@@ -1,4 +1,4 @@
-package com.awoo.vo;
+package com.awoo.config;
 
 import org.springframework.context.annotation.Configuration;
 

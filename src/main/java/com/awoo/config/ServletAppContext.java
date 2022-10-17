@@ -1,4 +1,4 @@
-package com.awoo.vo;
+package com.awoo.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
