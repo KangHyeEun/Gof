@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>여기는 인덱스페이지</h1>
+	<h1>시작페이지</h1>
 </body>
 </html>
