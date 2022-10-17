@@ -10,8 +10,5 @@
 </head>
 <body>
 	<h1>시작페이지</h1>
-	<a href="${pageContext.request.contextPath }/WEB-INF/views/menu/menu.jsp">이동</a>
-	<a href="${pageContext.request.contextPath }/test.jsp">test이동</a>
-	<jsp:include page="./menu/menu.jsp"></jsp:include>
 </body>
 </html>
