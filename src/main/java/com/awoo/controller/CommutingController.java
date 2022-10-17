@@ -24,7 +24,10 @@ public class CommutingController {
 	@GetMapping("commuting")
 	public String moveToCommuting(Model model) {
 		model.addAttribute("CommutingList", service.selectCommuting());
-		System.out.println("여기?");
 		return "commuting/commuting";
+	}
+	@GetMapping("enterpopup")
+	public String enterpopup() {
+		return "commuting/test";
 	}
 }

@@ -1,5 +1,8 @@
 package com.awoo.vo;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("CommutingVO")
 public class CommutingVO {
 	
 	private int id;
