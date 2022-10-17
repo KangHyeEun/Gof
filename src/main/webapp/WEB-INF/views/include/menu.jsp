@@ -24,8 +24,8 @@
                     <li class="drop_down_pointer">▼</li>
                     <li>
                         <ul class="sub">
-                            <li><a href="#">근무 기록</a></li>
-                            <li><a href="#">휴가 신청</a></li>
+                            <li><a href="${pageContext.request.contextPath}/commuting">근무 기록</a></li>
+                            <li><a href="${pageContext.request.contextPath}/holiday">휴가 신청</a></li>
                         </ul>
                     </li>
                 </ul>

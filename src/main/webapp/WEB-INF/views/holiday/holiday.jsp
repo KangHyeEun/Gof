@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>여기는 홀리데이 페이지</h1>
+	<div class="total">
+		<jsp:include page="../include/menu.jsp"></jsp:include>	
+		<div>여기는 홀리데이</div>
+	</div>
 </body>
 </html>

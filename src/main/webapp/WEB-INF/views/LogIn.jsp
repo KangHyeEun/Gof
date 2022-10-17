@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h1>시작페이지</h1>
+	<a href="${pageContext.request.contextPath}/commuting">이동</a>
 </body>
 </html>
