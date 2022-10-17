@@ -20,8 +20,6 @@ public class CommutingService {
 
 
 	public List<CommutingVO> selectCommuting(){
-		System.out.println("서비스");
-		System.out.println(dao.selectCommuting());
 		return dao.selectCommuting(); 
 	} 
 }
