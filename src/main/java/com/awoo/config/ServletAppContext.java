@@ -55,7 +55,7 @@ public class ServletAppContext implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
 		WebMvcConfigurer.super.addResourceHandlers(registry);
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/**").addResourceLocations("/resources/");
 	}
 
 	// 데이터베이스 접속 정보 관리

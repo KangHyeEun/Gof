@@ -8,5 +8,9 @@
 </head>
 <body>
 	<h1>시작페이지</h1>
+	
+	
+	<a href="${pageContext.request.contextPath }/menu/test2">Menu 이동</a>
+	<a href="${pageContext.request.contextPath }/calendar/test1">Calendar 이동</a>
 </body>
 </html>
