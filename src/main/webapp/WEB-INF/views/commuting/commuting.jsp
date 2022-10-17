@@ -11,7 +11,7 @@
 	 <div class="container">
         <section class="left-section">
             <div class="welcome">
-                
+                가빈이페이지
             </div>
             <div class="user-info">
 
