@@ -26,7 +26,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 // 스캔할 패키지를 지정한다.
 @ComponentScan("com.awoo")
 @MapperScan(basePackages = { "com.awoo.dao" }, annotationClass = org.apache.ibatis.annotations.Mapper.class)
-@PropertySource("/WEB-INF/properties/db.properties")
+@PropertySource("/META-INF/properties/db.properties")
 @EnableTransactionManagement
 public class ServletAppContext implements WebMvcConfigurer {
 
