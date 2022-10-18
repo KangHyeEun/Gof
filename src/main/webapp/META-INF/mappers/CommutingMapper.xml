@@ -5,6 +5,19 @@
 <mapper namespace="com.awoo.dao.CommutingDAO">
 	<select id="selectCommuting" resultType="CommutingVO">
 		select id, workday, start_time, end_time, work_time, over_time, empno
-		from commuting
+		from commuting order by id desc;
+	</select>
+	<insert id="insertEnter" keyProperty="id">
+		INSERT INTO commuting(start_time, empno) 
+		VALUES (#{startTime}, #{empno});
+	</insert>
+	<insert id="insertLeave">
+		INSERT INTO commuting(end_time, work_time, over_time) 
+		VALUES (#{endTime}, #{workTime}, #{overTime}) where empno = #{empno};
+	</insert>
+	<select id="getStartTime" resultType="String">
+<!-- 		select DATE_FORMAT(start_time, '%H:%i:%s %p') -->
+		select DATE_FORMAT(start_time, '%Y-%m-%d %H:%i:%s')
+		from commuting WHERE DATE_FORMAT(workday, '%Y-%m-%d') = #{workday} AND empno=#{empno};
 	</select>
 </mapper>

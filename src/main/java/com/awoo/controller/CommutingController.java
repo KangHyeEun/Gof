@@ -1,6 +1,11 @@
 package com.awoo.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,10 +37,19 @@ public class CommutingController {
 	@GetMapping("commuting")
 	public String moveToCommuting(Model model) {
 		model.addAttribute("CommutingList", service.selectCommuting());
+		// 오늘(start_time)이 empno랑 같으면 
+		model.addAttribute("startTime", service.getStartDate());
+//		model.addAttribute("endTime", service.getEndDate());
 		return "commuting/commuting";
 	}
-	@GetMapping("enterpopup")
-	public String enterpopup() {
-		return "commuting/test";
+	@GetMapping("/commuting/enter")
+	public String enter(Model model) {
+		service.insertEnter(model);
+		return "forward:/commuting";
+	}
+	@GetMapping("/commuting/leave")
+	public String leave(Model model) {
+		service.insertLeave(model);
+		return "commuting/commuting";
 	}
 }
