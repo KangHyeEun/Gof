@@ -13,10 +13,7 @@
 	<a href="${pageContext.request.contextPath}/bbstemplate">게시판 템플릿 이동</a><br>
 	<hr>
 	
-	<a href="${pageContext.request.contextPath }/menu/test2">Menu 이동</a>
-	<a href="${pageContext.request.contextPath }/calendar/test1">Calendar 이동</a>
+	<a href="${pageContext.request.contextPath }/calendar">Calendar 이동</a>
 
-
-	
 </body>
 </html>

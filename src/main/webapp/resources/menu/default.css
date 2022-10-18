@@ -1,15 +1,17 @@
-/* 메뉴 */
-*{
-	margin: 0;
-	padding: 0;
-}
+
 /* .left_sub_menu { */
 /* 	width: 210px; */
 /* 	height: 100%; */
 /* } */
 
+
 /* 공통 */
 
+*{
+	margin: 0;
+	padding: 0;
+	font-family: 'Noto Sans KR', sans-serif;
+}
 a {
 	text-decoration: none;
     display: inline-block;
@@ -17,15 +19,12 @@ a {
 ul {
 	list-style: none;
 }
-div,ul{
+ul,li{
 	clear: both;
 }
 
 
-
-
-
-
+/* 메뉴 */
 
 nav{
 	width: 250px;
@@ -45,16 +44,15 @@ nav{
 	border-radius: 8px;
 }
 .menu:hover{
-	background-color:#f0f5fa;
+	background-color:#E9E8ED;
 }
 .menu>li>a {
-	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 14px;
 	font-weight: bold;
 	color: #212529;
+	width: 150px;
 }
 .menu>li {
-	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 14px;
 	color: #212529;
 	display: inline-block;
@@ -66,6 +64,9 @@ nav{
 	height: 5px;
 	float: right;
 }
+.btn-display {
+	display: none;
+}
 
 .dropmenu, .dropmenu1, .dropmenu2, .dropmenu3{
 	cursor: pointer;
@@ -75,10 +76,9 @@ nav{
 	border-radius: 5px;
 }
 .dropmenu:hover, .dropmenu1:hover, .dropmenu2:hover, .dropmenu3:hover{
-	background-color:#f0f5fa;
+	background-color:#E9E8ED;
 }
 .dropmenu>li:first-child, .dropmenu1>li:first-child, .dropmenu2>li:first-child, .dropmenu3>li:first-child{
-	font-family: 'Noto Sans KR', sans-serif;
 	font-weight: 700;
 	font-size: 15px;
 	color: #212529;
@@ -97,7 +97,6 @@ nav{
 	margin: 15px 0 10px 0;
 }
 .sub>li>a, .sub1>li>a, .sub2>li>a, .sub3>li>a{
-	font-family: 'Noto Sans KR', sans-serif;
 	color:  #535353;
 	font-size: 14px;
 	font-weight: 300;
