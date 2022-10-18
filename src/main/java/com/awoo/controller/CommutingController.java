@@ -11,6 +11,10 @@ import com.awoo.vo.CommutingVO;
 
 @Controller
 public class CommutingController {
+	@GetMapping("template")
+	public String template() {
+		return "include/template";
+	}
 	
 	private CommutingService service;
 	

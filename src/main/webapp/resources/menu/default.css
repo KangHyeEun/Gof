@@ -3,15 +3,39 @@
 	margin: 0;
 	padding: 0;
 }
-.left_sub_menu {
-	width: 210px;
-	height: 100%;
+/* .left_sub_menu { */
+/* 	width: 210px; */
+/* 	height: 100%; */
+/* } */
+
+/* 공통 */
+
+a {
+	text-decoration: none;
+    display: inline-block;
 }
-.logo_box{
-	background-color: rgb(248, 250, 221);
-	margin: 20px 0;
-	width: 210px;
-	height: 60px;
+ul {
+	list-style: none;
+}
+div,ul{
+	clear: both;
+}
+
+
+
+
+
+
+
+nav{
+	width: 250px;
+    height: 100%;
+    padding: 35px 10px;
+    box-sizing: border-box;
+    /* padding: 20px; */
+    /* border: 1px solid black; */
+    box-shadow: 2px 1px 10px #a0a0a0;
+    z-index: 1;
 }
 .menu{
 	cursor: pointer;
@@ -47,8 +71,8 @@
 	cursor: pointer;
 	height: 22px;
 	margin: 0 0 5px;
-	padding: 10px 12px 10px 43px;
-	border-radius: 8px;
+	padding: 10px 37px 10px 43px;
+	border-radius: 5px;
 }
 .dropmenu:hover, .dropmenu1:hover, .dropmenu2:hover, .dropmenu3:hover{
 	background-color:#E9E8ED;
@@ -88,21 +112,6 @@
 
 
 
-/* 공통 */
-nav{
-	width: 170px;
-	height: 100%;
-	padding: 0 20px;
-}
-a {
-	text-decoration: none;
-    display: inline-block;
-}
-ul {
-	list-style: none;
-}
-div,ul{
-	clear: both;
-}
+
 
 
