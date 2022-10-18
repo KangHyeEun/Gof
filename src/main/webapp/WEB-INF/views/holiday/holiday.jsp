@@ -5,33 +5,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 <title>Insert title here</title>
 </head>
 <style>
- *{
-        margin:0;
-        padding:0;
-    }
-    .total{
-	    display: flex;
-    }
-   .container{
-    border: 1px solid black;
-    display: flex;
-    align-items:center;
-    justify-content:center;
-    width: 100%;
-    max-width: 1400px;
-    height: 100vh;
-    box-sizing: border-box;
-   }
-   .inner-container{
-    width: 90%;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-   }
+/*  *{ */
+/*         margin:0; */
+/*         padding:0; */
+/*     } */
+/*     .total{ */
+/* 	    display: flex; */
+/*     } */
+/*    .container{ */
+/*     border: 1px solid black; */
+/*     display: flex; */
+/*     align-items:center; */
+/*     justify-content:center; */
+/*     width: 100%; */
+/*     max-width: 1400px; */
+/*     height: 100vh; */
+/*     box-sizing: border-box; */
+/*    } */
+/*    .inner-container{ */
+/*     width: 90%; */
+/*     height: 90%; */
+/*     display: flex; */
+/*     flex-direction: column; */
+/*     align-items: center; */
+/*    } */
    .div1 {
     width: 100%;
     display: flex;
@@ -99,10 +100,17 @@
    }
 </style>
 <body>
-	<div class="total">
-		<jsp:include page="../include/menu.jsp"></jsp:include>
-		<div class="container">
-			<div class="inner-container">
+
+	
+<!-- 	<div class="container-wrap"> -->
+<!-- 		<div class="header"> -->
+<%-- 			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/> --%>
+<!--             <div class="header-logout">로그아웃 버튼</div> -->
+<!-- 		</div> -->
+<!-- 		<div class="container"> -->
+<%-- 			<jsp:include page="../include/menu.jsp"></jsp:include> --%>
+<!-- 			<div class="container-inner"> -->
+				
 				<div class="div1">
 					<span>휴가 관리</span>
 					<select>
@@ -169,10 +177,27 @@
                     <form action="${pageContext.request.contextPath}/commuting/leave">
                         <button>신청하기</button>
                     </form>
-                </div>    
-            </div>
-        </div>	
-	</div>
+                </div>
+				
+				
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+	
+	
+	
+
+
+
+<!-- 	<div class="total"> -->
+<%-- 		<jsp:include page="../include/menu.jsp"></jsp:include> --%>
+<!-- 		<div class="container"> -->
+<!-- 			<div class="inner-container"> -->
+				    
+<!--             </div> -->
+<!--         </div>	 -->
+<!-- 	</div> -->
+
 	<script type="text/javascript">
 		document.getElementById("apply-holiday").addEventListener("click",function(){
 			document.getElementById("applypop").style.display = "flex";
