@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <link rel="stylesheet" href="resources/default.css">
+    <link rel="stylesheet" href="default.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&display=swap" rel="stylesheet">
     
     
@@ -78,6 +78,6 @@
         </nav>
     </div>
 
-    <script src="resources/dropDown.js"></script>
+    <script src="dropDown.js"></script>
 
 
