@@ -5,10 +5,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&display=swap" rel="stylesheet">
     
     
-    <div class="left_sub_menu">
-        <div class="logo_box">
+<!--     <div class="left_sub_menu"> -->
+<!--         <div class="logo_box"> -->
 
-        </div>
+<!--         </div> -->
         <nav>
             <div class="menuwrap">
                 <ul class="menu">
@@ -76,7 +76,7 @@
                 </ul>
             </div>
         </nav>
-    </div>
+<!--     </div> -->
     
     <script src="${pageContext.request.contextPath}/menu/dropDown.js"></script>
 
