@@ -71,9 +71,9 @@
                     </li>
                 </ul>
 
-                <ul class="menu">
-                    <li><a href="#">로그아웃</a></li>
-                </ul>
+<!--                 <ul class="menu"> -->
+<!--                     <li><a href="#">로그아웃</a></li> -->
+<!--                 </ul> -->
             </div>
         </nav>
 <!--     </div> -->
