@@ -45,7 +45,7 @@ nav{
 	border-radius: 8px;
 }
 .menu:hover{
-	background-color:#E9E8ED;
+	background-color:#f0f5fa;
 }
 .menu>li>a {
 	font-family: 'Noto Sans KR', sans-serif;
@@ -75,7 +75,7 @@ nav{
 	border-radius: 5px;
 }
 .dropmenu:hover, .dropmenu1:hover, .dropmenu2:hover, .dropmenu3:hover{
-	background-color:#E9E8ED;
+	background-color:#f0f5fa;
 }
 .dropmenu>li:first-child, .dropmenu1>li:first-child, .dropmenu2>li:first-child, .dropmenu3>li:first-child{
 	font-family: 'Noto Sans KR', sans-serif;

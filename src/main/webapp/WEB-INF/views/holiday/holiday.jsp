@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <style>
-/*  *{ */
+/*  	*{ */
 /*         margin:0; */
 /*         padding:0; */
 /*     } */
@@ -26,13 +26,22 @@
 /*     height: 100vh; */
 /*     box-sizing: border-box; */
 /*    } */
-/*    .inner-container{ */
-/*     width: 90%; */
-/*     height: 90%; */
-/*     display: flex; */
-/*     flex-direction: column; */
-/*     align-items: center; */
-/*    } */
+	.container-inner {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+		
+	}
+   .inner-div{
+    background-color:white;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3%;
+    box-sizing: border-box;
+   }
    .div1 {
     width: 100%;
     display: flex;
@@ -101,50 +110,51 @@
 </style>
 <body>
 
-	
-<!-- 	<div class="container-wrap"> -->
-<!-- 		<div class="header"> -->
-<%-- 			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/> --%>
-<!--             <div class="header-logout">로그아웃 버튼</div> -->
-<!-- 		</div> -->
-<!-- 		<div class="container"> -->
-<%-- 			<jsp:include page="../include/menu.jsp"></jsp:include> --%>
-<!-- 			<div class="container-inner"> -->
-				
-				<div class="div1">
-					<span>휴가 관리</span>
-					<select>
-						<option>2020년</option>
-						<option>2021년</option>
-					</select>
-					<div id="apply-holiday">휴가 신청</div>
-				</div>
-				<div class="div2">
-					<table border="1">
-						<tr>
-							<th>id</th>
-							<th>휴가 신청일</th>
-							<th>종류</th>
-							<th>시작일</th>
-							<th>종료일</th>
-							<th>내용</th>
-							<th>허가여부</th>
-						</tr>
-						<c:forEach items="${holidayList}" var="hl">
-							<tr>
-								<th>${hl.id}</th>
-								<th>${hl.hwriteDate}</th>
-								<th>${hl.htype}</th>
-								<th>${hl.hstartDate}</th>
-								<th>${hl.hendDate}</th>
-								<th>${hl.hcontent}</th>
-								<th>${hl.approval}</th>
-							</tr>
-						</c:forEach>
-					</table>
-				</div>
-			</div>
+
+	<div class="container-wrap">
+		<div class="header">
+			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
+            <div class="header-logout">로그아웃 버튼</div>
 		</div>
+		<div class="container">
+			<jsp:include page="../include/menu.jsp"></jsp:include>
+			<div class="container-inner">
+				
+				
+				<div class="inner-div">
+					<div class="div1">
+						<span>휴가 관리</span>
+						<select>
+							<option>2020년</option>
+							<option>2021년</option>
+						</select>
+						<div id="apply-holiday">휴가 신청</div>
+					</div>
+					<div class="div2">
+						<table border="1">
+							<tr>
+								<th>id</th>
+								<th>휴가 신청일</th>
+								<th>종류</th>
+								<th>시작일</th>
+								<th>종료일</th>
+								<th>내용</th>
+								<th>허가여부</th>
+							</tr>
+							<c:forEach items="${holidayList}" var="hl">
+								<tr>
+									<th>${hl.id}</th>
+									<th>${hl.hwriteDate}</th>
+									<th>${hl.htype}</th>
+									<th>${hl.hstartDate}</th>
+									<th>${hl.hendDate}</th>
+									<th>${hl.hcontent}</th>
+									<th>${hl.approval}</th>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+				</div>
 		<div id="applypop" style="display:none">
             <div class="pop-container" >
                 <div class="pop1">
@@ -177,26 +187,15 @@
                     <form action="${pageContext.request.contextPath}/commuting/leave">
                         <button>신청하기</button>
                     </form>
-                </div>
+                </div>    
+            </div>
+        </div>	
+<!-- 	</div> -->
 				
 				
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-	
-	
-	
-
-
-
-<!-- 	<div class="total"> -->
-<%-- 		<jsp:include page="../include/menu.jsp"></jsp:include> --%>
-<!-- 		<div class="container"> -->
-<!-- 			<div class="inner-container"> -->
-				    
-<!--             </div> -->
-<!--         </div>	 -->
-<!-- 	</div> -->
+			</div>
+		</div>
+	</div>
 
 	<script type="text/javascript">
 		document.getElementById("apply-holiday").addEventListener("click",function(){

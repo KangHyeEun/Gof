@@ -15,6 +15,10 @@ public class CommutingController {
 	public String template() {
 		return "include/template";
 	}
+	@GetMapping("bbstemplate")
+	public String bbstemplate() {
+		return "include/bbs_template";
+	}
 	
 	private CommutingService service;
 	
