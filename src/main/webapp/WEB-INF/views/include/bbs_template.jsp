@@ -9,7 +9,7 @@
 
 </head>
 <body>
-	
+
 	<div class="container-wrap">
 		<div class="header">
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
@@ -17,16 +17,10 @@
 		</div>
 		<div class="container">
 			<jsp:include page="../include/menu.jsp"></jsp:include>
-			<div class="container-inner">
-<<<<<<< HEAD
-					
-				
-=======
-				
-				<!-- 각자 필요한 부분 넣기 -->
->>>>>>> branch 'master' of https://github.com/KangHyeEun/Gof.git
-				
-				
+			<div class="container-inner-bbs">
+				<div class="inner-div-bbs">
+					<!-- 각자 필요한 부분 넣기 -->
+				</div>
 			</div>
 		</div>
 	</div>
