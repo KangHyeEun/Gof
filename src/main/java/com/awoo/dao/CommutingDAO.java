@@ -1,5 +1,12 @@
 package com.awoo.dao;
 
-public interface CommutingDAO {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.awoo.vo.CommutingVO;
+
+@Mapper
+public interface CommutingDAO {
+	public List<CommutingVO> selectCommuting();
 }
