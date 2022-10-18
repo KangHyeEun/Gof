@@ -50,7 +50,7 @@
     
     #applypop{
     width: 100vw;
-    height: 100vh;
+    height: calc(100% - 60px);
     position: absolute;
     background-color: rgba(209, 209, 209, 0.787);
     display: flex;
@@ -155,45 +155,46 @@
 						</table>
 					</div>
 				</div>
-		<div id="applypop" style="display:none">
-            <div class="pop-container" >
-                <div class="pop1">
-                	<div><span>휴가신청</span><span>*필수 입력란입니다</span></div>
-                	<div><a href="" >✖️</a></div>
-                </div>
-                <div class="pop2">
-                	<p>휴가종류*</p>
-                	<select>
-                		<option>선택해주세요</option>
-                	</select>
-                	<div>
-                		총휴가일수, 사용된 휴가일수, 잔여휴가일수
-                	</div>
-                </div>
-                <div class="pop3">
-                    <p>휴가일선택* (하루를 사용하실 경우 같은날을 '두번 클릭해주세요')</p>
-                    <form action="">
-                    	<input type="date" placeholder="시작일 년/월/일"/>
-                    	<input type="date" placeholder="종료일 년/월/일"/>
-                    </form>
-                </div>
-                <div class="pop4">
-                    <p>신청사유</p>
-                    <form action="">
-                    	<input type="text" placeholder="내용을 입력해주세요"/>
-                    </form>
-                </div>
-                <div class="pop5">
-                    <form action="${pageContext.request.contextPath}/commuting/leave">
-                        <button>신청하기</button>
-                    </form>
-                </div>    
-            </div>
-        </div>	
+		
 <!-- 	</div> -->
 				
 				
 			</div>
+				<div id="applypop" style="display:none">
+	            <div class="pop-container" >
+	                <div class="pop1">
+	                	<div><span>휴가신청</span><span>*필수 입력란입니다</span></div>
+	                	<div><a href="" >✖️</a></div>
+	                </div>
+	                <div class="pop2">
+	                	<p>휴가종류*</p>
+	                	<select>
+	                		<option>선택해주세요</option>
+	                	</select>
+	                	<div>
+	                		총휴가일수, 사용된 휴가일수, 잔여휴가일수
+	                	</div>
+	                </div>
+	                <div class="pop3">
+	                    <p>휴가일선택* (하루를 사용하실 경우 같은날을 '두번 클릭해주세요')</p>
+	                    <form action="">
+	                    	<input type="date" placeholder="시작일 년/월/일"/>
+	                    	<input type="date" placeholder="종료일 년/월/일"/>
+	                    </form>
+	                </div>
+	                <div class="pop4">
+	                    <p>신청사유</p>
+	                    <form action="">
+	                    	<input type="text" placeholder="내용을 입력해주세요"/>
+	                    </form>
+	                </div>
+	                <div class="pop5">
+	                    <form action="${pageContext.request.contextPath}/commuting/leave">
+	                        <button>신청하기</button>
+	                    </form>
+	                </div>    
+	            </div>
+	        </div>	
 		</div>
 	</div>
 
