@@ -24,10 +24,16 @@ public class CommutingService {
 		this.dao = dao;
 	}
 
-
 	
-	
-	public List<CommutingVO> selectCommuting(){
+	public List<CommutingVO> selectCommuting(Model model){
+		LocalDate date = LocalDate.now();
+		DateTimeFormatter monthformatter = DateTimeFormatter.ofPattern("MM");
+//		DateTimeFormatter dayformatter = DateTimeFormatter.ofPattern("dd");
+		
+		String todayMonth = date.format(monthformatter);
+//		String todayDay = date.format(dayformatter);
+		model.addAttribute("todayMonth", todayMonth);
+//		model.addAttribute("todayDay", todayDay);
 		return dao.selectCommuting(); 
 		
 	}
@@ -64,7 +70,7 @@ public class CommutingService {
 		CommutingVO vo = new CommutingVO();
 		vo.setEndTime(now);
 		vo.setEmpno(123);
-		vo.setWorkTime(this.getStartDate(), now);
+		vo.setWorkTime(this.getStartDate(), formatedNow);
 		vo.setOverTime();
 		vo.setWorkday(today);
 		dao.insertLeave(vo);
@@ -107,5 +113,11 @@ public class CommutingService {
 			return dao.getEndTime(vo);
 		}
 		return null;
+	}
+	public List<String> getDistinctYear() {
+		return dao.getDistinctYear();
+	}
+	public List<String> getDistinctMonth() {
+		return dao.getDistinctMonth();
 	}
 }

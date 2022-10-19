@@ -12,5 +12,8 @@ public interface CommutingDAO {
 	public void insertLeave(CommutingVO vo);
 	public String getStartTime(CommutingVO vo);
 	public String getEndTime(CommutingVO vo);
+	public List<String> getDistinctYear();
+	public List<String> getDistinctMonth();
 }
+
 

@@ -36,10 +36,12 @@ public class CommutingController {
 
 	@GetMapping("/Commuting")
 	public String moveToCommuting(Model model) {
-		model.addAttribute("CommutingList", service.selectCommuting());
+		model.addAttribute("CommutingList", service.selectCommuting(model));
 		// 오늘(start_time)이 empno랑 같으면 
 		model.addAttribute("startTime", service.getStartDate());
 		model.addAttribute("endTime", service.getEndDate());
+		model.addAttribute("distinctYear", service.getDistinctYear());
+		model.addAttribute("distinctMonth", service.getDistinctMonth());
 		return "commuting/commuting";
 	}
 	@GetMapping("/CommutingEnter")

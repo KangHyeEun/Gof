@@ -47,9 +47,11 @@ public class CommutingVO {
 		return workTime;
 	}
 	public void setWorkTime(String startTime, String endTime) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.KOREA);
 		Date sd = null;
 		Date ed = null;
+//		startTime = "";
 		try {
 			sd = dateFormat.parse(startTime);
 		    ed = dateFormat.parse(endTime);
@@ -96,6 +98,7 @@ public class CommutingVO {
 	public void setEmpno(int empno) {
 		this.empno = empno;
 	}
+	
 	
 	
 }
