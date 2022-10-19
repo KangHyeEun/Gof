@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awoo.dao.PersonalInfoDAO">
+	<select id="selectPersonal" resultType="PersonalInfoVO">
+		select * from personal_info
+	</select>
+	<select id="selectAllInfo" resultType="InfoVO">
+		select id, NAME, personal_info.empno, edepartment,eposition, date_format(ehired_date,'%Y-%m-%d') ehired_date,ehired_type,total_holiday,estatus
+		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
+	</select>
+</mapper>

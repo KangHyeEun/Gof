@@ -1,0 +1,128 @@
+#total {
+	display: flex;
+}
+
+#table1 {
+	text-align: center;
+}
+
+th, td {
+	padding: 7px;
+}
+
+tr:nth-child(odd) {
+	background-color: #f8f8f9;
+}
+
+th {
+	background-color: #eaf6f7;
+}
+
+#table1 {
+	width: 100%;
+}
+
+.select {
+	width: 100%;
+}
+
+.table {
+	padding: 10px;
+}
+
+.tbtn1 {
+	background-color: #c9eaec;
+	padding: 7px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.tbtn1>button {
+	border: 1px solid #c0c5c9;
+	background-color: white;
+	padding: 3px;
+	border-radius: 5px;
+	cursor: pointer;
+	color: #6c6c6c;
+}
+
+a {
+	color: black;
+}
+
+span {
+	color: #54cbd4;
+}
+
+h4 {
+	padding-bottom: 10px;
+}
+
+.timg {
+	width: 20px;
+	height: 20px;
+}
+.timg2 {
+	margin-top: 10px;
+	width: 20px;
+	height: 20px;
+}
+
+.scroll {
+	padding: -10px;
+}
+
+.scroll::-webkit-scrollbar {
+	width: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+	background-color: #f2f4f5;
+	border-radius: 10px;
+	background-clip: padding-box;
+	border: 2px solid transparent;
+}
+
+.scroll::-webkit-scrollbar-track {
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 5px white;
+}
+
+.selectD{
+	font-size: 0;
+	width: 100%;
+	display: flex;
+    flex-direction: row;
+}
+
+#category {
+	width: 25%;
+	padding: 1%;
+	border:1px solid #c9eaec;
+}
+#sel {
+	border: 1px solid #c9eaec;	
+}
+
+.div1{
+	width: 100%;
+}
+
+.btn1 {
+	width: 25%;
+	background-color: #14abab;
+	color: white;
+	border: #14abab;
+	cursor: pointer;
+}
+
+.intro {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 4%;
+}
+
+.intro>p {
+	color: #c0c5c9;
+}
