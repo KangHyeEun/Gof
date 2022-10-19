@@ -1,8 +1,6 @@
 package com.awoo.vo;
 
-import org.apache.ibatis.type.Alias;
-
-public class PersonalInfoVO {
+public class InfoVO {
 	private int id;
 	private String name;
 	private String gender;
@@ -13,7 +11,13 @@ public class PersonalInfoVO {
 	private int phoneNumber;
 	private String address;
 	private int empno;
-	
+	private String ehiredDate;
+	private String eposition;
+	private String ehiredType;
+	private String estatus;
+	private String edepartment;
+	private int totalHoliday;
+	private int checkAdmin;
 	public int getId() {
 		return id;
 	}
@@ -74,5 +78,48 @@ public class PersonalInfoVO {
 	public void setEmpno(int empno) {
 		this.empno = empno;
 	}
+	public String getEhiredDate() {
+		return ehiredDate;
+	}
+	public void setEhiredDate(String ehiredDate) {
+		this.ehiredDate = ehiredDate;
+	}
+	public String getEposition() {
+		return eposition;
+	}
+	public void setEposition(String eposition) {
+		this.eposition = eposition;
+	}
+	public String getEhiredType() {
+		return ehiredType;
+	}
+	public void setEhiredType(String ehiredType) {
+		this.ehiredType = ehiredType;
+	}
+	public String getEstatus() {
+		return estatus;
+	}
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
+	}
+	public String getEdepartment() {
+		return edepartment;
+	}
+	public void setEdepartment(String edepartment) {
+		this.edepartment = edepartment;
+	}
+	public int getTotalHoliday() {
+		return totalHoliday;
+	}
+	public void setTotalHoliday(int totalHoliday) {
+		this.totalHoliday = totalHoliday;
+	}
+	public int getCheckAdmin() {
+		return checkAdmin;
+	}
+	public void setCheckAdmin(int checkAdmin) {
+		this.checkAdmin = checkAdmin;
+	}
+	
 	
 }

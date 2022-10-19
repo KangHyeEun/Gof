@@ -1,5 +1,12 @@
 package com.awoo.dao;
 
-public interface EmployeeInfoDAO {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.awoo.vo.EmployeeInfoVO;
+
+@Mapper
+public interface EmployeeInfoDAO {
+	public List<EmployeeInfoVO> selectEmployee();
 }
