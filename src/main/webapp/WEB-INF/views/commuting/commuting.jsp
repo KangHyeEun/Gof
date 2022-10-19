@@ -53,6 +53,8 @@
 			            </div>
 			            <div class="div3">
 			                <p>div3</p>
+			                <p>휴가신청 : </p>
+			                <p>휴가신청 승인 : </p>
 			            </div>
 			        </section>
 			
@@ -62,7 +64,7 @@
 					           	<div class="sorting">
 									<p>출퇴근 관리</p>
 									<div>
-										<select name="sorting-year" id="sorting-year">
+										<select name="sorting-year" id="sorting-year" onchange="OnChange();">
 											<c:forEach items="${distinctYear}" var="year">
 												<option value="${year}">${year}</option>
 											</c:forEach>
@@ -104,7 +106,7 @@
 					            </div>
 					         </div>
 					        <div class="div1">
-				                <p>div1</p>
+				                <p>초과근무시간 : ${overTime}</p>
 				            </div>
 				        </section>
 					</div>
@@ -148,7 +150,7 @@
     <script type="text/javascript">
 	    document.getElementById("enter").addEventListener("click",function(){
 	    	if(${startTime == null}){
-	        document.getElementById("enterpop").style.display = "flex";
+	       		document.getElementById("enterpop").style.display = "flex";
 	    	}else {
 	    		alert("이미 출근하셨습니다.");	    		
 	    	}
@@ -170,27 +172,23 @@
 	    function OnChange(){    
 	    	let year = document.getElementById("sorting-year").value;
 	    	let month = document.getElementById("sorting-month").value;
-	    	alert(year);
-	    	alert(month);
+// 	    	alert(year);
+// 	    	alert(month);
 	    	let child = document.getElementById("table-body").children;
 	    	
-	    	
+	    	// 정렬 테이블 초기화
 	    	for (let i = 0; i < child.length; i++) {
-				
 			   	child[i].style.display = "";
-			    	
 			}
 	    	
 	    	for (let i = 0; i < child.length; i++) {
-				
-	//	    	console.log(child[i].children[1].innerHTML);
 	    	let date = child[i].children[1].innerHTML;
-	    	let splitedmonth = date.split("-");
-	//	    	console.log(month[1]);
-	    	
-		    	if(month != splitedmonth [1]){
-		    		child[i].style.display = "none";
+	    	let spliteddate = date.split("-");
+		    	if(month == spliteddate[1] && year == spliteddate[0]){
+		    		child[i].style.display = "";
 		    		
+		    	}else {
+		    		child[i].style.display = "none";
 		    	}
 			}
 	    	
@@ -199,8 +197,8 @@
 	    document.addEventListener("DOMContentLoaded", function(){
 	    	let year = document.getElementById("sorting-year").value;
 	    	let month = document.getElementById("sorting-month").value;
-	    	alert(year);
-	    	alert(month);
+// 	    	alert(year);
+// 	    	alert(month);
 	    	let child = document.getElementById("table-body").children;
 	    	
 	    	for (let i = 0; i < child.length; i++) {
@@ -208,11 +206,13 @@
 // 	    	console.log(child[i].children[1].innerHTML);
 	    	let date = child[i].children[1].innerHTML;
 	    	let spliteddate = date.split("-");
-// 	    	console.log(month[1]);
+	    	console.log(spliteddate[0]);
 	    	
-		    	if(month != spliteddate[1] && year != spliteddate[0]){
-		    		child[i].style.display = "none";
+		    	if(month == spliteddate[1] && year == spliteddate[0]){
+		    		child[i].style.display = "";
 		    		
+		    	}else {
+		    		child[i].style.display = "none";
 		    	}
 			}
 	    	

@@ -14,6 +14,7 @@ public interface CommutingDAO {
 	public String getEndTime(CommutingVO vo);
 	public List<String> getDistinctYear();
 	public List<String> getDistinctMonth();
+	public int countOverTime(CommutingVO vo);
 }
 
 
