@@ -1,0 +1,58 @@
+/* 가장 큰 틀 */
+.container-wrap{
+    width:100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.header{
+    height:60px;
+    background-color: #272454;
+	box-sizing: border-box;
+    padding: 0 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header > img{
+	width: 90px;
+	object-fit: cover;
+}
+.header > .header-logout{
+	color:white;
+}
+.container{
+    width:100%;
+    height:100vh;
+    display: flex;
+}
+.container-inner{
+    width: calc(100% - 210px);
+    height:calc(100vh - 60px);
+    background-color:#f0f5fa;
+}
+
+
+/* 게시판 template inner 하얀 배경 */
+.container-inner-bbs {
+	width: calc(100% - 210px);
+    height:calc(100vh - 60px);
+    background-color:#f0f5fa;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	
+	
+}
+.inner-div-bbs{
+   background-color:white;
+   width: 90%;
+   height: 90%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 3%;
+   border-radius : 7px;
+   box-sizing: border-box;
+   box-shadow: 1px 1px 8px #c1c1c1;
+  }

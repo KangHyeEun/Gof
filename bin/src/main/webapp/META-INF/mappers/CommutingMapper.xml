@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awoo.dao.CommutingDAO">
+	<select id="selectCommuting" resultType="CommutingVO">
+		select id, workday, start_time, end_time, work_time, over_time, empno
+		from commuting order by id desc;
+	</select>
+	<insert id="insertEnter" keyProperty="id">
+		INSERT INTO commuting(start_time, empno) 
+		VALUES (#{startTime}, #{empno});
+	</insert>
+	<update id="insertLeave">
+		update commuting
+			set end_time = #{endTime},
+				work_time = #{workTime},
+				over_time = #{overTime}
+			WHERE empno=#{empno} AND DATE_FORMAT(workday, '%Y-%m-%d') = #{workday};
+	</update>
+	<select id="getStartTime" resultType="String">
+<!-- 		select DATE_FORMAT(start_time, '%H:%i:%s %p') -->
+		select DATE_FORMAT(start_time, '%Y-%m-%d %H:%i:%s')
+		from commuting WHERE DATE_FORMAT(workday, '%Y-%m-%d') = #{workday} AND empno=#{empno};
+	</select>
+		<select id="getEndTime" resultType="String">
+<!-- 		select DATE_FORMAT(start_time, '%H:%i:%s %p') -->
+		select DATE_FORMAT(end_time, '%Y-%m-%d %H:%i:%s')
+		from commuting WHERE DATE_FORMAT(workday, '%Y-%m-%d') = #{workday} AND empno=#{empno};
+	</select>
+</mapper>
