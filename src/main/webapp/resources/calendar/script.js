@@ -192,7 +192,6 @@ document.querySelector(".todayMove").addEventListener("click", () =>{
 let daysEle = document.querySelectorAll(".days div");
 //let isPressed = false;
 
-console.log(daysEle);
 for (let index = 0; index < daysEle.length; index++) {
 //	마우스떼기
     daysEle[index].addEventListener("mouseup", function(){
@@ -205,6 +204,12 @@ for (let index = 0; index < daysEle.length; index++) {
 	    this.style.backgroundColor = "#746bf5";
     });
 }
+
+    
+// ---------------------------------------------------------------------
+//비동기
+// ---------------------------------------------------------------------
+
 
 
 

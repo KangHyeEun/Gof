@@ -24,6 +24,7 @@
 			    <!-- right-content -->
                 <div class="calendar">
                     <div class="month">
+                    	<i class="fas fa-angles-left prevs"></i>
                         <i class="fas fa-angle-left prev"></i>
                         <div class="date">
                             <!-- month 객체로 월 동적 생성되는 부분 -->
@@ -32,6 +33,7 @@
                             <p class="todayMove"></p>
                         </div>
                         <i class="fas fa-angle-right next"></i>
+                        <i class="fas fa-angles-right nexts"></i>
                     </div>
                     <div class="weekdays">
                         <div><span>일</span></div>

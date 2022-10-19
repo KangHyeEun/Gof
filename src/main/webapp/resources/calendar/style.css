@@ -46,7 +46,7 @@
 }
 .todayMove:hover {
     cursor: pointer;
-    color: yellow;
+    color: #746bf5;
 }
 .weekdays {
     width: 100%;

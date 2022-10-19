@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.awoo.vo.CommutingVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -57,9 +59,25 @@
 				
 				        <section class="right-section">
 				        	<div class="div4">
-					           	<div class="sorting">정렬 버튼 위치 확인</div>
+					           	<div class="sorting">
+									<p>출퇴근 관리</p>
+									<div>
+										<select name="sorting-year" id="sorting-year">
+											<c:forEach items="${distinctYear}" var="year">
+												<option value="${year}">${year}</option>
+											</c:forEach>
+										</select>
+										<span>년</span>
+										<select name="sorting-month" id="sorting-month"  onchange="OnChange();">
+											<c:forEach items="${distinctMonth}" var="month">
+												<option value="${month}" <c:if test ="${month eq todayMonth}">selected="selected"</c:if>>${month}</option>
+											</c:forEach>
+										</select>
+										<span>월</span>
+									</div>
+								</div>
 					            <div class="list">
-					            	<table class="list-table" border="1">
+					            	<table class="list-table" border="1" >
 					            		<thead class="table-head">
 						            		<tr>
 						            			<th>ID</th>
@@ -70,8 +88,8 @@
 						            			<th>연장근무시간</th>
 						            		</tr>
 					            		</thead>
-					            		<tbody class="table-body">
-							            	<c:forEach items="${CommutingList}" var="cl" end="9">
+					            		<tbody class="table-body" id="table-body">
+							            	<c:forEach items="${CommutingList}" var="cl">
 							            		<tr>
 								            		<td>${cl.id}</td>
 								            		<td>${cl.workday}</td>
@@ -148,10 +166,64 @@
 	    	}
 	    	
 	    });
+	    
+	    function OnChange(){    
+	    	let year = document.getElementById("sorting-year").value;
+	    	let month = document.getElementById("sorting-month").value;
+	    	alert(year);
+	    	alert(month);
+	    	let child = document.getElementById("table-body").children;
+	    	
+	    	
+	    	for (let i = 0; i < child.length; i++) {
+				
+			   	child[i].style.display = "";
+			    	
+			}
+	    	
+	    	for (let i = 0; i < child.length; i++) {
+				
+	//	    	console.log(child[i].children[1].innerHTML);
+	    	let date = child[i].children[1].innerHTML;
+	    	let splitedmonth = date.split("-");
+	//	    	console.log(month[1]);
+	    	
+		    	if(month != splitedmonth [1]){
+		    		child[i].style.display = "none";
+		    		
+		    	}
+			}
+	    	
+	    };
+	    
+	    document.addEventListener("DOMContentLoaded", function(){
+	    	let year = document.getElementById("sorting-year").value;
+	    	let month = document.getElementById("sorting-month").value;
+	    	alert(year);
+	    	alert(month);
+	    	let child = document.getElementById("table-body").children;
+	    	
+	    	for (let i = 0; i < child.length; i++) {
+				
+// 	    	console.log(child[i].children[1].innerHTML);
+	    	let date = child[i].children[1].innerHTML;
+	    	let spliteddate = date.split("-");
+// 	    	console.log(month[1]);
+	    	
+		    	if(month != spliteddate[1] && year != spliteddate[0]){
+		    		child[i].style.display = "none";
+		    		
+		    	}
+			}
+	    	
+	    	
+
+	    });
     </script>
 
 
     
 </body>
 </html>
+
 
