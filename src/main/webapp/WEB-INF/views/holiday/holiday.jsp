@@ -26,22 +26,22 @@
 /*     height: 100vh; */
 /*     box-sizing: border-box; */
 /*    } */
-	.container-inner {
-	display:flex;
-	justify-content:center;
-	align-items:center;
+/* 	.container-inner { */
+/* 	display:flex; */
+/* 	justify-content:center; */
+/* 	align-items:center; */
 		
-	}
-   .inner-div{
-    background-color:white;
-    width: 90%;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 3%;
-    box-sizing: border-box;
-   }
+/* 	} */
+/*    .inner-div{ */
+/*     background-color:white; */
+/*     width: 90%; */
+/*     height: 90%; */
+/*     display: flex; */
+/*     flex-direction: column; */
+/*     align-items: center; */
+/*     padding: 3%; */
+/*     box-sizing: border-box; */
+/*    } */
    .div1 {
     width: 100%;
     display: flex;
@@ -118,10 +118,10 @@
 		</div>
 		<div class="container">
 			<jsp:include page="../include/menu.jsp"></jsp:include>
-			<div class="container-inner">
+			<div class="container-inner-bbs">
 				
 				
-				<div class="inner-div">
+				<div class="inner-div-bbs">
 					<div class="div1">
 						<span>휴가 관리</span>
 						<select>

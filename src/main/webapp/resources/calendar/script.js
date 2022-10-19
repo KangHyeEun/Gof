@@ -1,3 +1,7 @@
+
+// ---------------------------------------------------------------------
+//calendar
+// ---------------------------------------------------------------------
 // 현재 날짜를 불러오는 함수 / Fri Oct 14 2022 17:26:25 GMT+0900 (한국 표준시)
 const date = new Date();
 
@@ -51,7 +55,13 @@ const renderCalendar = () => {
 
     // 정적으로 넣어본 5월
     // document.querySelector(".date h1").innerHTML = months[4];
-    document.querySelector(".date h1").innerHTML = months[date.getMonth()];
+    // document.querySelector(".date h1").innerHTML = months[date.getMonth()];
+
+    let dateH1 = document.querySelector(".date h1");
+
+    dateH1.innerHTML = "";
+    dateH1.innerHTML = date.getFullYear() + "년 ";
+    dateH1.innerHTML += months[date.getMonth()];
 
     const longDays = ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"];
 
@@ -68,53 +78,70 @@ const renderCalendar = () => {
     let days = "";
 
     for (let x = firstDayindex; x > 0; x--) {
-        days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
-        console.log("first : "+days);
+        days += `<div class="prev-date"><span>${prevLastDay - x + 1}</span></div>`;
     }
 
     for (let i = 1; i <= lastDay; i++) {
         // 1~마지막날 중 오늘 날짜와 같고 지금쓰고 있는 date의 달이 현재 달과 같으면
-        if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
-            days += `<div class="today">${i}</div>`;
+        if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()
+        		&& date.getFullYear() === new Date().getFullYear()) {
+            days += `<div class="today"><span>${i}</span></div>`;
         } else {
-            days += `<div>${i}</div>`;
+            days += `<div><span>${i}</span></div>`;
         }
-        console.log("second : "+days);
     }
 
     for (let j = 1; j <= nextDays; j++) {
-        days += `<div class="next-date">${j}</div>`;
-        console.log("last : "+days);
+        days += `<div class="next-date"><span>${j}</span></div>`;
     }
 
     monthDays.innerHTML = "";
     monthDays.innerHTML = days;
+    
+    
+// ---------------------------------------------------------------------
+//border-bottom 없애려고...
+// ---------------------------------------------------------------------
+
+	let daysBorder = document.querySelector(".days").children;
+	console.log(daysBorder);
+	console.log(daysBorder[2]);
+	console.log(daysBorder.length);
+	console.log(daysBorder[35]!=undefined);
+	console.log(daysBorder[35]==undefined);
+	
+	if(daysBorder[35]==undefined){
+		for(let k = 34; k > 27; k--){
+			daysBorder[k].style.borderBottom = "none";
+		}
+		for(let g = 0; g < daysBorder.length; g++){
+			daysBorder[g].style.height = "116px";
+		}
+	}else {
+		for(let k = daysBorder.length-1; k > daysBorder.length-8; k--){
+			daysBorder[k].style.borderBottom = "none";
+		}
+	}
 
 }
 
 document.querySelector(".prev").addEventListener("click", () => {
-    // if(date.getMonth())
-    console.log("클릭전 : "+ date.toLocaleString());
     date.setMonth(date.getMonth() - 1);
-    console.log("클릭후 : "+ date.toLocaleString());
-    console.log("-------------------");
     renderCalendar();
 });
 
 document.querySelector(".next").addEventListener("click", () => {
-    console.log("클릭전 : "+ date.toLocaleString());
     date.setMonth(date.getMonth() + 1);
-    console.log("클릭후 : "+ date.toLocaleString());
-    console.log("-------------------");
     renderCalendar();
 });
 
 renderCalendar();
 
 document.querySelector(".todayMove").addEventListener("click", () =>{
-    console.log("클릭전 : "+ date.toLocaleString());
+    date.setFullYear(new Date().getFullYear());
     date.setMonth(new Date().getMonth());
-    console.log("클릭후 : "+ date.toLocaleString());
-    console.log("-------------------");
     renderCalendar();
 });
+
+
+

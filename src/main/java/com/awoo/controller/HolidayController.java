@@ -17,7 +17,7 @@ public class HolidayController {
 	}
 
 
-	@GetMapping("holiday")
+	@GetMapping("Holiday")
 	public String moveToHoliday(Model model) {
 		model.addAttribute("holidayList", service.selectHoliday());
 		return "holiday/holiday";
