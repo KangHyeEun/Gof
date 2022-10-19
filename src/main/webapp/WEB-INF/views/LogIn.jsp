@@ -31,5 +31,8 @@
 	<a href="${pageContext.request.contextPath }/calendar">Calendar 이동</a>
 
 >>>>>>> branch 'master' of https://github.com/KangHyeEun/Gof.git
+
+<hr>
+	<a href="${pageContext.request.contextPath}/admin">혜은이동</a>
 </body>
 </html>
