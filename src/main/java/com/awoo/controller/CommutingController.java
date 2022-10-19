@@ -42,6 +42,8 @@ public class CommutingController {
 		model.addAttribute("endTime", service.getEndDate());
 		model.addAttribute("distinctYear", service.getDistinctYear());
 		model.addAttribute("distinctMonth", service.getDistinctMonth());
+		model.addAttribute("overTime", service.countOverTime());
+		model.addAttribute("absence", service.countAbsence());
 		return "commuting/commuting";
 	}
 	@GetMapping("/CommutingEnter")
@@ -55,3 +57,4 @@ public class CommutingController {
 		return "redirect:/Commuting";
 	}
 }
+

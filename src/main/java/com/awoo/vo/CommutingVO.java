@@ -68,7 +68,7 @@ public class CommutingVO {
 		return overTime;
 	}
 	public void setOverTime() {
-		if(this.workTime != null) {
+		if(this.workTime != null && this.endTime !=null) {
 			SimpleDateFormat dateHM = new SimpleDateFormat("HH시간 mm분");
 			SimpleDateFormat dateH = new SimpleDateFormat("HH");
 			SimpleDateFormat dateM = new SimpleDateFormat("mm");
@@ -84,12 +84,14 @@ public class CommutingVO {
 			}
 			int hours = Integer.parseInt(dH);
 			int minutes = Integer.parseInt(dM);
-			if(hours >= 9) {
+			if(hours > 9 || (hours == 9 && minutes >= 10)) {
 				hours = hours-9;
 				this.overTime = hours+"시간 "+minutes+"분";
+			}else {
+				this.overTime = "-";
 			}
 		}else {
-			this.overTime = null;	
+			this.overTime = "-";	
 		}
 	}
 	public int getEmpno() {

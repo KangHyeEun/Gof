@@ -317,7 +317,7 @@
     }
     .sorting{
     height: 7%;
-    width: 90%;
+    width: 85%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -339,11 +339,12 @@
     .table-body{
     height: 100%;
     }
-    .table-body tr:nth-child(even){
-    background-color:#dcedffa6;
-    }
     .list-table tr{
  	height: 40px;
+ 	border-bottom:1px solid black;
+    }
+    .list-table thead tr{
+ 	background-color:#eaf6f7;
     }
    
    @media ( max-width: 1024px ) {

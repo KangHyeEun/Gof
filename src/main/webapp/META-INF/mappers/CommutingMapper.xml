@@ -8,8 +8,8 @@
 		from commuting order by id desc;
 	</select>
 	<insert id="insertEnter" keyProperty="id">
-		INSERT INTO commuting(start_time, empno) 
-		VALUES (#{startTime}, #{empno});
+		INSERT INTO commuting(start_time, empno, over_time) 
+		VALUES (#{startTime}, #{empno}, #{overTime});
 	</insert>
 	<update id="insertLeave">
 		update commuting
@@ -36,5 +36,9 @@
 	</select>
 	<select id="getDistinctMonth" resultType="String">
 		select distinct(DATE_FORMAT(workday, '%m')) from commuting order by (DATE_FORMAT(workday, '%m')) desc;
+	</select>
+	<select id="countOverTime" resultType="int">
+		SELECT COUNT(over_time) FROM commuting
+		WHERE over_time != "-" and empno = #{empno};
 	</select>
 </mapper>
