@@ -25,15 +25,7 @@ public class CommutingService {
 	}
 
 
-	LocalDate date = LocalDate.now();
-	LocalTime time = LocalTime.now();
 	
-	DateTimeFormatter timeformatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-	DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	
-	String formatedNow = time.format(timeformatter);
-	String now = date+" "+formatedNow;
-	String today = date.format(dateformatter);
 	
 	public List<CommutingVO> selectCommuting(){
 		return dao.selectCommuting(); 
@@ -41,6 +33,17 @@ public class CommutingService {
 	}
 
 	public void insertEnter(Model model) {
+		LocalDate date = LocalDate.now();
+		LocalTime time = LocalTime.now();
+		
+		DateTimeFormatter timeformatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		String formatedNow = time.format(timeformatter);
+		String now = date+" "+formatedNow;
+		String today = date.format(dateformatter);
+		
+		
 		CommutingVO vo = new CommutingVO();
 		vo.setStartTime(now);
 		vo.setEmpno(123);
@@ -48,15 +51,36 @@ public class CommutingService {
 	}
 	
 	public void insertLeave(Model model) {
+		LocalDate date = LocalDate.now();
+		LocalTime time = LocalTime.now();
+		
+		DateTimeFormatter timeformatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		String formatedNow = time.format(timeformatter);
+		String now = date+" "+formatedNow;
+		String today = date.format(dateformatter);
+		
 		CommutingVO vo = new CommutingVO();
 		vo.setEndTime(now);
 		vo.setEmpno(123);
 		vo.setWorkTime(this.getStartDate(), now);
 		vo.setOverTime();
+		vo.setWorkday(today);
 		dao.insertLeave(vo);
 	}
 	
 	public String getStartDate() {
+		LocalDate date = LocalDate.now();
+		LocalTime time = LocalTime.now();
+		
+		DateTimeFormatter timeformatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		String formatedNow = time.format(timeformatter);
+		String now = date+" "+formatedNow;
+		String today = date.format(dateformatter);
+		
 		CommutingVO vo = new CommutingVO();
 		vo.setWorkday(today);
 		vo.setEmpno(123);
@@ -66,14 +90,22 @@ public class CommutingService {
 		return null;
 	}
 	public String getEndDate() {
-//		CommutingVO vo = new CommutingVO();
-////		System.out.println(today);
-//		vo.setWorkday(today);
-//		vo.setEmpno(123);
-//		vo.setOverTime(, formatedNow);
-//		if(dao.getStartTime(vo) != null) {
-//			return dao.getEndTime(vo);
-//		}
+		LocalDate date = LocalDate.now();
+		LocalTime time = LocalTime.now();
+		
+		DateTimeFormatter timeformatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		String formatedNow = time.format(timeformatter);
+		String now = date+" "+formatedNow;
+		String today = date.format(dateformatter);
+		
+		CommutingVO vo = new CommutingVO();
+		vo.setWorkday(today);
+		vo.setEmpno(123);
+		if(dao.getEndTime(vo) != null) {
+			return dao.getEndTime(vo);
+		}
 		return null;
 	}
 }

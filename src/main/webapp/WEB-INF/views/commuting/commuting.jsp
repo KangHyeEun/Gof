@@ -9,8 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/commuting/style.css">
 <title>Insert title here</title>
 
-</head>
-	
+</head>	
 <body>
 	<div class="container-wrap">
 		<div class="header">
@@ -77,9 +76,9 @@
 								            		<td>${cl.id}</td>
 								            		<td>${cl.workday}</td>
 								            		<td>${cl.startTime}</td>
-								            		<td>${cl.endTime}</td>
-								            		<td>${cl.workTime}</td>
-								            		<td>${cl.overTime}</td>
+								            		<td>${cl.endTime != null? cl.endTime : "-"}</td>
+								            		<td>${cl.workTime != null? cl.workTime : "-"}</td>
+								            		<td>${cl.overTime != null? cl.overTime : "-"}</td>
 							            		</tr>	
 							            	</c:forEach>
 						            	</tbody>
@@ -103,7 +102,7 @@
 	                    <p>오늘날짜 시간</p>
 	                </div>
 	                <div class="pop4">
-	                    <form action="${pageContext.request.contextPath}/commuting/enter">
+	                    <form action="${pageContext.request.contextPath}/CommutingEnter">
 	                        <button>출근하겠습니다</button>
 	                    </form>
 	                </div>    
@@ -120,7 +119,7 @@
 	                    <p>오늘날짜 시간</p>
 	                </div>
 	                <div class="pop4">
-	                    <form action="${pageContext.request.contextPath}/commuting/leave">
+	                    <form action="${pageContext.request.contextPath}/CommutingLeave">
 	                        <button>퇴근하겠습니다</button>
 	                    </form>
 	                </div>    
@@ -137,11 +136,17 @@
 	    	}
 	    });
 	    document.getElementById("leave").addEventListener("click",function(){
+	    	
 	    	if(${endTime == null}){
-    			document.getElementById("leavepop").style.display = "flex";
+	    		if(${startTime == null}){
+		        	alert("출근 기록이 없습니다.")
+		    	}else{
+	    			document.getElementById("leavepop").style.display = "flex";	    		
+		    	}
 	    	}else {
 	    		alert("이미 퇴근하셨습니다.");	    		
 	    	}
+	    	
 	    });
     </script>
 

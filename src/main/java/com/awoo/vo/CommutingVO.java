@@ -1,8 +1,10 @@
 package com.awoo.vo;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 
 import org.apache.ibatis.type.Alias;
 
@@ -45,42 +47,48 @@ public class CommutingVO {
 		return workTime;
 	}
 	public void setWorkTime(String startTime, String endTime) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
-		System.out.println(format.format(new java.util.Date()));
-		String date = format.format(startTime);
-		System.out.println(date +"나와라아아아");
-		System.out.println(startTime);
-		System.out.println(endTime);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
 		Date sd = null;
 		Date ed = null;
 		try {
-			sd = (Date) format.parse(startTime);
-		    ed = (Date)format.parse(endTime);
-		    System.out.println("여기까지는 오니? 좋아");
+			sd = dateFormat.parse(startTime);
+		    ed = dateFormat.parse(endTime);
 		} catch (ParseException e) {
-			System.out.println("여기까지는 오니?");
 		    e.printStackTrace();
 		}   
+		// 계산해서 음수를 양수로 변환 *-1
 		long diff = sd.getTime() - ed.getTime();
-		long diffSeconds = diff / 1000;         
-		long diffMinutes = diff / (60 * 1000);         
-		long diffHours = diff / (60 * 60 * 1000);                      
-		System.out.println("Time in seconds: " + diffSeconds + " seconds.");         
-		System.out.println("Time in minutes: " + diffMinutes + " minutes.");         
-		System.out.println("Time in hours: " + diffHours + " hours.");
-		
-		this.workTime = diffHours+":"+diffMinutes+":"+diffSeconds;
+		long diffMinutes = (diff / (60 * 1000)*-1)%60;         
+		long diffHours = (diff / (60 * 60 * 1000)*-1);
+		this.workTime = diffHours+"시간 "+diffMinutes+"분";
 	}
 	public String getOverTime() {
 		return overTime;
 	}
 	public void setOverTime() {
 		if(this.workTime != null) {
-			
+			SimpleDateFormat dateHM = new SimpleDateFormat("HH시간 mm분");
+			SimpleDateFormat dateH = new SimpleDateFormat("HH");
+			SimpleDateFormat dateM = new SimpleDateFormat("mm");
+			Date dHM = null;
+			String dH = null;
+			String dM = null;
+			try {
+				dHM = dateHM.parse(this.workTime);
+				dH = dateH.format(dHM);
+				dM = dateM.format(dHM);
+			} catch (ParseException e) {
+			    e.printStackTrace();
+			}
+			int hours = Integer.parseInt(dH);
+			int minutes = Integer.parseInt(dM);
+			if(hours >= 9) {
+				hours = hours-9;
+				this.overTime = hours+"시간 "+minutes+"분";
+			}
+		}else {
+			this.overTime = null;	
 		}
-		this.overTime = "test";
-		
 	}
 	public int getEmpno() {
 		return empno;

@@ -189,14 +189,7 @@
    background-color: #1c1b20;
    }
    
-   @media ( max-width: 1024px ) {
-    }
-   @media ( max-width: 768px ) {
-   
-        
-    }
-    @media ( max-width: 480px ) {
-    }
+
     
     .container-inner-bbs{
     	flex-direction: column;
@@ -207,6 +200,7 @@
     	height: 85%;
     	padding: 0;
     	background: #f0f5fa;
+    	box-shadow:none;
     }
     .greating{
     	display:flex;
@@ -254,37 +248,42 @@
    	
    	#enter {
 	width: 44%;
-/*     background-color: #272454; */
-    background: linear-gradient(#319af3, #005dab);
+/*     background: linear-gradient(#319af3, #005dab); */
+    background-color: #272454;
+    /* background: linear-gradient(#319af3, #005dab); */
+    box-shadow: 3px 4px 6px #c7c7c7;
     color: white;
     font-weight: bold;
     padding: 8%;
     box-sizing: border-box;
-    border-radius: 7px;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     }
     #enter:hover {
-    background: linear-gradient(#226fb1, #053d6c);
+/*     background: linear-gradient(#226fb1, #053d6c); */
+	background-color:#161430;
     }
     #leave {
     width: 44%;
     /* height: 90%; */
     /* border: 1px solid #272454; */
-/*     background-color: #9190a4; */
-	background: linear-gradient(#868595, #373740);
+    background-color: #9190a4;
+/* 	background: linear-gradient(#868595, #373740); */
+	box-shadow: 3px 4px 6px #c7c7c7;
     color: white;
     font-weight: bold;
     padding: 8%;
     box-sizing: border-box;
-    border-radius: 7px;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     }
     #leave:hover {
-    background: linear-gradient(#70707c, #0e0e10);
+/*     background: linear-gradient(#70707c, #0e0e10); */
+	background-color:#373740;
     }
     
     .showenter, .showleave{
@@ -310,7 +309,7 @@
      font-size: 0.8em;
      display: flex;
      justify-content: center;
-     align-items: center;
+     align-items: start;
     }
     .list td {
     padding: 4px;
@@ -342,4 +341,12 @@
     .list-table tr{
  	height: 40px;
     }
-    
+   
+   @media ( max-width: 1024px ) {
+    }
+   @media ( max-width: 768px ) {
+   
+        
+    }
+    @media ( max-width: 480px ) {
+    }

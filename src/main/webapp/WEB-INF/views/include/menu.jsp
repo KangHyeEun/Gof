@@ -21,8 +21,8 @@
                                 class="menu-down">▼</span></li>
                         <li>
                             <ul class="sub">
-                                <li><a href="${pageContext.request.contextPath}/commuting">근무 기록</a></li>
-                                <li><a href="${pageContext.request.contextPath}/holiday">휴가 신청</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Commuting">근무 기록</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Holiday">휴가 신청</a></li>
                             </ul>
                         </li>
                     </ul>

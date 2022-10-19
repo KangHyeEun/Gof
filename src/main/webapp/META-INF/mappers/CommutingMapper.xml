@@ -11,13 +11,21 @@
 		INSERT INTO commuting(start_time, empno) 
 		VALUES (#{startTime}, #{empno});
 	</insert>
-	<insert id="insertLeave">
-		INSERT INTO commuting(end_time, work_time, over_time) 
-		VALUES (#{endTime}, #{workTime}, #{overTime}) where empno = #{empno};
-	</insert>
+	<update id="insertLeave">
+		update commuting
+			set end_time = #{endTime},
+				work_time = #{workTime},
+				over_time = #{overTime}
+			WHERE empno=#{empno} AND DATE_FORMAT(workday, '%Y-%m-%d') = #{workday};
+	</update>
 	<select id="getStartTime" resultType="String">
 <!-- 		select DATE_FORMAT(start_time, '%H:%i:%s %p') -->
 		select DATE_FORMAT(start_time, '%Y-%m-%d %H:%i:%s')
+		from commuting WHERE DATE_FORMAT(workday, '%Y-%m-%d') = #{workday} AND empno=#{empno};
+	</select>
+		<select id="getEndTime" resultType="String">
+<!-- 		select DATE_FORMAT(start_time, '%H:%i:%s %p') -->
+		select DATE_FORMAT(end_time, '%Y-%m-%d %H:%i:%s')
 		from commuting WHERE DATE_FORMAT(workday, '%Y-%m-%d') = #{workday} AND empno=#{empno};
 	</select>
 </mapper>
