@@ -246,13 +246,8 @@ document.addEventListener("mouseup", function(_e){
 //	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
 //	영역 벗어나면 함수 자체가 실행이 안됨...
 	} else if (prevs.classList.item(3) == "btnClick") {
-		console.log("다르다.");
-		console.log(document.getElementsByClassName(targetbtn).item(0));
-		console.log(document.getElementsByClassName(targetbtn).item(0));
 		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
 		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
-		console.log(document.getElementsByClassName(targetbtn).item(0));
-		console.log(document.getElementsByClassName(targetbtn).item(0));
 	}
 });
 	
@@ -288,13 +283,8 @@ document.addEventListener("mouseup", function(_e){
 //	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
 //	영역 벗어나면 함수 자체가 실행이 안됨...
 	} else if (prev.classList.item(3) == "btnClick") {
-		console.log("다르다.");
-		console.log(document.getElementsByClassName(targetbtn).item(0));
-		console.log(document.getElementsByClassName(targetbtn).item(0));
 		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
 		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
-		console.log(document.getElementsByClassName(targetbtn).item(0));
-		console.log(document.getElementsByClassName(targetbtn).item(0));
 	}
 });
 
@@ -333,13 +323,8 @@ document.addEventListener("mouseup", function(_e){
 //	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
 //	영역 벗어나면 함수 자체가 실행이 안됨...
 	} else if (next.classList.item(3) == "btnClick") {
-		console.log("다르다.");
-		console.log(document.getElementsByClassName(targetbtn).item(0));
-		console.log(document.getElementsByClassName(targetbtn).item(0));
 		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
 		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
-		console.log(document.getElementsByClassName(targetbtn).item(0));
-		console.log(document.getElementsByClassName(targetbtn).item(0));
 	}
 });
 
@@ -378,13 +363,8 @@ document.addEventListener("mouseup", function(_e){
 //	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
 //	영역 벗어나면 함수 자체가 실행이 안됨...
 	} else if (nexts.classList.item(3) == "btnClick") {
-		console.log("다르다.");
-		console.log(document.getElementsByClassName(targetbtn).item(0));
-		console.log(document.getElementsByClassName(targetbtn).item(0));
 		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
 		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
-		console.log(document.getElementsByClassName(targetbtn).item(0));
-		console.log(document.getElementsByClassName(targetbtn).item(0));
 	}
 });
 
