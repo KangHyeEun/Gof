@@ -19,9 +19,24 @@
 			<jsp:include page="../include/menu.jsp"></jsp:include>
 			<div class="container-inner">
 				
-				<!-- 각자 필요한 부분 넣기 -->
+				<section class="section1">
+					<div class="section1-1">
+						<p>이번 달 근무 현황</p>
+						
+					</div>
+					<div class="section1-2">
+						<p>이벌 달 근무기록 상세 현황</p>
+					</div>
+				</section>
 				
-				
+				<section class="section2">
+					<div class="section2-1">
+						<p>정렬</p>
+					</div>
+					<div class="section2-2">
+						<p>테이블</p>
+					</div>
+				</section>
 			</div>
 		</div>
 	</div>
