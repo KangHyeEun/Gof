@@ -1,4 +1,6 @@
 
+//======================================================================
+//======================================================================
 // ---------------------------------------------------------------------
 //calendar
 // ---------------------------------------------------------------------
@@ -84,9 +86,10 @@ const renderCalendar = () => {
 
 // 이전 달 마지막 주 일자 (회색)
     for (let x = firstDayindex; x > 0; x--) {
+		
 		prevClass = "";
 		prevClass += date.getFullYear() + "-" + date.getMonth() + "-" + (prevLastDay - x + 1);
-        days += `<div class="prev-date ${prevClass}"><span>${prevLastDay - x + 1}</span></div>`;
+        days += `<div class="${prevClass} prev-date"><span>${prevLastDay - x + 1}</span></div>`;
     }
 // 이번 달 일자
     for (let i = 1; i <= lastDay; i++) {
@@ -95,7 +98,7 @@ const renderCalendar = () => {
         		&& date.getFullYear() === new Date().getFullYear()) {
 	        currentClass = "";
 			currentClass += date.getFullYear() + "-" + (date.getMonth()+1) + "-" + i;
-            days += `<div class="today ${currentClass}"><span>${i}</span></div>`;
+            days += `<div class="${currentClass} today"><span>${i}</span></div>`;
         } else {
 	        currentClass = "";
 			currentClass += date.getFullYear() + "-" + (date.getMonth()+1) + "-" + i;
@@ -106,18 +109,20 @@ const renderCalendar = () => {
     for (let j = 1; j <= nextDays; j++) {
         nextClass = "";
 		nextClass += date.getFullYear() + "-" + (date.getMonth()+2) + "-" + j;
-        days += `<div class="next-date ${nextClass}"><span>${j}</span></div>`;
+        days += `<div class="${nextClass} next-date"><span>${j}</span></div>`;
     }
 
     monthDays.innerHTML = "";
     monthDays.innerHTML = days;
-    
-    
+
+
 // ---------------------------------------------------------------------
 //월별 border-bottom 없애려고...
 // ---------------------------------------------------------------------
 
+
 	let daysArray = document.querySelector(".days").children;
+//	console.log("여기여기");
 //	for (let arr = 0; arr < daysArray.length; arr++){
 //		console.log("daysArray : " + daysArray[arr].innerHTML);
 //	}
@@ -127,35 +132,178 @@ const renderCalendar = () => {
 //	console.log(daysArray[35]!=undefined);
 //	console.log(daysArray[35]==undefined);
 	
-	if(daysArray[35]==undefined){
+	if(daysArray[28]==undefined){
+		for(let k = 27; k > 20; k--){
+			daysArray[k].style.borderBottom = "none";
+		}
+		for(let g = 0; g < daysArray.length; g++){
+			daysArray[g].style.height = "16.2vh";
+		}
+	}else if(daysArray[35]==undefined){
 		for(let k = 34; k > 27; k--){
 			daysArray[k].style.borderBottom = "none";
 		}
 		for(let g = 0; g < daysArray.length; g++){
 //			daysArray[g].style.height = "116px";
-			daysArray[g].style.height = "14.2vh";
+			daysArray[g].style.height = "13vh";
 		}
 	}else {
 		for(let k = daysArray.length-1; k > daysArray.length-8; k--){
 			daysArray[k].style.borderBottom = "none";
 		}
 	}
+	
+	
 // ---------------------------------------------------------------------
+//일자 클릭시 이벤트
+// ---------------------------------------------------------------------
+
+
+	let daysEle = document.querySelectorAll(".days div");
+//	let isPressed = false;
+	let targetdaysEle = "";
+	
+	for (let index = 0; index < daysEle.length; index++) {
+//	    마우스클릭
+	    daysEle.item(index).addEventListener("mousedown", function(_e) {
+//			target : 클릭한 영역의 class
+			targetdaysEle = _e.currentTarget.className;
+//		    isPressed = true;
+		    this.style.backgroundColor = "#746bf5";
+	    });
+//		마우스떼기
+	    daysEle.item(index).addEventListener("mouseup", function(_e) {
+//			mousedown 영역(target)과 mouseup 영역이 같다면 
+			if (targetdaysEle === _e.target.className){
+				this.style.backgroundColor = "";
+//			만약에 다르면 클릭시의 영역에 대한 효과 제거
+			} else {
+				document.getElementsByClassName(targetdaysEle).item(0).style.backgroundColor = "";
+			}
+//		    isPressed = false;
+//			this.style.backgroundColor = "";
+	    });
+	}
+	
+	
+// ---------------------------------------------------------------------
+//월, 주, 일 클릭시 버튼 효과
+// ---------------------------------------------------------------------
+	
+	
+	const btnDiv = document.querySelectorAll(".btnDiv p");
+	
+	for (let index = 0; index < btnDiv.length; index++) {
+		btnDiv.item(index).addEventListener("click", function() {
+			for (let index1 = 0; index1 < btnDiv.length; index1++) {
+				btnDiv.item(index1).classList.add("btnColor");
+				btnDiv.item(index1).classList.remove("btnClick");
+			}
+			this.classList.add("btnClick");
+			this.classList.remove("btnColor");
+		});
+	}
+	
 
 }
 
+	
+// ---------------------------------------------------------------------
+//왼쪽 상단 이동 버튼
+// ---------------------------------------------------------------------
+
+// 이동 버튼 클릭시 효과를 위한 변수
+const btnMove = document.querySelectorAll(".btnMove i");
+// 이전 이벤트 타겟을 위한 저장 변수
+let targetbtn;
+
+// ---------------------------------------------------------------------
+
 // 이전 년도 버튼
-document.querySelector(".prevs").addEventListener("click", () => {
+const prevs = document.querySelector(".prevs");
+
+prevs.addEventListener("click", () => {
     date.setFullYear(date.getFullYear() - 1);
     renderCalendar();
 });
+
+// 이전 년도 버튼 효과 함수
+//마우스클릭
+prevs.addEventListener("mousedown", function(_e) {
+	targetbtn = "";
+	targetbtn = _e.currentTarget.classList.item(2);
+	this.classList.add("btnClick");
+	this.classList.remove("btnColor");
+});
+
+//마우스떼기
+document.addEventListener("mouseup", function(_e){
+	
+//	mousedown 영역(target)과 mouseup 영역이 같다면
+	if (targetbtn === _e.target.classList.item(2)){
+			this.classList.remove("btnClick");
+			this.classList.add("btnColor");
+//	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
+//	영역 벗어나면 함수 자체가 실행이 안됨...
+	} else if (prevs.classList.item(3) == "btnClick") {
+		console.log("다르다.");
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
+		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+	}
+});
+	
+
+// ---------------------------------------------------------------------
+
 // 이전 달 버튼
-document.querySelector(".prev").addEventListener("click", () => {
+const prev = document.querySelector(".prev");
+
+prev.addEventListener("click", () => {
     date.setMonth(date.getMonth() - 1);
     renderCalendar();
 });
+
+
+// 이전 달 버튼 효과 함수
+//마우스클릭
+prev.addEventListener("mousedown", function(_e) {
+	targetbtn = "";
+	targetbtn = _e.currentTarget.classList.item(2);
+	this.classList.add("btnClick");
+	this.classList.remove("btnColor");
+});
+
+	
+//마우스떼기
+document.addEventListener("mouseup", function(_e){
+	
+//	mousedown 영역(target)과 mouseup 영역이 같다면
+	if (targetbtn === _e.target.classList.item(2)){
+			this.classList.remove("btnClick");
+			this.classList.add("btnColor");
+//	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
+//	영역 벗어나면 함수 자체가 실행이 안됨...
+	} else if (prev.classList.item(3) == "btnClick") {
+		console.log("다르다.");
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
+		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+	}
+});
+
+// ---------------------------------------------------------------------
+
 // 다음 달 버튼
-document.querySelector(".next").addEventListener("click", () => {
+const next = document.querySelector(".next");
+
+next.addEventListener("click", () => {
     date.setMonth(date.getMonth() + 1);
 //    현재 년도로부터 30년 후 까지만 사용 가능
 	if((date.getFullYear()) >= (new Date().getFullYear()+30)){
@@ -164,8 +312,43 @@ document.querySelector(".next").addEventListener("click", () => {
 	}
     renderCalendar();
 });
+
+
+// 다음 달 버튼 효과 함수
+//마우스클릭
+next.addEventListener("mousedown", function(_e) {
+	targetbtn = "";
+	targetbtn = _e.currentTarget.classList.item(2);
+	this.classList.add("btnClick");
+	this.classList.remove("btnColor");
+});
+
+//마우스떼기
+document.addEventListener("mouseup", function(_e){
+	
+//	mousedown 영역(target)과 mouseup 영역이 같다면
+	if (targetbtn === _e.target.classList.item(2)){
+			this.classList.remove("btnClick");
+			this.classList.add("btnColor");
+//	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
+//	영역 벗어나면 함수 자체가 실행이 안됨...
+	} else if (next.classList.item(3) == "btnClick") {
+		console.log("다르다.");
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
+		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+	}
+});
+
+// ---------------------------------------------------------------------
+
 // 다음 년도 버튼
-document.querySelector(".nexts").addEventListener("click", () => {
+const nexts = document.querySelector(".nexts");
+
+nexts.addEventListener("click", () => {
     date.setFullYear(date.getFullYear() + 1);
 //    현재 년도로부터 30년 후 까지만 사용 가능
 	if((date.getFullYear()) >= (new Date().getFullYear()+30)){
@@ -174,6 +357,40 @@ document.querySelector(".nexts").addEventListener("click", () => {
 	}
     renderCalendar();
 });
+
+
+// 다음 년도 버튼 효과 함수
+//마우스클릭
+nexts.addEventListener("mousedown", function(_e) {
+	targetbtn = "";
+	targetbtn = _e.currentTarget.classList.item(2);
+	this.classList.add("btnClick");
+	this.classList.remove("btnColor");
+});
+
+//마우스떼기
+document.addEventListener("mouseup", function(_e){
+	
+//	mousedown 영역(target)과 mouseup 영역이 같다면
+	if (targetbtn === _e.target.classList.item(2)){
+			this.classList.remove("btnClick");
+			this.classList.add("btnColor");
+//	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
+//	영역 벗어나면 함수 자체가 실행이 안됨...
+	} else if (nexts.classList.item(3) == "btnClick") {
+		console.log("다르다.");
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
+		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+		console.log(document.getElementsByClassName(targetbtn).item(0));
+	}
+});
+
+
+// ---------------------------------------------------------------------
+
 // 첫 시작 시 렌더링
 renderCalendar();
 // 오늘 날짜로 이동
@@ -183,33 +400,33 @@ document.querySelector(".todayMove").addEventListener("click", () =>{
     renderCalendar();
 });
 
-    
-// ---------------------------------------------------------------------
-//일자 클릭시 이벤트
+
 // ---------------------------------------------------------------------
 
 
-let daysEle = document.querySelectorAll(".days div");
-//let isPressed = false;
 
-for (let index = 0; index < daysEle.length; index++) {
-//	마우스떼기
-    daysEle[index].addEventListener("mouseup", function(){
-//	    isPressed = false;
-		this.style.backgroundColor = "";
-    });
-//    마우스클릭
-    daysEle[index].addEventListener("mousedown", function(){
-//	    isPressed = true;
-	    this.style.backgroundColor = "#746bf5";
-    });
-}
 
-    
+//======================================================================
+
+//======================================================================
+
+//const anotherDay = () => {
+//
+//}
+
+//	let array = document.querySelector(".days div");
+//	console.log(array);
+//	for (let arr1 = 0; arr1 < array.length; arr1++){
+//		console.log("array"+[arr1]+".innerHTML : " + array[arr1].innerHTML);
+//		console.log("array"+[arr1]+".className : " + array[arr1].className);
+//		console.log("array"+[arr1]+".className : " + array[arr1].className[0]);
+//	}
+
+
+//======================================================================
+//======================================================================
+
 // ---------------------------------------------------------------------
 //비동기
 // ---------------------------------------------------------------------
-
-
-
 

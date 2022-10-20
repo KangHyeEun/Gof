@@ -24,16 +24,23 @@
 			    <!-- right-content -->
                 <div class="calendar">
                     <div class="month">
-                    	<i class="fas fa-angles-left prevs"></i>
-                        <i class="fas fa-angle-left prev"></i>
+	                    <div class="btnMove">
+	                    	<i class="fas fa-angles-left prevs btnColor"></i>
+	                        <i class="fas fa-angle-left prev btnColor"></i>
+	                        <i class="fas fa-angle-right next btnColor"></i>
+	                        <i class="fas fa-angles-right nexts btnColor"></i>
+                        </div>
                         <div class="date">
                             <!-- month 객체로 월 동적 생성되는 부분 -->
                             <h1></h1>
                             <!-- 현재 시간을 기준으로 날짜가 동적 생성되는 부분 -->
                             <p class="todayMove"></p>
                         </div>
-                        <i class="fas fa-angle-right next"></i>
-                        <i class="fas fa-angles-right nexts"></i>
+		               	<div class="btnDiv">
+		               		<p id="btnMonth" class="btnClick">월</p>
+		               		<p id="btnWeek" class="btnColor">주</p>
+		               		<p id="btnDay" class="btnColor">일</p>
+		               	</div>
                     </div>
                     <div class="weekdays">
                         <div><span>일</span></div>
