@@ -8,7 +8,7 @@
             <nav>
                 <div class="menuwrap">
                     <ul class="menu">
-                        <li><a href="#">홈</a></li>
+                        <li><a href="MoveToHome">홈</a></li>
                     </ul>
 
                     <ul class="menu">
@@ -21,7 +21,7 @@
                                 class="menu-down">▼</span></li>
                         <li>
                             <ul class="sub">
-                                <li><a href="${pageContext.request.contextPath}/Commuting">근무 기록</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Commuting?page=1&&year=0&&month=0">근무 기록</a></li>
                                 <li><a href="${pageContext.request.contextPath}/Holiday">휴가 신청</a></li>
                             </ul>
                         </li>
