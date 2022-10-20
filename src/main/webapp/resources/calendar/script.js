@@ -205,8 +205,11 @@ const renderCalendar = () => {
 	}
 	
 
+// ---------------------------------------------------------------------
 }
-
+// ---------------------------------------------------------------------
+	
+	
 	
 // ---------------------------------------------------------------------
 //왼쪽 상단 이동 버튼
@@ -218,6 +221,22 @@ const btnMove = document.querySelectorAll(".btnMove i");
 let targetbtn;
 
 // ---------------------------------------------------------------------
+// 마우스 떼기
+const mouseUp = (click) => {
+	document.addEventListener("mouseup", function(_e){
+		
+	//	mousedown 영역(target)과 mouseup 영역이 같다면
+		if (targetbtn === _e.target.classList.item(2)){
+				click.classList.remove("btnClick");
+				click.classList.add("btnColor");
+	//	처음 눌렀던 버튼에 btnClick 클래스가 있으면 제거
+		} else if (click.classList.item(3) == "btnClick") {
+			document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
+			document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
+		}
+	});
+}
+// ---------------------------------------------------------------------
 
 // 이전 년도 버튼
 const prevs = document.querySelector(".prevs");
@@ -227,7 +246,7 @@ prevs.addEventListener("click", () => {
     renderCalendar();
 });
 
-// 이전 년도 버튼 효과 함수
+// 이전 년도 버튼 효과
 //마우스클릭
 prevs.addEventListener("mousedown", function(_e) {
 	targetbtn = "";
@@ -237,19 +256,7 @@ prevs.addEventListener("mousedown", function(_e) {
 });
 
 //마우스떼기
-document.addEventListener("mouseup", function(_e){
-	
-//	mousedown 영역(target)과 mouseup 영역이 같다면
-	if (targetbtn === _e.target.classList.item(2)){
-			this.classList.remove("btnClick");
-			this.classList.add("btnColor");
-//	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
-//	영역 벗어나면 함수 자체가 실행이 안됨...
-	} else if (prevs.classList.item(3) == "btnClick") {
-		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
-		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
-	}
-});
+mouseUp(prevs);
 	
 
 // ---------------------------------------------------------------------
@@ -263,7 +270,7 @@ prev.addEventListener("click", () => {
 });
 
 
-// 이전 달 버튼 효과 함수
+// 이전 달 버튼 효과
 //마우스클릭
 prev.addEventListener("mousedown", function(_e) {
 	targetbtn = "";
@@ -272,21 +279,9 @@ prev.addEventListener("mousedown", function(_e) {
 	this.classList.remove("btnColor");
 });
 
-	
 //마우스떼기
-document.addEventListener("mouseup", function(_e){
-	
-//	mousedown 영역(target)과 mouseup 영역이 같다면
-	if (targetbtn === _e.target.classList.item(2)){
-			this.classList.remove("btnClick");
-			this.classList.add("btnColor");
-//	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
-//	영역 벗어나면 함수 자체가 실행이 안됨...
-	} else if (prev.classList.item(3) == "btnClick") {
-		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
-		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
-	}
-});
+mouseUp(prev);
+
 
 // ---------------------------------------------------------------------
 
@@ -303,8 +298,7 @@ next.addEventListener("click", () => {
     renderCalendar();
 });
 
-
-// 다음 달 버튼 효과 함수
+// 다음 달 버튼 효과
 //마우스클릭
 next.addEventListener("mousedown", function(_e) {
 	targetbtn = "";
@@ -314,19 +308,8 @@ next.addEventListener("mousedown", function(_e) {
 });
 
 //마우스떼기
-document.addEventListener("mouseup", function(_e){
-	
-//	mousedown 영역(target)과 mouseup 영역이 같다면
-	if (targetbtn === _e.target.classList.item(2)){
-			this.classList.remove("btnClick");
-			this.classList.add("btnColor");
-//	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
-//	영역 벗어나면 함수 자체가 실행이 안됨...
-	} else if (next.classList.item(3) == "btnClick") {
-		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
-		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
-	}
-});
+mouseUp(next);
+
 
 // ---------------------------------------------------------------------
 
@@ -343,8 +326,7 @@ nexts.addEventListener("click", () => {
     renderCalendar();
 });
 
-
-// 다음 년도 버튼 효과 함수
+// 다음 년도 버튼 효과
 //마우스클릭
 nexts.addEventListener("mousedown", function(_e) {
 	targetbtn = "";
@@ -354,20 +336,7 @@ nexts.addEventListener("mousedown", function(_e) {
 });
 
 //마우스떼기
-document.addEventListener("mouseup", function(_e){
-	
-//	mousedown 영역(target)과 mouseup 영역이 같다면
-	if (targetbtn === _e.target.classList.item(2)){
-			this.classList.remove("btnClick");
-			this.classList.add("btnColor");
-//	처음 눌렀던 버튼에 btnColor 클래스가 있으면 제거해야 하는데 여기서 태그가 고정적이라
-//	영역 벗어나면 함수 자체가 실행이 안됨...
-	} else if (nexts.classList.item(3) == "btnClick") {
-		document.getElementsByClassName(targetbtn).item(0).classList.remove("btnClick");
-		document.getElementsByClassName(targetbtn).item(0).classList.add("btnColor");
-	}
-});
-
+mouseUp(nexts);
 
 // ---------------------------------------------------------------------
 
