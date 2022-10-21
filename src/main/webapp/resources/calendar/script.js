@@ -83,33 +83,90 @@ const renderCalendar = () => {
     let prevClass;
     let currentClass;
     let nextClass;
+    let holidayStyle;
+
+//style="color: blue;"
 
 // 이전 달 마지막 주 일자 (회색)
     for (let x = firstDayindex; x > 0; x--) {
-		
+//		해당 날짜를 클래스 이름으로
 		prevClass = "";
 		prevClass += date.getFullYear() + "-" + date.getMonth() + "-" + (prevLastDay - x + 1);
-        days += `<div class="${prevClass} prev-date"><span>${prevLastDay - x + 1}</span></div>`;
+//		토,일 구하기
+		holidayStyle = "";
+		holidayStyle = new Date(date.getFullYear(), date.getMonth()-1, (prevLastDay - x + 1)).getDay();
+		
+//		일요일이면
+		if(holidayStyle == 0) {
+			days += `<div class="${prevClass} prev-date" style="color:red"><span>${prevLastDay - x + 1}</span></div>`;
+//		토요일이면
+		} else if(holidayStyle == 6) {
+			days += `<div class="${prevClass} prev-date" style="color:blue"><span>${prevLastDay - x + 1}</span></div>`;
+//		평일이면
+		} else {
+			days += `<div class="${prevClass} prev-date"><span>${prevLastDay - x + 1}</span></div>`;
+		}
     }
 // 이번 달 일자
     for (let i = 1; i <= lastDay; i++) {
-        // 1~마지막날 중 오늘 날짜와 같고 지금쓰고 있는 date의 달이 현재 달과 같으면
+//		해당 날짜를 클래스 이름으로
+		currentClass = "";
+		currentClass += date.getFullYear() + "-" + (date.getMonth()+1) + "-" + i;
+			
+        // 1~마지막날 중 오늘 날짜와 같고 지금쓰고 있는 date의 달이 실제 날짜의 달과 같으면
         if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()
         		&& date.getFullYear() === new Date().getFullYear()) {
-	        currentClass = "";
-			currentClass += date.getFullYear() + "-" + (date.getMonth()+1) + "-" + i;
-            days += `<div class="${currentClass} today"><span>${i}</span></div>`;
+//			토,일 구하기
+			holidayStyle = "";
+			holidayStyle = new Date(date.getFullYear(), date.getMonth(), i).getDay();
+		
+//			일요일이면
+			if(holidayStyle == 0) {
+				days += `<div class="${currentClass} today" style="color:red"><span>${i}</span></div>`;
+//			토요일이면
+			} else if(holidayStyle == 6) {
+				days += `<div class="${currentClass} today" style="color:blue"><span>${i}</span></div>`;
+//			평일이면
+			} else {
+				days += `<div class="${currentClass} today"><span>${i}</span></div>`;
+			}
+            
         } else {
-	        currentClass = "";
-			currentClass += date.getFullYear() + "-" + (date.getMonth()+1) + "-" + i;
-            days += `<div class="${currentClass}"><span>${i}</span></div>`;
+//			토,일 구하기
+			holidayStyle = "";
+			holidayStyle = new Date(date.getFullYear(), date.getMonth(), i).getDay();
+		
+//			일요일이면
+			if(holidayStyle == 0) {
+            	days += `<div class="${currentClass}" style="color:red"><span>${i}</span></div>`;
+//			토요일이면
+			} else if(holidayStyle == 6) {
+            	days += `<div class="${currentClass}" style="color:blue"><span>${i}</span></div>`;
+//			평일이면
+			} else {
+            	days += `<div class="${currentClass}"><span>${i}</span></div>`;
+			}
         }
     }
 // 이전 달 첫째 주 일자 (회색)
     for (let j = 1; j <= nextDays; j++) {
+//		해당 날짜를 클래스 이름으로
         nextClass = "";
 		nextClass += date.getFullYear() + "-" + (date.getMonth()+2) + "-" + j;
-        days += `<div class="${nextClass} next-date"><span>${j}</span></div>`;
+//		토,일 구하기
+		holidayStyle = "";
+		holidayStyle = new Date(date.getFullYear(), date.getMonth()+1, j).getDay();
+		
+//		일요일이면
+		if(holidayStyle == 0) {
+        	days += `<div class="${nextClass} next-date" style="color:red"><span>${j}</span></div>`;
+//		토요일이면
+		} else if(holidayStyle == 6) {
+        	days += `<div class="${nextClass} next-date" style="color:blue"><span>${j}</span></div>`;
+//		평일이면
+		} else {
+        	days += `<div class="${nextClass} next-date"><span>${j}</span></div>`;
+		}
     }
 
     monthDays.innerHTML = "";
@@ -120,17 +177,7 @@ const renderCalendar = () => {
 //월별 border-bottom 없애려고...
 // ---------------------------------------------------------------------
 
-
 	let daysArray = document.querySelector(".days").children;
-//	console.log("여기여기");
-//	for (let arr = 0; arr < daysArray.length; arr++){
-//		console.log("daysArray : " + daysArray[arr].innerHTML);
-//	}
-//	console.log(daysArray);
-//	console.log(daysArray[2]);
-//	console.log(daysArray.length);
-//	console.log(daysArray[35]!=undefined);
-//	console.log(daysArray[35]==undefined);
 	
 	if(daysArray[28]==undefined){
 		for(let k = 27; k > 20; k--){
@@ -153,11 +200,9 @@ const renderCalendar = () => {
 		}
 	}
 	
-	
 // ---------------------------------------------------------------------
 //일자 클릭시 이벤트
 // ---------------------------------------------------------------------
-
 
 	let daysEle = document.querySelectorAll(".days div");
 //	let isPressed = false;
@@ -185,11 +230,9 @@ const renderCalendar = () => {
 	    });
 	}
 	
-	
 // ---------------------------------------------------------------------
 //월, 주, 일 클릭시 버튼 효과
 // ---------------------------------------------------------------------
-	
 	
 	const btnDiv = document.querySelectorAll(".btnDiv p");
 	
@@ -204,11 +247,9 @@ const renderCalendar = () => {
 		});
 	}
 	
-
 // ---------------------------------------------------------------------
 }
 // ---------------------------------------------------------------------
-	
 	
 	
 // ---------------------------------------------------------------------
@@ -349,33 +390,21 @@ document.querySelector(".todayMove").addEventListener("click", () =>{
     renderCalendar();
 });
 
-
 // ---------------------------------------------------------------------
 
 
 
+//======================================================================
+
+//======================================================================
+
+
+
 
 //======================================================================
 
 //======================================================================
 
-//const anotherDay = () => {
-//
-//}
-
-//	let array = document.querySelector(".days div");
-//	console.log(array);
-//	for (let arr1 = 0; arr1 < array.length; arr1++){
-//		console.log("array"+[arr1]+".innerHTML : " + array[arr1].innerHTML);
-//		console.log("array"+[arr1]+".className : " + array[arr1].className);
-//		console.log("array"+[arr1]+".className : " + array[arr1].className[0]);
-//	}
 
 
-//======================================================================
-//======================================================================
-
-// ---------------------------------------------------------------------
-//비동기
-// ---------------------------------------------------------------------
 
