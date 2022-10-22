@@ -105,7 +105,6 @@
 	</div>
     <script type="text/javascript">
 	    document.getElementById("enter").addEventListener("click",function(){
-	    	alert("하이");
 	    	if(${startTime == null}){
 	       		document.getElementById("enterpop").style.display = "flex";
 	    	}else {

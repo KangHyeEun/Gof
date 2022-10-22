@@ -17,6 +17,8 @@
 	.inner-div-bbs{
 	    justify-content: space-between;
 	    padding: 1% 3%;
+    	height: 95%;
+	    
 	}
 	.container1{
 		width: 90%;
@@ -37,15 +39,25 @@
 	    box-shadow: 1px 1px 8px #c1c1c1;
 	}
 	.container1 .section1{
-		width: 34%;
+	    display: flex;
+	    width: 54%;
+	    flex-direction: column;
+     	justify-content: space-between; 
+    	padding: 1% 1.5%;
+	    box-sizing: border-box;
 	}
 	.container .section2{
-		width: 64%;
+		width: 45%;
 		display: flex;
-		justify-content: space-between;
+		flex-direction: column;
+		justify-content: center;
+/* 		padding: 1% 1.5%; */
+/* 		justify-content: space-between; */
 	}
 	.sub-title{
 		font-weight: bold;
+/* 		flex:2; */
+    height: 30%;
 	}
 	.container2{
 		width: 100%;
@@ -68,7 +80,7 @@
 	}
 	
 	.select{
-	height:5%;
+	height:6%;
 	width: 100%;
 /* 	border: 1px solid blue; */
 	padding: 5px;
@@ -84,8 +96,8 @@
 /* 	} */
 	.num{
 	height: 100%;
-	width: 25px;
- 	margin: 2px; 
+	width: 26px;
+ 	margin: 0 2px; 
 	border: 1px solid #c1c1c1;
 	display: flex;
 	justify-content:center;
@@ -117,8 +129,67 @@
 	border: 1px solid #959595;
 	}
 	
-	.list tr{
-	height: 32px;
+	.point{
+/* 		color:#ff6a53; */
+     margin-left: 5px; 
+	}
+	.progress-bar{
+ 	 width: 100%;
+ 	 position: absolute;
+  	 height: 100%; 
+     background: #fff;
+     border-radius: 9px;
+     border: 1px solid #21BFE2;
+	}
+	.progress-rate{
+	background: -webkit-gradient(linear, left top, right top, from(#1ADAEE), to(#1A97EA));
+ 	animation: moving 0.7s;
+   }
+	@keyframes moving {
+	    0% {
+	        width:0;
+	    }
+	}
+	
+	.progress-per{
+	display:flex;
+	width: 100%;
+    justify-content: space-between;
+/*     flex: 1; */
+    height: 20%;
+    align-items: center;
+    font-size:13px;
+	}
+ 	.progress-container{ 
+	position:relative;
+/* 	flex: 1; */
+    height: 15%;
+	}
+	
+	.day-rates{
+	display:flex;
+	justify-content: space-around;
+	align-items: center;
+	font-size: 1.3em;
+	font-weight: bold;
+	}
+	.work-rates{
+	font-size: 1.5em;
+	color: #2196f3;
+/* 	margin-left:10px; */
+	}
+	.day-rates p{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	}
+	.sub-title-container{
+	display: flex;
+    justify-content: space-between;
+	}
+	.sub-title-rate{
+	font-weight:bold;
+/* 	font-size:  */
 	}
 </style>
 </head>
@@ -140,15 +211,30 @@
 					
 					<div class="container1">
 						<section class="section1">
-							<p class="sub-title">이번 달 근무 현황 그래프</p>
-							<div class="progress-bar">진행현황그래프</div>
+							<div class="sub-title-container">
+								<p class="sub-title">이번 달 근무 현황 그래프</p>
+								<p class="sub-title-rate">총 ${getWeekDays}일 중 ${countThisMonth}일 째 </p>
+							</div>
+							<div class="progress-container">
+								<div class="progress-bar">
+									<div style="width:100%" class="progress-bar"></div>
+									<div style="width:${countThisMonth/getWeekDays*100}%" class="progress-bar progress-rate"></div>
+								</div>
+							</div>
+							<div class="progress-per">
+								<p>|&nbsp;0</p>
+								<p>|&nbsp;50%</p>
+								<p>|&nbsp;100%</p>
+							</div>
+							
 						</section>
 						<section class="section2">
-							<p class="sub-title">이번 달 근무 상세 현황</p>
-							 <p>초과 근무 : ${overTime}</p>
-			                <p>지각 : ${countLate}</p>
-			                <p>정상 근무 횟수 : <span id="normal-commuting"></span></p>
-							<p>근무시간 미달 : </p>
+<!-- 							<p class="sub-title">이번 달 근무 상세 현황</p> -->
+							<div class="day-rates">
+							 	<p>초과 근무 : <span class="work-rates">${overTime}</span></p>
+				                <p>지각 : <span class="work-rates">${countLate}</span></p>
+				                <p>정상 근무 횟수 : <span class="work-rates">${countNormalCommuting}</span></p>
+			                </div>
 						</section>					
 					</div>
 					<div class="container2">
@@ -215,8 +301,9 @@
 		<!-- 							<a id="doubleprev">＜＜</a> -->
 		<!-- 							<div class="select-container"> -->
 										<div class="num"><a id="prev">◀</a></div>
-											<c:forEach begin="1" end="${CommutingList.size() == 0? 1 : CommutingList.size()%10 == 0? CommutingList.size()/10 : 
-											((CommutingList.size()/10)+(1-((CommutingList.size()/10)%1))%1)}" varStatus="status">
+<%-- 											<c:forEach begin="1" end="${CommutingList.size() == 0? 1 : CommutingList.size()%10 == 0? CommutingList.size()/10 :  --%>
+<%-- 											((CommutingList.size()/10)+(1-((CommutingList.size()/10)%1))%1)}" varStatus="status"> --%>
+												<c:forEach begin="1" end="${CommutingList.size() == 0? 1 : CommutingList.size()%10 == 0? CommutingList.size()/10 :((CommutingList.size()/10)+(1-((CommutingList.size()/10)%1))%1)}" varStatus="status">
 												<c:choose>
 													<c:when test="${param.page eq status.count}">
 														<div class="num checked"><span>${status.count}</span></div>
@@ -246,7 +333,9 @@
 		
 		 document.addEventListener("DOMContentLoaded", function(){
 			
-		
+			 var today = new Date();
+
+			 console.log(today);
 // 			alert("하이");
 // 			alert(page);
 // 			alert(size);
@@ -258,34 +347,36 @@
 			}
 			
 			// 순서 아이디 값으로 넣기
-// 			let year = document.getElementById("sorting-year").value;
-// 	    	let month = document.getElementById("sorting-month").value;
-// 	    	let child = document.getElementById("table-body").children;
+			let year = document.getElementById("sorting-year").value;
+	    	let month = document.getElementById("sorting-month").value;
+	    	let child = document.getElementById("table-body").children;
 	    	
-// 	    	var cnt = 0;
-// 	    	for (let i = 0; i < child.length; i++) {
+	    	
+	    	var cnt = 0;
+	    	for (let i = 0; i < child.length; i++) {
+	    		
+	    		// 순서
+				child[i].children[0].innerHTML = i+1;
 				
-// 	    	let date = child[i].children[1].innerHTML;
-// 	    	let spliteddate = date.split("-");
+				//근무시간미달 표시
+				let hourtext = child[i].children[4].innerHTML;
+				if(hourtext.split("시간")[0] < 8){
+					child[i].children[4].innerHTML = hourtext+"<span class=point>❗<span>";	
+				}
+				
+				// 지각 표시
+				let daytext = child[i].children[2].innerHTML;
+				let time = daytext.split(":");
+				if(time[0] > 9 || (time[0] == 9 && time[1] > 10)){
+					child[i].children[2].innerHTML = daytext+"<span class=point>❗<span>";
+				}
+	    	}
 	    	
-// 	    	child[i].children[0].innerHTML = i+1;
-	    	
-	    	
-// 		    	if(month == spliteddate[1] && year == spliteddate[0]){
-// 		    		// 표시되어있는 tr 갯수 세기
-// 			    	cnt++;
-// 		    		child[i].style.display = "";
-// 		    		for (var j = 0; j < cnt; j++) {
-// 		    			child[i].children[0].innerHTML = i;	
-// 					}
-// 		    	}else {
-// 		    		child[i].style.display = "none";
-// 		    	}
-		    	
-// 			}
-			
-			
 		 });
+		 
+		 
+		 
+		 
 			// 버튼
 			var prev = document.getElementById("prev");
 			var next = document.getElementById("next");
@@ -306,30 +397,6 @@
 				}
 				location.href="${pageContext.request.contextPath}/Commuting?page="+page1+"&&year="+year+"&&month="+month;
 			});
-// 			doubleprev.addEventListener("click",function(){
-// 				var page1 = 0;
-// 				if(page > 1){
-// 					if(Math.floor((page)/10) <= 1){
-// 						page1 = 1;
-// 					}else if(Math.floor((page-1)/10)*10+1 > 1){
-// 						page1 = Math.floor((page-1)/10)*10;
-// 					}
-// 					location.href="${pageContext.request.contextPath}/Commuting?page="+page1+"&&year="+year+"&&month="+month;	
-// 				}	
-// 			});
-// 			doublenext.addEventListener("click",function(){
-// 				var page1 = 0;
-// 				if(page < Math.ceil(size/10)){
-// 					if(page%10 == 0){
-// 						page1 = page+1;
-// 					}else if((Math.floor((page-1)/10)+1)*10+1 < Math.ceil(size/10)){
-// 						page1 = (Math.floor((page-1)/10)+1)*10+1;
-// 					}else{
-// 						page1 = Math.ceil(size/10);
-// 					}
-// 					location.href="${pageContext.request.contextPath}/Commuting?page="+page1+"&&year="+year+"&&month="+month;
-// 				}
-// 			});
 
 
 		function OnChange(){    

@@ -8,17 +8,18 @@ import com.awoo.vo.CommutingVO;
 
 @Mapper
 public interface CommutingDAO {
-//	public List<CommutingVO> selectCommuting(CommutingVO vo);
+	public List<CommutingVO> selectAllCommutingByID(CommutingVO vo);
 	public List<CommutingVO> selectCommuting(Map<String, Object> map);
 //	public List<CommutingVO> selectCommuting();
 	public int insertEnter(CommutingVO vo);
 	public void insertLeave(CommutingVO vo);
 	public String getStartTime(CommutingVO vo);
 	public String getEndTime(CommutingVO vo);
-	public List<String> getDistinctYear();
-	public List<String> getDistinctMonth();
+	public List<String> getDistinctYear(CommutingVO vo);
+	public int countThisMonth(CommutingVO vo);
 	public int countOverTime(CommutingVO vo);
 	public int countLate(CommutingVO vo);
+	public int countNomalWorkday(CommutingVO vo);
 }
 
 
