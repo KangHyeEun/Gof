@@ -98,13 +98,13 @@ const renderCalendar = () => {
 		
 //		일요일이면
 		if(holidayStyle == 0) {
-			days += `<div class="${prevClass} prev-date" style="color:red"><span>${prevLastDay - x + 1}</span></div>`;
+			days += `<div class="${prevClass} prev-date" style="color:red"><div><span>${prevLastDay - x + 1}</span></div></div>`;
 //		토요일이면
 		} else if(holidayStyle == 6) {
-			days += `<div class="${prevClass} prev-date" style="color:blue"><span>${prevLastDay - x + 1}</span></div>`;
+			days += `<div class="${prevClass} prev-date" style="color:blue"><div><span>${prevLastDay - x + 1}</span></div>/</div>`;
 //		평일이면
 		} else {
-			days += `<div class="${prevClass} prev-date"><span>${prevLastDay - x + 1}</span></div>`;
+			days += `<div class="${prevClass} prev-date"><div><span>${prevLastDay - x + 1}</span></div></div>`;
 		}
     }
 // 이번 달 일자
@@ -122,13 +122,13 @@ const renderCalendar = () => {
 		
 //			일요일이면
 			if(holidayStyle == 0) {
-				days += `<div class="${currentClass} today" style="color:red"><span>${i}</span></div>`;
+				days += `<div class="${currentClass} today" style="color:red"><div><span>${i}</span></div></div>`;
 //			토요일이면
 			} else if(holidayStyle == 6) {
-				days += `<div class="${currentClass} today" style="color:blue"><span>${i}</span></div>`;
+				days += `<div class="${currentClass} today" style="color:blue"><div><span>${i}</span></div></div>`;
 //			평일이면
 			} else {
-				days += `<div class="${currentClass} today"><span>${i}</span></div>`;
+				days += `<div class="${currentClass} today"><div><span>${i}</span></div></div>`;
 			}
             
         } else {
@@ -138,13 +138,13 @@ const renderCalendar = () => {
 		
 //			일요일이면
 			if(holidayStyle == 0) {
-            	days += `<div class="${currentClass}" style="color:red"><span>${i}</span></div>`;
+            	days += `<div class="${currentClass}" style="color:red"><div><span>${i}</span></div></div>`;
 //			토요일이면
 			} else if(holidayStyle == 6) {
-            	days += `<div class="${currentClass}" style="color:blue"><span>${i}</span></div>`;
+            	days += `<div class="${currentClass}" style="color:blue"><div><span>${i}</span></div></div>`;
 //			평일이면
 			} else {
-            	days += `<div class="${currentClass}"><span>${i}</span></div>`;
+            	days += `<div class="${currentClass}"><div><span>${i}</span></div></div>`;
 			}
         }
     }
@@ -159,13 +159,13 @@ const renderCalendar = () => {
 		
 //		일요일이면
 		if(holidayStyle == 0) {
-        	days += `<div class="${nextClass} next-date" style="color:red"><span>${j}</span></div>`;
+        	days += `<div class="${nextClass} next-date" style="color:red"><div><span>${j}</span></div></div>`;
 //		토요일이면
 		} else if(holidayStyle == 6) {
-        	days += `<div class="${nextClass} next-date" style="color:blue"><span>${j}</span></div>`;
+        	days += `<div class="${nextClass} next-date" style="color:blue"><div><span>${j}</span></div></div>`;
 //		평일이면
 		} else {
-        	days += `<div class="${nextClass} next-date"><span>${j}</span></div>`;
+        	days += `<div class="${nextClass} next-date"><div><span>${j}</span></div></div>`;
 		}
     }
 
@@ -202,32 +202,63 @@ const renderCalendar = () => {
 	
 // ---------------------------------------------------------------------
 //일자 클릭시 이벤트
+//target 프로퍼티와 currentTarget 프로퍼티 비교
+//먼저 target 은 이벤트가 처음 발생한 대상을 가리킨다.
+//반면에 currentTarget은 이벤트가 버블링 혹은 캡처링 되는 과정에서 현재 이벤트가 위치하고 있는 대상을 가리킨다.
 // ---------------------------------------------------------------------
 
-	let daysEle = document.querySelectorAll(".days div");
-//	let isPressed = false;
+	let daysEle = document.querySelectorAll(".days > div");
+	let daysDivsEle = document.querySelectorAll(".days > div > div:first-child");
+//	console.log(daysDivsEle);
+//	console.log(daysDivsEle.item(0));
+//	console.log(daysDivsEle.item(0).children);
+//	console.log(daysDivsEle.item(0).children.item(0));
 	let targetdaysEle = "";
 	
 	for (let index = 0; index < daysEle.length; index++) {
 //	    마우스클릭
 	    daysEle.item(index).addEventListener("mousedown", function(_e) {
+//			_e.defaultPrevented();
 //			target : 클릭한 영역의 class
-			targetdaysEle = _e.currentTarget.className;
-//		    isPressed = true;
+			targetdaysEle = _e.target.className;
 		    this.style.backgroundColor = "#746bf5";
 	    });
 //		마우스떼기
-	    daysEle.item(index).addEventListener("mouseup", function(_e) {
-//			mousedown 영역(target)과 mouseup 영역이 같다면 
-			if (targetdaysEle === _e.target.className){
-				this.style.backgroundColor = "";
-//			만약에 다르면 클릭시의 영역에 대한 효과 제거
-			} else {
-				document.getElementsByClassName(targetdaysEle).item(0).style.backgroundColor = "";
+		document.addEventListener("mouseup", function(){
+			for (let index1 = 0; index1 < daysDivsEle.length; index1++){
+				document.querySelectorAll(".days > div").item(index1).style.backgroundColor = "";
+//				console.log("index : " + index + " / index1 : " + index1);
+//				console.log(document.querySelectorAll(".days > div"));
+//				console.log("여기여기");
+//				console.log(document.querySelectorAll(".days > div").item(index1));
+
 			}
-//		    isPressed = false;
-//			this.style.backgroundColor = "";
-	    });
+		});
+
+//	    daysEle.item(index).addEventListener("mouseup", function(_e) {
+////			mousedown 영역(target)과 mouseup 영역이 같다면 
+//			console.log(targetdaysEle);
+//			console.log(_e.target.className);
+//			if (false){
+////			if (targetdaysEle === _e.target.className){
+//				this.style.backgroundColor = "";
+////			만약에 다르면 클릭시의 영역에 대한 효과 제거
+//			} else {
+//				console.log(targetdaysEle);
+//				console.log(_e.target.className);
+//				document.getElementsByClassName(targetdaysEle).item(0).style.backgroundColor = "";
+////				console.log(targetdaysEle);
+////				console.log();
+////				for (let index1 = 0; index1 < daysDivsEle.length; index1++){
+////					document.getElementsByClassName(targetdaysEle).item(0).children.item(index1).style.backgroundColor = "";
+////				}
+//			}
+////			for (let index1 = 0; index1 < daysDivsEle.length; index1++){
+////				daysEle.item(index).daysDivsEle.item(index1).addEventListener("mouseup", function(_e) {
+////					console.log(this);
+////				});
+////			}
+//	    });
 	}
 	
 // ---------------------------------------------------------------------
@@ -247,6 +278,45 @@ const renderCalendar = () => {
 		});
 	}
 	
+	
+	
+	
+// ---------------------------------------------------------------------
+//날짜 클릭시 일정 입력 팝업
+//입력하여 DB로 저장뒤 id값 받아와서 날짜+id 값으로 class 만들어서 드래그 만들어야 될듯...
+//아니면 선택한게 몇번째 엘리먼트인지 구할수 있다면 그 숫자로 nth-child(index)로 설정할 수도 있을듯
+// ---------------------------------------------------------------------
+	
+	    	document.querySelector("#btn").addEventListener("click", function(){
+//     		document.querySelector(".schedule-wrap").style.display = "none";
+//     		location.href = "${pageContext.request.contextPath}/calendar";
+    	});
+
+        const daysDivs = document.querySelectorAll(".days > div");
+        for (let index = 0; index < daysDivs.length; index++) {
+        	daysDivs.item(index).addEventListener("click",function(e){
+//         		클릭한 일자에 대한 클래스 이름
+        	 	const thisTarget = e.target.classList.item(0);
+        	 	console.log(thisTarget);
+//         	 	클래스 이름에 맞는 태그
+        	    const thisDiv = document.getElementsByClassName(thisTarget).item(0);
+        		console.log(thisDiv);
+        		if (thisTarget != null && thisDiv != null){
+	        		let divTag = document.createElement("div");
+	        		let pTag = document.createElement("p");
+	        		
+	        		pTag.innerText = "하이하이";
+	        		divTag.append(pTag);
+	        		divTag.classList.add(thisTarget+"-inner");
+	        		divTag.classList.add("inner");
+	        		
+	        		thisDiv.append(divTag);
+	        		
+				}
+        	});
+        }
+        
+        
 // ---------------------------------------------------------------------
 }
 // ---------------------------------------------------------------------
@@ -291,7 +361,7 @@ prevs.addEventListener("click", () => {
 //마우스클릭
 prevs.addEventListener("mousedown", function(_e) {
 	targetbtn = "";
-	targetbtn = _e.currentTarget.classList.item(2);
+	targetbtn = _e.target.classList.item(2);
 	this.classList.add("btnClick");
 	this.classList.remove("btnColor");
 });
@@ -315,7 +385,7 @@ prev.addEventListener("click", () => {
 //마우스클릭
 prev.addEventListener("mousedown", function(_e) {
 	targetbtn = "";
-	targetbtn = _e.currentTarget.classList.item(2);
+	targetbtn = _e.target.classList.item(2);
 	this.classList.add("btnClick");
 	this.classList.remove("btnColor");
 });
@@ -343,7 +413,7 @@ next.addEventListener("click", () => {
 //마우스클릭
 next.addEventListener("mousedown", function(_e) {
 	targetbtn = "";
-	targetbtn = _e.currentTarget.classList.item(2);
+	targetbtn = _e.target.classList.item(2);
 	this.classList.add("btnClick");
 	this.classList.remove("btnColor");
 });
@@ -371,7 +441,7 @@ nexts.addEventListener("click", () => {
 //마우스클릭
 nexts.addEventListener("mousedown", function(_e) {
 	targetbtn = "";
-	targetbtn = _e.currentTarget.classList.item(2);
+	targetbtn = _e.target.classList.item(2);
 	this.classList.add("btnClick");
 	this.classList.remove("btnColor");
 });
@@ -391,12 +461,6 @@ document.querySelector(".todayMove").addEventListener("click", () =>{
 });
 
 // ---------------------------------------------------------------------
-
-
-
-//======================================================================
-
-//======================================================================
 
 
 

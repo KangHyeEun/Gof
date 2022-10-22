@@ -58,27 +58,42 @@
 			<div class="schedule-wrap">
 				<div class="schedule slideTop">
 					<div>
-						<a href="${pageContext.request.contextPath}/calendar">
+						<p>일정 등록</p>
+						<a href="">
 							<img src="${pageContext.request.contextPath}/imges/close.png" alt="" />
 						</a>
 					</div>
-					<form action="#">
-					    <label for="calTitle">제목</label>
-					    <input type="text" name="calTitle" id="calTitle"><br>
-					    <label for="calSelector">비공개</label>
-					    <input type="checkbox" name="calSelector" id="calSelector"><br>
-					    <label for="calPlace">장소</label>
-					    <input type="text" name="calPlace" id="calPlace"><br>
-					    <label for="calStart">일시</label>
-					    <input type="datetime-local" name="calStart" id="calStart" value="2022-09-27T13:57">
-					    <label for="calEnd"> ~ </label>
-					    <input type="datetime-local" name="calEnd" id="calEnd" value="2022-09-27T13:57"><br>
-					    <label for="calAllday">종일</label>
-					    <input type="checkbox" name="calAllday" id="calAllday"><br>
-					    <label for="calContent">설명</label>
-					    <textarea name="calContent" id="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea><br>
-					    <div class="btn"><button id="btn">전송</button></div>
-					</form>
+					<div>
+						<form action="#">
+							<div>
+							    <label for="calTitle">제목</label><br>
+							    <input type="text" name="calTitle" id="calTitle">
+						    </div>
+						    <div>
+							    <label for="calPlace">장소</label><br>
+							    <input type="text" name="calPlace" id="calPlace">
+						    </div>
+						    <div>
+							    <label for="calStart">일시</label><br>
+							    <input type="datetime-local" name="calStart" id="calStart" value="2022-09-27T13:57">
+							    <label for="calEnd"> ~ </label>
+							    <input type="datetime-local" name="calEnd" id="calEnd" value="2022-09-27T13:57">
+						    </div>
+						    <div>
+							    <label for="calAllday">종일</label>
+							    <input type="checkbox" name="calAllday" id="calAllday">
+							    <label for="calSelector">비공개</label>
+							    <input type="checkbox" name="calSelector" id="calSelector">
+						    </div>
+						    <div>
+							    <label for="calContent">설명</label><br>
+							    <textarea name="calContent" id="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
+						    </div>
+						    <div class="btn">
+						    	<button id="btn">전송</button>
+						    </div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -87,10 +102,8 @@
     <script src="${pageContext.request.contextPath}/calendar/cal-script.js"></script>
     
     <script type="text/javascript">
-//     	document.querySelector(".schedule a").addEventListener("click", function(){
-//     		document.querySelector(".schedule-wrap").style.display = "none";
-//     		location.href = "${pageContext.request.contextPath}/calendar";
-//     	});
+
+
     </script>
     
     <script type="text/javascript">
