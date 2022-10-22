@@ -7,9 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/calendar/style.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/calendar/cal-style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 </head>
 <body>
@@ -56,40 +55,73 @@
                     </div>
                 </div>
 			</div>
+			<div class="schedule-wrap">
+				<div class="schedule slideTop">
+					<div>
+						<a href="${pageContext.request.contextPath}/calendar">
+							<img src="${pageContext.request.contextPath}/imges/close.png" alt="" />
+						</a>
+					</div>
+					<form action="#">
+					    <label for="calTitle">제목</label>
+					    <input type="text" name="calTitle" id="calTitle"><br>
+					    <label for="calSelector">비공개</label>
+					    <input type="checkbox" name="calSelector" id="calSelector"><br>
+					    <label for="calPlace">장소</label>
+					    <input type="text" name="calPlace" id="calPlace"><br>
+					    <label for="calStart">일시</label>
+					    <input type="datetime-local" name="calStart" id="calStart" value="2022-09-27T13:57">
+					    <label for="calEnd"> ~ </label>
+					    <input type="datetime-local" name="calEnd" id="calEnd" value="2022-09-27T13:57"><br>
+					    <label for="calAllday">종일</label>
+					    <input type="checkbox" name="calAllday" id="calAllday"><br>
+					    <label for="calContent">설명</label>
+					    <textarea name="calContent" id="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea><br>
+					    <div class="btn"><button id="btn">전송</button></div>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 
-    <script src="${pageContext.request.contextPath}/calendar/script.js"></script>
+    <script src="${pageContext.request.contextPath}/calendar/cal-script.js"></script>
+    
+    <script type="text/javascript">
+//     	document.querySelector(".schedule a").addEventListener("click", function(){
+//     		document.querySelector(".schedule-wrap").style.display = "none";
+//     		location.href = "${pageContext.request.contextPath}/calendar";
+//     	});
+    </script>
     
     <script type="text/javascript">
 //     	날짜로 클래스이름 지정했는데 이런 형식이 querySelector에서는 .붙여서 제대로 작동을 안함
 //     	document.querySelector(".2022-10-5").addEventListener("click", function(){
 // 		그래서 상위 태그에서 child로 이용함 / 첫 번째에 있는 날짜형식의 className 추출
-		const days = document.querySelector(".days").children.item(26).classList.item(0);
-		console.log("1");
-		console.log(days);
-		const dates = new Date();
-		console.log("2");
-		console.log(dates);
+// 		const days = document.querySelector(".days").children.item(26).classList.item(0);
+// 		console.log("1");
+// 		console.log(days);
+// 		const dates = new Date();
+// 		console.log("2");
+// 		console.log(dates);
 // 		console.log(dates.toLocaleDateString());
 // 		console.log(dates.toLocaleString());
 // 		console.log(dates.toLocaleTimeString());
 // 		console.log(dates.getFullYear());
 // 		console.log(dates.getMonth());
 // 		console.log(dates.getDate());
-console.log("3");
-		console.log(dates.getFullYear()+"-"+dates.getMonth()+"-"+dates.getDate());
-		const test = dates.getFullYear()+"-"+dates.getMonth()+"-"+dates.getDate();
+// 		console.log("3");
+// 		console.log(dates.getFullYear()+"-"+(dates.getMonth()+1)+"-"+dates.getDate());
+// 		const test = dates.getFullYear()+"-"+(dates.getMonth()+1)+"-"+dates.getDate();
 // 		console.log(typeof(days));
 // 		console.log(typeof(test));
-console.log("4");
-		console.log(days.toString());
-		console.log("5");
-		console.log(test.toString());
-		if(days.toString() == test.toString()) {
-			console.log("확인");
-		}
-		else console.log("미확인");
+// 		console.log("4");
+// 		console.log(days.toString());
+// 		console.log("5");
+// 		console.log(test.toString());
+// 		if(days.toString() == test.toString()) {
+// 			console.log("확인");
+// 		}
+// 		else console.log("미확인");
 		
 //     	document.getElementsByClassName("2022-10-5")[0].addEventListener("click", function(){
 //     		document.querySelector(".container").style.display = "none";
