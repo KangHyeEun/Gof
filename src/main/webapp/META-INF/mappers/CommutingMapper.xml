@@ -79,6 +79,6 @@
 	</select>
 	<select id="countNomalWorkday" resultType="int">
 		SELECT count(work_time)
-	  	FROM commuting WHERE empno = ${empno} and cast(SUBSTRING_INDEX(work_time, '시간', 1) AS UNSIGNED) >= 8;
+	  	FROM commuting WHERE empno = ${empno} and cast(SUBSTRING_INDEX(work_time, '시간', 1) AS UNSIGNED) >= 9;
 	</select>
 </mapper>

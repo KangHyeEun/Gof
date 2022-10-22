@@ -2,7 +2,6 @@ package com.awoo.vo;
 
 public class HolidayVO {
 	private int id;
-	private int huserId;
 	private String huserName;
 	private String hwriteDate;
 	private String htype;
@@ -12,19 +11,14 @@ public class HolidayVO {
 	private String halfDay;
 	private int approval;
 	private int empno;
-	
+	private int totalHoliday;
+	private int checkAdmin;
 	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getHuserId() {
-		return huserId;
-	}
-	public void setHuserId(int huserId) {
-		this.huserId = huserId;
 	}
 	public String getHuserName() {
 		return huserName;
@@ -80,6 +74,25 @@ public class HolidayVO {
 	}
 	public void setEmpno(int empno) {
 		this.empno = empno;
+	}
+	public int getTotalHoliday() {
+		return totalHoliday;
+	}
+	public void setTotalHoliday(int totalHoliday) {
+		this.totalHoliday = totalHoliday;
+	}
+	public int getCheck_admin() {
+		return checkAdmin;
+	}
+	public void setCheck_admin(int check_admin) {
+		this.checkAdmin = check_admin;
+	}
+	@Override
+	public String toString() {
+		return "HolidayVO [id=" + id + ", huserName=" + huserName + ", hwriteDate=" + hwriteDate + ", htype=" + htype
+				+ ", hstartDate=" + hstartDate + ", hendDate=" + hendDate + ", hcontent=" + hcontent + ", halfDay="
+				+ halfDay + ", approval=" + approval + ", empno=" + empno + ", totalHoliday=" + totalHoliday
+				+ ", check_admin=" + checkAdmin + "]";
 	}
 	
 	

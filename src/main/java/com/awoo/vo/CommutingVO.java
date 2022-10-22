@@ -49,15 +49,31 @@ public class CommutingVO {
 	public void setWorkTime(String startTime, String endTime) {
 //		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.KOREA);
+		SimpleDateFormat dateH = new SimpleDateFormat("HH", Locale.KOREA);
+		SimpleDateFormat dateM = new SimpleDateFormat("mm", Locale.KOREA);
 		Date sd = null;
 		Date ed = null;
-//		startTime = "";
+		
+		// 원래는 시작값이 starTime으로 받아왔는데, 9시 이전에 출근해도 9시부터 근무시간 세도록 수정
+		String[] startTimeArr = startTime.split(":");
+		
+		
+		int sthour = Integer.parseInt(startTimeArr[0]);
+		int stmin = Integer.parseInt(startTimeArr[1]);
+		System.out.println(sthour);
+		System.out.println(stmin);
+
+		if(sthour < 9 || (sthour ==9 && stmin <=10)) {
+			startTime = "09:00";
+		}
+		
 		try {
 			sd = dateFormat.parse(startTime);
 		    ed = dateFormat.parse(endTime);
 		} catch (ParseException e) {
 		    e.printStackTrace();
-		}   
+		}
+		
 		// 계산해서 음수를 양수로 변환 *-1
 		long diff = sd.getTime() - ed.getTime();
 		long diffMinutes = (diff / (60 * 1000)*-1)%60;         

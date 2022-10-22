@@ -33,7 +33,7 @@ public class CommutingService {
 	}
 
 	public void getDefaultData(Model model) {
-
+		int empno = (int)model.getAttribute("empno");
 		// 초과 근무 시간
 		LocalDate date = LocalDate.now();
 		LocalTime time = LocalTime.now();
@@ -86,7 +86,7 @@ public class CommutingService {
 		
 		
 		CommutingVO vo1 = new CommutingVO();
-		vo1.setEmpno(123);
+		vo1.setEmpno(empno);
 
 		String sortingMonth = (String) model.getAttribute("sortingMonth");
 		String sortingYear = (String) model.getAttribute("sortingYear");
@@ -104,7 +104,7 @@ public class CommutingService {
 			vo1.setWorkday(sortedDay);
 			// 출퇴근 리스트 나오기
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("empno", 123);
+			map.put("empno", empno);
 			map.put("year", sortingYear);
 			map.put("month", sortingMonth);
 
@@ -114,9 +114,9 @@ public class CommutingService {
 		// 이번달의 값과 내 아이디 저장
 		CommutingVO vo2 = new CommutingVO();
 		vo2.setWorkday(YearAndMonth); // 지각이랑 초과근무시간에서 사용
-		vo2.setEmpno(123);
+		vo2.setEmpno(empno);
 
-		int empno = 123;
+
 //		원래 사용하던 데이터들은 막아둠 필요할 수 있으니 주석은 안지웠습니다
 		// 지각 개수
 		model.addAttribute("countLate", dao.countLate(vo2));
@@ -126,10 +126,9 @@ public class CommutingService {
 		model.addAttribute("distinctYear", dao.getDistinctYear(vo2));
 		// 이번달 근무 수를 세기 위해 이번달의 모든 값 불러오기
 		model.addAttribute("countThisMonth", dao.countThisMonth(vo2));
-		System.out.println(dao.countThisMonth(vo2));
 		// 오늘의 출근시간 퇴근시간
-		model.addAttribute("startTime", this.getStartDate(today));
-		model.addAttribute("endTime", this.getEndDate(today));
+		model.addAttribute("startTime", this.getStartDate(today, empno));
+		model.addAttribute("endTime", this.getEndDate(today, empno));
 		
 		
 		model.addAttribute("countThisMonth", dao.countThisMonth(vo2));
@@ -139,6 +138,8 @@ public class CommutingService {
 
 	// 출근 시간 저장
 	public void insertEnter(Model model) {
+		int empno = (int)model.getAttribute("empno");
+		
 		LocalDate date = LocalDate.now();
 		LocalTime time = LocalTime.now();
 
@@ -152,12 +153,13 @@ public class CommutingService {
 		CommutingVO vo = new CommutingVO();
 		vo.setStartTime(now);
 		vo.setOverTime();
-		vo.setEmpno(123);
+		vo.setEmpno(empno);
 		dao.insertEnter(vo);
 	}
 
 	// 퇴근 시간 저장
 	public void insertLeave(Model model) {
+		int empno = (int)model.getAttribute("empno");
 		LocalDate date = LocalDate.now();
 		LocalTime time = LocalTime.now();
 
@@ -170,18 +172,18 @@ public class CommutingService {
 
 		CommutingVO vo = new CommutingVO();
 		vo.setEndTime(now);
-		vo.setEmpno(123);
-		vo.setWorkTime(this.getStartDate(today), formatedNow);
+		vo.setEmpno(empno);
+		vo.setWorkTime(this.getStartDate(today,empno), formatedNow);
 		vo.setOverTime();
 		vo.setWorkday(today);
 		dao.insertLeave(vo);
 	}
 
 	// 오늘의 출근 시간 불러오는 메서드
-	public String getStartDate(String today) {
+	public String getStartDate(String today, int empno) {
 		CommutingVO vo = new CommutingVO();
 		vo.setWorkday(today);
-		vo.setEmpno(123);
+		vo.setEmpno(empno);
 		if (dao.getStartTime(vo) != null) {
 			return dao.getStartTime(vo);
 		}
@@ -189,10 +191,10 @@ public class CommutingService {
 	}
 
 	// 오늘의 퇴근 시간 불러오는 메서드
-	public String getEndDate(String today) {
+	public String getEndDate(String today, int empno) {
 		CommutingVO vo = new CommutingVO();
 		vo.setWorkday(today);
-		vo.setEmpno(123);
+		vo.setEmpno(empno);
 		if (dao.getEndTime(vo) != null) {
 			return dao.getEndTime(vo);
 		}

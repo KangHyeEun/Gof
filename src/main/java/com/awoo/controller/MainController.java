@@ -26,12 +26,16 @@ public class MainController {
 		// 출근 버튼 눌렀을 때
 		@GetMapping("/CommutingEnter")
 		public String enter(Model model) {
+			//임시empno
+			model.addAttribute("empno", 123);
 			service.insertEnter(model);
 			return "redirect:/MoveToHome";
 		}
 		// 퇴근 버튼 눌렀을 때
 		@GetMapping("/CommutingLeave")
 		public String leave(Model model) {
+			//임시empno
+			model.addAttribute("empno", 123);
 			service.insertLeave(model);
 			return "redirect:/MoveToHome";
 		}
