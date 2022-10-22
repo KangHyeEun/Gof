@@ -4,6 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.awoo.dao.HolidayDAO">
 	<select id="selectHoliday" resultType="HolidayVO">
-		select id, huser_id, huser_name, hwrite_date, htype, hstart_date, hend_date, hcontent, half_day,approval, empno from holiday
+		select h.id as id, huser_name, hwrite_date, htype, hstart_date, hend_date, hcontent, half_day,approval, h.empno as empno, e.total_holiday as total_holiday 
+		FROM holiday h, employee_info e
+		WHERE h.empno = e.empno
+	 	AND h.empno = #{empno};
 	</select>
+	<insert id="insertHoliday">
+		insert into holiday(huser_name, htype, hstart_date, hend_date, hcontent, half_day, approval, empno)
+		VALUES (#{huserName}, #{htype},#{hstartDate},#{hendDate},#{hcontent},#{halfDay},#{approval},#{empno});
+	</insert>
 </mapper>

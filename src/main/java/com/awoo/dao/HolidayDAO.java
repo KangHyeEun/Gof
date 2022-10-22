@@ -8,5 +8,6 @@ import com.awoo.vo.HolidayVO;
 
 @Mapper
 public interface HolidayDAO {
-	public List<HolidayVO> selectHoliday();
+	public List<HolidayVO> selectHoliday(HolidayVO vo);
+	public void insertHoliday(HolidayVO vo);
 }

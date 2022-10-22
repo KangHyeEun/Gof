@@ -41,13 +41,11 @@ public class CommutingController {
 								  @RequestParam("year") String sortingYear, 
 								  @RequestParam("month") String sortingMonth,
 								  Model model) {
-//		System.out.println(page);
-//		System.out.println(sortingYear);
-//		System.out.println(sortingMonth);
-//		
 		model.addAttribute("page", page);
 		model.addAttribute("sortingYear", sortingYear);
 		model.addAttribute("sortingMonth", sortingMonth);
+		//임시empno
+		model.addAttribute("empno", 123);
 		service.getDefaultData(model);		
 		return "commuting/commuting";
 	}
