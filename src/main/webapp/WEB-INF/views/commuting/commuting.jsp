@@ -149,14 +149,8 @@
     	let month = document.getElementById("sorting-month").value;
 		
 		 document.addEventListener("DOMContentLoaded", function(){
-			
-			 var today = new Date();
 
-			 console.log(today);
-// 			alert("하이");
-// 			alert(page);
-// 			alert(size);
-// 			// 페이지 이동
+			// 페이지 이동
 			for (var i = 0; i < size; i++) {
 				if(i+1 > 10*page || i+1 <= 10*(page-1)){
 					document.getElementById("tr"+(i+1)).style.display = "none";		

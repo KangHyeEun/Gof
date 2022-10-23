@@ -20,13 +20,16 @@ public class HolidayService {
 	
 	public void selectHoliday(Model model){
 		int empno = (int)model.getAttribute("empno");
+		String year = (String)model.getAttribute("year");
+		if(year.equals("0") || year == "0") {
+			year = null;
+		}
 		HolidayVO vo = new HolidayVO();
 		vo.setEmpno(empno);
-		List<HolidayVO> dvo = dao.selectHoliday(vo);
-		for (HolidayVO holidayVO : dvo) {
-			holidayVO.toString();
-		}
+		vo.setHwriteDate(year);
+		
 		model.addAttribute("holidayList", dao.selectHoliday(vo));
+		model.addAttribute("distinctYear", dao.distinctYear(vo));
 	}
 	public void insertHoliday(Model model) {
 		String leaveType = (String)model.getAttribute("leaveType");
@@ -45,13 +48,6 @@ public class HolidayService {
 		vo.setHalfDay(halfType);
 		vo.setApproval(0);
 		vo.setEmpno(empno);
-		System.out.println(leaveType);
-		System.out.println(leaveStartDate);
-		System.out.println(leaveEndDate);
-		System.out.println(content);
-		System.out.println(halfType);
-		System.out.println(userName);
 		dao.insertHoliday(vo);
-		
 	}
 }

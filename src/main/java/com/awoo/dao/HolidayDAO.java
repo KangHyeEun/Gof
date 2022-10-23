@@ -10,4 +10,5 @@ import com.awoo.vo.HolidayVO;
 public interface HolidayDAO {
 	public List<HolidayVO> selectHoliday(HolidayVO vo);
 	public void insertHoliday(HolidayVO vo);
+	public List<String> distinctYear(HolidayVO vo);
 }
