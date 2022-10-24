@@ -6,13 +6,13 @@ import org.apache.ibatis.type.Alias;
 public class CalendarVO {
 	private int calId;			// 일정 id 값
 	private String calTitle;	// 일정 제목
-	private String calSelector;	// 공개,비공개
-	private String calCategory;	// 개인,공지
 	private String calPlace;	// 장소
-	private String calContent;	// 내용
 	private String calStart;	// 시작일
 	private String calEnd;		// 종료일
-	private int calAllday;		// 종일여부
+	private String calAllday;	// 종일여부
+	private String calShow;		// 공개,비공개
+	private String calNotice;	// 개인,공지
+	private String calContent;	// 내용
 	private int empno;			// 사원번호
 	private int checkAdmin;		// 관리자여부
 	private int approval;		// 승인신청여부
@@ -29,29 +29,11 @@ public class CalendarVO {
 	public void setCalTitle(String calTitle) {
 		this.calTitle = calTitle;
 	}
-	public String getCalSelector() {
-		return calSelector;
-	}
-	public void setCalSelector(String calSelector) {
-		this.calSelector = calSelector;
-	}
-	public String getCalCategory() {
-		return calCategory;
-	}
-	public void setCalCategory(String calCategory) {
-		this.calCategory = calCategory;
-	}
 	public String getCalPlace() {
 		return calPlace;
 	}
 	public void setCalPlace(String calPlace) {
 		this.calPlace = calPlace;
-	}
-	public String getCalContent() {
-		return calContent;
-	}
-	public void setCalContent(String calContent) {
-		this.calContent = calContent;
 	}
 	public String getCalStart() {
 		return calStart;
@@ -65,11 +47,29 @@ public class CalendarVO {
 	public void setCalEnd(String calEnd) {
 		this.calEnd = calEnd;
 	}
-	public int getCalAllday() {
+	public String getCalAllday() {
 		return calAllday;
 	}
-	public void setCalAllday(int calAllday) {
+	public void setCalAllday(String calAllday) {
 		this.calAllday = calAllday;
+	}
+	public String getCalShow() {
+		return calShow;
+	}
+	public void setCalShow(String calShow) {
+		this.calShow = calShow;
+	}
+	public String getCalNotice() {
+		return calNotice;
+	}
+	public void setCalNotice(String calNotice) {
+		this.calNotice = calNotice;
+	}
+	public String getCalContent() {
+		return calContent;
+	}
+	public void setCalContent(String calContent) {
+		this.calContent = calContent;
 	}
 	public int getEmpno() {
 		return empno;

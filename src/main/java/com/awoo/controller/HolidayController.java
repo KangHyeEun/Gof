@@ -19,8 +19,10 @@ public class HolidayController {
 
 
 	@GetMapping("Holiday")
-	public String moveToHoliday(@RequestParam("year") String year,
+	public String moveToHoliday(@RequestParam("page") String page,
+								@RequestParam("year") String year,
 								Model model) {
+		model.addAttribute("page", page);
 		//임시empno
 		model.addAttribute("empno", 123);
 		model.addAttribute("year", year);
@@ -28,12 +30,13 @@ public class HolidayController {
 		return "holiday/holiday";
 	}
 	@GetMapping("ApplyHoliday")
-	public String ApplyHoliday(@RequestParam("leaveType") String leaveType,	
+	public String ApplyHoliday(
+							   @RequestParam("leaveType") String leaveType,	
 							   @RequestParam("leaveStartDate") String leaveStartDate,
 							   @RequestParam("leaveEndDate") String leaveEndDate,
 							   @RequestParam("content") String content,
 							   @RequestParam("halfType") String halfType,
-							   Model model) {
+							   Model model) {		
 		model.addAttribute("leaveType", leaveType);
 		model.addAttribute("leaveStartDate", leaveStartDate);
 		model.addAttribute("leaveEndDate", leaveEndDate);
@@ -44,7 +47,7 @@ public class HolidayController {
 		model.addAttribute("empno", 123);
 		
 		service.insertHoliday(model);
-		return "redirect:/Holiday";
+		return "redirect:/Holiday?page=1&&year=0";
 	}
 	
 	

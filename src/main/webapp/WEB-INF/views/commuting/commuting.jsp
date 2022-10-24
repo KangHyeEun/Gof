@@ -9,6 +9,18 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/commuting/style.css">
 <title>Insert title here</title>
 <style>
+@media screen and (max-width: 1360px) {
+	.list-table tr{
+ 	height: 1.5em;
+ 	border-bottom:1px solid black;
+ 	}
+ 	 .list-table tr td, .list-table tr th{
+    padding: 0.4%;
+    }
+    .select {
+    height: 6%;
+    }
+}
 @media screen and (max-width: 1280px) {
 	.day-rates {
 	    font-size: 1em;
@@ -66,7 +78,7 @@
     height: 6%;
     }
     .list-table tr {
-    height: 3em;
+/*     height: 3em; */
     }
 }
 
@@ -176,40 +188,27 @@
 					            </div>
 							
 								<div class="select">
-									<%
-		// 							int Ppage = Integer.parseInt((String)request.getParameter("page"));
-		// 							int begin = (Ppage-1)/10 <= 0 ? 0 : (int)Math.ceil((Ppage-1)/10)*10;
-		// 							int CommutingList = Integer.parseInt(request.getParameterValues("CommutingList").size());
-									
-		// 							int end = Ppage   begin+9;
-									%>
-		<!-- 							<a id="doubleprev">＜＜</a> -->
-		<!-- 							<div class="select-container"> -->
-										<div class="num"><a id="prev">◀</a></div>
-<%-- 											<c:forEach begin="1" end="${CommutingList.size() == 0? 1 : CommutingList.size()%10 == 0? CommutingList.size()/10 :  --%>
-<%-- 											((CommutingList.size()/10)+(1-((CommutingList.size()/10)%1))%1)}" varStatus="status"> --%>
-												<c:forEach begin="1" end="${CommutingList.size() == 0? 1 : CommutingList.size()%10 == 0? CommutingList.size()/10 :((CommutingList.size()/10)+(1-((CommutingList.size()/10)%1))%1)}" varStatus="status">
-												<c:choose>
-													<c:when test="${param.page eq status.count}">
-														<div class="num checked"><span>${status.count}</span></div>
-													</c:when>
-													<c:otherwise>				
-														<div class="num notchecked"><a href="Commuting?page=${status.count}&&year=${param.year}&&month=${param.month}">${status.count}</a></div>							
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-										<div class="num"><a id="next">▶</a></div>
-		<!-- 							</div> -->
-		<!-- 							<a id="doublenext">＞＞</a> -->
-									
-								
+									<div class="num"><a id="prev">◀</a></div>
+											<c:forEach begin="1" end="${CommutingList.size() == 0? 1 : CommutingList.size()%10 == 0? CommutingList.size()/10 :((CommutingList.size()/10)+(1-((CommutingList.size()/10)%1))%1)}" varStatus="status">
+											<c:choose>
+												<c:when test="${param.page eq status.count}">
+													<div class="num checked"><span>${status.count}</span></div>
+												</c:when>
+												<c:otherwise>				
+													<div class="num notchecked"><a href="Commuting?page=${status.count}&&year=${param.year}&&month=${param.month}">${status.count}</a></div>							
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									<div class="num">
+										<a id="next">▶</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		
+			
 		<script type="text/javascript">
 		let size = ${CommutingList.size()};
 		let page = ${param.page};
@@ -259,8 +258,6 @@
 			// 버튼
 			var prev = document.getElementById("prev");
 			var next = document.getElementById("next");
-			var doubleprev = document.getElementById("doubleprev");
-			var doublenext = document.getElementById("doublenext");
 			
 			prev.addEventListener("click",function(){
 				var page1 = page-1;
