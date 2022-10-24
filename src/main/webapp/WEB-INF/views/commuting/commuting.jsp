@@ -17,6 +17,9 @@
  	 .list-table tr td, .list-table tr th{
     padding: 0.4%;
     }
+    .select {
+    height: 6%;
+    }
 }
 @media screen and (max-width: 1280px) {
 	.day-rates {
