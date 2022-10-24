@@ -173,10 +173,11 @@
 
 .schedule-wrap {
 	width: 100vw;
-	height: calc(100% - 60px);
+/* 	height: calc(100% - 60px); */
+	height: 100%;
 	position: absolute;
-	background-color: rgb(193 193 193 / 50%);
 /* 	background-color: #f0f5fa; */
+	background-color: rgb(193 193 193 / 50%);
     transition: background-color 0.2s;
     flex-direction: column;
     justify-content: center;
