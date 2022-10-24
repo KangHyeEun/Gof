@@ -117,7 +117,12 @@ nav{
     nav{
 		width: 130px;
 		padding: 30px 12px;
-	
+
+
+
+	}
+	.container-inner-bbs {
+	    width: calc(100% - 130px);
 	}
 	.menu{
 		padding: 8px 10px;

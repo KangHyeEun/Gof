@@ -106,67 +106,185 @@
 
 .pop-container {
 	background-color: white;
-	width: 500px;
-	height: 500px;
+	width: 550px;
+    height: 600px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	padding: 1%;
+	padding: 2%;
 	box-sizing: border-box;
 	box-shadow: 0 17px 20px -18px rgba(0, 0, 0, 1);
+	z-index: 1;
+	border-radius: 5px;
+}
+.pop-titleContainer{
+	display: flex;
+    width: 43%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: baseline;
 }
 
-.pop2 {
-	width: 100%;
-}
 
 .pop1 {
 	width: 100%;
+    height: 10%;
 	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid black;
+}
+.pop1-1{
+	width: 100%;
+    height: 89.99%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.pop-title{
+	font-weight: bold;
+    font-size: 1.2em;
+}
+.count-nums{
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    font-weight: bold;
+}
+.pop1 a {
+	text-decoration: none;
+/* 	padding: 20px; */
+}
+.pop2 {
+	height: 12%;
+	width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-between;
+}
+.pop2 > select{
+	width:50%;
+	height: 60%;
+	padding: 0 2%;
+}
+.pop2-1{
+	width:100%;
+	height: 12%;
+
+}
+.pop2-3{
+	width:100%;
+	height: 30%;
+}
+.pop3 {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
 	justify-content: space-between;
 }
 
-.pop1 a {
-	text-decoration: none;
-	padding: 20px;
-}
-
-.pop3 {
-	display: flex;
-	height: 30%;
-	flex-direction: column;
-	justify-content: space-evenly;
-}
-
 .pop4 {
-	width: 100%;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
-
+.pop4 p{
+	height: 13%;
+}
+.pop4 input{
+	width: 100%;
+    height: 80%;
+}
 .pop5 {
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	height: 15%;
+	height: 9%;
+	
 }
 
 .pop5 form {
-	width: 50%;
+	width: 100%;
+	height: 100%;
+}
+.pop-container>form{
+	width: 100%;
+	height: 100%;
 }
 
-#applypop .pop5 form button {
-	width: 100%;
-	height: 40px;
-	background-color: rgb(181, 181, 249);
-}
-.select-halfType{
-	display:flex;
-	
+#applypop .pop5 button {
+	background-color: rgb(39 36 84);
+    color: white;
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    border-radius: 4px;
+
 }
 #morning-off,#afternoon-off{
 	border: 1px solid black;
-} 
-</style>
+    width: 48%;
+    height: 100%;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* #morning-off{ */
+/* 	background-color:#272454; */
+/* 	color: white; */
+/* }  */
+.halfType{
+    height: 12%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-between;
+    display:none;
+}
+.select-halfType{
+	display: flex;
+    height: 58%;
+    width: 50%;
+    justify-content: space-between;
+}
+.date-div{
+	display: flex;
+    justify-content: space-between;
+    width: 70%;
+    height:55%;
+}
+.date-div input{
+    width: 45%;
+    height: 100%;
+}
+	
+.p{
+	font-size:13px;
+}
+.important{
+	color: #ff6a53;
+}
+input[type=radio]{
+	display: none;
+}
+#input1:checked ~ #morning-off{
+	background-color: red;
+}
+
+#input2:checked ~ #afternoon-off{
+	background-color: yellow;
+}
+</style> 
 <body>
 
 
@@ -233,42 +351,54 @@
 <!-- 			<div id="applypop" style="display: none"> -->
 			<div id="applypop">
 				<div class="pop-container">
-					<form action="${pageContext.request.contextPath}/ApplyHoliday">
+					<form action="${pageContext.request.contextPath}/ApplyHoliday" class="pop-form">
 						<div class="pop1">
-							<div>
-								<span>휴가신청</span><span>*필수 입력란입니다</span>
+							<div class="pop-titleContainer">
+								<span class="pop-title">휴가신청</span><span>*필수 입력란입니다</span>
 							</div>
 							<div>
 								<a href="">✖️</a>
 							</div>
 						</div>
-						<div>총휴가일수, 사용된 휴가일수, 잔여휴가일수</div>
-						<div class="pop2">
-							<p>휴가종류*</p>
-							<select name="leaveType" id="leaveType" onchange="TypeChange();">
-								<option value="연차">연차</option>
-								<option value="반차">반차</option>
-							</select>
-<!-- 							<div class="halfType" id="halfType" style="display:none" > -->
-							<div class="halfType" id="halfType" >
-								<p>반차</p>
-								<div class="select-halfType">
-									<div id="morning-off"><span>09:00~01:30</span></div>
-									<div id="afternoon-off"><span>02:30~06:00</span></div>
+						<div class="pop1-1">
+							<div class="count-nums">총휴가일수, 사용된 휴가일수, 잔여휴가일수</div>
+							<div class="pop2">
+								<p class="p"><span class="important">*</span>휴가 종류</p>
+								<select name="leaveType" id="leaveType" onchange="TypeChange();">
+									<option value="연차">연차</option>
+									<option value="반차">반차</option>
+								</select>
+	<!-- 							<div class="halfType" id="halfType" style="display:none" > -->
+							</div>
+							
+							<div class="pop2-1">
+								<div class="pop3">
+									<p class="p"><span class="important">*</span>휴가 기간 (하루를 사용하실 경우 모두 같은날을 선택해주세요)</p>
+									<div class="date-div">
+										<input type="date" placeholder="시작일 년/월/일" name="leaveStartDate" id="leaveStartDate"/>
+										<span>~</span> 
+										<input type="date" placeholder="종료일 년/월/일" name="leaveEndDate" id="leaveEndDate"/>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="pop3">
-							<p>휴가일선택* (하루를 사용하실 경우 같은날을 '두번 클릭해주세요')</p>
-							<input type="date" placeholder="시작일 년/월/일" name="leaveStartDate" id="leaveStartDate"/> 
-							<input type="date" placeholder="종료일 년/월/일" name="leaveEndDate" id="leaveEndDate"/>
-						</div>
-						<div class="pop4">
-							<p>신청사유</p>
-							<input type="text" placeholder="내용을 입력해주세요" name="content" id="content"/>
-						</div>
-						<div class="pop5">
-							<button>신청하기</button>
+							<div class="halfType" id="halfType" >
+								<p class="p"><span class="important">*</span>반차</p>
+								<div class="select-halfType">
+<!-- 									<div id="morning-off">09:00~01:30</div> -->
+<!-- 									<div id="afternoon-off">02:30~06:00</div> -->
+									<label for="morning-off" id="morning-off">09:00~01:30</label><input id="input1" type="radio" value="오전" name="halfType" checked="checked"/>
+									<label for="afternoon-off" id="afternoon-off">02:30~06:00</label><input id="input2" type="radio" value="오전" name="halfType"/>
+								</div>
+							</div>
+							<div class="pop2-3">
+								<div class="pop4">
+									<p class="p">신청사유</p>
+									<input type="text" placeholder="내용을 입력해주세요" name="content" id="content"/>
+								</div>
+							</div>	
+							<div class="pop5">
+								<button id="submit-btn">신청하기</button>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -293,7 +423,7 @@
 	    	let endDate = document.getElementById("leaveEndDate").value;
 	    	let halfType = document.getElementById("halfType");
 	    	if(type == "반차"){
-	    		halfType.style.display = "block";
+	    		halfType.style.display = "flex";
 	    	}
 	    	if(type == "연차"){
 	    		halfType.style.display = "none";
@@ -303,6 +433,24 @@
 // 	    	console.log(endDate);
 	    };
 	    
+// 	    let after = document.getElementById("afternoon-off");
+// 	    let morning = document.getElementById("morning-off")
+// 	    after.addEventListener("click",function(){
+// 	    	after.style.backgroundColor = "#272454";
+// 	    	after.style.color = "white";
+// 	    	morning.style.backgroundColor = "white";
+// 	    	morning.style.color = "black";
+// 	    });
+// 	    morning.addEventListener("click",function(){
+// 	    	after.style.backgroundColor = "white";
+// 	    	after.style.color = "black";
+// 	    	morning.style.backgroundColor = "#272454";
+// 	    	morning.style.color = "white";
+// 	    });
+	    
+	    document.getElementById("submit-btn").addEventListener("click",function(){
+	    	location.href="${pageContext.request.contextPath}/ApplyHoliday?halfType="+"오전";
+	    });
 	</script>
 </body>
 </html>
