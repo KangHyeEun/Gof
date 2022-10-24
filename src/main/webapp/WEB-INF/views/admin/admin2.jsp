@@ -9,6 +9,14 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/admin/admin2.css">
 <title>Insert title here</title>
+<style type="text/css">
+	.container {
+		height: auto;
+	}
+	nav {
+		height: auto;
+	}
+</style>
 </head>
 <body>
 
@@ -22,14 +30,14 @@
 			<div class="container-inner-bbs">
 				<div class="inner-div-bbs">
 					<!-- 각자 필요한 부분 넣기 -->
-					<div class="scroll"
-						style="overflow: auto; width: 100%; height: 100%">
+					<div class="scroll">
 						<div class="intro">
-							<h2>신규 직원 등록</h2>
+							<h3>신규 직원 등록</h3>
 							<br />
 							<p>⏏홈>관리자>인사관리>직원 개별 등록</p>
 						</div>
-						<form action="${pageContext.request.contextPath}/" class="form1">
+						<form action="${pageContext.request.contextPath}/admin/insertData"
+							class="form1" method="post">
 							<div class="personal-wrap">
 								<div class="prodiv">
 									<img id="showimg"
@@ -49,8 +57,8 @@
 										</tr>
 										<tr>
 											<td class="label">생년월일<span>*</span></td>
-											<td colspan='3'><input type="date" name="bitrhday"
-												id="bitrhday" required></td>
+											<td colspan='3'><input type="date" name=birthday
+												id="birthday" required></td>
 										</tr>
 										<tr>
 											<td class="label">이메일<span>*</span></td>
@@ -71,79 +79,109 @@
 										<tr>
 											<td id="noB" class="label">사원번호<span>*</span></td>
 											<td id="noB"><input type="text" name="empno" id="empno"
-												required></td>
+												required value="${empno}"></td>
 											<td id="noB" class="label">비밀번호<span>*</span></td>
 											<td id="noB"><input type="password" name="password"
 												id="password" value="abc1" readonly></td>
 										</tr>
 									</table>
 								</div>
-								</div>
+							</div>
 
-								<div id="employee" style="width: 100%;">
-									<table>
-										<tr>
-											<td class="label">부서</td>
-											<td><input type="text" name="edepartment"
-												id="edepartment"></td>
-											<td class="label">직책<span>*</span></td>
-											<td><input type="text" name="eposition" id="eposition"
-												required></td>
-											<td class="label">재직 상태<span>*</span></td>
-											<td><input type="text" name="estatus" id="estatus"
-												required placeholder="재직,휴가,퇴직"></td>
-										</tr>
-										<tr>
-											<td class="label">고용 형태<span>*</span></td>
-											<td><input type="text" name="ehiredType" id="ehiredType"
-												required placeholder="정규직, 비정규직"></td>
-											<td class="label">총 연차 수<span>*</span></td>
-											<td><input type="text" name="total_holiday"
-												id="total_holiday" required></td>
-											<td class="label">관리자 여부</td>
-											<td><input type="checkbox" name="check_admin"
-												id="check_admin"></td>
-										</tr>
-										<tr>
-											<td class="label">입사일<span>*</span></td>
-											<td colspan='5'><input type="date" name="ehiredDate"
-												id="ehiredDate" required></td>
-										</tr>
-										<tr>
-											<td class="label">전화번호</td>
-											<td colspan='2'><input type="number" name="telNumber"
-												id="telNumber" placeholder="000-000-0000"></td>
-											<td class="label">핸드폰<span>*</span></td>
-											<td colspan='2'><input type="number" name="phone_number"
-												id="phone_number" required placeholder="000-000-0000"></td>
-										</tr>
-										<tr>
-											<td id="noB" class="label">주소</td>
-											<td id="noB" colspan='5'>
-												<div>
-													<input type="text" id="postcode" placeholder="우편번호">
-													<input type="button" onclick="execDaumPostcode()"
-														value="우편번호 찾기"><br> <input type="text"
-														id="address" placeholder="주소"> <input type="text"
-														id="detailAddress" placeholder="상세주소"> <input
-														type="text" id="extraAddress" placeholder="참고항목">
-												</div>
-												<div id="wrap"
-													style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
-													<img
-														src="//t1.daumcdn.net/postcode/resource/images/close.png"
-														id="btnFoldWrap"
-														style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
-														onclick="foldDaumPostcode()" alt="접기 버튼">
-												</div>
-											</td>
-										</tr>
-									</table>
-								</div>
+							<div id="employee" style="width: 100%;">
+								<table>
+									<tr>
+										<td class="label">부서</td>
+										<td>
+											<select class="edepartment" id="edepartment" name="edepartment">
+												<option value=" - ">※선택해주세요</option>
+												<option value="영업">영업</option>
+												<option value="마켓팅">마켓팅</option>
+												<option value="개발">개발</option>
+												<option value="인사">인사</option>
+												<option value="회계">회계</option>
+											</select>
+										</td>
+										<td class="label">직책<span>*</span></td>
+										<td>
+											<select name="eposition" id="eposition"
+											required>
+												<option value="">※선택해주세요</option>
+												<option value="부장">부장</option>
+												<option value="대리">대리</option>
+												<option value="사원">사원</option>
+												<option value="수습">수습</option>
+												<option value="인사">팀장</option>
+											</select>
+										</td>
+										<td class="label">재직 상태<span>*</span></td>
+										<td>
+											<select name="estatus" id="estatus"
+											required>
+												<option value="">※선택해주세요</option>
+												<option value="재직">재직</option>
+												<option value="휴직">휴직</option>
+												<option value="퇴직">퇴직</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="label">고용 형태<span>*</span></td>
+										<td>
+											<select name="ehiredType" id="ehiredType"
+											required>
+												<option value="">※선택해주세요</option>
+												<option value="정규직">정규직</option>
+												<option value="비정규직">비정규직</option>
+											</select>
+										</td>
+										<td class="label">총 연차 수<span>*</span></td>
+										<td><input type="text" name="total_holiday"
+											id="total_holiday" value="0" required></td>
+										<td class="label">관리자 여부</td>
+										<td><input type="checkbox" name="check_admin"
+											id="check_admin"></td>
+									</tr>
+									<tr>
+										<td class="label">입사일<span>*</span></td>
+										<td colspan='5'><input type="date" name="ehiredDate"
+											id="ehiredDate" required></td>
+									</tr>
+									<tr>
+										<td class="label">전화번호</td>
+										<td colspan='1'><input type="number" name="telNumber"
+											id="telNumber" placeholder="번호만 입력해 주세요"></td>
+										<td class="label">핸드폰<span>*</span></td>
+										<td colspan='3'><input type="number" name="phoneNumber"
+											id="phoneNumber" required placeholder="번호만 입력해 주세요"></td>
+									</tr>
+									<tr>
+										<td id="noB" class="label">주소</td>
+										<td id="noB" colspan='5'>
+											<div>
+												<input type="text" name="postcode" id="postcode" placeholder="우편번호">
+												<input type="button" onclick="execDaumPostcode()"
+													value="우편번호 찾기"><br> 
+													<input type="text" name="address" id="address" placeholder="주소"> 
+													<input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소"> 
+													<input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목">
+											</div>
+											<div id="wrap"
+												style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
+												<img
+													src="//t1.daumcdn.net/postcode/resource/images/close.png"
+													id="btnFoldWrap"
+													style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
+													onclick="foldDaumPostcode()" alt="접기 버튼">
+											</div>
+										</td>
+									</tr>
+								</table>
+							</div>
 
-								<script
-									src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-								<script>
+							<script
+								src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+							<script>
             var element_wrap = document.getElementById('wrap');
 
             function foldDaumPostcode() {
@@ -198,30 +236,27 @@
                 element_wrap.style.display = 'block';
             }
         </script>
-								<script>
+							<script>
             document.getElementById("email_select").addEventListener("change",function(){
                 const email_select = document.getElementById("email_select").value;
                 const email = document.getElementById("email_domain");
                 if(email_select != " "){
-                    email.disabled = true;   
+                    email.readonly  = true;   
                     email.value = email_select; 
                 }else {
                     email.value = null; 
-                    email.disabled = false;   
+                    email.readonly  = false;   
                 }
             });
         </script>
-							
-							<br>
-							<button class="insertbtn">등록하기</button>
-						</form>
-						<script>
-        document.getElementById("email_select").addEventListener("click",function(){
-            
-        });
 
-        document.getElementById("bitrhday").valueAsDate = new Date();
+							<br>
+							<button type="submit" class="insertbtn">등록하기</button>
+						</form>
+	<script>
+        document.getElementById("birthday").valueAsDate = new Date();
         document.getElementById("ehiredDate").valueAsDate = new Date();
+        
         const InputFile = document.getElementById("proimg");
         document.getElementById("proimg").addEventListener("change", function(){
             const fileReader = new FileReader();
@@ -241,7 +276,7 @@
         // }
     </script>
 
-						<!-- ------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------- -->
 					</div>
 				</div>
 			</div>
