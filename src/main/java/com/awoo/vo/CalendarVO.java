@@ -4,17 +4,18 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("calendarVO")
 public class CalendarVO {
-	private int calId;
-	private String calTitle;
-	private String calSelector;
-	private String calCategory;
-	private String calContent;
-	private String calStart;
-	private String calEnd;
-	private int calAllday;
-	private int empno;
-	private int checkAdmin;
-	private int approval;
+	private int calId;			// 일정 id 값
+	private String calTitle;	// 일정 제목
+	private String calSelector;	// 공개,비공개
+	private String calCategory;	// 개인,공지
+	private String calPlace;	// 장소
+	private String calContent;	// 내용
+	private String calStart;	// 시작일
+	private String calEnd;		// 종료일
+	private int calAllday;		// 종일여부
+	private int empno;			// 사원번호
+	private int checkAdmin;		// 관리자여부
+	private int approval;		// 승인신청여부
 	
 	public int getCalId() {
 		return calId;
@@ -39,6 +40,12 @@ public class CalendarVO {
 	}
 	public void setCalCategory(String calCategory) {
 		this.calCategory = calCategory;
+	}
+	public String getCalPlace() {
+		return calPlace;
+	}
+	public void setCalPlace(String calPlace) {
+		this.calPlace = calPlace;
 	}
 	public String getCalContent() {
 		return calContent;

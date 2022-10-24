@@ -172,7 +172,6 @@ const renderCalendar = () => {
     monthDays.innerHTML = "";
     monthDays.innerHTML = days;
 
-
 // ---------------------------------------------------------------------
 //월별 border-bottom 없애려고...
 // ---------------------------------------------------------------------
@@ -184,15 +183,14 @@ const renderCalendar = () => {
 			daysArray[k].style.borderBottom = "none";
 		}
 		for(let g = 0; g < daysArray.length; g++){
-			daysArray[g].style.height = "16.2vh";
+			daysArray[g].style.height = "16.73vh";
 		}
 	}else if(daysArray[35]==undefined){
 		for(let k = 34; k > 27; k--){
 			daysArray[k].style.borderBottom = "none";
 		}
 		for(let g = 0; g < daysArray.length; g++){
-//			daysArray[g].style.height = "116px";
-			daysArray[g].style.height = "13vh";
+			daysArray[g].style.height = "13.37vh";
 		}
 	}else {
 		for(let k = daysArray.length-1; k > daysArray.length-8; k--){
@@ -207,31 +205,25 @@ const renderCalendar = () => {
 //반면에 currentTarget은 이벤트가 버블링 혹은 캡처링 되는 과정에서 현재 이벤트가 위치하고 있는 대상을 가리킨다.
 // ---------------------------------------------------------------------
 
-	let daysEle = document.querySelectorAll(".days > div");
-	let daysDivsEle = document.querySelectorAll(".days > div > div:first-child");
-//	console.log(daysDivsEle);
-//	console.log(daysDivsEle.item(0));
-//	console.log(daysDivsEle.item(0).children);
-//	console.log(daysDivsEle.item(0).children.item(0));
-	let targetdaysEle = "";
-	
+	const daysEle = document.querySelectorAll(".days > div");
+	const daysDivsEle = document.querySelectorAll(".days > div > div:first-child");
+
 	for (let index = 0; index < daysEle.length; index++) {
 //	    마우스클릭
 	    daysEle.item(index).addEventListener("mousedown", function(_e) {
-//			_e.defaultPrevented();
 //			target : 클릭한 영역의 class
 			targetdaysEle = _e.target.className;
 		    this.style.backgroundColor = "#746bf5";
 	    });
 //		마우스떼기
 		document.addEventListener("mouseup", function(){
+//			처음 선택했던 영역을 벗어난 후에 마우스를 떼면 찾기가 힘들기때문에 mousedown한 영역 전체의 효과를 없애주는 것
+//			하위에 잘못 먹힐 수 있기때문에 아래에서 > 로 하위에만 적용
 			for (let index1 = 0; index1 < daysDivsEle.length; index1++){
-				document.querySelectorAll(".days > div").item(index1).style.backgroundColor = "";
-//				console.log("index : " + index + " / index1 : " + index1);
-//				console.log(document.querySelectorAll(".days > div"));
-//				console.log("여기여기");
-//				console.log(document.querySelectorAll(".days > div").item(index1));
-
+//				.days div에만 배경색을 없애는 것은
+//				.days div 하위의 태그에 배경색이 있다면 없애지않고
+//				배경색이 없다면 상위 태그에서 상속을 받을 것이기 때문이라고 생각했다. 
+				daysEle.item(index1).style.backgroundColor = "";
 			}
 		});
 
@@ -277,46 +269,114 @@ const renderCalendar = () => {
 			this.classList.remove("btnColor");
 		});
 	}
-	
-	
-	
-	
+// ---------------------------------------------------------------------
+//날짜 클릭시 일정 입력 팝업
+// ---------------------------------------------------------------------
+
+//	일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+	for (let index = 0; index < daysEle.length; index++) {
+		daysEle.item(index).addEventListener("click",function(){
+			document.querySelector(".schedule-wrap").style.display = "flex";
+		});
+	}
+
+//00000000000000000000000000000000000000000000000000000000000000000000000000000000
+//00000000000000000000000000000000000000000000000000000000000000000000000000000000
+//00000000000000000000000000000000000000000000000000000000000000000000000000000000
+//일단 보류
 // ---------------------------------------------------------------------
 //날짜 클릭시 일정 입력 팝업
 //입력하여 DB로 저장뒤 id값 받아와서 날짜+id 값으로 class 만들어서 드래그 만들어야 될듯...
 //아니면 선택한게 몇번째 엘리먼트인지 구할수 있다면 그 숫자로 nth-child(index)로 설정할 수도 있을듯
 // ---------------------------------------------------------------------
-	
-	    	document.querySelector("#btn").addEventListener("click", function(){
-//     		document.querySelector(".schedule-wrap").style.display = "none";
-//     		location.href = "${pageContext.request.contextPath}/calendar";
-    	});
 
-        const daysDivs = document.querySelectorAll(".days > div");
-        for (let index = 0; index < daysDivs.length; index++) {
-        	daysDivs.item(index).addEventListener("click",function(e){
-//         		클릭한 일자에 대한 클래스 이름
-        	 	const thisTarget = e.target.classList.item(0);
-        	 	console.log(thisTarget);
-//         	 	클래스 이름에 맞는 태그
-        	    const thisDiv = document.getElementsByClassName(thisTarget).item(0);
-        		console.log(thisDiv);
-        		if (thisTarget != null && thisDiv != null){
-	        		let divTag = document.createElement("div");
-	        		let pTag = document.createElement("p");
-	        		
-	        		pTag.innerText = "하이하이";
-	        		divTag.append(pTag);
-	        		divTag.classList.add(thisTarget+"-inner");
-	        		divTag.classList.add("inner");
-	        		
-	        		thisDiv.append(divTag);
-	        		
-				}
-        	});
-        }
-        
-        
+//    document.querySelector("#btn").addEventListener("click", function(){
+//// 		document.querySelector(".schedule-wrap").style.display = "none";
+//// 		location.href = "${pageContext.request.contextPath}/calendar";
+//	});
+//	
+////	일정 3개 이상 됐을때 +count 표시해주기 위한 변수
+//	let thisDiv;
+//	let countDiv;
+//	let addDiv;
+//	
+////	일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+//    for (let index = 0; index < daysEle.length; index++) {
+//    	daysEle.item(index).addEventListener("click",function(e){
+////     		클릭한 일자에 대한 클래스 이름
+//    	 	const thisTarget = e.target.classList.item(0);
+//    	 	console.log(thisTarget);
+////     	 	클래스 이름에 맞는 태그
+//    	    thisDiv = document.getElementsByClassName(thisTarget).item(0);
+//    		console.log(thisDiv);
+//    		if (thisTarget != null && thisDiv != null){
+//        		let divTag = document.createElement("div");
+//        		let pTag = document.createElement("p");
+//        		
+//        		pTag.innerText = "하이하이";
+//        		divTag.append(pTag);
+//        		divTag.classList.add(thisTarget+"-inner");
+//        		divTag.classList.add("inner");
+//        		
+//        		thisDiv.append(divTag);
+//			}
+//			
+////			document.querySelectorAll(".divs > div > div").item(3).remove();
+////			하루 일정에 세개 이상이 되면 +count 표시를 해주는 div 추가
+////			계산은 일자가 표시되어있는 div 포함해서 일정은 2개까지만 들어가고 계산은 +1로써
+////			div 3개 초과이면 div 생성, 일정 기준으로는 2개 초과이면 div 생성 이라는 의미
+////			thisDiv == daysEle.item(index)
+//			countDiv = daysEle.item(index).children.length;
+//			if (countDiv > 3) {
+//				console.log("------");
+//				console.log(countDiv);
+//				console.log("------");
+//				thisDiv.children.item(countDiv-1).remove();
+////				thisDiv.children.item(3).remove();
+//				countDiv -= 3;
+//				addDiv = "";
+////				addDiv += `<div class="dd"><span>dd</span></div>`;
+////				addDiv += `<div class="${thisTarget}-${index}"><span>+${countDiv}</span></div>`;
+//
+////				thisDiv 안에 div중 일자,일정,countDiv 4개를 제외하고 display: none
+//				for(let index1 = 4; index1 < thisDiv.children.lenght; index1++){
+//					thisDiv.children.item(index1).style.display = "none";
+//				}
+//			}else if (countDiv > 2) {
+////				thisDiv 안에 div중 일자,일정,countDiv 4개를 제외하고 display: none
+//				for(let index1 = 3; index1 < thisDiv.children.lenght; index1++){
+//					thisDiv.children.item(index1).style.display = "none";
+//				}
+//			}else if (countDiv > 1) {
+////				thisDiv 안에 div중 일자,일정,countDiv 4개를 제외하고 display: none
+//				for(let index1 = 2; index1 < thisDiv.children.lenght; index1++){
+//					thisDiv.children.item(index1).style.display = "none";
+//				}
+//			}
+//			
+//			thisDiv.innerHTML += addDiv;
+////			for (let index = 0; index < daysEle.length; index++){
+////				화면에 보이는 일일 중(.days div) 어떤 하나의 일정이 3개 이상이 되었을때
+////				console.log(daysEle.item(index).children.length);
+////			}
+//			
+////			console.log("----------------------------------------");
+////			console.log(daysEle.length);
+////			console.log(daysEle.item(0));
+////			console.log(daysEle.item(0).children.length);
+////			console.log(daysEle.item(0).children.item(0));
+////			console.log(daysEle.item(0).children.item(0).children);
+////			console.log("----------------------------------------");
+//
+////---------------------------------------------------------------------
+//
+//    	});
+//    }
+//00000000000000000000000000000000000000000000000000000000000000000000000000000000
+//00000000000000000000000000000000000000000000000000000000000000000000000000000000
+//00000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+
 // ---------------------------------------------------------------------
 }
 // ---------------------------------------------------------------------
@@ -368,7 +428,6 @@ prevs.addEventListener("mousedown", function(_e) {
 
 //마우스떼기
 mouseUp(prevs);
-	
 
 // ---------------------------------------------------------------------
 
@@ -392,7 +451,6 @@ prev.addEventListener("mousedown", function(_e) {
 
 //마우스떼기
 mouseUp(prev);
-
 
 // ---------------------------------------------------------------------
 
@@ -420,7 +478,6 @@ next.addEventListener("mousedown", function(_e) {
 
 //마우스떼기
 mouseUp(next);
-
 
 // ---------------------------------------------------------------------
 
@@ -468,6 +525,36 @@ document.querySelector(".todayMove").addEventListener("click", () =>{
 //======================================================================
 
 //======================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
