@@ -18,17 +18,8 @@ import com.awoo.vo.CommutingVO;
 
 @Controller
 public class CommutingController {
-	@GetMapping("template")
-	public String template() {
-		return "include/template";
-	}
-	@GetMapping("bbstemplate")
-	public String bbstemplate() {
-		return "include/bbs_template";
-	}
 	
 	private CommutingService service;
-	
 	
 	public CommutingController(CommutingService service) {
 		super();

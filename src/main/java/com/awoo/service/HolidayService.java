@@ -46,7 +46,7 @@ public class HolidayService {
 		vo.setHendDate(leaveEndDate);
 		vo.setHcontent(content);
 		vo.setHalfDay(halfType);
-		vo.setApproval(0);
+		vo.setApproval("요청중");
 		vo.setEmpno(empno);
 		dao.insertHoliday(vo);
 	}
