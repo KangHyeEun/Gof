@@ -1,5 +1,15 @@
+<%@page import="java.time.LocalTime"%>
+<%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	LocalDate dateLocal = LocalDate.now();
+	LocalTime timeLocal = LocalTime.now();
+	
+	String currentTime = dateLocal + "T" + timeLocal.getHour() + ":" + timeLocal.getMinute();
+	System.out.println(currentTime);
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +75,7 @@
 						</a>
 					</div>
 					<div>
-						<form action="#">
+						<form action="${pageContext.request.contextPath}/calendar/insertData" method="post">
 							<div>
 							    <label for="calTitle">제목</label><br>
 							    <input type="text" name="calTitle" id="calTitle">
@@ -76,15 +86,17 @@
 						    </div>
 						    <div>
 							    <label for="calStart">일시</label><br>
-							    <input type="datetime-local" name="calStart" id="calStart" value="2022-09-27T13:57">
+							    <input type="datetime-local" name="calStart" id="calStart" value="<%=currentTime%>">
 							    <label for="calEnd"> ~ </label>
-							    <input type="datetime-local" name="calEnd" id="calEnd" value="2022-09-27T13:57">
+							    <input type="datetime-local" name="calEnd" id="calEnd" value="<%=currentTime%>">
 						    </div>
 						    <div>
 							    <label for="calAllday">종일</label>
-							    <input type="checkbox" name="calAllday" id="calAllday">
-							    <label for="calSelector">비공개</label>
-							    <input type="checkbox" name="calSelector" id="calSelector">
+							    <input type="checkbox" name="calAllday" id="calAllday" value="1">
+							    <label for="calShow">비공개</label>
+							    <input type="checkbox" name="calShow" id="calShow" value="1">
+							    <label for="calNotice">공지</label>
+							    <input type="checkbox" name="calNotice" id="calNotice" value="1">
 						    </div>
 						    <div>
 							    <label for="calContent">설명</label><br>
@@ -101,12 +113,9 @@
 	</div>
 
     <script src="${pageContext.request.contextPath}/calendar/cal-script.js"></script>
+<!--     위의 .js 에서 EL태그 사용이 불가해서 대신 사용 -->
+<%--     <jsp:include page="../include/menu.jsp"></jsp:include> --%>
     
-    <script type="text/javascript">
-    	document.querySelector("#btn").addEventListener("click",function(){
-    		location.href = "${pageContext.request.contextPath}/"
-    	});
-    </script>
     
     <script type="text/javascript">
 //     	날짜로 클래스이름 지정했는데 이런 형식이 querySelector에서는 .붙여서 제대로 작동을 안함

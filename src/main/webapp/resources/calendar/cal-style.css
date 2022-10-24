@@ -225,12 +225,15 @@
 	margin-top: 10px;
 }
 input[type="text"] {
-	width: 100%;
+	width: 99%;
 }
 .schedule > div > form > div {
 	padding: 5px 0;
 }
-.schedule > div > form > iv:last-child {
+#calContent{
+	resize: none;
+}
+.schedule > div > form > div:last-child {
     display: flex;
     justify-content: center;
 	align-items: center;
@@ -248,6 +251,7 @@ input[type="text"] {
     justify-content: center;
 	align-items: center;
 	margin-top: 20px;
+	cursor: pointer;
 }
 .schedule #btn:hover{
 	background-color: #319af3;
