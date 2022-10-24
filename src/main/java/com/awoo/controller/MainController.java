@@ -19,6 +19,8 @@ public class MainController {
 
 		@GetMapping("MoveToHome")
 		public String MoveToHome(Model model) {
+			//임시empno
+			model.addAttribute("empno", 123);
 			// 첫 화면 띄울 때 값 가지고 옴
 			service.getDefaultData(model);
 			return "home/home";

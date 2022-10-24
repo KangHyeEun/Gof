@@ -19,9 +19,11 @@ public class HolidayController {
 
 
 	@GetMapping("Holiday")
-	public String moveToHoliday(Model model) {
+	public String moveToHoliday(@RequestParam("year") String year,
+								Model model) {
 		//임시empno
 		model.addAttribute("empno", 123);
+		model.addAttribute("year", year);
 		service.selectHoliday(model);
 		return "holiday/holiday";
 	}

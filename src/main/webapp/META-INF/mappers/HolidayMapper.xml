@@ -6,11 +6,25 @@
 	<select id="selectHoliday" resultType="HolidayVO">
 		select h.id as id, huser_name, hwrite_date, htype, hstart_date, hend_date, hcontent, half_day,approval, h.empno as empno, e.total_holiday as total_holiday 
 		FROM holiday h, employee_info e
-		WHERE h.empno = e.empno
-	 	AND h.empno = #{empno};
+			<where>
+			h.empno = e.empno
+			and h.empno=#{empno}
+			<if test="hwriteDate == null">
+				and 1=1
+			</if>
+			<if test="hwriteDate != null">
+				and DATE_FORMAT(hwrite_date, '%Y') = #{hwriteDate}
+			</if>
+		</where>
+		order by hwrite_date desc;
 	</select>
 	<insert id="insertHoliday">
 		insert into holiday(huser_name, htype, hstart_date, hend_date, hcontent, half_day, approval, empno)
 		VALUES (#{huserName}, #{htype},#{hstartDate},#{hendDate},#{hcontent},#{halfDay},#{approval},#{empno});
 	</insert>
+	<select id="distinctYear" resultType="String">
+		select distinct(DATE_FORMAT(hwrite_date, '%Y')) 
+		from holiday
+		where empno=#{empno} 
+	</select>
 </mapper>

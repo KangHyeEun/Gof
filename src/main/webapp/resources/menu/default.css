@@ -108,8 +108,56 @@ nav{
 	font-weight: 900;
 	
 }
+#mobile-btn{
+	display: none;
+}
 
 
+@media screen and (max-width: 768px) {
+    nav{
+		width: 130px;
+		padding: 30px 12px;
+	
+	}
+	.menu{
+		padding: 8px 10px;
+		border-radius: 7px;
+	}
+    .dropmenu, .dropmenu1, .dropmenu2, .dropmenu3{
+        padding: 8px 10px;
+    }
+
+
+}
+
+@media screen and (max-width: 500px) {
+
+    nav{
+       width: 100%;
+       padding: 10%;
+       z-index:99;
+       background-color:white;
+       display: none;
+	}
+	.container-inner-bbs {
+	 	width: 100%;
+	}
+   .toggle-none{
+       display: none;
+   }
+   .toggle-block{
+       display: flex;
+   }
+   #mobile-btn{	
+		font-size: 24px;
+		color: white;
+		position: absolute;
+		display:inline;
+		left: 15px;
+		top:11px;
+	}
+
+}
 
 
 
