@@ -8,7 +8,74 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/commuting/style.css">
 <title>Insert title here</title>
+<style>
+@media screen and (max-width: 1280px) {
+	.day-rates {
+	    font-size: 1em;
+	}
+}
+@media screen and (max-width: 1024px) {
+	.day-rates {
+	    flex-direction: column;
+	    font-size: 0.8em;
+	}
+	.container .section1 {
+		width: 64%;
+		justify-content: space-evenly;
+	}
+	.container .section2 {
+		width: 35%;
+	}
+	.sub-title-container {
+		font-size: 0.8em;
+	}
+	.progress-per {
+    font-size: 8px;
+    }
+/* } */
+@media screen and (max-width: 668px) {
+	.container1{
+	flex-direction: column;
+	}
+	
+	.inner-div-bbs {
+     height: 93%;
+	}
+	.container1{
+    height: 25%;
+    }
+	.container2{
+	height: 63%;
+	}
+	
+	.container .section1 {
+    	width: 100%; 
+        height: 46%;
+    }
+    .container .section2 {
+    	width: 100%;
+        height: 46%;
+    }
+    .day-rates{
+    flex-direction:row;
+    }
+    .list-table{
+    font-size: 11px;
+    }
+    .select {
+    height: 6%;
+    }
+    .list-table tr {
+    height: 3em;
+    }
+}
 
+@media screen and (max-width: 500px) {
+	.list-table tr {
+/* 	    height: 3em; */
+	}
+}
+</style>
 </head>
 <body>
 
@@ -34,7 +101,7 @@
 								<p class="sub-title-rate">총 ${getWeekDays}일 중 ${countThisMonth}일 째 </p>
 							</div>
 							<div class="progress-container">
-								<div class="progress-bar">
+								<div class="progress-bar-container ">
 									<div style="width:100%" class="progress-bar"></div>
 									<div style="width:${countThisMonth/getWeekDays*100 >= 100? 100 : countThisMonth/getWeekDays*100}%" class="progress-bar progress-rate"></div>
 								</div>
@@ -89,7 +156,7 @@
 						            			<th>퇴근시간</th>
 						            			<th>근무시간</th>
 						            			<th>연장근무시간</th>
-						            			<th>테스트</th>
+<!-- 						            			<th>테스트</th> -->
 						            		</tr>
 					            		</thead>
 					            		<tbody class="table-body" id="table-body">
@@ -101,7 +168,7 @@
 								            		<td>${cl.endTime != null? cl.endTime : "-"}</td>
 								            		<td>${cl.workTime != null? cl.workTime : "-"}</td>
 								            		<td>${cl.overTime != null? cl.overTime : "-"}</td>
-								            		<td>${cl.empno}</td>
+<%-- 								            		<td>${cl.empno}</td> --%>
 							            		</tr>	
 							            	</c:forEach>
 						            	</tbody>

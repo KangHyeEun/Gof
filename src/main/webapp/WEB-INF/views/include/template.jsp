@@ -12,6 +12,7 @@
 	
 	<div class="container-wrap">
 		<div class="header">
+			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
             <div class="header-logout">로그아웃 버튼</div>
 		</div>
