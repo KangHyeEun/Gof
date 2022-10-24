@@ -56,3 +56,6 @@
    box-sizing: border-box;
    box-shadow: 1px 1px 8px #c1c1c1;
   }
+ .navbar__toogleBtn{
+	display: none;
+}

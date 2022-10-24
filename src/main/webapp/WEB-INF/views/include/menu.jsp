@@ -4,8 +4,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/menu/default.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&display=swap" rel="stylesheet">
     
+    <style>
 
-            <nav>
+	
+	</style>
+
+            <nav class="nav">
                 <div class="menuwrap">
                     <ul class="menu">
                         <li><a href="MoveToHome">홈</a></li>

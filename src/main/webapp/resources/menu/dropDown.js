@@ -83,5 +83,9 @@ function show_sub3(){
   }
 }
 
-
-
+document.getElementById("mobile-btn").addEventListener("click",function(){
+    let inner = document.getElementsByClassName("container-inner-bbs");
+    let nav = document.getElementsByClassName("nav");
+    nav[0].classList.toggle("toggle-block");
+    inner[0].classList.toggle("toggle-none");
+});
