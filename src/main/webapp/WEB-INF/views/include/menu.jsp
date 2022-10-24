@@ -26,7 +26,7 @@
                         <li>
                             <ul class="sub">
                                 <li><a href="${pageContext.request.contextPath}/Commuting?page=1&&year=0&&month=0">근무 기록</a></li>
-                                <li><a href="${pageContext.request.contextPath}/Holiday?year=0">휴가 신청</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Holiday?page=1&&year=0">휴가 신청</a></li>
                             </ul>
                         </li>
                     </ul>

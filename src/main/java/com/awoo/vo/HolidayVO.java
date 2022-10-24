@@ -9,7 +9,8 @@ public class HolidayVO {
 	private String hendDate;
 	private String hcontent;
 	private String halfDay;
-	private int approval;
+	private String approval;
+	private String approvalDate;
 	private int empno;
 	private int totalHoliday;
 	private int checkAdmin;
@@ -62,12 +63,23 @@ public class HolidayVO {
 	public void setHalfDay(String halfDay) {
 		this.halfDay = halfDay;
 	}
-	
-	public int getApproval() {
+	public String getApproval() {
 		return approval;
 	}
-	public void setApproval(int approval) {
+	public void setApproval(String approval) {
 		this.approval = approval;
+	}
+	public String getApprovalDate() {
+		return approvalDate;
+	}
+	public void setApprovalDate(String approvalDate) {
+		this.approvalDate = approvalDate;
+	}
+	public int getCheckAdmin() {
+		return checkAdmin;
+	}
+	public void setCheckAdmin(int checkAdmin) {
+		this.checkAdmin = checkAdmin;
 	}
 	public int getEmpno() {
 		return empno;
