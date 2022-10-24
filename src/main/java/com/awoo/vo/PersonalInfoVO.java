@@ -1,5 +1,7 @@
 package com.awoo.vo;
 
+import org.apache.ibatis.type.Alias;
+
 public class PersonalInfoVO {
 	private int id;
 	private String name;
@@ -7,10 +9,11 @@ public class PersonalInfoVO {
 	private String birthday;
 	private String password;
 	private String email;
-	private int tel_number;
-	private int phone_number;
+	private int telNumber;
+	private int phoneNumber;
 	private String address;
 	private int empno;
+	
 	public int getId() {
 		return id;
 	}
@@ -47,17 +50,17 @@ public class PersonalInfoVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getTel_number() {
-		return tel_number;
+	public int getTelNumber() {
+		return telNumber;
 	}
-	public void setTel_number(int tel_number) {
-		this.tel_number = tel_number;
+	public void setTelNumber(int telNumber) {
+		this.telNumber = telNumber;
 	}
-	public int getPhone_number() {
-		return phone_number;
+	public int getPhoneNumber() {
+		return phoneNumber;
 	}
-	public void setPhone_number(int phone_number) {
-		this.phone_number = phone_number;
+	public void setPhoneNumber(int phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	public String getAddress() {
 		return address;

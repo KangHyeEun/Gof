@@ -12,27 +12,12 @@ public class InfoVO {
 	private String address;
 	private int empno;
 	private String ehiredDate;
-	private String date;
 	private String eposition;
 	private String ehiredType;
 	private String estatus;
-	private String[] estatus1;	
 	private String edepartment;
 	private int totalHoliday;
 	private int checkAdmin;
-	
-	public String[] getEstatus1() {
-		return estatus1;
-	}
-	public void setEstatus1(String[] estatus1) {
-		this.estatus1 = estatus1;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
 	public int getId() {
 		return id;
 	}
@@ -69,7 +54,6 @@ public class InfoVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 	public int getTelNumber() {
 		return telNumber;
 	}
@@ -136,5 +120,6 @@ public class InfoVO {
 	public void setCheckAdmin(int checkAdmin) {
 		this.checkAdmin = checkAdmin;
 	}
+	
 	
 }

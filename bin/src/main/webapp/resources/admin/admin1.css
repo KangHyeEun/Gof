@@ -4,7 +4,6 @@
 
 #table1 {
 	text-align: center;
-	width: 100%;
 }
 
 th, td {
@@ -17,6 +16,10 @@ tr:nth-child(odd) {
 
 th {
 	background-color: #eaf6f7;
+}
+
+#table1 {
+	width: 100%;
 }
 
 .select {
