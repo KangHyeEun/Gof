@@ -19,5 +19,10 @@
 
 <hr>
 	<a href="${pageContext.request.contextPath}/admin">혜은이동</a>
+	
+	<hr>
+	<a href="${pageContext.request.contextPath}/message"> 지영 - 받은 쪽지함</a>
+	
+	<a href="${pageContext.request.contextPath}/message/message2">지영 - 보낸 쪽지함</a>
 </body>
 </html>
