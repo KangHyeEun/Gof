@@ -1,3 +1,4 @@
+
 /*  	*{ */
 /*         margin:0; */
 /*         padding:0; */
@@ -45,7 +46,7 @@
 .div1-1{
 	display: flex;
     justify-content: space-between;
-    width: 20%;
+    width: 15%;
 }
 
 .div2{
@@ -80,8 +81,8 @@
 }
 #apply-holiday{
     border: 1px solid black;
-    width: 15%;
-    height: 100%;
+    width: 12%;
+    height: 60%;
     background-color: #272454;
     color: white;
     font-weight: bold;
@@ -281,7 +282,7 @@ input[type=radio]{
 	color: white;
 }
 .select{
-	height:6%;
+	height:4%;
 	width: 100%;
 /* 	border: 1px solid blue; */
 	padding: 5px;
@@ -320,3 +321,4 @@ background-color: #959595;
 color: black;
 border: 1px solid #959595;
 }
+

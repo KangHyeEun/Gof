@@ -3,13 +3,36 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.awoo.dao.CommutingDAO">
-	<select id="selectCommuting" resultType="CommutingVO">
+	<select id="selectAllCommutingByID" resultType="CommutingVo">
 		select id, workday, DATE_FORMAT(start_time, '%H:%i') as start_time, DATE_FORMAT(end_time, '%H:%i') as end_time, work_time, over_time, empno
-		from commuting order by id desc;
+		from commuting WHERE empno = 123; 
+	</select>
+
+
+	<select id="selectCommuting" parameterType="Map" resultType="CommutingVO">
+		select id, workday, DATE_FORMAT(start_time, '%H:%i') as start_time, DATE_FORMAT(end_time, '%H:%i') as end_time, work_time, over_time, empno
+		from commuting  
+		<where>
+			empno=#{empno}
+			
+			<if test="month == null">
+				and 1=1
+			</if>
+			<if test="year == null">
+				and 1=1
+			</if>
+			<if test="month != null">
+				and DATE_FORMAT(workday, '%m') = #{month}
+			</if>
+			<if test="year != null">
+				and DATE_FORMAT(workday, '%Y') = #{year}
+			</if>
+		</where>
+		order by workday desc;
 	</select>
 	<insert id="insertEnter" keyProperty="id">
-		INSERT INTO commuting(start_time, empno) 
-		VALUES (#{startTime}, #{empno});
+		INSERT INTO commuting(start_time, empno, over_time) 
+		VALUES (#{startTime}, #{empno}, #{overTime});
 	</insert>
 	<update id="insertLeave">
 		update commuting
@@ -31,10 +54,31 @@
 		select DATE_FORMAT(end_time, '%H:%i')
 		from commuting WHERE DATE_FORMAT(workday, '%Y-%m-%d') = #{workday} AND empno=#{empno};
 	</select>
+	
 	<select id="getDistinctYear" resultType="String">
-		select distinct(DATE_FORMAT(workday, '%Y')) from commuting order by (DATE_FORMAT(workday, '%Y')) desc
+		select distinct(DATE_FORMAT(workday, '%Y')) 
+		from commuting 
+		where empno=#{empno} 
+		order by (DATE_FORMAT(workday, '%Y')) desc
 	</select>
-	<select id="getDistinctMonth" resultType="String">
-		select distinct(DATE_FORMAT(workday, '%m')) from commuting order by (DATE_FORMAT(workday, '%m')) desc;
+	<select id="countThisMonth" resultType="int">
+		select count(workday) 
+		from commuting 
+		where DATE_FORMAT(workday, '%Y-%m') = #{workday}
+			and empno=#{empno};
+	</select>
+	<select id="countOverTime" resultType="int">
+		SELECT COUNT(over_time) FROM commuting
+		WHERE over_time != "-" and empno = #{empno} AND DATE_FORMAT(workday, '%Y-%m') = #{workday};
+	</select>
+	<select id="countLate" resultType="int">
+		SELECT COUNT(workday) FROM commuting
+		WHERE empno=#{empno} AND 
+		DATE_FORMAT(workday,'%Y-%m')=#{workday} AND
+		date_format(start_time,'%H:%i')>'09:10';
+	</select>
+	<select id="countNomalWorkday" resultType="int">
+		SELECT count(work_time)
+	  	FROM commuting WHERE empno = ${empno} and cast(SUBSTRING_INDEX(work_time, '시간', 1) AS UNSIGNED) >= 9;
 	</select>
 </mapper>

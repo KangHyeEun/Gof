@@ -1,9 +1,13 @@
 package com.awoo.controller;
 
 import java.time.LocalDate;
+
+import java.time.LocalTime;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.Date;
 import java.util.List;
 
@@ -62,6 +66,11 @@ public class CalendarController {
 //	일정을 DB에 저장
 	@PostMapping("/insertData")
 	public String insertData(CalendarVO vo, Model model) {
+
+		System.out.println("--------------");
+		System.out.println(vo.getCalTitle());
+		System.out.println("--------------");
+
 		service.insertDataMethod(vo, model);
 
 //		return "calendar/calendar";

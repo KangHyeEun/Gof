@@ -1,9 +1,18 @@
+
+<%@page import="java.time.LocalTime"%>
+<%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+
+	LocalDate dateLocal = LocalDate.now();
+	LocalTime timeLocal = LocalTime.now();
+	
+	String currentTime = dateLocal + "T" + timeLocal.getHour() + ":" + timeLocal.getMinute();
+	System.out.println(currentTime);
 	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	String formatTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
 	
@@ -85,8 +94,10 @@
 						    </div>
 						    <div>
 							    <label for="calStart">일시</label><br>
+							    <input type="datetime-local" name="calStart" id="calStart" value="<%=currentTime%>">
 							    <input type="datetime-local" name="calStart" id="calStart" value="<%=formatDate %>">
 							    <label for="calEnd"> ~ </label>
+							    <input type="datetime-local" name="calEnd" id="calEnd" value="<%=currentTime%>">
 							    <input type="datetime-local" name="calEnd" id="calEnd" value="<%=formatDate %>">
 						    </div>
 						    <div>
