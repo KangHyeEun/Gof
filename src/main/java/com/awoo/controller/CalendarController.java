@@ -64,16 +64,6 @@ public class CalendarController {
 	@ResponseBody
 //	public CalendarVO restData(@RequestBody CalendarVO calendarVO) {
 	public List<CalendarVO> restData(@RequestBody Map<String, String> map) {
-		System.out.println("여기");
-//		System.out.println(calendarVO.getCalId());
-//		System.out.println(calendarVO.getCalTitle());
-//		System.out.println(calendarVO.getCalStart());
-		System.out.println(map);
-		System.out.println(map.get("calStart"));
-		System.out.println(map.get("calEnd"));
-		
-		
-		
 		return service.restDataMethod(map);
 //		return calendarVO;
 	}

@@ -276,10 +276,45 @@ const renderCalendar = () => {
 //	일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
 	for (let index = 0; index < daysEle.length; index++) {
 		daysEle.item(index).addEventListener("click",function(){
+			let dates = daysEle.item(index).classList[0].split("-");
+			let years = dates[0];	// 년
+			let months = dates[1];	// 월
+			let days = dates[2];	// 일
+			if (months < 10){
+				months = "0"+months;
+			}
+			if (days < 10){
+				days = "0"+days;
+			}
+			
+			let hours = date.getHours();		// 시
+			let minutes = date.getMinutes();	// 분
+			if (hours < 10){
+				hours = "0"+hours;
+			}
+			if (minutes < 10){
+				minutes = "0"+minutes;
+			}
+			
+//			클릭한 날짜와 현재 시간을 입력창의 일시에 입력시켜주기 위한 변수
+			let clickDate = years + "-"+ months + "-"+ days + "T" + hours + ":" + minutes;
+
+			document.getElementById("calStart").value = clickDate;
+			document.getElementById("calEnd").value = clickDate;
+
 			document.querySelector(".schedule-wrap").style.display = "flex";
 		});
 	}
 	
+// ---------------------------------------------------------------------
+//overCnt 3개 이상일 때 +카운트 수 출력해주는 로직
+// ---------------------------------------------------------------------
+
+
+
+
+
+
 // ---------------------------------------------------------------------
 //renderCalendar(); 함수 호출시 DB에서 일정 가져와서 달력에 표시
 // ---------------------------------------------------------------------
@@ -287,10 +322,10 @@ const renderCalendar = () => {
 //	console.log(${list});
 	
 	
-	
-//00000000000000000000000000000000000000000000000000000000000000000000000000000000
-//00000000000000000000000000000000000000000000000000000000000000000000000000000000
-//00000000000000000000000000000000000000000000000000000000000000000000000000000000
+//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+// 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류
 //일단 보류
 // ---------------------------------------------------------------------
 //날짜 클릭시 일정 입력 팝업
@@ -380,39 +415,77 @@ const renderCalendar = () => {
 //
 //    	});
 //    }
-//00000000000000000000000000000000000000000000000000000000000000000000000000000000
-//00000000000000000000000000000000000000000000000000000000000000000000000000000000
-//00000000000000000000000000000000000000000000000000000000000000000000000000000000
+// 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류
+//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 
 // ---------------------------------------------------------------------
 //일자에 일정 출력
 // ---------------------------------------------------------------------
 
-console.log("testMonth");
-console.log(date.getMonth());
-	
 //	.js 파일에서 contextPath를 사용하기 위해 jsp 에서 script 태그로 session에 저장
 	var ctx = getContextPath();
 	function getContextPath() {
 		return sessionStorage.getItem("contextpath");
 	}
-	document.addEventListener("DOMContentLoaded", function(_e){
-		console.log(daysEle.length);
-		console.log(daysEle.item(0).classList[0]); // 첫 날
-		console.log(daysEle.item(daysEle.length-1).classList[0]); // 마지막 날
+//	window.addEventListener("DOMContentLoaded", function(_e){
+//	});
+//	console.log(daysEle.length);
+//	console.log(daysEle.item(0).classList[0]); // 첫 날
+//	console.log(daysEle.item(daysEle.length-1).classList[0]); // 마지막 날
 		
-		let dateRange = {calStart:daysEle.item(0).classList[0],
-						calEnd:daysEle.item(daysEle.length-1).classList[0]};
-		
-		fetch(ctx+"/calendar/restData",{
-			method : "POST",
-			headers : { "Content-type" : "application/json"},
-			body : JSON.stringify(dateRange)
-		}).then(response => response.json(), _e => console.log("error!!!"))
-		.then(_data => {
-			console.log("성공");
-		});
+	let dateRange = {calStart:daysEle.item(0).classList[0],
+					calEnd:daysEle.item(daysEle.length-1).classList[0]};
+	
+	fetch(ctx+"/calendar/restData",{
+		method : "POST",
+		headers : { "Content-type" : "application/json"},
+		body : JSON.stringify(dateRange)
+	}).then(response => response.json(), _e => console.log("error!!!"))
+	.then(_data => {
+		let list = _data;
+		let innerSpan;
+//		console.log(list[0]);
+//		{
+//		    "calId": 1,
+//		    "calTitle": "제목 없음",
+//		    "calPlace": "회의실A",
+//		    "calStart": "2022-10-9 05:00",
+//		    "calEnd": "2022-10-10 13:00",
+//		    "calAllday": "0",
+//		    "calShow": "0",
+//		    "calNotice": "0",
+//		    "calContent": "내용 없음",
+//		    "empno": 220401,
+//		    "checkAdmin": 0,
+//		    "approval": 0
+//		}
+		for(let index = 0; index < daysEle.length; index++) {
+			for(let index1 = 0; index1 < list.length; index1++) {
+				let calDate = list[index1].calStart.split(" ");
+				let calTime = calDate[1];	// 시간
+				calDate = calDate[0];		// 날짜
+				let calHour = calTime.split(":");
+				let calMinute = calHour[1];	// 분
+				calHour = calHour[0];		// 시간
+//				console.log("calHour : " + Number(calHour) + " / calMinute : " + calMinute);
+//				div의 클래스에 있는 값과 DB에서 추출한 날짜 값과 같으면 해당 div에 DB값 넣기
+				if (daysEle.item(index).classList[0] == calDate) {
+					let scheduleDiv = document.getElementsByClassName(calDate)[0].children[0];
+					let div = document.createElement("div");
+					let span = document.createElement("span");
+					
+					innerSpan = "";
+					innerSpan += calTime + " " + list[index1].calTitle;
+					span.innerHTML += innerSpan;
+					div.append(span);
+					scheduleDiv.append(div);
+				}
+			}
+		}
 	});
+	
 	
 	
 // ---------------------------------------------------------------------

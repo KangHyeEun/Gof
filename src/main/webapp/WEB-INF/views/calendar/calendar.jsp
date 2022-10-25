@@ -4,10 +4,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-	String formatTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+// 	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+// 	String formatTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
 	
-	formatDate += "T" + formatTime;
+// 	formatDate += "T" + formatTime;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,9 +85,9 @@
 						    </div>
 						    <div>
 							    <label for="calStart">일시</label><br>
-							    <input type="datetime-local" name="calStart" id="calStart" value="<%=formatDate %>">
+							    <input type="datetime-local" name="calStart" id="calStart">
 							    <label for="calEnd"> ~ </label>
-							    <input type="datetime-local" name="calEnd" id="calEnd" value="<%=formatDate %>">
+							    <input type="datetime-local" name="calEnd" id="calEnd">
 						    </div>
 						    <div>
 							    <label for="calAllday">종일</label>
