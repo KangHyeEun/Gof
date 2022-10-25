@@ -11,7 +11,6 @@
 <title>Insert title here</title>
 <style type="text/css">
 
-
 #table1 {
 	text-align: center;
 }
@@ -32,14 +31,9 @@ th {
 	width: 100%;
 }
 
-
-
 a {
 	color: black;
-	
 }
-
-
 
 .scroll {
 	padding: -10px;
@@ -62,8 +56,6 @@ a {
 	box-shadow: inset 0px 0px 5px white;
 }
 
-
-
 .intro {
 	display: flex;
 	justify-content: space-between;
@@ -74,7 +66,6 @@ a {
 	color: #c0c5c9;
 }
 
-
 .intro {
 	display: flex;
 	justify-content: space-between;
@@ -84,31 +75,171 @@ a {
 .intro>p {
 	color: #c0c5c9;
 }
+
 #note_bt {
-	margin-top:15px;
-	
+	margin-top: 15px;
 }
+
 #note_bt ul li {
 	float: left;
-	margin-left:100px;
+	margin-left: 100px;
 }
-#wri_m_bt {
 
+#btn1 {
 	padding: 10px 20px 10px 20px;
-	background:  #272454;
+	background: #272454;
 	border: 0;
-	color:white;
+	color: white;
 	font-size: 12px;
 	border-radius: 5px;
 	margin-right: -170px;
 }
-#wri_m_bt:hover {
+
+#btn1:hover {
 	background: #08298A;
-	color:white;
+	color: white;
+}
+
+#btn1 {
+	margin-top: 40px;
+}
+
+#btn2 {
+	padding: 10px 20px 10px 20px;
+	background: #272454;
+	border: 0;
+	color: white;
+	font-size: 12px;
+	border-radius: 5px;
+	width: 85px;
+}
+
+#btn2:hover {
+	background: #08298A;
+	color: white;
+}
+
+#btn2 {
+	margin-left: 180px;
+}
+
+h1 {
+	font-family: 'Oswald', sans-serif;
+	font-size: 30px;
+	color: #272454;
+}
+
+label {
+	display: block;
+	margin-top: 20px;
+	letter-spacing: 2px;
+}
+
+form {
+	margin: 0 auto;
+	width: 459px;
+}
+
+#category, #content ,#title {
+	width: 439px;
+	height: 27px;
+	background-color: #efefef;
+	border-radius: 6px;
+	border: 1px solid #dedede;
+	padding: 10px;
+	margin-top: 3px;
+	font-size: 0.9em;
+	color: #3a3a3a;
+}
+
+#category:focus, #content:focus ,#title:focus {
+	border: 1px solid #97d6eb;
+}
+
+textarea {
+	height: 60px;
+	background-color: #efefef;
+}
+
+#submit {
+	width: 127px;
+	height: 48px;
+	text-align: center;
+	border: none;
+	margin-top: 20px;
+	cursor: pointer;
+	border-radius: 4px;
 	
 }
-#wri_m_bt a{
-	color:white;
+
+#submit:hover {
+	color: #fff;
+	background-color: #272454;
+	opacity: 0.9;
+}
+
+#cancel {
+	width: 127px;
+	height: 48px;
+	text-align: center;
+	border: none;
+	margin-top: 20px;
+	cursor: pointer;
+	border-radius: 4px;
+	
+}
+
+#cancel:hover {
+	color: #fff;
+	background-color: #272454;
+	opacity: 0.9;
+}
+
+.modal {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(1.1);
+	transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform
+		0.25s;
+}
+
+.modal-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 1rem 1.5rem;
+	width: 500px;
+	height: 410px;
+	border-radius: 0.5rem;
+}
+
+.close-button {
+	float: right;
+	width: 1.5rem;
+	line-height: 1.5rem;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 0.25rem;
+	background-color: lightgray;
+}
+
+.close-button:hover {
+	background-color: darkgray;
+}
+
+.show-modal {
+	opacity: 1;
+	visibility: visible;
+	transform: scale(1.0);
+	transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 </style>
 </head>
@@ -158,17 +289,30 @@ a {
 							</tbody>
 						</table>
 
-
-						<div id="note_bt">
-							<ul>
-								<li id="wri_m_bt"><a href="${pageContext.request.contextPath }/message/result2"
-									onclick="window.open(this.href, '_blank', 'width=600, height=600' ); return false;">쪽지쓰기</a></li>
-							</ul>
-						</div>
-
-						<input type="button" value="삭제" class="btn btn-outline-info" id="wri_m_bt"
+						<div class="buttun">
+						<button class="trigger" id="btn1">쪽지 보내기</button>
+						<input type="button" value="삭제" class="btn btn-outline-info" id="btn2"
 							onclick="chkDel();">
-
+						</div>
+						<!-- 팝업 될 레이어 -->
+						<div class="modal">
+							<div class="modal-content">
+								<span class="close-button">&times;</span>
+								<h1 class="title">쪽지 보내기</h1>
+								<form action="${pageContext.request.contextPath}/bbs6/bbs/set" method="POST">
+									<label for="text">받는이:</label> <input type="text" name="text"
+										placeholder="받는이를 입력하세요." required="required" id="category">
+									
+									<label for="text">제목:</label> <input type="text" name="text"
+										placeholder="제목을 입력하세요." required="required" id="title">
+									<label>내용:</label>
+									<textarea name="message" placeholder="내용을 입력하세요."
+										required="required" id="content"></textarea>
+									<input type="button" id="cancel" value="취소"> <input
+										type="submit" id="submit" value="보내기">
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -224,6 +368,35 @@ a {
 			}
 		}
 	</script>
+	
+	<script type="text/javascript"> 
+         var modal = document.querySelector(".modal"); 
+         var trigger = document.querySelector(".trigger"); 
+         var closeButton = document.querySelector(".close-button"); 
+         var cancelButton = document.querySelector("#cancel");
+
+        //console.log(modal);
+
+        function toggleModal() { 
+             modal.classList.toggle("show-modal"); 
+         }
+
+        function windowOnClick(event) { 
+             if (event.target === modal) { 
+                 toggleModal(); 
+             } 
+         }
+
+        trigger.addEventListener("click", toggleModal); 
+         closeButton.addEventListener("click", toggleModal); 
+         cancel.addEventListener("click", toggleModal); 
+         window.addEventListener("click", windowOnClick); 
+         
+         var anText_sub1 = document.getElementById('category').value;
+         var anText_sub2 = document.getElementById('title').value;
+         var anText_sub3 = document.getElementById('content').value;
+     </script>
+	
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </body>
 </html>

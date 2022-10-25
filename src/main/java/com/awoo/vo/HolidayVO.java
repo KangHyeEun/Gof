@@ -11,10 +11,9 @@ public class HolidayVO {
 	private String halfDay;
 	private String approval;
 	private String approvalDate;
+	private double countDate;
 	private int empno;
 	private int totalHoliday;
-	private int checkAdmin;
-	
 	public int getId() {
 		return id;
 	}
@@ -75,11 +74,11 @@ public class HolidayVO {
 	public void setApprovalDate(String approvalDate) {
 		this.approvalDate = approvalDate;
 	}
-	public int getCheckAdmin() {
-		return checkAdmin;
+	public double getCountDate() {
+		return countDate;
 	}
-	public void setCheckAdmin(int checkAdmin) {
-		this.checkAdmin = checkAdmin;
+	public void setCountDate(double countDate) {
+		this.countDate = countDate;
 	}
 	public int getEmpno() {
 		return empno;
@@ -93,19 +92,8 @@ public class HolidayVO {
 	public void setTotalHoliday(int totalHoliday) {
 		this.totalHoliday = totalHoliday;
 	}
-	public int getCheck_admin() {
-		return checkAdmin;
-	}
-	public void setCheck_admin(int check_admin) {
-		this.checkAdmin = check_admin;
-	}
-	@Override
-	public String toString() {
-		return "HolidayVO [id=" + id + ", huserName=" + huserName + ", hwriteDate=" + hwriteDate + ", htype=" + htype
-				+ ", hstartDate=" + hstartDate + ", hendDate=" + hendDate + ", hcontent=" + hcontent + ", halfDay="
-				+ halfDay + ", approval=" + approval + ", empno=" + empno + ", totalHoliday=" + totalHoliday
-				+ ", check_admin=" + checkAdmin + "]";
-	}
+	
+	
 	
 	
 }

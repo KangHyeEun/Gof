@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -37,6 +38,7 @@ import com.awoo.vo.BBSVO;
 import com.awoo.vo.PersonalInfoVO;
 
 @Controller
+@RequestMapping("/bbsPage")
 public class BBSController {
 	
 	private BBSService service;
@@ -47,23 +49,19 @@ public class BBSController {
 	}
 	
 	//게시판 목록
-	@GetMapping("/bbsPage/bbs")
-	public String result1(@SessionAttribute("personalInfoVO") PersonalInfoVO vo, Model model, 
+	@GetMapping("/bbs")
+	public String result1(Model model, 
 						  @RequestParam(value="page", defaultValue = "1") int page,
 						  @RequestParam(value="title", defaultValue = "") String title,
 						  @RequestParam(value="content", defaultValue = "") String content,
 						  @RequestParam(value="category", defaultValue = "") String category,
 						  @RequestParam(value="owner", defaultValue = "") String owner) {
-		if(vo != null) {
-			service.getBBSList(model, page, title, content, category, owner);
-			return "bbsPage/bbs";			
-		}else {
-			return "redirect:/home/home";			
-		}
+		service.getBBSList(model, page, title, content, category, owner);
+		return "bbsPage/bbs";			
 	}
 	
 	//게시글 상세 보기
-	@GetMapping("/bbsPage/bbs/{id}")
+	@GetMapping("/bbs/{id}")
 	public String getBBSItem(@SessionAttribute("personalInfoVO") PersonalInfoVO vo, 
 							 Model model, @PathVariable("id") String id, 
 							 HttpServletResponse response, HttpServletRequest req) {
@@ -92,53 +90,39 @@ public class BBSController {
 			service.getCommentList(id);
 			return "bbsPage/content";
 		}else {
-			return "redirect:/home/home";			
+			return "redirect:/login/home";			
 		}
 	}
 	
 	//글쓰기 선택(select)
-	@GetMapping("/bbsPage/wrbtn")
-	public String createContent(@SessionAttribute("personalInfoVO") PersonalInfoVO vo, 
-								@ModelAttribute("BBSVO") BBSVO vo2, Model model) {
-		if(vo != null) {
-			service.getCateogry(model);
-			return "bbsPage/set";			
-		}else {
-			return "redirect:/home/home";			
-		}
+	@GetMapping("/wrbtn")
+	public String createContent(@ModelAttribute("BBSVO") BBSVO vo2, Model model) {
+		service.getCateogry(model);
+		return "bbsPage/set";			
 	}
 	
 	//글쓰기(insert)
-	@PostMapping("/bbsPage/set")
+	@PostMapping("/set")
 	public String saveContent(@SessionAttribute("personalInfoVO") PersonalInfoVO vo, BBSVO vo2) {
-		if(vo != null) {
-			vo2.setOwnerId(Integer.toString(vo.getEmpno()));
-			vo2.setOwner(vo.getName());
-			if(service.setBBS(vo2)) {			
-				return "redirect:/bbsPage/bbs";
-			}else {
-				return "bbsPage/set";			
-			}
+		vo2.setOwnerId(Integer.toString(vo.getEmpno()));
+		vo2.setOwner(vo.getName());
+		if(service.setBBS(vo2)) {			
+			return "redirect:/bbsPage/bbs";
 		}else {
-			return "redirect:/home/home";			
+			return "bbsPage/set";			
 		}
 	}
 	
 	//수정하기 선택(select)
-	@GetMapping("/bbsPage/put/{id}")
-	public String setBBS(@SessionAttribute("personalInfoVO") PersonalInfoVO vo, 
-						 @PathVariable("id")String id, Model model) {
-		if(vo != null) {
-			service.getBBSContent(model, id);
-			service.getCateogry(model);
-			return "bbsPage/put";
-		}else {
-			return "redirect:/home/home";			
-		}
+	@GetMapping("/put/{id}")
+	public String setBBS(@PathVariable("id")String id, Model model) {
+		service.getBBSContent(model, id);
+		service.getCateogry(model);
+		return "bbsPage/put";
 	}
 	
 	//수정하기(update)
-	@PostMapping("/bbsPage/put")
+	@PostMapping("/put")
 	public String setBBS(@SessionAttribute("personalInfoVO")PersonalInfoVO vo, @ModelAttribute("bbsVO") BBSVO vo2) {
 		vo2.setOwnerId(Integer.toString(vo.getEmpno()));
 		vo2.setOwner(vo.getName());
@@ -150,7 +134,7 @@ public class BBSController {
 	}
 	
 	//삭제(delete)
-	@GetMapping("/bbsPage/delete/{id}")
+	@GetMapping("/delete/{id}")
 	public String deleteList(@SessionAttribute("personalInfoVO")PersonalInfoVO vo, @ModelAttribute("BBSVO") BBSVO vo2,
 							 @PathVariable("id") String id) {
 		vo2.setOwnerId(Integer.toString(vo.getEmpno()));
@@ -163,15 +147,14 @@ public class BBSController {
 	}
 	
 	//댓글 불러오기
-	@GetMapping("/bbsPage/comment/{bbsId}")
+	@GetMapping("/comment/{bbsId}")
 	@ResponseBody
 	public List<BBSCommentVO> getComments(@PathVariable("bbsId") String bbsId){
 		return service.getCommentList(bbsId);
 	}
 	
-	
 	//댓글 달기
-	@PostMapping("/bbsPage/comment")
+	@PostMapping("/comment")
 	@ResponseBody
 	public ResponseEntity<Map<String, String>> setComments(@RequestBody BBSCommentVO vo){
 		ResponseEntity<Map<String,String>> res = null;
@@ -188,7 +171,7 @@ public class BBSController {
 		return res;
 	}
 	//파일 업로드
-	@PostMapping("/bbsPage/fileupload")
+	@PostMapping("/fileupload")
 	@ResponseBody
 	public String multiFileUploadWithAjax(MultipartFile[] uploadFile) throws IllegalStateException, IOException {
 		
@@ -207,7 +190,7 @@ public class BBSController {
 
 	//파일 다운로드
 	//데이터 전송시에는 반드시 response 객체를 통해 전송을 해야 한다.
-	@GetMapping("/bbsPage/download")
+	@GetMapping("/download")
 	public void download(HttpServletResponse response) throws Exception{
 		//path 수정 필요
 		String path = "C:/sample/abc.txt";

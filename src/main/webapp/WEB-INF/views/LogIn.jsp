@@ -14,13 +14,12 @@
             <h2 class="active"> 로그인 </h2>
 
             <!-- Login Form -->
-            <form:form modelAttribute="personalInfoVO" action="${pageContext.request.contextPath}/home/home" method="post">
-                <form:input path="empno" placeholder="아이디를 입력하세요 220204"/>
-                <form:password path="password" placeholder="패스워드를 입력하세요 abc6"/>
+            <form:form modelAttribute="personalInfoVO" action="${pageContext.request.contextPath}/login" method="post">
+                <form:input path="empno" value="220204" placeholder="아이디를 입력하세요"/>
+                <form:password path="password" value="abc6" placeholder="패스워드를 입력하세요"/>
                 <button>Log in</button>
             </form:form>
-	<a href="${pageContext.request.contextPath}/MoveToHome">홈 이동</a><br>
-
+            
         </div>
     </div>
 </body>

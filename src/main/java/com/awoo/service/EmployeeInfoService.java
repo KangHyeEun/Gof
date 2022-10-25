@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 
 import com.awoo.dao.EmployeeInfoDAO;
 import com.awoo.vo.EmployeeInfoVO;
+import com.awoo.vo.HolidayVO;
 import com.awoo.vo.PersonalInfoVO;
 
 @Service
@@ -61,4 +62,9 @@ public class EmployeeInfoService {
 		service.insertDataP(request,vop);
 	}
 	
+	/*휴가-------------------------------------------------------------------------*/
+	
+	public void updateUsedHoliday(HolidayVO vo) {
+		dao.updateUsedHoliday(vo);
+	}
 }

@@ -4,117 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <!-- 비동기 댓글 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/BBS/js/jquery-3.6.1.min.js"></script>
-<meta charset="UTF-8">
+<!-- 스타일 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/BBS/bbs/contentstyle.css" /> --%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/contentstyle.css" />
 <title>Insert title here</title>
-<style type="text/css">
-	.inner-div-bbs {
-	    display: inline-block;
-	}
-	
-	.content-nav {
-	    display: flex;
-        justify-content: space-between;
-	    align-items: center;
-	    height: 3rem;
-	    padding-top: 2rem;
-	    padding-bottom: 0.5rem;
-	}
-	
-	.content-nav button {
-	    background-color: #fff;
-	    border-radius: 0.4rem;
-	    border: 1px solid #272454;
-	    padding: 0.5rem;
-	    margin-right: 0.5rem;
-	    font-size: 0.8rem;
-	    width: 5rem;
-	    cursor: pointer;
-	}
-
-    #modify {
-        color: #3fb4d0;
-        border: 1px solid #3fb4d0;
-        background: #fff;
-    }
-
-    #delete {
-        color: #fff;
-        border: 1px solid #3fb4d0;
-        background: #14ABAB;
-    }
-	.content-head {
-	    display: flex;
-	    justify-content: space-between;
-	    align-items: center;
-	    border-top: 2px solid #909294;
-	    border-bottom: 2px solid #e8eaec;
-	    height: 50px;
-	}
-	.content-head h3 span {
-		color: #4f78bf;
-	}
-	
-	.head-inner {
-	    display: flex;
-	}
-	
-	.head-inner div p {
-	    padding: 0 1rem 0 1rem;
-	    margin: 0;
-	}
-	
-	.first-inner {
-	    box-sizing: border-box;
-	    border-right: 2px solid #e6e8eb;
-	}
-	
-	.content-text {
-	    height: 40vh;
-	    padding: 0.5rem 2rem;
-	}
-	
-	.content-footer {
-	    border-top: 2px dashed #e6e8eb;
-	    border-bottom: 2px solid #909294;
-	    height: auto;
-	    display: flex;
-	}
-	
-	.content-footer a {
-	    display: flex;
-	    text-decoration: none;
-	    justify-content: center;
-	    align-items: center;
-	    padding-left: 1rem;
-	}
-	.insert {
-	    display: flex;
-	    flex-wrap: nowrap;
-	    padding-top: 1rem;
-	}
-	
-	#inittext {
-	    width: 90%;
-	    background-color: #fff;
-	    border-radius: 0.4rem;
-	    border: 1px solid #272454;
-	}
-	
-	#ibtn {
-	    background-color: #fff;
-	    border-radius: 0.4rem;
-	    border: 1px solid #272454;
-	    padding: 0.5rem;
-	    margin-right: 0.5rem;
-	    font-size: 0.8rem;
-	    width: 10%;
-	    cursor: pointer;
-	}
-</style>
 </head>
 <body>
 

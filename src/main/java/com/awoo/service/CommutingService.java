@@ -50,7 +50,6 @@ public class CommutingService {
 		String[] splitedForMonth = dates.split("-");
 //		String onlyYear = splitedForMonth[0];
 		String onlyMonth = splitedForMonth[1];
-//		System.out.println(onlyYear+"-"+onlyMonth);
 		String YearAndMonth = splitedForMonth[0]+"-"+splitedForMonth[1];
 		
 		// 오늘 날짜의 시작일과 마지막일 구하기

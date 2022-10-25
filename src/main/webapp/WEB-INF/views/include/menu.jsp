@@ -38,7 +38,7 @@
                         <li>
                             <ul class="sub1">
                                 <li><a href="#">공지 사항</a></li>
-                                <li><a href="#">사내 게시판</a></li>
+                                <li><a href="${pageContext.request.contextPath}/bbsPage/bbs">사내 게시판</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -70,7 +70,7 @@
                         <li>
                             <ul class="sub3">
                                 <li><a href="${pageContext.request.contextPath}/admin">인사 관리</a></li>
-                                <li><a href="#">휴가 관리</a></li>
+                                <li><a href="${pageContext.request.contextPath}/holidayAdmin">휴가 관리</a></li>
                             </ul>
                         </li>
                     </ul>
