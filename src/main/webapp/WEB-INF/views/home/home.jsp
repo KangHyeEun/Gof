@@ -26,6 +26,10 @@
 <hr>
 	<a href="${pageContext.request.contextPath}/bbsPage/bbs">(희연)게시판으로 이동</a>
 	
+<hr>
+	<a href="${pageContext.request.contextPath}/message"> 지영 - 받은 쪽지함</a>
+	<a href="${pageContext.request.contextPath}/message/message2">지영 - 보낸 쪽지함</a>
+	
 	<div class="container-wrap">
 		<div class="header">
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
