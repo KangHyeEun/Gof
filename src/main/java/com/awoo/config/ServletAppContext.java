@@ -17,9 +17,13 @@ import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.awoo.interceptor.LoginInterceptor;
 
 // Spring MVC 프로젝트에 관련된 설정을 하는 클래스
 @Configuration
@@ -108,6 +112,18 @@ public class ServletAppContext implements WebMvcConfigurer {
 		multipartResolver.setMaxUploadSizePerFile(MAX_SIZE);
 		
 		return multipartResolver;
+	}
+	
+	//로그인 검증(인터셉터)
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		// TODO Auto-generated method stub
+		WebMvcConfigurer.super.addInterceptors(registry);
+		
+		LoginInterceptor loginInter = new LoginInterceptor();
+		InterceptorRegistration reg = registry.addInterceptor(loginInter);
+		
+		reg.addPathPatterns("/login/home");
 	}
 
 }

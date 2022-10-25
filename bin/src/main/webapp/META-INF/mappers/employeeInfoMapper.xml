@@ -41,4 +41,14 @@
 		ehired_type,total_holiday,estatus,check_admin
 		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
 	</select>
+	
+	<!-- 휴가 -->
+	<select id="selectEmpnoH" resultType="String">
+		SELECT DISTINCT edepartment
+		FROM  employee_info WHERE empno = #{empno}; 
+	</select>
+	<update id="updateUsedHoliday">
+		update employee_info SET used_holiday = used_holiday + (SELECT count_date FROM holiday WHERE id = #{id})  
+			WHERE empno = #{empno};
+	</update>
 </mapper>

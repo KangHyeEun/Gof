@@ -1,5 +1,6 @@
 package com.awoo.service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
@@ -18,12 +19,21 @@ public class LoginService {
 	}
 
 	//로그인
-	public boolean isUser(PersonalInfoVO vo, HttpSession session) {
+	public String isUser(PersonalInfoVO vo, HttpSession session, HttpServletRequest request) {
+		String path = "";
 		if(loginDao.selectUser(vo) != null) {
+			//유저 정보를 세션에 넣기 전 세션 초기화
+			session.invalidate();
+			//초기화한 후애 다시 세션 불러와야 함
+			session = request.getSession();
+			//세션에 담기
 			session.setAttribute("personalInfoVO", loginDao.selectUser(vo));
-			return true;
+			path ="redirect:/login/home";
 		}else {
-			return false;
+			//세션을 초기화하고 로그인 창으로 돌려보냄
+			session.invalidate();
+			path = "LogIn";
 		}
+		return path;
 	}
 }
