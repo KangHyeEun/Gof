@@ -5,6 +5,7 @@ import java.text.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -34,7 +35,7 @@ public class HolidayController {
 		service.selectHoliday(model);
 		return "holiday/holiday";
 	}
-	@GetMapping("ApplyHoliday")
+	@PostMapping("ApplyHoliday")
 	public String ApplyHoliday(
 							   @RequestParam("leaveType") String leaveType,	
 							   @RequestParam("leaveStartDate") String leaveStartDate,

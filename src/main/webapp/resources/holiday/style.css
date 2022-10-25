@@ -51,9 +51,7 @@
 
 .div2{
     width: 100%;
-    height: 79.9%; 
-    display: flex;
-    padding-top: 2%;
+    height: 75.9%;
     display: flex;
     align-content: flex-start;
 }
@@ -67,7 +65,7 @@
     width: 100%;
     border-collapse: collapse;   
     text-align: center;
-    height: fit-content;
+    height: fit-content; 
 }
 .holiday-list tr{
 	height: 2em;
@@ -91,11 +89,12 @@
     align-items: center;
     border-radius: 0.4rem;
 }
+
 #applypop {
 	width: 100vw;
 	height: calc(100% - 60px);
 	position: absolute;
-	background-color: rgba(209, 209, 209, 0.787);
+	background-color: #4c4c4c94;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -114,12 +113,23 @@
 	box-sizing: border-box;
 	box-shadow: 0 17px 20px -18px rgba(0, 0, 0, 1);
 	z-index: 1;
-/* 	border-radius: 5px; */
+	border-radius: 5px;
+	transition: all 0.3s ease 0s;
+   	animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
-	
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 .pop-titleContainer{
 	display: flex;
-    width: 43%;
+    width: 44%;
     flex-direction: row;
     justify-content: space-between;
     align-content: baseline;
@@ -198,16 +208,20 @@
 .pop4 p{
 	height: 13%;
 }
-.pop4 input{
+.pop4 #content{
 	width: 100%;
     height: 80%;
+    resize: none;
+	padding: 2%;
+	box-sizing : border-box;
 }
+
+
 .pop5 {
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	height: 9%;
-	
+	height: 9%;	
 }
 
 .pop5 form {
@@ -249,7 +263,22 @@
     justify-content: center;
     justify-content: space-between;
     display:none;
+/* 	transition: all 0.1s ease 0s; */
+   	animation: show-button 0.3s cubic-bezier(0, 0, 0, 0) both;
 }
+
+@keyframes show-button {
+  0% {
+  	height: 8%;
+    opacity: 0.5;
+  }
+  100% {
+  	height: 12%;
+    opacity: 1;
+  }
+}
+
+
 .select-halfType{
 	display: flex;
     height: 58%;
