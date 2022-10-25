@@ -19,5 +19,7 @@
 
 <hr>
 	<a href="${pageContext.request.contextPath}/admin">혜은이동</a>
+	<a href="${pageContext.request.contextPath}/orgChart1">조직도1</a>
+	<a href="${pageContext.request.contextPath}/orgChart2">조직도2</a>
 </body>
 </html>
