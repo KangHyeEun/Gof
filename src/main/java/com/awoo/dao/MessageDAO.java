@@ -15,9 +15,9 @@ public interface MessageDAO {
 	
 	public int insertData(MessageVO vo);
 
-	public int deleteData1(MessageVO vo);
+	public void deleteData1(MessageVO vo);
 	
-	public int deleteData2(MessageVO vo);
+	public void deleteData2(MessageVO vo);
 	
 	public void delete(String no);
 	

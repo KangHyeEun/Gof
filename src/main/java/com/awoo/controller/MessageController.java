@@ -82,13 +82,13 @@ public class MessageController {
 //    	return "message/result7";	}
 //
 //	
-//	//보낸쪽지함 아이디 입력 버전 삭제(성공)
-//	@GetMapping("/message/result8")
-//	public String result8(MessageVO vo) {
-//		service.deleteData2(vo);
-//		return "redirect:/message";
-//	}
-//	
+	//보낸쪽지함 아이디 입력 버전 삭제(성공)
+	@GetMapping("result8")
+	public String result8(MessageVO vo) {
+		service.deleteData2(vo);
+		return "redirect:/message";
+	}
+	
 	
 	
 	//내용클릭시 쪽지 확인 이동

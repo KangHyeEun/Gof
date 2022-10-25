@@ -170,13 +170,10 @@ a {
 						<!--쪽지 삭제 @PostMapping("result8") -->
 
 						<form action="${pageContext.request.contextPath}/message/result8"
-							method="post">
+							method="get">
 							<label for="id"></label> <input type="text" name="id" id="id" />
 							<button id="wri_m_bt">삭제</button>
 						</form>
-
-
-
 					</div>
 				</div>
 			</div>
