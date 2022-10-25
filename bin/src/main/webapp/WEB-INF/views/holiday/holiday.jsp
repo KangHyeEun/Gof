@@ -49,7 +49,7 @@
 									<th>종류</th>
 									<th>반차 종류</th>
 									<th>기간</th>
-<!-- 									<th>종료일</th> -->
+									<th>일수</th>
 									<th>내용</th>
 									<th>처리 상태</th>
 									<th>결재일</th>
@@ -64,7 +64,7 @@
 										<td>${hl.htype}</td>
 										<td>${hl.halfDay != null ? hl.halfDay : "-"}</td>
 										<td>${hl.hstartDate} ~ ${hl.hendDate}</td>
-<%-- 										<td>${hl.hendDate}</td> --%>
+										<td>${hl.countDate}</td>
 										<td>${hl.hcontent}</td>
 										<td>${hl.approval}</td>
 										<td>${hl.approvalDate != null ? hl.approvalDate : "-"}</td>
@@ -121,9 +121,9 @@
 								<div class="pop3">
 									<p class="p"><span class="important">*</span>휴가 기간 (하루를 사용하실 경우 모두 같은날을 선택해주세요)</p>
 									<div class="date-div">
-										<input type="date" placeholder="시작일 년/월/일" name="leaveStartDate" id="leaveStartDate" required />
-										<span>~</span> 
-										<input type="date" placeholder="종료일 년/월/일" name="leaveEndDate" id="leaveEndDate" required />
+										<input type="date" placeholder="시작일 년/월/일" name="leaveStartDate" id="leaveStartDate" required onchange="DateCheck();"/>
+										<span class="end-cal">~</span> 
+										<input class="end-cal" type="date" placeholder="종료일 년/월/일" name="leaveEndDate" id="leaveEndDate" required/>
 									</div>
 								</div>
 							</div>
@@ -165,14 +165,24 @@
 				}
 			}
 			
-			
+			// 앞에 순서 번호 넣기
 			let child = document.getElementById("htable-body").children;
 	    	var cnt = 0;
 	    	for (let i = 0; i < child.length; i++) {
 	    		// 순서
 				child[i].children[0].innerHTML = i+1;
+	    		
+	    		// 일수가 1일 이상이면 소숫점 없애기
+				let intext = child[i].children[5].innerText;
+	    		if(intext >= 1){
+	    			let date1 = intext.split('.');
+	    			console.log(date1[0]);
+	    			child[i].children[5].innerHTML = date1[0];	
+	    		}
+	    		
 	    	}
-			
+		
+	    	
 			
 	    });
 	    
@@ -209,16 +219,40 @@
 	    function TypeChange(){
 	    	
 	    	let type = document.getElementById("leaveType").value;
-	    	let startDate = document.getElementById("leaveStartDate").value;
-	    	let endDate = document.getElementById("leaveEndDate").value;
 	    	let halfType = document.getElementById("halfType");
+	    	let end = document.getElementsByClassName("end-cal");
 	    	if(type == "반차"){
 	    		halfType.style.display = "flex";
+	    		end[0].style.visibility = "hidden";
+	    		end[1].style.visibility = "hidden";
+	    		end[1].removeAttribute('required');	
+	    		end[1].value = "0";
 	    	}
 	    	if(type == "연차"){
 	    		halfType.style.display = "none";
+	    		end[0].style.visibility = "visible";
+	    		end[1].style.visibility = "visible";
 	    	}
 	    };
+	    
+	    // 휴가 신청 시작 날짜를 오늘 이후로 신청하도록 alert 띄움
+	    function DateCheck(){
+	    	
+	    	let today = new Date();
+
+	    	let year = today.getFullYear();
+	    	let month = ('0' + (today.getMonth() + 1)).slice(-2);
+	    	let day = ('0' + today.getDate()).slice(-2);
+	    	let dateString = year + '-' + month  + '-' + day;
+	    	
+	    	let startDate = document.getElementById("leaveStartDate").value;
+	    	let endDate = document.getElementById("leaveEndDate").value;
+	    	if(dateString > startDate){
+	    		alert("휴가 신청이 불가능한 날짜 입니다.");
+	    		document.getElementById("leaveStartDate").value = null; 
+	    	}
+	    	
+	    }
 	    
 
 	</script>
