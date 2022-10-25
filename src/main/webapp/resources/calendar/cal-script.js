@@ -98,13 +98,13 @@ const renderCalendar = () => {
 		
 //		일요일이면
 		if(holidayStyle == 0) {
-			days += `<div class="${prevClass} prev-date" style="color:red"><div><span>${prevLastDay - x + 1}</span></div></div>`;
+			days += `<div class="${prevClass} prev-date" style="color:red"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"></div></div>`;
 //		토요일이면
 		} else if(holidayStyle == 6) {
-			days += `<div class="${prevClass} prev-date" style="color:blue"><div><span>${prevLastDay - x + 1}</span></div>/</div>`;
+			days += `<div class="${prevClass} prev-date" style="color:blue"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"></div></div>`;
 //		평일이면
 		} else {
-			days += `<div class="${prevClass} prev-date"><div><span>${prevLastDay - x + 1}</span></div></div>`;
+			days += `<div class="${prevClass} prev-date"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"></div></div>`;
 		}
     }
 // 이번 달 일자
@@ -122,13 +122,13 @@ const renderCalendar = () => {
 		
 //			일요일이면
 			if(holidayStyle == 0) {
-				days += `<div class="${currentClass} today" style="color:red"><div><span>${i}</span></div></div>`;
+				days += `<div class="${currentClass} today" style="color:red"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
 //			토요일이면
 			} else if(holidayStyle == 6) {
-				days += `<div class="${currentClass} today" style="color:blue"><div><span>${i}</span></div></div>`;
+				days += `<div class="${currentClass} today" style="color:blue"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
 //			평일이면
 			} else {
-				days += `<div class="${currentClass} today"><div><span>${i}</span></div></div>`;
+				days += `<div class="${currentClass} today"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
 			}
             
         } else {
@@ -138,13 +138,13 @@ const renderCalendar = () => {
 		
 //			일요일이면
 			if(holidayStyle == 0) {
-            	days += `<div class="${currentClass}" style="color:red"><div><span>${i}</span></div></div>`;
+            	days += `<div class="${currentClass}" style="color:red"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
 //			토요일이면
 			} else if(holidayStyle == 6) {
-            	days += `<div class="${currentClass}" style="color:blue"><div><span>${i}</span></div></div>`;
+            	days += `<div class="${currentClass}" style="color:blue"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
 //			평일이면
 			} else {
-            	days += `<div class="${currentClass}"><div><span>${i}</span></div></div>`;
+            	days += `<div class="${currentClass}"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
 			}
         }
     }
@@ -159,13 +159,13 @@ const renderCalendar = () => {
 		
 //		일요일이면
 		if(holidayStyle == 0) {
-        	days += `<div class="${nextClass} next-date" style="color:red"><div><span>${j}</span></div></div>`;
+        	days += `<div class="${nextClass} next-date" style="color:red"><div><div><span>${j}</span></div></div><div class="overCnt"></div></div>`;
 //		토요일이면
 		} else if(holidayStyle == 6) {
-        	days += `<div class="${nextClass} next-date" style="color:blue"><div><span>${j}</span></div></div>`;
+        	days += `<div class="${nextClass} next-date" style="color:blue"><div><div><span>${j}</span></div></div><div class="overCnt"></div></div>`;
 //		평일이면
 		} else {
-        	days += `<div class="${nextClass} next-date"><div><span>${j}</span></div></div>`;
+        	days += `<div class="${nextClass} next-date"><div><div><span>${j}</span></div></div><div class="overCnt"></div></div>`;
 		}
     }
 
@@ -231,8 +231,7 @@ const renderCalendar = () => {
 ////			mousedown 영역(target)과 mouseup 영역이 같다면 
 //			console.log(targetdaysEle);
 //			console.log(_e.target.className);
-//			if (false){
-////			if (targetdaysEle === _e.target.className){
+//			if (targetdaysEle === _e.target.className){
 //				this.style.backgroundColor = "";
 ////			만약에 다르면 클릭시의 영역에 대한 효과 제거
 //			} else {
@@ -269,6 +268,7 @@ const renderCalendar = () => {
 			this.classList.remove("btnColor");
 		});
 	}
+	
 // ---------------------------------------------------------------------
 //날짜 클릭시 일정 입력 팝업
 // ---------------------------------------------------------------------
@@ -293,11 +293,11 @@ const renderCalendar = () => {
 //00000000000000000000000000000000000000000000000000000000000000000000000000000000
 //일단 보류
 // ---------------------------------------------------------------------
-//날짜 클릭시 일정 입력 팝업 에헤어헹
+//날짜 클릭시 일정 입력 팝업
 //입력하여 DB로 저장뒤 id값 받아와서 날짜+id 값으로 class 만들어서 드래그 만들어야 될듯...
 //아니면 선택한게 몇번째 엘리먼트인지 구할수 있다면 그 숫자로 nth-child(index)로 설정할 수도 있을듯
 // ---------------------------------------------------------------------
-
+//
 //    document.querySelector("#btn").addEventListener("click", function(){
 //// 		document.querySelector(".schedule-wrap").style.display = "none";
 //// 		location.href = "${pageContext.request.contextPath}/calendar";
@@ -384,7 +384,37 @@ const renderCalendar = () => {
 //00000000000000000000000000000000000000000000000000000000000000000000000000000000
 //00000000000000000000000000000000000000000000000000000000000000000000000000000000
 
+// ---------------------------------------------------------------------
+//일자에 일정 출력
+// ---------------------------------------------------------------------
 
+console.log("testMonth");
+console.log(date.getMonth());
+	
+//	.js 파일에서 contextPath를 사용하기 위해 jsp 에서 script 태그로 session에 저장
+	var ctx = getContextPath();
+	function getContextPath() {
+		return sessionStorage.getItem("contextpath");
+	}
+	document.addEventListener("DOMContentLoaded", function(_e){
+		console.log(daysEle.length);
+		console.log(daysEle.item(0).classList[0]); // 첫 날
+		console.log(daysEle.item(daysEle.length-1).classList[0]); // 마지막 날
+		
+		let dateRange = {calStart:daysEle.item(0).classList[0],
+						calEnd:daysEle.item(daysEle.length-1).classList[0]};
+		
+		fetch(ctx+"/calendar/restData",{
+			method : "POST",
+			headers : { "Content-type" : "application/json"},
+			body : JSON.stringify(dateRange)
+		}).then(response => response.json(), _e => console.log("error!!!"))
+		.then(_data => {
+			console.log("성공");
+		});
+	});
+	
+	
 // ---------------------------------------------------------------------
 }
 // ---------------------------------------------------------------------
@@ -526,9 +556,6 @@ document.querySelector(".todayMove").addEventListener("click", () =>{
 });
 
 // ---------------------------------------------------------------------
-
-
-
 
 //======================================================================
 

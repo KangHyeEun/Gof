@@ -1,21 +1,16 @@
 package com.awoo.controller;
 
-import java.time.LocalDate;
-
-import java.time.LocalTime;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awoo.service.CalendarService;
 import com.awoo.vo.CalendarVO;
@@ -59,8 +54,28 @@ public class CalendarController {
 //			System.out.println("사원번호 : " + list.get(i).getEmpno());
 //			System.out.println("관리자여부 : " + list.get(i).getCheckAdmin());
 //			System.out.println("승인신청여부 : " + list.get(i).getApproval());
+//		test Commit
 //		}
 		return "calendar/calendar";
+	}
+	
+//	비동기로 일자별 일정 출력하기 위한 데이터 추출
+	@PostMapping("/restData")
+	@ResponseBody
+//	public CalendarVO restData(@RequestBody CalendarVO calendarVO) {
+	public List<CalendarVO> restData(@RequestBody Map<String, String> map) {
+		System.out.println("여기");
+//		System.out.println(calendarVO.getCalId());
+//		System.out.println(calendarVO.getCalTitle());
+//		System.out.println(calendarVO.getCalStart());
+		System.out.println(map);
+		System.out.println(map.get("calStart"));
+		System.out.println(map.get("calEnd"));
+		
+		
+		
+		return service.restDataMethod(map);
+//		return calendarVO;
 	}
 	
 //	일정을 DB에 저장
@@ -77,3 +92,15 @@ public class CalendarController {
 		return "redirect:/calendar/selectData";
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

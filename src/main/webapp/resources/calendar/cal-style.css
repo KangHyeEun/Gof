@@ -133,21 +133,19 @@
     text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
     transition: background-color 0.2s;
 }
-.days > div > div {
+.days > div > div > div:not(.days > div > div > div:nth-child(1),
+						.days > div > div > div:nth-child(2),
+						.days > div > div > div:nth-child(3)) {
 	display: none;
 }
-.days > div > div:not(.days > div > div:nth-child(1), .days > div > div:nth-child(2),
-						.days > div > div:nth-child(3), .days > div > div:last-child) {
-	display: none;
-}
-.days > div > div:not(.days div div:first-child) {
+.days > div > div > div:not(.days div div:first-child) {
     align-items: flex-start;
 }
-.days > div > div:first-child {
+.days > div > div > div:first-child {
 	display: flex;
 	justify-content: flex-end;
 }
-.days > div > div > span {
+.days > div > div > div > span {
     padding: 5px 10px 0 0;
 }
 .days > div:hover:not(.today) {
@@ -257,7 +255,7 @@ input[type="text"] {
 .schedule #btn:hover{
 	background-color: #319af3;
 }
-
+/* testcommit */
 @media ( max-width: 1440px ) {
 }
 @media ( max-width: 1280px ) {
