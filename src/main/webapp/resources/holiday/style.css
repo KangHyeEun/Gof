@@ -46,7 +46,8 @@
 .div1-1{
 	display: flex;
     justify-content: space-between;
-    width: 15%;
+/*     width: 15%; */
+    width: 180px;
 }
 
 .div2{
@@ -56,10 +57,12 @@
     align-content: flex-start;
 }
 .sub-title{ 
-    width: 50%;
+/*     width: 50%; */
+	width: 105px;
  } 
 #sortingYear{
-	width:50%;
+/* 	width:50%; */
+    width: 100px;
 }
 .holiday-list{
     width: 100%;
@@ -79,7 +82,8 @@
 }
 #apply-holiday{
     border: 1px solid black;
-    width: 12%;
+/*     width: 12%; */
+	width:130px;
     height: 60%;
     background-color: #272454;
     color: white;
