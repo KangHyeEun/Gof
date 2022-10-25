@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.awoo.dao.EmployeeInfoDAO;
 import com.awoo.dao.HolidayDAO;
 import com.awoo.vo.HolidayVO;
 
@@ -17,10 +18,12 @@ import com.awoo.vo.HolidayVO;
 public class HolidayService {
 	
 	private HolidayDAO dao;
-
-	public HolidayService(HolidayDAO dao) {
+	private EmployeeInfoDAO Edao;
+	
+	public HolidayService(HolidayDAO dao, EmployeeInfoDAO edao) {
 		super();
 		this.dao = dao;
+		Edao = edao;
 	}
 	
 	public void selectHoliday(Model model){
@@ -72,5 +75,19 @@ public class HolidayService {
 		vo.setApproval("요청중");
 		vo.setEmpno(empno);
 		dao.insertHoliday(vo);
+	}
+	
+	/*혜은---------------------------------------------*/
+	
+
+
+	public void selectAdminH(Model model) {
+		model.addAttribute("list",dao.selectAdminH());
+		model.addAttribute("count",dao.selectCount());
+		
+	}
+	
+	public void updateApproval(HolidayVO vo) {
+		dao.updateApproval(vo);
 	}
 }

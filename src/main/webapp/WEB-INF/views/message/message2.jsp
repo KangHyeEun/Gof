@@ -167,7 +167,7 @@ a {
 					</script> -->
 
 
-						<!--쪽지 삭제 @PostMapping("result8") -->
+						<!--쪽지 삭제 @PostMapping("result8") 테스트 -->
 
 						<form action="${pageContext.request.contextPath}/message/result8"
 							method="get">

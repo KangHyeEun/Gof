@@ -214,14 +214,14 @@
 	                <button class="btn gray_btn modal_close" id="btn_cancle">취소</button>
 	            </div>
 	        </section>
-	         <section class="modal modal-section type-alert" id="confirmed-block">
-	            <div class="enroll_box">
-	                <p class="menu_msg">휴가 신청이 정상적으로 완료되었습니다</p>
-	            </div>
-	            <div class="enroll_btn">
-	                <button class="btn pink_btn modal_close">확인</button>
-	            </div>
-	        </section>
+<!-- 	         <section class="modal modal-section type-alert" id="confirmed-block"> -->
+<!-- 	            <div class="enroll_box"> -->
+<!-- 	                <p class="menu_msg">휴가 신청이 정상적으로 완료되었습니다</p> -->
+<!-- 	            </div> -->
+<!-- 	            <div class="enroll_btn"> -->
+<!-- 	                <button class="btn pink_btn modal_close">확인</button> -->
+<!-- 	            </div> -->
+<!-- 	        </section> -->
 		</div>
 	</div>
 
