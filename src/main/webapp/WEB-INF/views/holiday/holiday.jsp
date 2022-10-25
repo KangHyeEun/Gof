@@ -198,10 +198,7 @@
 // 							List<HolidayVO> size1 = request.getParameter("holidayList");
 						
 						%>
-							<c:forEach begin="${((((param.page-1)/10)-((param.page-1)/10)%1))*10+1}" end="${holidayList.size() == 0? 1 : 
-																											holidayList.size()%10 == 0? holidayList.size()/10 : 
-																											((holidayList.size()/10) + (1-((param.size()/10)%1)))%10}" 
-																											varStatus="status" var="var">
+						<c:forEach begin="1" end="${holidayList.size() == 0? 1 : holidayList.size()%10 == 0? holidayList.size()/10 :((holidayList.size()/10)+(1-((holidayList.size()/10)%1))%1)}" varStatus="status" var="var">
 								<c:choose>
 									<c:when test="${param.page eq var}">
 										<div class="num checked"><span>${var}</span></div>
