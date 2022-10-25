@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awoo.dao.OrgChartDAO">
+
+	<select id="selectOrg" resultType="InfoVO">
+		select NAME,edepartment,eposition,email, phone_number
+		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
+	</select>
+	
+	<select id="selectOrgDetail" resultType="InfoVO">
+		SELECT NAME,edepartment,eposition,email, phone_number
+		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
+		 where 1=1
+		 <if test="edepartment != null and edepartment != ''">
+		 	AND edepartment = #{edepartment}
+		 </if>
+		 <if test="eposition != null and eposition != ''">
+		 	AND eposition = #{eposition}
+		 </if>
+		 <if test="name != null and name != ''">
+		 	AND name = #{name}
+		 </if>	
+	</select>
+</mapper>

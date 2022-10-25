@@ -44,7 +44,7 @@
                     </ul>
 
                     <ul class="menu">
-                        <li><a href="#">조직도</a></li>
+                        <li><a href="${pageContext.request.contextPath}/orgChart2">조직도</a></li>
                     </ul>
 
                     <ul onclick="show_sub2()" class="dropmenu2">
@@ -69,7 +69,7 @@
                                 class="menu-down3">▼</span></li>
                         <li>
                             <ul class="sub3">
-                                <li><a href="#">인사 관리</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin">인사 관리</a></li>
                                 <li><a href="#">휴가 관리</a></li>
                             </ul>
                         </li>

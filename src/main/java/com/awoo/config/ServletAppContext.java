@@ -14,6 +14,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -56,6 +58,8 @@ public class ServletAppContext implements WebMvcConfigurer {
 		// TODO Auto-generated method stub
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 		registry.addResourceHandler("/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/upload/**").addResourceLocations("file:///C:/sample/");
+
 	}
 
 	// 데이터베이스 접속 정보 관리
@@ -87,6 +91,23 @@ public class ServletAppContext implements WebMvcConfigurer {
 		sqlSessionFactoryBean.setTransactionFactory(new ManagedTransactionFactory());
 
 		return sqlSessionFactoryBean.getObject();
+	}
+	
+	// 파일 업로드 세팅
+	private final int MAX_SIZE = 10 * 1024 * 1024;
+	
+	@Bean
+	public MultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		
+		// 디폴트 인코딩 타입 설정
+		multipartResolver.setDefaultEncoding("UTF-8");
+		// 전체 올릴 수 있는 파일들의 총 용량 최대치
+		multipartResolver.setMaxUploadSize(MAX_SIZE*10);
+		// 파일 한개 당 올릴 수 있는 용량 최대치
+		multipartResolver.setMaxUploadSizePerFile(MAX_SIZE);
+		
+		return multipartResolver;
 	}
 
 }

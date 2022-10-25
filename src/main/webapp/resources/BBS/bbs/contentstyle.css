@@ -1,0 +1,53 @@
+.inner-div-bbs {
+        display: grid;
+        grid-template-columns: 200px 1fr 200px;
+        grid-template-rows: 50px 
+        					50px 
+        					20px 
+        					auto 
+        					50px 
+        					50px
+        					50px 
+        					auto;
+        gap: 5px 5px;
+        grid-auto-flow: row;
+        grid-template-areas: ". . ."
+        					 ". contentHeader ."
+        					 ". . ." 
+        					 ". main ." 
+	 						 ". file-area ."						 
+        					 ". footer ." 
+        					 ". insert ."
+        					 ". comment .";
+    }
+.contentHeader {
+    grid-area: contentHeader;
+    display: grid;
+    grid-template-columns: 75px 1fr;
+    grid-template-rows: 1fr;
+    gap : 3px;
+    border-bottom: 1px solid black;
+}
+.main {
+    grid-area : main;
+    border : 1px solid black;
+    height: inherit;
+}
+.file-area {
+	border: 1px solid black;
+	grid-area: file-area;
+}
+.footer {
+    grid-area : footer;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.comment {
+    grid-area : comment;
+}
+.insert {
+    grid-area : insert;
+    display: grid;
+    justify-content: right;
+    grid-template-columns: 1fr 75px;
+}
