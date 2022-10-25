@@ -1,0 +1,62 @@
+.inner-div-bbs {
+	min-height: 90%;
+	display: grid;
+	grid-template-columns: 10px 1fr 10px;
+	grid-template-rows: 60px
+						40px
+						40px
+						1fr
+						40px;
+	gap: 0px 0px;
+	grid-auto-flow: row;
+	grid-template-areas: ". bbsHeader ."
+						 ". button-area ."
+						 ". select-area ." 
+						 ". main ." 
+						 ". pannel .";
+}
+main {
+	grid-area: main;
+}
+
+table {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table td, table th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+/* table tr:nth-child(even) { */
+/* 	background-color: #f2f2f2; */
+/* } */
+
+table tr:hover {
+	background-color: #ddd;
+}
+
+table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: white;
+	color: rgb(0, 0, 0);
+}
+.bbsHeader {
+	grid-area: bbsHeader;
+}
+.button-area{
+	grid-area: button-area;
+	text-align: right;
+}
+.select-area{
+	grid-area: select-area;
+	text-align: right;
+}
+.pannel{
+	grid-area: pannel;
+	text-align: center;
+}

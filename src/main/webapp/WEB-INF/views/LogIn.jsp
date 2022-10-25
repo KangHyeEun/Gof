@@ -1,23 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/login/style.css">
 <title>Insert title here</title>
 </head>
-<body>
-	<jsp:include page="./include/menu.jsp"></jsp:include>     
-	<h1>시작페이지</h1>
-	<a href="${pageContext.request.contextPath}/MoveToHome">홈 이동</a><br>
-	<a href="${pageContext.request.contextPath}/Commuting">가빈이동</a><br>
-	<a href="${pageContext.request.contextPath}/template">템플릿 이동</a><br>
-	<a href="${pageContext.request.contextPath}/bbstemplate">게시판 템플릿 이동</a><br>
-	<hr>
-	
-	<a href="${pageContext.request.contextPath }/calendar">Calendar 이동</a>
 
-<hr>
-	<a href="${pageContext.request.contextPath}/admin">혜은이동</a>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <h2 class="active"> 로그인 </h2>
+
+            <!-- Login Form -->
+            <form:form modelAttribute="personalInfoVO" action="${pageContext.request.contextPath}/home/home" method="post">
+                <form:input path="empno" placeholder="아이디를 입력하세요 220204"/>
+                <form:password path="password" placeholder="패스워드를 입력하세요 abc6"/>
+                <button>Log in</button>
+            </form:form>
+	<a href="${pageContext.request.contextPath}/MoveToHome">홈 이동</a><br>
+
+        </div>
+    </div>
 </body>
+
 </html>

@@ -13,6 +13,19 @@
 
 </head>	
 <body>
+<%-- 	<a href="${pageContext.request.contextPath}/MoveToHome">홈 이동</a><br> --%>
+	<a href="${pageContext.request.contextPath}/Commuting">가빈이동</a><br>
+	<a href="${pageContext.request.contextPath}/template">템플릿 이동</a><br>
+	<a href="${pageContext.request.contextPath}/bbstemplate">게시판 템플릿 이동</a><br>
+	<hr>
+	
+	<a href="${pageContext.request.contextPath }/calendar">Calendar 이동</a>
+
+<hr>
+	<a href="${pageContext.request.contextPath}/admin">혜은이동</a>
+<hr>
+	<a href="${pageContext.request.contextPath}/bbsPage/bbs">(희연)게시판으로 이동</a>
+	
 	<div class="container-wrap">
 		<div class="header">
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
