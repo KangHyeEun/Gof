@@ -8,8 +8,15 @@ public class EmployeeInfoVO {
 	 private String estatus;
 	 private String edepartment;
 	 private int totalHoliday;
+	 private int usedHoliday;
 	 private int checkAdmin;
-	 
+	  
+	public int getUsedHoliday() {
+		return usedHoliday;
+	}
+	public void setUsedHoliday(int usedHoliday) {
+		this.usedHoliday = usedHoliday;
+	}
 	public int getEmpno() {
 		return empno;
 	}
