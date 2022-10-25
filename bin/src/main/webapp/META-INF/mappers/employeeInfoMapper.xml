@@ -6,4 +6,39 @@
 	<select id="selectEmployee" resultType="EmployeeInfoVO">
 		select * from employee_info
 	</select>
+	<select id="countInfoE" resultType="int">
+		SELECT COUNT(*) FROM personal_info
+	</select>
+	<insert id="insertDataE">
+		insert into employee_info(
+		empno, edepartment,eposition,ehired_date,ehired_type,total_holiday,estatus,check_admin
+		)
+		values(
+		#{empno}, #{edepartment},#{eposition},#{ehiredDate},#{ehiredType},#{totalHoliday},#{estatus},#{checkAdmin}
+		)
+	</insert>
+	
+	<select id="selectEmpno" resultType="EmployeeInfoVO">
+		select empno from employee_info
+	</select>
+	
+	<select id="edepartment" resultType="InfoVO">
+		SELECT DISTINCT edepartment FROM employee_info;
+	</select>
+	
+	<select id="selectAllEInfo" resultType="InfoVO">
+		select id, NAME, edepartment,eposition,tel_number,name
+		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
+	</select>
+	
+<!-- 	<update id="updateE"> -->
+<!-- 		update employee_info set  -->
+<!-- 	</update> -->
+	
+	<select id="selectInfo1" resultType="InfoVO">
+		select id, NAME,gender,birthday,password,email,tel_number,phone_number,address, 
+		personal_info.empno, edepartment,eposition, date_format(ehired_date,'%Y-%m-%d') ehired_date,
+		ehired_type,total_holiday,estatus,check_admin
+		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
+	</select>
 </mapper>

@@ -2,6 +2,75 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.awoo.dao">
+<mapper namespace="com.awoo.dao.BBSDAO">
+
+	<select id="selectBBSCount" resultType="int">
+		select count(*) 
+		from bbs
+		where is_delete = 0
+		<choose>
+			<when test="title != null and content != null">
+				and (title like #{title} or content like #{content})
+			</when>
+			<when test="owner == null and category != null">
+				and category like #{category}
+			</when>
+			<when test="owner != null and category == null">
+				and owner like #{owner}
+			</when>
+		</choose>
+	</select>
+
+	<select id="selectBBSList" resultType="BBSVO">
+		select id, category, title, owner_id, owner, content, view_counts, 
+		date_format(create_date, '%Y-%m-%d %T') create_date
+		from bbs
+		where is_delete = 0
+		<choose>
+			<when test="title != null and content != null">
+				and (title like #{title} or content like #{content})
+			</when>
+			<when test="owner == null and category != null">
+				and category like #{category}
+			</when>
+			<when test="owner != null and category == null">
+				and owner like #{owner}
+			</when>
+		</choose>
+		order by id desc 
+		limit #{startRow}, #{cntPerPage}
+	</select>
+		
+	<select id="selectCategory" resultType="BBSVO">
+		select distinct category
+		from bbs
+	</select>
+	
+	<select id="selectBBS" resultType="BBSVO">
+		select id, category, title, owner_id, owner, content, view_counts, 
+		date_format(create_date, '%Y-%m-%d %T') create_date
+		from bbs
+		where is_delete = 0 and id = #{id}
+	</select>
+	
+	<insert id="insertBBS">
+		insert into bbs(category, title, owner_id, owner, content)
+		values(#{category}, #{title}, #{ownerId}, #{owner}, #{content})
+	</insert>
+	
+	<update id="updateBBS">
+		update bbs set category = #{category}, title=#{title}, content=#{content}
+		where id = #{id} and owner_id = #{ownerId}
+	</update>
+	
+	<update id="deleteBBS">
+		update bbs set is_delete = 1 
+		where id = #{id} and owner_id = #{ownerId}
+	</update>
+	
+	<update id="updateViewCount">
+		update bbs set view_counts = view_counts + 1 
+		where id = #{id}
+	</update>
 	
 </mapper>

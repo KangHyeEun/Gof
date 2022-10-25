@@ -13,7 +13,7 @@ span {
 #img {
 	background-color: rgb(228, 223, 223);
 	cursor: pointer;
-	margin-left: 49%;
+	margin-left: 45%;
     background-color: white;
     padding: 1%;
     padding-left: 4%;
@@ -41,7 +41,7 @@ span {
 }
 
 #showimg {
-	width: 100%;
+	width: 90%;
     height: 70%;
     border-radius: 100%;
     padding-bottom: 5%;
@@ -50,6 +50,7 @@ span {
 .personal-wrap {
 	display: flex;
 	flex-direction: row;
+	height: 25.5vh;
 }
 
 .prodiv {
@@ -60,7 +61,7 @@ span {
 .intro {
 	display: flex;
 	justify-content: space-between;
-	padding-bottom: 4%;
+	padding-bottom: 2%;
 }
 
 .intro>p {
@@ -81,7 +82,7 @@ td {
 
 .label {
 	background-color: #e3edf7;
-	padding: 8px;
+	padding: 7px;
 }
 
 #noB {
