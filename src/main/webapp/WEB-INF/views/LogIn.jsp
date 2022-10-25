@@ -19,7 +19,7 @@
                 <form:password path="password" placeholder="패스워드를 입력하세요 abc6"/>
                 <button>Log in</button>
             </form:form>
-	<a href="${pageContext.request.contextPath}/MoveToHome">홈 이동</a><br>
+		<a href="${pageContext.request.contextPath}/MoveToHome">홈 이동</a><br>
 
         </div>
     </div>
