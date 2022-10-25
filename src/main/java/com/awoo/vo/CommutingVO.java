@@ -60,8 +60,6 @@ public class CommutingVO {
 		
 		int sthour = Integer.parseInt(startTimeArr[0]);
 		int stmin = Integer.parseInt(startTimeArr[1]);
-		System.out.println(sthour);
-		System.out.println(stmin);
 
 		if(sthour < 9 || (sthour ==9 && stmin <=10)) {
 			startTime = "09:00";

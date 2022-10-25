@@ -1,5 +1,7 @@
 package com.awoo.controller;
 
+import java.text.ParseException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,17 +42,22 @@ public class HolidayController {
 							   @RequestParam("content") String content,
 							   @RequestParam("halfType") String halfType,
 							   @SessionAttribute("personalInfoVO") PersonalInfoVO vo,
-							   Model model) {		
+							   Model model) {
 		model.addAttribute("leaveType", leaveType);
 		model.addAttribute("leaveStartDate", leaveStartDate);
 		model.addAttribute("leaveEndDate", leaveEndDate);
 		model.addAttribute("content", content);
-		model.addAttribute("userName", "김가빈");
+		model.addAttribute("userName", vo.getName());
 		model.addAttribute("halfType", halfType);
 		//임시empno
 		model.addAttribute("empno", vo.getEmpno());
 		
-		service.insertHoliday(model);
+		try {
+			service.insertHoliday(model);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "redirect:/Holiday?page=1&&year=0";
 	}
 	
