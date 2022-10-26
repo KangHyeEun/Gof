@@ -49,12 +49,11 @@ body {
 .helpBar {
 	/* border: 1px solid black; */
 	display: flex;
-	justify-content: right;
+	justify-content: space-around;
 	align-items: center;
 	height: 3rem;
 	padding-bottom: 0.8rem;
 }
-
 .search-wrap {
 	border: 1px solid gray;
 	border-radius: 0.4rem;

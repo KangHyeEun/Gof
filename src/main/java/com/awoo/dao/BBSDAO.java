@@ -10,7 +10,7 @@ import com.awoo.vo.PageVO;
 @Mapper
 public interface BBSDAO {
 	
-	public int selectBBSCount();
+	public int selectBBSCount(PageVO vo);
 	
 	public List<BBSVO> selectBBSList(PageVO vo);
 	

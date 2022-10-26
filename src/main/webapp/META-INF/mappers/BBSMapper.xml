@@ -9,32 +9,38 @@
 		from bbs
 		where is_delete = 0
 		<choose>
-			<when test="title != null and content != null">
-				and (title like #{title} or content like #{content})
+			<when test="searchType.equals('title') and keyword != ''">
+				and title like concat('%', #{keyword}, '%')
 			</when>
-			<when test="owner == null and category != null">
-				and category like #{category}
+			<when test="searchType.equals('content') and keyword != ''">
+				and content like concat('%', #{keyword}, '%')
 			</when>
-			<when test="owner != null and category == null">
-				and owner like #{owner}
+			<when test="searchType.equals('title_content') and keyword != ''">
+				and title like concat('%', #{keyword}, '%') or content LIKE concat('%', #{keyword}, '%')
+			</when>
+			<when test="searchType.equals('owner') and keyword != ''">
+				and owner like concat('%', #{keyword}, '%')
 			</when>
 		</choose>
 	</select>
 
 	<select id="selectBBSList" resultType="BBSVO">
 		select id, category, title, owner_id, owner, content, view_counts, 
-		date_format(create_date, '%Y-%m-%d %T') create_date
+		date_format(create_date, '%Y-%m-%d') create_date
 		from bbs
 		where is_delete = 0
 		<choose>
-			<when test="title != null and content != null">
-				and (title like #{title} or content like #{content})
+			<when test="searchType.equals('title') and keyword != ''">
+				and title like concat('%', #{keyword}, '%')
 			</when>
-			<when test="owner == null and category != null">
-				and category like #{category}
+			<when test="searchType.equals('content') and keyword != ''">
+				and content like concat('%', #{keyword}, '%')
 			</when>
-			<when test="owner != null and category == null">
-				and owner like #{owner}
+			<when test="searchType.equals('title_content') and keyword != ''">
+				and title like concat('%', #{keyword}, '%') or content like concat('%', #{keyword}, '%')
+			</when>
+			<when test="searchType.equals('owner') and keyword != ''">
+				and owner like concat('%', #{keyword}, '%')
 			</when>
 		</choose>
 		order by id desc 
@@ -48,7 +54,7 @@
 	
 	<select id="selectBBS" resultType="BBSVO">
 		select id, category, title, owner_id, owner, content, view_counts, 
-		date_format(create_date, '%Y-%m-%d %T') create_date
+		date_format(create_date, '%Y-%m-%d') create_date
 		from bbs
 		where is_delete = 0 and id = #{id}
 	</select>

@@ -31,41 +31,15 @@
 				
 			<!-- 검색 기능------------------------------- -->
 				<div class="helpBar">
-			        <div class="search-wrap">
-						<c:choose>
-							<c:when test="${title} != null && ${content} != null">
-								<select name="option" id="option">
-									<option value="both" selected>제목+내용</option>
-									<option value="category">카테고리</option>
-									<option value="owner">글쓴이</option>
-								</select>
-								<input type="text" id="text" name="text" value="${title}"/>
-							</c:when>
-							<c:when test="${title} != null">
-								<select name="option" id="option">
-									<option value="both" selected>제목+내용</option>
-									<option value="category">카테고리</option>
-									<option value="owner">글쓴이</option>
-								</select>
-								<input type="text" id="text" name="text" value="${title}"/>
-							</c:when>
-							<c:when test="${content} != null">
-								<select name="option" id="option">
-									<option value="both" selected>제목+내용</option>
-									<option value="category">카테고리</option>
-									<option value="owner">글쓴이</option>
-								</select>
-								<input type="text" id="text" name="text" value="${content}"/>							
-							</c:when>
-							<c:otherwise>
-								<select name="option" id="option">
-									<option value="both" selected>제목+내용</option>
-									<option value="category">카테고리</option>
-									<option value="owner">글쓴이</option>
-								</select>
-								<input type="text" id="text" name="text"/>							
-							</c:otherwise>
-						</c:choose>
+			        <div class="search-wrap-right">
+						<select name="searchType" id="searchType">
+						    <option value="title" <c:if test="${page.searchType eq 'title'}">selected</c:if>>제목</option>
+					        <option value="content" <c:if test="${page.searchType eq 'content'}">selected</c:if>>내용</option>
+						    <option value="title_content" <c:if test="${page.searchType eq 'title_content'}">selected</c:if>>제목+내용</option>
+						    <option value="owner" <c:if test="${page.searchType eq 'owner'}">selected</c:if>>작성자</option>
+						</select>
+						
+						<input type="text" name="keyword" id="keyword" value="${page.keyword}"/>
 						<button id="search"></button>
 					</div>				
 				</div>
@@ -101,57 +75,64 @@
 			</div>
 
 			<!-- 페이징단------------------------------- -->
-				<div class="bbs-footer">
-					<div id="paging">
-						<c:choose>
-							<c:when test="${1 == page.startPage}">
-								<span>◀◀</span>
-							</c:when>
-							<c:otherwise>
-								<a
-									href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.startPage - 1}">◀◀</a>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${1 == page.nowPage}">
-								<span>◀</span>
-							</c:when>
-							<c:otherwise>
-								<a
-									href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.nowPage - 1}">◀</a>
-							</c:otherwise>
-						</c:choose>
-						<c:forEach var="i" begin="${page.startPage}"
-							end="${page.endPage}">
-							<c:choose>
-								<c:when test="${page.nowPage eq i}">
-									<span>${i}</span>
-								</c:when>
-								<c:otherwise>
-									<a
-										href="${pageContext.request.contextPath}/bbsPage/bbs?page=${i}">${i}</a>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<c:choose>
-							<c:when test="${page.totalPage == page.nowPage}">
-								<span>▶</span>
-							</c:when>
-							<c:otherwise>
-								<a
-									href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.nowPage + 1}">▶</a>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${page.totalPage eq page.endPage}">
-								<span>▶▶</span>
-							</c:when>
-							<c:otherwise>
-								<a href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.endPage + 1}">▶▶</a>
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
+    <div class="bbs-footer">
+        <div id="paging">
+            <c:choose>
+                <c:when test="${1 == page.startPage}">
+                    <span class="num" style="color: #14abab" >◀◀</span>
+                </c:when>
+                <c:otherwise>
+                    <div class="num">
+                        <a href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.startPage - 1}" >◀◀</a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${1 == page.nowPage}">
+                    <span class="num" style="color: #14abab;">◀</span>
+                </c:when>
+                <c:otherwise>
+                    <div class="num">
+                        <a
+                        href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.nowPage - 1}${page.searchTypeKeyword}">◀</a>
+                    </div>
+                    </c:otherwise>
+            </c:choose>
+            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+                <c:choose>
+                    <c:when test="${page.nowPage eq i}">
+                        <span class="num checked">${i}</span>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="num notchecked">
+                            <a href="${pageContext.request.contextPath}/bbsPage/bbs?page=${i}${page.searchTypeKeyword}">${i}</a>
+                        </div>        
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            <c:choose>
+                <c:when test="${page.totalPage == page.nowPage}">
+                    <span class="num" style="color: #14abab;">▶</span>
+                </c:when>
+                <c:otherwise>
+                    <div class="num">
+                        <a
+                        href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.nowPage + 1}${page.searchTypeKeyword}">▶</a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${page.totalPage eq page.endPage}">
+                    <span class="num" style="color: #14abab">▶▶</span>
+                </c:when>
+                <c:otherwise>
+                    <div class="num">
+                        <a href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.endPage + 1}">▶▶</a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
 		
 			</div>
 		</div>
@@ -159,19 +140,27 @@
 </div>
 		
 <script type="text/javascript">
-//검색
+
+// 	window.addEventListener("DOMContentLoaded",function(){
+// 		document.getElementById("keyword").value = "${keyword}";
+// 	});
+// //검색
 	document.getElementById("search").addEventListener("click", function(){
-		let option = document.getElementById("option").value;
-		let text = document.getElementById("text").value;
+		let searchType = document.getElementById("searchType").value;
+		let keyword = document.getElementById("keyword").value;
 		
-		if(option == "both"){
-			location.href = "${pageContext.request.contextPath}/bbsPage/bbs?title="+text+"&content="+text;	
-		}else if(option == "category"){
-			location.href = "${pageContext.request.contextPath}/bbsPage/bbs?category="+text;	
-		}else if(option == "owner"){
-			location.href = "${pageContext.request.contextPath}/bbsPage/bbs?owner="+text;
-		}
-	});
+		console.log(searchType);
+		console.log(keyword);
+
+		location.href = "${pageContext.request.contextPath}/bbsPage/bbs?searchType="+searchType+"&keyword="+keyword;
+	});	
+	
+// 	function clickPage(i){
+// 		let searchType = document.getElementById("searchType").value;
+// 		let keyword = document.getElementById("keyword").value;
+		
+// 		location.href = "${pageContext.request.contextPath}/bbsPage/bbs?page="+i+"&searchType="+searchType+"&keyword="+keyword;
+// 	}
 </script>
 
 </body>

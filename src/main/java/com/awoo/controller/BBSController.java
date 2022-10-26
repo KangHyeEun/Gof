@@ -52,12 +52,11 @@ public class BBSController {
 	@GetMapping("/bbs")
 	public String result1(Model model, 
 						  @RequestParam(value="page", defaultValue = "1") int page,
-						  @RequestParam(value="title", defaultValue = "") String title,
-						  @RequestParam(value="content", defaultValue = "") String content,
-						  @RequestParam(value="category", defaultValue = "") String category,
-						  @RequestParam(value="owner", defaultValue = "") String owner) {
-		service.getBBSList(model, page, title, content, category, owner);
-		return "bbsPage/bbs";			
+						  @RequestParam(value = "searchType",required = false, defaultValue = "title") String searchType,
+						  @RequestParam(value = "keyword",required = false, defaultValue = "") String keyword) {
+		
+		service.getBBSList(model, page, searchType, keyword);
+		return "bbsPage/bbs";
 	}
 	
 	//게시글 상세 보기

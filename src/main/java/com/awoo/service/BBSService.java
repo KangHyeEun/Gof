@@ -24,26 +24,28 @@ public class BBSService {
 	}
 
 	//게시판+페이징
-	public void getBBSList(Model model, int page, String title, String content, String category, String owner) {
-		PageVO vo = new PageVO(page,8,10,bbsDAO.selectBBSCount());
+	public void getBBSList(Model model, int page, String searchType, String keyword) {
+		PageVO vo = new PageVO();
+		vo.setNowPage(page);
+		vo.setCntPerPage(8);
+		vo.setCntPerBlock(10);
+		vo.setSearchType(searchType);
+		vo.setKeyword(keyword);
+		vo.setTotalRow(bbsDAO.selectBBSCount(vo));
 		
-		if(!title.equals("")) {
-			model.addAttribute("title", title);
-			vo.setTitle("%"+title+"%");
+		if(!searchType.equals("")) {
+			model.addAttribute("searchType", searchType);
+			vo.setSearchType(searchType);
 		}
-		if(!content.equals("")) {
-			model.addAttribute("content", content);
-			vo.setContent("%"+content+"%");
+		if(!keyword.equals("")) {
+			model.addAttribute("keyword", keyword);
+			vo.setKeyword(keyword);
 		}
-		if(!category.equals("")) {
-			model.addAttribute("category", category);
-			vo.setCategory("%"+category+"%");
-		}
-		if(!owner.equals("")) {
-			model.addAttribute("owner", owner);
-			vo.setOwner("%"+owner+"%");		
-		}
+		
 		vo.process();
+		
+//		System.out.println(vo);
+		
 		model.addAttribute("page", vo);
 		model.addAttribute("list", bbsDAO.selectBBSList(vo));
 	}
