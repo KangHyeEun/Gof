@@ -93,13 +93,13 @@ h2 {
 				<div class="inner-div-bbs">
 					<!-- 각자 필요한 부분 넣기 -->
 					<div class="container1">
-						<h1>상세 받은 쪽지함</h1>
+						<h1>상세 보낸 쪽지함</h1>
 					</div>
 					<div class="head">
 						<h2>제목 : ${messageVO.mtitle}</h2>
 					</div>
 					<div class="main2">
-						<h3>보낸이 : ${messageVO.mreciever}</h3>
+						<h3>보낸이 : ${messageVO.mowner}</h3>
 					</div>
 
 					<div class="main1">
@@ -122,7 +122,7 @@ h2 {
 				.addEventListener(
 						"click",
 						function() {
-							location.href = "${pageContext.request.contextPath}/message/message1";
+							location.href = "${pageContext.request.contextPath}/message/message2";
 						});
 	</script>
 

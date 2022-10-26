@@ -1,22 +1,13 @@
-
-<%@page import="java.time.LocalTime"%>
-<%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-
-	LocalDate dateLocal = LocalDate.now();
-	LocalTime timeLocal = LocalTime.now();
+// 	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+// 	String formatTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
 	
-	String currentTime = dateLocal + "T" + timeLocal.getHour() + ":" + timeLocal.getMinute();
-	System.out.println(currentTime);
-	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-	String formatTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-	
-	formatDate += "T" + formatTime;
+// 	formatDate += "T" + formatTime;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,11 +85,9 @@
 						    </div>
 						    <div>
 							    <label for="calStart">일시</label><br>
-							    <input type="datetime-local" name="calStart" id="calStart" value="<%=currentTime%>">
-							    <input type="datetime-local" name="calStart" id="calStart" value="<%=formatDate %>">
+							    <input type="datetime-local" name="calStart" id="calStart">
 							    <label for="calEnd"> ~ </label>
-							    <input type="datetime-local" name="calEnd" id="calEnd" value="<%=currentTime%>">
-							    <input type="datetime-local" name="calEnd" id="calEnd" value="<%=formatDate %>">
+							    <input type="datetime-local" name="calEnd" id="calEnd">
 						    </div>
 						    <div>
 							    <label for="calAllday">종일</label>
@@ -121,10 +110,42 @@
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+// 		.js 파일에서 contextPath 사용을 위해 session에 저장
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+	</script>
+	
 
     <script src="${pageContext.request.contextPath}/calendar/cal-script.js"></script>
 <!--     위의 .js 에서 EL태그 사용이 불가해서 대신 사용 -->
 <%--     <jsp:include page="../include/menu.jsp"></jsp:include> --%>
+    
+    <script type="text/javascript">
+
+// 	const daysEle = document.querySelectorAll(".days > div");
+// 		document.addEventListener("DOMContentLoaded", function(e){
+// 			console.log("-----------------");
+// 			console.log(daysEle.length);
+			
+// 			console.log(daysEle.item(0).classList[0]);
+// 			console.log(daysEle.item(daysEle.length-1).classList[0]);
+			
+// 			let dateRange = {calStart:daysEle.item(0).classList[0],
+// 							calEnd:daysEle.item(daysEle.length-1).classList[0]};
+// 			console.log(dateRange);
+			
+// 			console.log("-----------------");
+// 			fetch("${pageContext.request.contextPath}/calendar/restData",{
+// 				method : "POST",
+// 				headers : { "Content-type" : "application/json"},
+// 				body : JSON.stringify(dateRange)
+// 			}).then(response => response.json(), e => console.log("error!!!"))
+// 			.then(data => {
+// 				console.log("성공");
+// 			});
+// 		});
+    </script>
     
     
     <script type="text/javascript">

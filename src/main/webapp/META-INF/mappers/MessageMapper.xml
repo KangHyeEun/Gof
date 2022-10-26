@@ -10,12 +10,10 @@
 	</select>
 	
 	<select id="selectBBS" resultType="MessageVO">
-		select id, mowner, mtitle, mcontent,mreciever,
-		date_format(create_date, '%Y-%m-%d %T') create_date
+		select id, mowner, mtitle, mcontent,date_format(create_date, '%Y-%m-%d %T') create_date, mreciever
 		from message
 		where id = #{id}
 	</select>
-	
 	
 
 	
@@ -35,6 +33,8 @@
 		delete from message
 		where id=#{id}
 	</delete>
+	
+
 
 
 </mapper>
