@@ -1,3 +1,4 @@
+<%@page import="com.awoo.vo.HolidayVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -21,10 +22,29 @@
 	th, td {
 	    border: none;
 	    padding: 0.9em;
+ 	    width: 100px; 
 /* 	    white-space: nowrap; */
+	    
+	}
+	th:nth-child(5), td:nth-child(5){
+		width:150px;
+	}
+	.holiday-list tr th:nth-child(7), .holiday-list tr td:nth-child(7){
+    display: block;
+    width: 100%; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    height: 0.8em;
+    text-align: left; 
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    
 	}
 	th{
-	    border-bottom: 1px solid #444444;	
+/* 	    border-bottom: 1px solid #444444;	 */
 	}
 	.sub-sub-title{
 	    display: flex;
@@ -66,6 +86,50 @@
 	.pink_btn {width: 90px;background: #ed197a;color: #fff;height: 36px;line-height: 36px;transition: 0.5s;font-size: 17px;border: none;}
 	
 	
+	.detail-container{
+	 	width: 100%;
+	    height: 100%;
+	    display: flex;
+	    /* justify-content: flex-start; */
+	    flex-direction: column;
+	    
+	}
+	.detail-container table tr{
+/* 		background-color : white; */
+	}
+	.detail-container table,.detail-container table td {
+		border-collapse: collapse;
+		border:1px solid #dfdfdf;
+		padding: 10px;
+
+	}
+	.detail-container table td:nth-child(1){
+    	width: 100px;
+    	text-align : center; 
+	}
+	.detail-container table tr:nth-child(5){
+    	height: 13rem; 
+	}
+	
+	.approval-container{
+		width: 100%;
+	    display: flex;
+	    flex-direction: column;
+	    height: 23%;
+	    font-weight: bold;
+	    justify-content: center;
+	}	    
+	.approvalDate,.reject{
+		height: 30px;
+	}
+	
+	#pop-approvalDate, #reject{
+		font-weight: normal;
+    	padding: 0 1em;	
+	}
+	#pop-approval{
+		color : rgb(33, 150, 243);
+	}
 	@media screen and (max-width: 1490px) {
 		th, td {
 	        padding: 0.6em;
@@ -125,6 +189,10 @@
 
 @media screen and (max-width: 500px) {
 }
+
+
+
+
 </style> 
 <body>
 
@@ -171,6 +239,7 @@
 									<th>내용</th>
 									<th>처리 상태</th>
 									<th>결재일</th>
+									<th>상세보기</th>
 								</tr>
 							</thead>
 							<tbody class="tbody" id="htable-body">
@@ -185,7 +254,7 @@
 										<td>${hl.hcontent}</td>
 										<td>${hl.approval}</td>
 										<td>${hl.approvalDate != null ? hl.approvalDate : "-"}</td>
-<%-- 										<td>${hl.totalHoliday}</td> --%>
+										<td><a class="${hl.id}" id="atag${status1.count}">상세보기</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>	
@@ -193,12 +262,17 @@
 					</div>
 					<div class="select">
 						<div class="num"><a id="prev">◀</a></div>
-						<%
-// 							int Ppage = Integer.parseInt(request.getParameter("page"));
-// 							List<HolidayVO> size1 = request.getParameter("holidayList");
-						
-						%>
-						<c:forEach begin="1" end="${holidayList.size() == 0? 1 : holidayList.size()%10 == 0? holidayList.size()/10 :((holidayList.size()/10)+(1-((holidayList.size()/10)%1))%1)}" varStatus="status" var="var">
+							<%
+							int Ppage = Integer.parseInt((String)request.getParameter("page"));
+							int begin = (Ppage-1)/10 <= 0 ? 1 : (int)Math.ceil((Ppage-1)/10)*10+1;
+							
+							
+							List<HolidayVO> list = (List<HolidayVO>)request.getAttribute("holidayList");
+							
+							int celi = (int)Math.ceil(list.size()/10);
+							int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin+9 : celi+1;
+							%>
+							<c:forEach begin="<%=begin%>" end="<%=endPage%>" varStatus="status" var="var">
 								<c:choose>
 									<c:when test="${param.page eq var}">
 										<div class="num checked"><span>${var}</span></div>
@@ -210,14 +284,24 @@
 							</c:forEach>
 						<div class="num"><a id="next">▶</a></div>
 					</div>
-				</div>
 
 				<!-- 	</div> -->
 
 
 			</div>
 <!-- 			<div id="applypop" style="display: none"> -->
-			<div id="applypop">
+			
+<!-- 	         <section class="modal modal-section type-alert" id="confirmed-block"> -->
+<!-- 	            <div class="enroll_box"> -->
+<!-- 	                <p class="menu_msg">휴가 신청이 정상적으로 완료되었습니다</p> -->
+<!-- 	            </div> -->
+<!-- 	            <div class="enroll_btn"> -->
+<!-- 	                <button class="btn pink_btn modal_close">확인</button> -->
+<!-- 	            </div> -->
+<!-- 	        </section> -->
+		</div>
+		
+		<div id="applypop">
 				<div class="pop-container">
 					<form action="${pageContext.request.contextPath}/ApplyHoliday" class="pop-form" method="post">
 						<div class="pop1">
@@ -286,14 +370,57 @@
 	                <button class="btn gray_btn modal_close" id="btn_cancle">취소</button>
 	            </div>
 	        </section>
-<!-- 	         <section class="modal modal-section type-alert" id="confirmed-block"> -->
-<!-- 	            <div class="enroll_box"> -->
-<!-- 	                <p class="menu_msg">휴가 신청이 정상적으로 완료되었습니다</p> -->
-<!-- 	            </div> -->
-<!-- 	            <div class="enroll_btn"> -->
-<!-- 	                <button class="btn pink_btn modal_close">확인</button> -->
-<!-- 	            </div> -->
-<!-- 	        </section> -->
+		
+			<div id="detailpop">
+				<div class="pop-container">
+					<div class="pop1">
+						<div class="pop-titleContainer">
+							<span class="pop-title">휴가 신청 상세내역</span>
+							<span id="pop-approval"></span>
+						</div>
+						<div>
+							<a href="">✖️</a>
+						</div>
+					</div>
+					<div class="detail-container">
+					
+						<div></div>
+						<table border="1">
+							<tr>
+								<td>휴가 신청일</td>
+								<td><span id="pop-writeDate"></span></td>
+							</tr>
+							<tr>
+								<td>휴가 종류</td>
+								<td><span id="pop-halfDay"></span><span id="pop-htype"></span></td>
+							</tr>
+							<tr>
+								<td>기간</td>
+								<td><span id="pop-hstartDate"></span>~<span id="pop-hendDate"></span></td>
+							</tr>
+							<tr>
+								<td>일수</td>
+								<td><span id="pop-countDate"></span></td>
+							</tr>
+							<tr>
+								<td>신청 내용</td>
+								<td><span id="pop-hcontent"></span></td>
+							</tr>
+						</table>
+<!-- 						<div>휴가 신청일: <span id="pop-writeDate"></span></div> -->
+<!-- 						<div>휴가 종류: <span id="pop-htype"></span></div> -->
+<!-- 						<div>반차 종류: <span id="pop-halfDay"></span></div> -->
+<!-- 						<div>기간: <span id="pop-hstartDate"></span>~<span id="pop-hendDate"></span></div> -->
+<!-- 						<div>일수: <span id="pop-countDate"></span></div> -->
+<!-- 						<div>내용: <span id="pop-hcontent"></span></div> -->
+<!-- 						<div>처리 상태: <span id="pop-approval"></span></div> -->
+						<div class="approval-container">
+							<div class="approvalDate">결재일: <span id="pop-approvalDate">넣을 예정</span></div>
+							<div class="reject">반려사유: <span id="pop-rejection_reason">넣을 예정</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -305,9 +432,11 @@
 	    document.addEventListener("DOMContentLoaded", function(){
 			// 페이지 이동
 			for (var i = 0; i < size; i++) {
+				// 현재 페이지에서 10개씩만 tr 출럭함 나머지 display none
 				if(i+1 > 10*page || i+1 <= 10*(page-1)){
 					document.getElementById("tr"+(i+1)).style.display = "none";		
 				}
+				
 			}
 			
 			// 앞에 순서 번호 넣기
@@ -326,7 +455,6 @@
 	    		
 	    		let status = child[i].children[7];
 	    		if(status.innerText == "요청중"){
-	    			console.log(status);
 	    			child[i].children[7].style.color = "#2196f3";	
 	    		}
 	    		
@@ -361,9 +489,11 @@
 			document.getElementById("applypop").style.display = "flex";
 		});
 		
+			
+		
 		function OnChange(){    
 			let year = document.getElementById("sortingYear").value;
-	    	location.href="${pageContext.request.contextPath}/Holiday?page="+page+"&&year="+year;
+	    	location.href="${pageContext.request.contextPath}/Holiday?page=1&&year="+year;
 	    };
 	    
 	    
@@ -466,9 +596,67 @@
  	     document.getElementById("btn_cancle").addEventListener("click",function(){
  	    	document.getElementsByClassName("modal-section")[0].style.display = "none";
  		 });
- 	   	
  	    
+ 	   	
+ 	     
+ 	     
+ 	 // 비동기로 상세보기 가져옴
+ 	 for (let k = 1; k <= size; k++) {
+ 		document.getElementById("atag"+k).addEventListener("click",function(){
+ 			document.getElementById("detailpop").style.display = "flex";
+ 		
+			let classname = document.getElementById("atag"+k).className;
+			let simple_data = {id:classname};
+			
+			fetch("${pageContext.request.contextPath}/holiday/detail",{
+				method : "POST", // PUT, PATCH, DELETE
+				headers : {"Content-Type" : "application/json"},
+				body : JSON.stringify(simple_data)
+			}).then(response => response.json())
+		
+			.then(data => {
+// 				console.log("---------------------------")
+// 				console.log(data.id)
+// 				console.log(data.hwriteDate)
+// 				console.log(data.htype)
+// 				console.log(data.hstartDate)
+// 				console.log(data.hendDate)
+// 				console.log(data.hcontent)
+// 				console.log(data.halfDay)
+// 				console.log(data.approval)
+// 				console.log(data.approvalDate) // 요청날자는 null 가능성 있음
+// 				console.log(data.countDate)
+// 				console.log(data.empno)
+// 				console.log(data.totalHoliday)
+				
+// 				<div>휴가 신청일: <span id="pop-writeDate"></span></div>
+// 				<div>휴가 종류: <span id="pop-htype"></span></div>
+// 				<div>반차 종류: <span id="pop-halfDay"></span></div>
+// 				<div>기간: <span id="pop-hstartDate"></span>~<span id="pop-hendDate"></span></div>
+// 				<div>일수: <span id="pop-countDate"></span></div>
+// 				<div>내용: <span id="pop-hcontent"></span></div>
+// 				<div>처리 상태: <span id="pop-approval"></span></div>
+// 				<div>결재일: <span id="pop-approvalDate"></span></div>
 
+				document.getElementById("pop-writeDate").innerHTML=data.hwriteDate;
+				document.getElementById("pop-htype").innerHTML=data.htype;
+				document.getElementById("pop-halfDay").innerHTML=data.halfDay;
+				document.getElementById("pop-hstartDate").innerHTML=data.hstartDate;
+				document.getElementById("pop-hendDate").innerHTML=data.hendDate;
+				document.getElementById("pop-countDate").innerHTML=data.countDate;
+				document.getElementById("pop-hcontent").innerHTML=data.hcontent;
+				document.getElementById("pop-approval").innerHTML=data.approval;
+				document.getElementById("pop-rejection_reason").innerHTML=data.rejectionReason;
+				if(data.approvalDate == null || data.approvalDate == ""){
+					document.getElementById("pop-approvalDate").innerHTML="미확인";
+				}else{
+					document.getElementById("pop-approvalDate").innerHTML=data.approvalDate;
+				}
+			}).catch(error => {
+				console.log("error");
+			});
+		});
+ 	 }			
 	</script>
 </body>
 </html>

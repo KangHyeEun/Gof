@@ -77,6 +77,16 @@ public class HolidayService {
 		dao.insertHoliday(vo);
 	}
 	
+	public HolidayVO getDetailHoliday(Model model) {
+		HolidayVO vo = new HolidayVO();
+		int empno = (int)model.getAttribute("empno");
+		int id = (int)model.getAttribute("id");
+		vo.setEmpno(empno);
+		vo.setId(id);
+		
+		return dao.getDetailHoliday(vo);
+	}
+	
 	/*혜은---------------------------------------------*/
 	
 

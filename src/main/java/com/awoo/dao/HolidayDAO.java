@@ -12,6 +12,8 @@ public interface HolidayDAO {
 	public void insertHoliday(HolidayVO vo);
 	public List<String> distinctYear(HolidayVO vo);
 	
+	public HolidayVO getDetailHoliday(HolidayVO vo);
+	
 	/*혜은*/
 	public List<HolidayVO> selectAdminH();
 	public int selectCount();

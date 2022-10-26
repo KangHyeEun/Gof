@@ -1,6 +1,7 @@
 package com.awoo.controller;
 
 import java.text.ParseException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.awoo.service.EmployeeInfoService;
@@ -50,6 +53,10 @@ public class HolidayController {
 							   @RequestParam("halfType") String halfType,
 							   @SessionAttribute("personalInfoVO") PersonalInfoVO vo,
 							   Model model) {
+		if(leaveType.equals("연차")) {
+			halfType = null;
+		}
+		
 		model.addAttribute("leaveType", leaveType);
 		model.addAttribute("leaveStartDate", leaveStartDate);
 		model.addAttribute("leaveEndDate", leaveEndDate);
@@ -62,11 +69,27 @@ public class HolidayController {
 		try {
 			service.insertHoliday(model);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "redirect:/Holiday?page=1&&year=0";
 	}
+	
+	// 휴가 상세보기
+	@ResponseBody   
+	@PostMapping("/holiday/detail")
+	public HolidayVO holidaydetail(@RequestBody Map<String, String> map,
+			 								@SessionAttribute("personalInfoVO") PersonalInfoVO vo,
+											Model model) {
+		
+		int id = Integer.parseInt((String)map.get("id"));
+		model.addAttribute("empno", vo.getEmpno());
+		model.addAttribute("id", id);
+		service.getDetailHoliday(model);
+		
+		return service.getDetailHoliday(model);
+	}
+	
+	
 	
 /*혜은---------------------------------------------------------------------*/
 	

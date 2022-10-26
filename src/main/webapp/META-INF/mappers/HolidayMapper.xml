@@ -28,6 +28,14 @@
 		where empno=#{empno} 
 	</select>
 	
+	<select id="getDetailHoliday" resultType="HolidayVO">
+		select h.id as id, huser_name, DATE_FORMAT(hwrite_date, '%y.%m.%d') as hwrite_date, htype, date_format(hstart_date,'%y.%m.%d') as hstart_date, date_format(hend_date,'%y.%m.%d') as hend_date, hcontent, half_day,approval, count_date, h.empno as empno, e.total_holiday as total_holiday, date_format(approval_date,'%y.%m.%d'), rejection_reason
+		FROM holiday h, employee_info e
+		where h.empno = e.empno and h.empno=#{empno} and h.id=${id}
+	</select>
+	
+	
+	
 <!-- 	혜은  -->
 	<select id="selectAdminH" resultType="HolidayVO">
 		select h.id as id, huser_name, DATE_FORMAT(hwrite_date, '%y.%m.%d') as hwrite_date, htype, date_format(hstart_date,'%y.%m.%d') as hstart_date, date_format(hend_date,'%y.%m.%d') as hend_date, hcontent, half_day,approval, count_date, h.empno as empno, e.total_holiday as total_holiday, date_format(approval_date,'%y.%m.%d') AS approval_date 

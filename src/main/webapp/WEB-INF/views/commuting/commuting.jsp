@@ -1,3 +1,5 @@
+<%@page import="com.awoo.vo.CommutingVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -189,13 +191,27 @@
 							
 								<div class="select">
 									<div class="num"><a id="prev">◀</a></div>
-											<c:forEach begin="1" end="${CommutingList.size() == 0? 1 : CommutingList.size()%10 == 0? CommutingList.size()/10 :((CommutingList.size()/10)+(1-((CommutingList.size()/10)%1))%1)}" varStatus="status">
+									
+											<%
+											int Ppage = Integer.parseInt((String)request.getParameter("page"));
+											int begin = (Ppage-1)/10 <= 0 ? 1 : (int)Math.ceil((Ppage-1)/10)*10+1;
+											
+											
+											List<CommutingVO> list = (List<CommutingVO>)request.getAttribute("CommutingList");
+											
+											int celi = (int)Math.ceil(list.size()/10);
+											int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin+9 : celi+1;
+											%>
+											<c:forEach begin="<%=begin%>" end="<%=endPage%>" varStatus="status" var="var">
+									
+									
+<%-- 											<c:forEach begin="1" end="${CommutingList.size() == 0? 1 : CommutingList.size()%10 == 0? CommutingList.size()/10 :((CommutingList.size()/10)+(1-((CommutingList.size()/10)%1))%1)}" varStatus="status"> --%>
 											<c:choose>
-												<c:when test="${param.page eq status.count}">
-													<div class="num checked"><span>${status.count}</span></div>
+												<c:when test="${param.page eq var}">
+													<div class="num checked"><span>${var}</span></div>
 												</c:when>
 												<c:otherwise>				
-													<div class="num notchecked"><a href="Commuting?page=${status.count}&&year=${param.year}&&month=${param.month}">${status.count}</a></div>							
+													<div class="num notchecked"><a href="Commuting?page=${var}&&year=${param.year}&&month=${param.month}">${var}</a></div>							
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
