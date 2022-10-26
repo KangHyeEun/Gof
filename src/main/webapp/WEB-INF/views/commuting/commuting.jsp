@@ -23,11 +23,25 @@
     height: 4%;
     }
 }
+@media screen and (max-height: 863px){
+	.list-table tr td{ 
+  		padding: 7px; 
+     	white-space: nowrap;
+ 	} 
+}
+
 @media screen and (max-width: 1280px) {
 	.day-rates {
 	    font-size: 1em;
 	}
 }
+@media screen and (max-height: 800px){
+	.list-table tr td{ 
+  		padding: 5px; 
+     	white-space: nowrap;
+ 	} 
+}
+
 @media screen and (max-width: 1024px) {
 	.day-rates {
 	    flex-direction: column;
@@ -46,7 +60,14 @@
 	.progress-per {
     font-size: 8px;
     }
-/* } */
+}
+@media screen and (max-height: 700px){
+	.list-table tr td{ 
+  		padding: 3px; 
+     	white-space: nowrap;
+ 	} 
+}
+
 @media screen and (max-width: 668px) {
 	.container1{
 	flex-direction: column;
@@ -83,14 +104,14 @@
 /*     height: 3em; */
     }
    	.list-table tr td, .list-table tr th{
-	padding: 0.8em 0em;
+	padding: 0.6em 0em;
     }
 }
-
-@media screen and (max-width: 500px) {
-	.list-table tr {
-/* 	    height: 3em; */
-	}
+@media screen and (max-height: 505px){
+	.list-table tr td{ 
+  		padding: 0px;
+     	white-space: nowrap;
+ 	} 
 }
 </style>
 </head>

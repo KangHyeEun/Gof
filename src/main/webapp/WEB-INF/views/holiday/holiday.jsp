@@ -21,7 +21,8 @@
 	}
 	th, td {
 	    border: none;
-	    padding: 1em;
+  	    padding: 0.3em;  
+		height:35px;
  	    width: 80px; 
  	    white-space: nowrap;
 /* 	    white-space: nowrap; */
@@ -35,19 +36,18 @@
 	white-space: nowrap;
 	}
 	.holiday-list tr th:nth-child(6), .holiday-list tr td:nth-child(6){
-    display: block;
-/*     width: 100%;  */
+     display: block;
+    /* width: 100%; */
     width: 22em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
-    height: 0.8em;
-    text-align: left; 
+    height: 1.5em;
+    text-align: left;
     word-wrap: break-word;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    
 	}
 	th{
 /* 	    border-bottom: 1px solid #444444;	 */
@@ -69,7 +69,7 @@
 	.sub-sub-title span{
 		color: #2196f3;
 	}
-	tbody tr:nth-child(odd){
+	.holiday-list tbody tr:nth-child(odd){
 	background-color: #f8f8f9;
 	}
 	.count-nums{
@@ -148,9 +148,39 @@
 	    text-align: left;
 	    word-wrap: break-word;
 	}
-	@media screen and (max-width: 1864px) {
-		th, td {
-/* 	        padding: 0.8em; */
+	.holiday-list td a{
+		border: 1px solid #d3d3d3;
+	    width: 5.5em;
+	    /* padding: 4px; */
+	    width: 70%;
+	    font-size: 11px;
+	    border-radius: 7px;
+	    background: linear-gradient(1deg, #cdcdcd, #ffffff);
+/* 	    display: flex; */
+/* 	    justify-content: center; */
+/* 	    align-items: center; */
+	    height: 50%;
+	}
+	.holiday-list td a:hover{
+		color:white;
+		background: linear-gradient(1deg, #8d8d8d, #cdc9c9);
+	}
+	.holiday-list td a:active{
+		color:white;
+		position:relative;
+		background: linear-gradient(1deg, #8d8d8d, #cdc9c9);
+		top:2px;
+	}
+	@media screen and (max-height: 890px){
+	.holiday-list th, .holiday-list td { 
+  		padding: 0; 
+ 	    font-size: 14px; 
+     	white-space: nowrap;
+ 	}
+}
+	@media screen and (max-width: 1864px),screen and (max-height: 790px){
+		.holiday-list th, .holiday-list td {
+  	        padding: 0.2em;  
    			font-size: 14px;
 		}
 		.select {
@@ -169,9 +199,9 @@
 /*     		width: 21%; */
 	    }
 }
-	@media screen and (max-width: 1490px) {
-		th, td {
-	        padding: 1em 0.6em;
+	@media screen and (max-width: 1490px){
+		.holiday-list th, .holiday-list td {
+/*  	        padding: 1% 0; */
    			font-size: 14px;
 		}
 		.select {
@@ -190,9 +220,9 @@
 /*     		width: 21%; */
 	    }
 }
-@media screen and (max-width: 1280px) {
-	th, td {
-		padding: 0.9em 0.3em;
+@media screen and (max-width: 1280px){
+	.holiday-list th, .holiday-list td {
+ 		padding: 1% 0;
 	    font-size: 14px;
     	white-space: nowrap;
 		
@@ -206,23 +236,36 @@
 		display: none;
 	}
 }
+@media screen and (max-height: 860px){
+	.holiday-list th, .holiday-list td { 
+  		padding: 0; 
+ 	    font-size: 14px; 
+     	white-space: nowrap;
+ 	} 
+}
 @media screen and (max-width: 1050px) {
 	#apply-holiday {
 	    width: 90px;
 	    font-size: 12px;
 	}
-	th, td {
-    	padding: 17px 0;
+	.holiday-list th, .holiday-list td {
+     	padding: 1% 0;
 	    font-size: 12px;
 	}
-
+@media screen and (max-height: 860px){
+	.holiday-list th, .holiday-list td { 
+  		padding: 0; 
+ 	    font-size: 14px; 
+     	white-space: nowrap;
+ 	} 
+}
 @media screen and (max-width: 668px) {
 	.num {
 	    height: 78%;
 	    width: 20px;
     }
-	th, td {
-		padding: 18px 0;
+	.holiday-list th, .holiday-list td {
+ 		padding: 1% 0;
 	    font-size: 11px;
 	}
 	.pop-titleContainer {
@@ -235,9 +278,21 @@
     .count-nums {
     font-size: 0.8em;
     }
+    .detail-container table, .detail-container table td {
+    max-width: 225px;
+    }
 }
 
-
+@media screen and (max-height: 860px){
+	.holiday-list th, .holiday-list td { 
+  		padding: 0; 
+ 	    font-size: 14px; 
+     	white-space: nowrap;
+ 	} 
+ 	
+ 	
+	
+}
 
 
 
