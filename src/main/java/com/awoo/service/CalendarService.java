@@ -1,5 +1,8 @@
 package com.awoo.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -19,6 +22,13 @@ public class CalendarService {
 	public void selectDataMethod(Model model) {
 		model.addAttribute("list", dao.selectSchedule());
 	}
+	
+//	비동기로 일자별 일정 출력하기 위한 데이터 추출
+	public List<CalendarVO> restDataMethod(Map<String, String> map) {
+		System.out.println(map.get("calStart"));
+		System.out.println(map.get("calEnd"));
+		return dao.selectRestData(map);
+	}
 
 //	일정을 DB에 저장
 	public void insertDataMethod(CalendarVO vo, Model model) {
@@ -35,7 +45,7 @@ public class CalendarService {
 		if(vo.getCalNotice() == null || vo.getCalNotice() == "") {
 			vo.setCalNotice("0");
 		}
-		
+//		test Commit
 		dao.insertSchedule(vo);
 	}
 }

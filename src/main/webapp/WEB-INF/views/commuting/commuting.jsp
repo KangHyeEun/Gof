@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/commuting/style.css">
 <title>Insert title here</title>
 <style>
-@media screen and (max-width: 1360px) {
+@media screen and (max-width: 1490px) {
 	.list-table tr{
  	height: 1.5em;
  	border-bottom:1px solid black;

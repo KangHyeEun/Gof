@@ -38,7 +38,7 @@
                         <li>
                             <ul class="sub1">
                                 <li><a href="#">공지 사항</a></li>
-                                <li><a href="#">사내 게시판</a></li>
+                                <li><a href="${pageContext.request.contextPath}/bbsPage/bbs">사내 게시판</a></li>
                             </ul>
                         </li>
                     </ul>

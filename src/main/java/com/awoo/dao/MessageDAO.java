@@ -19,9 +19,7 @@ public interface MessageDAO {
 	
 	public void deleteData2(MessageVO vo);
 	
-	public void delete(String no);
-	
-	
-	
+
+
 	
 }

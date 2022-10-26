@@ -126,8 +126,9 @@ a {
 h1 {
 	font-family: 'Oswald', sans-serif;
 	font-size: 30px;
-	color: #272454;
+	
 }
+
 
 label {
 	display: block;
@@ -257,9 +258,9 @@ textarea {
 				<div class="inner-div-bbs">
 					<!-- 각자 필요한 부분 넣기 -->
 					<div class="intro">
-						<h1>받은 쪽지함</h1>
+						<h1 class="hh1">받은 쪽지함</h1>
 					</div>
-					<div class="scroll" style="overflow: auto; width: 100%; height: 350px;">
+					<div class="scroll" style="overflow: auto; width: 100%; height: 500px;">
 						<table id="table1">
 
 							<thead>
@@ -274,16 +275,15 @@ textarea {
 								</tr>
 							</thead>
 							<tbody id="table-body">
-								<c:forEach var="item" items="${list}">
+								<c:forEach var="vo" items="${list}">
 									<tr>
 
-										<td><input type="checkbox" name="RowCheck" id="chkObj" value="${item.id}"></td>
-										<td>${item.id}</td>
-										<td>${item.mreciever}</td>
-										<td><a
-											href="${pageContext.request.contextPath}/message/content">${item.mtitle}</a></td>
-										<td>${item.createDate}</td>
-										<td>${item.mowner}</td>
+										<td><input type="checkbox" name="RowCheck" id="chkObj" value="${vo.id}"></td>
+										<td>${vo.id}</td>
+										<td>${vo.mreciever}</td>
+										<td><a href="${pageContext.request.contextPath}/message/messageValue/${vo.id}">${vo.mtitle}</a></td>										
+										<td>${vo.createDate}</td>
+										<td>${vo.mowner}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

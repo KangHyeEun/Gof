@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,6 +11,9 @@
 <title>Insert title here</title>
 </head>
 <style>
+	
+
+
 	table{
 		border:0;
 		font-size: 0.9em;
@@ -17,6 +21,7 @@
 	th, td {
 	    border: none;
 	    padding: 0.9em;
+/* 	    white-space: nowrap; */
 	}
 	th{
 	    border-bottom: 1px solid #444444;	
@@ -29,7 +34,8 @@
 	    align-items: center;
 	}
 	.sub-sub-title h4{
-	    width: 10%;
+/* 	    width: 10%; */
+	    width: 130px;
 	}
 	.sub-sub-title p{
 		font-weight: bold;
@@ -58,6 +64,67 @@
 	.enroll_box p{padding-bottom: 56px;}
 	.gray_btn {width: 90px;background: #ffffff;color: #999999;height: 36px;line-height: 36px;transition: 0.5s;font-size: 17px;}
 	.pink_btn {width: 90px;background: #ed197a;color: #fff;height: 36px;line-height: 36px;transition: 0.5s;font-size: 17px;border: none;}
+	
+	
+	@media screen and (max-width: 1490px) {
+		th, td {
+	        padding: 0.6em;
+   			font-size: 14px;
+		}
+		.select {
+    		height: 5%;
+    	}
+		.sub-title {
+		    width: 62%;
+    	}
+    	.sub-sub-title h4 {
+/*     		width: 13%; */
+    	}
+    	.div1 {
+/* 	    	height: 11%; */
+	    }
+	    .div1-1 {
+/*     		width: 21%; */
+	    }
+}
+@media screen and (max-width: 1280px) {
+	th, td {
+	    padding: 9px 0;
+	    font-size: 14px;
+    	white-space: break-spaces;
+		
+	}
+	.thead tr th:nth-child(1),
+	.thead tr th:nth-child(5),
+	.thead tr th:nth-child(6),
+	.tbody tr td:nth-child(1),
+	.tbody tr td:nth-child(5),
+	.tbody tr td:nth-child(6){
+		display: none;
+	}
+}
+@media screen and (max-width: 1050px) {
+	#apply-holiday {
+	    width: 90px;
+	    font-size: 12px;
+	}
+	th, td {
+	    padding: 10px 0;
+	    font-size: 12px;
+	}
+
+@media screen and (max-width: 668px) {
+	.num {
+	    height: 78%;
+	    width: 20px;
+    }
+	th, td {
+	    font-size: 11px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+}
 </style> 
 <body>
 
@@ -126,13 +193,18 @@
 					</div>
 					<div class="select">
 						<div class="num"><a id="prev">◀</a></div>
-							<c:forEach begin="1" end="${holidayList.size() == 0? 1 : holidayList.size()%10 == 0? holidayList.size()/10 :((holidayList.size()/10)+(1-((holidayList.size()/10)%1))%1)}" varStatus="status">
+						<%
+// 							int Ppage = Integer.parseInt(request.getParameter("page"));
+// 							List<HolidayVO> size1 = request.getParameter("holidayList");
+						
+						%>
+						<c:forEach begin="1" end="${holidayList.size() == 0? 1 : holidayList.size()%10 == 0? holidayList.size()/10 :((holidayList.size()/10)+(1-((holidayList.size()/10)%1))%1)}" varStatus="status" var="var">
 								<c:choose>
-									<c:when test="${param.page eq status.count}">
-										<div class="num checked"><span>${status.count}</span></div>
+									<c:when test="${param.page eq var}">
+										<div class="num checked"><span>${var}</span></div>
 									</c:when>
 									<c:otherwise>				
-										<div class="num notchecked"><a href="Holiday?page=${status.count}&&year=${param.year}">${status.count}</a></div>							
+										<div class="num notchecked"><a href="Holiday?page=${var}&&year=${param.year}">${var}</a></div>							
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -294,22 +366,24 @@
 	    	location.href="${pageContext.request.contextPath}/Holiday?page="+page+"&&year="+year;
 	    };
 	    
-	    function TypeChange(){
-	    	
-	    	let type = document.getElementById("leaveType").value;
+	    
+// 	    let Ltype1 ="연차";
+	    function TypeChange(){	
+	    	let Ltype = document.getElementById("leaveType").value;
 	    	let halfType = document.getElementById("halfType");
 	    	let end = document.getElementsByClassName("end-cal");
-	    	if(type == "반차"){
+	    	if(Ltype == "반차"){
 	    		halfType.style.display = "flex";
 	    		end[0].style.visibility = "hidden";
 	    		end[1].style.visibility = "hidden";
 	    		end[1].removeAttribute('required');	
 	    		end[1].value = "0";
 	    	}
-	    	if(type == "연차"){
+	    	if(Ltype == "연차"){
 	    		halfType.style.display = "none";
 	    		end[0].style.visibility = "visible";
 	    		end[1].style.visibility = "visible";
+	    		end[1].setAttribute('required', true);
 	    	}
 	    };
 	    
@@ -351,11 +425,9 @@
    		 let Htype = "오전";
  		function getMType() {
 	 		Htype = "오전";
-	 		console.log(Htype);
  		}
  		function getAType() {
 	 		Htype = "오후";
-	 		console.log(Htype);
  		}
  		
    		 document.getElementById("submit-btn").addEventListener("click",function(){
@@ -364,11 +436,9 @@
 			let Etype = document.getElementById("leaveEndDate").value;
 			
 			let Ctype = document.getElementById("content").value;
-// 						document.getElementsByName("halfType").value;
 			
    			let section = document.getElementsByClassName("modal-section");
 			
-
    			if(Ltype == "연차"){
    				if(Stype != ""  && Etype != "" && Ctype != ""){
    		   			section[0].style.display = "block";
@@ -381,7 +451,6 @@
    				
 		   		if(Stype != "" && Ctype != "" && Htype != ""){
 		   			section[0].style.display = "block";
-		   			console.log(Htype);
    		   			document.getElementById("real-submit-message").innerHTML = Stype+"의 "+Htype+"반차를 신청하시겠습니까?";	
    				}else{
 					section[0].style.display = "none";	

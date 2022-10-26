@@ -11,6 +11,18 @@
 		from calendar
 	</select>
 	
+	<select id="selectRestData" resultType="CalendarVO">
+		select cal_id, cal_title, cal_place,
+			DATE_FORMAT(cal_start, '%Y-%c-%e %H:%i') as cal_start,
+			DATE_FORMAT(cal_end, '%Y-%c-%e %H:%i') as cal_end,
+			cal_allday, cal_show, cal_notice, cal_content, empno, check_admin, approval
+		from calendar
+		<where>
+			cal_start between #{calStart} and #{calEnd}
+<!-- 			DATE(cal_start) = '2022-09-27' -->
+		</where>
+	</select>
+	
 	<insert id="insertSchedule">
 		insert into calendar(cal_title, cal_place, cal_start, cal_end, cal_allday, cal_show, cal_notice, cal_content, empno, check_admin, approval)
 		values (#{calTitle}, #{calPlace}, #{calStart}, #{calEnd}, #{calAllday}, #{calShow}, #{calNotice}, #{calContent}, #{empno}, #{checkAdmin}, #{approval})
