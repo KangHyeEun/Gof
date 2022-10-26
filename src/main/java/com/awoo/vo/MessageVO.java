@@ -2,7 +2,7 @@ package com.awoo.vo;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("MessageVO")
+@Alias("messageVO")
 public class MessageVO {
 	private int id;
 	private String mowner;

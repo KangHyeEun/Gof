@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.awoo.service.EmployeeInfoService;
 import com.awoo.service.HolidayService;
+import com.awoo.vo.EmployeeInfoVO;
 import com.awoo.vo.HolidayVO;
 import com.awoo.vo.PersonalInfoVO;
 
@@ -44,7 +48,7 @@ public class HolidayController {
 		service.selectHoliday(model);
 		return "holiday/holiday";
 	}
-	@PostMapping("ApplyHoliday")
+	@GetMapping("ApplyHoliday")
 	public String ApplyHoliday(
 							   @RequestParam("leaveType") String leaveType,	
 							   @RequestParam("leaveStartDate") String leaveStartDate,
@@ -99,6 +103,17 @@ public class HolidayController {
 		model.addAttribute("endPage","9");
 		model.addAttribute("nowPage","1");
 		service.selectAdminH(model);
+		Eservice.HEdepartment(model);
+		return "/admin/holidayAdmin";
+	}
+	// 상세 검색
+	@PostMapping("/damin/holidayselect")
+	public String holidayselect(Model model,@RequestParam Map<String,String> map) {
+		model.addAttribute("startPage","0");
+		model.addAttribute("endPage","9");
+		model.addAttribute("nowPage","1");
+		service.selectH(model,map);
+		Eservice.HEdepartment(model);
 		return "/admin/holidayAdmin";
 	}
 	
@@ -108,27 +123,39 @@ public class HolidayController {
 			model.addAttribute("nowPage",page);
 			model.addAttribute("startPage", 10*(page-1));
 			model.addAttribute("endPage", (10*(page-1))+9);			
-			service.selectAdminH(model);			
+			service.selectAdminH(model);
+			Eservice.HEdepartment(model);
 			return "/admin/holidayAdmin";
 		}
 		
 	// 승인
 		@GetMapping("holiday/Ok/{id}")
-		public String holidayOk(HolidayVO vo,@PathVariable("id") int id,HttpServletRequest request) {
-			int empno = Integer.parseInt(request.getParameter("empno"));
-			String countDate = request.getParameter("countDate");
-			vo.setApproval("승인");
+		public String holidayOk(HolidayVO vo,@PathVariable("id") int id,
+				@RequestParam("empno") int empno,@RequestParam("countDate") double countDate) {
 			vo.setId(id);
 			vo.setEmpno(empno);
-			vo.setCountDate(empno);
-			Eservice.updateUsedHoliday(vo);
-			service.updateApproval(vo);
+
+			double totalH = Eservice.selectHolidayTotal(empno).getTotalHoliday();
+			double usedH = Eservice.selectHolidayTotal(empno).getUsedHoliday();
+			if(totalH >= (usedH+countDate)) {
+				vo.setApproval("승인");
+				Eservice.updateUsedHoliday(vo);				
+				service.updateApproval(vo);	
+			} else if(totalH < (usedH+countDate)) {
+				vo.setApproval("반려");
+				vo.setRejectionReason("잔여 연차 : " + (totalH-usedH));
+				service.updateApproval(vo);	
+			}
 			return "redirect:/holidayAdmin";
 		}
 		
 	// 반려
-		@GetMapping("holiday/No/{empno}")
-		public String holidayNo() {
-			return "/admin/holidayAdmin";
+		@GetMapping("holiday/No/{id}")
+		public String holidayNo(HolidayVO vo,@PathVariable("id") int id) {
+			vo.setId(id);
+			vo.setApproval("반려");
+			service.updateApproval(vo);	
+			
+			return "redirect:/holidayAdmin";
 		}
 }

@@ -14,6 +14,14 @@ public class HolidayVO {
 	private double countDate;
 	private int empno;
 	private int totalHoliday;
+	private String rejectionReason;
+	
+	public String getRejectionReason() {
+		return rejectionReason;
+	}
+	public void setRejectionReason(String rejectionReason) {
+		this.rejectionReason = rejectionReason;
+	}
 	public int getId() {
 		return id;
 	}

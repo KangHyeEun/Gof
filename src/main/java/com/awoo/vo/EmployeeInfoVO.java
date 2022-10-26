@@ -9,8 +9,15 @@ public class EmployeeInfoVO {
 	 private String edepartment;
 	 private int totalHoliday;
 	 private int usedHoliday;
+	 private int countDate;
 	 private int checkAdmin;
-	  
+	
+	public int getCountDate() {
+		return countDate;
+	}
+	public void setCountDate(int countDate) {
+		this.countDate = countDate;
+	}
 	public int getUsedHoliday() {
 		return usedHoliday;
 	}

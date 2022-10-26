@@ -43,12 +43,17 @@
 	</select>
 	
 	<!-- 휴가 -->
-	<select id="selectEmpnoH" resultType="String">
-		SELECT DISTINCT edepartment
-		FROM  employee_info WHERE empno = #{empno}; 
-	</select>
 	<update id="updateUsedHoliday">
-		update employee_info SET used_holiday = used_holiday + (SELECT count_date FROM holiday WHERE id = #{id})  
-			WHERE empno = #{empno};
+		update employee_info SET
+		used_holiday = used_holiday + (SELECT count_date FROM holiday WHERE id = #{id})  
+		WHERE empno = #{empno};
 	</update>
+	<select id="selectHolidayTotal" resultType="EmployeeInfoVO">
+		SELECT total_holiday,used_holiday,empno
+		FROM employee_info 
+		WHERE empno = #{empno}
+	</select>
+	<select id="HEdepartment" resultType="EmployeeInfoVO">
+		SELECT edepartment, empno FROM employee_info;
+	</select>
 </mapper>

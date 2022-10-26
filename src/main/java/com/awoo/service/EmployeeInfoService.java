@@ -3,6 +3,7 @@ package com.awoo.service;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,5 +67,21 @@ public class EmployeeInfoService {
 	
 	public void updateUsedHoliday(HolidayVO vo) {
 		dao.updateUsedHoliday(vo);
+	}
+	
+	public EmployeeInfoVO selectHolidayTotal(int empno){
+		
+		EmployeeInfoVO list = new EmployeeInfoVO();
+		
+		for (int i = 0; i < dao.selectHolidayTotal(empno).size() ; i++) {			
+			if (empno == dao.selectHolidayTotal(empno).get(i).getEmpno()) {
+				list = dao.selectHolidayTotal(empno).get(i);
+			}
+		}
+		return list;
+	}
+	
+	public void HEdepartment(Model model) {
+		 model.addAttribute("depart",dao.HEdepartment());
 	}
 }

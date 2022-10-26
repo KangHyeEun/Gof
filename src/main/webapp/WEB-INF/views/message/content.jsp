@@ -5,104 +5,77 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 <title>Insert title here</title>
 <style>
-#table1 {
-	text-align: center;
+.container1 {
+	margin-top: 10px;
+	
 }
 
-th, td {
-	padding: 7px;
+}
+.head {
+	
+	width: 600px;
+	margin-top: 10px;
 }
 
-tr:nth-child(odd) {
-	background-color: #f8f8f9;
-}
-
-th {
+.main2 {
+	border: 1px solid black;
 	background-color: #eaf6f7;
-}
-
-#table1 {
-	width: 100%;
-}
-
-a {
-	color: black;
-}
-
-.scroll {
-	padding: -10px;
-}
-
-.scroll::-webkit-scrollbar {
-	width: 10px;
-}
-
-.scroll::-webkit-scrollbar-thumb {
-	background-color: #f2f4f5;
-	border-radius: 10px;
-	background-clip: padding-box;
-	border: 2px solid transparent;
-}
-
-.scroll::-webkit-scrollbar-track {
-	background-color: white;
-	border-radius: 10px;
-	box-shadow: inset 0px 0px 5px white;
-}
-
-.intro {
-	display: flex;
-	justify-content: space-between;
-	padding-bottom: 4%;
-}
-
-.intro>p {
-	color: #c0c5c9;
-}
-
-.intro {
-	display: flex;
-	justify-content: space-between;
-	padding-bottom: 2%;
-}
-
-.intro>p {
-	color: #c0c5c9;
-}
-
-#note_bt {
 	margin-top: 15px;
+	width: 600px;
+	height: 50px;
+	border-radius: 7px;
 }
 
-#note_bt ul li {
-	float: left;
-	margin-left: 100px;
+.main1 {
+	border: 1px solid black;
+	background-color: #eaf6f7;
+	margin-top: 20px;
+	width: 600px;
+	height: 600px;
+	border-radius: 7px;
 }
 
 #return {
-	padding: 10px 20px 10px 20px;
+	margin-top: 30px;
+	padding: 15px 35px 15px 35px;
+	background: #272454;
+	border: 0;
+	color: white;
+	font-size: 15px;
+	border-radius: 5px;
+	margin-right: -10px;
+	text-aline: center;
+}
+
+#delete {
+	margin-top: 30px;
+	padding: 10px 30px 10px 30px;
 	background: #272454;
 	border: 0;
 	color: white;
 	font-size: 12px;
 	border-radius: 5px;
 	margin-right: -170px;
-	margin-top: 20px;
+	text-aline: center;
 }
 
-#return:hover {
-	background: #08298A;
-	color: white;
+h2 {
+	background-color: #eaf6f7;
+	width: 600px;
+	height: 50px;
+	border: 1px solid black;
+	margin-top: 30px;
+	border-radius: 5px;
 }
 
-#return a {
-	color: white;
-}
+
+
+
 </style>
+
 
 
 </head>
@@ -110,7 +83,7 @@ a {
 
 	<div class="container-wrap">
 		<div class="header">
-		<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
+			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
 			<div class="header-logout">로그아웃 버튼</div>
 		</div>
@@ -118,33 +91,40 @@ a {
 			<jsp:include page="../include/menu.jsp"></jsp:include>
 			<div class="container-inner-bbs">
 				<div class="inner-div-bbs">
-					<c:forEach var="item" items="${list}">
-					
-							<div class="header1">
-								<h4>제목 :</h4>
-								<h4>${item.mtitle}</h4>
-							</div>
-							<div class="main1">
-							    <h4>내용 :</h4>
-								<p>${item.mcontent}</p>
-							</div>
-						</c:forEach>
-						<div class="footer1">
-							<button id="return">뒤로가기</button>
-						</div>
+					<!-- 각자 필요한 부분 넣기 -->
+					<div class="container1">
+						<h1>상세 받은 쪽지함</h1>
+					</div>
+					<div class="head">
+						<h2>제목 : ${messageVO.mtitle}</h2>
+					</div>
+					<div class="main2">
+						<h3>보낸이 : ${messageVO.mreciever}</h3>
 					</div>
 
+					<div class="main1">
+						<h3>
+							내용 : <br /> ${messageVO.mcontent}
+						</h3>
+					</div>
+					<div class="footer1">
+						<button id="return">뒤로가기</button>
 
-					<script type="text/javascript">
-    	document.getElementById("return").addEventListener("click",function(){
-    		location.href = "${pageContext.request.contextPath}/message/message1";
-    	});
-    </script>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+	<script type="text/javascript">
+		document
+				.getElementById("return")
+				.addEventListener(
+						"click",
+						function() {
+							location.href = "${pageContext.request.contextPath}/message/message1";
+						});
+	</script>
 
 </body>
 </html>

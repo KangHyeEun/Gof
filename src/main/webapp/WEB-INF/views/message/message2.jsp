@@ -10,6 +10,7 @@
 
 <title>Insert title here</title>
 <style type="text/css">
+
 #table1 {
 	text-align: center;
 }
@@ -84,7 +85,7 @@ a {
 	margin-left: 100px;
 }
 
-#wri_m_bt {
+#btn1 {
 	padding: 10px 20px 10px 20px;
 	background: #272454;
 	border: 0;
@@ -94,14 +95,36 @@ a {
 	margin-right: -170px;
 }
 
-#wri_m_bt:hover {
+#btn1:hover {
 	background: #08298A;
 	color: white;
 }
 
-#wri_m_bt a {
+#btn1 {
+	margin-top: 40px;
+}
+
+#btn2 {
+	padding: 10px 20px 10px 20px;
+	background: #272454;
+	border: 0;
+	color: white;
+	font-size: 12px;
+	border-radius: 5px;
+	width: 85px;
+	margin-top: 35px;
+	margin-left: 20px;
+}
+
+#btn2:hover {
+	background: #08298A;
 	color: white;
 }
+
+
+
+
+
 </style>
 </head>
 <body>
@@ -120,8 +143,7 @@ a {
 					<div class="intro">
 						<h1>보낸 쪽지함</h1>
 					</div>
-					<div class="scroll"
-						style="overflow: auto; width: 100%; height: 350px;">
+					<div class="scroll" style="overflow: auto; width: 100%; height: 500px;">
 						<table id="table1">
 
 							<thead>
@@ -136,50 +158,83 @@ a {
 								</tr>
 							</thead>
 							<tbody id="table-body">
-								<c:forEach var="item" items="${list}">
+								<c:forEach var="vo" items="${list}">
 									<tr>
-										<td><input type="checkbox" name="RowCheck" id="chkObj"
-											value="${item.id}"></td>
-										<td>${item.id}</td>
-										<td>${item.mowner}</td>
-										<td><a
-											href="${pageContext.request.contextPath}/message/content">${item.mtitle}</a></td>
-										<td>${item.createDate}</td>
-										<td>${item.mreciever}</td>
+
+										<td><input type="checkbox" name="RowCheck" id="chkObj" value="${vo.id}"></td>
+										<td>${vo.id}</td>
+										<td>${vo.mowner}</td>
+										<td><a href="${pageContext.request.contextPath}/message/messageValue2/${vo.id}">${vo.mtitle}</a></td>										
+										<td>${vo.createDate}</td>
+										<td>${vo.mreciever}</td>
 									</tr>
-
 								</c:forEach>
-
 							</tbody>
-
 						</table>
 
-						<!--  	<script>s
 					
-					$('#delBtn')Click(function){
-						if($("input:checkbox[name='chk_list']:checked").length === 0);
-							return;
-					}
-					
-					$("input:checkbox[name='chk_list']:checked").each(function(k,kval){
-						console.log("Kval :: " , kVal.parentElment.parentElement.parentElement);
-					})	let a = kVal.parentElen
-					</script> -->
-
-
-						<!--쪽지 삭제 @PostMapping("result8") 테스트 -->
-
-						<form action="${pageContext.request.contextPath}/message/result8"
-							method="get">
-							<label for="id"></label> <input type="text" name="id" id="id" />
-							<button id="wri_m_bt">삭제</button>
-						</form>
+						<input type="button" value="삭제" class="btn btn-outline-info" id="btn2"
+							onclick="chkDel();">
+						</div>
+						
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+	
 
+	<script>
+		function checkAll() {
+			var is_checked = document.getElementById("allCheck").checked;
+			var RowCheck = document.getElementsByName("RowCheck");
+			var rowCnt = RowCheck.length;
+			if (is_checked == true) {
+				for (var i = 0; i <= rowCnt; i++) {
+					document.getElementsByName("RowCheck")[i].checked = true;
+				}
+			} else {
+				for (var i = 0; i <= rowCnt; i++) {
+					document.getElementsByName("RowCheck")[i].checked = false;
+				}
+			}
+		}
 
+		function chkDel() {
+			var url = "";
+			var valueArr = new Array();
+			var list = $("input[name='RowCheck']");
+			for (var i = 0; i < list.length; i++) {
+				if (list[i].checked) {
+					valueArr.push(list[i].value);
+					console.log(valueArr);
+				}
+			}
+			if (valueArr.length == 0) {
+				alert("삭제할 쪽지가 없습니다.");
+			} else {
+				var chk = confirm("정말 삭제하시겠습니까?");
+				$.ajax({
+					url : 'message/result7',
+					type : 'POST',
+					traditional : true,
+					data : {
+						valueArr : valueArr
+					},
+					success : function(jdata) {
+						if (jdata = 1) {
+							alert("삭제가 완료되었습니다.");
+							location.replace("message")
+						} else {
+							alert("삭제 실패");
+						}
+					}
+				});
+			}
+		}
+	</script>
+	
+	
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </body>
 </html>
