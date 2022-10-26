@@ -6,12 +6,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.awoo.dao.EmployeeInfoDAO;
 import com.awoo.dao.HolidayDAO;
+import com.awoo.vo.EmployeeInfoVO;
 import com.awoo.vo.HolidayVO;
 
 @Service
@@ -79,12 +82,14 @@ public class HolidayService {
 	
 	/*혜은---------------------------------------------*/
 	
-
-
 	public void selectAdminH(Model model) {
 		model.addAttribute("list",dao.selectAdminH());
 		model.addAttribute("count",dao.selectCount());
-		
+	}
+	
+	public void selectH(Model model,Map<String,String> map) {
+		model.addAttribute("list",dao.selectH(map));
+		model.addAttribute("count",dao.selectCount());
 	}
 	
 	public void updateApproval(HolidayVO vo) {

@@ -1,6 +1,7 @@
  package com.awoo.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,6 +15,7 @@ public interface HolidayDAO {
 	
 	/*혜은*/
 	public List<HolidayVO> selectAdminH();
+	public List<HolidayVO> selectH(Map<String, String> map);
 	public int selectCount();
 	public void updateApproval(HolidayVO vo);
 }

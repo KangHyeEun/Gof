@@ -23,7 +23,9 @@ public interface EmployeeInfoDAO {
 	public int countInfoE();
 	
 	/*휴가*/
-	public List<EmployeeInfoVO> selectEmpnoH(int empno);
-	
 	public void updateUsedHoliday(HolidayVO vo);
+
+	public List<EmployeeInfoVO> selectHolidayTotal(int empno);
+
+	public List<EmployeeInfoVO> HEdepartment();
 }

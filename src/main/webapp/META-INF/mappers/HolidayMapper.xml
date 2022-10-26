@@ -6,7 +6,7 @@
 	<select id="selectHoliday" resultType="HolidayVO">
 		select h.id as id, huser_name, DATE_FORMAT(hwrite_date, '%y.%m.%d') as hwrite_date, htype, date_format(hstart_date,'%y.%m.%d') as hstart_date, date_format(hend_date,'%y.%m.%d') as hend_date, hcontent, half_day,approval, count_date, h.empno as empno, e.total_holiday as total_holiday, date_format(approval_date,'%y.%m.%d') 
 		FROM holiday h, employee_info e
-			<where>
+		<where>
 			h.empno = e.empno
 			and h.empno=#{empno}
 			<if test="hwriteDate == null">
@@ -30,7 +30,10 @@
 	
 <!-- 	혜은  -->
 	<select id="selectAdminH" resultType="HolidayVO">
-		select h.id as id, huser_name, DATE_FORMAT(hwrite_date, '%y.%m.%d') as hwrite_date, htype, date_format(hstart_date,'%y.%m.%d') as hstart_date, date_format(hend_date,'%y.%m.%d') as hend_date, hcontent, half_day,approval, count_date, h.empno as empno, e.total_holiday as total_holiday, date_format(approval_date,'%y.%m.%d') AS approval_date 
+		select h.id as id, huser_name, DATE_FORMAT(hwrite_date, '%y.%m.%d') as hwrite_date, htype, 
+		date_format(hstart_date,'%y.%m.%d') as hstart_date, date_format(hend_date,'%y.%m.%d') as hend_date, 
+		hcontent, half_day,approval, count_date, h.empno as empno, e.total_holiday as total_holiday, 
+		date_format(approval_date,'%y.%m.%d') AS approval_date, rejection_reason
 		FROM holiday h, employee_info e
 		where h.empno = e.empno
 		order by DATE_FORMAT(hwrite_date, '%y.%m.%d %H:%i:%m') desc;
@@ -39,8 +42,33 @@
 		SELECT COUNT(*) FROM holiday;
 	</select>
 	<update id="updateApproval">
-		update holiday set approval = #{approval}, approval_date = NOW() where id = #{id} ;
+		update holiday set approval = #{approval}, approval_date = NOW()
+		<if test="rejectionReason != null and rejectionReason != ''">
+			,rejection_reason = #{rejectionReason}  
+		</if>
+		where id = #{id};
 	</update>
+	<select id="selectH" resultType="HolidayVO">
+		SELECT 
+		h.id as id, huser_name, DATE_FORMAT(hwrite_date, '%y.%m.%d') as hwrite_date, htype, 
+		date_format(hstart_date,'%y.%m.%d') as hstart_date, date_format(hend_date,'%y.%m.%d') as hend_date, 
+		hcontent, half_day,approval, count_date, h.empno as empno, e.total_holiday as total_holiday, 
+		date_format(approval_date,'%y.%m.%d') AS approval_date, rejection_reason
+		FROM holiday h, employee_info e
+		 <where>
+			  h.empno = e.empno
+			 <if test="edepartment != null and edepartment != ''">
+			 	AND edepartment = #{edepartment}
+			 </if>
+			 <if test="htype != null and htype != ''">
+			 	AND htype = #{htype}
+			 </if>
+			 <if test="hwriteDate != null and hwriteDate != ''">
+				AND DATE_FORMAT(hwrite_date, '%Y') = #{hwriteDate}
+			</if>
+		 </where>
+		 order by DATE_FORMAT(hwrite_date, '%y.%m.%d %H:%i:%m') desc;
+	</select>
 </mapper>
 
 
