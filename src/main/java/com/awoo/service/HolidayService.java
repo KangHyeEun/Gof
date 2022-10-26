@@ -77,6 +77,8 @@ public class HolidayService {
 		vo.setCountDate(diff);
 		vo.setApproval("요청중");
 		vo.setEmpno(empno);
+		vo.setApprovalDate(null);
+		vo.setRejectionReason(null);
 		dao.insertHoliday(vo);
 	}
 	

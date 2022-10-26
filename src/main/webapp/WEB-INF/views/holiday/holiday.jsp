@@ -21,17 +21,23 @@
 	}
 	th, td {
 	    border: none;
-	    padding: 0.9em;
- 	    width: 100px; 
+	    padding: 1em;
+ 	    width: 80px; 
+ 	    white-space: nowrap;
 /* 	    white-space: nowrap; */
 	    
 	}
-	th:nth-child(5), td:nth-child(5){
-		width:150px;
+/* 	th:nth-child(4), td:nth-child(4){ */
+/* 		width:150px; */
+/* 	} */
+	.holiday-list tr th:nth-child(5), .holiday-list tr td:nth-child(5){
+	width: 170px;
+	white-space: nowrap;
 	}
-	.holiday-list tr th:nth-child(7), .holiday-list tr td:nth-child(7){
+	.holiday-list tr th:nth-child(6), .holiday-list tr td:nth-child(6){
     display: block;
-    width: 100%; 
+/*     width: 100%;  */
+    width: 22em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
@@ -92,6 +98,7 @@
 	    display: flex;
 	    /* justify-content: flex-start; */
 	    flex-direction: column;
+	    justify-content: space-around;
 	    
 	}
 	.detail-container table tr{
@@ -107,8 +114,8 @@
     	width: 100px;
     	text-align : center; 
 	}
-	.detail-container table tr:nth-child(5){
-    	height: 13rem; 
+	.detail-container table tr:nth-child(4){
+/*     	height: 13rem;  */
 	}
 	
 	.approval-container{
@@ -120,23 +127,55 @@
 	    justify-content: center;
 	}	    
 	.approvalDate,.reject{
-		height: 30px;
+		height: 30px;pop-rejection_reason
 	}
 	
-	#pop-approvalDate, #reject{
+	#pop-approvalDate, #pop-rejection_reason{
 		font-weight: normal;
     	padding: 0 1em;	
 	}
 	#pop-approval{
 		color : rgb(33, 150, 243);
 	}
-	@media screen and (max-width: 1490px) {
+	#pop-hcontent{
+	    display: block;
+	    /* width: 100%; */
+	    width: 22em;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: normal;
+	    height: 11em;
+	    text-align: left;
+	    word-wrap: break-word;
+	}
+	@media screen and (max-width: 1864px) {
 		th, td {
-	        padding: 0.6em;
+/* 	        padding: 0.8em; */
    			font-size: 14px;
 		}
 		.select {
-    		height: 5%;
+    		height: 4%;
+    	}
+		.sub-title {
+		    width: 62%;
+    	}
+    	.sub-sub-title h4 {
+/*     		width: 13%; */
+    	}
+    	.div1 {
+/* 	    	height: 11%; */
+	    }
+	    .div1-1 {
+/*     		width: 21%; */
+	    }
+}
+	@media screen and (max-width: 1490px) {
+		th, td {
+	        padding: 1em 0.6em;
+   			font-size: 14px;
+		}
+		.select {
+    		height: 4%;
     	}
 		.sub-title {
 		    width: 62%;
@@ -153,16 +192,16 @@
 }
 @media screen and (max-width: 1280px) {
 	th, td {
-	    padding: 9px 0;
+		padding: 0.9em 0.3em;
 	    font-size: 14px;
-    	white-space: break-spaces;
+    	white-space: nowrap;
 		
 	}
 	.thead tr th:nth-child(1),
-	.thead tr th:nth-child(5),
+	.thead tr th:nth-child(4),
 	.thead tr th:nth-child(6),
 	.tbody tr td:nth-child(1),
-	.tbody tr td:nth-child(5),
+	.tbody tr td:nth-child(4),
 	.tbody tr td:nth-child(6){
 		display: none;
 	}
@@ -173,7 +212,7 @@
 	    font-size: 12px;
 	}
 	th, td {
-	    padding: 10px 0;
+    	padding: 17px 0;
 	    font-size: 12px;
 	}
 
@@ -183,12 +222,22 @@
 	    width: 20px;
     }
 	th, td {
+		padding: 18px 0;
 	    font-size: 11px;
 	}
+	.pop-titleContainer {
+    	width: 64%;
+    }
+    .pop-container {
+    width: 400px;
+    padding: 6%
+    }
+    .count-nums {
+    font-size: 0.8em;
+    }
 }
 
-@media screen and (max-width: 500px) {
-}
+
 
 
 
@@ -223,7 +272,9 @@
 					</div>
 					<div class="sub-sub-title">
 						<h4>◎&nbsp;휴가 신청내역</h4>
-						<p>잔여일수 : <span>${holidayList[0].totalHoliday}</span>일</p>
+<%-- 						<p>잔여일수 : <span>${holidayList[0].totalHoliday}</span>일</p> --%>
+<%-- 						<p>사용일수 : <span>${holidayList[0].usedHoliday}</span>일</p> --%>
+						<p>잔여일수 : <span>${holidayList[0].totalHoliday - holidayList[0].usedHoliday}</span>일</p>
 					</div>
 					 
 					<div class="div2">
@@ -235,7 +286,7 @@
 									<th>종류</th>
 									<th>반차 종류</th>
 									<th>기간</th>
-									<th>일수</th>
+<!-- 									<th>일수</th> -->
 									<th>내용</th>
 									<th>처리 상태</th>
 									<th>결재일</th>
@@ -250,7 +301,7 @@
 										<td>${hl.htype}</td>
 										<td>${hl.halfDay != null ? hl.halfDay : "-"}</td>
 										<td>${hl.hstartDate} ~ ${hl.hendDate}</td>
-										<td>${hl.countDate}</td>
+<%-- 										<td>${hl.countDate}</td> --%>
 										<td>${hl.hcontent}</td>
 										<td>${hl.approval}</td>
 										<td>${hl.approvalDate != null ? hl.approvalDate : "-"}</td>
@@ -315,8 +366,8 @@
 						<div class="pop1-1">
 							<div class="count-nums">
 								<span>총휴가일수:&nbsp;<span class="holiday-count">${holidayList[0].totalHoliday}</span></span>
-								<span>사용된 휴가일수:&nbsp;<span class="holiday-count">${holidayList[0].totalHoliday}</span></span> 
-								<span> 잔여휴가일수:&nbsp;<span class="holiday-count">${holidayList[0].totalHoliday}</span></span>
+								<span>사용된 휴가일수:&nbsp;<span class="holiday-count">${holidayList[0].usedHoliday}</span></span> 
+								<span> 잔여휴가일수:&nbsp;<span class="holiday-count">${holidayList[0].totalHoliday - holidayList[0].usedHoliday}</span></span>
 							</div>
 							<div class="pop2">
 								<p class="p"><span class="important">*</span>휴가 종류</p>
@@ -396,7 +447,7 @@
 							</tr>
 							<tr>
 								<td>기간</td>
-								<td><span id="pop-hstartDate"></span>~<span id="pop-hendDate"></span></td>
+								<td><span id="pop-hstartDate"></span>&nbsp;~&nbsp;<span id="pop-hendDate"></span></td>
 							</tr>
 							<tr>
 								<td>일수</td>
@@ -416,7 +467,7 @@
 <!-- 						<div>처리 상태: <span id="pop-approval"></span></div> -->
 						<div class="approval-container">
 							<div class="approvalDate">결재일: <span id="pop-approvalDate">넣을 예정</span></div>
-							<div class="reject">반려사유: <span id="pop-rejection_reason">넣을 예정</span></div>
+							<div id="reject" class="reject">반려사유: <span id="pop-rejection_reason">넣을 예정</span></div>
 						</div>
 					</div>
 				</div>
@@ -643,10 +694,14 @@
 				document.getElementById("pop-halfDay").innerHTML=data.halfDay;
 				document.getElementById("pop-hstartDate").innerHTML=data.hstartDate;
 				document.getElementById("pop-hendDate").innerHTML=data.hendDate;
-				document.getElementById("pop-countDate").innerHTML=data.countDate;
+				document.getElementById("pop-countDate").innerHTML=data.countDate+"일";
 				document.getElementById("pop-hcontent").innerHTML=data.hcontent;
 				document.getElementById("pop-approval").innerHTML=data.approval;
-				document.getElementById("pop-rejection_reason").innerHTML=data.rejectionReason;
+				if(data.rejectionReason == null || data.rejectionReason == ""){
+					document.getElementById("reject").style.visibility = "hidden";
+				}else{
+					document.getElementById("pop-rejection_reason").innerHTML=data.rejectionReason;
+				}	
 				if(data.approvalDate == null || data.approvalDate == ""){
 					document.getElementById("pop-approvalDate").innerHTML="미확인";
 				}else{

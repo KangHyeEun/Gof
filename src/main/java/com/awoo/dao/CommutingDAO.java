@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import com.awoo.vo.CommutingVO;
+import com.awoo.vo.EmployeeInfoVO;
 
 @Mapper
 public interface CommutingDAO {
@@ -20,6 +21,7 @@ public interface CommutingDAO {
 	public int countOverTime(CommutingVO vo);
 	public int countLate(CommutingVO vo);
 	public int countNomalWorkday(CommutingVO vo);
+	public EmployeeInfoVO getEmpInfo(CommutingVO vo); 
 }
 
 

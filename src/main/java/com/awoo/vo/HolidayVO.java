@@ -14,14 +14,9 @@ public class HolidayVO {
 	private double countDate;
 	private int empno;
 	private int totalHoliday;
+	private int usedHoliday;
 	private String rejectionReason;
 	
-	public String getRejectionReason() {
-		return rejectionReason;
-	}
-	public void setRejectionReason(String rejectionReason) {
-		this.rejectionReason = rejectionReason;
-	}
 	public int getId() {
 		return id;
 	}
@@ -100,8 +95,18 @@ public class HolidayVO {
 	public void setTotalHoliday(int totalHoliday) {
 		this.totalHoliday = totalHoliday;
 	}
-	
-	
+	public int getUsedHoliday() {
+		return usedHoliday;
+	}
+	public void setUsedHoliday(int usedHoliday) {
+		this.usedHoliday = usedHoliday;
+	}
+	public String getRejectionReason() {
+		return rejectionReason;
+	}
+	public void setRejectionReason(String rejectionReason) {
+		this.rejectionReason = rejectionReason;
+	}
 	
 	
 }

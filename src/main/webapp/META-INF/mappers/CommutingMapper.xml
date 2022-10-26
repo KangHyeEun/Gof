@@ -81,4 +81,8 @@
 		SELECT count(work_time)
 	  	FROM commuting WHERE empno = ${empno} and cast(SUBSTRING_INDEX(work_time, '시간', 1) AS UNSIGNED) >= 9;
 	</select>
+	
+	<select id="getEmpInfo" resultType="EmployeeInfoVO">
+		select eposition, edepartment from employee_info where empno=#{empno}
+	</select>
 </mapper>

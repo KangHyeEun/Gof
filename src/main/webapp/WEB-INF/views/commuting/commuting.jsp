@@ -17,10 +17,10 @@
  	border-bottom:1px solid black;
  	}
  	 .list-table tr td, .list-table tr th{
-    padding: 0.4%;
+/*     padding: 0.4%; */
     }
     .select {
-    height: 6%;
+    height: 4%;
     }
 }
 @media screen and (max-width: 1280px) {
@@ -81,6 +81,9 @@
     }
     .list-table tr {
 /*     height: 3em; */
+    }
+   	.list-table tr td, .list-table tr th{
+	padding: 0.8em 0em;
     }
 }
 

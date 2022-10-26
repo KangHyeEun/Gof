@@ -44,7 +44,7 @@
  	background-color:#eaf6f7;
     }
     .list-table tr td, .list-table tr th{
-    padding: 0.6%;
+    padding: 0.7em;
     }
     
     
@@ -121,7 +121,7 @@
 	}
 	
 	.select{
-	height:5%;
+	height:4%;
 	width: 100%;
 /* 	border: 1px solid blue; */
 	padding: 5px;

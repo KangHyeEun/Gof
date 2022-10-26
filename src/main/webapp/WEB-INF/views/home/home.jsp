@@ -38,7 +38,7 @@
 		<div class="container">
 			<jsp:include page="../include/menu.jsp"></jsp:include>
 			<div class="container-inner-bbs">
-			<div class="greating"><h2>김루피님, 안녕하세요! 오늘도 행복한 하루 보내세요</h2></div> 
+			<div class="greating"><h2>${ename}님, 안녕하세요! 오늘도 행복한 하루 보내세요</h2></div> 
 				<div class="inner-div-bbs">
 					<!-- 각자 필요한 부분 넣기 -->
 					
@@ -53,9 +53,9 @@
 			                            <img src="https://i.pinimg.com/736x/c6/75/37/c67537a607e37016cd65de01fb4bf437.jpg" alt="">
 			                        </div>
 			                        <div class="div2-1-1-2">
-			                        	<p>직원 / 관리자</p>
-			                        	<p>김루피님</p>
-			                            <p><span>직원 종류</span></p>
+			                        	<p>${employeeInfo.checkAdmin == 1? "관리자" : "직원"}</p>
+			                        	<p>${ename}님</p>
+			                            <p><span>${employeeInfo.eposition}</span></p>
 			                            <div class="buttons">
 				                            <div id="enter"><p>출근</p></div>
 				                    		<div id="leave"><p>퇴근</p></div>

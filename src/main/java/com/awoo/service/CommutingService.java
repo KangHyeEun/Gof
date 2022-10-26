@@ -115,8 +115,9 @@ public class CommutingService {
 		vo2.setWorkday(YearAndMonth); // 지각이랑 초과근무시간에서 사용
 		vo2.setEmpno(empno);
 
-
-//		원래 사용하던 데이터들은 막아둠 필요할 수 있으니 주석은 안지웠습니다
+		// 직원 종류 직급 불러오기 위한 dao
+		model.addAttribute("employeeInfo", dao.getEmpInfo(vo2));
+		
 		// 지각 개수
 		model.addAttribute("countLate", dao.countLate(vo2));
 		// 초과 근무 개수
@@ -129,7 +130,7 @@ public class CommutingService {
 		model.addAttribute("startTime", this.getStartDate(today, empno));
 		model.addAttribute("endTime", this.getEndDate(today, empno));
 		
-		
+		// 계산 재료들
 		model.addAttribute("countThisMonth", dao.countThisMonth(vo2));
 		model.addAttribute("countNormalCommuting", dao.countNomalWorkday(vo2));
 	

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.awoo.dao.HolidayDAO">
 	<select id="selectHoliday" resultType="HolidayVO">
-		select h.id as id, huser_name, DATE_FORMAT(hwrite_date, '%y.%m.%d') as hwrite_date, htype, date_format(hstart_date,'%y.%m.%d') as hstart_date, date_format(hend_date,'%y.%m.%d') as hend_date, hcontent, half_day,approval, count_date, h.empno as empno, e.total_holiday as total_holiday, date_format(approval_date,'%y.%m.%d') 
+		select h.id as id, huser_name, DATE_FORMAT(hwrite_date, '%y.%m.%d') as hwrite_date, htype, date_format(hstart_date,'%y.%m.%d') as hstart_date, date_format(hend_date,'%y.%m.%d') as hend_date, hcontent, half_day,approval, count_date, h.empno as empno, e.total_holiday as total_holiday, e.used_holiday as used_holiday, date_format(approval_date,'%y.%m.%d') as approval_date 
 		FROM holiday h, employee_info e
 		<where>
 			h.empno = e.empno

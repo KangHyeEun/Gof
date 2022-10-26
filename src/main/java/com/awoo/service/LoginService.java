@@ -28,7 +28,8 @@ public class LoginService {
 			session = request.getSession();
 			//세션에 담기
 			session.setAttribute("personalInfoVO", loginDao.selectUser(vo));
-			path ="redirect:/login/home";
+//			path ="redirect:/login/home";
+			path ="redirect:/MoveToHome";
 		}else {
 			//세션을 초기화하고 로그인 창으로 돌려보냄
 			session.invalidate();

@@ -59,3 +59,14 @@
  .navbar__toogleBtn{
 	display: none;
 }
+@media screen and (max-width: 500px) {
+	.toggle-block {
+	    display: flex;
+	    justify-content: center;
+	    
+	}
+	.menuwrap{
+		width: 65%;
+	}
+	
+}

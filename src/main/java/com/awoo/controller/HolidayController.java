@@ -48,7 +48,7 @@ public class HolidayController {
 		service.selectHoliday(model);
 		return "holiday/holiday";
 	}
-	@GetMapping("ApplyHoliday")
+	@PostMapping("ApplyHoliday")
 	public String ApplyHoliday(
 							   @RequestParam("leaveType") String leaveType,	
 							   @RequestParam("leaveStartDate") String leaveStartDate,

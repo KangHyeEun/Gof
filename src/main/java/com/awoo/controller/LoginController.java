@@ -26,11 +26,11 @@ public class LoginController {
 		return service.isUser(vo, session, request);
 	}	
 	
-	//메인페이지 이동
-	@GetMapping("/login/home")
-	public String postLogin() {
-		return "home/home";
-	}
+	//메인페이지 이동  데이터 불러오는 것 때문에 MoveToHome으로 변경했습니다!!!
+//	@GetMapping("/login/home")
+//	public String postLogin() {
+//		return "home/home";
+//	}
 	
 	//로그아웃(세션 초기화)
 	@GetMapping("/logout")
