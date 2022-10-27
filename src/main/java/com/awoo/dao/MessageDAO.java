@@ -3,6 +3,7 @@ package com.awoo.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.awoo.vo.MessageVO;
 
@@ -13,13 +14,14 @@ public interface MessageDAO {
 	
 	public MessageVO selectBBS(String id);
 	
-	public int insertData(MessageVO vo);
-
-	public void deleteData1(MessageVO vo);
+	public void insertData(MessageVO vo);
+	
+	//체크박스삭제
+	public int deleteData1(@Param("ids") int[] ids);
 	
 	public void deleteData2(MessageVO vo);
 	
-
+	
 
 	
 }

@@ -141,7 +141,7 @@ form {
 	width: 459px;
 }
 
-#category, #content ,#title {
+#mreciever, #mcontent ,#mtitle {
 	width: 439px;
 	height: 27px;
 	background-color: #efefef;
@@ -153,7 +153,7 @@ form {
 	color: #3a3a3a;
 }
 
-#category:focus, #content:focus ,#title:focus {
+#mreciever:focus, #mcontent:focus ,#mtitle:focus {
 	border: 1px solid #97d6eb;
 }
 
@@ -299,15 +299,15 @@ textarea {
 							<div class="modal-content">
 								<span class="close-button">&times;</span>
 								<h1 class="title">쪽지 보내기</h1>
-								<form action="${pageContext.request.contextPath}/bbs6/bbs/set" method="POST">
-									<label for="text">받는이:</label> <input type="text" name="text"
-										placeholder="받는이를 입력하세요." required="required" id="category">
+								<form action="${pageContext.request.contextPath}/message/result2" method="POST">
+									<label for="text">받는이:</label> <input type="text" name="mreciever"
+										placeholder="받는이를 입력하세요."  id="mreciever">
 									
-									<label for="text">제목:</label> <input type="text" name="text"
-										placeholder="제목을 입력하세요." required="required" id="title">
+									<label for="text">제목:</label> <input type="text" name="mtitle"
+										placeholder="제목을 입력하세요." id="mtitle" >
 									<label>내용:</label>
-									<textarea name="message" placeholder="내용을 입력하세요."
-										required="required" id="content"></textarea>
+									<textarea name="mcontent" placeholder="내용을 입력하세요."
+									 id="mcontent"  ></textarea>
 									<input type="button" id="cancel" value="취소"> <input
 										type="submit" id="submit" value="보내기">
 								</form>
@@ -350,12 +350,10 @@ textarea {
 			} else {
 				var chk = confirm("정말 삭제하시겠습니까?");
 				$.ajax({
-					url : 'message/result7',
+					url : '${pageContext.request.contextPath}/message/delete',
 					type : 'POST',
-					traditional : true,
-					data : {
-						valueArr : valueArr
-					},
+					contentType: 'application/json; charset=utf-8',
+					data : JSON.stringify(valueArr),
 					success : function(jdata) {
 						if (jdata = 1) {
 							alert("삭제가 완료되었습니다.");
@@ -363,6 +361,9 @@ textarea {
 						} else {
 							alert("삭제 실패");
 						}
+					},
+					error : function(err){
+						console.log('실패');
 					}
 				});
 			}
@@ -392,9 +393,9 @@ textarea {
          cancel.addEventListener("click", toggleModal); 
          window.addEventListener("click", windowOnClick); 
          
-         var anText_sub1 = document.getElementById('category').value;
-         var anText_sub2 = document.getElementById('title').value;
-         var anText_sub3 = document.getElementById('content').value;
+         //var anText_sub1 = document.getElementById('category').value;
+         //var anText_sub2 = document.getElementById('title').value;
+         //var anText_sub3 = document.getElementById('content').value;
      </script>
 	
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>

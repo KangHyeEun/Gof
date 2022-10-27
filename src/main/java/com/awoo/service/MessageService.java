@@ -21,16 +21,20 @@ public class MessageService {
 	public void getList(Model model) {
 		model.addAttribute("list", dao.selectList());
 	}
-
-	//데이터 추가
+	
 	public void setData1(MessageVO vo) {
 		dao.insertData(vo);
 	}
 
-//	//받은 쪽지함 삭제
-//	public void deleteData1(MessageVO vo) {
-//		dao.deleteData1(vo);
-//	}
+	
+ 	//받은 쪽지함 체크 박스 삭제
+	public boolean deleteData1(int[] ids) {
+		if(dao.deleteData1(ids)> 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 
 	//보낸 쪽지함 삭제
 	public void deleteData2(MessageVO vo) {
