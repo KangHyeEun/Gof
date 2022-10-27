@@ -13,23 +13,6 @@
 
 </head>	
 <body>
-<%-- 	<a href="${pageContext.request.contextPath}/MoveToHome">홈 이동</a><br> --%>
-	<a href="${pageContext.request.contextPath}/Commuting">가빈이동</a><br>
-	<a href="${pageContext.request.contextPath}/template">템플릿 이동</a><br>
-	<a href="${pageContext.request.contextPath}/bbstemplate">게시판 템플릿 이동</a><br>
-	<hr>
-	
-	<a href="${pageContext.request.contextPath }/calendar">Calendar 이동</a>
-
-<hr>
-	<a href="${pageContext.request.contextPath}/admin">혜은이동</a>
-<hr>
-	<a href="${pageContext.request.contextPath}/bbsPage/bbs">(희연)게시판으로 이동</a>
-	
-<hr>
-	<a href="${pageContext.request.contextPath}/message"> 지영 - 받은 쪽지함</a>
-	<a href="${pageContext.request.contextPath}/message/message2">지영 - 보낸 쪽지함</a>
-	
 	<div class="container-wrap">
 		<div class="header">
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
@@ -50,12 +33,15 @@
 			                    </div>
 			                    <div class="div2-1-1">
 			                        <div class="div2-1-1-1">
-			                            <img src="https://i.pinimg.com/736x/c6/75/37/c67537a607e37016cd65de01fb4bf437.jpg" alt="">
+			                            <img src="${pageContext.request.contextPath}/imges/contact.png" alt="">
 			                        </div>
 			                        <div class="div2-1-1-2">
-			                        	<p>${employeeInfo.checkAdmin == 1? "관리자" : "직원"}</p>
-			                        	<p>${ename}님</p>
-			                            <p><span>${employeeInfo.eposition}</span></p>
+			                        	<p class="infoEcheckAdmin">
+			                        	<img src="${pageContext.request.contextPath}/imges/badge_staff.png"/>
+			                        	${employeeInfo.checkAdmin == 1? "관리자" : "일반 직원"}</p>
+			                        	<p class="infoEname">${ename}&nbsp;<span>${employeeInfo.eposition}</span>님</p>
+			                            <p class="infoEmpno">사원번호&nbsp;:&nbsp;<span>${employeeInfo.empno}</span></p>
+<!-- 			                            <p class="infoEposition"></p> -->
 			                            <div class="buttons">
 				                            <div id="enter"><p>출근</p></div>
 				                    		<div id="leave"><p>퇴근</p></div>
@@ -70,6 +56,14 @@
 			            </div>
 			            <div class="div3">
 			                <p>div3</p>
+			                <div class="day-rates">
+							 	<p>초과 근무 : <span class="work-rates">${overTime}</span></p>
+				                <p>지각 : <span class="work-rates">${countLate}</span></p>
+				                <p>정상 근무 횟수 : <span class="work-rates">${countNormalCommuting}</span></p>
+				                <p>휴가 요청 개수 : <span class="work-rates">${countApproval}</span></p>
+				                <p>총 휴갸 개수: <span class="work-rates">${totalUsedHoliday.totalHoliday}</span></p>
+				                <p>사용한 휴가 개수 : <span class="work-rates">${totalUsedHoliday.usedHoliday}</span></p>
+			                </div>
 			            </div>
 			        </section>
 			
@@ -79,20 +73,50 @@
 					           	<p>div4</p>
 							</div>
 					        <div class="div1">
-				                <p>div1</p>
+				                <p>사내 공지사항</p>
+				                <div>
+									<table>
+										<thead>
+											<tr>
+												<th>번호</th>
+												<th>분류</th>
+												<th>제목</th>
+												<th>작성자</th>
+												<th>작성일</th>
+												<th>조회수</th>
+												<th>첨부 파일</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="vo" items="${noticeListForHome}" varStatus="status">
+												<tr>
+													<td>${status.index+1}</td>
+													<td>${vo.category}</td>
+													<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
+													<td>인사담당자</td>
+													<td>${vo.createDate}</td>
+													<td>${vo.viewCounts}</td>
+													<td>첨부 파일</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+				                </div>
 				            </div>
 				        </section>
 					</div>
 				</div>
 			<div id="enterpop" style="display:none">
 	            <div class="pop-container" >
-	                <div class="pop1"><a href="" >✖️</a></div>
+	                <div class="pop1"><span id="todayEnterDate"></span><a href="" >✖️</a></div>
+	                
 	                <div class="pop2"><img src="https://i.pinimg.com/736x/c6/75/37/c67537a607e37016cd65de01fb4bf437.jpg" alt=""></div>
 	                <div class="pop3">
-	                    <p>김루피님</p>
-	                    <p>정보/사원</p>
-	                    <p>이메일</p>
-	                    <p>오늘날짜 시간</p>
+	                    <p>이름&nbsp;:&nbsp;<span>${ename}</span></p>
+<%-- 	                    <p>${employeeInfo.checkAdmin == 1? "관리자" : "직원"}&nbsp;/&nbsp;<span>${employeeInfo.eposition}</span></p> --%>
+<%-- 	                    <p>사원번호&nbsp;:&nbsp;<span>${employeeInfo.empno}</span></p> --%>
+	                    
+	                    <p>현재 시간&nbsp;:&nbsp;<span id="todayEnterTime"></span></p>
 	                </div>
 	                <div class="pop4">
 	                    <form action="${pageContext.request.contextPath}/CommutingEnter">
@@ -103,13 +127,13 @@
 	        </div>
 	        <div id="leavepop" style="display:none">
 	            <div class="pop-container" >
-	                <div class="pop1"><a href="" >✖️</a></div>
+	            <div class="pop1"><span id="todayLeaveDate"></span><a href="" >✖️</a></div>
 	                <div class="pop2"><img src="https://i.pinimg.com/736x/c6/75/37/c67537a607e37016cd65de01fb4bf437.jpg" alt=""></div>
 	                <div class="pop3">
-	                    <p>김사원님</p>
-	                    <p>정보/사원</p>
-	                    <p>이메일</p>
-	                    <p>오늘날짜 시간</p>
+	                    <p>이름&nbsp;:&nbsp;<span>${ename}</span></p>
+<%-- 	                    <p>${employeeInfo.checkAdmin == 1? "관리자" : "직원"}&nbsp;/&nbsp;<span>${employeeInfo.eposition}</span></p> --%>
+<%-- 	                    <p>사원번호&nbsp;:&nbsp;<span>${employeeInfo.empno}</span></p> --%>
+	                    <p>현재 시간&nbsp;:&nbsp;<span id="todayLeaveTime"></span></p>
 	                </div>
 	                <div class="pop4">
 	                    <form action="${pageContext.request.contextPath}/CommutingLeave">
@@ -121,9 +145,18 @@
 		</div>
 	</div>
     <script type="text/javascript">
+    	
+    
+    
 	    document.getElementById("enter").addEventListener("click",function(){
 	    	if(${startTime == null}){
+	    		let today = new Date();
+	    		let date = today.toLocaleDateString();
+	    		let time = today.toLocaleTimeString();
 	       		document.getElementById("enterpop").style.display = "flex";
+	       		document.getElementById("todayEnterDate").innerHTML = date;
+	       		document.getElementById("todayEnterTime").innerHTML = time;
+	       		
 	    	}else {
 	    		alert("이미 출근하셨습니다.");	    		
 	    	}
@@ -134,7 +167,12 @@
 	    		if(${startTime == null}){
 		        	alert("출근 기록이 없습니다.")
 		    	}else{
-	    			document.getElementById("leavepop").style.display = "flex";	    		
+		    		let today = new Date();
+		    		let date = today.toLocaleDateString();
+		    		let time = today.toLocaleTimeString();
+	    			document.getElementById("leavepop").style.display = "flex";
+	    			document.getElementById("todayLeaveDate").innerHTML = date;
+		       		document.getElementById("todayLeaveTime").innerHTML = time;		
 		    	}
 	    	}else {
 	    		alert("이미 퇴근하셨습니다.");	    		

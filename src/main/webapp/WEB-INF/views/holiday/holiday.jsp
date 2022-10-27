@@ -23,7 +23,7 @@
 	    border: none;
   	    padding: 0.3em;  
 		height:35px;
- 	    width: 80px; 
+ 	    width: 100px; 
  	    white-space: nowrap;
 /* 	    white-space: nowrap; */
 	    
@@ -72,6 +72,9 @@
 	.holiday-list tbody tr:nth-child(odd){
 	background-color: #f8f8f9;
 	}
+	.detail-container table tbody tr:nth-child(odd){
+	background-color: #f8f8f9;
+	}
 	.count-nums{
 	    justify-content: space-evenly;
 	}
@@ -82,14 +85,68 @@
 	
 	
 	
-	.modal .btn{cursor: pointer;border: 1px solid #999999;text-align: center;border-radius: 5px;outline: none;font-weight: 500;}
+	.modal .btn {
+	    cursor: pointer;
+/* 	    border: 1px solid #e1e1e1; */
+	    text-align: center;
+	    border-radius: 30px;
+	    outline: none;
+	    font-weight: 500;
+	    width: 23%;
+	    height: 40px;
+	    margin: 0px 6px;
+	    box-shadow: 0px 2px 7px -4px #3e3e3e;
+	}
 	.dimLayer{display: block;width: 100%;background-color: rgba(0, 0, 0, 0.3);position: fixed;left: 0;top: 0px;margin: 0;padding: 0;z-index: 9998;}
-	.modal{width: 600px;height: 252px;border-radius: 10px;padding: 80px 24px;box-sizing: border-box;text-align: center;}
-	.modal-section{background: #ffffff;box-sizing: border-box;display: none;position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);display: none;z-index: 9999;}
-	.menu_msg{font-size: 21px;font-weight: 500;}
-	.enroll_box p{padding-bottom: 56px;}
-	.gray_btn {width: 90px;background: #ffffff;color: #999999;height: 36px;line-height: 36px;transition: 0.5s;font-size: 17px;}
-	.pink_btn {width: 90px;background: #ed197a;color: #fff;height: 36px;line-height: 36px;transition: 0.5s;font-size: 17px;border: none;}
+	.modal{
+		width: 600px;height: 252px;border-radius: 10px;padding: 80px 24px;box-sizing: border-box;text-align: center;
+	    transition: all 0.3s ease 0s;
+	    animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	}
+	.modal-section {
+	    background: #ffffff;
+	    box-sizing: border-box;
+	    display: none;
+	    position: absolute;
+	    transform: translate(-50%, -50%);
+	    display: none;
+	    z-index: 9999;
+	    box-shadow: 0px 5px 20px -9px rgb(0 0 0);
+	}
+	.menu_msg{font-size: 20px;font-weight: 500;}
+	.enroll_box p{
+	padding-bottom: 50px; 
+	color: #4c4c4c;
+	}
+	.gray_btn {
+	width: 90px;
+    background: #ffffff;
+    color: #3c3c3c;
+    height: 36px;
+    line-height: 36px;
+    transition: 0.5s;
+    font-size: 17px;
+    border: 1px solid #e1e1e1;
+/*     text-shadow: 2px 2px 10px #afafaf; */
+}
+
+
+
+
+
+	.pink_btn {
+    width: 90px;
+    background: #219cf3;
+    color: #fff;
+    height: 36px;
+    line-height: 36px;
+    transition: 0.5s;
+    font-size: 17px;
+    border: none;
+    border: 1px solid #0095ff;
+    text-shadow: 2px 2px 3px #5c5c5c;
+}
+
 	
 	
 	.detail-container{
@@ -152,25 +209,27 @@
 		border: 1px solid #d3d3d3;
 	    width: 5.5em;
 	    /* padding: 4px; */
-	    width: 70%;
+	    width: 70px;
 	    font-size: 11px;
 	    border-radius: 7px;
 	    background: linear-gradient(1deg, #cdcdcd, #ffffff);
 /* 	    display: flex; */
 /* 	    justify-content: center; */
 /* 	    align-items: center; */
-	    height: 50%;
+	    padding: 3% 0px;
+    	box-sizing: border-box;
 	}
 	.holiday-list td a:hover{
+		transition: 0.3s;
 		color:white;
 		background: linear-gradient(1deg, #8d8d8d, #cdc9c9);
 	}
-	.holiday-list td a:active{
-		color:white;
-		position:relative;
-		background: linear-gradient(1deg, #8d8d8d, #cdc9c9);
-		top:2px;
-	}
+/* 	.holiday-list td a:active{ */
+/* 		color:white; */
+/* 		position:relative; */
+/* 		background: linear-gradient(1deg, #8d8d8d, #cdc9c9); */
+/* 		top:2px; */
+/* 	} */
 	@media screen and (max-height: 890px){
 	.holiday-list th, .holiday-list td { 
   		padding: 0; 
@@ -465,17 +524,17 @@
 						</div>
 					</form>
 				</div>
+		        <section class="modal modal-section type-confirm" id="confirm-block">
+		            <div class="enroll_box">
+		                <p class="menu_msg" id="real-submit-message">휴가를 신청하시겠습니까?</p>
+		            </div>
+		            <div class="enroll_btn">
+		                <button class="btn pink_btn btn_ok" id="btn_ok">확인</button>
+		                <button class="btn gray_btn modal_close" id="btn_cancle">취소</button>
+		            </div>
+		        </section>
 			</div>
 			
-	        <section class="modal modal-section type-confirm" id="confirm-block">
-	            <div class="enroll_box">
-	                <p class="menu_msg" id="real-submit-message">휴가를 신청하시겠습니까?</p>
-	            </div>
-	            <div class="enroll_btn">
-	                <button class="btn pink_btn btn_ok" id="btn_ok">확인</button>
-	                <button class="btn gray_btn modal_close" id="btn_cancle">취소</button>
-	            </div>
-	        </section>
 		
 			<div id="detailpop">
 				<div class="pop-container">
@@ -697,7 +756,8 @@
    		 });
    		 
    		 document.getElementById("btn_ok").addEventListener("click",function(){
- 		 	document.getElementById("real-submit-btn").click();   				 
+ 		 	alert("성공적으로 신청되었습니다");
+   			 document.getElementById("real-submit-btn").click();   				 
  		 });
  	     document.getElementById("btn_cancle").addEventListener("click",function(){
  	    	document.getElementsByClassName("modal-section")[0].style.display = "none";

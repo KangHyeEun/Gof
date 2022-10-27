@@ -27,10 +27,10 @@ public class LoginController {
 	}	
 	
 	//메인페이지 이동  데이터 불러오는 것 때문에 MoveToHome으로 변경했습니다!!!
-//	@GetMapping("/login/home")
-//	public String postLogin() {
-//		return "home/home";
-//	}
+	@GetMapping("/login/home")
+	public String postLogin() {
+		return "redirect:/MoveToHome";
+	}
 	
 	//로그아웃(세션 초기화)
 	@GetMapping("/logout")

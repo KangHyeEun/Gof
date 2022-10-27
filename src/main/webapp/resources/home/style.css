@@ -39,7 +39,10 @@
     box-shadow: 1px 1px 8px #c1c1c1;
    }
    .left-section > .div2 .div2-1-1-1{
-    width: 33%;
+    width: 11em;
+    height: 11em;
+    /* height: 100%; */
+    /* height: min-content; */
     border: 1px solid black;
     border-radius: 40%;
     overflow: hidden;
@@ -92,11 +95,14 @@
    }
    .div3{
 /*     flex: 3; */
+	flex-direction : column;
     height: 48%;
     width: 98%;
     background-color: white;  
     border-radius: 7px; 
     box-shadow: 1px 1px 8px #c1c1c1;
+    justify-content: start;
+    align-items: center;
     
    }
    
@@ -110,6 +116,8 @@
     align-items: center;
     animation: fadein 0.3s;
     z-index:1;
+    padding: 5%;
+    box-sizing: border-box;
    }
 	@keyframes fadein {
 	    from {
@@ -152,7 +160,15 @@
    .pop1 {
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.1em;
+   }
+   .pop1 span{
+    width: 30%;
+    text-align: -webkit-center;
+    color: #2196f3;
    }
    .pop1 a {
     text-decoration: none;
@@ -160,14 +176,17 @@
    }
    .pop3 {
     display: flex;
-    height: 30%;
+    height: 15%;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    color: #424242;
+    color: #8f8f8f;;
     font-weight: bold;
+    letter-spacing: 1px;
     }
-
+	.pop3 p span{
+		color : black;
+	}
    .pop4 {
     display: flex;
     justify-content: center;
@@ -255,15 +274,46 @@
     justify-content: space-evenly;
     
     }
+    .div2-1-1-2 .infoEcheckAdmin img {
+	padding-right: 4px;
+    position: relative;
+    top: 3px;
+    }
+    .infoEname{
+    font-size:1.3em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    }
+    .infoEcheckAdmin{
+     color: #7c7c7c;
+    font-size: 0.9em;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    }
+    .infoEmpno{
+    font-size: 1em;
+    letter-spacing: 1px;
+    }
+    .infoEposition{
+    
+    }
+    
+    
+    .div2-1-1-2 p span {
+/*     	color: #2196f3; */
+    }
    	.div2-1-1-2 > .buttons{
     display: flex;
-    height: 25%;
+    height: 35%;
     width: 70%;
     justify-content: space-between;
+    align-items: center;
    	}
    	
    	#enter {
 	width: 44%;
+	height: 73%;
 /*     background: linear-gradient(#319af3, #005dab); */
     background-color: #373462;
     /* background: linear-gradient(#319af3, #005dab); */
@@ -282,6 +332,7 @@
     }
     #leave {
     width: 44%;
+    height: 73%;
     /* height: 90%; */
     /* border: 1px solid #272454; */
     background-color: #58585c;
@@ -303,8 +354,8 @@
     .showenter, .showleave{
    	border: 1px solid #d3d3d3;
     width: 45%;
-    height: 48%;
-    font-size: 13px;
+    height: 60%;
+    font-size: 14px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -317,6 +368,7 @@
    	border-radius: 0 5px 5px  0;
     }
     
+  
 /*     .list{ */
 /*      height: 90%; */
 /*      width: 90%; */
@@ -360,7 +412,16 @@
 /*     .list-table thead tr{ */
 /*  	background-color:#eaf6f7; */
 /*     } */
-   
+    @media ( max-width: 1624px ) {
+      .left-section > .div2 .div2-1-1-1{
+		    display:none;
+		   }
+		.div2-1-1-2 {
+		    width: 100%;
+		    height: 100%;
+		    align-items: center;
+		}
+    }
    @media ( max-width: 1024px ) {
    		.container-bbs{
    		justify-content: space-around;
@@ -378,11 +439,11 @@
 /* 	    width:100%; */
 /* 	   } */
 	   .left-section .div2{
-	   width: 58%;
+	   width: 62%;
 	   height: 97%;
 	   }
 	   .left-section .div3{
-	    width: 40%;
+	   width: 36%;
 	   height: 97%;
 	   }
 	   .right-section{
@@ -397,7 +458,7 @@
 	   width: 100%;
 	   }
     }
-   @media ( max-width: 768px ) {
+   @media ( max-width: 800px ) {
    		.left-section{
 	   	flex-direction:column;
 	    width: 100%;
@@ -414,9 +475,9 @@
 	    font-size:10px;
 	   }
 	   .left-section .div2{
-	   width: 100%;
-	   height: 68%;
-	   flex-direction: row;
+	       width: 100%;
+		    height: 68%;
+		    flex-direction: row;
 	   }
 	   .left-section .div3{
 	   width: 100%;
@@ -431,21 +492,49 @@
 	   width: 100%;
 	   height: 30%;
 	   }
-	   .left-section > .div2 > .div2-2 {
-	   flex-direction: column;
-	   width:90%
-	   }
+/* 	   .left-section > .div2 > .div2-2 { */
+	   
+/* 	   } */
+/*  .div2-1-1, .div2-1-2,  .div2-1-3{ */
+/*            display: flex; */
+/* 		    flex: 4; */
+/* 		    align-items: center; */
+/* 		    width: 100%; */
+/* 		    justify-content: space-between; */
+/*    } */
+		.div2-1-1-2 {
+    		width: 93%;
+	    }
 		.left-section > .div2 > .div2-1 {
-		flex:none;
-		width: 60%;
+			flex:none;
+			width: 50%;
+		    padding: 0;
+		    height: 85%;
 		}
 		.left-section > .div2 > .div2-2 {
-		flex:none;
-		width: 35%;
+		    flex-direction: column;
+		    flex: none;
+		    height: 60%;
+    		width: 33%;
+		    justify-content: space-between;
 		}
 		.showenter, .showleave{
-	   width: 100%;
+	       width: 100%;
+    		height: 45%;
 		}
+		.infoEmpno {
+	    font-size: 0.8em;
+	    }
+	    .infoEname {
+	    font-size: 1em;
+	    }
+	    .div2-1-1-2 > .buttons {
+	    width: 80%;
+	    }
+	    .left-section > .div2 .div2-1-1-1 {
+	    display: none;
+	    }
+	    
     }
-    @media ( max-width: 500px ) {
+    @media ( max-width: 635px ) {
     }
