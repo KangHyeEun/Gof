@@ -40,7 +40,9 @@
 .month > p {
     font-size: 16px;
 }
-
+.date > h1 {
+	font-size: 26px;
+}
 .btnMove, .btnDiv{
 	flex: 1;
 }
@@ -82,6 +84,9 @@
 	height: 30px;
 	cursor: pointer;
 }
+.btnDiv > p:first-child {
+	width: 70px;
+}
 .btnColor {
 	box-shadow: inset 1px 1px 5px white;
 }
@@ -122,21 +127,26 @@
     flex-wrap: wrap;
 }
 .days > div {
-    font-size: 16px;
+    font-size: 14px;
     width: calc((100% - 6px) / 7);
     height: 11.13vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+/*     justify-content: flex-start; */
+    justify-content: space-between;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
     text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
     transition: background-color 0.2s;
 }
-.days > div > div > div:not(.days > div > div > div:nth-child(1),
-						.days > div > div > div:nth-child(2),
-						.days > div > div > div:nth-child(3)) {
-	display: none;
+/* 사용자 에이전트 스타일시트를 막기 위함 */
+.days > div > div {
+	display: block;
+}
+.days > div > .overCnt > span {
+    display: flex;
+    justify-content: flex-end;
+	padding: 0px 5px 0 0;
 }
 .days > div > div > div:not(.days div div:first-child) {
     align-items: flex-start;
@@ -146,7 +156,16 @@
 	justify-content: flex-end;
 }
 .days > div > div > div > span {
-    padding: 5px 10px 0 0;
+/*     padding: 5px 10px 0 0; */
+	padding: 0px 5px 0 5px;
+}
+.days > div > div:first-child > div > span:not(.days > div > div:first-child > div:first-child > span) {
+	display: inline-block;
+	width: 150px;
+	overflow: hidden;			/* 영역을 감출 것 */
+	text-overflow: ellipsis;	/* ... 만들기 */
+	white-space: nowrap;		/* 아래줄로 내려가는 것을 막기위해 */
+	word-break: break-all;
 }
 .days > div:hover:not(.today) {
 	background-color: #a7a4bf;
@@ -220,6 +239,9 @@
 .schedule > div a {
 	padding-right: 30px;
 }
+.schedule > div > a > img {
+	cursor: pointer;
+}
 .schedule > div:last-child {
 	margin-top: 10px;
 }
@@ -255,14 +277,63 @@ input[type="text"] {
 .schedule #btn:hover{
 	background-color: #319af3;
 }
+
+.displayNone {
+	display: none;
+}
 /* testcommit */
-@media ( max-width: 1440px ) {
+@media ( max-width: 1440px ) {	/* default */
+	.days > div > div:first-child > div > span:not(.days > div > div:first-child > div:first-child > span) {
+		width: 140px; /* 일정 가로길이 ...을 위한 값 */
+	}
 }
-@media ( max-width: 1280px ) {
+@media ( max-width: 1400px ) {	/* add */
+	.days > div > div:first-child > div > span:not(.days > div > div:first-child > div:first-child > span) {
+		width: 130px; /* 일정 가로길이 ...을 위한 값 */
+	}
 }
-@media ( max-width: 1024px ) {
+@media ( max-width: 1300px ) {	/* add */
+	.days > div > div:first-child > div > span:not(.days > div > div:first-child > div:first-child > span) {
+		width: 120px; /* 일정 가로길이 ...을 위한 값 */
+	}
 }
-@media ( max-width: 768px ) {
+@media ( max-width: 1280px ) {	/* default */
 }
-@media ( max-width: 480px ) {
+@media ( max-width: 1200px ) {	/* add */
+	.days > div > div:first-child > div > span:not(.days > div > div:first-child > div:first-child > span) {
+		width: 100px; /* 일정 가로길이 ...을 위한 값 */
+	}
 }
+@media ( max-width: 1100px ) {	/* add */
+	.days > div > div:first-child > div > span:not(.days > div > div:first-child > div:first-child > span) {
+		width: 80px; /* 일정 가로길이 ...을 위한 값 */
+	}
+}
+@media ( max-width: 1024px ) {	/* default */
+}
+@media ( max-width: 900px ) {	/* add */
+	.days > div > div:first-child > div > span:not(.days > div > div:first-child > div:first-child > span) {
+		width: 60px; /* 일정 가로길이 ...을 위한 값 */
+	}
+}
+@media ( max-width: 768px ) {	/* default */
+	.days > div > div:first-child > div > span:not(.days > div > div:first-child > div:first-child > span) {
+		width: 40px; /* 일정 가로길이 ...을 위한 값 */
+	}
+}
+@media ( max-width: 480px ) {	/* default */
+}
+/* //test Commit//test Commit */
+/* @media (max-height: 880px) { */
+/* 	.days > div > div > div:not(.days > div > div > div:nth-child(1), */
+/* 							.days > div > div > div:nth-child(2), */
+/* 							.days > div > div > div:nth-child(3)) { */
+/* 		display: none; */
+/* 	} */
+/* } */
+/* @media (max-height: 690px) { */
+/* 	.days > div > div > div:not(.days > div > div > div:nth-child(1), */
+/* 							.days > div > div > div:nth-child(2)) { */
+/* 		display: none; */
+/* 	} */
+/* } */

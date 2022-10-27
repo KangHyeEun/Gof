@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.awoo.dao.CalendarDAO">
+<!-- //test Commit//test Commit -->
 	<select id="selectSchedule" resultType="CalendarVO">
 		select cal_id, cal_title, cal_place,
 			DATE_FORMAT(cal_start, '%Y-%c-%e %H:%i') as cal_start,

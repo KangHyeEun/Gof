@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 import com.awoo.dao.CalendarDAO;
 import com.awoo.vo.CalendarVO;
-
+//test Commit//test Commit
 @Service
 public class CalendarService {
 	private CalendarDAO dao;
@@ -25,8 +25,6 @@ public class CalendarService {
 	
 //	비동기로 일자별 일정 출력하기 위한 데이터 추출
 	public List<CalendarVO> restDataMethod(Map<String, String> map) {
-		System.out.println(map.get("calStart"));
-		System.out.println(map.get("calEnd"));
 		return dao.selectRestData(map);
 	}
 

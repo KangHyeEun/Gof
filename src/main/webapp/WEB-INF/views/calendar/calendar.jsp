@@ -46,6 +46,7 @@
                             <p class="todayMove"></p>
                         </div>
 		               	<div class="btnDiv">
+		               		<p id="btnScheAdd" class="btnColor">일정추가</p>
 		               		<p id="btnMonth" class="btnClick">월</p>
 		               		<p id="btnWeek" class="btnColor">주</p>
 		               		<p id="btnDay" class="btnColor">일</p>
@@ -69,7 +70,7 @@
 				<div class="schedule slideTop">
 					<div>
 						<p>일정 등록</p>
-						<a href="">
+						<a>
 							<img src="${pageContext.request.contextPath}/imges/close.png" alt="" />
 						</a>
 					</div>
@@ -108,6 +109,11 @@
 					</div>
 				</div>
 			</div>
+			<div class="schedule-info-wrap">
+				<div class="schedule-info slideTop">
+					
+				</div>
+			</div>
 		</div>
 	</div>
 	
@@ -116,10 +122,16 @@
 		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
 	</script>
 	
-
+<!-- //test Commit//test Commit -->
     <script src="${pageContext.request.contextPath}/calendar/cal-script.js"></script>
 <!--     위의 .js 에서 EL태그 사용이 불가해서 대신 사용 -->
 <%--     <jsp:include page="../include/menu.jsp"></jsp:include> --%>
+    
+    <script type="text/javascript">
+		document.querySelector(".schedule > div > a > img").addEventListener("click", function(){
+			document.querySelector(".schedule-wrap").style.display = "none";
+		});
+    </script>
     
     <script type="text/javascript">
 

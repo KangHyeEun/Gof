@@ -98,13 +98,13 @@ const renderCalendar = () => {
 		
 //		일요일이면
 		if(holidayStyle == 0) {
-			days += `<div class="${prevClass} prev-date" style="color:red"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"></div></div>`;
+			days += `<div class="${prevClass} prev-date" style="color:red"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //		토요일이면
 		} else if(holidayStyle == 6) {
-			days += `<div class="${prevClass} prev-date" style="color:blue"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"></div></div>`;
+			days += `<div class="${prevClass} prev-date" style="color:blue"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //		평일이면
 		} else {
-			days += `<div class="${prevClass} prev-date"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"></div></div>`;
+			days += `<div class="${prevClass} prev-date"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"><span></span></div></div>`;
 		}
     }
 // 이번 달 일자
@@ -122,13 +122,13 @@ const renderCalendar = () => {
 		
 //			일요일이면
 			if(holidayStyle == 0) {
-				days += `<div class="${currentClass} today" style="color:red"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
+				days += `<div class="${currentClass} today" style="color:red"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //			토요일이면
 			} else if(holidayStyle == 6) {
-				days += `<div class="${currentClass} today" style="color:blue"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
+				days += `<div class="${currentClass} today" style="color:blue"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //			평일이면
 			} else {
-				days += `<div class="${currentClass} today"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
+				days += `<div class="${currentClass} today"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
 			}
             
         } else {
@@ -138,13 +138,13 @@ const renderCalendar = () => {
 		
 //			일요일이면
 			if(holidayStyle == 0) {
-            	days += `<div class="${currentClass}" style="color:red"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
+            	days += `<div class="${currentClass}" style="color:red"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //			토요일이면
 			} else if(holidayStyle == 6) {
-            	days += `<div class="${currentClass}" style="color:blue"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
+            	days += `<div class="${currentClass}" style="color:blue"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //			평일이면
 			} else {
-            	days += `<div class="${currentClass}"><div><div><span>${i}</span></div></div><div class="overCnt"></div></div>`;
+            	days += `<div class="${currentClass}"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
 			}
         }
     }
@@ -159,13 +159,13 @@ const renderCalendar = () => {
 		
 //		일요일이면
 		if(holidayStyle == 0) {
-        	days += `<div class="${nextClass} next-date" style="color:red"><div><div><span>${j}</span></div></div><div class="overCnt"></div></div>`;
+        	days += `<div class="${nextClass} next-date" style="color:red"><div><div><span>${j}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //		토요일이면
 		} else if(holidayStyle == 6) {
-        	days += `<div class="${nextClass} next-date" style="color:blue"><div><div><span>${j}</span></div></div><div class="overCnt"></div></div>`;
+        	days += `<div class="${nextClass} next-date" style="color:blue"><div><div><span>${j}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //		평일이면
 		} else {
-        	days += `<div class="${nextClass} next-date"><div><div><span>${j}</span></div></div><div class="overCnt"></div></div>`;
+        	days += `<div class="${nextClass} next-date"><div><div><span>${j}</span></div></div><div class="overCnt"><span></span></div></div>`;
 		}
     }
 
@@ -226,30 +226,6 @@ const renderCalendar = () => {
 				daysEle.item(index1).style.backgroundColor = "";
 			}
 		});
-
-//	    daysEle.item(index).addEventListener("mouseup", function(_e) {
-////			mousedown 영역(target)과 mouseup 영역이 같다면 
-//			console.log(targetdaysEle);
-//			console.log(_e.target.className);
-//			if (targetdaysEle === _e.target.className){
-//				this.style.backgroundColor = "";
-////			만약에 다르면 클릭시의 영역에 대한 효과 제거
-//			} else {
-//				console.log(targetdaysEle);
-//				console.log(_e.target.className);
-//				document.getElementsByClassName(targetdaysEle).item(0).style.backgroundColor = "";
-////				console.log(targetdaysEle);
-////				console.log();
-////				for (let index1 = 0; index1 < daysDivsEle.length; index1++){
-////					document.getElementsByClassName(targetdaysEle).item(0).children.item(index1).style.backgroundColor = "";
-////				}
-//			}
-////			for (let index1 = 0; index1 < daysDivsEle.length; index1++){
-////				daysEle.item(index).daysDivsEle.item(index1).addEventListener("mouseup", function(_e) {
-////					console.log(this);
-////				});
-////			}
-//	    });
 	}
 	
 // ---------------------------------------------------------------------
@@ -258,9 +234,9 @@ const renderCalendar = () => {
 	
 	const btnDiv = document.querySelectorAll(".btnDiv p");
 	
-	for (let index = 0; index < btnDiv.length; index++) {
+	for (let index = 1; index < btnDiv.length; index++) {
 		btnDiv.item(index).addEventListener("click", function() {
-			for (let index1 = 0; index1 < btnDiv.length; index1++) {
+			for (let index1 = 1; index1 < btnDiv.length; index1++) {
 				btnDiv.item(index1).classList.add("btnColor");
 				btnDiv.item(index1).classList.remove("btnClick");
 			}
@@ -273,8 +249,10 @@ const renderCalendar = () => {
 //날짜 클릭시 일정 입력 팝업
 // ---------------------------------------------------------------------
 
+//	일자 클릭시 현재 날짜가 아닌 클릭한 날짜가 입력됨
 //	일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
 	for (let index = 0; index < daysEle.length; index++) {
+//		daysEle.item(index).addEventListener("click",function(){
 		daysEle.item(index).addEventListener("click",function(){
 			let dates = daysEle.item(index).classList[0].split("-");
 			let years = dates[0];	// 년
@@ -297,8 +275,8 @@ const renderCalendar = () => {
 			}
 			
 //			클릭한 날짜와 현재 시간을 입력창의 일시에 입력시켜주기 위한 변수
-			let clickDate = years + "-"+ months + "-"+ days + "T" + hours + ":" + minutes;
-
+			let clickDate = years + "-" + months + "-" + days + "T" + hours + ":" + minutes;
+			
 			document.getElementById("calStart").value = clickDate;
 			document.getElementById("calEnd").value = clickDate;
 
@@ -306,120 +284,38 @@ const renderCalendar = () => {
 		});
 	}
 	
-// ---------------------------------------------------------------------
-//overCnt 3개 이상일 때 +카운트 수 출력해주는 로직
-// ---------------------------------------------------------------------
+//	일정추가 클릭시 현재 날짜와 현재 시간의 내용이 들어감
+	document.getElementById("btnScheAdd").addEventListener("click", function(){
+		const newDate = new Date();
+		let years = newDate.getFullYear();	// 년
+		let months = newDate.getMonth()+1;	// 월
+		let days = newDate.getDate();	// 일
+		if (months < 10){
+			months = "0"+months;
+		}
+		if (days < 10){
+			days = "0"+days;
+		}
+		
+		let hours = newDate.getHours();		// 시
+		let minutes = newDate.getMinutes();	// 분
+		if (hours < 10){
+			hours = "0"+hours;
+		}
+		if (minutes < 10){
+			minutes = "0"+minutes;
+		}
+		
+//		클릭한 날짜와 현재 시간을 입력창의 일시에 입력시켜주기 위한 변수
+		let clickDate = years + "-" + months + "-" + days + "T" + hours + ":" + minutes;
+		
+		document.getElementById("calStart").value = clickDate;
+		document.getElementById("calEnd").value = clickDate;
 
+		document.querySelector(".schedule-wrap").style.display = "flex";
+	});
 
-
-
-
-
-// ---------------------------------------------------------------------
-//renderCalendar(); 함수 호출시 DB에서 일정 가져와서 달력에 표시
-// ---------------------------------------------------------------------
 	
-//	console.log(${list});
-	
-	
-//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-// 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류
-//일단 보류
-// ---------------------------------------------------------------------
-//날짜 클릭시 일정 입력 팝업
-//입력하여 DB로 저장뒤 id값 받아와서 날짜+id 값으로 class 만들어서 드래그 만들어야 될듯...
-//아니면 선택한게 몇번째 엘리먼트인지 구할수 있다면 그 숫자로 nth-child(index)로 설정할 수도 있을듯
-// ---------------------------------------------------------------------
-//
-//    document.querySelector("#btn").addEventListener("click", function(){
-//// 		document.querySelector(".schedule-wrap").style.display = "none";
-//// 		location.href = "${pageContext.request.contextPath}/calendar";
-//	});
-//	
-////	일정 3개 이상 됐을때 +count 표시해주기 위한 변수
-//	let thisDiv;
-//	let countDiv;
-//	let addDiv;
-//	
-////	일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
-//    for (let index = 0; index < daysEle.length; index++) {
-//    	daysEle.item(index).addEventListener("click",function(e){
-////     		클릭한 일자에 대한 클래스 이름
-//    	 	const thisTarget = e.target.classList.item(0);
-//    	 	console.log(thisTarget);
-////     	 	클래스 이름에 맞는 태그
-//    	    thisDiv = document.getElementsByClassName(thisTarget).item(0);
-//    		console.log(thisDiv);
-//    		if (thisTarget != null && thisDiv != null){
-//        		let divTag = document.createElement("div");
-//        		let pTag = document.createElement("p");
-//        		
-//        		pTag.innerText = "하이하이";
-//        		divTag.append(pTag);
-//        		divTag.classList.add(thisTarget+"-inner");
-//        		divTag.classList.add("inner");
-//        		
-//        		thisDiv.append(divTag);
-//			}
-//			
-////			document.querySelectorAll(".divs > div > div").item(3).remove();
-////			하루 일정에 세개 이상이 되면 +count 표시를 해주는 div 추가
-////			계산은 일자가 표시되어있는 div 포함해서 일정은 2개까지만 들어가고 계산은 +1로써
-////			div 3개 초과이면 div 생성, 일정 기준으로는 2개 초과이면 div 생성 이라는 의미
-////			thisDiv == daysEle.item(index)
-//			countDiv = daysEle.item(index).children.length;
-//			if (countDiv > 3) {
-//				console.log("------");
-//				console.log(countDiv);
-//				console.log("------");
-//				thisDiv.children.item(countDiv-1).remove();
-////				thisDiv.children.item(3).remove();
-//				countDiv -= 3;
-//				addDiv = "";
-////				addDiv += `<div class="dd"><span>dd</span></div>`;
-////				addDiv += `<div class="${thisTarget}-${index}"><span>+${countDiv}</span></div>`;
-//
-////				thisDiv 안에 div중 일자,일정,countDiv 4개를 제외하고 display: none
-//				for(let index1 = 4; index1 < thisDiv.children.lenght; index1++){
-//					thisDiv.children.item(index1).style.display = "none";
-//				}
-//			}else if (countDiv > 2) {
-////				thisDiv 안에 div중 일자,일정,countDiv 4개를 제외하고 display: none
-//				for(let index1 = 3; index1 < thisDiv.children.lenght; index1++){
-//					thisDiv.children.item(index1).style.display = "none";
-//				}
-//			}else if (countDiv > 1) {
-////				thisDiv 안에 div중 일자,일정,countDiv 4개를 제외하고 display: none
-//				for(let index1 = 2; index1 < thisDiv.children.lenght; index1++){
-//					thisDiv.children.item(index1).style.display = "none";
-//				}
-//			}
-//			
-//			thisDiv.innerHTML += addDiv;
-////			for (let index = 0; index < daysEle.length; index++){
-////				화면에 보이는 일일 중(.days div) 어떤 하나의 일정이 3개 이상이 되었을때
-////				console.log(daysEle.item(index).children.length);
-////			}
-//			
-////			console.log("----------------------------------------");
-////			console.log(daysEle.length);
-////			console.log(daysEle.item(0));
-////			console.log(daysEle.item(0).children.length);
-////			console.log(daysEle.item(0).children.item(0));
-////			console.log(daysEle.item(0).children.item(0).children);
-////			console.log("----------------------------------------");
-//
-////---------------------------------------------------------------------
-//
-//    	});
-//    }
-// 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류 보류
-//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-//000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-
 // ---------------------------------------------------------------------
 //일자에 일정 출력
 // ---------------------------------------------------------------------
@@ -475,6 +371,9 @@ const renderCalendar = () => {
 					let scheduleDiv = document.getElementsByClassName(calDate)[0].children[0];
 					let div = document.createElement("div");
 					let span = document.createElement("span");
+					span.classList.add("schedule-"+list[index1].calId);
+					console.log("schedule-"+list[index1].calId);
+
 					
 					innerSpan = "";
 					innerSpan += calTime + " " + list[index1].calTitle;
@@ -484,9 +383,739 @@ const renderCalendar = () => {
 				}
 			}
 		}
+		
+//		 ---------------------------------------------------------------------
+//		 overCnt를 위에서 생성후에 해당 span태그(+count) 클릭시 숨겨진 일정 팝업
+//		 ---------------------------------------------------------------------
+		
+		
+		
+		
+		return _data;
+		
+	}).then(_data => {
+	
+//////////////////////////////////////////////////////////////////////////////////////////
+////media query///////media query///////media query///////media query///////media query///
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	// ---------------------------------------------------------------------
+	// matchMedia()	
+	// min-height: 981px
+	// ---------------------------------------------------------------------
+
+	//	일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+//		매치함수 생성
+		function funcHeight981(x) {
+//		  980px -> 981px 로 갈때
+		  if (x.matches) {
+//			월별 border-bottom 없애려고...에서 사용한 변수 사용
+//			let daysArray = document.querySelector(".days").children;
+		
+			if(daysArray[28]==undefined){		// 월의 일자가 28개 이하일때
+				console.log("1001px : 28번째");
+//				981px : 5개 -> 980px: 4개 -> 690px: 3개
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					일자가 28개일때는 981px 이상에서 일정 다섯 개만 보여야하므로 0~5까지는 none 안함 (0번째는 일자 div)
+					for (let index1 = 6; index1 < scheDiv.item(0).children.length; index1++) {
+//						scheDiv.item(0).children.item(index1).style.display = "none";
+						scheDiv.item(0).children.item(index1).classList.add("displayNone");
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 6개(일자까지 7개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 6) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 6;	// 7개 이상일때 화면에 보일 6개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 6) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}else if(daysArray[35]==undefined){	// 월의 일자가 35개 이하일때
+				console.log("1001px : 35번째");
+//				981px : 4개 -> 980px: 3개 -> 690px: 2개
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					일자가 35개일때는 981px 이상에서 일정 네 개만 보여야하므로 0~4까지는 none 안함 (0번째는 일자 div)
+					for (let index1 = 5; index1 < scheDiv.item(0).children.length; index1++) {
+//						scheDiv.item(0).children.item(index1).style.display = "none";
+						scheDiv.item(0).children.item(index1).classList.add("displayNone");
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 5개(일자까지 6개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 5) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 5;	// 6개 이상일때 화면에 보일 5개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 5) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}else {								// 월의 일자가 42개 이하일때
+				console.log("1001px : 42번째");
+//				981px : 3개 -> 980px: 2개 -> 690px: 1개
+//					(daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					일자가 42개일때는 981px 이상에서 일정 세 개만 보여야하므로 0~3까지는 none 안함 (0번째는 일자 div)
+					for (let index1 = 4; index1 < scheDiv.item(0).children.length; index1++) {
+//						scheDiv.item(0).children.item(index1).style.display = "none";
+						scheDiv.item(0).children.item(index1).classList.add("displayNone");
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 4개(일자까지 5개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 4) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 4;	// 5개 이상일때 화면에 보일 4개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 4) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}
+		    
+		  }
+		}
+		
+////////////////////////////////////////////////////////////////////////////////////////
+
+	// ---------------------------------------------------------------------
+	// matchMedia()	
+	// max-height: 980px <-> 981px
+	// ---------------------------------------------------------------------
+
+	//	일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+//		매치함수 생성
+		function funcHeight980(x) {
+//		  981px -> 980px 로 갈때
+		  if (x.matches) {
+//			월별 border-bottom 없애려고...에서 사용한 변수 사용
+//			let daysArray = document.querySelector(".days").children;
+		
+			if(daysArray[28]==undefined){		// 월의 일자가 28개 이하일때
+				console.log("880px : 28번째");
+//				981px : 5개 -> 980px: 4개 -> 690px: 3개
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					일자가 28개일때는 980px 이하에서 일정 네 개만 보여야하므로 0~4까지는 none 안함 (0번째는 일자 div)
+					for (let index1 = 5; index1 < scheDiv.item(0).children.length; index1++) {
+//						scheDiv.item(0).children.item(index1).style.display = "none";
+						scheDiv.item(0).children.item(index1).classList.add("displayNone");
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 5개(일자까지 6개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 5) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 5;	// 6개 이상일때 화면에 보일 5개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 5) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}else if(daysArray[35]==undefined){	// 월의 일자가 35개 이하일때
+				console.log("880px : 35번째");
+//				981px : 4개 -> 980px: 3개 -> 690px: 2개
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					일자가 35개일때는 980px 이하에서 일정 세 개만 보여야하므로 0~3까지는 none 안함 (0번째는 일자 div)
+					for (let index1 = 4; index1 < scheDiv.item(0).children.length; index1++) {
+//						scheDiv.item(0).children.item(index1).style.display = "none";
+						scheDiv.item(0).children.item(index1).classList.add("displayNone");
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 4개(일자까지 5개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 4) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 4;	// 5개 이상일때 화면에 보일 4개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 4) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}else {								// 월의 일자가 42개 이하일때
+				console.log("980px : 42번째");
+//				981px : 3개 -> 980px: 2개 -> 690px: 1개
+//					(daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					일자가 42개일때는 980px 이하에서 일정 두 개만 보여야하므로 0~2까지는 none 안함 (0번째는 일자 div)
+					for (let index1 = 3; index1 < scheDiv.item(0).children.length; index1++) {
+//						scheDiv.item(0).children.item(index1).style.display = "none";
+						scheDiv.item(0).children.item(index1).classList.add("displayNone");
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 3개(일자까지 4개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 3) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 3;	// 4개 이상일때 화면에 보일 3개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 3) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}
+		    
+		  }
+		  
+//		  981px -> 980px 로 갈때 none 시켰던거 block으로 원복
+		  else {
+			if(daysArray[28]==undefined){		// 월의 일자가 28개 이하일때
+				console.log("원복 980px : 28번째");
+//				1200px : 5개 <- 880px: 4개 <- 690px: 3개
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					4개에서 5개로 가는 것이기때문에 0~5만 block처리
+					for (let index1 = 0; index1 < 6; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+							if(index1 == 0) {	// 첫 번째 div
+//								scheDiv.item(0).children.item(0).style.display = "flex";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+							else {
+//								scheDiv.item(0).children.item(index1).style.display = "block";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+						}
+					}
+					for (let index1 = 6; index1 < scheDiv.item(0).children.length; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+//							scheDiv.item(0).children.item(index1).style.display = "none";
+							scheDiv.item(0).children.item(index1).classList.add("displayNone");
+						}
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 6개(일자까지 7개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 6) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 6;	// 7개 이상일때 화면에 보일 6개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 6) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}else if(daysArray[35]==undefined){	// 월의 일자가 35개 이하일때
+				console.log("원복 980px : 35번째");
+//				1200px : 4개 <- 880px: 3개 <- 690px: 2개
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					3개에서 4개로 가는 것이기때문에 0~4만 block처리
+					for (let index1 = 0; index1 < 5; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+							if(index1 == 0) {	// 첫 번째 div
+//								scheDiv.item(0).children.item(0).style.display = "flex";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+							else {
+//								scheDiv.item(0).children.item(index1).style.display = "block";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+						}
+					}
+					for (let index1 = 5; index1 < scheDiv.item(0).children.length; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+//							scheDiv.item(0).children.item(index1).style.display = "none";
+							scheDiv.item(0).children.item(index1).classList.add("displayNone");
+						}
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 5개(일자까지 6개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 5) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 5;	// 6개 이상일때 화면에 보일 5개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 5) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}else {								// 월의 일자가 42개 이하일때
+				console.log("원복 980px : 42번째");
+//				1200px : 3개 <- 880px: 2개 <- 690px: 1개
+//					(daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					2개에서 3개로 가는 것이기때문에 0~3만 block처리
+					for (let index1 = 0; index1 < 4; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+							if(index1 == 0) {	// 첫 번째 div
+//								scheDiv.item(0).children.item(0).style.display = "flex";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+							else {
+//								scheDiv.item(0).children.item(index1).style.display = "block";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+						}
+					}
+					for (let index1 = 4; index1 < scheDiv.item(0).children.length; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+//							scheDiv.item(0).children.item(index1).style.display = "none";
+							scheDiv.item(0).children.item(index1).classList.add("displayNone");
+						}
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 4개(일자까지 5개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 4) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 4;	// 5개 이상일때 화면에 보일 4개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 4) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}
+		    
+		  }
+		}
+		
+		
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	// ---------------------------------------------------------------------
+	// matchMedia()	
+	// max-height: 690px <-> 691px
+	// ---------------------------------------------------------------------
+
+	//	일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+//		매치함수 생성
+		function funcHeight780(x) {
+//		  691px -> 690px 로 갈때
+		  if (x.matches) {
+//			월별 border-bottom 없애려고...에서 사용한 변수 사용
+//			let daysArray = document.querySelector(".days").children;
+		
+			if(daysArray[28]==undefined){		// 월의 일자가 28개 이하일때
+				console.log("690px : 28번째");
+//				5개 -> 880px: 4개 -> 690px: 3개
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					일자가 28개일때는 690px 이하에서 일정 세 개만 보여야하므로 0~3까지는 none 안함 (0번째는 일자 div)
+					for (let index1 = 4; index1 < scheDiv.item(0).children.length; index1++) {
+//						scheDiv.item(0).children.item(index1).style.display = "none";
+						scheDiv.item(0).children.item(index1).classList.add("displayNone");
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 4개(일자까지 5개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 4) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 4;	// 5개 이상일때 화면에 보일 4개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 4) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}else if(daysArray[35]==undefined){	// 월의 일자가 35개 이하일때
+				console.log("690px : 35번째");
+//				4개 -> 880px: 3개 -> 690px: 2개
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					일자가 35개일때는 690px 이하에서 일정 두 개만 보여야하므로 0~2까지는 none 안함 (0번째는 일자 div)
+					for (let index1 = 3; index1 < scheDiv.item(0).children.length; index1++) {
+//						scheDiv.item(0).children.item(index1).style.display = "none";
+						scheDiv.item(0).children.item(index1).classList.add("displayNone");
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 3개(일자까지 4개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 3) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 3;	// 4개 이상일때 화면에 보일 3개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 3) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}else {								// 월의 일자가 42개 이하일때
+				console.log("690px : 42번째");
+//				3개 -> 880px: 2개 -> 690px: 1개
+//					(daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					일자가 42개일때는 690px 이하에서 일정 한 개만 보여야하므로 0~1까지는 none 안함 (0번째는 일자 div)
+					for (let index1 = 2; index1 < scheDiv.item(0).children.length; index1++) {
+//						scheDiv.item(0).children.item(index1).style.display = "none";
+						scheDiv.item(0).children.item(index1).classList.add("displayNone");
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 2개(일자까지 3개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 2) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 2;	// 3개 이상일때 화면에 보일 2개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 2) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}
+		    
+		  }
+		  
+//		  880px -> 881px 로 갈때 none 시켰던거 block으로 원복
+		  else {
+			if(daysArray[28]==undefined){		// 월의 일자가 28개 이하일때
+				console.log("원복 690px : 28번째");
+//				5개 <- 880px: 4개 <- 690px: 3개
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					3개에서 4개로 가는 것이기때문에 0~4만 block처리
+					for (let index1 = 0; index1 < 5; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+							if(index1 == 0) {	// 첫 번째 div
+//								scheDiv.item(0).children.item(0).style.display = "flex";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+							else {
+//								scheDiv.item(0).children.item(index1).style.display = "block";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+						}
+					}
+					for (let index1 = 5; index1 < scheDiv.item(0).children.length; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+//							scheDiv.item(0).children.item(index1).style.display = "none";
+							scheDiv.item(0).children.item(index1).classList.add("displayNone");
+						}
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 5개(일자까지 6개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 5) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 5;	// 6개 이상일때 화면에 보일 5개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 5) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}else if(daysArray[35]==undefined){	// 월의 일자가 35개 이하일때
+				console.log("원복 690px : 35번째");
+//				4개 <- 880px: 3개 <- 690px: 2개
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					2개에서 3개로 가는 것이기때문에 0~3만 block처리
+					for (let index1 = 0; index1 < 4; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+							if(index1 == 0) {	// 첫 번째 div
+//								scheDiv.item(0).children.item(0).style.display = "flex";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+							else {
+//								scheDiv.item(0).children.item(index1).style.display = "block";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+						}
+					}
+					for (let index1 = 4; index1 < scheDiv.item(0).children.length; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+//							scheDiv.item(0).children.item(index1).style.display = "none";
+							scheDiv.item(0).children.item(index1).classList.add("displayNone");
+						}
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 4개(일자까지 5개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 4) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 4;	// 5개 이상일때 화면에 보일 4개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 4) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}else {								// 월의 일자가 42개 이하일때
+				console.log("원복 690px : 42번째");
+//				3개 <- 880px: 2개 <- 690px: 1개
+//					(daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+					let scheDiv = daysEle.item(index).children;
+//					각 일자에 들어있는 일정 개수 + 일자(1개) 만큼 반복
+//					1개에서 2개로 가는 것이기때문에 0~2만 block처리
+					for (let index1 = 0; index1 < 3; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+							if(index1 == 0) {	// 첫 번째 div
+//								scheDiv.item(0).children.item(0).style.display = "flex";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+							else {
+//								scheDiv.item(0).children.item(index1).style.display = "block";
+								scheDiv.item(0).children.item(index1).classList.remove("displayNone");
+							}
+						}
+					}
+					for (let index1 = 3; index1 < scheDiv.item(0).children.length; index1++) {
+						if(scheDiv.item(0).children.item(index1) != null) {
+//							scheDiv.item(0).children.item(index1).style.display = "none";
+							scheDiv.item(0).children.item(index1).classList.add("displayNone");
+						}
+					}
+				}
+				
+//				 ---------------------------------------------------------------------
+//				 overCnt 일정이 3개(일자까지 4개) 이상일 때 +1 카운트 수 출력해주는 로직
+//				 ---------------------------------------------------------------------
+
+//				일자 클릭시 이벤트에서 만든 변수 사용 (daysEle => (".days > div"))
+				for (let index = 0; index < daysEle.length; index++) {
+//					(daysEle(일자) > div 첫번째 > div => 일정 들어가는 곳)
+					let scheDiv1 = daysEle.item(index).children.item(0).children;
+//					(daysEle(일자) > div 두번째 > span => count값 들어가는 곳)
+					let scheDiv2 = daysEle.item(index).children.item(1).children;
+					let divCount = "";
+					if (scheDiv1.length > 3) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+						divCount = "+";	// count값 앞에 +표시
+						divCount += scheDiv1.length - 3;	// 4개 이상일때 화면에 보일 3개를 제외한 개수 (+divCount)
+						scheDiv2.item(0).append(divCount);	// 일자의 아래쪽 div에 span 태그 추가
+						
+					}else if (scheDiv1.length <= 3) {
+						scheDiv2.item(0).innerHTML = divCount;	// 일자의 아래쪽 div의 span을 초기화
+					}
+				}
+				
+			}
+		    
+		  }
+		}
+		
+		
+//		아래의 780px, 980px, 981px 함수 호출의 순서를 뒤집으면 881 이상 구간에서 div가 block 되지않는 현상있음...
+		
+//		MediaQueryList 객체 생성
+		const media780 = window.matchMedia("(max-height: 780px)")
+//		런타임시에 매치함수 호출
+		funcHeight780(media780);
+//		상태 변경 리스너로 매치함수를 추가한다. 
+		media780.addListener(funcHeight780);
+		
+//		MediaQueryList 객체 생성
+//		const media880 = window.matchMedia("(max-height: 880px) and (min-height: 691px)")
+		const media980 = window.matchMedia("(max-height: 980px)")
+//		런타임시에 매치함수 호출
+		funcHeight980(media980);
+//		상태 변경 리스너로 매치함수를 추가한다. 
+		media980.addListener(funcHeight980);
+		
+//		MediaQueryList 객체 생성
+		const media981 = window.matchMedia("(min-height: 981px)");
+//		런타임시에 매치함수 호출
+		funcHeight981(media981);
+//		상태 변경 리스너로 매치함수를 추가한다. 
+		media981.addListener(funcHeight981);
+		
+		
+//////////////////////////////////////////////////////////////////////////////////////////
+////media query///////media query///////media query///////media query///////media query///
+//////////////////////////////////////////////////////////////////////////////////////////
+		
+		
 	});
-	
-	
 	
 // ---------------------------------------------------------------------
 }
