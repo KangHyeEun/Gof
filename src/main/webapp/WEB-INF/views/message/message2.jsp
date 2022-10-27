@@ -214,26 +214,53 @@ a {
 			} else {
 				var chk = confirm("정말 삭제하시겠습니까?");
 				$.ajax({
-					url : 'message/result7',
+					url : '${pageContext.request.contextPath}/message/delete2',
 					type : 'POST',
-					traditional : true,
-					data : {
-						valueArr : valueArr
-					},
+					contentType: 'application/json; charset=utf-8',
+					data : JSON.stringify(valueArr),
 					success : function(jdata) {
 						if (jdata = 1) {
 							alert("삭제가 완료되었습니다.");
-							location.replace("message")
+							location.replace("message2")
 						} else {
 							alert("삭제 실패");
 						}
+					},
+					error : function(err){
+						console.log('실패');
 					}
 				});
 			}
 		}
 	</script>
 	
-	
+	<script type="text/javascript"> 
+         var modal = document.querySelector(".modal"); 
+         var trigger = document.querySelector(".trigger"); 
+         var closeButton = document.querySelector(".close-button"); 
+         var cancelButton = document.querySelector("#cancel");
+
+        //console.log(modal);
+
+        function toggleModal() { 
+             modal.classList.toggle("show-modal"); 
+         }
+
+        function windowOnClick(event) { 
+             if (event.target === modal) { 
+                 toggleModal(); 
+             } 
+         }
+
+        trigger.addEventListener("click", toggleModal); 
+         closeButton.addEventListener("click", toggleModal); 
+         cancel.addEventListener("click", toggleModal); 
+         window.addEventListener("click", windowOnClick); 
+         
+         //var anText_sub1 = document.getElementById('category').value;
+         //var anText_sub2 = document.getElementById('title').value;
+         //var anText_sub3 = document.getElementById('content').value;
+     </script>
 	
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </body>

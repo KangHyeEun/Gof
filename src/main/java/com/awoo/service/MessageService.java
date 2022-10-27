@@ -36,10 +36,15 @@ public class MessageService {
 		}
 	}
 
-	//보낸 쪽지함 삭제
-	public void deleteData2(MessageVO vo) {
-		dao.deleteData2(vo);
-	}
+	//보낸 쪽지함 체크 박스 삭제
+		public boolean deleteData2(int[] idss) {
+			if(dao.deleteData2(idss)> 0) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+
 
 	//게시글 상세 보기
 	public void MessageContent(Model model, String id) {
