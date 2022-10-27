@@ -194,7 +194,7 @@ nav {
 												<td>${i.totalHoliday}</td>
 												<td>${i.estatus}</td>
 												<td><a
-													href="${pageContext.request.contextPath}/admin/detail/${i.id}">상세보기</a></td>
+													href="${pageContext.request.contextPath}/admin/detail/${i.id}?empno=${i.empno}">상세보기</a></td>
 											</tr>
 										</c:forEach>
 									</table>
@@ -261,7 +261,7 @@ nav {
 											</div>
 										</div>
 										<div class="mdiv3">
-											<ul></ul>
+											<ul id="ul"></ul>
 										</div>
 										<div class="mselect">
 											<div class="sdiv1">
@@ -411,30 +411,41 @@ nav {
 					document.getElementById("endDate").valueAsDate = null;
 				});
 
-		/* 모달창*/
+/* 모달창 끄기*/
+		
 		document.getElementById("exit").addEventListener("click", function() {
-			document.getElementById("modal_dim").style.display = "none";
+			document.getElementById("modal_dim").style.display = "none";	
+				const ul = document.getElementById("ul");
+
+				while(ul.hasChildNodes()){
+					ul.removeChild( ul.firstChild );  
+				}
+            	
 		});
+		
+		
+		/*모달창 켜기*/
 		document
 				.getElementById("modal_open")
 				.addEventListener(
 						"click",
 						function() {
-							const checkboxes = document.getElementsByName("id");
-							var c = 0;
+							const checkboxes = document
+									.getElementsByName("empno");
+							var j = 0;
 							for (var i = 0; i < checkboxes.length; i++) {
-								c = checkboxes[i].checked ? 1 : 0;
-								console.log(c);
-								if (c == 0) {
-									alert("정보를 수정할 직원을 선택해 주세요.");
-									break;
-								}
-								if (c == 1) {
-									document.getElementById("modal_dim").style.display = "flex";
+								if (checkboxes[i].checked == true) {
+									j++;
 								}
 							}
-							document.getElementById("modal_dim").style.display = "flex";
+							if (j > 0) {
+								document.getElementById("modal_dim").style.display = "flex";
+							} else {
+								alert("정보를 수정할 직원을 선택해 주세요.");
+								document.getElementById("modal_dim").style.display = "flex";
+							}
 						});
+		/*모달창 select 색 변경*/
 		document
 				.getElementById("mcategory")
 				.addEventListener(
@@ -445,6 +456,52 @@ nav {
 							}
 						});
 		
+		/*모달창 div에 li추가*/
+		document.getElementById("modal_open").addEventListener(
+				"click",
+				function() {
+					const checkboxes = document.getElementsByName("empno");
+					const ul = document.getElementById("ul");
+					const mspan = document.getElementById("mspan");
+
+					for (var i = 0; i < checkboxes.length; i++) {
+						if (checkboxes[i].checked) {
+							const li = document.createElement("li");
+							const name = checkboxes[i].getAttribute("value1");
+							const edepartment = checkboxes[i]
+									.getAttribute("value2");
+							const span = document.createElement("span");
+
+							span.innerText = "X"
+							span.setAttribute("id", "remove");
+							span.setAttribute("value", name);
+							span.setAttribute("name", "span1");
+
+							li.innerText = name + "(" + edepartment + ")";
+							li.setAttribute("name", "li1");
+							li.setAttribute("value", name);
+							li.append(span);
+							
+							ul.append(li);
+						
+						}
+					/*모달창 span 삭제*/
+// 						const spans = document.getElementsByName("span1");
+// 					for (var i = 0; i < spans.length; i++) {
+// 							spans[i].addEventListener("click", function(e) {
+							
+// 								console.log(spans[i]);	
+						
+// 							const del = e.target;  // span ("X")
+// 							const deleteAll = del.parentNode; // <li><span></span></li>
+// 	//							console.log(del);
+							
+// 	//							deleteAll.remove();
+// 						});
+						
+// 					}
+					}
+				});
 		
 	</script>
 

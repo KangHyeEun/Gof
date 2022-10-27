@@ -11,4 +11,8 @@
 		#{ownerId},#{fileName},now()
 		)
 	</insert>
+	
+	<select id="selectFile" resultType="UploadfilesVO">
+		select file_name from uploadfiles where owner_id = #{ownerId}
+	</select>
 </mapper>

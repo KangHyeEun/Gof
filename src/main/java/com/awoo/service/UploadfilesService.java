@@ -18,4 +18,8 @@ public class UploadfilesService {
 	public void uplaodFile(UploadfilesVO vo) {
 		dao.uplaodFile(vo);
 	}
+	
+	public String selectFile(int empno) {
+		return dao.selectFile(empno);
+	}
 }

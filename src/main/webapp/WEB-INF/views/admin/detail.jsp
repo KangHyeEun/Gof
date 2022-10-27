@@ -33,8 +33,8 @@
 							class="form1" method="post" enctype="multipart/form-data">
 							<div class="personal-wrap">
 								<div class="prodiv">
-									<img id="showimg"
-										src="${pageContext.request.contextPath}/imges/user.png">
+									<img id="showimg" 
+										src="http://localhost:8080/E:/sample/kk.jpg">
 									<label for="proimg" id="img">사진등록</label><input type="file"
 										name="proimg" id="proimg" accept="image/*" multiple>
 								</div>

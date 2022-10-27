@@ -8,5 +8,6 @@ import com.awoo.vo.UploadfilesVO;
 public interface UploadfilesDAO {
 	
 	public void uplaodFile(UploadfilesVO vo);
-
+	
+	public String selectFile(int empno);
 }

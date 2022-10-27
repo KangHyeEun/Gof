@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -32,7 +33,7 @@ import com.awoo.interceptor.LoginInterceptor;
 // 스캔할 패키지를 지정한다.
 @ComponentScan("com.awoo")
 @MapperScan(basePackages = { "com.awoo.dao" }, annotationClass = org.apache.ibatis.annotations.Mapper.class)
-@PropertySource("/META-INF/properties/db.properties")
+@PropertySource("/META-INF/properties/db.properties")	
 @EnableTransactionManagement
 public class ServletAppContext implements WebMvcConfigurer {
 

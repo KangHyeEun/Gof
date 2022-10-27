@@ -143,9 +143,10 @@ public class HolidayController {
 				service.updateApproval(vo);	
 			} else if(totalH < (usedH+countDate)) {
 				vo.setApproval("반려");
-				vo.setRejectionReason("잔여 연차 : " + (totalH-usedH));
+				vo.setRejectionReason("잔여 연차 : " + (totalH-(usedH+countDate)));
 				service.updateApproval(vo);	
 			}
+
 			return "redirect:/holidayAdmin";
 		}
 		
