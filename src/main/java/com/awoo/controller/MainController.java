@@ -27,6 +27,10 @@ public class MainController {
 			model.addAttribute("ename", vo.getName());
 			model.addAttribute("empno", vo.getEmpno());
 			service.getDefaultData(model);
+			
+			// 홈에 값 가져오는 애들 ---------------------------------------------
+			
+			service.getDateForHome(model);
 			return "home/home";
 		}
 		// 출근 버튼 눌렀을 때

@@ -2,47 +2,43 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+  
 <mapper namespace="com.awoo.dao.MessageDAO">
 	<select id="selectList" resultType="MessageVO">
-		select id, mowner, mtitle,
-		mcontent,date_format(create_date, '%Y-%m-%d %T') create_date,
-		mreciever
+		select id, mowner, mtitle, mcontent,date_format(create_date, '%Y-%m-%d %T') create_date, mreciever
 		from message
 	</select>
-
+	
 	<select id="selectBBS" resultType="MessageVO">
-		select id, mowner, mtitle,
-		mcontent,date_format(create_date, '%Y-%m-%d %T') create_date,
-		mreciever
+		select id, mowner, mtitle, mcontent,date_format(create_date, '%Y-%m-%d %T') create_date, mreciever
 		from message
 		where id = #{id}
 	</select>
+	
 
-
-
-	<insert id="insertData">
-		insert into message( mowner, mtitle, mcontent,
-		mreciever)
+	
+	<insert id="insertData" >
+		insert into message( mowner, mtitle, mcontent, mreciever)
 		values ( #{mowner}, #{mtitle},#{mcontent}, #{mreciever})
 	</insert>
 
 
-
+	
 	<delete id="deleteData1">
 		delete from message
-		where id in
-		<foreach item="item" collection="ids" open="(" separator=","
-			close=")">
-			#{item}
-		</foreach>
+		where id in 
+		<foreach item="item" collection="ids" open="(" separator="," close=")">
+        	#{item}
+  		</foreach>
 	</delete>
 	
 	<delete id="deleteData2">
 		delete from message
-		where id=#{id}
+		where id in 
+		<foreach item="item" collection="idss" open="(" separator="," close=")">
+        	#{item}
+  		</foreach>
 	</delete>
-
 
 
 

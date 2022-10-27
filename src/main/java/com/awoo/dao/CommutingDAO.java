@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import com.awoo.vo.BBSVO;
 import com.awoo.vo.CommutingVO;
 import com.awoo.vo.EmployeeInfoVO;
 
@@ -22,6 +24,12 @@ public interface CommutingDAO {
 	public int countLate(CommutingVO vo);
 	public int countNomalWorkday(CommutingVO vo);
 	public EmployeeInfoVO getEmpInfo(CommutingVO vo); 
+	
+//	홈에 가져갈 애들-------------------------------------------------------
+	public List<BBSVO> selectBBSListNoticeForHome();
+	public int selectCountApprovalHoliday(Map<String,Object>map);
+	public EmployeeInfoVO selectTotalUsedHoliday(Map<String,Object>map);
+	
 }
 
 

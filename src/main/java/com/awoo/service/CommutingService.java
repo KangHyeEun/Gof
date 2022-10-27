@@ -268,4 +268,13 @@ public class CommutingService {
 		return cnt;
 	}
 	
+//	홈에 가져갈 애들--------------------------------------------------------------------
+	public void getDateForHome(Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("empno", model.getAttribute("empno"));
+		model.addAttribute("noticeListForHome", dao.selectBBSListNoticeForHome());
+		model.addAttribute("countApproval", dao.selectCountApprovalHoliday(map));
+		model.addAttribute("totalUsedHoliday", dao.selectTotalUsedHoliday(map));
+	}
+	
 }

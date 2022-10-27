@@ -16,10 +16,11 @@ public interface MessageDAO {
 	
 	public void insertData(MessageVO vo);
 	
-	//체크박스삭제
+	//체크박스삭제 - 받은 메세지함
 	public int deleteData1(@Param("ids") int[] ids);
 	
-	public void deleteData2(MessageVO vo);
+	//체크박스삭제 - 보낸 메세지함
+	public int deleteData2(@Param("idss") int[] idss);
 	
 	
 

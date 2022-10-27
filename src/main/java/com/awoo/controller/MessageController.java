@@ -1,7 +1,6 @@
 package com.awoo.controller;
 
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -106,7 +105,7 @@ public class MessageController {
 		}
 	}
 
-	//체크박스 삭제
+	//받은 쪽지함- 체크박스 삭제
 	@PostMapping("/delete")
 	@ResponseBody
 	public ResponseEntity<String> deleteItems(@RequestBody int[] ids){
@@ -117,6 +116,26 @@ public class MessageController {
 		ResponseEntity<String> response = null;
 		
 		if(service.deleteData1(ids)) {
+			response = new ResponseEntity<String>("ok", HttpStatus.OK);
+		}else {
+			response = new ResponseEntity<String>("err", HttpStatus.NOT_FOUND);
+		}
+		
+		return response;
+		
+	}
+	
+	//받은 쪽지함- 체크박스 삭제
+	@PostMapping("/delete2")
+	@ResponseBody
+	public ResponseEntity<String> deleteItems2(@RequestBody int[] idss){
+		
+//		for (String string : idArr) {
+//			System.out.println(string);
+//		}
+		ResponseEntity<String> response = null;
+		
+		if(service.deleteData2(idss)) {
 			response = new ResponseEntity<String>("ok", HttpStatus.OK);
 		}else {
 			response = new ResponseEntity<String>("err", HttpStatus.NOT_FOUND);
