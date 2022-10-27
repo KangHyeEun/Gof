@@ -10,7 +10,6 @@
 
 <title>Insert title here</title>
 <style type="text/css">
-
 #table1 {
 	text-align: center;
 }
@@ -126,9 +125,7 @@ a {
 h1 {
 	font-family: 'Oswald', sans-serif;
 	font-size: 30px;
-	
 }
-
 
 label {
 	display: block;
@@ -141,7 +138,7 @@ form {
 	width: 459px;
 }
 
-#mreciever, #mcontent ,#mtitle {
+#mreciever, #mcontent, #mtitle {
 	width: 439px;
 	height: 27px;
 	background-color: #efefef;
@@ -153,7 +150,7 @@ form {
 	color: #3a3a3a;
 }
 
-#mreciever:focus, #mcontent:focus ,#mtitle:focus {
+#mreciever:focus, #mcontent:focus, #mtitle:focus {
 	border: 1px solid #97d6eb;
 }
 
@@ -162,7 +159,7 @@ textarea {
 	background-color: #efefef;
 }
 
-#submit {
+#btn-save {
 	width: 127px;
 	height: 48px;
 	text-align: center;
@@ -170,10 +167,9 @@ textarea {
 	margin-top: 20px;
 	cursor: pointer;
 	border-radius: 4px;
-	
 }
 
-#submit:hover {
+#btn-save:hover {
 	color: #fff;
 	background-color: #272454;
 	opacity: 0.9;
@@ -187,7 +183,6 @@ textarea {
 	margin-top: 20px;
 	cursor: pointer;
 	border-radius: 4px;
-	
 }
 
 #cancel:hover {
@@ -248,7 +243,7 @@ textarea {
 
 	<div class="container-wrap">
 		<div class="header">
-		<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
+			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
 			<div class="header-logout">로그아웃 버튼</div>
 		</div>
@@ -260,7 +255,8 @@ textarea {
 					<div class="intro">
 						<h1 class="hh1">받은 쪽지함</h1>
 					</div>
-					<div class="scroll" style="overflow: auto; width: 100%; height: 500px;">
+					<div class="scroll"
+						style="overflow: auto; width: 100%; height: 500px;">
 						<table id="table1">
 
 							<thead>
@@ -278,46 +274,88 @@ textarea {
 								<c:forEach var="vo" items="${list}">
 									<tr>
 
-										<td><input type="checkbox" name="RowCheck" id="chkObj" value="${vo.id}"></td>
+										<td><input type="checkbox" name="RowCheck" id="chkObj"
+											value="${vo.id}"></td>
 										<td>${vo.id}</td>
 										<td>${vo.mreciever}</td>
-										<td><a href="${pageContext.request.contextPath}/message/messageValue/${vo.id}">${vo.mtitle}</a></td>										
+										<td><a
+											href="${pageContext.request.contextPath}/message/messageValue/${vo.id}">${vo.mtitle}</a></td>
 										<td>${vo.createDate}</td>
 										<td>${vo.mowner}</td>
 									</tr>
+									<!-- 팝업 될 레이어 -->
+									<div class="modal">
+										<div class="modal-content">
+											<span class="close-button">&times;</span>
+											<h1 class="title">쪽지 보내기</h1>
+
+											<form
+												action="${pageContext.request.contextPath}/message/insert/${vo.mowner}"
+												method="POST">
+												<label for="mreciever">받는이:</label> <input type="text"
+													name="mreciever" placeholder="받는이를 입력하세요." id="mreciever">
+
+												<label for="mtitle">제목:</label> <input type="text"
+													name="mtitle" placeholder="제목을 입력하세요." id="mtitle">
+
+												<label for="mcontent">내용:</label>
+												<textarea name="mcontent" class="form-control summernote"
+													placeholder="내용을 입력하세요." id="mcontent"></textarea>
+
+												<input type="button" id="cancel" value="취소"> <input
+													type="submit" id="btn-save" class="btn btn-info"
+													value="보내기">
+											</form>
+										</div>
+
+									</div>
 								</c:forEach>
+
 							</tbody>
 						</table>
 
 						<div class="buttun">
-						<button class="trigger" id="btn1">쪽지 보내기</button>
-						<input type="button" value="삭제" class="btn btn-outline-info" id="btn2"
-							onclick="chkDel();">
+							<button class="trigger" id="btn1">쪽지 보내기</button>
+							<input type="button" value="삭제" class="btn btn-outline-info"
+								id="btn2" onclick="chkDel();">
 						</div>
-						<!-- 팝업 될 레이어 -->
-						<div class="modal">
-							<div class="modal-content">
-								<span class="close-button">&times;</span>
-								<h1 class="title">쪽지 보내기</h1>
-								<form action="${pageContext.request.contextPath}/message/result2" method="POST">
-									<label for="text">받는이:</label> <input type="text" name="mreciever"
-										placeholder="받는이를 입력하세요."  id="mreciever">
-									
-									<label for="text">제목:</label> <input type="text" name="mtitle"
-										placeholder="제목을 입력하세요." id="mtitle" >
-									<label>내용:</label>
-									<textarea name="mcontent" placeholder="내용을 입력하세요."
-									 id="mcontent"  ></textarea>
-									<input type="button" id="cancel" value="취소"> <input
-										type="submit" id="submit" value="보내기">
-								</form>
-							</div>
-						</div>
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+	 let index = {
+			 init:function(){
+				 $("#btn-save").on("click",()=>{
+					 this.save();
+				 });
+			 },
+			 
+			save:function(){
+				let data = {
+						mreciever:$("#mreciever").val(),
+						mtitle:$("#mtitle").val(),
+						mcontent:$("#mcontent").val()
+				};
+				
+				$.ajax({
+					url : '${pageContext.request.contextPath}/message/insert',
+					type : 'POST',
+					contentType: 'application/json; charset=utf-8',
+					data : JSON.stringify(data),
+			}).done(function(resp){
+				alert("쪽지 보내기가 완료되었습니다.");
+				location.replace("message")
+			}).fail(function(error){
+				alert(JSON.stringify(error));
+			});
+				
+			},
+	 }
+	</script>
 
 	<script>
 		function checkAll() {
@@ -369,7 +407,7 @@ textarea {
 			}
 		}
 	</script>
-	
+
 	<script type="text/javascript"> 
          var modal = document.querySelector(".modal"); 
          var trigger = document.querySelector(".trigger"); 
@@ -397,7 +435,7 @@ textarea {
          //var anText_sub2 = document.getElementById('title').value;
          //var anText_sub3 = document.getElementById('content').value;
      </script>
-	
+
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </body>
 </html>
