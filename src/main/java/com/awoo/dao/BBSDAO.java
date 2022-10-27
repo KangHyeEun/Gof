@@ -26,5 +26,21 @@ public interface BBSDAO {
 	
 	public int updateViewCount(String id);
 
+	//공지사항 게시판
+	public int selectBBSCountNotice(PageVO vo);
+	
+	public List<BBSVO> selectBBSListNotice(PageVO vo);
+	
+	public List<BBSVO> selectCategoryNotice();
+	
+	public BBSVO selectBBSNotice(String id);
+	
+	public int insertBBSNotice(BBSVO vo);
+	
+	public int updateBBSNotice(BBSVO vo);
+	
+	public int deleteBBSNotice(BBSVO vo);
+	
+	public int updateViewCountNotice(String id);
 	
 }

@@ -5,7 +5,7 @@
 <mapper namespace="com.awoo.dao.BBSDAO">
 
 	<select id="selectBBSCount" resultType="int">
-		select count(*) 
+		select count(*)
 		from bbs
 		where is_delete = 0
 		<choose>
@@ -15,8 +15,10 @@
 			<when test="searchType.equals('content') and keyword != ''">
 				and content like concat('%', #{keyword}, '%')
 			</when>
-			<when test="searchType.equals('title_content') and keyword != ''">
-				and title like concat('%', #{keyword}, '%') or content LIKE concat('%', #{keyword}, '%')
+			<when
+				test="searchType.equals('title_content') and keyword != ''">
+				and title like concat('%', #{keyword}, '%') or content LIKE
+				concat('%', #{keyword}, '%')
 			</when>
 			<when test="searchType.equals('owner') and keyword != ''">
 				and owner like concat('%', #{keyword}, '%')
@@ -25,9 +27,77 @@
 	</select>
 
 	<select id="selectBBSList" resultType="BBSVO">
-		select id, category, title, owner_id, owner, content, view_counts, 
+		select id, category, title, owner_id, owner, content, view_counts,
 		date_format(create_date, '%Y-%m-%d') create_date
 		from bbs
+		where
+		is_delete = 0
+		<choose>
+			<when test="searchType.equals('title') and keyword != ''">
+				and title like concat('%', #{keyword}, '%')
+			</when>
+			<when test="searchType.equals('content') and keyword != ''">
+				and content like concat('%', #{keyword}, '%')
+			</when>
+			<when
+				test="searchType.equals('title_content') and keyword != ''">
+				and title like concat('%', #{keyword}, '%') or content like
+				concat('%', #{keyword}, '%')
+			</when>
+			<when test="searchType.equals('owner') and keyword != ''">
+				and owner like concat('%', #{keyword}, '%')
+			</when>
+		</choose>
+		order by id desc
+		limit #{startRow}, #{cntPerPage}
+	</select>
+
+	<select id="selectCategory" resultType="BBSVO">
+		select distinct category
+		from bbs
+	</select>
+
+	<select id="selectBBS" resultType="BBSVO">
+		select id, category, title,
+		owner_id, owner, content, view_counts,
+		date_format(create_date, '%Y-%m-%d') create_date
+		from bbs
+		where is_delete = 0 and id = #{id}
+	</select>
+
+	<insert id="insertBBS">
+		insert into bbs(category, title, owner_id, owner,
+		content)
+		values(#{category}, #{title}, #{ownerId}, #{owner},
+		#{content})
+	</insert>
+
+	<update id="updateBBS">
+		update bbs set category = #{category},
+		title=#{title}, content=#{content}
+		where id = #{id} and owner_id =
+		#{ownerId}
+	</update>
+
+	<update id="deleteBBS">
+		update bbs set is_delete = 1
+		where id = #{id} and owner_id = #{ownerId}
+	</update>
+
+	<update id="updateViewCount">
+		update bbs set view_counts = view_counts + 1
+		where id = #{id}
+	</update>
+
+
+
+
+<!-- 공지사항 게시판 -->
+
+
+	<select id="selectBBSCountNotice" resultType="int">
+		select count(*)
+		from bbs_notice
 		where is_delete = 0
 		<choose>
 			<when test="searchType.equals('title') and keyword != ''">
@@ -36,47 +106,91 @@
 			<when test="searchType.equals('content') and keyword != ''">
 				and content like concat('%', #{keyword}, '%')
 			</when>
-			<when test="searchType.equals('title_content') and keyword != ''">
-				and title like concat('%', #{keyword}, '%') or content like concat('%', #{keyword}, '%')
-			</when>
-			<when test="searchType.equals('owner') and keyword != ''">
-				and owner like concat('%', #{keyword}, '%')
+			<when
+				test="searchType.equals('title_content') and keyword != ''">
+				and title like concat('%', #{keyword}, '%') or content LIKE
+				concat('%', #{keyword}, '%')
 			</when>
 		</choose>
-		order by id desc 
+	</select>
+
+	<select id="selectBBSListNotice" resultType="BBSVO">
+		select id, category, title, owner_id, owner, content, view_counts,
+		date_format(create_date, '%Y-%m-%d') create_date
+		from bbs_notice
+		where
+		is_delete = 0
+		<choose>
+			<when test="searchType.equals('title') and keyword != ''">
+				and title like concat('%', #{keyword}, '%')
+			</when>
+			<when test="searchType.equals('content') and keyword != ''">
+				and content like concat('%', #{keyword}, '%')
+			</when>
+			<when
+				test="searchType.equals('title_content') and keyword != ''">
+				and title like concat('%', #{keyword}, '%') or content like
+				concat('%', #{keyword}, '%')
+			</when>
+		</choose>
+		order by id desc
 		limit #{startRow}, #{cntPerPage}
 	</select>
-		
-	<select id="selectCategory" resultType="BBSVO">
-		select distinct category
-		from bbs
-	</select>
 	
-	<select id="selectBBS" resultType="BBSVO">
-		select id, category, title, owner_id, owner, content, view_counts, 
+	<select id="selectCategoryNotice" resultType="BBSVO">
+		select distinct category
+		from bbs_notice
+	</select>
+
+	<select id="selectBBSNotice" resultType="BBSVO">
+		select id, category, title,
+		owner_id, owner, content, view_counts,
 		date_format(create_date, '%Y-%m-%d') create_date
-		from bbs
+		from bbs_notice
 		where is_delete = 0 and id = #{id}
 	</select>
-	
-	<insert id="insertBBS">
-		insert into bbs(category, title, owner_id, owner, content)
-		values(#{category}, #{title}, #{ownerId}, #{owner}, #{content})
+
+	<insert id="insertBBSNotice">
+		insert into bbs_notice(category, title, owner_id, owner, content
+<!--	<if test="category != null and category != ''">
+			category, 
+		</if>
+		<if test="title != null and title != ''">
+			title, 
+		</if>
+			owner_id, owner,
+		<if test="content != null and content != ''">
+			content
+		</if>
+		 -->
+		)
+		values(
+		<if test="category != null and category != ''">
+			#{category},
+		</if>
+		<if test="title != null and title != ''">
+			#{title},
+		</if>
+			#{ownerId}, #{owner},
+		<if test="content != null and content != ''">
+			#{content}
+		</if>
+		)
 	</insert>
-	
-	<update id="updateBBS">
-		update bbs set category = #{category}, title=#{title}, content=#{content}
+
+	<update id="updateBBSNotice">
+		update bbs_notice set category = #{category},
+		title=#{title}, content=#{content}
 		where id = #{id} and owner_id = #{ownerId}
 	</update>
-	
-	<update id="deleteBBS">
-		update bbs set is_delete = 1 
+
+	<update id="deleteBBSNotice">
+		update bbs_notice set is_delete = 1
 		where id = #{id} and owner_id = #{ownerId}
 	</update>
-	
-	<update id="updateViewCount">
-		update bbs set view_counts = view_counts + 1 
+
+	<update id="updateViewCountNotice">
+		update bbs_notice set view_counts = view_counts + 1
 		where id = #{id}
 	</update>
-	
 </mapper>

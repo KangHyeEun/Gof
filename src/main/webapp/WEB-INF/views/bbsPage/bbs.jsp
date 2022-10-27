@@ -5,8 +5,205 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/bbsstyle.css"/>
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/bbsstyle.css"/> --%>
 <title>Insert title here</title>
+<style type="text/css">
+body {
+	font-family: 'Nanum Barun Gothic', sans-serif;
+}
+
+.inner-div-bbs {
+	display: inline-block;
+}
+
+.bbs-header {
+	display: flex;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	justify-content: space-between;
+}
+
+.title {
+	display: flex;
+	box-sizing: border-box;
+}
+
+.title h3 {
+	font-family: 'NanumSquare', sans-serif;
+	font-size: 1.8rem;
+	font-weight: 700;
+	line-height: 3.6rem;
+	color: #212529;
+}
+
+.wrbtn {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	height: 5rem;
+}
+
+.wrbtn a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 30px;
+	font-size: 1rem;
+	color: #fff;
+	background-color: #232249;
+	border-radius: 0.4rem;
+	text-decoration: none;
+}
+
+.helpBar {
+	/* border: 1px solid black; */
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	height: 3rem;
+	padding-bottom: 0.8rem;
+}
+
+.search-wrap {
+	border: 1px solid gray;
+	border-radius: 0.4rem;
+	padding: 0.1rem;
+}
+
+.helpBar select {
+	width: 6rem;
+	height: 1.5rem;
+	border-style: none;
+}
+
+.helpBar input {
+	width: 20rem;
+	height: 1.5rem;
+	border-style: none;
+}
+
+.helpBar select, .helpBar input:focus {
+	outline: none;
+}
+
+#search {
+	border: none;
+	border-radius: 0.4rem;
+	box-sizing: border-box;
+	padding: 0.5rem 1rem;
+	width: 1.4rem;
+	height: 1.4rem;
+	background-image: url(https://uinnout.com/admin/images/search.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.main {
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+table {
+	border-collapse: collapse;
+	table-layout: fixed;
+	width: -webkit-fill-available;
+}
+
+thead tr {
+	border-top: 2px solid #909294;
+	border-bottom: 1px solid #b3c2d1;
+}
+
+tbody tr {
+	border-bottom: 1px solid #b3c2d1;
+}
+
+tbody tr:last-child {
+	border-bottom: 2px solid #909294;
+}
+
+tbody tr td:nth-child(3) {
+	padding-left: 3rem;
+	text-align: left;
+}
+
+table td, table th {
+	padding: 8px;
+	text-align: center;
+	line-height: 1.8rem;
+}
+
+table a {
+	text-decoration: none;
+	color: #0459c1;
+	overflow: hidden;
+	font-size: 1rem;
+}
+
+table th {
+	font-family: 'Nanum Barun Gothic', sans-serif;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: white;
+	color: rgb(0, 0, 0);
+}
+
+.bbs-footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1.5rem;
+	display: fixed;
+	box-sizing: border-box;
+}
+
+#paging {
+	display: flex;
+}
+
+.num {
+	height: 100%;
+	width: 26px;
+	margin: 0 2px;
+	border: 1px solid #14abab;;
+ 	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* 	font-weight: bold; */
+	border-radius: 10px;
+	font-size: 11px;
+	color: black;
+}
+
+.num a {
+	text-decoration: none;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.checked {
+	background-color: #14abab;
+	color: white;
+	border: 1px solid #14abab;
+}
+
+.notchecked:hover {
+	background-color: #c9eaec;
+	color: black;
+	border: 1px solid #c9eaec;
+}
+
+
+</style>
 </head>
 <body>
 <div class="container-wrap">
@@ -32,41 +229,15 @@
 			<!-- 검색 기능------------------------------- -->
 				<div class="helpBar">
 			        <div class="search-wrap">
-						<c:choose>
-							<c:when test="${title} != null && ${content} != null">
-								<select name="option" id="option">
-									<option value="both" selected>제목+내용</option>
-									<option value="category">카테고리</option>
-									<option value="owner">글쓴이</option>
-								</select>
-								<input type="text" id="text" name="text" value="${title}"/>
-							</c:when>
-							<c:when test="${title} != null">
-								<select name="option" id="option">
-									<option value="both" selected>제목+내용</option>
-									<option value="category">카테고리</option>
-									<option value="owner">글쓴이</option>
-								</select>
-								<input type="text" id="text" name="text" value="${title}"/>
-							</c:when>
-							<c:when test="${content} != null">
-								<select name="option" id="option">
-									<option value="both" selected>제목+내용</option>
-									<option value="category">카테고리</option>
-									<option value="owner">글쓴이</option>
-								</select>
-								<input type="text" id="text" name="text" value="${content}"/>							
-							</c:when>
-							<c:otherwise>
-								<select name="option" id="option">
-									<option value="both" selected>제목+내용</option>
-									<option value="category">카테고리</option>
-									<option value="owner">글쓴이</option>
-								</select>
-								<input type="text" id="text" name="text"/>							
-							</c:otherwise>
-						</c:choose>
-						<button id="search"></button>
+						<select name="searchType" id="searchType">
+						    <option value="title" <c:if test="${page.searchType eq 'title'}">selected</c:if>>제목</option>
+					        <option value="content" <c:if test="${page.searchType eq 'content'}">selected</c:if>>내용</option>
+						    <option value="title_content" <c:if test="${page.searchType eq 'title_content'}">selected</c:if>>제목+내용</option>
+						    <option value="owner" <c:if test="${page.searchType eq 'owner'}">selected</c:if>>작성자</option>
+						</select>
+						
+						<input type="text" name="keyword" id="keyword" value="${page.keyword}"/>
+						<button type="submit" id="search"></button>
 					</div>				
 				</div>
 				
@@ -101,57 +272,64 @@
 			</div>
 
 			<!-- 페이징단------------------------------- -->
-				<div class="bbs-footer">
-					<div id="paging">
-						<c:choose>
-							<c:when test="${1 == page.startPage}">
-								<span>◀◀</span>
-							</c:when>
-							<c:otherwise>
-								<a
-									href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.startPage - 1}">◀◀</a>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${1 == page.nowPage}">
-								<span>◀</span>
-							</c:when>
-							<c:otherwise>
-								<a
-									href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.nowPage - 1}">◀</a>
-							</c:otherwise>
-						</c:choose>
-						<c:forEach var="i" begin="${page.startPage}"
-							end="${page.endPage}">
-							<c:choose>
-								<c:when test="${page.nowPage eq i}">
-									<span>${i}</span>
-								</c:when>
-								<c:otherwise>
-									<a
-										href="${pageContext.request.contextPath}/bbsPage/bbs?page=${i}">${i}</a>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<c:choose>
-							<c:when test="${page.totalPage == page.nowPage}">
-								<span>▶</span>
-							</c:when>
-							<c:otherwise>
-								<a
-									href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.nowPage + 1}">▶</a>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${page.totalPage eq page.endPage}">
-								<span>▶▶</span>
-							</c:when>
-							<c:otherwise>
-								<a href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.endPage + 1}">▶▶</a>
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
+    <div class="bbs-footer">
+        <div id="paging">
+            <c:choose>
+                <c:when test="${1 == page.startPage}">
+                    <span class="num" style="color: #14abab" >◀◀</span>
+                </c:when>
+                <c:otherwise>
+                    <div class="num">
+                        <a href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.startPage - 1}" >◀◀</a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${1 == page.nowPage}">
+                    <span class="num" style="color: #14abab;">◀</span>
+                </c:when>
+                <c:otherwise>
+                    <div class="num">
+                        <a
+                        href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.nowPage - 1}${page.searchTypeKeyword}">◀</a>
+                    </div>
+                    </c:otherwise>
+            </c:choose>
+            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+                <c:choose>
+                    <c:when test="${page.nowPage eq i}">
+                        <span class="num checked">${i}</span>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="num notchecked">
+                            <a href="${pageContext.request.contextPath}/bbsPage/bbs?page=${i}${page.searchTypeKeyword}">${i}</a>
+                        </div>        
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            <c:choose>
+                <c:when test="${page.totalPage == page.nowPage}">
+                    <span class="num" style="color: #14abab;">▶</span>
+                </c:when>
+                <c:otherwise>
+                    <div class="num">
+                        <a
+                        href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.nowPage + 1}${page.searchTypeKeyword}">▶</a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${page.totalPage eq page.endPage}">
+                    <span class="num" style="color: #14abab">▶▶</span>
+                </c:when>
+                <c:otherwise>
+                    <div class="num">
+                        <a href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.endPage + 1}">▶▶</a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
 		
 			</div>
 		</div>
@@ -159,17 +337,34 @@
 </div>
 		
 <script type="text/javascript">
-//검색
+
+// 	window.addEventListener("DOMContentLoaded",function(){
+// 		document.getElementById("keyword").value = "${keyword}";
+// 	});
+// //검색(페이징)
 	document.getElementById("search").addEventListener("click", function(){
-		let option = document.getElementById("option").value;
-		let text = document.getElementById("text").value;
+		let searchType = document.getElementById("searchType").value;
+		let keyword = document.getElementById("keyword").value;
 		
-		if(option == "both"){
-			location.href = "${pageContext.request.contextPath}/bbsPage/bbs?title="+text+"&content="+text;	
-		}else if(option == "category"){
-			location.href = "${pageContext.request.contextPath}/bbsPage/bbs?category="+text;	
-		}else if(option == "owner"){
-			location.href = "${pageContext.request.contextPath}/bbsPage/bbs?owner="+text;
+		console.log(searchType);
+		console.log(keyword);
+
+		location.href = "${pageContext.request.contextPath}/bbsPage/bbs?searchType="+searchType+"&keyword="+keyword;
+	});	
+	
+// 	function clickPage(i){
+// 		let searchType = document.getElementById("searchType").value;
+// 		let keyword = document.getElementById("keyword").value;
+		
+// 		location.href = "${pageContext.request.contextPath}/bbsPage/bbs?page="+i+"&searchType="+searchType+"&keyword="+keyword;
+// 	}
+	
+	
+	document.getElementById("keyword").addEventListener("keydown", function(e){
+		const button = document.getElementById("search");
+		const input = document.getElementById("keyword");
+		if(e.key === "Enter") {
+			console.log(1);
 		}
 	});
 </script>

@@ -79,7 +79,7 @@ public class BBSService {
 		return (bbsDAO.deleteBBS(vo2)>0)?true:false;
 	}
 	
-	//댓글----------------------------------------------
+	//댓글
 	//댓글 불러오기
 	public List<BBSCommentVO> getCommentList(String bbsId) {
 		return comDAO.selecCommentAll(bbsId);
@@ -88,6 +88,63 @@ public class BBSService {
 	//댓글 쓰기
 	public int setComment(BBSCommentVO vo) {
 		return comDAO.insertComment(vo);
+	}
+	
+	//공지사항 게시판----------------------------------------
+	//게시판+페이징
+	public void getBBSListNotice(Model model, int page, String searchType, String keyword) {
+		PageVO vo = new PageVO();
+		vo.setNowPage(page);
+		vo.setCntPerPage(8);
+		vo.setCntPerBlock(10);
+		vo.setSearchType(searchType);
+		vo.setKeyword(keyword);
+		vo.setTotalRow(bbsDAO.selectBBSCountNotice(vo));
+		
+		if(!searchType.equals("")) {
+			model.addAttribute("searchType", searchType);
+			vo.setSearchType(searchType);
+		}
+		if(!keyword.equals("")) {
+			model.addAttribute("keyword", keyword);
+			vo.setKeyword(keyword);
+		}
+		
+		vo.process();
+		
+//		System.out.println(vo);
+		
+		model.addAttribute("page", vo);
+		model.addAttribute("list", bbsDAO.selectBBSListNotice(vo));
+	}
+	
+	//카테고리
+	public void getCateogryNotice(Model model) {
+		model.addAttribute("categories", bbsDAO.selectCategoryNotice());
+	}
+	
+	//게시글 상세 보기
+	public void getBBSContentNotice(Model model, String id) {
+		model.addAttribute("bbsVO", bbsDAO.selectBBSNotice(id));
+	}
+	//조회수
+	public void setViewCountNotice(String id) {
+		bbsDAO.updateViewCountNotice(id);
+	}
+	
+	//게시글 보기
+	public boolean setBBSNotice(BBSVO vo2) {
+		return(bbsDAO.insertBBSNotice(vo2) > 0)?true:false;
+	}
+	
+	//수정
+	public boolean putBBSNotice(BBSVO vo2) {
+		return(bbsDAO.updateBBSNotice(vo2) > 0)?true:false;
+	}
+	
+	//삭제
+	public boolean deleteBBSNotice(BBSVO vo2) {
+		return (bbsDAO.deleteBBSNotice(vo2)>0)?true:false;
 	}
 	
 }
