@@ -10,7 +10,92 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/home/style.css">
 <title>Insert title here</title>
+  <style>
+  .div3-title{
+/*     width: 100%; */
+/*     display: flex; */
+/*     justify-content: center; */
+/*     height: 10%; */
+/*     align-items: flex-end; */
+/*     font-weight: bold; */
+  }
+	.donut {
+    width: calc(100% - 16px);
+    padding-bottom: calc(100% - 16px);
+    margin: 0 auto;
+    border-radius: 50%;
+    position: relative;
+    text-align: center;
+    transition: background .3s ease-in-out;
+    background: conic-gradient(#3F8BC9 0% 72%, #F2F2F2 72% 100%);
+}
 
+.donut::before {
+    color: #fff;
+    width: 70%;
+    padding: calc(35% - .64vw) 0;
+    background: #264057;
+    border-radius: 50%;
+    position: absolute;
+    left: 15%;
+    top: 15%;
+    display: block;
+    content: attr(data-percent)'%';
+    transform: skew(-0.03deg);
+    margin: auto;
+    font-size: 1.1vw;
+    font-size: 2vw;
+    padding: calc(35% - 1.3vw) 0;
+}
+.div3{
+    flex-direction: row;
+    width: 100%;
+    /* height: 100%; */
+    justify-content: space-evenly;
+    align-items: center;
+}
+ .donuts{ 
+	width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+ } 
+/* .day-rates{ */
+/*     width: 100%; */
+/*     height: 100%; */
+
+/* } */
+ .donut-container{ 
+/*     height: 65%; */
+}
+ .donut-info{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 16%;
+    font-size: 0.9em;
+    font-weight: bold;
+    letter-spacing: 1px;
+ } 
+ .donut-info span{
+ 	font-weight: bold;
+ 	color: #2196f3;
+ }
+ .donut-info p{
+     word-break: keep-all;
+ }
+ .donuts-subtitle{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    height: 13%;
+    font-size: 1.1em;
+    
+ } 
+    </style>
 </head>	
 <body>
 	<div class="container-wrap">
@@ -39,8 +124,8 @@
 			                        	<p class="infoEcheckAdmin">
 			                        	<img src="${pageContext.request.contextPath}/imges/badge_staff.png"/>
 			                        	${employeeInfo.checkAdmin == 1? "관리자" : "일반 직원"}</p>
-			                        	<p class="infoEname">${ename}&nbsp;<span>${employeeInfo.eposition}</span>님</p>
-			                            <p class="infoEmpno">사원번호&nbsp;:&nbsp;<span>${employeeInfo.empno}</span></p>
+			                        	<p class="infoEname">${ename} <span>${employeeInfo.eposition}</span>님</p>
+			                            <p class="infoEmpno">사원번호 : <span>${employeeInfo.empno}</span></p>
 <!-- 			                            <p class="infoEposition"></p> -->
 			                            <div class="buttons">
 				                            <div id="enter"><p>출근</p></div>
@@ -55,16 +140,36 @@
 			                </div>
 			            </div>
 			            <div class="div3">
-			                <p>div3</p>
-			                <div class="day-rates">
-							 	<p>초과 근무 : <span class="work-rates">${overTime}</span></p>
-				                <p>지각 : <span class="work-rates">${countLate}</span></p>
-				                <p>정상 근무 횟수 : <span class="work-rates">${countNormalCommuting}</span></p>
-				                <p>휴가 요청 개수 : <span class="work-rates">${countApproval}</span></p>
-				                <p>총 휴갸 개수: <span class="work-rates">${totalUsedHoliday.totalHoliday}</span></p>
-				                <p>사용한 휴가 개수 : <span class="work-rates">${totalUsedHoliday.usedHoliday}</span></p>
+<!-- 			                <p class="div3-title">근무 / 휴가 현황</p> -->
+<!-- 			                <div class="day-rates"> -->
+			                		<div class="donuts">
+					                 	<div class="donuts-subtitle">근무현황</div>
+						                 <div class="donut-container commuting">
+									        <div class="donut"> </div>
+									    </div>
+								        <div class="donut-info">
+								        		<p>월급날까지 <span id="payday"></span>일 남았습니다</p>
+<%-- 												<p>총 ${getWeekDays}일 중 ${countThisMonth}일 째</p> --%>
+<%-- 									        <p>초과 근무 : <span class="work-rates">${overTime}</span></p> --%>
+<%-- 							                <p>지각 : <span class="work-rates">${countLate}</span></p> --%>
+<%-- 							                <p>정상 근무 횟수 : <span class="work-rates">${countNormalCommuting}</span></p> --%>
+							            </div>
+							         </div>
+							         <div class="donuts">   
+							     		<div class="donuts-subtitle">휴가현황</div>
+								     	<div class="donut-container holiday">
+								        	<div class="donut"> </div>
+								     	</div>   
+							        	<div class="donut-info">
+<%-- 							                <p>총 휴갸 개수: <span class="work-rates">${totalUsedHoliday.totalHoliday}</span></p> --%>
+							                <p>남은 휴가 <span class="work-rates">${totalUsedHoliday.totalHoliday-totalUsedHoliday.usedHoliday}</span>개</p>
+							                <p>휴가 요청 <span class="work-rates">${countApproval}</span>개</p>
+						                </div>
+						             </div>   
+<!-- 						    	</div> -->
+						    	
 			                </div>
-			            </div>
+			            
 			        </section>
 			
 				
@@ -145,7 +250,65 @@
 		</div>
 	</div>
     <script type="text/javascript">
-    	
+    // 근무현황 월급날 (매월1일) 까지 남을 날짜 구하기
+    let now = new Date();
+	let firstDate, lastDate;
+	
+	firstDate = new Date(now.getYear(), now.getMonth(), 1);
+	lastDate = new Date(now.getYear(), now.getMonth()+1, 0);
+	
+	let todayDate = now.getDate();
+	let endDate = lastDate.getDate();
+	
+	let payday = endDate-todayDate+1;
+	
+	document.getElementById("payday").innerHTML = payday;
+    
+    
+	// 퍼센트 구하기
+    const donut = document.getElementsByClassName("donut")[0]
+	const donut2 = document.getElementsByClassName("donut")[1]
+    
+    const weekDays = ${getWeekDays};
+	const countWorkDay = ${countThisMonth};
+	
+	const usedHoliday = ${totalUsedHoliday.usedHoliday};
+	const totalHoliday = ${totalUsedHoliday.totalHoliday};
+	
+	
+	// let worked = countWorkDay / weekDays * 100; //원래는 근무한 날짜로 평일에서 뺐는데 수정 
+	// 지금날짜 / 이번 달 일수 *100 
+    let worked = todayDate / endDate * 100;
+    // 사용한 휴가일 / 총 휴가일 * 100
+    let holidayper = usedHoliday / totalHoliday * 100;
+   
+   
+	
+	let totalMinwon = worked, resolveMinwon = 12
+	let t = 0
+	
+	let t4 = 0
+	const donutAnimation = setInterval(() => {
+	  donut.dataset.percent = t4
+	  let graph1 = "conic-gradient(#4F98FF 0 "+t4+"%, #DEDEDE "+t4+"% 100% )";
+	  donut.style.background = graph1
+	  t4++ >= totalMinwon && clearInterval(donutAnimation)
+	}, 10)
+	
+	
+	let totalMinwon2 = holidayper, resolveMinwon2 = 12
+	let t5 = 0
+	const donutAnimation2 = setInterval(() => {	
+	  donut2.dataset.percent = t5
+	  let graph2 = "conic-gradient(#4F98FF 0 "+t5+"%, #DEDEDE "+t5+"% 100% )";
+	  donut2.style.background = graph2
+// 	  donut.style.background = "conic-gradient(#4F98FF 0" +t4+"%, #DEDEDE "+t4+" 100% )";
+	  t5++ >= totalMinwon2 && clearInterval(donutAnimation2)
+	}, 10)
+    
+	
+	
+		
     
     
 	    document.getElementById("enter").addEventListener("click",function(){
@@ -181,7 +344,10 @@
 	    });
 	    
 	   
-
+	    
+	    
+	     
+	    
     </script>
 
 
