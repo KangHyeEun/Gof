@@ -70,9 +70,7 @@
 				<div class="schedule slideTop">
 					<div>
 						<p>일정 등록</p>
-						<a>
-							<img src="${pageContext.request.contextPath}/imges/close.png" alt="" />
-						</a>
+						<a>✖️</a>
 					</div>
 					<div>
 						<form action="${pageContext.request.contextPath}/calendar/insertData" method="post">
@@ -103,7 +101,10 @@
 							    <textarea name="calContent" id="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
 						    </div>
 						    <div class="btn">
-						    	<button id="btn">전송</button>
+						    	<button id="btn" type="submit">저장</button>
+						    	<button id="realBtn" class="displayNone" type="submit">버튼</button>
+						    	<input id="year" type="hidden" value="${year }"/>
+						    	<input id="month" type="hidden" value="${month }"/>
 						    </div>
 						</form>
 					</div>
@@ -123,12 +124,16 @@
 	</script>
 	
 <!-- //test Commit//test Commit -->
-    <script src="${pageContext.request.contextPath}/calendar/cal-script.js"></script>
-<!--     위의 .js 에서 EL태그 사용이 불가해서 대신 사용 -->
-<%--     <jsp:include page="../include/menu.jsp"></jsp:include> --%>
+    <script src="${pageContext.request.contextPath}/calendar/cal-script.js">
+//     	renderCalendar();
+//     	console.log("확인");
+    </script>
+    
+<!--     위의 .js 에서 EL태그 사용이 불가해서 대신 사용해볼까함 -->
+<%--     <jsp:include page="./cal-script.jsp"></jsp:include> --%>
     
     <script type="text/javascript">
-		document.querySelector(".schedule > div > a > img").addEventListener("click", function(){
+		document.querySelector(".schedule > div > a").addEventListener("click", function(){
 			document.querySelector(".schedule-wrap").style.display = "none";
 		});
     </script>

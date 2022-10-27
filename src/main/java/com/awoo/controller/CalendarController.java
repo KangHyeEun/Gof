@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,12 +29,16 @@ public class CalendarController {
 //	첫 화면 로딩시 calendar 메서드로 들어와서 redirect
 	@GetMapping
 	public String calendar() {
-		return "redirect:/calendar/selectData";
+		return "redirect:/calendar/selectData/0/0";
 	}
 	
 //	extract에서 일정 데이터 가져오는 로직 수행후에 달력 화면으로 이동 
-	@GetMapping("/selectData")
-	public String selectData(Model model) {
+	@GetMapping("/selectData/{year}/{month}")
+	public String selectData(Model model,
+			@PathVariable String year, @PathVariable String month) {
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
+		
 		service.selectDataMethod(model);
 		return "calendar/calendar";
 	}
@@ -46,11 +51,13 @@ public class CalendarController {
 	}
 	
 //	일정을 DB에 저장
-	@PostMapping("/insertData")
-	public String insertData(CalendarVO vo, Model model) {
+	@PostMapping("/insertData/{year}/{month}")
+	public String insertData(CalendarVO vo, Model model,
+			@PathVariable String year, @PathVariable String month) {
+		
 		service.insertDataMethod(vo, model);
 //		return "calendar/calendar";
-		return "redirect:/calendar/selectData";
+		return "redirect:/calendar/selectData/"+year+"/"+month;
 	}
 }
 

@@ -1,5 +1,12 @@
 
 //======================================================================
+
+//.js 파일에서 contextPath를 사용하기 위해 jsp 에서 script 태그로 session에 저장
+var ctx = getContextPath();
+function getContextPath() {
+	return sessionStorage.getItem("contextpath");
+}
+
 //======================================================================
 // ---------------------------------------------------------------------
 //calendar
@@ -317,20 +324,9 @@ const renderCalendar = () => {
 
 	
 // ---------------------------------------------------------------------
-//일자에 일정 출력
+//비동기 통신
 // ---------------------------------------------------------------------
 
-//	.js 파일에서 contextPath를 사용하기 위해 jsp 에서 script 태그로 session에 저장
-	var ctx = getContextPath();
-	function getContextPath() {
-		return sessionStorage.getItem("contextpath");
-	}
-//	window.addEventListener("DOMContentLoaded", function(_e){
-//	});
-//	console.log(daysEle.length);
-//	console.log(daysEle.item(0).classList[0]); // 첫 날
-//	console.log(daysEle.item(daysEle.length-1).classList[0]); // 마지막 날
-		
 	let dateRange = {calStart:daysEle.item(0).classList[0],
 					calEnd:daysEle.item(daysEle.length-1).classList[0]};
 	
@@ -340,6 +336,11 @@ const renderCalendar = () => {
 		body : JSON.stringify(dateRange)
 	}).then(response => response.json(), _e => console.log("error!!!"))
 	.then(_data => {
+		
+//		----------------------------------------------------------------------
+//		일자에 일정 출력
+//		----------------------------------------------------------------------
+
 		let list = _data;
 		let innerSpan;
 //		console.log(list[0]);
@@ -372,8 +373,6 @@ const renderCalendar = () => {
 					let div = document.createElement("div");
 					let span = document.createElement("span");
 					span.classList.add("schedule-"+list[index1].calId);
-					console.log("schedule-"+list[index1].calId);
-
 					
 					innerSpan = "";
 					innerSpan += calTime + " " + list[index1].calTitle;
@@ -387,7 +386,10 @@ const renderCalendar = () => {
 //		 ---------------------------------------------------------------------
 //		 overCnt를 위에서 생성후에 해당 span태그(+count) 클릭시 숨겨진 일정 팝업
 //		 ---------------------------------------------------------------------
-		
+
+		document.querySelector(".overCnt").addEventListener("click",function(){
+			console.log("확인");
+		});
 		
 		
 		
@@ -1248,9 +1250,10 @@ mouseUp(nexts);
 
 // ---------------------------------------------------------------------
 
-// 첫 시작 시 렌더링
-renderCalendar();
-// 오늘 날짜로 이동
+//---------------------------------------------------------------------
+//오늘 날짜로 이동
+//---------------------------------------------------------------------
+
 document.querySelector(".todayMove").addEventListener("click", () =>{
     date.setFullYear(new Date().getFullYear());
     date.setMonth(new Date().getMonth());
@@ -1259,28 +1262,69 @@ document.querySelector(".todayMove").addEventListener("click", () =>{
 
 // ---------------------------------------------------------------------
 
-//======================================================================
+//---------------------------------------------------------------------
+//일정 팝업에서 controller로 가기전 날짜 데이터 추출
+//---------------------------------------------------------------------
+
+//일정 팝업을 띄운 후 전송버튼을 눌러 날짜 값을 넘겼는지를 판단하는 flag
+let calStart = "";
+//button[type="button"] 형태의 button 클릭시 날짜값을 넘겨서 렌더링 함수를 컨트롤
+let transferBtn = document.getElementById("btn");
+transferBtn.addEventListener("click", function(){
+	console.log("------------------------------");
+	let calStart = document.getElementById("calStart");
+	console.log(calStart.value);
+	
+	let calYear = calStart.value.split("-")[0];
+	let calMonth = calStart.value.split("-")[1];
+	console.log(calYear);
+	console.log(calMonth);
+	
+    document.querySelector(".schedule form").setAttribute("action", ctx+"/calendar/insertData/"+calYear+"/"+calMonth);
+    documnet.querySelector("#realBtn").click();
+});
+
+// ---------------------------------------------------------------------
+
+//---------------------------------------------------------------------
+//일정 팝업에서 controller로 가기전 날짜 데이터 추출 및 팝업 전송시 렌더링 정의
+//---------------------------------------------------------------------
+
+//달력 페이지 넘겼을때 (년,월에 대한 이전,다음 페이지) 해당 년,월 값을 위한 변수
+let inputYearValue = ""; 
+let inputMonthValue = ""; 
+inputYearValue = document.querySelector("#year").value;
+inputMonthValue = document.querySelector("#month").value;
+
+console.log(inputYearValue);
+console.log(inputMonthValue);
+
+//제일 위에 변수선언 및 값을 가져오며, 중간에 렌더링 함수 안에서 값이 바뀐다.
+//inputYearValue = document.querySelector("#year").value;
+//inputMonthValue = document.querySelector("#month").value;
+
+if (inputYearValue == 0 && inputMonthValue == 0) {
+	console.log("첫 렌더링");
+	// 첫 시작 시 렌더링
+	renderCalendar();
+} else {
+	console.log("이후 렌더링");
+//	년, 월 값 대입 후 렌더링
+    date.setFullYear(inputYearValue);
+    date.setMonth(inputMonthValue-1);
+    renderCalendar();
+
+}
+
+// ---------------------------------------------------------------------
+
+// ---------------------------------------------------------------------
+
+// ---------------------------------------------------------------------
 
 //======================================================================
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//======================================================================
 
 
 
