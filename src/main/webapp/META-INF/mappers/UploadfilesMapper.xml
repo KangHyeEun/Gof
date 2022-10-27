@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awoo.dao.UploadfilesDAO">
+	<insert id="uplaodFile">
+		insert into uploadfiles(
+		owner_id,file_name,upload_date
+		)
+		values(
+		#{ownerId},#{fileName},now()
+		)
+	</insert>
+</mapper>

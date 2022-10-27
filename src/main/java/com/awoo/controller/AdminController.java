@@ -1,5 +1,8 @@
 package com.awoo.controller;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -7,25 +10,32 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.awoo.service.EmployeeInfoService;
 import com.awoo.service.PersonalInfoService;
+import com.awoo.service.UploadfilesService;
 import com.awoo.vo.EmployeeInfoVO;
 import com.awoo.vo.InfoVO;
 import com.awoo.vo.PersonalInfoVO;
+import com.awoo.vo.UploadfilesVO;
 
 @Controller
 public class AdminController {
 	
 	private PersonalInfoService Pservice;
 	private EmployeeInfoService Eservice;
-	
-	public AdminController(PersonalInfoService pservice, EmployeeInfoService eservice) {
+	private UploadfilesService Uservice;
+
+	public AdminController(PersonalInfoService pservice, EmployeeInfoService eservice, UploadfilesService uservice) {
 		super();
 		Pservice = pservice;
 		Eservice = eservice;
+		Uservice = uservice;
 	}
-
+	
 	// admin List
 	@GetMapping("/admin")
 	public String admin(Model model) {
@@ -57,9 +67,29 @@ public class AdminController {
 	}
 	
 	// 새로운 직원 추가
-	@PostMapping("/admin/insertData")
-	public String insertData(PersonalInfoVO pvo,EmployeeInfoVO evo, HttpServletRequest request) {
+	@PostMapping("/admin/insertData/{empno}")
+	public String insertData(
+			@PathVariable("empno") int empno,
+			PersonalInfoVO pvo,EmployeeInfoVO evo, 
+			HttpServletRequest request,
+			@RequestParam("proimg") MultipartFile[] files,
+			UploadfilesVO vo)throws IllegalStateException, IOException{
+		System.out.println("확인1");
+		for (MultipartFile file : files) {
+			 if(!file.getOriginalFilename().isEmpty()) {
+//				 file.transferTo(Paths.get("D:/sample/"+file.getOriginalFilename()));
+					System.out.println(file.getOriginalFilename() + "저장완료 : 컨트롤러");
+					vo.setFileName(file.getOriginalFilename());
+					vo.setOwnerId(empno);
+					Uservice.uplaodFile(vo);
+				} else {
+					System.out.println("에러가 발생했습니다.");
+				}
+		 }
+		
+		System.out.println("확인6");
 		Eservice.insertDataE(pvo,evo,request);
+		
 		return "redirect:/admin";
 	}
 	
@@ -82,5 +112,20 @@ public class AdminController {
 		model.addAttribute("endPage", (10*(page-1))+9);			
 		Pservice.AllList(model);			
 		return "/admin/admin1";
+	}
+	
+	// 파일 처리
+	@PostMapping("/admin/file")
+	@ResponseBody
+	public void multiFileUploadWithAjax(MultipartFile[] uploadFile,UploadfilesVO vo) 
+			throws IllegalStateException, IOException {
+		for(MultipartFile file : uploadFile) {
+			if(!file.getOriginalFilename().isEmpty()) {
+				file.transferTo(Paths.get("E:/sample/"+file.getOriginalFilename()));
+				System.out.println(file.getOriginalFilename() + "저장완료. : 비동기");
+			}else {
+				System.out.println("에러가 발생했습니다.");
+			}
+		}
 	}
 }

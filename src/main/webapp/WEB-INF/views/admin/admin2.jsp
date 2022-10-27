@@ -36,14 +36,14 @@
 							<br />
 							<p>⏏홈>관리자>인사관리>직원 개별 등록</p>
 						</div>
-						<form action="${pageContext.request.contextPath}/admin/insertData"
-							class="form1" method="post">
+						<form action="${pageContext.request.contextPath}/admin/insertData/${empno}"
+							class="form1" method="post" enctype="multipart/form-data">
 							<div class="personal-wrap">
 								<div class="prodiv">
 									<img id="showimg"
 										src="${pageContext.request.contextPath}/imges/user.png">
 									<label for="proimg" id="img">사진등록</label><input type="file"
-										name="proimg" id="proimg" accept="image/*">
+										name="proimg" id="proimg" accept="image/*" multiple>
 								</div>
 								<div id="personal">
 									<table>
@@ -256,7 +256,8 @@
 	<script>
         document.getElementById("birthday").valueAsDate = new Date();
         document.getElementById("ehiredDate").valueAsDate = new Date();
-        
+    </script>
+    <script type="text/javascript">
         const InputFile = document.getElementById("proimg");
         document.getElementById("proimg").addEventListener("change", function(){
             const fileReader = new FileReader();
@@ -266,15 +267,31 @@
             fileReader.onload = function(){
                 document.getElementById("showimg").src = fileReader.result;
             }
+            
+            
+         	// formData 를 통해 데이터를 보낼 양식 설정
+        	const formData = new FormData();
+        	// MediaFile input = file 태트 엘리먼트를 선언       	
+        	const inputFiles = document.getElementById("proimg");
+        	// inputFiles에서 파일에 대한 정보들을 전부 가져와 변수에 저장
+        	let files = inputFiles.files;
+        	// 어쩐 값이 오는지 임시 출력
+    		console.log(files);
+        	
+    		// files의 정보를 formData에 담기
+    		for (const file of files) {
+    			formData.append("uploadFile", file);
+    		}
+    		
+     		//fetch를 통해 formData 전송
+    		fetch("${pageContext.request.contextPath}/admin/file",{
+    			method : "POST",
+    			body : formData})
+    		.then(reponse => console.log(response))
+    		.catch(error => console.log(error));
         });
-
-        // const fileInput = document.getElementById("proimg");
-
-        // const hadleFile = (e) => {
-        //     const selectedFile = [...fileInput.files];
-        //     const fileReader = new FileReader();
-        // }
-    </script>
+        </script>  
+    
 
 <!-- -------------------------------------------------------------------------------- -->
 					</div>
