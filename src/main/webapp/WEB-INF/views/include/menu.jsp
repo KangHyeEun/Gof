@@ -12,7 +12,7 @@
             <nav class="nav">
                 <div class="menuwrap">
                     <ul class="menu">
-                        <li><a href="MoveToHome">홈</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MoveToHome">홈</a></li>
                     </ul>
 
                     <ul class="menu">
