@@ -71,7 +71,47 @@ public class PersonalInfoService {
 			dao.insertDataP(vo);
 		
 	}
-
+	
+public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
+		
+		int telNumber = 0;
+		String addr = "";
+		String email_id = request.getParameter("email_id");
+		String email_domain = request.getParameter("email_domain");
+		if(request.getParameter("phoneNumber") != null) {
+			int phoneNumber = Integer.parseInt(request.getParameter("phoneNumber"));						
+			vo.setPhone_number(phoneNumber);
+		}
+		
+		vo.setEmail(email_id+"@"+email_domain);
+		
+		if(request.getParameter("postcode") != null) {
+			String postcode = request.getParameter("postcode");
+			addr += postcode;
+			if(request.getParameter("address") != null) {
+				String  address = request.getParameter("address");
+				addr += (" " + address);
+				if(request.getParameter("detailAddress") != null) {
+					String  detailAddress = request.getParameter("detailAddress");
+					addr += (" " + detailAddress);
+				}
+				if(request.getParameter("extraAddress") != null) {
+					String  extraAddress = request.getParameter("extraAddress");
+					addr += (" " + extraAddress);
+				}
+			}
+		}
+		vo.setAddress(addr);
+		
+		
+		if(request.getParameter("telNumber") != null && request.getParameter("telNumber") != "") {
+			telNumber = Integer.parseInt(request.getParameter("telNumber"));
+		}	
+		vo.setTel_number(telNumber);
+		
+		dao.updateP(vo);
+	}
+	
 	public void selectInfo(InfoVO vo,Model model) {
 		String[] email = dao.selectInfo(vo).get(0).getEmail().split("@");
 		for (int i = 0; i < email.length; i++) {

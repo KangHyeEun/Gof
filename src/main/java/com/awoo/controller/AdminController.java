@@ -59,6 +59,32 @@ public class AdminController {
 		return "/admin/detail";
 	}
 	
+	// 수정하기
+		@PostMapping("/admin/updateData/{empno}")
+		public String updateDetail(
+				@PathVariable("empno") int empno,
+				PersonalInfoVO pvo,EmployeeInfoVO evo, 
+				HttpServletRequest request,
+				@RequestParam("proimg") MultipartFile[] files,
+				UploadfilesVO vo)throws IllegalStateException, IOException {
+			pvo.setEmpno(empno);
+			evo.setEmpno(empno);
+			Eservice.updateE(pvo,evo,request);
+			
+			for (MultipartFile file : files) {
+				 if(!file.getOriginalFilename().isEmpty()) {
+						vo.setFileName(file.getOriginalFilename());
+						vo.setOwnerId(empno);
+						Uservice.uplaodFile(vo);
+					} else {
+						System.out.println("에러가 발생했습니다.");
+					}
+			 }	
+			
+			return "redirect:/admin";
+		}
+		
+	
 	// 새로운 직원 추가 페이지 이동
 	@GetMapping("/admin/newE")
 	public String newE(Model model,HttpServletRequest request) {
@@ -74,22 +100,18 @@ public class AdminController {
 			HttpServletRequest request,
 			@RequestParam("proimg") MultipartFile[] files,
 			UploadfilesVO vo)throws IllegalStateException, IOException{
-		System.out.println("확인1");
+		
+		Eservice.insertDataE(pvo,evo,request);
+
 		for (MultipartFile file : files) {
 			 if(!file.getOriginalFilename().isEmpty()) {
-//				 file.transferTo(Paths.get("D:/sample/"+file.getOriginalFilename()));
-					System.out.println(file.getOriginalFilename() + "저장완료 : 컨트롤러");
 					vo.setFileName(file.getOriginalFilename());
 					vo.setOwnerId(empno);
 					Uservice.uplaodFile(vo);
 				} else {
 					System.out.println("에러가 발생했습니다.");
 				}
-		 }
-		
-		System.out.println("확인6");
-		Eservice.insertDataE(pvo,evo,request);
-		
+		 }	
 		return "redirect:/admin";
 	}
 	
@@ -122,7 +144,6 @@ public class AdminController {
 		for(MultipartFile file : uploadFile) {
 			if(!file.getOriginalFilename().isEmpty()) {
 				file.transferTo(Paths.get("E:/sample/"+file.getOriginalFilename()));
-				System.out.println(file.getOriginalFilename() + "저장완료. : 비동기");
 			}else {
 				System.out.println("에러가 발생했습니다.");
 			}

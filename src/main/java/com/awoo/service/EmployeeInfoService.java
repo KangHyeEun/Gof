@@ -63,6 +63,11 @@ public class EmployeeInfoService {
 		service.insertDataP(request,vop);
 	}
 	
+	public void updateE(PersonalInfoVO vop,EmployeeInfoVO vo, HttpServletRequest request) {
+		dao.updateE(vo);
+		service.updateP(request,vop);
+	}
+	
 	/*휴가-------------------------------------------------------------------------*/
 	
 	public void updateUsedHoliday(HolidayVO vo) {
