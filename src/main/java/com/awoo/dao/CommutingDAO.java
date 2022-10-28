@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.awoo.vo.BBSVO;
+import com.awoo.vo.CalendarVO;
 import com.awoo.vo.CommutingVO;
 import com.awoo.vo.EmployeeInfoVO;
 
@@ -29,6 +30,7 @@ public interface CommutingDAO {
 	public List<BBSVO> selectBBSListNoticeForHome();
 	public int selectCountApprovalHoliday(Map<String,Object>map);
 	public EmployeeInfoVO selectTotalUsedHoliday(Map<String,Object>map);
+	public List<CalendarVO> getTodayCalendar(Map<String,Object>map);
 	
 }
 

@@ -85,9 +85,9 @@
 				<!-- Login Form -->
 				<form:form modelAttribute="personalInfoVO" action="${pageContext.request.contextPath}/login" method="post" name="loginForm">
 					<p>아이디</p>
-					<form:input path="empno" placeholder="아이디를 입력하세요" id="empno" value="220701"/>
+					<form:input path="empno" placeholder="아이디를 입력하세요" id="empno" value="220204"/>
 					<p>패스워드</p>
-					<form:password path="password" placeholder="패스워드를 입력하세요" id="pw" value="abc7"/>
+					<form:password path="password" placeholder="패스워드를 입력하세요" id="pw" value="abc6"/>
 					<button id="checkPW">Log in</button>
 				</form:form>
 			</div>
