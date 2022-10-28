@@ -19,7 +19,7 @@ nav {
 	border-spacing: 0;
 }
 
-.table1 tr:nth-child(odd) {
+.table1>tbody:nth-child(odd) {
 	background-color: #f8f8f9;
 }
 
@@ -30,10 +30,10 @@ th, td {
 td {
 	padding: 1%;
 }
-
+ 
 th {
 	background-color: #e3edf7;
-}
+} 
 
 .select {
 	width: 100%;

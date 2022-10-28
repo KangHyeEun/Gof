@@ -27,7 +27,7 @@ public class PersonalInfoService {
 	}
 
 	public void AllList(Model model){
-		model.addAttribute("count",dao.countInfo());
+//		model.addAttribute("count",dao.countInfo());
 		model.addAttribute("list",dao.selectAllInfo());
 	}
 	

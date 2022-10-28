@@ -1,3 +1,5 @@
+<%@page import="com.awoo.vo.HolidayVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -65,13 +67,62 @@ input {
 	width: 30%;
 	height: 25%;
 }
+
+.mdiv1 {
+	margin-bottom: 0;
+}
+
+.detail, #exit2 {
+	cursor: pointer;
+}
+
+.detail-container {
+	height: 80%;
+}
+
+.DTable{
+	width: 100%;
+	height: 100%;
+	border-spacing: 0;
+	border: 1px solid #c1bdbd;
+}
+
+.DTable tbody tr:nth-child(odd) {
+	background-color: #f8f8f9;
+}
+
+.DTable tbody tr td {
+	padding-left: 3%;
+	border-bottom: 1px solid #c1bdbd;
+}
+
+.DTable tr, .DTable tr td, .DTable tr td:first-child {
+	border-bottom: 1px solid #c1bdbd;
+}
+
+.DTable tr td:first-child {
+	border-right: 1px solid #c1bdbd;
+}
+
+span {
+	color: black;
+}
+#pop-approval {
+	color: #14abab;
+}
+.approval-container {
+	margin-left: 2%;
+}
 </style>
 </head>
 <body>
 	<div class="container-wrap">
 		<div class="header">
+
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
-			<div class="header-logout">로그아웃 버튼</div>
+			<div class="header-logout">
+				<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+			</div>
 		</div>
 		<div class="container">
 			<jsp:include page="../include/menu.jsp"></jsp:include>
@@ -79,12 +130,11 @@ input {
 				<div class="inner-div-bbs">
 					<div class="select">
 						<div class="intro">
-							<fmt:parseNumber var="page" value="${count/10}"
-								integerOnly="true" />
 							<h3>휴가 신청 관리</h3>
 							<p>⏏홈>휴가 신청</p>
 						</div>
-						<form action="${pageContext.request.contextPath}/damin/holidayselect"
+						<form
+							action="${pageContext.request.contextPath}/damin/holidayselect?page=1"
 							method="post">
 							<div class="div1">
 								<div class="selectD" style="height: 40px;">
@@ -127,22 +177,23 @@ input {
 										<th></th>
 										<th></th>
 										<th></th>
+										<th>상세보기</th>
 									</tr>
-									<c:forEach var="i" items="${list}" begin="${startPage}"
-										end="${endPage}">
+									<c:forEach var="i" items="${list}" begin="${10*(page-1)}"
+										end="${(10*(page-1))+9}" varStatus="status">
 										<tr>
 											<td>${i.hwriteDate}</td>
-										<c:set var="loof_flag" value="false"/>
-										<c:forEach var="j" items="${depart}">
-											<c:if test="${not loof_flag}">
-											<c:choose>
-												<c:when test="${i.empno eq j.empno}">
-												<td>${i.huserName}(${j.edepartment})</td>	
-													<c:set var="loof_flag" value="true"/>											
-												</c:when>
-											</c:choose>
-											</c:if>
-										</c:forEach>
+											<c:set var="loof_flag" value="false" />
+											<c:forEach var="j" items="${depart}">
+												<c:if test="${not loof_flag}">
+													<c:choose>
+														<c:when test="${i.empno eq j.empno}">
+															<td>${i.huserName}(${j.edepartment})</td>
+															<c:set var="loof_flag" value="true" />
+														</c:when>
+													</c:choose>
+												</c:if>
+											</c:forEach>
 											<c:choose>
 												<c:when test="${i.approval eq '요청중'}">
 													<td><div class="req">신청</div></td>
@@ -157,7 +208,8 @@ input {
 											<td>${i.htype}</td>
 											<td>${i.hstartDate}~${i.hendDate}</td>
 											<td>${i.countDate}</td>
-											<td>${i.hcontent}</td>
+											<td
+												style="max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${i.hcontent}</td>
 											<td></td>
 											<td></td>
 											<td><c:choose>
@@ -193,53 +245,119 @@ input {
 														${i.rejectionReason}
 													</c:when>
 												</c:choose></td>
+											<td id="detail${status.count}" class="detail"
+												value1="${i.id}" value2="${i.empno}" style="color: #ababaf;">상세보기</td>
 										</tr>
-										</c:forEach>
-									
+									</c:forEach>
 								</table>
+								<!-- 상세보기 모달 -->
+								<div class="modal_dim" id="modal_dim2">
+									<div class="modal_wrap"
+										style="width: 30%;min-height: 60%;">
+										<div class="modal">
+											<div class="mdiv1">
+												<div style="display: flex; width: 80%">
+													<h4 style="margin-right: 5%;">휴가 신청 상세보기</h4>
+													<span id="pop-approval"></span>
+												</div>
+												<div>
+													<h5 id="exit2">X</h5>
+												</div>
+											</div>
+											<div class="detail-container">
+
+												<div></div>
+												<table class="DTable">
+													<tr>
+														<td>휴가 신청일</td>
+														<td><span id="pop-writeDate"></span></td>
+													</tr>
+													<tr>
+														<td>휴가 종류</td>
+														<td><span id="pop-halfDay"></span><span
+															id="pop-htype"></span></td>
+													</tr>
+													<tr>
+														<td>기간</td>
+														<td><span id="pop-hstartDate"></span>&nbsp;~&nbsp;<span
+															id="pop-hendDate"></span></td>
+													</tr>
+													<tr>
+														<td>일수</td>
+														<td><span id="pop-countDate"></span></td>
+													</tr>
+													<tr>
+														<td style="height: 50%;">신청 내용</td>
+														<td
+															style="max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: normal;"><span
+															id="pop-hcontent"></span></td>
+													</tr>
+												</table>
+
+												<div class="approval-container">
+													<div class="approvalDate">
+														결재일: <span id="pop-approvalDate">넣을 예정</span>
+													</div>
+													<div id="reject" class="reject">
+														반려사유: <span id="pop-rejection_reason">넣을 예정</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 								<!-- 페이지 처리 -->
 								<div class="paging">
 
 									<c:choose>
-										<c:when test="${nowPage == 1}">
-											<span class="num" style="color: #272454;">◀</span>
+										<c:when test="${param.page == 1}">
+											<div class="num">
+												<span id="prev" style="color: #14abab;">◀</span>
+											</div>
 										</c:when>
 										<c:otherwise>
 											<div class="num">
-												<a id="prev"
-													href="${pageContext.request.contextPath}/holiday/paging/${nowPage-1}">◀</a>
+												<a id="prev" href="${pageContext.request.contextPath}/${url}?page=${param.page-1}">◀</a>
 											</div>
 										</c:otherwise>
 									</c:choose>
-									<c:forEach begin="1" end="${page+1}" varStatus="status">
+										<%
+										int Ppage = Integer.parseInt((String) request.getParameter("page"));
+										int begin = (Ppage - 1) / 10 <= 0 ? 1 : (int) Math.ceil((Ppage - 1) / 10) * 10 + 1;
+
+										List<HolidayVO> list = (List<HolidayVO>) request.getAttribute("list");
+
+										int celi = (int) Math.ceil(list.size() / 10);
+										int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin + 9 : celi + 1;
+										%>
+										<c:forEach begin="<%=begin%>" end="<%=endPage%>"
+											varStatus="status" var="var">
+											<c:choose>
+												<c:when test="${param.page eq var}">
+													<div class="num checked">
+														<span>${var}</span>
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="num notchecked">
+														<a href="${pageContext.request.contextPath}/${url}?page=${var}">${var}</a>
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
 										<c:choose>
-											<c:when test="${status.count eq nowPage}">
-												<div class="num checked">
-													<a
-														href="${pageContext.request.contextPath}/holiday/paging/${status.count}"
-														style="color: white;">${status.count}</a>
+											<c:when test="${param.page} == <%=endPage%>">
+												<div class="num">
+													<span id="next" style="color: #14abab;">▶</span>
 												</div>
 											</c:when>
 											<c:otherwise>
-												<div class="num notchecked">
-													<a
-														href="${pageContext.request.contextPath}/holiday/paging/${status.count}">${status.count}</a>
+												<div class="num">
+													<a id="next" href="${pageContext.request.contextPath}/${url}?page=${param.page+1}">▶</a>
 												</div>
 											</c:otherwise>
 										</c:choose>
-									</c:forEach>
-
-									<c:choose>
-										<c:when test="${nowPage == page+1}">
-											<span class="num" style="color: #272454;">▶</span>
-										</c:when>
-										<c:otherwise>
-											<div class="num">
-												<a id="next"
-													href="${pageContext.request.contextPath}/holiday/paging/${nowPage+1}">▶</a>
-											</div>
-										</c:otherwise>
-									</c:choose>
+									
 								</div>
 							</div>
 						</div>
@@ -253,6 +371,8 @@ input {
 
 
 	<script type="text/javascript">
+		
+	
 		/* 모달창 */
 		document.getElementById("exit").addEventListener("click", function() {
 			document.getElementById("modal_dim").style.display = "none";
@@ -265,6 +385,56 @@ input {
 						function() {
 							document.getElementById("modal_dim").style.display = "flex";
 						});
+		let size = ${list.size()};
+			
+		 // 비동기로 상세보기 가져옴
+	 	 for (let k = 1; k <= size; k++) {
+	 		document.getElementById("detail"+k).addEventListener("click",function(){
+				document.getElementById("modal_dim2").style.display = "flex";
+				
+				document.getElementById("exit2").addEventListener("click", function() {
+					document.getElementById("modal_dim2").style.display = "none";
+				});
+				
+				let id1 = document.getElementById("detail"+k).getAttribute("value1");
+				let empno1 = document.getElementById("detail"+k).getAttribute("value2");
+				
+				let simple_data = {
+									id:id1,
+									empno:empno1
+									};
+				
+				fetch("${pageContext.request.contextPath}/holiday/detailAdmin",{
+					method : "POST", // PUT, PATCH, DELETE
+					headers : {"Content-Type" : "application/json"},
+					body : JSON.stringify(simple_data)
+				}).then(response => response.json())
+			
+				.then(data => {
+
+					document.getElementById("pop-writeDate").innerHTML=data.hwriteDate;
+					document.getElementById("pop-htype").innerHTML=data.htype;
+					document.getElementById("pop-halfDay").innerHTML=data.halfDay;
+					document.getElementById("pop-hstartDate").innerHTML=data.hstartDate;
+					document.getElementById("pop-hendDate").innerHTML=data.hendDate;
+					document.getElementById("pop-countDate").innerHTML=data.countDate+"일";
+					document.getElementById("pop-hcontent").innerHTML=data.hcontent;
+					document.getElementById("pop-approval").innerHTML=data.approval;
+					if(data.rejectionReason == null || data.rejectionReason == ""){
+						document.getElementById("reject").style.visibility = "hidden";
+					}else{
+						document.getElementById("pop-rejection_reason").innerHTML=data.rejectionReason;
+					}	
+					if(data.approvalDate == null || data.approvalDate == ""){
+						document.getElementById("pop-approvalDate").innerHTML="미확인";
+					}else{
+						document.getElementById("pop-approvalDate").innerHTML=data.approvalDate;
+					}
+				}).catch(error => {
+					console.log("error");
+				});
+			});
+	 	 }
 	</script>
 </body>
 </html>

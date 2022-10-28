@@ -50,10 +50,8 @@ public class AdminController {
 	
 	// admin List
 	@GetMapping("/admin")
-	public String admin(Model model) {
-		model.addAttribute("startPage","0");
-		model.addAttribute("endPage","9");
-		model.addAttribute("nowPage","1");
+	public String admin(Model model,@RequestParam("page") String page) {
+		model.addAttribute("page", page);
 		Pservice.AllList(model);	
 		return "/admin/admin1";
 	}
@@ -156,24 +154,24 @@ public class AdminController {
 	
 	//상세 검색
 	@PostMapping("/admin/details")
-	public String selectDetail(Model model,InfoVO vo) {
-		model.addAttribute("startPage","0");
-		model.addAttribute("endPage","9");
-		model.addAttribute("nowPage","1");
-//		model.addAttribute("count",);
+	public String selectDetail(Model model,InfoVO vo,@RequestParam("page") String page) {
+		model.addAttribute("page", page);
 		Pservice.selectDetail(vo, model);
 		return "/admin/admin1";
 	}
 	
-	// 페이지 처리
-	@GetMapping("/admin/paging/{page}")
-	public String paging(@PathVariable("page") int page,Model model) {
-		model.addAttribute("nowPage",page);
-		model.addAttribute("startPage", 10*(page-1));
-		model.addAttribute("endPage", (10*(page-1))+9);			
-		Pservice.AllList(model);			
-		return "/admin/admin1";
-	}
+	// 선택 직원 정보 수정
+		@PostMapping("/admin/updateD")
+		public String updateD(@RequestParam("empno") int[] empno,PersonalInfoVO pvo,EmployeeInfoVO evo, HttpServletRequest request) {
+			
+			for (int i : empno) {
+				pvo.setEmpno(i);
+				evo.setEmpno(i);
+				Eservice.updateE(pvo,evo,request);
+			}
+			
+			return "redirect:/admin";
+		}
 	
 	// 파일 처리
 	@PostMapping("/admin/file")
