@@ -5,116 +5,174 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
+<!-- 비동기 댓글 -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/BBS/js/jquery-3.6.1.min.js"></script>
+<!-- 스타일 적용 -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/main.css">
 <title>Insert title here</title>
 <style>
-.container1 {
-	margin-top: 10px;
-	
+.inner-div-bbs {
+	display: inline-block;
 }
 
-}
-.head {
-	
-	width: 600px;
-	margin-top: 10px;
-}
-
-.main2 {
-	border: 1px solid black;
-	background-color: #eaf6f7;
-	margin-top: 15px;
-	width: 600px;
-	height: 50px;
-	border-radius: 7px;
+.content-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 3rem;
+	padding-top: 2rem;
+	padding-bottom: 0.5rem;
 }
 
-.main1 {
-	border: 1px solid black;
-	background-color: #eaf6f7;
-	margin-top: 20px;
-	width: 600px;
-	height: 600px;
-	border-radius: 7px;
-}
-
-#return {
-	margin-top: 30px;
-	padding: 15px 35px 15px 35px;
+.content-nav button {
 	background: #272454;
-	border: 0;
+	border-radius: 0.4rem;
 	color: white;
-	font-size: 15px;
-	border-radius: 5px;
-	margin-right: -10px;
-	text-aline: center;
+	border: 1px solid #272454;
+	padding: 0.5rem;
+	margin-right: 0.5rem;
+	font-size: 0.8rem;
+	width: 5rem;
+	cursor: pointer;
+}
+
+.content-nav button:hover {
+	background: #08298A;
+	color: white;
+}
+
+#modify {
+	color: #3fb4d0;
+	border: 1px solid #3fb4d0;
+	background: #fff;
 }
 
 #delete {
-	margin-top: 30px;
-	padding: 10px 30px 10px 30px;
-	background: #272454;
-	border: 0;
-	color: white;
-	font-size: 12px;
-	border-radius: 5px;
-	margin-right: -170px;
-	text-aline: center;
+	color: #fff;
+	border: 1px solid #3fb4d0;
+	background: #14ABAB;
 }
 
-h2 {
-	background-color: #eaf6f7;
-	width: 600px;
+.content-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-top: 2px solid #909294;
+	border-bottom: 2px solid #e8eaec;
 	height: 50px;
-	border: 1px solid black;
-	margin-top: 30px;
-	border-radius: 5px;
 }
 
+.content-head h3 span {
+	color: #4f78bf;
+}
 
+.head-inner {
+	display: flex;
+}
 
+.head-inner div p {
+	padding: 0 1rem 0 1rem;
+	margin: 0;
+}
 
+.first-inner {
+	box-sizing: border-box;
+	border-right: 2px solid #e6e8eb;
+}
+
+.content-text {
+	height: 40vh;
+	padding: 0.5rem 2rem;
+}
+
+.content-footer {
+	border-top: 2px dashed #e6e8eb;
+	border-bottom: 2px solid #909294;
+	height: 40px;
+	display: flex;
+	background-color: #e3edf7;
+}
+
+.content-footer a {
+	display: flex;
+	text-decoration: none;
+	justify-content: center;
+	align-items: center;
+	padding-left: 1rem;
+}
+
+.insert {
+	display: flex;
+	flex-wrap: nowrap;
+	padding-top: 1rem;
+}
+
+#inittext {
+	width: 90%;
+	background-color: #fff;
+	border-radius: 0.4rem;
+	border: 1px solid #272454;
+}
+
+#ibtn {
+	background-color: #fff;
+	border-radius: 0.4rem;
+	border: 1px solid #272454;
+	padding: 0.5rem;
+	margin-right: 0.5rem;
+	font-size: 0.8rem;
+	width: 10%;
+	cursor: pointer;
+}
 </style>
-
-
-
 </head>
 <body>
 
-	<div class="container-wrap">
-		<div class="header">
-			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
-			<div class="header-logout"><a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
+	<div class="header">
+		<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+		<div class="header-logout">
+			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 		</div>
-		<div class="container">
-			<jsp:include page="../include/menu.jsp"></jsp:include>
-			<div class="container-inner-bbs">
-				<div class="inner-div-bbs">
-					<!-- 각자 필요한 부분 넣기 -->
-					<div class="container1">
-						<h1>상세 받은 쪽지함</h1>
-					</div>
-					<div class="head">
-						<h2>제목 : ${messageVO.mtitle}</h2>
-					</div>
-					<div class="main2">
-						<h3>보낸이 : ${messageVO.mreciever}</h3>
-					</div>
+	</div>
+	<div class="container">
+		<jsp:include page="../include/menu.jsp"></jsp:include>
+		<div class="container-inner-bbs">
+			<div class="inner-div-bbs">
+				<div class="content-title"></div>
 
-					<div class="main1">
-						<h3>
-							내용 : <br /> ${messageVO.mcontent}
-						</h3>
-					</div>
-					<div class="footer1">
+				<div class="content-nav">
+					<h2>상세 받은 쪽지함</h2>
+					<div class="adminbtn">
 						<button id="return">뒤로가기</button>
-
 					</div>
 				</div>
+
+				<div class="content-head">
+					<h3>
+						<span>쪽지 제목</span> &nbsp; ${messageVO.mtitle}
+					</h3>
+					<div class="head-inner">
+						<div class="first-inner">
+							<p>보낸이(${messageVO.mreciever})</p>
+						</div>
+						<div>
+							<p>도착시간 ${messageVO.createDate}</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="content-text">
+					<p>${messageVO.mcontent}</p>
+				</div>
+
+				<div class="content-footer"></div>
+
 			</div>
 		</div>
 	</div>
+
 
 	<script type="text/javascript">
 		document

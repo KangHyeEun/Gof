@@ -10,7 +10,6 @@
 
 <title>Insert title here</title>
 <style type="text/css">
-
 #table1 {
 	text-align: center;
 }
@@ -24,7 +23,7 @@ tr:nth-child(odd) {
 }
 
 th {
-	background-color: #eaf6f7;
+	background-color:  #e3edf7;
 }
 
 #table1 {
@@ -35,6 +34,7 @@ a {
 	color: black;
 }
 
+/*스크롤 css 주석
 .scroll {
 	padding: -10px;
 }
@@ -54,8 +54,7 @@ a {
 	background-color: white;
 	border-radius: 10px;
 	box-shadow: inset 0px 0px 5px white;
-}
-
+}*/
 .intro {
 	display: flex;
 	justify-content: space-between;
@@ -85,25 +84,6 @@ a {
 	margin-left: 100px;
 }
 
-#btn1 {
-	padding: 10px 20px 10px 20px;
-	background: #272454;
-	border: 0;
-	color: white;
-	font-size: 12px;
-	border-radius: 5px;
-	margin-right: -170px;
-}
-
-#btn1:hover {
-	background: #08298A;
-	color: white;
-}
-
-#btn1 {
-	margin-top: 40px;
-}
-
 #btn2 {
 	padding: 10px 20px 10px 20px;
 	background: #272454;
@@ -112,28 +92,26 @@ a {
 	font-size: 12px;
 	border-radius: 5px;
 	width: 85px;
-	margin-top: 35px;
-	margin-left: 20px;
+	margin-top: 30px;
+	margin-right: 1200px;
+	display: inline-table;
 }
 
 #btn2:hover {
 	background: #08298A;
 	color: white;
 }
-
-
-
-
-
 </style>
 </head>
 <body>
 
 	<div class="container-wrap">
 		<div class="header">
-		<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
+			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
-		<div class="header-logout"><a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
+			<div class="header-logout">
+				<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+			</div>
 		</div>
 		<div class="container">
 			<jsp:include page="../include/menu.jsp"></jsp:include>
@@ -143,45 +121,49 @@ a {
 					<div class="intro">
 						<h1>보낸 쪽지함</h1>
 					</div>
-					<div class="scroll" style="overflow: auto; width: 100%; height: 500px;">
-						<table id="table1">
-
-							<thead>
+					<!-- 스크롤<div class="scroll"
+						style="overflow: auto; width: 100%; height: 500px;">  -->
+					<table id="table1">
+						<thead>
+							<tr>
+								<th><input type="checkbox" onclick="checkAll()"
+									name="allCheck" id="allCheck" /></th>
+								<th>NO.</th>
+								<th>보낸사람</th>
+								<th>제목</th>
+								<th>날짜</th>
+								<th>받는사람</th>
+							</tr>
+						</thead>
+						<tbody id="table-body">
+							<c:forEach var="vo" items="${list}">
 								<tr>
-									<th><input type="checkbox" onclick="checkAll()"
-										name="allCheck" id="allCheck" /></th>
-									<th>NO.</th>
-									<th>보낸사람</th>
-									<th>제목</th>
-									<th>날짜</th>
-									<th>받는사람</th>
+
+									<td><input type="checkbox" name="RowCheck" id="chkObj"
+										value="${vo.id}"></td>
+									<td>${vo.id}</td>
+									<td>${vo.mowner}</td>
+									<td><a
+										href="${pageContext.request.contextPath}/message/messageValue2/${vo.id}">${vo.mtitle}</a></td>
+									<td>${vo.createDate}</td>
+									<td>${vo.mreciever}</td>
 								</tr>
-							</thead>
-							<tbody id="table-body">
-								<c:forEach var="vo" items="${list}">
-									<tr>
+							</c:forEach>
+						</tbody>
 
-										<td><input type="checkbox" name="RowCheck" id="chkObj" value="${vo.id}"></td>
-										<td>${vo.id}</td>
-										<td>${vo.mowner}</td>
-										<td><a href="${pageContext.request.contextPath}/message/messageValue2/${vo.id}">${vo.mtitle}</a></td>										
-										<td>${vo.createDate}</td>
-										<td>${vo.mreciever}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
 
-					
-						<input type="button" value="삭제" class="btn btn-outline-info" id="btn2"
-							onclick="chkDel();">
-						</div>
-						
-							</div>
-						</div>
-					</div>
+					</table>
+
+
+					<input type="button" value="삭제" class="btn btn-outline-info"
+						id="btn2" onclick="chkDel();">
 				</div>
-	
+
+			</div>
+		</div>
+	</div>
+	<!--</div> 스크롤 -->
+
 
 	<script>
 		function checkAll() {
@@ -233,7 +215,7 @@ a {
 			}
 		}
 	</script>
-	
+
 	<script type="text/javascript"> 
          var modal = document.querySelector(".modal"); 
          var trigger = document.querySelector(".trigger"); 
@@ -261,7 +243,7 @@ a {
          //var anText_sub2 = document.getElementById('title').value;
          //var anText_sub3 = document.getElementById('content').value;
      </script>
-	
+
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </body>
 </html>
