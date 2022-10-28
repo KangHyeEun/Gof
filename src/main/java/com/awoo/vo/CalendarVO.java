@@ -1,7 +1,7 @@
 package com.awoo.vo;
 
 import org.apache.ibatis.type.Alias;
-//test Commit//test Commit
+
 @Alias("calendarVO")
 public class CalendarVO {
 	private int calId;			// 일정 id 값
