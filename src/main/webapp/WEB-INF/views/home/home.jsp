@@ -82,10 +82,10 @@
 									    </div>
 								        <div class="donut-info">
 								        		<p>월급날까지 <span id="payday"></span>일 남았습니다</p>
-<%-- 												<p>총 ${getWeekDays}일 중 ${countThisMonth}일 째</p> --%>
-<%-- 									        <p>초과 근무 : <span class="work-rates">${overTime}</span></p> --%>
-<%-- 							                <p>지각 : <span class="work-rates">${countLate}</span></p> --%>
-<%-- 							                <p>정상 근무 횟수 : <span class="work-rates">${countNormalCommuting}</span></p> --%>
+												<p>총 ${getWeekDays}일 중 ${countThisMonth}일 째</p>
+									        <p>초과 근무 : <span class="work-rates">${overTime}</span></p>
+							                <p>지각 : <span class="work-rates">${countLate}</span></p>
+							                <p>정상 근무 횟수 : <span class="work-rates">${countNormalCommuting}</span></p>
 							            </div>
 							         </div>
 							         <div class="donuts">   
@@ -94,7 +94,7 @@
 								        	<div class="donut"> </div>
 								     	</div>   
 							        	<div class="donut-info">
-<%-- 							                <p>총 휴갸 개수: <span class="work-rates">${totalUsedHoliday.totalHoliday}</span></p> --%>
+							                <p>총 휴갸 개수: <span class="work-rates">${totalUsedHoliday.totalHoliday}</span></p>
 							                <p>남은 휴가 <span class="work-rates">${totalUsedHoliday.totalHoliday-totalUsedHoliday.usedHoliday}</span>개</p>
 							                <p>휴가 요청 <span class="work-rates">${countApproval}</span>개</p>
 						                </div>
