@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- 비동기 댓글 -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/BBS/js/jquery-3.6.1.min.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/bbs/js/jquery-3.6.1.min.js"></script> --%>
 <!-- 스타일 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/contentstyle.css" />
@@ -94,11 +94,13 @@
 	window.addEventListener('DOMContentLoaded', (e) => {
 		initialize();
 	});
-	
+	//댓글 불러오기
 	function initialize(){
 		fetch("${pageContext.request.contextPath}/bbsPage/comment/${bbsVO.id}")
 		.then(response => response.json())
 		.then(data => {
+			//데이터 불러오는지 찍어보기
+			console.log(data);
 			originList = data;
 			for(const obj of data) {
 				if(obj.orderId === 0){
@@ -124,7 +126,8 @@
 			console.log(err);
 		});
 	}
-		//-----------
+	
+		//댓글 모양 잡기
 		function makeCommentList(num, item){
 		const mainDiv = document.createElement("div");
 		mainDiv.style.border = "1px solid black";
@@ -148,12 +151,21 @@
 		subDiv1.style.width = "60px";
 		subDiv1.style.flexDirection = "column";
 		
-		const initButton = document.createElement("button")
+		const commnetModify = document.createElement("button"); //댓글 수정 버튼
+		commnetModify.innerText = "수정";
+
+		const commnetDelete = document.createElement("button"); //댓글 삭제 버튼
+		commnetDelete.innerText = "삭제";
+// 		commnetDelete.style.display ="none";
+		
+		const initButton = document.createElement("button"); //대댓글 버튼
 		initButton.innerText = "댓글";
 		
 		subDiv1.append(h4);
 		subDiv1.append(p);
 		
+		subDiv2.append(commnetModify);
+		subDiv2.append(commnetDelete);
 		subDiv2.append(initButton);
 		
 		mainDiv.append(subDiv1);
@@ -161,10 +173,14 @@
 		
 		commentMain.append(mainDiv);
 		
+		
+		
+		//대댓글 달기(전송, 취소)--------
 		initButton.addEventListener("click",function(){
 			const writeDiv = document.createElement("div");
 			writeDiv.classList.add("insert");
-			
+	
+			//전송----
 			const writeArea = document.createElement("textarea");
 			const wbtn = document.createElement("button");
 			wbtn.innerText = "전송";
@@ -196,7 +212,7 @@
 				});
 				
 			});
-			
+			//취소-----
 			const cbtn = document.createElement("button");
 			cbtn.innerText = "취소";
 			
@@ -218,7 +234,8 @@
 		}
 
 	}
-		//댓글 불러오기----------------------------
+		
+		//댓글 달기----------------------------
 		document.getElementById("ibtn").addEventListener("click", function() {
 		let str = document.getElementById("inittext").value;
 				
@@ -245,6 +262,40 @@
 				console.log(err);
 			});
 		});
+		
+// 		//댓글 수정(해당 유저가 쓴 댓글일 경우, 수정/삭제)
+// 			let ownerId = commentList.ownerId;
+// 			console.log(ownerId);
+// 		//해당 댓글의 ownerId가 세션에 들은 아이디(현재 들어온 사람)	
+// 			if(ownerId == ${personalInfoVO.empno}) {
+// 				//버튼 나타나게
+// // 				commnetDelete.style.display ="hidden";
+// 				commnetDelete.addEventListener("click",function(){
+// 					let yn = confirm("삭제하시겠습니까?");
+	
+// 					if(yn){
+// 						const sendObj = {
+// 								id : ${id},
+// 								ownerId : ${personalInfoVO.empno}
+// 							}
+// 						fetch("${pageContext.request.contextPath}/bbsPage/comment/delete", {
+// 							method: "DELETE",
+// 							headers: {
+// 								"Content-Type": "application/json",
+// 							},
+// 							body: JSON.stringify(sendObj)
+// 							})
+// 							.then((response) => response.json())
+// 							.then((data) => {
+// 								makeCommentList(0, sendObj);
+// 							})
+// 							.catch(err => {
+// 								console.log(err);
+// 							});
+// 					}
+// 				)};
+// 			}
+	
 		
 	</script>
 

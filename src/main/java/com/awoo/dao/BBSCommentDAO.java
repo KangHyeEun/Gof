@@ -13,4 +13,8 @@ public interface BBSCommentDAO {
 	public List<BBSCommentVO> selecCommentAll(@Param("bbsId") String bbsId);
 	
 	public int insertComment(BBSCommentVO vo);
+	
+	public int updateComment(BBSCommentVO vo);
+	
+	public int deleteComment(BBSCommentVO vo);
 }

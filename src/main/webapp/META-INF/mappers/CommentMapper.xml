@@ -16,6 +16,18 @@
 		insert into bbs_comment (bbs_id, owner_id, owner, content, order_id)
 		values (#{bbsId}, #{ownerId}, #{owner}, #{content}, #{orderId});
 	</insert>
+	
+	<update id="updateComment">
+		update bbs_comment 
+		set content = #{content}
+		where id = #{id} and owner_id = #{owner_id}
+	</update>
+	
+	<delete id="deleteComment">
+		delete from bbs_comment
+		where id = #{id}
+		and owner_id = #{ownerId}
+	</delete>
 
 	
 </mapper>

@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 비동기 댓글 -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/BBS/js/jquery-3.6.1.min.js"></script>
 <!-- 스타일 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/contentstyle.css" />

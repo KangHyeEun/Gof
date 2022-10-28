@@ -16,13 +16,16 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -86,7 +89,7 @@ public class BBSController {
 	            String value = viewCookie.getValue(); // 쿠키 값 받아옴.
 	        }
 			service.getBBSContent(model, id);
-			service.getCommentList(id);
+			service.getCommentList(model, id);
 			return "bbsPage/content";
 		}else {
 			return "redirect:/login/home";			
@@ -148,8 +151,8 @@ public class BBSController {
 	//댓글 불러오기
 	@GetMapping("/comment/{bbsId}")
 	@ResponseBody
-	public List<BBSCommentVO> getComments(@PathVariable("bbsId") String bbsId){
-		return service.getCommentList(bbsId);
+	public List<BBSCommentVO> getComments(Model model, @PathVariable("bbsId") String bbsId){
+		return service.getCommentList(model, bbsId);
 	}
 	
 	//댓글 달기
@@ -169,6 +172,37 @@ public class BBSController {
 		
 		return res;
 	}
+	
+	//삭제
+	@DeleteMapping("/comment/delete")
+	@ResponseBody
+	public ResponseEntity<String> dropComment(@RequestBody BBSCommentVO vo){
+		
+		System.out.println(vo.getId());
+		
+		service.deleteComment(vo);
+		
+		String str = "삭제되었습니다";
+		
+		ResponseEntity<String> entity = new ResponseEntity<String>(str , HttpStatus.OK);
+		return entity;
+	}
+	
+	//수정
+	@PatchMapping("/comment/update")
+	@ResponseBody
+	public ResponseEntity<BBSCommentVO> patchComment(@RequestBody BBSCommentVO vo){
+		
+		System.out.println(vo.getContent());
+		System.out.println(vo.getId());
+		System.out.println(vo.getOwnerId());
+
+		service.updateComment(vo);
+		
+		ResponseEntity<BBSCommentVO> entity = new ResponseEntity<BBSCommentVO>(vo, HttpStatus.OK);
+		return entity;
+	}
+	
 	//파일 업로드
 	@PostMapping("/fileupload")
 	@ResponseBody

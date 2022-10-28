@@ -81,13 +81,23 @@ public class BBSService {
 	
 	//댓글
 	//댓글 불러오기
-	public List<BBSCommentVO> getCommentList(String bbsId) {
+	public List<BBSCommentVO> getCommentList(Model model, String bbsId) {
+		//model.addAttribute("BBSCommentVO", comDAO.selecCommentAll(bbsId));
 		return comDAO.selecCommentAll(bbsId);
 	}
 	
 	//댓글 쓰기
 	public int setComment(BBSCommentVO vo) {
 		return comDAO.insertComment(vo);
+	}
+	
+	//댓글 수정
+	public void updateComment(BBSCommentVO vo) {
+		comDAO.updateComment(vo);
+	}
+	//댓글 삭제
+	public void deleteComment(BBSCommentVO vo) {
+		comDAO.deleteComment(vo);
 	}
 	
 	//공지사항 게시판----------------------------------------
