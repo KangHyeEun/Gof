@@ -23,7 +23,7 @@ tr:nth-child(odd) {
 }
 
 th {
-	background-color: #eaf6f7;
+	background-color: #e3edf7;
 }
 
 #table1 {
@@ -34,6 +34,7 @@ a {
 	color: black;
 }
 
+/*스크롤 css 주석
 .scroll {
 	padding: -10px;
 }
@@ -53,8 +54,7 @@ a {
 	background-color: white;
 	border-radius: 10px;
 	box-shadow: inset 0px 0px 5px white;
-}
-
+}*/
 .intro {
 	display: flex;
 	justify-content: space-between;
@@ -91,7 +91,7 @@ a {
 	color: white;
 	font-size: 12px;
 	border-radius: 5px;
-	margin-right: -170px;
+	margin-left: -670px;
 }
 
 #btn1:hover {
@@ -100,7 +100,7 @@ a {
 }
 
 #btn1 {
-	margin-top: 40px;
+	margin-top: 30px;
 }
 
 #btn2 {
@@ -119,7 +119,7 @@ a {
 }
 
 #btn2 {
-	margin-left: 180px;
+	margin-left: 10px;
 }
 
 h1 {
@@ -141,7 +141,7 @@ form {
 #mreciever, #mcontent, #mtitle {
 	width: 439px;
 	height: 27px;
-	background-color: #efefef;
+	background-color: #e3edf7;
 	border-radius: 6px;
 	border: 1px solid #dedede;
 	padding: 10px;
@@ -167,6 +167,7 @@ textarea {
 	margin-top: 20px;
 	cursor: pointer;
 	border-radius: 4px;
+	background-color: #e3edf7;
 }
 
 #btn-save:hover {
@@ -183,6 +184,7 @@ textarea {
 	margin-top: 20px;
 	cursor: pointer;
 	border-radius: 4px;
+	background-color: #e3edf7;
 }
 
 #cancel:hover {
@@ -245,7 +247,9 @@ textarea {
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
-			<div class="header-logout"><a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
+			<div class="header-logout">
+				<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+			</div>
 		</div>
 		<div class="container">
 			<jsp:include page="../include/menu.jsp"></jsp:include>
@@ -255,76 +259,75 @@ textarea {
 					<div class="intro">
 						<h1 class="hh1">받은 쪽지함</h1>
 					</div>
-					<div class="scroll"
-						style="overflow: auto; width: 100%; height: 500px;">
-						<table id="table1">
+					<!-- 스크롤<div class="scroll"
+						style="overflow: auto; width: 100%; height: 500px;">  -->
+					<table id="table1">
 
-							<thead>
+						<thead>
+							<tr>
+								<th><input type="checkbox" onclick="checkAll()"
+									name="allCheck" id="allCheck" /></th>
+								<th>NO.</th>
+								<th>보낸사람</th>
+								<th>제목</th>
+								<th>날짜</th>
+								<th>받는사람</th>
+							</tr>
+						</thead>
+						<tbody id="table-body">
+							<c:forEach var="vo" items="${list}">
 								<tr>
-									<th><input type="checkbox" onclick="checkAll()"
-										name="allCheck" id="allCheck" /></th>
-									<th>NO.</th>
-									<th>보낸사람</th>
-									<th>제목</th>
-									<th>날짜</th>
-									<th>받는사람</th>
+
+									<td><input type="checkbox" name="RowCheck" id="chkObj"
+										value="${vo.id}"></td>
+									<td>${vo.id}</td>
+									<td>${vo.mreciever}</td>
+									<td><a
+										href="${pageContext.request.contextPath}/message/messageValue/${vo.id}">${vo.mtitle}</a></td>
+									<td>${vo.createDate}</td>
+									<td>${vo.mowner}</td>
 								</tr>
-							</thead>
-							<tbody id="table-body">
-								<c:forEach var="vo" items="${list}">
-									<tr>
+								<!-- 팝업 될 레이어 -->
+								<div class="modal">
+									<div class="modal-content">
+										<span class="close-button">&times;</span>
+										<h1 class="title">쪽지 보내기</h1>
 
-										<td><input type="checkbox" name="RowCheck" id="chkObj"
-											value="${vo.id}"></td>
-										<td>${vo.id}</td>
-										<td>${vo.mreciever}</td>
-										<td><a
-											href="${pageContext.request.contextPath}/message/messageValue/${vo.id}">${vo.mtitle}</a></td>
-										<td>${vo.createDate}</td>
-										<td>${vo.mowner}</td>
-									</tr>
-									<!-- 팝업 될 레이어 -->
-									<div class="modal">
-										<div class="modal-content">
-											<span class="close-button">&times;</span>
-											<h1 class="title">쪽지 보내기</h1>
+										<form
+											action="${pageContext.request.contextPath}/message/insert/${vo.mowner}"
+											method="POST">
+											<label for="mreciever">받는이:</label> <input type="text"
+												name="mreciever" placeholder="받는이를 입력하세요." id="mreciever">
 
-											<form
-												action="${pageContext.request.contextPath}/message/insert/${vo.mowner}"
-												method="POST">
-												<label for="mreciever">받는이:</label> <input type="text"
-													name="mreciever" placeholder="받는이를 입력하세요." id="mreciever">
+											<label for="mtitle">제목:</label> <input type="text"
+												name="mtitle" placeholder="제목을 입력하세요." id="mtitle">
 
-												<label for="mtitle">제목:</label> <input type="text"
-													name="mtitle" placeholder="제목을 입력하세요." id="mtitle">
+											<label for="mcontent">내용:</label>
+											<textarea name="mcontent" class="form-control summernote"
+												placeholder="내용을 입력하세요." id="mcontent"></textarea>
 
-												<label for="mcontent">내용:</label>
-												<textarea name="mcontent" class="form-control summernote"
-													placeholder="내용을 입력하세요." id="mcontent"></textarea>
-
-												<input type="button" id="cancel" value="취소"> <input
-													type="submit" id="btn-save" class="btn btn-info"
-													value="보내기">
-											</form>
-										</div>
-
+											<input type="button" id="cancel" value="취소"> <input
+												type="submit" id="btn-save" class="btn btn-info" value="보내기">
+										</form>
 									</div>
-								</c:forEach>
 
-							</tbody>
-						</table>
+								</div>
+							</c:forEach>
 
-						<div class="buttun">
-							<button class="trigger" id="btn1">쪽지 보내기</button>
-							<input type="button" value="삭제" class="btn btn-outline-info"
-								id="btn2" onclick="chkDel();">
-						</div>
+						</tbody>
+					</table>
 
+					<div class="buttun">
+						<button class="trigger" id="btn1">쪽지 보내기</button>
+						<input type="button" value="삭제" class="btn btn-outline-info"
+							id="btn2" onclick="chkDel();">
 					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
+	<!--</div> 스크롤 -->
 
 	<script type="text/javascript">
 	 let index = {
