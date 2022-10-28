@@ -11,59 +11,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/home/style.css">
 <title>Insert title here</title>
   <style>
- .donut::before {
-    color: #fff;
-    width: 70%;
-    padding: calc(35% - .64vw) 0;
-    background: #264057;
-    border-radius: 50%;
-    position: absolute;
-    left: 15%;
-    top: 15%;
-    display: block;
-    content: attr(data-percent)'%';
-    transform: skew(-0.03deg);
-    margin: auto;
-    font-size: 1.1vw;
-    font-size: 2vw;
-    padding: calc(35% - 1.3vw) 0;
-}
-.pop-date-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 16px;
-}
-
-.cal-icon{
-	width: 20px;
-    margin: 0 10px;
-}
-#enterpop .pop-ename{
-    font-weight: bold;
-    color: #3fb4d0;
-    font-size: 19px;
-    height: 23%;
-}
-#enterpop .pop-edepart{
-	font-weight: bold;
-    color: #3fb4d0;
-    font-size: 12px;
-}
-
-#leavepop .pop-ename{
-	font-weight: bold;
-    color: #272454;
-    font-size: 19px;
-    height: 23%;
-}
-
-#leavepop .pop-edepart{
-	font-weight: bold;
-    color: #272454;
-    font-size: 12px;
-}
-    </style>
+  /*자바스크립트로 width를 보내기 때문에 얘는 style.css로 옮길 수 없음*/
+ 	.donut::before {
+	    content: attr(data-percent)'%';
+	}
+  </style>
 </head>	
 <body>
 	<div class="container-wrap">
@@ -167,7 +119,33 @@
 							      </div>
 							    
 							     <div class="cal-container-right">
-							     
+							     <c:if test="${todayCalendar.size() > 0}">
+							     	<table>
+							     		<thead>
+							     			<tr>
+							     				<th>순서</th>
+							     				<th>종료일</th>
+							     				<th>종료시간</th>
+							     				<th>내용</th>
+							     				<th>작성자</th>
+							     			</tr>
+							     		</thead>
+								     	<c:forEach items="${todayCalendar}" var="cal">
+								     		<tr>
+								     			<td>${cal.calId}</td>
+								     			<td>${cal.calEnd.split(" ")[0]}</td>
+								     			<td>${cal.calEnd.split(" ")[1]}</td>
+								     			<td>${cal.calTitle }</td>
+								     			<td>${cal.ename}</td>
+								     		</tr>
+								     	</c:forEach>
+							     	</table>
+							     </c:if>
+							     <c:if test="${todayCalendar.size() <= 0}">
+							     	<div>
+							     	하이하이하이하이 일정이 없어요 하하하하
+							     	</div>
+							     </c:if>
 							     </div>
 						      </div>
 					           	<!-- 캘린더 -->

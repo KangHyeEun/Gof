@@ -10,110 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/commuting/style.css">
 <title>Insert title here</title>
-<style>
-@media screen and (max-width: 1490px) {
-	.list-table tr{
- 	height: 1.5em;
- 	border-bottom:1px solid black;
- 	}
- 	 .list-table tr td, .list-table tr th{
-/*     padding: 0.4%; */
-    }
-    .select {
-    height: 4%;
-    }
-}
-@media screen and (max-height: 863px){
-	.list-table tr td{ 
-  		padding: 7px; 
-     	white-space: nowrap;
- 	} 
-}
 
-@media screen and (max-width: 1280px) {
-	.day-rates {
-	    font-size: 1em;
-	}
-}
-@media screen and (max-height: 800px){
-	.list-table tr td{ 
-  		padding: 5px; 
-     	white-space: nowrap;
- 	} 
-}
-
-@media screen and (max-width: 1024px) {
-	.day-rates {
-	    flex-direction: column;
-	    font-size: 0.8em;
-	}
-	.container .section1 {
-		width: 64%;
-		justify-content: space-evenly;
-	}
-	.container .section2 {
-		width: 35%;
-	}
-	.sub-title-container {
-		font-size: 0.8em;
-	}
-	.progress-per {
-    font-size: 8px;
-    }
-}
-@media screen and (max-height: 700px){
-	.list-table tr td{ 
-  		padding: 3px; 
-     	white-space: nowrap;
- 	} 
-}
-
-@media screen and (max-width: 668px) {
-	.container1{
-	flex-direction: column;
-	}
-	
-	.inner-div-bbs {
-     height: 93%;
-	}
-	.container1{
-    height: 25%;
-    }
-	.container2{
-	height: 63%;
-	}
-	
-	.container .section1 {
-    	width: 100%; 
-        height: 46%;
-    }
-    .container .section2 {
-    	width: 100%;
-        height: 46%;
-    }
-    .day-rates{
-    flex-direction:row;
-    }
-    .list-table{
-    font-size: 11px;
-    }
-    .select {
-    height: 6%;
-    }
-    .list-table tr {
-/*     height: 3em; */
-    }
-   	.list-table tr td, .list-table tr th{
-	padding: 0.6em 0em;
-    }
-}
-@media screen and (max-height: 505px){
-	.list-table tr td{ 
-  		padding: 0px;
-     	white-space: nowrap;
- 	} 
-}
-</style>
 </head>
 <body>
 
@@ -164,7 +61,7 @@
 						<div class="inner-div-bbs">
 							<!-- 정렬 버튼 -->
 								<div class="sorting">
-									<p>출퇴근 관리</p>
+									<p>◎ 출퇴근 관리</p>
 									<div>
 										<select name="sorting-year" id="sorting-year" onchange="OnChange();">
 											<option value="0">전체 연도</option>
@@ -286,7 +183,7 @@
 				let daytext = child[i].children[2].innerHTML;
 				let time = daytext.split(":");
 				if(time[0] > 9 || (time[0] == 9 && time[1] > 10)){
-					child[i].children[2].innerHTML = daytext+"<span class=point>❗<span>";
+					child[i].children[2].innerHTML = daytext+"<span class=point>⚡<span>";
 				}
 	    	}
 	    	

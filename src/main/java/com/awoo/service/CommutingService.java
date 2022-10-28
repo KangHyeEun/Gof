@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.HttpSessionRequiredException;
 
 import com.awoo.dao.CommutingDAO;
+import com.awoo.vo.CalendarVO;
 import com.awoo.vo.CommutingVO;
 
 @Service
@@ -270,11 +271,21 @@ public class CommutingService {
 	
 //	홈에 가져갈 애들--------------------------------------------------------------------
 	public void getDateForHome(Model model) {
+		LocalDate date = LocalDate.now();
+		DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String today = date.format(dateformatter);
+		
+		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("empno", model.getAttribute("empno"));
+		map.put("today", today);
 		model.addAttribute("noticeListForHome", dao.selectBBSListNoticeForHome());
 		model.addAttribute("countApproval", dao.selectCountApprovalHoliday(map));
 		model.addAttribute("totalUsedHoliday", dao.selectTotalUsedHoliday(map));
+		model.addAttribute("todayCalendar", dao.getTodayCalendar(map));
+		
+		
 	}
 	
 }
