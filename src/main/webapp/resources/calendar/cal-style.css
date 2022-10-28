@@ -186,6 +186,9 @@
 	border-right: none;
 }
 
+/* ============================================ */
+/* .schedule */
+/* ============================================ */
 
 .schedule-wrap {
 	width: 100vw;
@@ -229,7 +232,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid black;
 	padding-bottom: 10px;
 }
 .schedule > div p {
@@ -285,10 +288,72 @@ input[type="text"] {
 	background-color: #319af3;
 }
 
+
+/* ============================================ */
+/* .schedule-info */
+/* ============================================ */
+
+.schedule-info-wrap {
+	width: 100vw;
+	height: 100%;
+	position: fixed;
+	padding-bottom: 500px;
+/* 	background-color: rgb(193 193 193 / 50%); */
+    display: none;
+	overflow: auto;
+}
+.schedule-info {
+	width: 250px;
+	height: 200px;
+	position: absolute;
+    transition: background-color 0.2s;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.schedule-inner {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 7px;
+    box-shadow: 1px 1px 8px #c1c1c1;
+    overflow: auto;
+}
+.schedule-title {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 15px;
+	border-bottom: 1px solid black;
+}
+.schedule-title > a {
+	cursor: pointer;
+}
+.schedule-list {
+	padding: 10px;
+}
+.schedule-list > div {
+	margin-bottom: 2px;
+/* 	border: 1px solid black; */
+/* 	border-radius: 5px; */
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+}
+.schedule-list > div > span:hover {
+	display: inline-block;
+	border-bottom: 1px solid black;
+}
+/* ============================================ */
+/* 공통 */
+/* ============================================ */
 .displayNone {
 	display: none;
 }
-/* testcommit */
+
+/* ============================================ */
+/* media query */
+/* ============================================ */
+
 @media ( max-width: 1440px ) {	/* default */
 	.days > div > div:first-child > div > span:not(.days > div > div:first-child > div:first-child > span) {
 		width: 140px; /* 일정 가로길이 ...을 위한 값 */

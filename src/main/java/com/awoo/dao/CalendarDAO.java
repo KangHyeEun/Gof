@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.awoo.vo.CalendarVO;
-//test Commit//test Commit
+
 @Mapper
 public interface CalendarDAO {
 	public List<CalendarVO> selectSchedule();

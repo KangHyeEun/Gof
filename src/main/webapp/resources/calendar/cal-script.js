@@ -358,6 +358,8 @@ const renderCalendar = () => {
 //		    "checkAdmin": 0,
 //		    "approval": 0
 //		}
+		
+//		달력에 직접적으로 보이는 부분
 		for(let index = 0; index < daysEle.length; index++) {
 			for(let index1 = 0; index1 < list.length; index1++) {
 				let calDate = list[index1].calStart.split(" ");
@@ -372,7 +374,7 @@ const renderCalendar = () => {
 					let scheduleDiv = document.getElementsByClassName(calDate)[0].children[0];
 					let div = document.createElement("div");
 					let span = document.createElement("span");
-					span.classList.add("schedule-"+list[index1].calId);
+					span.classList.add("schedule_"+list[index1].calId);
 					
 					innerSpan = "";
 					innerSpan += calTime + " " + list[index1].calTitle;
@@ -383,6 +385,114 @@ const renderCalendar = () => {
 			}
 		}
 		
+//		---------------------------------------------------------------------
+
+////		달력에 직접적으로 보이지않는 일정목록 부분
+//		for(let index = 0; index < daysEle.length; index++) {
+//			for(let index1 = 0; index1 < list.length; index1++) {
+//				let calDate = list[index1].calStart.split(" ");
+//				let calTime = calDate[1];	// 시간
+//				calDate = calDate[0];		// 날짜
+//				let calHour = calTime.split(":");
+//				let calMinute = calHour[1];	// 분
+//				calHour = calHour[0];		// 시간
+////				console.log("calHour : " + Number(calHour) + " / calMinute : " + calMinute);
+////				div의 클래스에 있는 값과 DB에서 추출한 날짜 값과 같으면 해당 div에 DB값 넣기
+//				if (daysEle.item(index).classList[0] == calDate) {
+//					let scheduleDiv = document.getElementsByClassName(calDate)[0].children[0];
+//					let div = document.createElement("div");
+//					let span = document.createElement("span");
+//					span.classList.add("schedule_"+list[index1].calId);
+//					
+//					innerSpan = "";
+//					innerSpan += calTime + " " + list[index1].calTitle;
+//					span.innerHTML += innerSpan;
+//					div.append(span);
+//					scheduleDiv.append(div);
+//				}
+//			}
+//		}
+		
+		return _data;
+		
+	}).then(_data => {
+		
+//		 ---------------------------------------------------------------------
+//		 일정 클릭시 상세정보 팝업
+//		 ---------------------------------------------------------------------
+
+		let list = _data;
+		let innerSpan;
+
+//		console.log(document.querySelectorAll(".days > div > div:first-child > div:not(.days > div > div:first-child > div:first-child)"));
+//		console.log(document.querySelectorAll(".days > div > div:first-child > div:not(.days > div > div:first-child > div:first-child)").length);
+//		날짜 div 안에서 제일 위의 일자 div와 제일아래 +count div 를 제외한 일정에 대한 클릭 발생시
+		let innerDiv = document.querySelectorAll(".days > div > div:first-child > div:not(.days > div > div:first-child > div:first-child)");
+		for (let index = 0; index < innerDiv.length; index++){
+			innerDiv[index].addEventListener("click",function(e){
+			
+//				클릭한 위치에 팝업창 생성
+//		 		---------------------------------------------------------------------
+		
+//				일정추가 팝업이 뜨지않게 이벤트 버블링 방지
+				e.stopPropagation();
+				console.log(this);
+				
+				let valueX = e.clientX;
+				let valueY = e.clientY;
+//				뷰포트의 길이에서 클릭한 x좌표를 뺀 길이가 팝업창 가로길이인 250보다 작아지면 x좌표에서 그 값만큼 빼준다.
+				if ((window.innerWidth-valueX) < 250) {
+					valueX -= (250-(window.innerWidth-valueX));
+				}
+//				세로길이는 박스 크기로 계산하면 안맞아서 임의로 값을 늘려줌
+				if ((window.innerHeight-valueY) < 250) {
+					valueY -= (300-(window.innerHeight-valueY));
+				}
+//				일정 클릭시 position: absolute 상태인 schedule-info 의 위치를 정해주어 팝업처럼 뜨게함 
+				document.querySelector(".schedule-info").style.left = valueX+"px";
+				document.querySelector(".schedule-info").style.top = valueY+"px";
+				document.querySelector(".schedule-info-wrap").style.display = "block";
+				
+				
+//				클릭한 곳에 있는 일정 모두 표시하는 팝업
+//		 		---------------------------------------------------------------------
+				
+				let cloneDiv = document.querySelectorAll(".days > div > div:first-child > div");
+				console.log(cloneDiv);
+				let scheList = document.querySelector(".schedule-list");
+				scheList.textContent = "";	// 팝업에 내용 넣기전에 초기화
+				let childEle = "";
+//				클릭한 곳의 상위 요소로 가서 하위요소의 개수를 구한다 => 클릭한 곳의 일정 개수를 구하기 위함
+//				innerDiv[index].parentElement.children.length (일자 div도 포함되어있어서 1부터 시작)
+				let scheParentToChild = innerDiv[index].parentElement.children;
+				console.log(scheParentToChild);
+				for (let index1 = 0; index1 < scheParentToChild.length; index1++) {
+//					console.log(index1 + " : ");
+//					console.log("========================");
+//					console.log(scheParentToChild[0]);
+//					console.log(scheParentToChild[1]);
+//					console.log(scheParentToChild[2]);
+//					element 복제, 하위 요소도 복제하기 위해 true 값 설정
+					childEle = scheParentToChild[index1].cloneNode(true);
+					scheList.append(childEle);
+				}
+//				기존 일정에서 displayNone 처리 되었던것을 팝업에서 해제
+				for (let index1 = 0; index1 < scheList.children.length; index1++) {
+					scheList.children[index1].classList.remove("displayNone");
+				}
+//				console.log(scheList);
+//				console.log(scheList.children[0]);
+//				클릭한 팝업창의 제목 초기화
+				scheList.children[0].textContent = "";
+//				클릭한 곳의 날짜 삽입
+//				scheList.children[0].append
+			});
+		}
+		
+		return _data;
+		
+	}).then(_data => {
+		
 //		 ---------------------------------------------------------------------
 //		 overCnt를 위에서 생성후에 해당 span태그(+count) 클릭시 숨겨진 일정 팝업
 //		 ---------------------------------------------------------------------
@@ -390,8 +500,6 @@ const renderCalendar = () => {
 		document.querySelector(".overCnt").addEventListener("click",function(){
 			console.log("확인");
 		});
-		
-		
 		
 		return _data;
 		
@@ -415,7 +523,7 @@ const renderCalendar = () => {
 //			let daysArray = document.querySelector(".days").children;
 		
 			if(daysArray[28]==undefined){		// 월의 일자가 28개 이하일때
-				console.log("1001px : 28번째");
+//				console.log("1001px : 28번째");
 //				981px : 5개 -> 980px: 4개 -> 690px: 3개
 				for (let index = 0; index < daysEle.length; index++) {
 					let scheDiv = daysEle.item(index).children;
@@ -450,7 +558,7 @@ const renderCalendar = () => {
 				}
 				
 			}else if(daysArray[35]==undefined){	// 월의 일자가 35개 이하일때
-				console.log("1001px : 35번째");
+//				console.log("1001px : 35번째");
 //				981px : 4개 -> 980px: 3개 -> 690px: 2개
 				for (let index = 0; index < daysEle.length; index++) {
 					let scheDiv = daysEle.item(index).children;
@@ -485,7 +593,7 @@ const renderCalendar = () => {
 				}
 				
 			}else {								// 월의 일자가 42개 이하일때
-				console.log("1001px : 42번째");
+//				console.log("1001px : 42번째");
 //				981px : 3개 -> 980px: 2개 -> 690px: 1개
 //					(daysEle => (".days > div"))
 				for (let index = 0; index < daysEle.length; index++) {
@@ -541,7 +649,7 @@ const renderCalendar = () => {
 //			let daysArray = document.querySelector(".days").children;
 		
 			if(daysArray[28]==undefined){		// 월의 일자가 28개 이하일때
-				console.log("880px : 28번째");
+//				console.log("880px : 28번째");
 //				981px : 5개 -> 980px: 4개 -> 690px: 3개
 				for (let index = 0; index < daysEle.length; index++) {
 					let scheDiv = daysEle.item(index).children;
@@ -576,7 +684,7 @@ const renderCalendar = () => {
 				}
 				
 			}else if(daysArray[35]==undefined){	// 월의 일자가 35개 이하일때
-				console.log("880px : 35번째");
+//				console.log("880px : 35번째");
 //				981px : 4개 -> 980px: 3개 -> 690px: 2개
 				for (let index = 0; index < daysEle.length; index++) {
 					let scheDiv = daysEle.item(index).children;
@@ -611,7 +719,7 @@ const renderCalendar = () => {
 				}
 				
 			}else {								// 월의 일자가 42개 이하일때
-				console.log("980px : 42번째");
+//				console.log("980px : 42번째");
 //				981px : 3개 -> 980px: 2개 -> 690px: 1개
 //					(daysEle => (".days > div"))
 				for (let index = 0; index < daysEle.length; index++) {
@@ -653,7 +761,7 @@ const renderCalendar = () => {
 //		  981px -> 980px 로 갈때 none 시켰던거 block으로 원복
 		  else {
 			if(daysArray[28]==undefined){		// 월의 일자가 28개 이하일때
-				console.log("원복 980px : 28번째");
+//				console.log("원복 980px : 28번째");
 //				1200px : 5개 <- 880px: 4개 <- 690px: 3개
 				for (let index = 0; index < daysEle.length; index++) {
 					let scheDiv = daysEle.item(index).children;
@@ -702,7 +810,7 @@ const renderCalendar = () => {
 				}
 				
 			}else if(daysArray[35]==undefined){	// 월의 일자가 35개 이하일때
-				console.log("원복 980px : 35번째");
+//				console.log("원복 980px : 35번째");
 //				1200px : 4개 <- 880px: 3개 <- 690px: 2개
 				for (let index = 0; index < daysEle.length; index++) {
 					let scheDiv = daysEle.item(index).children;
@@ -751,7 +859,7 @@ const renderCalendar = () => {
 				}
 				
 			}else {								// 월의 일자가 42개 이하일때
-				console.log("원복 980px : 42번째");
+//				console.log("원복 980px : 42번째");
 //				1200px : 3개 <- 880px: 2개 <- 690px: 1개
 //					(daysEle => (".days > div"))
 				for (let index = 0; index < daysEle.length; index++) {
@@ -822,7 +930,7 @@ const renderCalendar = () => {
 //			let daysArray = document.querySelector(".days").children;
 		
 			if(daysArray[28]==undefined){		// 월의 일자가 28개 이하일때
-				console.log("690px : 28번째");
+//				console.log("690px : 28번째");
 //				5개 -> 880px: 4개 -> 690px: 3개
 				for (let index = 0; index < daysEle.length; index++) {
 					let scheDiv = daysEle.item(index).children;
@@ -857,7 +965,7 @@ const renderCalendar = () => {
 				}
 				
 			}else if(daysArray[35]==undefined){	// 월의 일자가 35개 이하일때
-				console.log("690px : 35번째");
+//				console.log("690px : 35번째");
 //				4개 -> 880px: 3개 -> 690px: 2개
 				for (let index = 0; index < daysEle.length; index++) {
 					let scheDiv = daysEle.item(index).children;
@@ -892,7 +1000,7 @@ const renderCalendar = () => {
 				}
 				
 			}else {								// 월의 일자가 42개 이하일때
-				console.log("690px : 42번째");
+//				console.log("690px : 42번째");
 //				3개 -> 880px: 2개 -> 690px: 1개
 //					(daysEle => (".days > div"))
 				for (let index = 0; index < daysEle.length; index++) {
@@ -934,7 +1042,7 @@ const renderCalendar = () => {
 //		  880px -> 881px 로 갈때 none 시켰던거 block으로 원복
 		  else {
 			if(daysArray[28]==undefined){		// 월의 일자가 28개 이하일때
-				console.log("원복 690px : 28번째");
+//				console.log("원복 690px : 28번째");
 //				5개 <- 880px: 4개 <- 690px: 3개
 				for (let index = 0; index < daysEle.length; index++) {
 					let scheDiv = daysEle.item(index).children;
@@ -983,7 +1091,7 @@ const renderCalendar = () => {
 				}
 				
 			}else if(daysArray[35]==undefined){	// 월의 일자가 35개 이하일때
-				console.log("원복 690px : 35번째");
+//				console.log("원복 690px : 35번째");
 //				4개 <- 880px: 3개 <- 690px: 2개
 				for (let index = 0; index < daysEle.length; index++) {
 					let scheDiv = daysEle.item(index).children;
@@ -1032,7 +1140,7 @@ const renderCalendar = () => {
 				}
 				
 			}else {								// 월의 일자가 42개 이하일때
-				console.log("원복 690px : 42번째");
+//				console.log("원복 690px : 42번째");
 //				3개 <- 880px: 2개 <- 690px: 1개
 //					(daysEle => (".days > div"))
 				for (let index = 0; index < daysEle.length; index++) {
@@ -1280,42 +1388,40 @@ transferBtn.addEventListener("click", function(){
 	console.log(calYear);
 	console.log(calMonth);
 	
-    document.querySelector(".schedule form").setAttribute("action", ctx+"/calendar/insertData/"+calYear+"/"+calMonth);
+    document.querySelector(".schedule form").setAttribute("action", ctx+"/calendar/insertData");
     documnet.querySelector("#realBtn").click();
 });
 
 // ---------------------------------------------------------------------
 
 //---------------------------------------------------------------------
-//일정 팝업에서 controller로 가기전 날짜 데이터 추출 및 팝업 전송시 렌더링 정의
+//렌더링 시 년,월 값 정의
+//렌더링시 일정을 추가해서 controller로 갔다오거나 refresh 되었을때 초기값으로 돌아가서
+//년,월이 특정 값에 고정되는 문제점을 해결하기 위해서 f5시 localStrage에 값을 저장하는 방식을 사용함
 //---------------------------------------------------------------------
 
-//달력 페이지 넘겼을때 (년,월에 대한 이전,다음 페이지) 해당 년,월 값을 위한 변수
-let inputYearValue = ""; 
-let inputMonthValue = ""; 
-inputYearValue = document.querySelector("#year").value;
-inputMonthValue = document.querySelector("#month").value;
+if ((date.getFullYear() != null && date.getMonth() != null) ||
+	(date.getFullYear() != undefined && date.getMonth() != undefined)) {
+//	localStorage.getItem("localFullYear");	// 새로고침전에 저장해둔 년 값
+//	localStorage.getItem("localMonth");		// 새로고침전에 저장해둔 월 값
 
-console.log(inputYearValue);
-console.log(inputMonthValue);
-
-//제일 위에 변수선언 및 값을 가져오며, 중간에 렌더링 함수 안에서 값이 바뀐다.
-//inputYearValue = document.querySelector("#year").value;
-//inputMonthValue = document.querySelector("#month").value;
-
-if (inputYearValue == 0 && inputMonthValue == 0) {
-	console.log("첫 렌더링");
-	// 첫 시작 시 렌더링
-	renderCalendar();
-} else {
-	console.log("이후 렌더링");
 //	년, 월 값 대입 후 렌더링
-    date.setFullYear(inputYearValue);
-    date.setMonth(inputMonthValue-1);
+    date.setFullYear(localStorage.getItem("localFullYear"));
+    date.setMonth(localStorage.getItem("localMonth"));
+//    렌더링
     renderCalendar();
-
+} else {
+//	첫 시작 시 렌더링
+	renderCalendar();
 }
-
+//     	f5 누를시 렌더링하기 위한 값 구하기
+function refreshFunc() {
+	window.onbeforeunload = function (e) {
+		localStorage.setItem("localFullYear", date.getFullYear());
+    	localStorage.setItem("localMonth", date.getMonth());
+//		return 0; // 새로고침시 확인하는 알림창을 띄워준다.
+	};
+}
 // ---------------------------------------------------------------------
 
 // ---------------------------------------------------------------------

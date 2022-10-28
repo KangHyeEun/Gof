@@ -20,12 +20,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/calendar/cal-style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 </head>
-<body>
+<body onload="refreshFunc();">
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
-            <div class="header-logout">로그아웃 버튼</div>
+            <div class="header-logout">
+            	<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+            </div>
 		</div>
 		<div class="container">
 			<jsp:include page="../include/menu.jsp"></jsp:include>
@@ -103,8 +105,6 @@
 						    <div class="btn">
 						    	<button id="btn" type="submit">저장</button>
 						    	<button id="realBtn" class="displayNone" type="submit">버튼</button>
-						    	<input id="year" type="hidden" value="${year }"/>
-						    	<input id="month" type="hidden" value="${month }"/>
 						    </div>
 						</form>
 					</div>
@@ -112,93 +112,70 @@
 			</div>
 			<div class="schedule-info-wrap">
 				<div class="schedule-info slideTop">
-					
+					<div class="schedule-inner">
+						<div class="schedule-title">
+							<p>클릭한 곳의 날짜</p>
+							<a>✖️</a>
+						</div>
+						<div class="schedule-list">
+<!-- 								자바스크립트로 추가될 일정 부분 -->
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
+	
+<!-- .js 파일에서 contextPath 사용을 위해 session에 저장 -->
 	<script type="text/javascript">
-// 		.js 파일에서 contextPath 사용을 위해 session에 저장
 		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
 	</script>
 	
-<!-- //test Commit//test Commit -->
-    <script src="${pageContext.request.contextPath}/calendar/cal-script.js">
-//     	renderCalendar();
-//     	console.log("확인");
-    </script>
-    
-<!--     위의 .js 에서 EL태그 사용이 불가해서 대신 사용해볼까함 -->
-<%--     <jsp:include page="./cal-script.jsp"></jsp:include> --%>
+<!-- calendar -->
+    <script src="${pageContext.request.contextPath}/calendar/cal-script.js"></script>
     
     <script type="text/javascript">
-		document.querySelector(".schedule > div > a").addEventListener("click", function(){
+//     	일정 추가 팝업
+    	const divA = document.querySelector(".schedule > div > a");
+//     	닫기(x표시) 클릭시 none 처리
+    	divA.addEventListener("click", function(){
 			document.querySelector(".schedule-wrap").style.display = "none";
 		});
-    </script>
-    
-    <script type="text/javascript">
-
-// 	const daysEle = document.querySelectorAll(".days > div");
-// 		document.addEventListener("DOMContentLoaded", function(e){
-// 			console.log("-----------------");
-// 			console.log(daysEle.length);
-			
-// 			console.log(daysEle.item(0).classList[0]);
-// 			console.log(daysEle.item(daysEle.length-1).classList[0]);
-			
-// 			let dateRange = {calStart:daysEle.item(0).classList[0],
-// 							calEnd:daysEle.item(daysEle.length-1).classList[0]};
-// 			console.log(dateRange);
-			
-// 			console.log("-----------------");
-// 			fetch("${pageContext.request.contextPath}/calendar/restData",{
-// 				method : "POST",
-// 				headers : { "Content-type" : "application/json"},
-// 				body : JSON.stringify(dateRange)
-// 			}).then(response => response.json(), e => console.log("error!!!"))
-// 			.then(data => {
-// 				console.log("성공");
-// 			});
-// 		});
-    </script>
-    
-    
-    <script type="text/javascript">
-//     	날짜로 클래스이름 지정했는데 이런 형식이 querySelector에서는 .붙여서 제대로 작동을 안함
-//     	document.querySelector(".2022-10-5").addEventListener("click", function(){
-// 		그래서 상위 태그에서 child로 이용함 / 첫 번째에 있는 날짜형식의 className 추출
-// 		const days = document.querySelector(".days").children.item(26).classList.item(0);
-// 		console.log("1");
-// 		console.log(days);
-// 		const dates = new Date();
-// 		console.log("2");
-// 		console.log(dates);
-// 		console.log(dates.toLocaleDateString());
-// 		console.log(dates.toLocaleString());
-// 		console.log(dates.toLocaleTimeString());
-// 		console.log(dates.getFullYear());
-// 		console.log(dates.getMonth());
-// 		console.log(dates.getDate());
-// 		console.log("3");
-// 		console.log(dates.getFullYear()+"-"+(dates.getMonth()+1)+"-"+dates.getDate());
-// 		const test = dates.getFullYear()+"-"+(dates.getMonth()+1)+"-"+dates.getDate();
-// 		console.log(typeof(days));
-// 		console.log(typeof(test));
-// 		console.log("4");
-// 		console.log(days.toString());
-// 		console.log("5");
-// 		console.log(test.toString());
-// 		if(days.toString() == test.toString()) {
-// 			console.log("확인");
-// 		}
-// 		else console.log("미확인");
+    	
+//     	일정 목록 팝업
+    	const titleA = document.querySelector(".schedule-title > a");
+//     	닫기(x표시) 클릭시 none 처리
+    	titleA.addEventListener("click", function(){
+			document.querySelector(".schedule-info-wrap").style.display = "none";
+		});
 		
-//     	document.getElementsByClassName("2022-10-5")[0].addEventListener("click", function(){
-//     		document.querySelector(".container").style.display = "none";
-// 			console.log("확인");
-//     	});
+		const scheWrapEle = document.querySelector(".schedule-wrap");
+		const scheInfoWrapEle = document.querySelector(".schedule-info-wrap");
+		
+// 		최종적으로 적용된 CSS를 모두 불러올수있는 메서드
+// 		window.getComputedStyle(element)
+//     	esc 누를시 일정추가, 일정목록 팝업 none 처리
+    	document.onkeydown = function(event) {
+    		if(event.keyCode == 27) {
+//     			일정추가 팝업 속성
+    			const scheWrap = window.getComputedStyle(scheWrapEle);
+//     			일정목록 팝업 속성
+    			const scheInfoWrap = window.getComputedStyle(scheInfoWrapEle);
+    			if (scheWrap.display=="flex") {
+        			document.querySelector(".schedule-wrap").style.display = "none";
+    			}
+    			if (scheInfoWrap.display=="block") {
+    				document.querySelector(".schedule-info-wrap").style.display = "none";
+    			}
+    		}
+    	}
     </script>
+
+
+
+<!-- 위의 .js 에서 EL태그 사용이 불가해서 대신 사용해볼까함 -->
+<%--     <jsp:include page="./cal-script.jsp"></jsp:include> --%>
+    
 </body>
 </html>
