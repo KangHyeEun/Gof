@@ -14,24 +14,86 @@
 	    margin-bottom: 19px;
 	    margin-left: 11px;
 	}
+	.wrapper{
+	 		background: linear-gradient(90deg, #a8cc66, #1d7fcf);
+            background-size: 400% 400%;
+            animation: AnimationName 5s ease infinite;
+            position:relative
+	}
+	@keyframes AnimationName {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 51%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
+        }
 	
-	
+		.login-logo{
+	        width: 73%;
+		    height: 8em;		    
+    		min-width: 270px;
+		}
+		form p {
+		    display: flex;
+		    width: 85%;
+		    font-size: 13px;
+		    height: 0.7em;
+		    color: #686868;
+		}
+		.active{
+			font-size: 28px;
+		}
+		.container{
+		   	display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    flex-direction: column;
+		    width: 25%;
+		    animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+		}
+		
+		@keyframes slide-in-top {
+		  0% {
+		    transform: translateY(-100px);
+		    opacity: 0;
+		  }
+		  100% {
+		    transform: translateY(0);
+		    opacity: 1;
+		  }
+		}
+		
+		.emptydiv{
+			height: 3em;
+		}
 </style>
 </head>
 <body>
 	<div class="wrapper fadeInDown">
-		<img src="${pageContext.request.contextPath}/imges/logo.PNG" class="logo"/>
-		<div id="formContent">
-			<!-- Tabs Titles -->
-			<h2 class="active">LOGIN</h2>
-
-			<!-- Login Form -->
-			<form:form modelAttribute="personalInfoVO" action="${pageContext.request.contextPath}/login" method="post" name="loginForm">
-				<form:input path="empno" placeholder="아이디를 입력하세요" id="empno" value="220701"/>
-				<form:password path="password" placeholder="패스워드를 입력하세요" id="pw" value="abc7"/>
-				<button id="checkPW">Log in</button>
-			</form:form>
+		<div class="container">
+		<img src="${pageContext.request.contextPath}/imges/logo-white.png" class="login-logo"/>
+			<div id="formContent">
+				<!-- Tabs Titles -->
+				<h2 class="active">LOGIN</h2>
+				
+				<!-- Login Form -->
+				<form:form modelAttribute="personalInfoVO" action="${pageContext.request.contextPath}/login" method="post" name="loginForm">
+					<p>아이디</p>
+					<form:input path="empno" placeholder="아이디를 입력하세요" id="empno" value="220701"/>
+					<p>패스워드</p>
+					<form:password path="password" placeholder="패스워드를 입력하세요" id="pw" value="abc7"/>
+					<button id="checkPW">Log in</button>
+				</form:form>
+			</div>
+			<div class="emptydiv"></div>
 		</div>
+		
 	</div>
 
 	<div class="modal">

@@ -28,6 +28,41 @@
     font-size: 2vw;
     padding: calc(35% - 1.3vw) 0;
 }
+.pop-date-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.cal-icon{
+	width: 20px;
+    margin: 0 10px;
+}
+#enterpop .pop-ename{
+    font-weight: bold;
+    color: #3fb4d0;
+    font-size: 19px;
+    height: 23%;
+}
+#enterpop .pop-edepart{
+	font-weight: bold;
+    color: #3fb4d0;
+    font-size: 12px;
+}
+
+#leavepop .pop-ename{
+	font-weight: bold;
+    color: #272454;
+    font-size: 19px;
+    height: 23%;
+}
+
+#leavepop .pop-edepart{
+	font-weight: bold;
+    color: #272454;
+    font-size: 12px;
+}
     </style>
 </head>	
 <body>
@@ -177,15 +212,19 @@
 				</div>
 			<div id="enterpop" style="display:none">
 	            <div class="pop-container" >
-	                <div class="pop1"><span id="todayEnterDate"></span><a href="" >✖️</a></div>
+	                <div class="pop1"><a href="" >✖️</a></div>
 	                
 	                <div class="pop2"><img src="https://i.pinimg.com/736x/c6/75/37/c67537a607e37016cd65de01fb4bf437.jpg" alt=""></div>
 	                <div class="pop3">
-	                    <p>이름&nbsp;:&nbsp;<span>${ename}</span></p>
-<%-- 	                    <p>${employeeInfo.checkAdmin == 1? "관리자" : "직원"}&nbsp;/&nbsp;<span>${employeeInfo.eposition}</span></p> --%>
-<%-- 	                    <p>사원번호&nbsp;:&nbsp;<span>${employeeInfo.empno}</span></p> --%>
-	                    
-	                    <p>현재 시간&nbsp;:&nbsp;<span id="todayEnterTime"></span></p>
+	                    <p class="pop-ename"><span>${ename}</span>님</p>
+	                    <p class="pop-edepart"><span>${employeeInfo.edepartment}<c:if test="${employeeInfo.edepartment != null}"> / </c:if></span><span>${employeeInfo.eposition}</span></p>
+	                    <p class="pop-edepart">사원번호 - <span>${employeeInfo.empno}</span></p>
+	                    <p class="pop-date-container">
+	                    	<img src="${pageContext.request.contextPath}/imges/cal-icon.png" class="cal-icon"/> 
+	                    	<span id="todayEnterDate"></span>
+	                    	<img src="${pageContext.request.contextPath}/imges/time-icon.png" class="cal-icon"/>
+	                    	<span id="todayEnterTime"></span>
+	                    </p>
 	                </div>
 	                <div class="pop4">
 	                    <form action="${pageContext.request.contextPath}/CommutingEnter">
@@ -196,17 +235,21 @@
 	        </div>
 	        <div id="leavepop" style="display:none">
 	            <div class="pop-container" >
-	            <div class="pop1"><span id="todayLeaveDate"></span><a href="" >✖️</a></div>
+	            <div class="pop1"><a href="" >✖️</a></div>
 	                <div class="pop2"><img src="https://i.pinimg.com/736x/c6/75/37/c67537a607e37016cd65de01fb4bf437.jpg" alt=""></div>
 	                <div class="pop3">
-	                    <p>이름&nbsp;:&nbsp;<span>${ename}</span></p>
-<%-- 	                    <p>${employeeInfo.checkAdmin == 1? "관리자" : "직원"}&nbsp;/&nbsp;<span>${employeeInfo.eposition}</span></p> --%>
-<%-- 	                    <p>사원번호&nbsp;:&nbsp;<span>${employeeInfo.empno}</span></p> --%>
-	                    <p>현재 시간&nbsp;:&nbsp;<span id="todayLeaveTime"></span></p>
+	                    <p class="pop-ename"><span>${ename}</span>님</p>
+	                    <p class="pop-edepart"><span>${employeeInfo.edepartment}<c:if test="${employeeInfo.edepartment != null}"> / </c:if></span><span>${employeeInfo.eposition}</span></p>
+	                    <p class="pop-date-container">
+	                    	<img src="${pageContext.request.contextPath}/imges/cal-icon.png" class="cal-icon"/>
+	                    	<span id="todayLeaveDate"></span>
+	                    	<img src="${pageContext.request.contextPath}/imges/time-icon.png" class="cal-icon"/>
+	                    	<span id="todayLeaveTime"></span>
+	                   </p>
 	                </div>
 	                <div class="pop4">
 	                    <form action="${pageContext.request.contextPath}/CommutingLeave">
-	                        <button>퇴근하겠습니다</button>
+	                        <button class="leavebutton">퇴근하겠습니다</button>
 	                    </form>
 	                </div>    
 	            </div>
