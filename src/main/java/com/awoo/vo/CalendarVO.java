@@ -16,7 +16,10 @@ public class CalendarVO {
 	private int empno;			// 사원번호
 	private int checkAdmin;		// 관리자여부
 	private int approval;		// 승인신청여부
+	private String ename;		// 사원 이름
 	
+	
+
 	public int getCalId() {
 		return calId;
 	}
@@ -88,5 +91,11 @@ public class CalendarVO {
 	}
 	public void setApproval(int approval) {
 		this.approval = approval;
+	}
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
 	}
 }

@@ -13,6 +13,8 @@ public interface EmployeeInfoDAO {
 	public List<EmployeeInfoVO> selectEmployee();
 	
 	public void insertDataE(EmployeeInfoVO vo);
+	
+	public void updateE(EmployeeInfoVO vo);
 
 	public List<EmployeeInfoVO> selectEmpno();
 	

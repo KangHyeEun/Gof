@@ -1,5 +1,7 @@
 package com.awoo.service;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -36,5 +38,10 @@ public class LoginService {
 			path = "LogIn";
 		}
 		return path;
+	}
+	
+	//신입사원 초기 비밀번호 변경
+	public void resetPassword(Map<String, String> map) {
+		loginDao.updatePassword(map);	
 	}
 }

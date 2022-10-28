@@ -22,7 +22,8 @@ public interface MessageDAO {
 	//체크박스삭제 - 보낸 메세지함
 	public int deleteData2(@Param("idss") int[] idss);
 	
-	
+	//쪽지 보내기 추가
+	public int insertmessage(MessageVO vo);
 
 	
 }

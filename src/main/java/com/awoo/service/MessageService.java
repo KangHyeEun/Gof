@@ -1,10 +1,13 @@
 package com.awoo.service;
 
+
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.awoo.dao.MessageDAO;
 import com.awoo.vo.MessageVO;
+
 
 
 @Service
@@ -21,13 +24,13 @@ public class MessageService {
 	public void getList(Model model) {
 		model.addAttribute("list", dao.selectList());
 	}
-	
+
 	public void setData1(MessageVO vo) {
 		dao.insertData(vo);
 	}
 
-	
- 	//받은 쪽지함 체크 박스 삭제
+
+	//받은 쪽지함 체크 박스 삭제
 	public boolean deleteData1(int[] ids) {
 		if(dao.deleteData1(ids)> 0) {
 			return true;
@@ -37,13 +40,13 @@ public class MessageService {
 	}
 
 	//보낸 쪽지함 체크 박스 삭제
-		public boolean deleteData2(int[] idss) {
-			if(dao.deleteData2(idss)> 0) {
-				return true;
-			}else {
-				return false;
-			}
+	public boolean deleteData2(int[] idss) {
+		if(dao.deleteData2(idss)> 0) {
+			return true;
+		}else {
+			return false;
 		}
+	}
 
 
 	//게시글 상세 보기
@@ -53,8 +56,14 @@ public class MessageService {
 
 
 
+	public void insert(MessageVO vo) {
+		dao.insertmessage(vo);
+	}
 
-	
+
+
+
+
 
 
 

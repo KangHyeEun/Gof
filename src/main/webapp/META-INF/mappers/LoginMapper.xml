@@ -6,5 +6,11 @@
 	<select id="selectUser" resultType="PersonalInfoVO">
 		select id, name, gender, birthday, email, tel_number, phone_number, address, empno from personal_info where empno = #{empno} and password = #{password}
 	</select>
+		
+	<!-- 신입사원 최초 비밀번호 변경 -->
+	<update id="updatePassword">
+		update personal_info set password = #{newPW}
+		where password = #{nowPW} and empno = #{empno_id}
+	</update>
 </mapper>
 

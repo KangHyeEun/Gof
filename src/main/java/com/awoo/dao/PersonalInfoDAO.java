@@ -18,6 +18,8 @@ public interface PersonalInfoDAO {
 	
 	public void insertDataP(PersonalInfoVO vo);
 	
+	public void updateP(PersonalInfoVO vo);
+	
 	public List<InfoVO> selectInfo(InfoVO vo);
 
 	public List<InfoVO> selectDetail(InfoVO vo);

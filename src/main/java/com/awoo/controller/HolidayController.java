@@ -98,40 +98,37 @@ public class HolidayController {
 /*혜은---------------------------------------------------------------------*/
 	
 	@GetMapping("/holidayAdmin")
-	public String holidayAdmin(Model model) {
-		model.addAttribute("startPage","0");
-		model.addAttribute("endPage","9");
-		model.addAttribute("nowPage","1");
+	public String holidayAdmin(Model model,@RequestParam("page") String page) {
+		model.addAttribute("page", page);
+		model.addAttribute("url","holidayAdmin");
 		service.selectAdminH(model);
 		Eservice.HEdepartment(model);
 		return "/admin/holidayAdmin";
 	}
 	// 상세 검색
 	@PostMapping("/damin/holidayselect")
-	public String holidayselect(Model model,@RequestParam Map<String,String> map) {
-		model.addAttribute("startPage","0");
-		model.addAttribute("endPage","9");
-		model.addAttribute("nowPage","1");
+	public String holidayselect(Model model,@RequestParam Map<String,String> map,@RequestParam("page") String page) {
+		model.addAttribute("page", page);
+		model.addAttribute("url","damin/holidayselect");
 		service.selectH(model,map);
 		Eservice.HEdepartment(model);
 		return "/admin/holidayAdmin";
 	}
-	
-	// 페이지 처리
-		@GetMapping("/holiday/paging/{page}")
-		public String paging(@PathVariable("page") int page,Model model) {
-			model.addAttribute("nowPage",page);
-			model.addAttribute("startPage", 10*(page-1));
-			model.addAttribute("endPage", (10*(page-1))+9);			
-			service.selectAdminH(model);
-			Eservice.HEdepartment(model);
-			return "/admin/holidayAdmin";
-		}
+	// 상세검색 페이지 이동
+	@GetMapping("/damin/holidayselect")
+	public String holidayselect1(Model model,@RequestParam Map<String,String> map,@RequestParam("page") String page) {
+		model.addAttribute("page", page);
+		model.addAttribute("url","damin/holidayselect");
+		service.selectH(model,map);
+		Eservice.HEdepartment(model);
+		return "/admin/holidayAdmin";
+	}
 		
 	// 승인
 		@GetMapping("holiday/Ok/{id}")
 		public String holidayOk(HolidayVO vo,@PathVariable("id") int id,
-				@RequestParam("empno") int empno,@RequestParam("countDate") double countDate) {
+				@RequestParam("empno") int empno,@RequestParam("countDate") double countDate,
+				EmployeeInfoVO evo) {
 			vo.setId(id);
 			vo.setEmpno(empno);
 
@@ -157,5 +154,20 @@ public class HolidayController {
 			service.updateApproval(vo);	
 			
 			return "redirect:/holidayAdmin";
+		}
+		
+		// 휴가 상세보기
+		@ResponseBody   
+		@PostMapping("/holiday/detailAdmin")
+		public HolidayVO holidaydetailAdmin(@RequestBody Map<String, String> map,Model model) {
+			
+			int id = Integer.parseInt((String)map.get("id"));
+			int empno = Integer.parseInt((String)map.get("empno"));
+
+			model.addAttribute("empno", empno);
+			model.addAttribute("id", id);
+			service.getDetailHoliday(model);
+			
+			return service.getDetailHoliday(model);
 		}
 }

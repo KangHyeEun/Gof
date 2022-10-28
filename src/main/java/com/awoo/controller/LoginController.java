@@ -1,11 +1,14 @@
 package com.awoo.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.awoo.service.LoginService;
 import com.awoo.vo.PersonalInfoVO;
@@ -37,6 +40,13 @@ public class LoginController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";	
+	}
+	
+	//신입사원 초기 비밀번호 변경
+	@PostMapping("/resetPassword")
+	public String resetPW(@RequestParam Map<String, String> map) {
+		service.resetPassword(map);
+		return "redirect:/";
 	}
 
 }

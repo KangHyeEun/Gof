@@ -1,3 +1,5 @@
+<%@page import="com.awoo.vo.PersonalInfoVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -68,13 +70,22 @@ nav {
 	    height: auto;
 	    align-items: center;
 	}
+	#ul {
+		display: flex;
+	}
+	.span1{
+		cursor: pointer;
+	}
+	.table1>tbody:nth-child(2n) {
+	background-color: #f8f8f9;
+}
 </style>
 </head>
 <body>
 	<div class="container-wrap">
 		<div class="header">
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
-			<div class="header-logout">로그아웃 버튼</div>
+			<div class="header-logout">   <a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
 		<div class="container">
 			<jsp:include page="../include/menu.jsp"></jsp:include>
@@ -82,12 +93,11 @@ nav {
 				<div class="inner-div-bbs">
 					<div class="select">
 						<div class="intro">
-						<fmt:parseNumber var="page" value="${count/10}"
-											integerOnly="true" />
+						
 							<h3>직원 정보 관리</h3>
 							<p>⏏홈>관리자>인사관리</p>
 						</div>
-						<form action="${pageContext.request.contextPath}/admin/details"
+						<form action="${pageContext.request.contextPath}/admin/details?page=1"
 							method="post">
 							<div class="div1">
 								<h4>
@@ -153,9 +163,9 @@ nav {
 					<div class="table" style="width: 100%;">
 						<h4>
 							<img src="${pageContext.request.contextPath}/imges/total.png"
-								class="timg" />총 <span>${count}</span>명
+								class="timg" />총 <span id="count"></span>명
 						</h4>
-						<form action="${pageContext.request.contextPath}/admin/update/"
+						<form action="${pageContext.request.contextPath}/admin/updateD?page=1"
 							method="post" id="form1">
 							<div id="EpTable">
 								<div class="tbtn1">
@@ -179,11 +189,11 @@ nav {
 											<th>재직 상태</th>
 											<th>상세보기</th>
 										</tr>
-										<c:forEach var="i" items="${list}" begin="${startPage}"
-											end="${endPage}">
+										<c:forEach var="i" items="${list}" begin="${10*(page-1)}"
+											end="${(10*(page-1))+9}">
 											<tr>
-												<td><input type="checkbox" name="id" id="id"
-													value="${i.id}"></td>
+												<td><input type="checkbox" name="empno" id="empno"
+													value="${i.empno}" value1="${i.name}" value2="${i.edepartment}"></td>
 												<td>${i.id}</td>
 												<td>${i.name}</td>
 												<td>${i.empno}</td>
@@ -194,47 +204,65 @@ nav {
 												<td>${i.totalHoliday}</td>
 												<td>${i.estatus}</td>
 												<td><a
-													href="${pageContext.request.contextPath}/admin/detail/${i.id}">상세보기</a></td>
+													href="${pageContext.request.contextPath}/admin/detail/${i.id}" style="color: #ababaf;">상세보기</a></td>
 											</tr>
+											
+											<script type="text/javascript">
+												let c = ${list.size()};
+												const count = document.getElementById("count");
+												count.innerText = c;
+											</script>
+											
 										</c:forEach>
 									</table>
 
 									<div class="paging">
 										
 										<c:choose>
-											<c:when test="${nowPage == 1}">
-												<span class="num" style="color: #14abab;">◀</span>
-											</c:when>
-											<c:otherwise>
-												<div class="num">
-													<a id="prev"
-														href="${pageContext.request.contextPath}/admin/paging/${nowPage-1}">◀</a>
-												</div>
-											</c:otherwise>
-										</c:choose>
-										<c:forEach begin="1" end="${page+1}" varStatus="status">
+										<c:when test="${param.page == 1}">
+											<div class="num">
+												<span id="prev" style="color: #14abab;">◀</span>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="num">
+												<a id="prev" href="admin?page=${param.page-1}">◀</a>
+											</div>
+										</c:otherwise>
+									</c:choose>
+										<%
+										int Ppage = Integer.parseInt((String) request.getParameter("page"));
+										int begin = (Ppage - 1) / 10 <= 0 ? 1 : (int) Math.ceil((Ppage - 1) / 10) * 10 + 1;
+
+										List<PersonalInfoVO> list = (List<PersonalInfoVO>) request.getAttribute("list");
+
+										int celi = (int) Math.ceil(list.size() / 10);
+										int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin + 9 : celi + 1;
+										%>
+										<c:forEach begin="<%=begin%>" end="<%=endPage%>"
+											varStatus="status" var="var">
 											<c:choose>
-												<c:when test="${status.count eq nowPage}">
+												<c:when test="${param.page eq var}">
 													<div class="num checked">
-														<a href="${pageContext.request.contextPath}/admin/paging/${status.count}" style="color: white;">${status.count}</a>
+														<span>${var}</span>
 													</div>
 												</c:when>
 												<c:otherwise>
 													<div class="num notchecked">
-														<a href="${pageContext.request.contextPath}/admin/paging/${status.count}">${status.count}</a>
+														<a href="admin?page=${var}">${var}</a>
 													</div>
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
-
 										<c:choose>
-											<c:when test="${nowPage == page+1}">
-												<span class="num" style="color: #14abab;">▶</span>
+											<c:when test="${param.page} == <%=endPage%>">
+												<div class="num">
+													<span id="next" style="color: #14abab;">▶</span>
+												</div>
 											</c:when>
 											<c:otherwise>
 												<div class="num">
-													<a id="next"
-														href="${pageContext.request.contextPath}/admin/paging/${nowPage+1}">▶</a>
+													<a id="next" href="admin?page=${param.page+1}">▶</a>
 												</div>
 											</c:otherwise>
 										</c:choose>
@@ -252,7 +280,7 @@ nav {
 										</div>
 										<div class="mdiv2">
 											<h4>
-												선택직원 <span id="mspan">0</span>명
+												선택직원 <span id="mspan"></span>명
 											</h4>
 											<div class="mdiv2-1">
 												<h5 style="color: #aaabad;">직원추가</h5>
@@ -261,7 +289,7 @@ nav {
 											</div>
 										</div>
 										<div class="mdiv3">
-											<ul></ul>
+											<ul id="ul"></ul>
 										</div>
 										<div class="mselect">
 											<div class="sdiv1">
@@ -325,7 +353,7 @@ nav {
 		});
 		/*리스트 전체 체크*/
 		function checkAll() {
-			const checkboxes = document.getElementsByName("id");
+			const checkboxes = document.getElementsByName("empno");
 			if (document.getElementById("allCheck").checked == true) {
 				for (var i = 0; i < checkboxes.length; i++)
 					checkboxes[i].checked = true;
@@ -411,30 +439,41 @@ nav {
 					document.getElementById("endDate").valueAsDate = null;
 				});
 
-		/* 모달창*/
+		/* 모달창 끄기*/
+		
 		document.getElementById("exit").addEventListener("click", function() {
-			document.getElementById("modal_dim").style.display = "none";
+			document.getElementById("modal_dim").style.display = "none";	
+				const ul = document.getElementById("ul");
+
+				while(ul.hasChildNodes()){
+					ul.removeChild( ul.firstChild );  
+				}
+            	
 		});
+		
+		
+		/*모달창 켜기*/
 		document
 				.getElementById("modal_open")
 				.addEventListener(
 						"click",
 						function() {
-							const checkboxes = document.getElementsByName("id");
-							var c = 0;
+							const checkboxes = document
+									.getElementsByName("empno");
+							var j = 0;
 							for (var i = 0; i < checkboxes.length; i++) {
-								c = checkboxes[i].checked ? 1 : 0;
-								console.log(c);
-								if (c == 0) {
-									alert("정보를 수정할 직원을 선택해 주세요.");
-									break;
-								}
-								if (c == 1) {
-									document.getElementById("modal_dim").style.display = "flex";
+								if (checkboxes[i].checked == true) {
+									j++;
 								}
 							}
-							document.getElementById("modal_dim").style.display = "flex";
+							if (j > 0) {
+								document.getElementById("modal_dim").style.display = "flex";
+							} else {
+								alert("정보를 수정할 직원을 선택해 주세요.");
+								document.getElementById("modal_dim").style.display = "flex";
+							}
 						});
+		/*모달창 select 색 변경*/
 		document
 				.getElementById("mcategory")
 				.addEventListener(
@@ -445,9 +484,59 @@ nav {
 							}
 						});
 		
+		/*모달창 div에 li추가*/
+		document.getElementById("modal_open").addEventListener(
+				"click",
+				function() {
+					const checkboxes = document.getElementsByName("empno");
+					const ul = document.getElementById("ul");
+					const mspan = document.getElementById("mspan");
+					const li1 = document.getElementsByName("li1");
+
+					for (var i = 0; i < checkboxes.length; i++) {
+						if (checkboxes[i].checked) {
+							const li = document.createElement("li");
+							const name = checkboxes[i].getAttribute("value1");
+							const edepartment = checkboxes[i]
+									.getAttribute("value2");
+							const span = document.createElement("span");
+
+							span.innerText = "X"
+							span.setAttribute("id", "remove"+i);
+							span.setAttribute("value", name);
+							span.setAttribute("class", "span1");
+
+							li.innerText = name + "(" + edepartment + ")";
+							li.setAttribute("name", "li1");
+							li.setAttribute("value", name);
+							li.append(span);
+							
+							ul.append(li);
+							
+						
+						}
+					}
+							
+							mspan.innerText = li1.length;
+					
+					/*모달창 span 삭제*/
+					
+					for (var i = 0; i < checkboxes.length; i++) {
+						document.getElementById("remove"+i).addEventListener("click", function(e) {	
+						
+							const del = e.target;  // span ("X")
+							const deleteAll = del.parentNode; // <li><span></span></li>
+							checkboxes[i-1].checked = false;
+							deleteAll.remove();
+							
+							mspan.innerText = li1.length;
+						});
+						
+					}
+				});
+		
 		
 	</script>
-
 
 </body>
 </html>
