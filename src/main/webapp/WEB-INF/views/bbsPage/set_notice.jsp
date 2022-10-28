@@ -7,8 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
 <link rel="stylesheet"
@@ -46,7 +44,7 @@
 							<tbody>
 								<tr>
 									<th>작성자</th>
-									<td>${session.name}</td>
+									<td>${sessionScope.personalInfoVO.name}</td>
 								</tr>
 								<tr>
 									<th>카테고리</th>
