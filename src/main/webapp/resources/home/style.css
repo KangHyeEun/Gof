@@ -39,8 +39,8 @@
     box-shadow: 1px 1px 8px #c1c1c1;
    }
    .left-section > .div2 .div2-1-1-1{
-    width: 11em;
-    height: 11em;
+    width: 10em;
+    height: 10em;
     /* height: 100%; */
     /* height: min-content; */
     border: 1px solid black;
@@ -748,6 +748,13 @@ background-color:#f1f1f1;
 		    height: 100%;
 		    align-items: center;
 		}
+		.sec_cal .cal_wrap .days {
+		   margin-bottom: 0px; 
+		   padding-bottom: 0px; 
+		}
+		.sec_cal .cal_wrap .dates {
+	    height: 180px;
+	    }
     }
     @media ( max-width: 1130px ) {
     	.bbs-table tr th:nth-child(1),
