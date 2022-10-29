@@ -83,6 +83,32 @@
 	</select>
 	
 	<select id="getEmpInfo" resultType="EmployeeInfoVO">
-		select eposition, edepartment from employee_info where empno=#{empno}
+		select empno, eposition, edepartment, total_holiday, used_holiday
+		from employee_info where empno=#{empno}
+	</select>
+	
+	
+	<!--=========================== 홈에 가져갈 애들========================== -->
+	
+	<select id="selectBBSListNoticeForHome" resultType="BBSVO">
+		select id, category, title, owner_id, owner, content, view_counts,
+		date_format(create_date, '%Y-%m-%d') create_date
+		from bbs_notice
+		where
+		is_delete = 0
+		order by id desc
+		limit 0, 5
+	</select>
+	<select id="selectCountApprovalHoliday" resultType="int">
+		SELECT COUNT(approval) FROM holiday WHERE approval = '요청중' and empno = #{empno};
+	</select>
+	<select id="selectTotalUsedHoliday" resultType="EmployeeInfoVO">
+		SELECT total_holiday, used_holiday FROM employee_info WHERE empno=#{empno};
+	</select>
+	<select id="getTodayCalendar" resultType="CalendarVO">
+		SELECT cal_id, cal_title, cal_place, cal_start, date_format(cal_end, '%Y-%m-%d %h:%m') AS cal_end, cal_allday, cal_show, cal_notice, cal_content, c.empno as empno, check_admin, approval, p.name as ename 
+		FROM calendar c, personal_info p
+		WHERE c.empno = p.empno
+		AND #{today} between DATE_FORMAT(cal_start,'%Y-%m-%d') AND DATE_FORMAT(cal_end,'%Y-%m-%d');
 	</select>
 </mapper>

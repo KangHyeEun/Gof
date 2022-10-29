@@ -11,293 +11,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/holiday/style.css">
 <title>Insert title here</title>
 </head>
-<style>
-	
-
-
-	table{
-		border:0;
-		font-size: 0.9em;
-	}
-	th, td {
-	    border: none;
-  	    padding: 0.3em;  
-		height:35px;
- 	    width: 80px; 
- 	    white-space: nowrap;
-/* 	    white-space: nowrap; */
-	    
-	}
-/* 	th:nth-child(4), td:nth-child(4){ */
-/* 		width:150px; */
-/* 	} */
-	.holiday-list tr th:nth-child(5), .holiday-list tr td:nth-child(5){
-	width: 170px;
-	white-space: nowrap;
-	}
-	.holiday-list tr th:nth-child(6), .holiday-list tr td:nth-child(6){
-     display: block;
-    /* width: 100%; */
-    width: 22em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    height: 1.5em;
-    text-align: left;
-    word-wrap: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-	}
-	th{
-/* 	    border-bottom: 1px solid #444444;	 */
-	}
-	.sub-sub-title{
-	    display: flex;
-	    justify-content: flex-start;
-	    width: 100%;
-	    height: 10%;
-	    align-items: center;
-	}
-	.sub-sub-title h4{
-/* 	    width: 10%; */
-	    width: 130px;
-	}
-	.sub-sub-title p{
-		font-weight: bold;
-	}
-	.sub-sub-title span{
-		color: #2196f3;
-	}
-	.holiday-list tbody tr:nth-child(odd){
-	background-color: #f8f8f9;
-	}
-	.count-nums{
-	    justify-content: space-evenly;
-	}
-	.count-nums .holiday-count{
-		color : #2196f3;
-	}
-	
-	
-	
-	
-	.modal .btn{cursor: pointer;border: 1px solid #999999;text-align: center;border-radius: 5px;outline: none;font-weight: 500;}
-	.dimLayer{display: block;width: 100%;background-color: rgba(0, 0, 0, 0.3);position: fixed;left: 0;top: 0px;margin: 0;padding: 0;z-index: 9998;}
-	.modal{width: 600px;height: 252px;border-radius: 10px;padding: 80px 24px;box-sizing: border-box;text-align: center;}
-	.modal-section{background: #ffffff;box-sizing: border-box;display: none;position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);display: none;z-index: 9999;}
-	.menu_msg{font-size: 21px;font-weight: 500;}
-	.enroll_box p{padding-bottom: 56px;}
-	.gray_btn {width: 90px;background: #ffffff;color: #999999;height: 36px;line-height: 36px;transition: 0.5s;font-size: 17px;}
-	.pink_btn {width: 90px;background: #ed197a;color: #fff;height: 36px;line-height: 36px;transition: 0.5s;font-size: 17px;border: none;}
-	
-	
-	.detail-container{
-	 	width: 100%;
-	    height: 100%;
-	    display: flex;
-	    /* justify-content: flex-start; */
-	    flex-direction: column;
-	    justify-content: space-around;
-	    
-	}
-	.detail-container table tr{
-/* 		background-color : white; */
-	}
-	.detail-container table,.detail-container table td {
-		border-collapse: collapse;
-		border:1px solid #dfdfdf;
-		padding: 10px;
-
-	}
-	.detail-container table td:nth-child(1){
-    	width: 100px;
-    	text-align : center; 
-	}
-	.detail-container table tr:nth-child(4){
-/*     	height: 13rem;  */
-	}
-	
-	.approval-container{
-		width: 100%;
-	    display: flex;
-	    flex-direction: column;
-	    height: 23%;
-	    font-weight: bold;
-	    justify-content: center;
-	}	    
-	.approvalDate,.reject{
-		height: 30px;pop-rejection_reason
-	}
-	
-	#pop-approvalDate, #pop-rejection_reason{
-		font-weight: normal;
-    	padding: 0 1em;	
-	}
-	#pop-approval{
-		color : rgb(33, 150, 243);
-	}
-	#pop-hcontent{
-	    display: block;
-	    /* width: 100%; */
-	    width: 22em;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    white-space: normal;
-	    height: 11em;
-	    text-align: left;
-	    word-wrap: break-word;
-	}
-	.holiday-list td a{
-		border: 1px solid #d3d3d3;
-	    width: 5.5em;
-	    /* padding: 4px; */
-	    width: 70%;
-	    font-size: 11px;
-	    border-radius: 7px;
-	    background: linear-gradient(1deg, #cdcdcd, #ffffff);
-/* 	    display: flex; */
-/* 	    justify-content: center; */
-/* 	    align-items: center; */
-	    height: 50%;
-	}
-	.holiday-list td a:hover{
-		color:white;
-		background: linear-gradient(1deg, #8d8d8d, #cdc9c9);
-	}
-	.holiday-list td a:active{
-		color:white;
-		position:relative;
-		background: linear-gradient(1deg, #8d8d8d, #cdc9c9);
-		top:2px;
-	}
-	@media screen and (max-height: 890px){
-	.holiday-list th, .holiday-list td { 
-  		padding: 0; 
- 	    font-size: 14px; 
-     	white-space: nowrap;
- 	}
-}
-	@media screen and (max-width: 1864px),screen and (max-height: 790px){
-		.holiday-list th, .holiday-list td {
-  	        padding: 0.2em;  
-   			font-size: 14px;
-		}
-		.select {
-    		height: 4%;
-    	}
-		.sub-title {
-		    width: 62%;
-    	}
-    	.sub-sub-title h4 {
-/*     		width: 13%; */
-    	}
-    	.div1 {
-/* 	    	height: 11%; */
-	    }
-	    .div1-1 {
-/*     		width: 21%; */
-	    }
-}
-	@media screen and (max-width: 1490px){
-		.holiday-list th, .holiday-list td {
-/*  	        padding: 1% 0; */
-   			font-size: 14px;
-		}
-		.select {
-    		height: 4%;
-    	}
-		.sub-title {
-		    width: 62%;
-    	}
-    	.sub-sub-title h4 {
-/*     		width: 13%; */
-    	}
-    	.div1 {
-/* 	    	height: 11%; */
-	    }
-	    .div1-1 {
-/*     		width: 21%; */
-	    }
-}
-@media screen and (max-width: 1280px){
-	.holiday-list th, .holiday-list td {
- 		padding: 1% 0;
-	    font-size: 14px;
-    	white-space: nowrap;
-		
-	}
-	.thead tr th:nth-child(1),
-	.thead tr th:nth-child(4),
-	.thead tr th:nth-child(6),
-	.tbody tr td:nth-child(1),
-	.tbody tr td:nth-child(4),
-	.tbody tr td:nth-child(6){
-		display: none;
-	}
-}
-@media screen and (max-height: 860px){
-	.holiday-list th, .holiday-list td { 
-  		padding: 0; 
- 	    font-size: 14px; 
-     	white-space: nowrap;
- 	} 
-}
-@media screen and (max-width: 1050px) {
-	#apply-holiday {
-	    width: 90px;
-	    font-size: 12px;
-	}
-	.holiday-list th, .holiday-list td {
-     	padding: 1% 0;
-	    font-size: 12px;
-	}
-@media screen and (max-height: 860px){
-	.holiday-list th, .holiday-list td { 
-  		padding: 0; 
- 	    font-size: 14px; 
-     	white-space: nowrap;
- 	} 
-}
-@media screen and (max-width: 668px) {
-	.num {
-	    height: 78%;
-	    width: 20px;
-    }
-	.holiday-list th, .holiday-list td {
- 		padding: 1% 0;
-	    font-size: 11px;
-	}
-	.pop-titleContainer {
-    	width: 64%;
-    }
-    .pop-container {
-    width: 400px;
-    padding: 6%
-    }
-    .count-nums {
-    font-size: 0.8em;
-    }
-    .detail-container table, .detail-container table td {
-    max-width: 225px;
-    }
-}
-
-@media screen and (max-height: 860px){
-	.holiday-list th, .holiday-list td { 
-  		padding: 0; 
- 	    font-size: 14px; 
-     	white-space: nowrap;
- 	} 
- 	
- 	
-	
-}
-
-
-
-
-</style> 
 <body>
 
 
@@ -305,7 +18,7 @@
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
-			<div class="header-logout">로그아웃 버튼</div>
+			<div class="header-logout">	<a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
 		<div class="container">
 			<jsp:include page="../include/menu.jsp"></jsp:include>
@@ -326,7 +39,7 @@
 						<div id="apply-holiday"><span>휴가 신청하기</span></div>
 					</div>
 					<div class="sub-sub-title">
-						<h4>◎&nbsp;휴가 신청내역</h4>
+						<h4>◎ 휴가 신청내역</h4>
 <%-- 						<p>잔여일수 : <span>${holidayList[0].totalHoliday}</span>일</p> --%>
 <%-- 						<p>사용일수 : <span>${holidayList[0].usedHoliday}</span>일</p> --%>
 						<p>잔여일수 : <span>${holidayList[0].totalHoliday - holidayList[0].usedHoliday}</span>일</p>
@@ -360,7 +73,8 @@
 										<td>${hl.hcontent}</td>
 										<td>${hl.approval}</td>
 										<td>${hl.approvalDate != null ? hl.approvalDate : "-"}</td>
-										<td><a class="${hl.id}" id="atag${status1.count}">상세보기</a></td>
+<%-- 										<td><a class="${hl.id}" id="atag${status1.count}"></a></td> --%>
+										<td><a class="${hl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a></td>
 									</tr>
 								</c:forEach>
 							</tbody>	
@@ -465,17 +179,17 @@
 						</div>
 					</form>
 				</div>
+		        <section class="modal modal-section type-confirm" id="confirm-block">
+		            <div class="enroll_box">
+		                <p class="menu_msg" id="real-submit-message">휴가를 신청하시겠습니까?</p>
+		            </div>
+		            <div class="enroll_btn">
+		                <button class="btn pink_btn btn_ok" id="btn_ok">확인</button>
+		                <button class="btn gray_btn modal_close" id="btn_cancle">취소</button>
+		            </div>
+		        </section>
 			</div>
 			
-	        <section class="modal modal-section type-confirm" id="confirm-block">
-	            <div class="enroll_box">
-	                <p class="menu_msg" id="real-submit-message">휴가를 신청하시겠습니까?</p>
-	            </div>
-	            <div class="enroll_btn">
-	                <button class="btn pink_btn btn_ok" id="btn_ok">확인</button>
-	                <button class="btn gray_btn modal_close" id="btn_cancle">취소</button>
-	            </div>
-	        </section>
 		
 			<div id="detailpop">
 				<div class="pop-container">
@@ -697,7 +411,8 @@
    		 });
    		 
    		 document.getElementById("btn_ok").addEventListener("click",function(){
- 		 	document.getElementById("real-submit-btn").click();   				 
+ 		 	alert("성공적으로 신청되었습니다");
+   			 document.getElementById("real-submit-btn").click();   				 
  		 });
  	     document.getElementById("btn_cancle").addEventListener("click",function(){
  	    	document.getElementsByClassName("modal-section")[0].style.display = "none";

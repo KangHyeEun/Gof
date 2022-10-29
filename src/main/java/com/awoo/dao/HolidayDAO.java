@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.awoo.vo.EmployeeInfoVO;
 import com.awoo.vo.HolidayVO;
 
 @Mapper
@@ -12,7 +13,7 @@ public interface HolidayDAO {
 	public List<HolidayVO> selectHoliday(HolidayVO vo);
 	public void insertHoliday(HolidayVO vo);
 	public List<String> distinctYear(HolidayVO vo);
-	
+	public EmployeeInfoVO getholidayCount(HolidayVO vo);
 	public HolidayVO getDetailHoliday(HolidayVO vo);
 	
 	/*혜은*/

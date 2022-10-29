@@ -40,7 +40,8 @@ public class HolidayService {
 		vo.setHwriteDate(year);
 		
 		model.addAttribute("holidayList", dao.selectHoliday(vo));
-		model.addAttribute("distinctYear", dao.distinctYear(vo));
+		model.addAttribute("distinctYear", dao.distinctYear(vo)); 
+		model.addAttribute("countHoliday", dao.getholidayCount(vo));
 	}
 	public void insertHoliday(Model model) throws ParseException {
 		String leaveType = (String)model.getAttribute("leaveType");

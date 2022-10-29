@@ -53,4 +53,35 @@
 		 	AND ehired_date BETWEEN #{ehiredDate} AND #{date}
 		 </if>
 	</select>
+	
+	<update id="updateP">
+		update personal_info
+		<set>
+			<if test="empno != null and empno != ''">
+			empno = #{empno},  
+			</if>
+			<if test="name != null and name != ''">
+			name = #{name},  
+			</if>
+			<if test="gender != null and gender != ''">
+			gender = #{gender},  
+			</if>
+			<if test="birthday != null and birthday != ''">
+			birthday = #{birthday},  
+			</if>
+			<if test="password != null and password != ''">
+			password = #{password},  
+			</if>
+			<if test="tel_number != null and tel_number != ''">
+			tel_number = #{tel_number},  
+			</if>
+			<if test="phone_number != null and phone_number != ''">
+			phone_number = #{phone_number},  
+			</if>
+			<if test="address != null and address != ''">
+			address = #{address},  
+			</if>
+		</set>
+		where empno = #{empno}
+	</update>
 </mapper>
