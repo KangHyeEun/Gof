@@ -219,8 +219,8 @@
 .schedule {
     display: flex;
     flex-direction: column;
-    width: 520px;
-    height: 520px;
+    width: 560px;
+    height: 540px;
     background-color: #ffffff;
     justify-content: center;
     align-items: center;	
@@ -324,6 +324,9 @@ input[type="text"] {
 	justify-content: space-between;
 	padding: 10px 15px;
 	border-bottom: 1px solid black;
+}
+.schedule-title > p {
+	font-weight: bold;
 }
 .schedule-title > a {
 	cursor: pointer;

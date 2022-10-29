@@ -385,34 +385,6 @@ const renderCalendar = () => {
 			}
 		}
 		
-//		---------------------------------------------------------------------
-
-////		달력에 직접적으로 보이지않는 일정목록 부분
-//		for(let index = 0; index < daysEle.length; index++) {
-//			for(let index1 = 0; index1 < list.length; index1++) {
-//				let calDate = list[index1].calStart.split(" ");
-//				let calTime = calDate[1];	// 시간
-//				calDate = calDate[0];		// 날짜
-//				let calHour = calTime.split(":");
-//				let calMinute = calHour[1];	// 분
-//				calHour = calHour[0];		// 시간
-////				console.log("calHour : " + Number(calHour) + " / calMinute : " + calMinute);
-////				div의 클래스에 있는 값과 DB에서 추출한 날짜 값과 같으면 해당 div에 DB값 넣기
-//				if (daysEle.item(index).classList[0] == calDate) {
-//					let scheduleDiv = document.getElementsByClassName(calDate)[0].children[0];
-//					let div = document.createElement("div");
-//					let span = document.createElement("span");
-//					span.classList.add("schedule_"+list[index1].calId);
-//					
-//					innerSpan = "";
-//					innerSpan += calTime + " " + list[index1].calTitle;
-//					span.innerHTML += innerSpan;
-//					div.append(span);
-//					scheduleDiv.append(div);
-//				}
-//			}
-//		}
-		
 		return _data;
 		
 	}).then(_data => {
@@ -436,7 +408,7 @@ const renderCalendar = () => {
 		
 //				일정추가 팝업이 뜨지않게 이벤트 버블링 방지
 				e.stopPropagation();
-				console.log(this);
+//				console.log(this);
 				
 				let valueX = e.clientX;
 				let valueY = e.clientY;
@@ -454,24 +426,20 @@ const renderCalendar = () => {
 				document.querySelector(".schedule-info-wrap").style.display = "block";
 				
 				
-//				클릭한 곳에 있는 일정 모두 표시하는 팝업
+//				클릭한 곳에 있는 일정을 모두 표시하는 팝업
 //		 		---------------------------------------------------------------------
 				
-				let cloneDiv = document.querySelectorAll(".days > div > div:first-child > div");
-				console.log(cloneDiv);
+//				일정 팝업의 제목
 				let scheList = document.querySelector(".schedule-list");
+//				일정 팝업의 목록
+				let scheTitle = document.querySelector(".schedule-title");
 				scheList.textContent = "";	// 팝업에 내용 넣기전에 초기화
 				let childEle = "";
 //				클릭한 곳의 상위 요소로 가서 하위요소의 개수를 구한다 => 클릭한 곳의 일정 개수를 구하기 위함
 //				innerDiv[index].parentElement.children.length (일자 div도 포함되어있어서 1부터 시작)
 				let scheParentToChild = innerDiv[index].parentElement.children;
-				console.log(scheParentToChild);
-				for (let index1 = 0; index1 < scheParentToChild.length; index1++) {
-//					console.log(index1 + " : ");
-//					console.log("========================");
-//					console.log(scheParentToChild[0]);
-//					console.log(scheParentToChild[1]);
-//					console.log(scheParentToChild[2]);
+//				일자에 있는 일정들 팝업에 복사
+				for (let index1 = 1; index1 < scheParentToChild.length; index1++) {
 //					element 복제, 하위 요소도 복제하기 위해 true 값 설정
 					childEle = scheParentToChild[index1].cloneNode(true);
 					scheList.append(childEle);
@@ -480,26 +448,18 @@ const renderCalendar = () => {
 				for (let index1 = 0; index1 < scheList.children.length; index1++) {
 					scheList.children[index1].classList.remove("displayNone");
 				}
-//				console.log(scheList);
-//				console.log(scheList.children[0]);
+//				클릭한 곳의 날짜
+				let clickToday = innerDiv[index].parentElement.parentElement.classList[0];
+//				릭한 곳의 날짜 자르기
+				let clickTodayCut = clickToday.split("-");
+//				클릭한 곳의 날짜로 요일 구하기
+				clickTodayDay = new Date(clickTodayCut[0], clickTodayCut[1]-1, clickTodayCut[2]).getDay();
 //				클릭한 팝업창의 제목 초기화
-				scheList.children[0].textContent = "";
-//				클릭한 곳의 날짜 삽입
-//				scheList.children[0].append
+				scheTitle.children[0].textContent = "";
+//				클릭한 곳의 날짜와 요일 삽입
+				scheTitle.children[0].innerHTML = clickToday + " " + longDays[clickTodayDay];
 			});
 		}
-		
-		return _data;
-		
-	}).then(_data => {
-		
-//		 ---------------------------------------------------------------------
-//		 overCnt를 위에서 생성후에 해당 span태그(+count) 클릭시 숨겨진 일정 팝업
-//		 ---------------------------------------------------------------------
-
-		document.querySelector(".overCnt").addEventListener("click",function(){
-			console.log("확인");
-		});
 		
 		return _data;
 		
@@ -1402,12 +1362,9 @@ transferBtn.addEventListener("click", function(){
 
 if ((date.getFullYear() != null && date.getMonth() != null) ||
 	(date.getFullYear() != undefined && date.getMonth() != undefined)) {
-//	localStorage.getItem("localFullYear");	// 새로고침전에 저장해둔 년 값
-//	localStorage.getItem("localMonth");		// 새로고침전에 저장해둔 월 값
-
 //	년, 월 값 대입 후 렌더링
-    date.setFullYear(localStorage.getItem("localFullYear"));
-    date.setMonth(localStorage.getItem("localMonth"));
+    date.setFullYear(localStorage.getItem("localFullYear")); // 새로고침 전에 저장한 값 가져와서 저장
+    date.setMonth(localStorage.getItem("localMonth"));		 // 새로고침 전에 저장한 값 가져와서 저장
 //    렌더링
     renderCalendar();
 } else {
@@ -1417,8 +1374,8 @@ if ((date.getFullYear() != null && date.getMonth() != null) ||
 //     	f5 누를시 렌더링하기 위한 값 구하기
 function refreshFunc() {
 	window.onbeforeunload = function (e) {
-		localStorage.setItem("localFullYear", date.getFullYear());
-    	localStorage.setItem("localMonth", date.getMonth());
+		localStorage.setItem("localFullYear", date.getFullYear());	// 새로고침 되기전에 값 저장
+    	localStorage.setItem("localMonth", date.getMonth());		// 새로고침 되기전에 값 저장
 //		return 0; // 새로고침시 확인하는 알림창을 띄워준다.
 	};
 }
