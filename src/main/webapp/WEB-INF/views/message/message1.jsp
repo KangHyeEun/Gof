@@ -287,6 +287,7 @@ textarea {
 									<td>${vo.createDate}</td>
 									<td>${vo.mowner}</td>
 								</tr>
+							</c:forEach>
 								<!-- 팝업 될 레이어 -->
 								<div class="modal">
 									<div class="modal-content">
@@ -312,7 +313,6 @@ textarea {
 									</div>
 
 								</div>
-							</c:forEach>
 
 						</tbody>
 					</table>

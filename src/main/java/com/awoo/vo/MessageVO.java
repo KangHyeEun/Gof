@@ -5,101 +5,58 @@ import org.apache.ibatis.type.Alias;
 @Alias("messageVO")
 public class MessageVO {
 	private int id;
-	private String mowner;
-	private String mtitle;
+	private int mownerId;
+	private String ownerName;
 	private String mcontent;
-	private String createDate;
-	private String mreciever;
-	
-	
-	public MessageVO() {
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public MessageVO(int id, String mowner, String mtitle, String mcontent, String createDate, String mreciever) {
-		super();
-		this.id = id;
-		this.mowner = mowner;
-		this.mtitle = mtitle;
-		this.mcontent = mcontent;
-		this.createDate = createDate;
-		this.mreciever = mreciever;
-	}
-
-
+	private String msendDate;
+	private int mreceiverId;
+	private String receiverName;
 	public int getId() {
 		return id;
 	}
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
-	public String getMowner() {
-		return mowner;
+	public int getMownerId() {
+		return mownerId;
 	}
-
-
-	public void setMowner(String mowner) {
-		this.mowner = mowner;
+	public void setMownerId(int mownerId) {
+		this.mownerId = mownerId;
 	}
-
-
-	public String getMtitle() {
-		return mtitle;
+	public String getOwnerName() {
+		return ownerName;
 	}
-
-
-	public void setMtitle(String mtitle) {
-		this.mtitle = mtitle;
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
-
-
 	public String getMcontent() {
 		return mcontent;
 	}
-
-
 	public void setMcontent(String mcontent) {
 		this.mcontent = mcontent;
 	}
-
-
-	public String getCreateDate() {
-		return createDate;
+	public String getMsendDate() {
+		return msendDate;
 	}
-
-
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
+	public void setMsendDate(String msendDate) {
+		this.msendDate = msendDate;
 	}
-
-
-	public String getMreciever() {
-		return mreciever;
+	public int getMreceiverId() {
+		return mreceiverId;
 	}
-
-
-	public void setMreciever(String mreciever) {
-		this.mreciever = mreciever;
+	public void setMreceiverId(int mreceiverId) {
+		this.mreceiverId = mreceiverId;
 	}
-
-
-	@Override
-	public String toString() {
-		return "MessageVO [id=" + id + ", mowner=" + mowner + ", mtitle=" + mtitle + ", mcontent=" + mcontent
-				+ ", createDate=" + createDate + ", mreciever=" + mreciever + "]";
+	public String getReceiverName() {
+		return receiverName;
+	}
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
 	}
 	
+
 	
 	
-	
- 
-	
-	
-	
+
 	
 }
