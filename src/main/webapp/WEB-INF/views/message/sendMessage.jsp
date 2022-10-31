@@ -138,7 +138,7 @@
 	let page = ${param.page};
 	let year = ${param.year};
 	let month = ${param.month};
-	let name = ${param.name};
+	let name = "${param.name}";
 	
 	
 	 document.addEventListener("DOMContentLoaded", function(){

@@ -97,20 +97,8 @@ public class MessageController {
 	@ResponseBody   
 	@PostMapping("sendMessage/deleteMessage")
 	public ResponseEntity<String> holidaydetailAdmin(@RequestBody int[] checked) {
-		
-//		for (String string : idArr) {
-//			System.out.println(string);
-//		}
 		ResponseEntity<String> response = null;
-		System.out.println(checked[0]);
 		service.deleteMessage(checked);
-//
-//		if(service.deleteData2(idss)) {
-//			response = new ResponseEntity<String>("ok", HttpStatus.OK);
-//		}else {
-//			response = new ResponseEntity<String>("err", HttpStatus.NOT_FOUND);
-//		}
-
 		return response;
 	
 	}
@@ -122,9 +110,7 @@ public class MessageController {
 									Model model) {
 		
 		int id = Integer.parseInt((String)map.get("id"));
-//		model.addAttribute("empno", vo.getEmpno());
 		model.addAttribute("id", id);
-//		service.getDetailMessage(model);
 		
 		return service.getDetailMessageReceive(model);
 	}
@@ -143,7 +129,7 @@ public class MessageController {
 	
 	
 	
-	//지영--------
+	//지영---------------------------------------------
 //	@GetMapping
 //	public String index(Model model) {
 //		service.getList(model);

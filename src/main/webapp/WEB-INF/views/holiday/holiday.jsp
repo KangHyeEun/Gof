@@ -90,7 +90,6 @@
 							List<HolidayVO> list = (List<HolidayVO>)request.getAttribute("holidayList");
 							
 							int celi = (int)Math.ceil(list.size()/10);
-// 							System.out.println(celi);
 							int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin+9 : list.size()%10 == 0 ? celi : celi+1;
 							%>
 							<c:forEach begin="<%=begin%>" end="<%=endPage%>" varStatus="status" var="var">
