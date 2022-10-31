@@ -11,7 +11,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/holiday/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/message/style.css">
 <title>Insert title here</title>
-
+<style>
+</style>
 </head>
 <body>
 
@@ -25,33 +26,37 @@
 			<jsp:include page="../include/menu.jsp"></jsp:include>
 			<div class="container-inner-bbs">
 				<div class="inner-div-bbs">
+					<h3 class="sub-title">보낸 쪽지함</h3> 
 					<!-- 각자 필요한 부분 넣기 -->
-					<div>
-						<button type="button" id="deleteMessage">삭제</button>
-						<select name="sorting-year" id="sorting-name" onchange="OnChange();">
-							<option value="0">보낸이</option>
-							<c:forEach items="${sdistinctReceiver}" var="receive">
-								<option value="${receive}" <c:if test ="${receive eq param.name}">selected="selected"</c:if>>${receive}</option>
-							</c:forEach>
-						</select>
-						<select name="sorting-year" id="sorting-year" onchange="OnChange();">
-							<option value="0">전체 연도</option>
-							<c:forEach items="${sdistinctYear}" var="year">
-								<option value="${year}" <c:if test ="${year eq param.year}">selected="selected"</c:if>>${year}</option>
-							</c:forEach>
-						</select>
-						<span>년</span>
-						<select name="sorting-month" id="sorting-month" onchange="OnChange();">
-							<option value="0">전체 월</option>
-							<c:forEach begin="1" end="12" var="month">
-								<option value="${month}" <c:if test ="${month eq param.month}">selected="selected"</c:if>>${month}</option>
-							</c:forEach>
-						</select>
-						<span>월</span>
+					<div class="table-head">
+<!-- 							<button type="button" id="deleteMessage">삭제</button> -->
+						<div></div>
+						<div>
+							<select name="sorting-year" id="sorting-name" onchange="OnChange();">
+								<option value="0">보낸이</option>
+								<c:forEach items="${sdistinctReceiver}" var="receive">
+									<option value="${receive}" <c:if test ="${receive eq param.name}">selected="selected"</c:if>>${receive}</option>
+								</c:forEach>
+							</select>
+							<select name="sorting-year" id="sorting-year" onchange="OnChange();">
+								<option value="0">전체 연도</option>
+								<c:forEach items="${sdistinctYear}" var="year">
+									<option value="${year}" <c:if test ="${year eq param.year}">selected="selected"</c:if>>${year}</option>
+								</c:forEach>
+							</select>
+							<span>년</span>
+							<select name="sorting-month" id="sorting-month" onchange="OnChange();">
+								<option value="0">전체 월</option>
+								<c:forEach begin="1" end="12" var="month">
+									<option value="${month}" <c:if test ="${month eq param.month}">selected="selected"</c:if>>${month}</option>
+								</c:forEach>
+							</select>
+							<span>월</span>
+						</div>
 					</div>
 					<table class="holiday-list">
 						<thead class="thead">
-							<tr>
+							<tr class="receivetr">
 								<th><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll()"></th>
 								<th>내용</th>
 								<th>보낸날짜</th>
@@ -61,7 +66,7 @@
 						</thead>	
 						<tbody class="tbody" id="htable-body">
 							<c:forEach items="${smessageList}" var="rl" varStatus="status1">
-								<tr id="tr${status1.count}">
+								<tr id="tr${status1.count}" class="receivetr">
 									<td><input type="checkbox" class="checkbox" name="checkbox" id="checkbox" value="${rl.id}"/></td>
 									<td>${rl.mcontent}</td>
 									<td>${rl.msendDate}</td>
@@ -71,7 +76,9 @@
 							</c:forEach>
 						</tbody>	
 					</table>
-					
+					<div class="bottom-div">
+						<button type="button" id="deleteMessage">삭제</button>
+					</div>	
 					
 					<div class="select">
 							<div class="num"><a id="prev">◀</a></div>
@@ -112,7 +119,7 @@
 				<div class="pop-container">
 					<div class="pop1">
 						<div class="pop-titleContainer">
-							<span class="pop-title">휴가 신청 상세내역</span>
+							<span class="pop-title">보낸 쪽지 상세보기</span>
 							<span id="pop-approval"></span>
 						</div>
 						<div>
@@ -121,10 +128,39 @@
 					</div>
 					<div class="detail-container">
 						<div class="approval-container">
-							<div class="message-receiverName">보낸사람: <span id="pop-receiverName">-</span></div>
-<!-- 							<div class="message-receiver">받는사람: <span id="pop-mreceiverId">-</span></div> -->
-							<div class="message-content">내용: <span id="pop-mcontent">-</span></div>
-							<div class="message-date">보낸일자: <span id="pop-msendDate">-</span></div>
+<!-- 							<div class="message-receiverName">보낸사람: <span id="pop-receiverName">-</span></div> -->
+<!-- 							<div class="message-receiver">받는사람: <span id="pop-mreceiverId">-</span></div> --> 
+<!-- 							<div class="message-content">내용: <span id="pop-mcontent">-</span></div> -->
+<!-- 							<div class="message-date">보낸일자: <span id="pop-msendDate">-</span></div> -->
+							
+							
+							
+						<div></div>
+						<table border="1">
+							<tr class="receivetr">
+								<td>받는사람</td>
+								<td><span id="pop-receiverName"></span></td>
+							</tr>
+							<tr class="receivetr">
+								<td>확인여부</td>
+								<td><span id="pop-halfDay"></span><span id="pop-htype">나중에 추가할 예정</span></td>
+							</tr>
+							<tr class="receivetr">
+								<td>보낸일자</td>
+								<td><span id="pop-hstartDate"></span><span id="pop-msendDate"></span></td>
+							</tr>
+							<tr class="receivetr">
+								<td>내용</td>
+								<td><span id="pop-mcontent"></span></td>
+							</tr>
+						</table>
+						
+						<button type="button" id="btn-check">확인</button>
+<!-- 							<div class="message-owner">보낸사람: <span id="pop-mownerId">-</span></div> -->
+<!-- <!-- 							<div class="message-receiver">받는사람: <span id="pop-mreceiverId">-</span></div> --> 
+<!-- 							<div class="message-content">내용: <span id="pop-mcontent">-</span></div> -->
+<!-- 							<div class="message-date">보낸일자: <span id="pop-msendDate">-</span></div> -->
+						
 						</div>
 					</div>
 				</div>
@@ -244,7 +280,7 @@
 				
 				document.getElementById("pop-receiverName").innerHTML=data.receiverName;
 				document.getElementById("pop-mcontent").innerHTML=data.mcontent;
-				document.getElementById("pop-msendDate").innerHTML=data.mreceived;
+				document.getElementById("pop-msendDate").innerHTML=data.msendDate;
 				
 			
 			}).catch(error => {
@@ -252,7 +288,12 @@
 			});
 		});
 	 }		
-
+ 
+ 
+ 
+	 document.getElementById("btn-check").addEventListener("click",function(){
+			location.href="";
+		});	
 	</script>
 </body>
 </html>

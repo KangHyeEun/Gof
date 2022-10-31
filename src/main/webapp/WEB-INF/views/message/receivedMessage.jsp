@@ -28,32 +28,35 @@
 			<div class="container-inner-bbs">
 				<div class="inner-div-bbs">
 					<!-- 각자 필요한 부분 넣기 -->
-					<button type="button" id="writeMessage">쪽지쓰기</button>
-					<button type="button" id="deleteMessage">삭제</button>
-					
-					<div>
-						<select name="sorting-year" id="sorting-name" onchange="OnChange();">
-							<option value="0">전체</option>
-							<c:forEach items="${rdistinctSender}" var="sender">
-								<option value="${sender}" <c:if test ="${sender eq param.name}">selected="selected"</c:if>>${sender}</option>
-							</c:forEach>
-						</select>
-						<select name="sorting-year" id="sorting-year" onchange="OnChange();">
-							<option value="0">전체 연도</option>
-							<c:forEach items="${rdistinctYear}" var="year">
-								<option value="${year}" <c:if test ="${year eq param.year}">selected="selected"</c:if>>${year}</option>
-							</c:forEach>
-						</select>
-						<span>년</span>
-						<select name="sorting-month" id="sorting-month" onchange="OnChange();">
-							<option value="0">전체 월</option>
-							<c:forEach begin="1" end="12" var="month">
-								<option value="${month}" <c:if test ="${month eq param.month}">selected="selected"</c:if>>${month}</option>
-							</c:forEach>
-						</select>
-						<span>월</span>
+					<h3 class="sub-title">받은 쪽지함</h3> 
+					<div class="table-head">
+						
+						<button type="button" id="writeMessage">쪽지쓰기</button>
+<!-- 						<button type="button" id="deleteMessage">삭제</button> -->
+						
+						<div>
+							<select name="sorting-year" id="sorting-name" onchange="OnChange();">
+								<option value="0">전체</option>
+								<c:forEach items="${rdistinctSender}" var="sender">
+									<option value="${sender}" <c:if test ="${sender eq param.name}">selected="selected"</c:if>>${sender}</option>
+								</c:forEach>
+							</select>
+							<select name="sorting-year" id="sorting-year" onchange="OnChange();">
+								<option value="0">전체 연도</option>
+								<c:forEach items="${rdistinctYear}" var="year">
+									<option value="${year}" <c:if test ="${year eq param.year}">selected="selected"</c:if>>${year}</option>
+								</c:forEach>
+							</select>
+							<span>년</span>
+							<select name="sorting-month" id="sorting-month" onchange="OnChange();">
+								<option value="0">전체 월</option>
+								<c:forEach begin="1" end="12" var="month">
+									<option value="${month}" <c:if test ="${month eq param.month}">selected="selected"</c:if>>${month}</option>
+								</c:forEach>
+							</select>
+							<span>월</span>
+						</div>
 					</div>
-					
 					<table class="holiday-list">
 						<thead class="thead">
 							<tr>
@@ -74,8 +77,11 @@
 									<td><a class="${rl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a></td>
 								</tr>
 							</c:forEach>
-						</tbody>	
+						</tbody>
 					</table>
+					<div class="bottom-div">
+						<button type="button" id="deleteMessage">삭제</button>
+					</div>		
 					
 						<div class="select">
 							<div class="num"><a id="prev">◀</a></div>
@@ -122,10 +128,12 @@
 							</div>
 						</div>
 						<div class="pop1-1">
-							<div class="pop2">
+							<div class="writeToMeContainer">
 								<button type="button" id="writeToMe">내게쓰기</button>
-								<p class="p"><span class="important">*</span>보낼사람</p>
-								<input type="text" id="mreceiverId" name="mreceiverId" onkeyup="filter()" required/>
+							</div>	
+							<div class="pop2">
+								<p class="p"><span class="important">*</span>보낼사람 (사원번호)</p>
+								<input type="text" id="mreceiverId" name="mreceiverId" onkeyup="filter()" required autocomplete='off'/>
 								<!-- 이름검색 -->
 								<div class="person-info-container">
 									 <c:forEach items="${employees}" var="em">
@@ -163,7 +171,7 @@
 				<div class="pop-container">
 					<div class="pop1">
 						<div class="pop-titleContainer">
-							<span class="pop-title">휴가 신청 상세내역</span>
+							<span class="pop-title">받은 쪽지 상세보기</span>
 							<span id="pop-approval"></span>
 						</div>
 						<div>
@@ -172,10 +180,31 @@
 					</div>
 					<div class="detail-container">
 						<div class="approval-container">
-							<div class="message-owner">보낸사람: <span id="pop-mownerId">-</span></div>
-<!-- 							<div class="message-receiver">받는사람: <span id="pop-mreceiverId">-</span></div> -->
-							<div class="message-content">내용: <span id="pop-mcontent">-</span></div>
-							<div class="message-date">보낸일자: <span id="pop-msendDate">-</span></div>
+						<div></div>
+						<table border="1">
+							<tr>
+								<td>보낸사람</td>
+								<td><span id="pop-mownerId"></span></td>
+							</tr>
+							<tr>
+								<td>확인여부</td>
+								<td><span id="pop-halfDay"></span><span id="pop-htype">나중에 추가할 예정</span></td>
+							</tr>
+							<tr>
+								<td>보낸일자</td>
+								<td><span id="pop-hstartDate"></span><span id="pop-msendDate"></span></td>
+							</tr>
+							<tr>
+								<td>내용</td>
+								<td><span id="pop-mcontent"></span></td>
+							</tr>
+						</table>
+						
+						<button type="button" id="btn-check">확인</button>
+<!-- 							<div class="message-owner">보낸사람: <span id="pop-mownerId">-</span></div> -->
+<!-- <!-- 							<div class="message-receiver">받는사람: <span id="pop-mreceiverId">-</span></div> --> 
+<!-- 							<div class="message-content">내용: <span id="pop-mcontent">-</span></div> -->
+<!-- 							<div class="message-date">보낸일자: <span id="pop-msendDate">-</span></div> -->
 						</div>
 					</div>
 				</div>
@@ -225,6 +254,7 @@
 		});
 		document.getElementById("writeToMe").addEventListener("click",function(){
 			document.getElementById("mreceiverId").value = "${empno}";
+			document.querySelector(".person-info-container").style.display="none";
 		});
 		document.getElementById("submit-btn").addEventListener("click",function(){
 			let recieverId = document.getElementById("mreceiverId").value;
@@ -278,7 +308,10 @@
 			}		
 			location.reload();
 		});		
-
+	
+		document.getElementById("btn-check").addEventListener("click",function(){
+			location.href="";
+		});	
 			
       function filter(){
     	  document.querySelector(".person-info-container").style.display="block";

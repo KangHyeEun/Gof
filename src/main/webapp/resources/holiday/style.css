@@ -450,6 +450,7 @@ table{
 	.detail-container table tbody tr:nth-child(odd){
 	background-color: #f8f8f9;
 	}
+	
 	.count-nums{
 	    justify-content: space-evenly;
 	}
@@ -575,7 +576,7 @@ table{
 	    display: block;
 	    /* width: 100%; */
 	    width: 22em;
-	    overflow: hidden;
+	    overflow: auto;
 	    text-overflow: ellipsis;
 	    white-space: normal;
 	    height: 11em;
