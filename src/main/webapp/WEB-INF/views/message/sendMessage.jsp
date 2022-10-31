@@ -49,8 +49,8 @@
 						</select>
 						<span>월</span>
 					</div>
-					<table border="1">
-						<thead>
+					<table class="holiday-list">
+						<thead class="thead">
 							<tr>
 								<th><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll()"></th>
 								<th>내용</th>
@@ -59,7 +59,7 @@
 								<th>상세보기</th>
 							</tr>
 						</thead>	
-						<tbody>
+						<tbody class="tbody" id="htable-body">
 							<c:forEach items="${smessageList}" var="rl" varStatus="status1">
 								<tr id="tr${status1.count}">
 									<td><input type="checkbox" class="checkbox" name="checkbox" id="checkbox" value="${rl.id}"/></td>
@@ -84,7 +84,8 @@
 									List<MessageVO> list = (List<MessageVO>)request.getAttribute("smessageList");
 									
 									int celi = (int)Math.ceil(list.size()/10);
-									int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin+9 : celi+1;
+// 									System.out.println(celi);
+									int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin+9 : list.size()%10 == 0 ? celi : celi+1;
 									%>
 									<c:forEach begin="<%=begin%>" end="<%=endPage%>" varStatus="status" var="var">
 							
@@ -120,7 +121,7 @@
 					</div>
 					<div class="detail-container">
 						<div class="approval-container">
-							<div class="message-owner">보낸사람: <span id="pop-mownerId">-</span></div>
+							<div class="message-receiverName">보낸사람: <span id="pop-receiverName">-</span></div>
 <!-- 							<div class="message-receiver">받는사람: <span id="pop-mreceiverId">-</span></div> -->
 							<div class="message-content">내용: <span id="pop-mcontent">-</span></div>
 							<div class="message-date">보낸일자: <span id="pop-msendDate">-</span></div>
@@ -228,7 +229,6 @@
  // 비동기로 상세보기 가져옴
 	 for (let k = 1; k <= size; k++) {
 		document.getElementById("atag"+k).addEventListener("click",function(){
-			alert("하이")
 			document.getElementById("detailpop").style.display = "flex";
 		
 			let classname = document.getElementById("atag"+k).className;
@@ -242,10 +242,9 @@
 		
 			.then(data => {
 				
-				document.getElementById("pop-mownerId").innerHTML=data.receiverId;
-//				document.getElementById("pop-mreceiverId").innerHTML=data.mreceiverId;
+				document.getElementById("pop-receiverName").innerHTML=data.receiverName;
 				document.getElementById("pop-mcontent").innerHTML=data.mcontent;
-				document.getElementById("pop-msendDate").innerHTML=data.msendDate;
+				document.getElementById("pop-msendDate").innerHTML=data.mreceived;
 				
 			
 			}).catch(error => {
