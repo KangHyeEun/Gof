@@ -1,3 +1,4 @@
+
 	.list{
 /*      height: 75%; */
      width: 100%;
@@ -44,6 +45,7 @@
     .list-table tr td, .list-table tr th{
     padding: 1.3em;
     border:none;
+    white-space: nowrap;
     }
     
 
@@ -55,7 +57,7 @@
    /*근태관리*/
    	.container-inner-bbs{
 	flex-direction : column;
-	padding: 2% 0 0 0;
+	padding: 3%;
 	box-sizing: border-box;
 /*     height: auto; */
 	}
@@ -68,7 +70,7 @@
 	    margin-bottom: 35px;
 	}
 	.container1{
-		width: 90%;
+		width: 100%;
 		height: 160px;
 		min-height:12%;
 		display:flex;
@@ -122,7 +124,7 @@
 	
 	.intro {
     height: 7%;
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -264,11 +266,13 @@
 /*  	}  */
 /* } */
 
-/* @media screen and (max-width: 1280px) { */
-/* 	.day-rates { */
-/* 	    font-size: 1em; */
-/* 	} */
-/* } */
+@media screen and (max-width: 1280px) {
+	.day-rates {
+	    font-size: 1em;
+	     flex-direction: column;
+/* 	    font-size: 0.8em; */
+	}
+}
 /* @media screen and (max-height: 800px){ */
 /* 	.list-table tr td{  */
 /*   		padding: 5px;  */
@@ -276,31 +280,39 @@
 /*  	}  */
 /* } */
 
-/* @media screen and (max-width: 1024px) { */
-/* 	.day-rates { */
-/* 	    flex-direction: column; */
-/* 	    font-size: 0.8em; */
-/* 	} */
-/* 	.container .section1 { */
-/* 		width: 64%; */
-/* 		justify-content: space-evenly; */
-/* 	} */
-/* 	.container .section2 { */
-/* 		width: 35%; */
-/* 	} */
-/* 	.sub-title-container { */
-/* 		font-size: 0.8em; */
-/* 	} */
-/* 	.progress-per { */
-/*     font-size: 8px; */
-/*     } */
-/* } */
-/* @media screen and (max-height: 700px){ */
-/* 	.list-table tr td{  */
-/*   		padding: 3px;  */
-/*      	white-space: nowrap; */
-/*  	}  */
-/* } */
+@media screen and (max-width: 1024px) {
+	 .container1{
+ 	    flex-direction: column;
+	    height: 250px;
+ 	 }
+	.container .section1 {
+		 width: 100%;
+    	 height: 56%;
+		justify-content: space-evenly;
+	}
+	.container .section2 {
+		width: 100%;
+		height:40%;
+    	flex-direction: row;
+	}
+	.sub-title-container {
+		font-size: 0.8em;
+	}
+	.progress-per {
+    	font-size: 8px; 
+    }
+    .day-rates{
+        width: 100%;
+    	flex-direction: row;
+    }
+    .list-table tr td, .list-table tr th {
+    	padding: 1em 0;
+    }
+}
+@media screen and (max-width: 700px) {
+ 	
+
+}
 
 /* @media screen and (max-width: 668px) { */
 /* 	.container1{ */
