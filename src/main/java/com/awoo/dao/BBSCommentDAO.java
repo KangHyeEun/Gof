@@ -10,7 +10,7 @@ import com.awoo.vo.BBSCommentVO;
 @Mapper
 public interface BBSCommentDAO {
 	
-	public List<BBSCommentVO> selecCommentAll(@Param("bbsId") String bbsId);
+	public List<BBSCommentVO> selectCommentList(BBSCommentVO cvo);
 	
 	public int insertComment(BBSCommentVO vo);
 	

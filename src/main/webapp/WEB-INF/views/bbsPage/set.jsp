@@ -7,15 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+</style>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/bbs/setstyle.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/setstyle.css" />
+<!-- ckeditor 적용 -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<div class="header">
 		<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
-		<div class="header-logout">로그아웃 버튼</div>
+		<div class="header-logout">
+			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+		</div>
 	</div>
 	<div class="container">
 		<jsp:include page="../include/menu.jsp"></jsp:include>
@@ -66,8 +71,7 @@
 								<tr>
 									<th>내용</th>
 									<td>
-										<textarea rows="" cols="" id="contentArea"></textarea>
-<%-- 										<form:input path="content"/> --%>
+										<form:textarea path="content" id="textarea"/>	
 									</td>
 								</tr>
 								<tr>
@@ -80,7 +84,7 @@
 						</table>
 					</div>
 					<div class="set-footer">
-						<button>저장하기</button>
+						<button onclick="save">저장하기</button>
 					</div>
 				</form:form>
 
@@ -90,10 +94,14 @@
 
 	<script type="text/javascript">
 	//뒤로가기
-		document.getElementById("return").addEventListener("click",function(e){
-			e.preventDefault();
-			location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
-		});
+	document.getElementById("return").addEventListener("click",function(e){
+		e.preventDefault();
+		location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
+	});
+	
+	//이지윅즈 적용
+	CKEDITOR.replace('textarea');
+	
 	
 	//파일 업로드
 		document.getElementById("btn").addEventListener("click", function(e){

@@ -11,11 +11,15 @@
 	href="${pageContext.request.contextPath}/main.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/bbs/setstyle.css" />
+<!-- ckeditor 적용 -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<div class="header">
 		<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
-		<div class="header-logout">로그아웃 버튼</div>
+		<div class="header-logout">
+			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+		</div>
 	</div>
 	<div class="container">
 		<jsp:include page="../include/menu.jsp"></jsp:include>
@@ -62,7 +66,7 @@
 								</tr>
 								<tr>
 									<th>내용</th>
-									<td><form:textarea path="content" /></td>
+									<td><form:textarea path="content" id="textarea"/></td>
 								</tr>
 								<tr>
 									<th>파일첨부<span><img src=""></span></th>
@@ -86,6 +90,9 @@
 			e.preventDefault();
 			location.href = "${pageContext.request.contextPath}/bbsNotice/bbs";
 		});
+		
+		//이지윅즈 적용
+		CKEDITOR.replace('textarea');
 	</script>
 </body>
 </html>

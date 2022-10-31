@@ -209,7 +209,9 @@ table th {
 <div class="container-wrap">
 	<div class="header">
 		<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
-		<div class="header-logout">로그아웃 버튼</div>
+		<div class="header-logout">
+			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+		</div>
 	</div>
 	<div class="container">
 		<jsp:include page="../include/menu.jsp"></jsp:include>

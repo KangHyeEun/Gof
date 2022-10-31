@@ -79,25 +79,24 @@ public class BBSService {
 		return (bbsDAO.deleteBBS(vo2)>0)?true:false;
 	}
 	
-	//댓글
 	//댓글 불러오기
-	public List<BBSCommentVO> getCommentList(Model model, String bbsId) {
-		//model.addAttribute("BBSCommentVO", comDAO.selecCommentAll(bbsId));
-		return comDAO.selecCommentAll(bbsId);
+	public List<BBSCommentVO> getCommentList(BBSCommentVO cvo) {
+		return comDAO.selectCommentList(cvo);
 	}
 	
 	//댓글 쓰기
-	public int setComment(BBSCommentVO vo) {
-		return comDAO.insertComment(vo);
+	public int setComment(BBSCommentVO cvo) {
+		return comDAO.insertComment(cvo);
 	}
 	
 	//댓글 수정
-	public void updateComment(BBSCommentVO vo) {
-		comDAO.updateComment(vo);
+	public void updateComment(BBSCommentVO cvo) {
+		comDAO.updateComment(cvo);
 	}
+	
 	//댓글 삭제
-	public void deleteComment(BBSCommentVO vo) {
-		comDAO.deleteComment(vo);
+	public void deleteComment(BBSCommentVO cvo) {
+		comDAO.deleteComment(cvo);
 	}
 	
 	//공지사항 게시판----------------------------------------

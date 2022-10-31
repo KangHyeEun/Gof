@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- 비동기 댓글 -->
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/bbs/js/jquery-3.6.1.min.js"></script> --%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/bbs/js/jquery-3.6.1.min.js"></script>
 <!-- 스타일 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/contentstyle.css" />
@@ -16,7 +16,9 @@
 
     <div class="header">
         <img src="${pageContext.request.contextPath}/imges/logo.PNG" />
-        <div class="header-logout">로그아웃 버튼</div>
+		<div class="header-logout">
+			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+		</div>
     </div>
     <div class="container">
         <jsp:include page="../include/menu.jsp"></jsp:include>
@@ -54,17 +56,19 @@
 
                 <div class="content-footer">
                     <h4>첨부파일&nbsp;&nbsp;&nbsp;<span><img src="https://uinnout.com/employee/images/clip.svg"></span></h4>
-                    <a href="${pageContext.request.contextPath}/bbsPage/download">다운로드&nbsp;&nbsp;<img
-                            src="upload/abc7.txt"></a>
+<%--                     <a href="${pageContext.request.contextPath}/bbsPage/download">다운로드&nbsp;&nbsp;<img --%>
+<!--                             src="upload/abc7.txt"></a> -->
                 </div>
 
-                <div class="insert" id="insert">
-                    <textarea id="inittext"></textarea>
-                    <button id="ibtn">댓글달기</button>
-                </div>
-                <div class="comment" id="comment">
-                
-               </div>
+				<div id="comment-list">
+					<!-- 댓글 달리는 곳 -->
+				</div>
+				
+				<div>
+					<!-- 댓글 적는 곳 -->
+					<textarea name="comment" id="comment" cols="150" rows="5"></textarea>
+					<button id="set-comment">댓글 달기</button>
+				</div>
            </div>
        </div>
    </div>
@@ -74,229 +78,281 @@
 		document.getElementById("return").addEventListener("click", function() {
 			location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
 		});
-		//수정하기 버튼 이벤트-------------------------------
-		document.getElementById("modify").addEventListener("click", function() {
-			location.href = "${pageContext.request.contextPath}/bbsPage/put/${bbsVO.id}";
-		});
-		//삭제하기 버튼 이벤트-------------------------------
-		document.getElementById("delete").addEventListener("click", function() {
-			if(confirm('정말로 삭제하시겠습니까?')){
-			location.href = "${pageContext.request.contextPath}/bbsPage/delete/${bbsVO.id}";
-			}
-		});
-		
-	//비동기 방식으로 댓글 달기
-	const commentMain = document.getElementById("comment");
-	
-	let commentList = [];
-	let originList;
-	
-	window.addEventListener('DOMContentLoaded', (e) => {
-		initialize();
-	});
-	//댓글 불러오기
-	function initialize(){
-		fetch("${pageContext.request.contextPath}/bbsPage/comment/${bbsVO.id}")
-		.then(response => response.json())
-		.then(data => {
-			//데이터 불러오는지 찍어보기
-			console.log(data);
-			originList = data;
-			for(const obj of data) {
-				if(obj.orderId === 0){
-					commentList.push(obj);
-				}else{
-					for(const comp of data){
-						if(comp.id == obj.orderId){
-							if(comp.innerList == null){
-								comp.innerList = [];
-							}
-							comp.innerList.push(obj);
-							break;
+
+		//댓글 불러오기-----------------------------------------------
+		$(function(){
+			$.ajax({
+				url:"${pageContext.request.contextPath}/bbsPage/comment/get/${bbsVO.id}",
+				type:"GET",
+				dataType : "json",
+				success : function(data){
+					console.log(data);
+					for(const item of data){
+// 						$("#comment-list").append("<div><h4>"+item.owner+"</h4><p>"+item.comment
+// 								+"</p></div><button class='comment-delete'>삭제</button>");
+						
+						//owner_id를 가져옴
+						let sownerid = ${personalInfoVO.empno};
+						
+						const commentList = document.querySelector("#comment-list");
+						
+						const div = document.createElement("div");
+						const owner = document.createElement("h4");
+						owner.innerText = item.owner;
+						const comment = document.createElement("p");
+						comment.innerText = item.comment;
+						const createDate = document.createElement("p");
+						createDate.innerText = item.createDate;
+						
+						// 해당 유저가 쓴 댓글일 경우
+						//empno == ownerid
+						if(item.ownerId == sownerid){
+							// 삭제 버튼
+							const delete_button = document.createElement("button");
+							delete_button.innerText = "삭제";
+						
+							delete_button.addEventListener("click", function(){
+								//alert("삭제되었습니다");
+								let yn = confirm("삭제하시겠습니까?");
+								//console.log(yn);
+								if(yn){
+									let comment_data = {id : item.id};
+									
+									$.ajax({
+										url:"${pageContext.request.contextPath}/bbsPage/comment/delete",
+										type:"DELETE",
+										data:JSON.stringify(comment_data),
+										contentType : "application/json; charset=utf-8",
+										dataType : "html",
+										success:function(data){
+											div.remove();
+										}
+									});
+								}
+							});
+							
+							div.append(delete_button);
+							
+							// 수정 버튼
+							const modify_button = document.createElement("button");
+							modify_button.innerText = "수정";
+							
+							modify_button.addEventListener("click", function(){
+								const edit_div = document.createElement("div");
+								const edit_textarea = document.createElement("textarea");
+								edit_textarea.cols = "200";
+								edit_textarea.rows = "5";
+								
+								edit_textarea.value = p.innerText;
+								
+								const edit_modify = document.createElement("button");
+								edit_modify.innerText = "수정완료";
+								const edit_cancel = document.createElement("button");
+								edit_cancel.innerText = "취소";
+								
+								edit_div.append(edit_textarea);
+								edit_div.append(edit_modify);
+								edit_div.append(edit_cancel);
+								
+								div.after(edit_div);
+								div.style.display = "none";
+								
+								// 취소 버튼 클릭 시 이벤트
+								edit_cancel.addEventListener("click", function(){
+									div.style.display = "block";
+									edit_div.remove();
+								});
+								
+								// 수정완료 버튼 클릭 시 이벤트
+								edit_modify.addEventListener("click", function(){
+									//alert("수정완료 버튼 클릭");
+									if(confirm("수정하시겠습니까")){
+										let comment = edit_textarea.value;
+										
+										const modify_data = {comment, id:item.id, ownerId:item.ownerId};
+										
+										$.ajax({
+											url:"${pageContext.request.contextPath}/bbsPage/comment/update",
+											type:"PATCH",
+											data:JSON.stringify(modify_data),
+											contentType : "application/json; charset=utf-8",
+											dataType : "json",
+											success:function(data){
+												console.log(data);
+												p.innerText = data.comment;
+												div.style.display = "block";
+												edit_div.remove();
+											}
+										});
+									}
+								});
+							});
+							
+							div.append(modify_button);
 						}
+						
+						div.prepend(comment);
+						div.prepend(createDate);
+						div.prepend(owner);
+						
+						
+						commentList.append(div);
 					}
 				}
-			}
-			
-			for(const obj of commentList) {
-				makeCommentList(0,obj);
-			}
-			
-		}).catch(err => {
-			console.log(err);
-		});
-	}
-	
-		//댓글 모양 잡기
-		function makeCommentList(num, item){
-		const mainDiv = document.createElement("div");
-		mainDiv.style.border = "1px solid black";
-		mainDiv.style.padding = "5px";
-		mainDiv.style.display = "flex";
-		
-		let lPad = (40*num) + 5;
-		mainDiv.style.paddingLeft = lPad + "px";
-		
-		const subDiv1 = document.createElement("div");
-		subDiv1.style.flex = "1";
-		
-		const h4 = document.createElement("h4");
-		h4.innerText = item.owner;
-		const p = document.createElement("p");
-		
-		let content = (num > 0)?"↳":"";
-		p.innerText = content + item.content;
-		
-		const subDiv2 = document.createElement("div");
-		subDiv1.style.width = "60px";
-		subDiv1.style.flexDirection = "column";
-		
-		const commnetModify = document.createElement("button"); //댓글 수정 버튼
-		commnetModify.innerText = "수정";
+			});
 
-		const commnetDelete = document.createElement("button"); //댓글 삭제 버튼
-		commnetDelete.innerText = "삭제";
-// 		commnetDelete.style.display ="none";
-		
-		const initButton = document.createElement("button"); //대댓글 버튼
-		initButton.innerText = "댓글";
-		
-		subDiv1.append(h4);
-		subDiv1.append(p);
-		
-		subDiv2.append(commnetModify);
-		subDiv2.append(commnetDelete);
-		subDiv2.append(initButton);
-		
-		mainDiv.append(subDiv1);
-		mainDiv.append(subDiv2);
-		
-		commentMain.append(mainDiv);
-		
-		
-		
-		//대댓글 달기(전송, 취소)--------
-		initButton.addEventListener("click",function(){
-			const writeDiv = document.createElement("div");
-			writeDiv.classList.add("insert");
-	
-			//전송----
-			const writeArea = document.createElement("textarea");
-			const wbtn = document.createElement("button");
-			wbtn.innerText = "전송";
-			
-			wbtn.addEventListener("click",function(){
-				let str = writeArea.value;
-				
-				const sendObj = {
-					bbsId : ${bbsVO.id},
-					ownerId : ${personalInfoVO.empno},
-					owner : "${personalInfoVO.name}",
-					content : str,
-					orderId : item.id
+			//삭제 버튼 이벤트
+			$("#delete").click(function(){
+				if(confirm("정말로 삭제하시겠습니까")){
+					location.href = "${pageContext.request.contextPath}/bbsPage/delete/${bbsVO.id}";
 				}
-				
-				fetch("${pageContext.request.contextPath}/bbsPage/comment", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(sendObj)
-				})
-				.then((response) => response.json())
-				.then((data) => {
-					commentList = [];
-					originList = null;
-					document.getElementById("comment").textContent = "";
-					initialize();
-				});
-				
 			});
-			//취소-----
-			const cbtn = document.createElement("button");
-			cbtn.innerText = "취소";
-			
-			cbtn.addEventListener("click",function(){
-				writeDiv.remove();
+			//수정 버튼 이벤트
+			$("#modify").click(function(){
+				location.href ="${pageContext.request.contextPath}/bbsPage/put/${bbsVO.id}";
 			});
 			
-			writeDiv.append(writeArea);
-			writeDiv.append(wbtn);
-			writeDiv.append(cbtn);
-			
-			mainDiv.after(writeDiv);
-		});
-		
-		if(item.innerList != null){
-			for(const innerItem of item.innerList){
-				makeCommentList(num+1,innerItem);
-			}
-		}
+			//댓글 달기
+			$("#set-comment").click(function(){
+				let comment = $("#comment").val();
+				
+				if(comment.length > 0){
+					//현재 시간
+					let today = new Date();
+					
+					let year = today.getFullYear();
+					let month = ('0' + (today.getMonth() + 1)).slice(-2);
+					let day = ('0' + today.getDate()).slice(-2);
+					
+					let hours = ('0' + today.getHours()).slice(-2); 
+					let minutes = ('0' + today.getMinutes()).slice(-2);
+					let seconds = ('0' + today.getSeconds()).slice(-2); 
 
-	}
-		
-		//댓글 달기----------------------------
-		document.getElementById("ibtn").addEventListener("click", function() {
-		let str = document.getElementById("inittext").value;
-				
-		const sendObj = {
-				bbsId : ${bbsVO.id},
-				ownerId : ${personalInfoVO.empno},
-				owner : "${personalInfoVO.name}",
-				content : str,
-				orderId : 0
-			}
-
-		fetch("${pageContext.request.contextPath}/bbsPage/comment", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(sendObj)
-			})
-			.then((response) => response.json())
-			.then((data) => {
-				makeCommentList(0, sendObj);
-			})
-			.catch(err => {
-				console.log(err);
+					let dateTimeString = year+'-'+month+'-'+day+hours+':'+minutes+':'+seconds;
+					let createDate = dateTimeString;
+					
+// 					console.log(dateTimeString); //현재 시간 찍힘
+					
+					let comment_data = {
+							comment, 
+							bbsId :"${bbsVO.id}",
+							ownerId:"${personalInfoVO.empno}",
+							owner:"${personalInfoVO.name}",
+							createDate
+							};
+					
+					$.ajax({
+						url:"${pageContext.request.contextPath}/bbsPage/comment/set",
+						type:"POST",
+						data:JSON.stringify(comment_data),
+						contentType : "application/json; charset=utf-8",
+						dataType : "json",
+						success:function(data){
+							let owner = data.owner;
+							
+							const commentList = document.querySelector("#comment-list");
+							
+							const div = document.createElement("div");
+							const h4 = document.createElement("h4");
+							h4.innerText = data.owner;
+							const p = document.createElement("p");
+							p.innerText = data.comment;
+							
+							// 삭제 버튼
+							const delete_button = document.createElement("button");
+							delete_button.innerText = "삭제";
+							
+							delete_button.addEventListener("click", function(){
+								//alert("삭제되었습니다");
+								let yn = confirm("삭제하시겠습니까?");
+								//console.log(yn);
+								if(yn){
+									let comment_data = {id : data.id};
+										
+									$.ajax({
+										url:"${pageContext.request.contextPath}/bbsPage/comment/delete",
+										type:"DELETE",
+										data:JSON.stringify(comment_data),
+										contentType : "application/json; charset=utf-8",
+										dataType : "html",
+										success:function(data){
+											div.remove();
+										}
+									});
+								}
+							});
+								
+							div.append(delete_button);
+							
+							// 수정 버튼
+							const modify_button = document.createElement("button");
+							modify_button.innerText = "수정";
+							
+							modify_button.addEventListener("click", function(){
+								const edit_div = document.createElement("div");
+								const edit_textarea = document.createElement("textarea");
+								edit_textarea.cols = "200";
+								edit_textarea.rows = "5";
+								
+								edit_textarea.value = p.innerText;
+								
+								const edit_modify = document.createElement("button");
+								edit_modify.innerText = "수정완료";
+								const edit_cancel = document.createElement("button");
+								edit_cancel.innerText = "취소";
+								
+								edit_div.append(edit_textarea);
+								edit_div.append(edit_modify);
+								edit_div.append(edit_cancel);
+								
+								div.after(edit_div);
+								div.style.display = "none";
+								
+								// 취소 버튼 클릭 시 이벤트
+								edit_cancel.addEventListener("click", function(){
+									div.style.display = "block";
+									edit_div.remove();
+								});
+								
+								// 수정완료 버튼 클릭 시 이벤트
+								edit_modify.addEventListener("click", function(){
+									//alert("수정완료 버튼 클릭");
+									if(confirm("수정하시겠습니까")){
+										let comment = edit_textarea.value;
+										
+										const modify_data = {comment, id:data.id};
+										
+										$.ajax({
+											url:"${pageContext.request.contextPath}/bbsPage/comment/update",
+											type:"PATCH",
+											data:JSON.stringify(modify_data),
+											contentType : "application/json; charset=utf-8",
+											dataType : "json",
+											success:function(data){
+// 												console.log(data);
+												p.innerText = data.comment;
+												div.style.display = "block";
+												edit_div.remove();
+											}
+										});
+									}
+								});
+							});
+							
+							div.append(modify_button);
+														
+							div.prepend(p);
+							div.prepend(h4);
+														
+							commentList.append(div);
+						}
+					});
+				}else{
+					alert("댓글을 달아주세요");
+				}
 			});
-		});
-		
-// 		//댓글 수정(해당 유저가 쓴 댓글일 경우, 수정/삭제)
-// 			let ownerId = commentList.ownerId;
-// 			console.log(ownerId);
-// 		//해당 댓글의 ownerId가 세션에 들은 아이디(현재 들어온 사람)	
-// 			if(ownerId == ${personalInfoVO.empno}) {
-// 				//버튼 나타나게
-// // 				commnetDelete.style.display ="hidden";
-// 				commnetDelete.addEventListener("click",function(){
-// 					let yn = confirm("삭제하시겠습니까?");
+		});			
 	
-// 					if(yn){
-// 						const sendObj = {
-// 								id : ${id},
-// 								ownerId : ${personalInfoVO.empno}
-// 							}
-// 						fetch("${pageContext.request.contextPath}/bbsPage/comment/delete", {
-// 							method: "DELETE",
-// 							headers: {
-// 								"Content-Type": "application/json",
-// 							},
-// 							body: JSON.stringify(sendObj)
-// 							})
-// 							.then((response) => response.json())
-// 							.then((data) => {
-// 								makeCommentList(0, sendObj);
-// 							})
-// 							.catch(err => {
-// 								console.log(err);
-// 							});
-// 					}
-// 				)};
-// 			}
-	
-		
 	</script>
 
 </body>

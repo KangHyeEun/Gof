@@ -8,7 +8,7 @@ public class BBSCommentVO {
 	private int bbsId;
 	private int ownerId;
 	private String owner;
-	private String content;
+	private String comment;
 	private String createDate;
 	private int orderId;
 	private int isDelete;
@@ -36,11 +36,11 @@ public class BBSCommentVO {
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
-	public String getContent() {
-		return content;
+	public String getComment() {
+		return comment;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	public String getCreateDate() {
 		return createDate;
@@ -60,7 +60,7 @@ public class BBSCommentVO {
 	public void setIsDelete(int isDelete) {
 		this.isDelete = isDelete;
 	}
-
+	
 
 	
 }

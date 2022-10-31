@@ -9,14 +9,11 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -89,7 +86,6 @@ public class BBSController {
 	            String value = viewCookie.getValue(); // 쿠키 값 받아옴.
 	        }
 			service.getBBSContent(model, id);
-			service.getCommentList(model, id);
 			return "bbsPage/content";
 		}else {
 			return "redirect:/login/home";			
@@ -108,6 +104,7 @@ public class BBSController {
 	public String saveContent(@SessionAttribute("personalInfoVO") PersonalInfoVO vo, BBSVO vo2) {
 		vo2.setOwnerId(Integer.toString(vo.getEmpno()));
 		vo2.setOwner(vo.getName());
+		
 		if(service.setBBS(vo2)) {			
 			return "redirect:/bbsPage/bbs";
 		}else {
@@ -149,41 +146,31 @@ public class BBSController {
 	}
 	
 	//댓글 불러오기
-	@GetMapping("/comment/{bbsId}")
+	@GetMapping("/comment/get/{bbsId}")
 	@ResponseBody
-	public List<BBSCommentVO> getComments(Model model, @PathVariable("bbsId") String bbsId){
-		return service.getCommentList(model, bbsId);
+	public ResponseEntity<List<BBSCommentVO>> getComments(@PathVariable("bbsId") String bbsId){
+		BBSCommentVO cvo = new BBSCommentVO();
+		cvo.setBbsId(Integer.parseInt(bbsId));
+		List<BBSCommentVO> list = service.getCommentList(cvo);
+		ResponseEntity<List<BBSCommentVO>> entity = new ResponseEntity<List<BBSCommentVO>>(list, HttpStatus.OK);
+		return entity;
 	}
 	
 	//댓글 달기
-	@PostMapping("/comment")
+	@PostMapping("/comment/set")
 	@ResponseBody
-	public ResponseEntity<Map<String, String>> setComments(@RequestBody BBSCommentVO vo){
-		ResponseEntity<Map<String,String>> res = null;
-		Map<String, String> map = new HashMap<String, String>();
-		
-		if(service.setComment(vo) > 0) {
-			map.put("result", "성공적으로 전송되었습니다");
-			res = new ResponseEntity<Map<String,String>>(map, HttpStatus.OK);
-		}else {
-			map.put("result", "전송되지 못했습니다");
-			res = new ResponseEntity<Map<String,String>>(map, HttpStatus.NOT_FOUND);
-		}
-		
-		return res;
+	public ResponseEntity<BBSCommentVO> setComments(@RequestBody BBSCommentVO vo){
+		service.setComment(vo);
+		ResponseEntity<BBSCommentVO> entity = new ResponseEntity<BBSCommentVO>(vo,HttpStatus.OK);
+		return entity;
 	}
 	
 	//삭제
 	@DeleteMapping("/comment/delete")
 	@ResponseBody
 	public ResponseEntity<String> dropComment(@RequestBody BBSCommentVO vo){
-		
-		System.out.println(vo.getId());
-		
 		service.deleteComment(vo);
-		
 		String str = "삭제되었습니다";
-		
 		ResponseEntity<String> entity = new ResponseEntity<String>(str , HttpStatus.OK);
 		return entity;
 	}
@@ -192,13 +179,7 @@ public class BBSController {
 	@PatchMapping("/comment/update")
 	@ResponseBody
 	public ResponseEntity<BBSCommentVO> patchComment(@RequestBody BBSCommentVO vo){
-		
-		System.out.println(vo.getContent());
-		System.out.println(vo.getId());
-		System.out.println(vo.getOwnerId());
-
 		service.updateComment(vo);
-		
 		ResponseEntity<BBSCommentVO> entity = new ResponseEntity<BBSCommentVO>(vo, HttpStatus.OK);
 		return entity;
 	}
