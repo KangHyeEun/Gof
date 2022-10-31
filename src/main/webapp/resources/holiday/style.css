@@ -708,7 +708,7 @@ table{
 	.holiday-list th, .holiday-list td {
  		padding: 1% 0;
 	    font-size: 11px;
-	}
+	} 
 	.pop-titleContainer {
     	width: 64%;
     }
@@ -728,7 +728,7 @@ table{
 	.holiday-list th, .holiday-list td { 
   		padding: 0; 
  	    font-size: 14px; 
-     	white-space: nowrap;
+     	white-space: nowrap; 
  	}
 }
 	

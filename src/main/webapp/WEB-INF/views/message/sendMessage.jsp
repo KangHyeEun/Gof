@@ -98,7 +98,7 @@
 							
 							
 <%-- 											<c:forEach begin="1" end="${CommutingList.size() == 0? 1 : CommutingList.size()%10 == 0? CommutingList.size()/10 :((CommutingList.size()/10)+(1-((CommutingList.size()/10)%1))%1)}" varStatus="status"> --%>
-									<c:choose>
+									<c:choose> 
 										<c:when test="${param.page eq var}">
 											<div class="num checked"><span>${var}</span></div>
 										</c:when>
