@@ -16,7 +16,6 @@ const ename = sessionStorage.getItem("ename");
 // ---------------------------------------------------------------------
 // 현재 날짜를 불러오는 함수 / Fri Oct 14 2022 17:26:25 GMT+0900 (한국 표준시)
 const date = new Date();
-const dateTest = new Date();
 
 const renderCalendar = () => {
 
@@ -102,7 +101,12 @@ const renderCalendar = () => {
     for (let x = firstDayindex; x > 0; x--) {
 //		해당 날짜를 클래스 이름으로
 		prevClass = "";
-		prevClass += date.getFullYear() + "-" + date.getMonth() + "-" + (prevLastDay - x + 1);
+		if (date.getMonth() == 0) {
+			prevClass += (date.getFullYear()-1) + "-" + 12 + "-" + (prevLastDay - x + 1);
+		}
+		else {
+			prevClass += date.getFullYear() + "-" + date.getMonth() + "-" + (prevLastDay - x + 1);
+		}
 //		토,일 구하기
 		holidayStyle = "";
 		holidayStyle = new Date(date.getFullYear(), date.getMonth()-1, (prevLastDay - x + 1)).getDay();
@@ -163,7 +167,12 @@ const renderCalendar = () => {
     for (let j = 1; j <= nextDays; j++) {
 //		해당 날짜를 클래스 이름으로
         nextClass = "";
-		nextClass += date.getFullYear() + "-" + (date.getMonth()+2) + "-" + j;
+        if ((date.getMonth()+2) == 13) {
+			nextClass += (date.getFullYear()+1) + "-" + 1 + "-" + j;
+		}
+		else {
+			nextClass += date.getFullYear() + "-" + (date.getMonth()+2) + "-" + j;
+		}
 //		토,일 구하기
 		holidayStyle = "";
 		holidayStyle = new Date(date.getFullYear(), date.getMonth()+1, j).getDay();
@@ -265,6 +274,7 @@ const renderCalendar = () => {
 	for (let index = 0; index < daysEle.length; index++) {
 //		daysEle.item(index).addEventListener("click",function(){
 		daysEle.item(index).addEventListener("click",function(){
+			console.log(daysEle.item(index));
 			let dates = daysEle.item(index).classList[0].split("-");
 			let years = dates[0];	// 년
 			let months = dates[1];	// 월
@@ -1417,6 +1427,7 @@ const mouseUp = (click) => {
 const prevs = document.querySelector(".prevs");
 
 prevs.addEventListener("click", () => {
+	date.setDate(1);
     date.setFullYear(date.getFullYear() - 1);
     renderCalendar();
 });
@@ -1439,7 +1450,9 @@ mouseUp(prevs);
 const prev = document.querySelector(".prev");
 
 prev.addEventListener("click", () => {
+	date.setDate(1);
     date.setMonth(date.getMonth() - 1);
+    console.log("이전달 : " + date.getMonth());
     renderCalendar();
 });
 
@@ -1462,11 +1475,14 @@ mouseUp(prev);
 const next = document.querySelector(".next");
 
 next.addEventListener("click", () => {
+	date.setDate(1);
     date.setMonth(date.getMonth() + 1);
+    console.log("다음달 : " + date.getMonth());
     
 //    현재 년도로부터 30년 후 까지만 사용 가능
 	if((date.getFullYear()) >= (new Date().getFullYear()+30)){
 		alert("지원하는 날짜 범위를 벗어났습니다.");
+		date.setDate(1);
     	date.setMonth(date.getMonth() - 1);
 	}
     renderCalendar();
@@ -1490,11 +1506,13 @@ mouseUp(next);
 const nexts = document.querySelector(".nexts");
 
 nexts.addEventListener("click", () => {
+	date.setDate(1);
     date.setFullYear(date.getFullYear() + 1);
     
 //    현재 년도로부터 30년 후 까지만 사용 가능
 	if((date.getFullYear()) >= (new Date().getFullYear()+30)){
 		alert("지원하는 날짜 범위를 벗어났습니다.");
+		date.setDate(1);
 		date.setFullYear(date.getFullYear() - 1);
 	}
     renderCalendar();
@@ -1556,128 +1574,47 @@ transferBtn.addEventListener("click", function(){
 //년,월이 특정 값에 고정되는 문제점을 해결하기 위해서 f5시 localStrage에 값을 저장하는 방식을 사용함
 //---------------------------------------------------------------------
 
-console.log("여기도 fresh???");
 const localFullYear = localStorage.getItem("localFullYear");
 const localMonth = localStorage.getItem("localMonth");
 const dateYear = date.getFullYear();
 const dateMonth = date.getMonth()
-console.log("localFullYear : " + localFullYear);
-console.log("localMonth : " + localMonth);
-console.log("dateYear : " + dateYear);
-console.log("dateMonth : " + dateMonth);
 
+//	최초 실행시
 if (localFullYear == null || localMonth == null) {
-	
-	console.log("여기는 첫번째~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	
 	date.setFullYear(new Date().getFullYear());
 	date.setMonth(new Date().getMonth());
 
 	localStorage.setItem("localFullYear", date.getFullYear());
 	localStorage.setItem("localMonth", date.getMonth());
-//	첫 시작 시 렌더링
+
 	renderCalendar();
 }
+//	년, 월 변화가 없는 경우
 else if (localFullYear == date.getFullYear() && localMonth == date.getMonth()) {
-	
-	console.log("여기는 두번째~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	
-//	년, 월 값 대입 후 렌더링
-//	console.log(date.getFullYear() == localStorage.getItem("localFullYear"))
-//	console.log(date.getMonth() == localStorage.getItem("localMonth"))
-//	
-//	console.log("새로고침 이후");
-//	console.log("1. " + date.getFullYear());
-//	console.log("2. " + date.getMonth());
-//	console.log("3. " + localStorage.getItem("localFullYear"));
-//	console.log("4. " + localStorage.getItem("localMonth"));
-//	console.log("----------------");
-//	
-//	date.setFullYear(localStorage.getItem("localFullYear"));
-//	date.setMonth(localStorage.getItem("localMonth"));
-	
-//    렌더링
     renderCalendar();
 }
+//	년, 월 변화가 있는 경우
 else {
-	console.log("여기는 세번째~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	console.log("새로고침 이후");
-	console.log("1. " + date.getFullYear());
-	console.log("2. " + date.getMonth());
-	console.log("3. " + localStorage.getItem("localFullYear"));
-	console.log("4. " + localStorage.getItem("localMonth"));
-	console.log("----------------");
-	
-	console.log(date.getFullYear() == localStorage.getItem("localFullYear"));
-	console.log(date.getMonth() == localStorage.getItem("localMonth"));
-	
 	const localFullYear1 = localStorage.getItem("localFullYear");
 	const localMonth1 = localStorage.getItem("localMonth");
-	const dateYear1 = date.getFullYear();
-	const dateMonth1 = date.getMonth()
-	console.log("localFullYear : " + localFullYear1);
-	console.log("localMonth : " + localMonth1);
-	console.log("dateYear : " + dateYear1);
-	console.log("dateMonth : " + dateMonth1);
-	console.log(Number(localFullYear1));
-	console.log(Number(localMonth1));
-	console.log(Number(dateYear1));
-	console.log(Number(dateMonth1));
-	console.log(localFullYear1 == dateYear1);
-	console.log(localMonth1 == localMonth1);
-	
-	
-	if (localFullYear1 != dateYear1) {
-		console.log("성공1");
-		date.setFullYear(Number(localFullYear1));
-		console.log("성공2");
-	}
-//	if (localMonth1 != dateMonth1) {
-//		console.log("성공111");
-//		date.setMonth(Number(localMonth1));
-//		console.log("성공222");
-//	}
-	if (Number(localMonth1) == (dateMonth1+1)) {
-		console.log("성공111");
-		date.setMonth(Number(localMonth1));
-		console.log("성공222");
-	}
-	
-	console.log("localFullYear : " + localFullYear1);
-	console.log("localMonth : " + localMonth1);
-	console.log("dateYear : " + dateYear1);
-	console.log("dateMonth : " + dateMonth1);
-	
-	console.log("새로고침 직전");
-	console.log("1. " + date.getFullYear());
-	console.log("2. " + date.getMonth());
-	console.log("3. " + localStorage.getItem("localFullYear"));
-	console.log("4. " + localStorage.getItem("localMonth"));
-	console.log("----------------");
+
+//	1일 기준으로 년,월 수정
+	date.setDate(1);
+	date.setMonth(Number(localMonth1));
+	date.setFullYear(Number(localFullYear1));
+
     renderCalendar();
 }
 //     	f5 누를시 렌더링하기 위한 값 구하기
 
 function refreshFunc() {
 	window.onbeforeunload = function (e) {
-		let tempYear = localStorage.getItem("localFullYear");
-		let tempMonth = localStorage.getItem("localMonth");
-		
-		console.log("새로고침 이전");
-		console.log("1. " + date.getFullYear());
-		console.log("2. " + date.getMonth());
-		console.log("3. " + localStorage.getItem("localFullYear"));
-		console.log("4. " + localStorage.getItem("localMonth"));
-		console.log("----------------");
-		
-//		localStorage.removeItem("localFullYear");
-//		localStorage.removeItem("localMonth");
-		console.log("새로고침 전 수정");
+//		새로고침 전 수정
 		localStorage.setItem("localFullYear", date.getFullYear());	// 새로고침 되기전에 값 저장
     	localStorage.setItem("localMonth", date.getMonth());		// 새로고침 되기전에 값 저장
     	
-		console.log("새로고침 직전");
-		return 0; // 새로고침시 확인하는 알림창을 띄워준다.
+//		return 0; // 새로고침시 확인하는 알림창을 띄워준다.
 	};
 }
 

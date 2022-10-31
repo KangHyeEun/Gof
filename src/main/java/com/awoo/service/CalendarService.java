@@ -1,8 +1,5 @@
 package com.awoo.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -74,6 +71,7 @@ public class CalendarService {
 		int calStartDay = Integer.parseInt(calStart.split("-")[2]);
 		int calEndMonth = Integer.parseInt(calEnd.split("-")[1]);
 		int calEndDay = Integer.parseInt(calEnd.split("-")[2]);
+		
 
 //		날짜범위여부 : 시작일과 종료일이 같으면 0, 아니면 1
 		if ((calStartMonth != calEndMonth) && (calStartDay != calEndDay)) {
