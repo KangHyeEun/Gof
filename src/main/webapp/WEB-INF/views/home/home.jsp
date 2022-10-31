@@ -29,11 +29,30 @@
     font-weight: bold;
     color: #1e1e1e;
 }
+.container-for-view{
+	display: flex;
+    width: 160px;
+    justify-content: space-between;
+}
+
+.view{
+	text-decoration:none;
+		
+}
+.view:hover{
+	color:#272454;
+		
+}
+.view span{
+	font-weight:bold;
+	color:#299cff;
+}
 </style>
 </head>
 <body>
 	<div class="container-wrap">
 		<div class="header">
+			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
 			<div class="header-logout">
 				<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
@@ -72,7 +91,8 @@
 										<p class="infoEmpno">
 											사원번호 : <span>${employeeInfo.empno}</span>
 										</p>
-										<!-- 			                            <p class="infoEposition"></p> -->
+										<!--<p class="infoEposition"></p> -->
+										<a href="${pageContext.request.contextPath}/ReceivedMessage?page=1&&name=0&&year=0&&month=0" class="view">안읽은 쪽지 : <span>${countView}</span>통</a>
 										<div class="buttons">
 											<div id="enter">
 												<p>출근</p>

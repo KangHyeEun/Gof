@@ -283,6 +283,7 @@ border: 1px solid #959595;
 	    display: flex;
 	    justify-content: space-between;
 	    align-content: baseline;
+	    font-size: 19px;
     }
     .bottom-div{
    	width: 100%;
@@ -294,7 +295,7 @@ border: 1px solid #959595;
    	border: 1px solid black;
     /* width: 12%; */
     width: 130px;
-    height: 60%;
+    height: 37px;
     background-color: #272454;
     color: white;
     font-weight: bold;
@@ -409,7 +410,7 @@ border: 1px solid #959595;
 	
 	tr td{
 	  	border: none;
-  	    padding: 0.3em;  
+  	    padding: 0.4em 0em;
 		height:35px;
  	    width: 100px;
  	    max-width: 100px; 
@@ -431,6 +432,67 @@ border: 1px solid #959595;
 	.sortings span{
 		font-weight:bold;
 	}
+	
+	.select{
+	height: 30px;
+	width: 100%;
+/* 	border: 1px solid blue; */
+	padding: 5px;
+	display: flex;
+    justify-content: center;
+	}
+/* 	.select-container{ */
+/* 		width: 10%; */
+/* 		height: 100%; */
+/* 		display:flex; */
+/* 		flex-direction: row; */
+/* 		justify-content: center; */
+/* 	} */
+	.num{
+	height: 100%;
+	width: 26px;
+ 	margin: 0 2px; 
+	border: 1px solid #c1c1c1;
+	display: flex;
+	justify-content:center;
+	align-items:center;
+/* 	font-weight: bold; */
+ 	border-radius:3px; 
+	font-size:11px;
+	color: black;
+	
+	
+	}
+	.num a{
+	text-decoration : none;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content:center;
+	align-items:center;
+	}
+	.checked{
+	background-color: #272454;
+	color: white;
+	border: 1px solid #272454;
+	}
+	
+	.notchecked:hover{
+	background-color: #959595;
+	color: black;
+	border: 1px solid #959595;
+	}
+	.color-info{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+	}
+	.color-info p{
+	width: 75px;
+    text-align: center;
+    font-size: 13px;
+	}
+	
 	#pop-mcontent{
 		display: block;
     /* width: 100%; */

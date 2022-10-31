@@ -58,6 +58,10 @@
 							<span>월</span>
 						</div>
 					</div>
+					<div class="color-info">
+						<p>🟢 읽음 </p>
+						<p>🟠 읽지 않음 </p>
+					</div>	
 					<div class="div2">
 						<table class="holiday-list">
 							<thead class="thead">
@@ -76,7 +80,10 @@
 										<td>${rl.ownerName}</td>
 										<td>${rl.mcontent}</td>
 										<td>${rl.msendDate}</td>
-										<td><a class="${rl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a></td>
+										<td><a class="${rl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a>
+										<c:if test="${rl.view != 1}"><span style="color: #299cff">🟠</span></c:if>
+										<c:if test="${rl.view == 1}"><span style="color: #299cff">🟢</span></c:if>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>

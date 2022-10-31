@@ -56,6 +56,10 @@
 							<span>월</span>
 						</div>
 					</div>
+					<div class="color-info">
+						<p>🟢 읽음 </p>
+						<p>🟠 읽지 않음 </p>
+					</div>	
 					<div class="div2">
 						<table class="holiday-list">
 							<thead class="thead">
@@ -67,6 +71,7 @@
 									<th>상세보기</th>
 								</tr>
 							</thead>	
+							
 							<tbody class="tbody" id="htable-body">
 								<c:forEach items="${smessageList}" var="rl" varStatus="status1">
 									<tr id="tr${status1.count}" class="receivetr">
@@ -74,7 +79,10 @@
 										<td>${rl.mcontent}</td>
 										<td>${rl.msendDate}</td>
 										<td>${rl.receiverName}</td>
-										<td><a class="${rl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a></td>
+										<td><a class="${rl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a>
+										<c:if test="${rl.view != 1}"><span style="color: #299cff">🟠</span></c:if>
+										<c:if test="${rl.view == 1}"><span style="color: #299cff">🟢</span></c:if>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>	

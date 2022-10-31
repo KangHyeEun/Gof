@@ -32,7 +32,7 @@ public interface CommutingDAO {
 	public int selectCountApprovalHoliday(Map<String,Object>map);
 	public EmployeeInfoVO selectTotalUsedHoliday(Map<String,Object>map);
 	public List<CalendarVO> getTodayCalendar(Map<String,Object>map);
-	
+	public int getCountView(Map<String,Object>map);
 }
 
 

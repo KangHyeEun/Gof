@@ -677,5 +677,8 @@ border: 1px solid #959595;
     .detail-container table, .detail-container table td {
     max-width: 225px;
     }
+    .inner-outer-section {
+    	width:100%
+    }
 }
 

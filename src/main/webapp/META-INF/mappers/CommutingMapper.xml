@@ -120,4 +120,7 @@
 		WHERE c.empno = p.empno
 		AND #{today} between DATE_FORMAT(cal_start,'%Y-%m-%d') AND DATE_FORMAT(cal_end,'%Y-%m-%d');
 	</select>
+	<select id="getCountView" resultType="int">
+	SELECT COUNT(VIEW) FROM message WHERE mreceiver_id = #{empno} AND VIEW=0;
+	</select>
 </mapper>

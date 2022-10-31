@@ -285,7 +285,7 @@ public class CommutingService {
 		model.addAttribute("countApproval", dao.selectCountApprovalHoliday(map));
 		model.addAttribute("totalUsedHoliday", dao.selectTotalUsedHoliday(map));
 		model.addAttribute("todayCalendar", dao.getTodayCalendar(map));
-		
+		model.addAttribute("countView", dao.getCountView(map));
 		
 	}
 	

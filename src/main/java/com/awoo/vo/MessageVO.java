@@ -11,6 +11,8 @@ public class MessageVO {
 	private String msendDate;
 	private int mreceiverId;
 	private String receiverName;
+	private int view;
+	
 	public int getId() {
 		return id;
 	}
@@ -53,10 +55,12 @@ public class MessageVO {
 	public void setReceiverName(String receiverName) {
 		this.receiverName = receiverName;
 	}
-	
-
-	
-	
+	public int getView() {
+		return view;
+	}
+	public void setView(int view) {
+		this.view = view;
+	}
 
 	
 }

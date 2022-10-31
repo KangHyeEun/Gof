@@ -6,7 +6,7 @@
 <mapper namespace="com.awoo.dao.MessageDAO">
 
 	<select id="getReceivedMessageList" resultType="MessageVO">
-		SELECT m.id as id, mowner_id, p.name as ownerName, mcontent, date_format(msend_date, '%Y-%m-%d') as msend_date, mreceiver_id 
+		SELECT m.id as id, mowner_id, p.name as ownerName, mcontent, date_format(msend_date, '%Y-%m-%d') as msend_date, mreceiver_id, view 
 		FROM message m, personal_info p
 		<where>
 			m.mowner_id = p.empno
@@ -34,7 +34,7 @@
 		ORDER BY m.id desc;
 	</select>
 	<select id="getSendMessageList" resultType="MessageVO">
-		SELECT m.id as id, mowner_id, mcontent, date_format(msend_date, '%Y-%m-%d') as msend_date, mreceiver_id, p.name as receiverName
+		SELECT m.id as id, mowner_id, mcontent, date_format(msend_date, '%Y-%m-%d') as msend_date, mreceiver_id, p.name as receiverName, view
 		FROM message m, personal_info p
 		
 		<where>
@@ -122,7 +122,7 @@
 	</delete>
 
 	<update id="viewMessage">
-		UPDATE message SET VIEW = 1 
+		UPDATE message SET VIEW = 1
 		WHERE mreceiver_Id = #{empno} 
 		AND id= #{id}
 	</update>

@@ -698,7 +698,7 @@ background-color:#f1f1f1;
     border-radius: 50%;
     position: absolute;
     left: 15%;
-    top: 15%;
+    top: 14%;
     display: block;    
     transform: skew(-0.03deg);
     margin: auto;
@@ -1126,7 +1126,7 @@ header i {
 	   }
 	   .div4{
 	   width: 100%;
-	   height: 56%;
+	   height: 54%;
 	   }
 	   .div1{
 		width: 100%;
@@ -1180,11 +1180,14 @@ header i {
     	.donut-info{
     	    font-size: 12px;
     	}
+    	.outersection {
+    	height: 95%;
+    	}
    }
    @media ( max-width: 800px ) {
    		.greeting {
 	    font-size: 10px;
-	    height: 50px;
+	    height: 150px;
 	    }
   		
    		.left-section{
@@ -1268,11 +1271,6 @@ header i {
 	   .sec_cal .cal_wrap .dates {
 	    height: 210px;
 	    }
-/* 	    .bbs-container { */
-/* 	    width: 160px; */
-/* 	    height: 70%; */
-/* 	    font-size: 14px; */
-/* 	    } */
 	   .outer-div-bbs {
 	       flex-direction: column-reverse;
 	   }
@@ -1282,15 +1280,7 @@ header i {
 	   .right-inner-outer {
 		    width: 100%;
 		}
-   }
-    @media ( max-width: 635px ) {
-/*      	.bbs-subtitle{ */
-/* 	    width: 30%; */
-/* 	    height: 70%; */
-/* 	    display: flex; */
-/* 	    align-items: center; */
-/* 	    } */
-    	.donut-info p {
+			.donut-info p {
 	    font-size: 11px;
 	    }
 	    .outer-div-bbs {
@@ -1299,5 +1289,22 @@ header i {
 	    .outersection {
 	    height: 98%;
 	    flex: 1;
+	    width:100%;
 	    }
+	    .inner-outer-section{
+	    height:95%;
+	    width:100%;
+	    }
+	    .left-section .div3{
+		margin-bottom: 15px;
+		}
+   }
+    @media ( max-width: 635px ) {
+/*      	.bbs-subtitle{ */
+/* 	    width: 30%; */
+/* 	    height: 70%; */
+/* 	    display: flex; */
+/* 	    align-items: center; */
+/* 	    } */
+    
     }
