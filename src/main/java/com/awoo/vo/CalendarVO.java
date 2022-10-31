@@ -10,13 +10,13 @@ public class CalendarVO {
 	private String calContent;	// 내용
 	private String calStart;	// 시작일
 	private String calEnd;		// 종료일
-	private String calRange;	// 날짜범위 여부
+	private int calRange;	// 날짜범위 여부
 	private String calAllday;	// 종일여부
 	private String calShow;		// 공개,비공개
 	private String calNotice;	// 개인,공지
 	private int empno;			// 사원번호(작성자)
 	private int checkAdmin;		// 관리자여부
-	private int approval;		// 승인신청여부
+	private String approval;	// 승인신청여부
 	private String ename;		// 사원 이름
 	
 	public int getCalId() {
@@ -55,10 +55,10 @@ public class CalendarVO {
 	public void setCalEnd(String calEnd) {
 		this.calEnd = calEnd;
 	}
-	public String getCalRange() {
+	public int getCalRange() {
 		return calRange;
 	}
-	public void setCalRange(String calRange) {
+	public void setCalRange(int calRange) {
 		this.calRange = calRange;
 	}
 	public String getCalAllday() {
@@ -91,10 +91,10 @@ public class CalendarVO {
 	public void setCheckAdmin(int checkAdmin) {
 		this.checkAdmin = checkAdmin;
 	}
-	public int getApproval() {
+	public String getApproval() {
 		return approval;
 	}
-	public void setApproval(int approval) {
+	public void setApproval(String approval) {
 		this.approval = approval;
 	}
 	public String getEname() {

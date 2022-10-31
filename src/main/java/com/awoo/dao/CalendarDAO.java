@@ -11,7 +11,9 @@ import com.awoo.vo.CalendarVO;
 public interface CalendarDAO {
 	public List<CalendarVO> selectSchedule();
 	
+	public List<CalendarVO> selectRestData(Map<String, String> map);
+	
 	public int insertSchedule(CalendarVO vo);
 	
-	public List<CalendarVO> selectRestData(Map<String, String> map);
+	public void deleteSchedule(int id);
 }

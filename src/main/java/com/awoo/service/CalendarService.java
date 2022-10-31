@@ -50,19 +50,22 @@ public class CalendarService {
 
 //	일정을 DB에 저장
 	public void insertDataMethod(CalendarVO vo, Model model) {
+//		제목
 		if(vo.getCalTitle() == null || vo.getCalTitle() == "") {
 			vo.setCalTitle("제목 없음");
 		}
+//		종일여부
 		if(vo.getCalAllday() == null || vo.getCalAllday() == "") {
 			vo.setCalAllday("0");
 		}
+//		비공개
 		if(vo.getCalShow() == null || vo.getCalShow() == "") {
 			vo.setCalShow("0");
 		}
+//		공지
 		if(vo.getCalNotice() == null || vo.getCalNotice() == "") {
 			vo.setCalNotice("0");
 		}
-		
 		
 		String calStart = vo.getCalStart().split("T")[0];
 		String calEnd = vo.getCalEnd().split("T")[0];
@@ -71,25 +74,24 @@ public class CalendarService {
 		int calStartDay = Integer.parseInt(calStart.split("-")[2]);
 		int calEndMonth = Integer.parseInt(calEnd.split("-")[1]);
 		int calEndDay = Integer.parseInt(calEnd.split("-")[2]);
-		
 
-		
-//		if ((calStartMonth != calEndMonth) && (calStartDay != calEndDay)) {
-//			System.out.println("시작월과 종료일이 다르고 시작일과 종료일이 다르다.");
-//			
-//		}
-//		else if (calStartMonth != calEndMonth) {
-//			System.out.println("시작월과 종료월이 다르다.");
-//			
-//		}
-//		else if (calStartDay != calEndDay) {
-//			System.out.println("시작일과 종료일이 다르다.");
-//			
-//		}
-//		else {
-//			System.out.println("시작일과 종료일이 같다.");
-//			
-//		}
+//		날짜범위여부 : 시작일과 종료일이 같으면 0, 아니면 1
+		if ((calStartMonth != calEndMonth) && (calStartDay != calEndDay)) {
+			System.out.println("시작월과 종료일이 다르고 시작일과 종료일이 다르다.");
+			vo.setCalRange(1);
+		}
+		else if (calStartMonth != calEndMonth) {
+			System.out.println("시작월과 종료월이 다르다.");
+			vo.setCalRange(1);
+		}
+		else if (calStartDay != calEndDay) {
+			System.out.println("시작일과 종료일이 다르다.");
+			vo.setCalRange(1);
+		}
+		else {
+			System.out.println("시작일과 종료일이 같다.");
+			vo.setCalRange(0);
+		}
 		
 		
 		
@@ -125,45 +127,47 @@ public class CalendarService {
 //		
 
 //		/////////////////////////////////////////////////////////////////
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMM"); //년월 표시
-        //dateFormat = new SimpleDateFormat("yyyyMMdd"); //년월일 표시
-        System.out.println("dateFormat : " + dateFormat);
-        System.out.println(dateFormat.getCalendar());
-        
-        System.out.println("---------------------------");
-        
-        Calendar cal = Calendar.getInstance();
-        System.out.println("cal : " + cal);
-//        System.out.println(cal.get);
-        
-        cal.set ( 2019, 1-1, 1 ); //종료 날짜 셋팅
-        String endDate = dateFormat.format(cal.getTime());
-//        System.out.println("cal.getTime() : " + cal.getTime());
+//        SimpleDateFormat dateFormat; 
+////        dateFormat = new SimpleDateFormat("yyyyMM"); //년월 표시
+//        dateFormat = new SimpleDateFormat("yyyyMMdd"); //년월일 표시
+//        System.out.println("dateFormat : " + dateFormat);
+//        System.out.println(dateFormat.getCalendar());
+//        
+//        System.out.println("---------------------------");
+//        
+//        Calendar cal = Calendar.getInstance();
+//        System.out.println("cal : " + cal);
+//        
+//
+//        cal.set( 2019, 12, 1 ); //종료 날짜 셋팅
+//        String endDate = dateFormat.format(cal.getTime());
+//        System.out.println("cal.getTime() endDate : " + cal.getTime());
 //        System.out.println("endDate : " + endDate);
-        
-        cal.set ( 2018, 1-1, 1 ); //시작 날짜 셋팅
-        String startDate = dateFormat.format(cal.getTime());    
+//        
+//        cal.set ( 2018, 2, 1 ); //시작 날짜 셋팅
+//        String startDate = dateFormat.format(cal.getTime());    
 //        System.out.println("cal.getTime() startDate : " + cal.getTime());
 //        System.out.println("startDate : " + startDate);
-        
-        int i = 0;
- 
-        while(!startDate.equals(endDate)){ //다르다면 실행, 동일 하다면 빠져나감
-            
-            if(i==0) { //최초 실행 출력
-                System.out.println(dateFormat.format(cal.getTime()));
-            }
-            
-            cal.add(Calendar.MONTH, 1); //1달 더해줌
-            //cal.add(Calendar.DATE, 1); //1일 더해줌
-            startDate = dateFormat.format(cal.getTime()); //비교를 위한 값 셋팅
-            
-            //+1달 출력
-            System.out.println(dateFormat.format(cal.getTime()));
-            
-            i++;
- 
-        }
+//
+//        
+//        int i = 0;
+// 
+//        while(!startDate.equals(endDate)){ //다르다면 실행, 동일 하다면 빠져나감
+//            
+//            if(i==0) { //최초 실행 출력
+//                System.out.println(dateFormat.format(cal.getTime()));
+//            }
+//            
+//            cal.add(Calendar.MONTH, 1); //1달 더해줌
+//            //cal.add(Calendar.DATE, 1); //1일 더해줌
+//            startDate = dateFormat.format(cal.getTime()); //비교를 위한 값 셋팅
+//            
+//            //+1달 출력
+//            System.out.println(dateFormat.format(cal.getTime()));
+//            
+//            i++;
+// 
+//        }
         
 //		/////////////////////////////////////////////////////////////////
 		
@@ -202,7 +206,9 @@ public class CalendarService {
     		
 	}
 	
-	
+	public void deleteDataMethod(CalendarVO vo) {
+		dao.deleteSchedule(vo.getCalId());
+	}
 	
 //	일정 계산 메서드(DB에서 꺼낸값에서 월과 일자에서 0을 제외시킴)
 	public void dateSetMethod(List<CalendarVO> innerList) {

@@ -7,12 +7,16 @@ function getContextPath() {
 	return sessionStorage.getItem("contextpath");
 }
 
+const empno = Number(sessionStorage.getItem("empno"));
+const ename = sessionStorage.getItem("ename");
+
 //======================================================================
 // ---------------------------------------------------------------------
 //calendar
 // ---------------------------------------------------------------------
 // 현재 날짜를 불러오는 함수 / Fri Oct 14 2022 17:26:25 GMT+0900 (한국 표준시)
 const date = new Date();
+const dateTest = new Date();
 
 const renderCalendar = () => {
 
@@ -239,18 +243,18 @@ const renderCalendar = () => {
 //월, 주, 일 클릭시 버튼 효과
 // ---------------------------------------------------------------------
 	
-	const btnDiv = document.querySelectorAll(".btnDiv p");
-	
-	for (let index = 1; index < btnDiv.length; index++) {
-		btnDiv.item(index).addEventListener("click", function() {
-			for (let index1 = 1; index1 < btnDiv.length; index1++) {
-				btnDiv.item(index1).classList.add("btnColor");
-				btnDiv.item(index1).classList.remove("btnClick");
-			}
-			this.classList.add("btnClick");
-			this.classList.remove("btnColor");
-		});
-	}
+//	const btnDiv = document.querySelectorAll(".btnDiv p");
+//	
+//	for (let index = 1; index < btnDiv.length; index++) {
+//		btnDiv.item(index).addEventListener("click", function() {
+//			for (let index1 = 1; index1 < btnDiv.length; index1++) {
+//				btnDiv.item(index1).classList.add("btnColor");
+//				btnDiv.item(index1).classList.remove("btnClick");
+//			}
+//			this.classList.add("btnClick");
+//			this.classList.remove("btnColor");
+//		});
+//	}
 	
 // ---------------------------------------------------------------------
 //날짜 클릭시 일정 입력 팝업
@@ -438,10 +442,17 @@ const renderCalendar = () => {
 //				클릭한 곳의 상위 요소로 가서 하위요소의 개수를 구한다 => 클릭한 곳의 일정 개수를 구하기 위함
 //				innerDiv[index].parentElement.children.length (일자 div도 포함되어있어서 1부터 시작)
 				let scheParentToChild = innerDiv[index].parentElement.children;
+				let delBtn = "";
+				delBtn = "×"
 //				일자에 있는 일정들 팝업에 복사
 				for (let index1 = 1; index1 < scheParentToChild.length; index1++) {
+					const innerSpan = document.createElement("span");
+					innerSpan.classList.add("innerScheBtn");
+					innerSpan.innerHTML = delBtn;
 //					element 복제, 하위 요소도 복제하기 위해 true 값 설정
 					childEle = scheParentToChild[index1].cloneNode(true);
+					childEle.append(innerSpan);
+					childEle.children[0].classList.add("innerSchedule");
 					scheList.append(childEle);
 				}
 //				기존 일정에서 displayNone 처리 되었던것을 팝업에서 해제
@@ -450,7 +461,7 @@ const renderCalendar = () => {
 				}
 //				클릭한 곳의 날짜
 				let clickToday = innerDiv[index].parentElement.parentElement.classList[0];
-//				릭한 곳의 날짜 자르기
+//				클릭한 곳의 날짜 자르기
 				let clickTodayCut = clickToday.split("-");
 //				클릭한 곳의 날짜로 요일 구하기
 				clickTodayDay = new Date(clickTodayCut[0], clickTodayCut[1]-1, clickTodayCut[2]).getDay();
@@ -458,9 +469,192 @@ const renderCalendar = () => {
 				scheTitle.children[0].textContent = "";
 //				클릭한 곳의 날짜와 요일 삽입
 				scheTitle.children[0].innerHTML = clickToday + " " + longDays[clickTodayDay];
+				
+				
+				
+//	 	---------------------------------------------------------------------
+//		일정 팝업에서 제목 혹은 x 키 누를시 이벤트 발생 기능
+//		---------------------------------------------------------------------
+
+				const scheInfo = document.querySelector(".scheInfo-content > ul");
+				
+				function tagCreate(category, value) {
+					
+					if (category == "종료일") {
+						let li = document.query
+					}
+					else {
+						let li = document.createElement("li");
+						let span1 = document.createElement("span");
+						let span2 = document.createElement("span");
+							
+						span1.innerHTML = "";
+						span1.innerHTML = category;
+						li.append(span1);
+						
+						span2.innerHTML = "";
+						span2.innerHTML = value;
+						li.append(span2);
+						
+						scheInfo.append(li);
+					}
+					
+					
+				}
+//				팝업 눌러졌는지 체크
+				if (scheList.children.length != 0) {
+					for (let index1 = 0; index1 < scheList.children.length; index1++) {
+						
+//						일정목록 팝업에서 제목 눌렀을때 이벤트
+//	 	---------------------------------------------------------------------
+						scheList.children[index1].children[0].addEventListener("click", function(){
+//							schedule_xx 에서 xx 값 추출 (id값)
+							let idValue = this.classList[0].split("_")[1];
+							scheParentToChild[index1].cloneNode(true)
+							
+							for (let index2 = 0; index2 < list.length; index2++) {
+//								일정 상세목록에서 목록하나 클릭했을때
+								if (list[index2].calId == idValue) {
+									scheInfo.innerHTML = "";
+									
+									if (list[index2].calTitle != "" && list[index2].calTitle != null && list[index2].calTitle != undefined) {
+										tagCreate("제목", list[index2].calTitle);
+									} else {
+										tagCreate("제목", "제목 없음");
+									}
+									if (list[index2].ename != "" && list[index2].ename != null && list[index2].ename != undefined) {
+										tagCreate("작성자", list[index2].ename);
+									}
+									if (list[index2].calPlace != "" && list[index2].calPlace != null && list[index2].calPlace != undefined) {
+										tagCreate("장소", list[index2].calPlace);
+									}
+									if (list[index2].calContent != "" && list[index2].calContent != null && list[index2].calContent != undefined) {
+										tagCreate("내용", list[index2].calContent);
+									}
+									if (list[index2].calStart != "" && list[index2].calStart != null && list[index2].calStart != undefined &&
+										list[index2].calEnd != "" && list[index2].calEnd != null && list[index2].calEnd != undefined) {
+										if (list[index2].calStart == list[index2].calEnd) {
+											tagCreate("일시", list[index2].calStart);
+										}
+										else {
+											tagCreate("일시", list[index2].calStart + " ~ " + list[index2].calEnd);
+										}
+									}
+									
+//									if (list[index2].calRange != 0 && list[index2].calRange != null && list[index2].calRange != undefined) {
+//										tagCreate("전체일정", list[index2].calRange);
+//									}
+//									if (list[index2].calShow != "" && list[index2].calShow != null && list[index2].calRange != undefined) {
+//										tagCreate("비공개", list[index2].calShow);
+//									}
+									
+//									if (list[index2].calAllday != "" && list[index2].calAllday != null && list[index2].calAllday != undefined) {
+//										tagCreate("종일", list[index2].calAllday);
+//									}
+//									if (list[index2].calNotice != "" && list[index2].calNotice != null && list[index2].calNotice != undefined) {
+//										tagCreate("공지", list[index2].calNotice);
+//									}
+
+
+
+
+//									*** 세션의 empno 값 가져와서 본인것만 수정할 수 있게 해야함
+//									수정클릭시 이벤트
+//									
+
+//									*** 세션의 empno 값 가져와서 본인것만 지울 수 있게 해야함
+//									삭제클릭시 이벤트
+									
+									console.log(list[index2].empno);
+									console.log(empno);
+									
+									
+									document.querySelector(".scheInfo-btn > a:last-child").addEventListener("click", function(e){
+//										e.stopPropagation();
+//										console.log(list[index2].empno);
+//										console.log(typeof(list[index2].empno));
+//										console.log(list[index2].calRange);
+//										console.log(typeof(list[index2].calRange));
+										if (list[index2].empno == empno) {
+											if (confirm("정말로 삭제하시겠습니까?")) {
+												location.href = ctx+"/calendar/deleteData/"+list[index2].calId;
+											}
+											else {
+												location.href = ctx+"/calendar";
+											}
+										}
+										else {
+											alert("권한이 없습니다.");
+											location.href = ctx+"/calendar";
+										}
+									});
+									
+									
+									
+									
+////									---------------------------------------------------------------------
+////									일정 팝업에서 controller로 가기전 날짜 데이터 추출
+////									---------------------------------------------------------------------
+//
+//									//일정 팝업을 띄운 후 전송버튼을 눌러 날짜 값을 넘겼는지를 판단하는 flag
+//									let calStart = "";
+//									//button[type="button"] 형태의 button 클릭시 날짜값을 넘겨서 렌더링 함수를 컨트롤
+//									let transferBtn = document.getElementById("btn");
+//									transferBtn.addEventListener("click", function(){
+//										console.log("------------------------------");
+//										let calStart = document.getElementById("calStart");
+//										console.log(calStart.value);
+//										
+//										let calYear = calStart.value.split("-")[0];
+//										let calMonth = calStart.value.split("-")[1];
+//										console.log(calYear);
+//										console.log(calMonth);
+//										
+//									    document.querySelector(".schedule form").setAttribute("action", ctx+"/calendar/insertData");
+//									    documnet.querySelector("#realBtn").click();
+//									});
+
+
+								}
+							}
+//							console.log(list[0]);
+//							console.log(_data);
+							
+							document.querySelector(".schedule-info-wrap").style.display = "none";
+							document.querySelector(".scheInfo-detail-wrap").style.display = "flex";
+						});
+						
+//						일정목록 x 버튼 눌렀을때 이벤트
+//	 	---------------------------------------------------------------------
+						scheList.children[index1].children[1].addEventListener("click", function(_e){
+							const calId = this.previousElementSibling.classList[0].split("_")[1];
+							const checkValue = confirm("정말로 삭제하시겠습니까?");
+//							삭제시
+							if (checkValue) {
+								location.href = ctx+"/calendar/deleteData/"+calId;
+							}
+//							*** 세션의 empno 값 가져와서 본인것만 지울 수 있게 해야함
+						});
+						
+					}
+				}
 			});
 		}
 		
+		return _data;
+		
+	}).then(_data => {
+		
+
+		
+//	 	---------------------------------------------------------------------
+//		일정 팝업에서 x 키 누를시 삭제 기능
+//		---------------------------------------------------------------------
+//		console.log(document.querySelectorAll(".schedule-list > div > span:last-child"));
+//		document.querySelectorAll(".innerScheBtn")[0].addEventListener("click", function(){
+//			console.log(this);
+//		});
+
 		return _data;
 		
 	}).then(_data => {
@@ -1269,6 +1463,7 @@ const next = document.querySelector(".next");
 
 next.addEventListener("click", () => {
     date.setMonth(date.getMonth() + 1);
+    
 //    현재 년도로부터 30년 후 까지만 사용 가능
 	if((date.getFullYear()) >= (new Date().getFullYear()+30)){
 		alert("지원하는 날짜 범위를 벗어났습니다.");
@@ -1296,6 +1491,7 @@ const nexts = document.querySelector(".nexts");
 
 nexts.addEventListener("click", () => {
     date.setFullYear(date.getFullYear() + 1);
+    
 //    현재 년도로부터 30년 후 까지만 사용 가능
 	if((date.getFullYear()) >= (new Date().getFullYear()+30)){
 		alert("지원하는 날짜 범위를 벗어났습니다.");
@@ -1349,7 +1545,7 @@ transferBtn.addEventListener("click", function(){
 	console.log(calMonth);
 	
     document.querySelector(".schedule form").setAttribute("action", ctx+"/calendar/insertData");
-    documnet.querySelector("#realBtn").click();
+    document.querySelector("#realBtn").click();
 });
 
 // ---------------------------------------------------------------------
@@ -1360,25 +1556,165 @@ transferBtn.addEventListener("click", function(){
 //년,월이 특정 값에 고정되는 문제점을 해결하기 위해서 f5시 localStrage에 값을 저장하는 방식을 사용함
 //---------------------------------------------------------------------
 
-if ((date.getFullYear() != null && date.getMonth() != null) ||
-	(date.getFullYear() != undefined && date.getMonth() != undefined)) {
-//	년, 월 값 대입 후 렌더링
-    date.setFullYear(localStorage.getItem("localFullYear")); // 새로고침 전에 저장한 값 가져와서 저장
-    date.setMonth(localStorage.getItem("localMonth"));		 // 새로고침 전에 저장한 값 가져와서 저장
-//    렌더링
-    renderCalendar();
-} else {
+console.log("여기도 fresh???");
+const localFullYear = localStorage.getItem("localFullYear");
+const localMonth = localStorage.getItem("localMonth");
+const dateYear = date.getFullYear();
+const dateMonth = date.getMonth()
+console.log("localFullYear : " + localFullYear);
+console.log("localMonth : " + localMonth);
+console.log("dateYear : " + dateYear);
+console.log("dateMonth : " + dateMonth);
+
+if (localFullYear == null || localMonth == null) {
+	
+	console.log("여기는 첫번째~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	
+	date.setFullYear(new Date().getFullYear());
+	date.setMonth(new Date().getMonth());
+
+	localStorage.setItem("localFullYear", date.getFullYear());
+	localStorage.setItem("localMonth", date.getMonth());
 //	첫 시작 시 렌더링
 	renderCalendar();
 }
+else if (localFullYear == date.getFullYear() && localMonth == date.getMonth()) {
+	
+	console.log("여기는 두번째~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	
+//	년, 월 값 대입 후 렌더링
+//	console.log(date.getFullYear() == localStorage.getItem("localFullYear"))
+//	console.log(date.getMonth() == localStorage.getItem("localMonth"))
+//	
+//	console.log("새로고침 이후");
+//	console.log("1. " + date.getFullYear());
+//	console.log("2. " + date.getMonth());
+//	console.log("3. " + localStorage.getItem("localFullYear"));
+//	console.log("4. " + localStorage.getItem("localMonth"));
+//	console.log("----------------");
+//	
+//	date.setFullYear(localStorage.getItem("localFullYear"));
+//	date.setMonth(localStorage.getItem("localMonth"));
+	
+//    렌더링
+    renderCalendar();
+}
+else {
+	console.log("여기는 세번째~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	console.log("새로고침 이후");
+	console.log("1. " + date.getFullYear());
+	console.log("2. " + date.getMonth());
+	console.log("3. " + localStorage.getItem("localFullYear"));
+	console.log("4. " + localStorage.getItem("localMonth"));
+	console.log("----------------");
+	
+	console.log(date.getFullYear() == localStorage.getItem("localFullYear"));
+	console.log(date.getMonth() == localStorage.getItem("localMonth"));
+	
+	const localFullYear1 = localStorage.getItem("localFullYear");
+	const localMonth1 = localStorage.getItem("localMonth");
+	const dateYear1 = date.getFullYear();
+	const dateMonth1 = date.getMonth()
+	console.log("localFullYear : " + localFullYear1);
+	console.log("localMonth : " + localMonth1);
+	console.log("dateYear : " + dateYear1);
+	console.log("dateMonth : " + dateMonth1);
+	console.log(Number(localFullYear1));
+	console.log(Number(localMonth1));
+	console.log(Number(dateYear1));
+	console.log(Number(dateMonth1));
+	console.log(localFullYear1 == dateYear1);
+	console.log(localMonth1 == localMonth1);
+	
+	
+	if (localFullYear1 != dateYear1) {
+		console.log("성공1");
+		date.setFullYear(Number(localFullYear1));
+		console.log("성공2");
+	}
+//	if (localMonth1 != dateMonth1) {
+//		console.log("성공111");
+//		date.setMonth(Number(localMonth1));
+//		console.log("성공222");
+//	}
+	if (Number(localMonth1) == (dateMonth+1)) {
+		console.log("성공111");
+		date.setMonth(13);
+		console.log("성공222");
+	}
+	
+	console.log("localFullYear : " + localFullYear1);
+	console.log("localMonth : " + localMonth1);
+	console.log("dateYear : " + dateYear1);
+	console.log("dateMonth : " + dateMonth1);
+	
+	console.log("새로고침 직전");
+	console.log("1. " + date.getFullYear());
+	console.log("2. " + date.getMonth());
+	console.log("3. " + localStorage.getItem("localFullYear"));
+	console.log("4. " + localStorage.getItem("localMonth"));
+	console.log("----------------");
+    renderCalendar();
+}
 //     	f5 누를시 렌더링하기 위한 값 구하기
+
 function refreshFunc() {
 	window.onbeforeunload = function (e) {
+		let tempYear = localStorage.getItem("localFullYear");
+		let tempMonth = localStorage.getItem("localMonth");
+		
+		console.log("새로고침 이전");
+		console.log("1. " + date.getFullYear());
+		console.log("2. " + date.getMonth());
+		console.log("3. " + localStorage.getItem("localFullYear"));
+		console.log("4. " + localStorage.getItem("localMonth"));
+		console.log("----------------");
+		
+//		localStorage.removeItem("localFullYear");
+//		localStorage.removeItem("localMonth");
+		console.log("새로고침 전 수정");
 		localStorage.setItem("localFullYear", date.getFullYear());	// 새로고침 되기전에 값 저장
     	localStorage.setItem("localMonth", date.getMonth());		// 새로고침 되기전에 값 저장
-//		return 0; // 새로고침시 확인하는 알림창을 띄워준다.
+    	
+		console.log("새로고침 직전");
+		return 0; // 새로고침시 확인하는 알림창을 띄워준다.
 	};
 }
+
+
+
+//시점의 문제가 있는 것으로 보여 keyCode로 해봤지만 이 문제는 아니고 페이지 이동시의 새로고침에는 이벤트 발생되지않아 위의 것으로 원복 
+//window.addEventListener("keydown", function(e){
+//	if (e.keyCode == 27) {
+//		
+//		let testYear = localStorage.getItem("localFullYear");
+//		let testMonth = localStorage.getItem("localMonth");
+//	
+//		console.log("새로고침 이전");
+//		console.log(". " + testYear);
+//		console.log(". " + testMonth);
+//		console.log("1. " + date.getFullYear());
+//		console.log("2. " + date.getMonth());
+//		console.log("3. " + localStorage.getItem("localFullYear"));
+//		console.log("4. " + localStorage.getItem("localMonth"));
+//		console.log("5. " + testYear);
+//		console.log("6. " + testMonth);
+//		console.log("----------------");
+//		
+//		let tempYear = localStorage.getItem("localFullYear");
+//		let tempMonth = localStorage.getItem("localMonth");
+//		
+////		
+////		localStorage.removeItem("localFullYear");
+////		localStorage.removeItem("localMonth");
+//		
+//		localStorage.setItem("localFullYear", tempYear);	// 새로고침 되기전에 값 저장
+//		localStorage.setItem("localMonth", tempYear);		// 새로고침 되기전에 값 저장
+//	}
+//});
+
+
+
 // ---------------------------------------------------------------------
 
 // ---------------------------------------------------------------------
