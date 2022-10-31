@@ -416,8 +416,20 @@ border: 1px solid #959595;
  	    white-space: nowrap;
  	    overflow: hidden;
 	}
+	
+	.checkbox-table{
+		width: 30px;
+	}
+	
 	.holiday-list tr th:nth-child(5), .holiday-list tr td:nth-child(5) {
 	    width: 50px;
+	}
+	
+	.sortings select{
+	border: none;
+}
+	.sortings span{
+		font-weight:bold;
 	}
 	#pop-mcontent{
 		display: block;

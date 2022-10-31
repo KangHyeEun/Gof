@@ -31,9 +31,7 @@
 			</if>
 			and mreceiver_id=#{mreceiverId}
 		</where>
-		
-		
-		ORDER BY date_format(msend_date, '%Y-%m-%d %h:%i:%s')desc;
+		ORDER BY m.id desc;
 	</select>
 	<select id="getSendMessageList" resultType="MessageVO">
 		SELECT m.id as id, mowner_id, mcontent, date_format(msend_date, '%Y-%m-%d') as msend_date, mreceiver_id, p.name as receiverName
@@ -63,7 +61,7 @@
 			AND m.mowner_id=#{mownerId}
 		</where>
 		
-		ORDER BY date_format(msend_date, '%Y-%m-%d %h:%i:%s')desc;
+		ORDER BY m.id desc;
 	</select>
 	<select id="getDistinctEmployees" resultType="PersonalInfoVO">
 		SELECT DISTINCT(NAME), empno FROM personal_info;

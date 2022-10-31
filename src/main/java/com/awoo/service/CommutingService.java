@@ -281,6 +281,7 @@ public class CommutingService {
 		map.put("empno", model.getAttribute("empno"));
 		map.put("today", today);
 		model.addAttribute("noticeListForHome", dao.selectBBSListNoticeForHome());
+		model.addAttribute("BBSListForHome", dao.selectBBSForHome());
 		model.addAttribute("countApproval", dao.selectCountApprovalHoliday(map));
 		model.addAttribute("totalUsedHoliday", dao.selectTotalUsedHoliday(map));
 		model.addAttribute("todayCalendar", dao.getTodayCalendar(map));

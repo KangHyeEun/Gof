@@ -29,20 +29,31 @@
 					<div class="div1">
 						<div class="div1-1">
 							<h3 class="sub-title">휴가 관리</h3> 
+<!-- 							<select name="sortingYear" id="sortingYear" onchange="OnChange();"> -->
+<!-- 								<option value="0">전체년도</option> -->
+<%-- 								<c:forEach items="${distinctYear}" var="dy"> --%>
+<%-- 									<option value="${dy}" <c:if test ="${dy eq param.year}">selected="selected"</c:if>>${dy}</option> --%>
+<%-- 								</c:forEach> --%>
+<!-- 							</select> -->
+						</div>
+						<div id="apply-holiday"><span>휴가 신청하기</span></div>
+					</div>
+					<div class="sub-sub-title">
+						<div>
+							<h4>◎ 휴가 신청내역</h4>
+	<%-- 						<p>잔여일수 : <span>${holidayList[0].totalHoliday}</span>일</p> --%>
+	<%-- 						<p>사용일수 : <span>${holidayList[0].usedHoliday}</span>일</p> --%>
+							<p>잔여일수 : <span class="blueText">${countHoliday.totalHoliday - countHoliday.usedHoliday}</span>일</p>
+						</div>
+						<div>
 							<select name="sortingYear" id="sortingYear" onchange="OnChange();">
 								<option value="0">전체년도</option>
 								<c:forEach items="${distinctYear}" var="dy">
 									<option value="${dy}" <c:if test ="${dy eq param.year}">selected="selected"</c:if>>${dy}</option>
 								</c:forEach>
 							</select>
+							<span class="sortingYearSpan">년</span>
 						</div>
-						<div id="apply-holiday"><span>휴가 신청하기</span></div>
-					</div>
-					<div class="sub-sub-title">
-						<h4>◎ 휴가 신청내역</h4>
-<%-- 						<p>잔여일수 : <span>${holidayList[0].totalHoliday}</span>일</p> --%>
-<%-- 						<p>사용일수 : <span>${holidayList[0].usedHoliday}</span>일</p> --%>
-						<p>잔여일수 : <span>${countHoliday.totalHoliday - countHoliday.usedHoliday}</span>일</p>
 					</div>
 					 
 					<div class="div2">

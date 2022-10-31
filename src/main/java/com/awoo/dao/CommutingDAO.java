@@ -28,6 +28,7 @@ public interface CommutingDAO {
 	
 //	홈에 가져갈 애들-------------------------------------------------------
 	public List<BBSVO> selectBBSListNoticeForHome();
+	public List<BBSVO> selectBBSForHome();
 	public int selectCountApprovalHoliday(Map<String,Object>map);
 	public EmployeeInfoVO selectTotalUsedHoliday(Map<String,Object>map);
 	public List<CalendarVO> getTodayCalendar(Map<String,Object>map);

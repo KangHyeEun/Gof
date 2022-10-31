@@ -18,7 +18,15 @@
 	content: attr(data-percent) '%';
 }
 
-
+.bbs-table a{
+	width:100%;
+	height:100%;
+	border-radius: 5px;
+}
+.bbs-table a:hover {
+	background-color:#68686840;
+	font-weight:bold;
+}
 </style>
 </head>
 <body>
@@ -186,10 +194,45 @@
 									</div>
 								</div>
 							</div>
-							<!-- 캘린더 -->
+							
 
 						</div>
-						<div class="div1"></div>
+						<div class="div1">
+							<div class="inner-outer-section1">
+							<p class="bbs-subtitle">공지사항</p>
+							<div class="bbs-container">
+								<table class="bbs-table">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>분류</th>
+											<th>제목</th>
+											<th>작성자</th>
+											<th>작성일</th>
+											<th>조회수</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="vo" items="${noticeListForHome}"
+											varStatus="status">
+											<tr>
+												<td>${status.index+1}</td>
+												<td>${vo.category}</td>
+												<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
+												<td>${vo.owner}</td>
+												<td>${vo.createDate}</td>
+												<td>${vo.viewCounts}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+								<div class="hidden-link-to-bbs">
+									<a href="${pageContext.request.contextPath}/bbsPage/bbs">사내 공지사항으로 이동</a>
+								</div>
+							</div>
+						</div>
+						
+						</div>
 					</section>
 				</div>
 				<div class="outer-div-bbs">
@@ -239,7 +282,7 @@
 
 					<div class="outersection right-outersection">
 						<div class="inner-outer-section right-inner-outer">
-							<p class="bbs-subtitle">사내 공지사항</p>
+							<p class="bbs-subtitle">사내 게시판</p>
 							<div class="bbs-container">
 								<table class="bbs-table">
 									<thead>
@@ -250,20 +293,18 @@
 											<th>작성자</th>
 											<th>작성일</th>
 											<th>조회수</th>
-											<th>첨부 파일</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="vo" items="${noticeListForHome}"
+										<c:forEach var="vo" items="${BBSListForHome}"
 											varStatus="status">
 											<tr>
 												<td>${status.index+1}</td>
 												<td>${vo.category}</td>
-												<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
+												<td><a href="${pageContext.request.contextPath}/bbsPage/bbs/${vo.id}">${vo.title}</a></td>
 												<td>${vo.owner}</td>
 												<td>${vo.createDate}</td>
 												<td>${vo.viewCounts}</td>
-												<td>첨부 파일</td>
 											</tr>
 										</c:forEach>
 									</tbody>

@@ -34,13 +34,14 @@
 						<button type="button" id="writeMessage">쪽지쓰기</button>
 <!-- 						<button type="button" id="deleteMessage">삭제</button> -->
 						
-						<div>
+						<div class="sortings">
 							<select name="sorting-year" id="sorting-name" onchange="OnChange();">
-								<option value="0">전체</option>
+								<option value="0">보낸사람 전체</option>
 								<c:forEach items="${rdistinctSender}" var="sender">
 									<option value="${sender}" <c:if test ="${sender eq param.name}">selected="selected"</c:if>>${sender}</option>
 								</c:forEach>
 							</select>
+							<span>님</span>
 							<select name="sorting-year" id="sorting-year" onchange="OnChange();">
 								<option value="0">전체 연도</option>
 								<c:forEach items="${rdistinctYear}" var="year">
@@ -57,28 +58,30 @@
 							<span>월</span>
 						</div>
 					</div>
-					<table class="holiday-list">
-						<thead class="thead">
-							<tr>
-								<th><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll()"></th>
-								<th>보낸이</th>
-								<th>내용</th>
-								<th>보낸날짜</th>
-								<th>상세보기</th>
-							</tr>
-						</thead>	
-						<tbody class="tbody" id="htable-body">
-							<c:forEach items="${rmessageList}" var="rl" varStatus="status1">
-								<tr id="tr${status1.count}">
-									<td><input type="checkbox" class="checkbox" name="checkbox" id="checkbox" value="${rl.id}"/></td>
-									<td>${rl.ownerName}</td>
-									<td>${rl.mcontent}</td>
-									<td>${rl.msendDate}</td>
-									<td><a class="${rl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a></td>
+					<div class="div2">
+						<table class="holiday-list">
+							<thead class="thead">
+								<tr>
+									<th class="checkbox-table"><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll()"></th>
+									<th>보낸사람</th>
+									<th>내용</th>
+									<th>보낸날짜</th>
+									<th>상세보기</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>	
+							<tbody class="tbody" id="htable-body">
+								<c:forEach items="${rmessageList}" var="rl" varStatus="status1">
+									<tr id="tr${status1.count}">
+										<td class="checkbox-table"><input type="checkbox" class="checkbox" name="checkbox" id="checkbox" value="${rl.id}"/></td>
+										<td>${rl.ownerName}</td>
+										<td>${rl.mcontent}</td>
+										<td>${rl.msendDate}</td>
+										<td><a class="${rl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
 					<div class="bottom-div">
 						<button type="button" id="deleteMessage">삭제</button>
 					</div>		

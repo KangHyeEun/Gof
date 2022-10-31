@@ -38,10 +38,10 @@
 }
 .div1 {
 	display: flex;
- 	justify-content: space-between; 
-	width: 100%;
-    height: 9%;
-    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 80px;
+    align-items: baseline;
 }
 .div1-1{
 	display: flex;
@@ -53,6 +53,7 @@
 .div2{
     width: 100%;
     height: 75.9%;
+   	min-height: 550px;
     display: flex;
     align-content: flex-start;
 }
@@ -68,7 +69,7 @@
     width: 100%;
     border-collapse: collapse;   
     text-align: center;
-    height: fit-content; 
+    height: fit-content;
 }
 .holiday-list tr{
 	height: 2em;
@@ -324,7 +325,7 @@ input[type=radio]{
 	color: white;
 }
 .select{
-	height:4%;
+	height: 30px;
 	width: 100%;
 /* 	border: 1px solid blue; */
 	padding: 5px;
@@ -390,18 +391,26 @@ border: 1px solid #959595;
 
 
 
-table{
+	table{
 		border:0;
 		font-size: 0.9em;
 	}
 	th, td {
 	    border: none;
-  	    padding: 0.3em;  
 		height:35px;
  	    width: 100px; 
  	    white-space: nowrap;
+ 	    padding: 0.5em;
 /* 	    white-space: nowrap; */
 	    
+	}
+	
+	#sortingYear{
+		border:none;
+	}
+	.sortingYearSpan{
+		color: black;
+		font-weight: bold;
 	}
 /* 	th:nth-child(4), td:nth-child(4){ */
 /* 		width:150px; */
@@ -424,15 +433,18 @@ table{
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 	}
-	th{
-/* 	    border-bottom: 1px solid #444444;	 */
-	}
 	.sub-sub-title{
 	    display: flex;
-	    justify-content: flex-start;
+	    justify-content: space-between;
 	    width: 100%;
 	    height: 10%;
 	    align-items: center;
+	}
+	.blueText{
+		color:#2196f3;
+	}
+	.sub-sub-title > div{
+	    display: flex;
 	}
 	.sub-sub-title h4{
 /* 	    width: 10%; */
@@ -441,9 +453,7 @@ table{
 	.sub-sub-title p{
 		font-weight: bold;
 	}
-	.sub-sub-title span{
-		color: #2196f3;
-	}
+	
 	.holiday-list tbody tr:nth-child(odd){
 	background-color: #f8f8f9;
 	}
@@ -606,64 +616,22 @@ table{
 	    background-color: #e5e5e5;
 	    border-radius: 10px;
 	}
-/* 	.holiday-list td a:active{ */
-/* 		color:white; */
-/* 		position:relative; */
-/* 		background: linear-gradient(1deg, #8d8d8d, #cdc9c9); */
-/* 		top:2px; */
-/* 	} */
-	@media screen and (max-height: 890px){
-	.holiday-list th, .holiday-list td { 
-  		padding: 0; 
- 	    font-size: 14px; 
-     	white-space: nowrap;
-	 	}
-	}
-	@media screen and (max-width: 1864px),screen and (max-height: 790px){
-		.holiday-list th, .holiday-list td {
-  	        padding: 0.2em;  
-   			font-size: 14px;
-		}
-		.select {
-    		height: 4%;
-    	}
-		.sub-title {
-		    width: 62%;
-    	}
-    	.sub-sub-title h4 {
-/*     		width: 13%; */
-    	}
-    	.div1 {
-/* 	    	height: 11%; */
-	    }
-	    .div1-1 {
-/*     		width: 21%; */
-	    }
-	}
+	
 	@media screen and (max-width: 1490px){
 		.holiday-list th, .holiday-list td {
 /*  	        padding: 1% 0; */
    			font-size: 14px;
 		}
 		.select {
-    		height: 4%;
+    		height: 30px;
     	}
 		.sub-title {
 		    width: 62%;
     	}
-    	.sub-sub-title h4 {
-/*     		width: 13%; */
-    	}
-    	.div1 {
-/* 	    	height: 11%; */
-	    }
-	    .div1-1 {
-/*     		width: 21%; */
-	    }
 	}
 @media screen and (max-width: 1280px){
 	.holiday-list th, .holiday-list td {
- 		padding: 1% 0;
+/*  		padding: 1% 0; */
 	    font-size: 14px;
     	white-space: nowrap;	
 	}
@@ -678,7 +646,7 @@ table{
 }
 @media screen and (max-height: 860px){
 	.holiday-list th, .holiday-list td { 
-  		padding: 0; 
+/*   		padding: 0;  */
  	    font-size: 14px; 
      	white-space: nowrap;
  	} 
@@ -689,13 +657,13 @@ table{
 	    font-size: 12px;
 	}
 	.holiday-list th, .holiday-list td {
-     	padding: 1% 0;
+/*      	padding: 1% 0; */
 	    font-size: 12px;
 	}
 }	
 @media screen and (max-height: 860px){
 	.holiday-list th, .holiday-list td { 
-  		padding: 0; 
+/*   		padding: 0;  */
  	    font-size: 14px; 
      	white-space: nowrap;
  	} 
@@ -706,7 +674,7 @@ table{
 	    width: 20px;
     }
 	.holiday-list th, .holiday-list td {
- 		padding: 1% 0;
+/*  		padding: 1% 0; */
 	    font-size: 11px;
 	} 
 	.pop-titleContainer {
@@ -726,7 +694,7 @@ table{
 
 @media screen and (max-height: 860px){
 	.holiday-list th, .holiday-list td { 
-  		padding: 0; 
+/*   		padding: 0;  */
  	    font-size: 14px; 
      	white-space: nowrap; 
  	}

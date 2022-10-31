@@ -99,6 +99,15 @@
 		order by id desc
 		limit 0, 5
 	</select>
+	<select id="selectBBSForHome" resultType="BBSVO">
+		select id, owner_id, owner, title, content, date_format(create_date, '%Y-%m-%d') create_date, category, is_delete, view_counts
+		from bbs
+		where
+		is_delete = 0
+		order by id desc
+		limit 0, 5;
+	</select>
+	
 	<select id="selectCountApprovalHoliday" resultType="int">
 		SELECT COUNT(approval) FROM holiday WHERE approval = '요청중' and empno = #{empno};
 	</select>
