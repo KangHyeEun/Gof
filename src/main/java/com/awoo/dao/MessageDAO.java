@@ -25,6 +25,8 @@ public interface MessageDAO {
 	public void deleteMessage(int[] checked);
 	public MessageVO getDetailMessageReceive(int id);
 	public MessageVO getDetailMessageSend(int id);
+	public void viewMessage(Map<String, Object> map);
+	
 //	public List<MessageVO> selectList();
 //	
 //	public MessageVO selectBBS(String id);

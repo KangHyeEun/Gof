@@ -145,9 +145,9 @@
 						</div>
 						<div class="pop1-1">
 							<div class="count-nums">
-								<span>총휴가일수:&nbsp;<span class="holiday-count">${holidayList[0].totalHoliday}</span></span>
-								<span>사용된 휴가일수:&nbsp;<span class="holiday-count">${holidayList[0].usedHoliday}</span></span> 
-								<span> 잔여휴가일수:&nbsp;<span class="holiday-count">${holidayList[0].totalHoliday - holidayList[0].usedHoliday}</span></span>
+								<span>총휴가일수:&nbsp;<span class="holiday-count">${countHoliday.totalHoliday}</span></span>
+								<span>사용된 휴가일수:&nbsp;<span class="holiday-count">${countHoliday.usedHoliday}</span></span> 
+								<span> 잔여휴가일수:&nbsp;<span class="holiday-count">${countHoliday.totalHoliday - countHoliday.usedHoliday}</span></span>
 							</div>
 							<div class="pop2">
 								<p class="p"><span class="important">*</span>휴가 종류</p>

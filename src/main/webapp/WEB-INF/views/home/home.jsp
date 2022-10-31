@@ -22,10 +22,12 @@
 	width:100%;
 	height:100%;
 	border-radius: 5px;
+	color:#299cff;
 }
 .bbs-table a:hover {
-	background-color:#68686840;
-	font-weight:bold;
+    background-color: #68686840;
+    font-weight: bold;
+    color: #1e1e1e;
 }
 </style>
 </head>
@@ -216,7 +218,7 @@
 										<c:forEach var="vo" items="${noticeListForHome}"
 											varStatus="status">
 											<tr>
-												<td>${status.index+1}</td>
+												<td>${vo.id}</td>
 												<td>${vo.category}</td>
 												<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
 												<td>${vo.owner}</td>
@@ -299,7 +301,7 @@
 										<c:forEach var="vo" items="${BBSListForHome}"
 											varStatus="status">
 											<tr>
-												<td>${status.index+1}</td>
+												<td>${vo.id}</td>
 												<td>${vo.category}</td>
 												<td><a href="${pageContext.request.contextPath}/bbsPage/bbs/${vo.id}">${vo.title}</a></td>
 												<td>${vo.owner}</td>

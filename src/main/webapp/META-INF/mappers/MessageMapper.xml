@@ -121,6 +121,11 @@
 		</foreach>
 	</delete>
 
+	<update id="viewMessage">
+		UPDATE message SET VIEW = 1 
+		WHERE mreceiver_Id = #{empno} 
+		AND id= #{id}
+	</update>
 
 <!-- 	<select id="selectList" resultType="MessageVO"> -->
 <!-- 		select id, mowner, mtitle, -->

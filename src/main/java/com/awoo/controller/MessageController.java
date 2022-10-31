@@ -107,7 +107,9 @@ public class MessageController {
 	@ResponseBody   
 	@PostMapping("/message/detail/receive")
 	public MessageVO MessageDetailReceive(@RequestBody Map<String, String> map,
-									Model model) {
+										  @SessionAttribute("personalInfoVO") PersonalInfoVO vo,
+										  Model model) {
+		model.addAttribute("empno", vo.getEmpno());
 		
 		int id = Integer.parseInt((String)map.get("id"));
 		model.addAttribute("id", id);
@@ -118,7 +120,7 @@ public class MessageController {
 	@ResponseBody   
 	@PostMapping("/message/detail/send")
 	public MessageVO MessageDetailSend(@RequestBody Map<String, String> map,
-									Model model) {
+									   Model model) {
 		
 		int id = Integer.parseInt((String)map.get("id"));
 		model.addAttribute("id", id);

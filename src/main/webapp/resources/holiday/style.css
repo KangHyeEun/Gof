@@ -644,40 +644,26 @@ border: 1px solid #959595;
 	.tbody tr td:nth-child(6){
 		display: none;
 	}
-}
-@media screen and (max-height: 860px){
-	.holiday-list th, .holiday-list td { 
-/*   		padding: 0;  */
- 	    font-size: 14px; 
-     	white-space: nowrap;
- 	} 
+	.div1 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 80px;
+    align-items: center;
+    }
 }
 @media screen and (max-width: 1050px) {
 	#apply-holiday {
 	    width: 90px;
 	    font-size: 12px;
 	}
-	.holiday-list th, .holiday-list td {
-/*      	padding: 1% 0; */
-	    font-size: 12px;
-	}
 }	
-@media screen and (max-height: 860px){
-	.holiday-list th, .holiday-list td { 
-/*   		padding: 0;  */
- 	    font-size: 14px; 
-     	white-space: nowrap;
- 	} 
-}
+
 @media screen and (max-width: 668px) {
 	.num {
 	    height: 78%;
 	    width: 20px;
     }
-	.holiday-list th, .holiday-list td {
-/*  		padding: 1% 0; */
-	    font-size: 11px;
-	} 
 	.pop-titleContainer {
     	width: 64%;
     }
@@ -693,11 +679,3 @@ border: 1px solid #959595;
     }
 }
 
-@media screen and (max-height: 860px){
-	.holiday-list th, .holiday-list td { 
-/*   		padding: 0;  */
- 	    font-size: 14px; 
-     	white-space: nowrap; 
- 	}
-}
-	

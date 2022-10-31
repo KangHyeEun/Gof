@@ -112,11 +112,19 @@ public class MessageService {
 		dao.deleteMessage(checked);
 	}
 	public MessageVO getDetailMessageReceive(Model model) {
+		int empno = (int)model.getAttribute("empno");
 		int id = (int)model.getAttribute("id");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("empno", empno);
+		map.put("id",id);
+		dao.viewMessage(map);
+		
 		return dao.getDetailMessageReceive(id);
 	}
 	public MessageVO getDetailMessageSend(Model model) {
-		int id = (int)model.getAttribute("id");
+		
+		int id = (int)model.getAttribute("id");		
 		return dao.getDetailMessageSend(id);
 	}
 	

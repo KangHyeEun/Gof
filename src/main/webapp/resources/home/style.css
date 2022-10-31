@@ -1120,57 +1120,58 @@ header i {
 	   }
 	   .right-section{
 	   width: 100%;
-	   height: calc(100vh - 500px);
+/* 	   height: calc(100vh - 500px); */
+	   align-items:center;
 	   
 	   }
 	   .div4{
 	   width: 100%;
-	   height: 73%;
+	   height: 56%;
 	   }
 	   .div1{
 		width: 100%;
-	    display: flex;
-	    justify-content: center;
-	    align-items: center;
-	    height: 24%;
+	    height: 41%;
+	    margin-bottom: 10px; 
 	   }
-	   
-	   .sec_cal .cal_wrap .days {
-	   margin: 0;
-	   padding: 0;
+	   .bbs-container{
+	       height: 92%;
 	   }
-	   .sec_cal .cal_wrap .dates {
-    	height: 133px;	
-	   }
-	   .sec_cal .cal_nav .year-month {
-	    font-size: 16px;
-	   }
-	   .sec_cal .cal_nav {
-	    height: 20%;
-	    }
-	    .cal-subtitle {
-	    height: 16%;
-	    }
-	     .bbs-table{
-     	 display: none;
-    	}
-    	.hidden-link-to-bbs{
-    		display:block;
-    	}
-    	.bbs-container{
-    	width: 80%;
-	    border: 1px solid black;
-	    border-radius: 5px;
-	    background: #272454;
-	    color: white;
-	    font-size: bold;
-	    font-weight: bold;
-    	height: 20%;
-    	}
-    	.bbs-container a{    	
-	    text-decoration: none;
-	    color: white;
-    	}
+/* 	   .sec_cal .cal_wrap .days { */
+/* 	   margin: 0; */
+/* 	   padding: 0; */
+/* 	   } */
+/* 	   .sec_cal .cal_wrap .dates { */
+/*     	height: 133px;	 */
+/* 	   } */
+/* 	   .sec_cal .cal_nav .year-month { */
+/* 	    font-size: 16px; */
+/* 	   } */
+/* 	   .sec_cal .cal_nav { */
+/* 	    height: 20%; */
+/* 	    } */
+/* 	    .cal-subtitle { */
+/* 	    height: 16%; */
+/* 	    } */
+/* 	     .bbs-table{ */
+/*      	 display: none; */
+/*     	} */
+/*     	.hidden-link-to-bbs{ */
+/*     		display:block; */
+/*     	} */
+/*     	.bbs-container{ */
+/*     	width: 80%; */
+/* 	    border: 1px solid black; */
+/* 	    border-radius: 5px; */
+/* 	    background: #272454; */
+/* 	    color: white; */
+/* 	    font-size: bold; */
+/* 	    font-weight: bold; */
+/*     	height: 20%; */
+/*     	} */
+/*     	.bbs-container a{    	 */
+/* 	    text-decoration: none; */
+/* 	    color: white; */
+/*     	} */
     	.bbs-subtitle {	
     	   height: 25%;
     	   justify-content: center;
@@ -1181,33 +1182,41 @@ header i {
     	}
    }
    @media ( max-width: 800px ) {
+   		.greeting {
+	    font-size: 10px;
+	    height: 50px;
+	    }
+  		
    		.left-section{
 	   	flex-direction:column;
 	    width: 100%;
-	    height:45%;
+/* 	    height:45%; */
 	    max-height: 48%;
 	   }
 	   .right-section{
-	    height:45%;
-	    max-height: 48%;
+/* 	    height:45%; */
+/* 	    max-height: 48%; */
 	   }
 	   .left-section .div2{
-	       width: 100%;
-		    height: 68%;
-		    flex-direction: row;
+	    width: 100%;
+    	height: 500px;
+		margin-bottom: 13px;
+		flex-direction: row;
 	   }
 	   .left-section .div3{
 	   width: 100%;
-	   height: 30%;
+	   margin-bottom: 5px;
+/* 	   height: 30%; */
 	   }
 	   .left-section .div4{
 	   width: 100%;
-	   height: 68%;
+	   margin-bottom: 9px;
+/* 	   height: 68%; */
 	   flex-direction: row;
 	   }
 	   .left-section .div1{
 	   width: 100%;
-	   height: 30%;
+/* 	   height: 30%; */
 	   }
 		.div2-1-1-2 {
     		width: 93%;
@@ -1242,28 +1251,37 @@ header i {
 	    display: none;
 	    }
     	.donut {
-	    display: none;
+/* 	    display: none; */
 	    }
 	    .donuts {
 	    width: 40%;
-	    height: 70%;
+	    height: 94%;
 	    }
 	   .donut-info{
 	    flex-direction: row;
     	justify-content: space-between;
+    	font-size:13px;
 	   }
 	   .first-donut-info {
 		justify-content: center;
 		}
 	   .sec_cal .cal_wrap .dates {
-	    height: 0;
+	    height: 210px;
 	    }
 /* 	    .bbs-container { */
 /* 	    width: 160px; */
 /* 	    height: 70%; */
 /* 	    font-size: 14px; */
 /* 	    } */
-	   
+	   .outer-div-bbs {
+	       flex-direction: column-reverse;
+	   }
+	   .right-outersection{
+	       width:100%;
+	   }
+	   .right-inner-outer {
+		    width: 100%;
+		}
    }
     @media ( max-width: 635px ) {
 /*      	.bbs-subtitle{ */
