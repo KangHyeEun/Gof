@@ -176,8 +176,7 @@ nav {
 
 									<table id="table1" class="table1">
 										<tr>
-											<th><input type="checkbox" name="allCheck" id="allCheck"
-												onclick="checkAll()"></th>
+											<th><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll()"></th>
 											<th>No.</th>
 											<th>이름</th>
 											<th>사원번호</th>

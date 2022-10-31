@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<p>확인임마</p>
+		<p>확인</p>
 </body>
 </html>

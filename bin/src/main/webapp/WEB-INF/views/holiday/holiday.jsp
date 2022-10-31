@@ -42,7 +42,7 @@
 						<h4>◎ 휴가 신청내역</h4>
 <%-- 						<p>잔여일수 : <span>${holidayList[0].totalHoliday}</span>일</p> --%>
 <%-- 						<p>사용일수 : <span>${holidayList[0].usedHoliday}</span>일</p> --%>
-						<p>잔여일수 : <span>${holidayList[0].totalHoliday - holidayList[0].usedHoliday}</span>일</p>
+						<p>잔여일수 : <span>${countHoliday.totalHoliday - countHoliday.usedHoliday}</span>일</p>
 					</div>
 					 
 					<div class="div2">
@@ -90,7 +90,7 @@
 							List<HolidayVO> list = (List<HolidayVO>)request.getAttribute("holidayList");
 							
 							int celi = (int)Math.ceil(list.size()/10);
-							int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin+9 : celi+1;
+							int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin+9 : list.size()%10 == 0 ? celi : celi+1;
 							%>
 							<c:forEach begin="<%=begin%>" end="<%=endPage%>" varStatus="status" var="var">
 								<c:choose>
@@ -436,28 +436,6 @@
 			}).then(response => response.json())
 		
 			.then(data => {
-// 				console.log("---------------------------")
-// 				console.log(data.id)
-// 				console.log(data.hwriteDate)
-// 				console.log(data.htype)
-// 				console.log(data.hstartDate)
-// 				console.log(data.hendDate)
-// 				console.log(data.hcontent)
-// 				console.log(data.halfDay)
-// 				console.log(data.approval)
-// 				console.log(data.approvalDate) // 요청날자는 null 가능성 있음
-// 				console.log(data.countDate)
-// 				console.log(data.empno)
-// 				console.log(data.totalHoliday)
-				
-// 				<div>휴가 신청일: <span id="pop-writeDate"></span></div>
-// 				<div>휴가 종류: <span id="pop-htype"></span></div>
-// 				<div>반차 종류: <span id="pop-halfDay"></span></div>
-// 				<div>기간: <span id="pop-hstartDate"></span>~<span id="pop-hendDate"></span></div>
-// 				<div>일수: <span id="pop-countDate"></span></div>
-// 				<div>내용: <span id="pop-hcontent"></span></div>
-// 				<div>처리 상태: <span id="pop-approval"></span></div>
-// 				<div>결재일: <span id="pop-approvalDate"></span></div>
 
 				document.getElementById("pop-writeDate").innerHTML=data.hwriteDate;
 				document.getElementById("pop-htype").innerHTML=data.htype;

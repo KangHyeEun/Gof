@@ -53,8 +53,8 @@
                                 class="menu-down2">▼</span></li>
                         <li>
                             <ul class="sub2">
-                                <li><a href="${pageContext.request.contextPath}/message">받은 쪽지함</a></li>
-                                <li><a href="${pageContext.request.contextPath}/message/message2">보낸 쪽지함</a></li>
+                                <li><a href="${pageContext.request.contextPath}/ReceivedMessage?page=1&&name=0&&year=0&&month=0">받은 쪽지함</a></li>
+                                <li><a href="${pageContext.request.contextPath}/SendMessage?page=1&&name=0&&year=0&&month=0">보낸 쪽지함</a></li>
                             </ul>
                         </li>
                     </ul>
