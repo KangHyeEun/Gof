@@ -1639,7 +1639,7 @@ else {
 //	}
 	if (Number(localMonth1) == (dateMonth+1)) {
 		console.log("성공111");
-		date.setMonth(13);
+		date.setMonth(Number(localMonth1));
 		console.log("성공222");
 	}
 	
