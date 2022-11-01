@@ -9,11 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
+	href="${pageContext.request.contextPath}/resources/main.css">
 <!-- <link rel="stylesheet" -->
 <%-- 	href="${pageContext.request.contextPath}/orgChart/orgChart.css"> --%>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/admin/admin1.css">
+	href="${pageContext.request.contextPath}/resources/admin/admin1.css">
 <title>Insert title here</title>
 <style type="text/css">
 
@@ -36,7 +36,7 @@
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 			<div class="header-logout">
 				<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 			</div>
@@ -174,7 +174,7 @@
 													</c:when>
 												</c:choose></td>
 											<td id="detail${status.count}" class="detail"
-												value1="${i.id}" value2="${i.empno}" style="color: #ababaf;"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a></td>
+												value1="${i.id}" value2="${i.empno}" style="color: #ababaf;"><img src="${pageContext.request.contextPath}/resources/imges/magni-icon.png" /></a></td>
 										</tr>
 									</c:forEach>
 								</table>

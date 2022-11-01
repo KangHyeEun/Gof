@@ -8,15 +8,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
+	href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/bbs/setstyle.css" />
+	href="${pageContext.request.contextPath}/resources/bbs/setstyle.css" />
 <!-- ckeditor 적용 -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>	
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>	
 </head>
 <body>
 	<div class="header">
-		<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+		<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 		<div class="header-logout">
 			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 		</div>

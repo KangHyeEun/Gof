@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
+	href="${pageContext.request.contextPath}/resources/main.css">
 
 <title>Insert title here</title>
 <style type="text/css">
@@ -246,7 +246,7 @@ textarea {
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 			<div class="header-logout">
 				<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 			</div>

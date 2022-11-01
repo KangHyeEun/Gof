@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/holiday/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/message/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/holiday/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/message/style.css">
 <title>Insert title here</title>
 <style>
 
@@ -20,7 +20,7 @@
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG"/>
             <div class="header-logout">	<a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
 		<div class="container">
@@ -80,7 +80,7 @@
 										<td>${rl.ownerName}</td>
 										<td>${rl.mcontent}</td>
 										<td>${rl.msendDate}</td>
-										<td><a class="${rl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a>
+										<td><a class="${rl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/resources/imges/magni-icon.png" /></a>
 										<c:if test="${rl.view != 1}"><span style="color: #299cff">🟠</span></c:if>
 										<c:if test="${rl.view == 1}"><span style="color: #299cff">🟢</span></c:if>
 										</td>

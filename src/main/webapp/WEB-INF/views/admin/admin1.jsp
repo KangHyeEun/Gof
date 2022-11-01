@@ -9,8 +9,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/admin1.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/admin1.css">
 <title>Insert title here</title>
 <style type="text/css">
 </style>
@@ -19,7 +19,7 @@
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 			<div class="header-logout">   <a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
 		<div class="container">
@@ -35,7 +35,7 @@
 							<input name="page" value="1" style="display: none;" />
 							<div class="div1">
 								<h4>
-									<img src="${pageContext.request.contextPath}/imges/admin2.png"
+									<img src="${pageContext.request.contextPath}/resources/imges/admin2.png"
 										class="timg2" />직원 상세 검색
 								</h4>
 								<div class="selectD">
@@ -61,7 +61,7 @@
 									<div id="category" onclick="test()">
 										<p id="categoryA">상세조건</p>
 										<img id="categoryA"
-											src="${pageContext.request.contextPath}/imges/down.JPG">
+											src="${pageContext.request.contextPath}/resources/imges/down.JPG">
 									</div>
 									<button class="btn1">검색하기</button>
 								</div>
@@ -104,7 +104,7 @@
 					</div>
 					<div class="table" style="width: 100%;">
 						<h4>
-							<img src="${pageContext.request.contextPath}/imges/total.png"
+							<img src="${pageContext.request.contextPath}/resources/imges/total.png"
 								class="timg" />총 <span id="count"></span>명
 						</h4>
 						<form action="${pageContext.request.contextPath}/admin/updateD"
@@ -147,7 +147,7 @@
 												<td>${i.totalHoliday}</td>
 												<td>${i.estatus}</td>
 												<td><a
-													href="${pageContext.request.contextPath}/admin/detail/${i.id}?empno=${i.empno}" style="color: #ababaf;"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a></td>
+													href="${pageContext.request.contextPath}/admin/detail/${i.id}?empno=${i.empno}" style="color: #ababaf;"><img src="${pageContext.request.contextPath}/resources/imges/magni-icon.png" /></a></td>
 											</tr>
 											
 											<script type="text/javascript">

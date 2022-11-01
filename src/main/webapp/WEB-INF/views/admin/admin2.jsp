@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/admin2.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/admin2.css">
 <title>Insert title here</title>
 <style type="text/css">
 	.container {
@@ -32,7 +32,7 @@
 
 	<div class="container-wrap">
 		<div class="header">
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 			<div class="header-logout">   <a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
 		<div class="container">
@@ -52,7 +52,7 @@
 							<div class="personal-wrap">
 								<div class="prodiv">
 									<img id="showimg"
-										src="${pageContext.request.contextPath}/imges/user.png">
+										src="${pageContext.request.contextPath}/resources/imges/user.png">
 									<label for="proimg" id="img">사진등록</label><input type="file"
 										name="proimg" id="proimg" accept="image/*" multiple>
 								</div>

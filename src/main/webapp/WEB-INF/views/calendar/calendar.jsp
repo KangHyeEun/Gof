@@ -16,8 +16,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/calendar/cal-style.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/calendar/cal-style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 </head>
 <body onload="refreshFunc();">
@@ -25,7 +25,7 @@
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG"/>
             <div class="header-logout">
             	<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </div>
@@ -211,7 +211,7 @@
 	</script>
 	
 <!-- calendar -->
-    <script src="${pageContext.request.contextPath}/calendar/cal-script.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/calendar/cal-script.js"></script>
     
     <script type="text/javascript">
     	

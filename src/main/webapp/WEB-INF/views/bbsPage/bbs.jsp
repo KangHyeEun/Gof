@@ -4,18 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/bbsstyle.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bbs/bbsstyle.css"/>
 <title>Insert title here</title>
-<style type="text/css">
-
-</style>
 </head>
 <body>
 <div class="container-wrap">
 	<div class="header">
 		<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-		<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+		<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 		<div class="header-logout">
 			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 		</div>
@@ -47,7 +44,7 @@
 						
 						<input type="text" name="keyword" id="keyword" value="${page.keyword}"/>
 						<button type="submit" id="search">
-							<img src="${pageContext.request.contextPath}/imges/search.svg"/>
+							<img src="${pageContext.request.contextPath}/resources/imges/search.svg"/>
 						</button>
 					</div>				
 				</div>

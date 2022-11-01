@@ -7,8 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/holiday/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/holiday/style.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 			<div class="header-logout">	<a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
 		<div class="container">
@@ -85,7 +85,7 @@
 										<td>${hl.approval}</td>
 										<td>${hl.approvalDate != null ? hl.approvalDate : "-"}</td>
 <%-- 										<td><a class="${hl.id}" id="atag${status1.count}"></a></td> --%>
-										<td><a class="${hl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a></td>
+										<td><a class="${hl.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/resources/imges/magni-icon.png" /></a></td>
 									</tr>
 								</c:forEach>
 							</tbody>	

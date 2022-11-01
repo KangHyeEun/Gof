@@ -8,9 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
+	href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/home/style.css">
+	href="${pageContext.request.contextPath}/resources/home/style.css">
 <title>Insert title here</title>
 <style>
 /*자바스크립트로 width를 보내기 때문에 얘는 style.css로 옮길 수 없음*/
@@ -61,7 +61,7 @@
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 			<div class="header-logout">
 				<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 			</div>
@@ -84,13 +84,13 @@
 								<div class="div2-1-1">
 									<div class="div2-1-1-1">
 										<img
-											src="${pageContext.request.contextPath}/imges/contact.png"
+											src="${pageContext.request.contextPath}/resources/imges/contact.png"
 											alt="">
 									</div>
 									<div class="div2-1-1-2">
 										<p class="infoEcheckAdmin">
 											<img
-												src="${pageContext.request.contextPath}/imges/badge_staff.png" />
+												src="${pageContext.request.contextPath}/resources/imges/badge_staff.png" />
 											${employeeInfo.checkAdmin == 1? "관리자" : "일반 직원"}
 										</p>
 										<p class="infoEname">${ename}
@@ -105,7 +105,7 @@
 											<span>없음</span>
 										</c:if>
 										<c:if test="${countView > 0}">
-											<span>${countView}</span>통 <img src="${pageContext.request.contextPath}/imges/message.png" class="message-icon" />
+											<span>${countView}</span>통 <img src="${pageContext.request.contextPath}/resources/imges/message.png" class="message-icon" />
 										</c:if>
 										</a>
 										<div class="buttons">
@@ -184,7 +184,7 @@
 
 								<div class="cal-container-right">
 									<div class="cal-subTitle">
-										<img src="${pageContext.request.contextPath}/imges/list.png" alt="" />
+										<img src="${pageContext.request.contextPath}/resources/imges/list.png" alt="" />
 										<p id="today-date"></p>
 									</div>
 									<div class="cal-list">
@@ -224,7 +224,7 @@
 										<c:if test="${todayCalendar.size() <= 0}">
 											<div class="emptybox-container">
 												<img
-													src="${pageContext.request.contextPath}/imges/emptybox.png" />
+													src="${pageContext.request.contextPath}/resources/imges/emptybox.png" />
 												<p>일정이 없습니다</p>
 											</div>
 										</c:if>
@@ -254,7 +254,7 @@
 											varStatus="status">
 											<tr>
 												<td>${vo.id}</td>
-												<td>${vo.category}&nbsp;&nbsp;<c:if test="${vo.category == '중요'}"><img src="${pageContext.request.contextPath}/imges/horn.svg"/></c:if></td>
+												<td>${vo.category}&nbsp;&nbsp;<c:if test="${vo.category == '중요'}"><img src="${pageContext.request.contextPath}/resources/imges/horn.svg"/></c:if></td>
 												<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
 												<td>${vo.owner}</td>
 												<td>${vo.createDate}</td>
@@ -375,9 +375,9 @@
 							사원번호 - <span>${employeeInfo.empno}</span>
 						</p>
 						<p class="pop-date-container">
-							<img src="${pageContext.request.contextPath}/imges/cal-icon.png" class="cal-icon" />
+							<img src="${pageContext.request.contextPath}/resources/imges/cal-icon.png" class="cal-icon" />
 							<span id="todayEnterDate"></span>
-							<img src="${pageContext.request.contextPath}/imges/time-icon.png"
+							<img src="${pageContext.request.contextPath}/resources/imges/time-icon.png"
 								class="cal-icon" /> <span id="todayEnterTime"></span>
 						</p>
 					</div>
@@ -405,9 +405,9 @@
 									test="${employeeInfo.edepartment != null}"> / </c:if></span><span>${employeeInfo.eposition}</span>
 						</p>
 						<p class="pop-date-container">
-							<img src="${pageContext.request.contextPath}/imges/cal-icon.png"
+							<img src="${pageContext.request.contextPath}/resources/imges/cal-icon.png"
 								class="cal-icon" /> <span id="todayLeaveDate"></span> <img
-								src="${pageContext.request.contextPath}/imges/time-icon.png"
+								src="${pageContext.request.contextPath}/resources/imges/time-icon.png"
 								class="cal-icon" /> <span id="todayLeaveTime"></span>
 						</p>
 					</div>
@@ -719,17 +719,17 @@
 		        const {temp, feels_like, humidity} = info.main;
 		
 		        if(id == 800){
-		            wIcon.src = "${pageContext.request.contextPath}/imges/weather-icons/clear.svg";
+		            wIcon.src = "${pageContext.request.contextPath}/resources/imges/weather-icons/clear.svg";
 		        }else if(id >= 200 && id <= 232){
-		            wIcon.src = "${pageContext.request.contextPath}/imges/weather-icons/storm.svg";  
+		            wIcon.src = "${pageContext.request.contextPath}/resources/imges/weather-icons/storm.svg";  
 		        }else if(id >= 600 && id <= 622){
-		            wIcon.src = "${pageContext.request.contextPath}/imges/weather-icons/snow.svg";
+		            wIcon.src = "${pageContext.request.contextPath}/resources/imges/weather-icons/snow.svg";
 		        }else if(id >= 701 && id <= 781){
-		            wIcon.src = "${pageContext.request.contextPath}/imges/weather-icons/haze.svg";
+		            wIcon.src = "${pageContext.request.contextPath}/resources/imges/weather-icons/haze.svg";
 		        }else if(id >= 801 && id <= 804){
-		            wIcon.src = "${pageContext.request.contextPath}/imges/weather-icons/cloud.svg";
+		            wIcon.src = "${pageContext.request.contextPath}/resources/imges/weather-icons/cloud.svg";
 		        }else if((id >= 500 && id <= 531) || (id >= 300 && id <= 321)){
-		            wIcon.src = "${pageContext.request.contextPath}/imges/weather-icons/rain.svg";
+		            wIcon.src = "${pageContext.request.contextPath}/resources/imges/weather-icons/rain.svg";
 		        }
 		        
 		        weatherPart.style.visibility = "visible";

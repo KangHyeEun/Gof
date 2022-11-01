@@ -8,11 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
+	href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/admin/admin1.css">
+	href="${pageContext.request.contextPath}/resources/admin/admin1.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/orgChart/orgChart.css">
+	href="${pageContext.request.contextPath}/resources/orgChart/orgChart.css">
 
 <title>Insert title here</title>
 <style type="text/css">
@@ -23,7 +23,7 @@
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 			<div class="header-logout">
 				<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 			</div>
@@ -186,7 +186,7 @@
 											<div class="div1">
 												<h4>
 													<img
-														src="${pageContext.request.contextPath}/imges/admin2.png"
+														src="${pageContext.request.contextPath}/resources/imges/admin2.png"
 														class="timg2" />직원 상세 검색
 												</h4>
 												<div class="selectD" style="height: 40px;">
@@ -213,7 +213,7 @@
 									</div>
 									<div class="table" style="width: 100%;">
 										<h4>
-											<img src="${pageContext.request.contextPath}/imges/total.png"
+											<img src="${pageContext.request.contextPath}/resources/imges/total.png"
 												class="timg" />총 <span id="count"></span>명
 										</h4>
 										<div id="EpTable">

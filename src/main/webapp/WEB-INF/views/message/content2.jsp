@@ -5,12 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 비동기 댓글 -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/BBS/js/jquery-3.6.1.min.js"></script>
 <!-- 스타일 적용 -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
+	href="${pageContext.request.contextPath}/resources/main.css">
 <title>Insert title here</title>
 <style>
 .inner-div-bbs {
@@ -131,7 +128,7 @@
 <body>
 
 	<div class="header">
-		<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+		<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 		<div class="header-logout">
 			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 		</div>

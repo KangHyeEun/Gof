@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/login/style.css">
+	href="${pageContext.request.contextPath}/resources/login/style.css">
 <title>Insert title here</title>
 <style type="text/css">
 	
@@ -15,7 +15,7 @@
 <body>
 	<div class="wrapper fadeInDown">
 		<div class="container">
-		<img src="${pageContext.request.contextPath}/imges/logo-white.png" class="login-logo"/>
+		<img src="${pageContext.request.contextPath}/resources/imges/logo-white.png" class="login-logo"/>
 			<div id="formContent">
 				<!-- Tabs Titles -->
 				<h2 class="active">LOGIN</h2>
