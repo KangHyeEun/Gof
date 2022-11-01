@@ -71,7 +71,7 @@ const menuDown3 = document.querySelector(".menu-down3");
 let  subToggle3 = true;
 function show_sub3(){
   if(subToggle3){
-    subBar3.style.height="80px";
+    subBar3.style.height="160px";
     subToggle3 = !subToggle3;
     menuUp3.classList.remove("btn-display");
     menuDown3.classList.add("btn-display");

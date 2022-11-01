@@ -55,10 +55,8 @@ public class AdminController {
 	@GetMapping("/admin")
 	public String admin(Model model,@RequestParam("page") String page,@RequestParam Map<String,String> map) {
 		model.addAttribute("page", page);
-		System.out.println(map);
 		Pservice.selectDetail(model,map);
 		
-		System.out.println(map.get("estatus"));
 		return "/admin/admin1";
 	}
 	
@@ -162,5 +160,13 @@ public class AdminController {
 		model.addAttribute("name", name);
 
 		return Eservice.AssociatedSearch(vo,model);
+	}
+	
+	
+	// 부서 관리 페이지 접근
+	@GetMapping("/admin/department")
+	public String department(Model model,HttpServletRequest request) {
+		Eservice.position(model);
+		return "/admin/department";
 	}
 }

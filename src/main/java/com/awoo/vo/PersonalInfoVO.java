@@ -7,10 +7,11 @@ public class PersonalInfoVO {
 	private String birthday;
 	private String password;
 	private String email;
-	private int tel_number;
-	private int phone_number;
+	private String tel_number;
+	private String phone_number;
 	private String address;
 	private int empno;
+	
 	public int getId() {
 		return id;
 	}
@@ -47,16 +48,16 @@ public class PersonalInfoVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getTel_number() {
+	public String getTel_number() {
 		return tel_number;
 	}
-	public void setTel_number(int tel_number) {
+	public void setTel_number(String tel_number) {
 		this.tel_number = tel_number;
 	}
-	public int getPhone_number() {
+	public String getPhone_number() {
 		return phone_number;
 	}
-	public void setPhone_number(int phone_number) {
+	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
 	public String getAddress() {

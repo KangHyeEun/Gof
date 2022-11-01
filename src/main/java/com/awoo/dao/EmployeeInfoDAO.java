@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.awoo.vo.EmployeeInfoVO;
 import com.awoo.vo.HolidayVO;
 import com.awoo.vo.InfoVO;
+import com.awoo.vo.PositionDepartmentVO;
 
 @Mapper
 public interface EmployeeInfoDAO {
@@ -33,4 +34,24 @@ public interface EmployeeInfoDAO {
 	public List<EmployeeInfoVO> selectHolidayTotal(int empno);
 
 	public List<EmployeeInfoVO> HEdepartment();
+	
+	/*부서 관리*/
+	public List<PositionDepartmentVO> department();
+	public List<PositionDepartmentVO> countDepartment();
+	public void insertDepartment(PositionDepartmentVO vo);
+	public void updateDepartment(PositionDepartmentVO vo);
+	public void deleteDepartment(PositionDepartmentVO vo);
+	
+	/*직책 관리*/
+	public List<PositionDepartmentVO> position();
+	public List<PositionDepartmentVO> countPosition();
+	public void insertPosition(PositionDepartmentVO vo);
+	public void updatePosition(PositionDepartmentVO vo);
+	public void deletePosition(PositionDepartmentVO vo);
 }
+
+
+
+
+
+
