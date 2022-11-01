@@ -230,7 +230,7 @@
 				
 			<!-- 검색 기능------------------------------- -->
 				<div class="helpBar">
-			        <div class="search-wrap">
+			        <div class="search-wrap"> 
 						<select name="searchType" id="searchType">
 						    <option value="title" <c:if test="${page.searchType eq 'title'}">selected</c:if>>제목</option>
 					        <option value="content" <c:if test="${page.searchType eq 'content'}">selected</c:if>>내용</option>
