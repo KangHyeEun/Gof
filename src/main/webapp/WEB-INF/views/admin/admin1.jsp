@@ -9,99 +9,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/admin/admin1.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/admin1.css">
 <title>Insert title here</title>
 <style type="text/css">
-.container {
-	height: auto;
-}
-
-nav {
-	height: auto;
-}
-
-.scroll {
-	height: 75vh;
-}
-
-.paging {
-	display: flex;
-}
-.num{
-	height: 100%;
-	width: 26px;
- 	margin: 0 2px; 
-	border: 1px solid #14abab;
-	display: flex;
-	justify-content:center;
-	align-items:center;
-/* 	font-weight: bold; */
- 	border-radius:10px; 
-	font-size:11px;
-	color: black;
-	}
-	
-	.num a{
-	text-decoration : none;
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content:center;
-	align-items:center;
-	}
-	.checked{
-	background-color: #14abab;
-	color: white;
-	border: 1px solid #14abab;
-	}
-	
-	.notchecked:hover{
-	background-color: #c9eaec;
-	color: black;
-	border: 1px solid #c9eaec;
-	}
-	
-	.paging {
-		width: 100%;
-	    justify-content: center;
-	    padding-top: 1%;
-	    height: auto;
-	    align-items: center;
-	}
-	#ul {
-		display: flex;
-	}
-	.span1{
-		cursor: pointer;
-	}
-	.table1>tbody:nth-child(2n) {
-	background-color: #f8f8f9;
-}
-
-#suggestdiv{
-		width: 75%;
-		height: auto;
-		border: 1px solid black; 
-		display: none;
-		background: white;
-	}
-.t1 tr td {
-	width: 25%;
-}
-
-#estatus1 {
-	padding: 2%;
-    width: 80%;
-    border-color: #c9eaec;
-} 
 </style>
 </head>
 <body>
 	<div class="container-wrap">
 		<div class="header">
+			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
 			<div class="header-logout">   <a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
@@ -111,7 +28,6 @@ nav {
 				<div class="inner-div-bbs">
 					<div class="select">
 						<div class="intro">
-						
 							<h3>직원 정보 관리</h3>
 							<p>⏏홈>관리자>인사관리</p>
 						</div>
@@ -150,7 +66,7 @@ nav {
 									<button class="btn1">검색하기</button>
 								</div>
 								<div id="detailS">
-									<table id="t1" style="width: 100%">
+									<table id="t1">
 										<tr>
 											<td>재직상태</td>
 											<td>
@@ -169,14 +85,17 @@ nav {
 										<tr>
 											<td>입사기간</td>
 											<td><input type="date" name="ehiredDate" id="startDate"
-												placeholder="(시작일)"> ~ <input type="date"
+												placeholder="(시작일)">~<input type="date"
 												name="date" id="endDate" placeholder="(종료일)"></td>
-											<td><span id="s1" class="styleA" onclick="change()">최근
-													1개월</span></td>
-											<td><span id="s2" class="styleA" onclick="change()">최근
-													2개월</span></td>
-											<td><span id="s3" class="styleA" onclick="change()">최근
-													3개월</span></td>
+											<td>
+												<span id="s1" class="styleA" onclick="change()">최근 1개월</span>
+<!-- 											</td> -->
+<!-- 											<td> -->
+												<span id="s2" class="styleA" onclick="change()">최근 2개월</span>
+<!-- 											</td> -->
+<!-- 											<td> -->
+												<span id="s3" class="styleA" onclick="change()">최근 3개월</span>
+											</td>
 										</tr>
 									</table>
 								</div>
@@ -228,7 +147,7 @@ nav {
 												<td>${i.totalHoliday}</td>
 												<td>${i.estatus}</td>
 												<td><a
-													href="${pageContext.request.contextPath}/admin/detail/${i.id}?empno=${i.empno}" style="color: #ababaf;">상세보기</a></td>
+													href="${pageContext.request.contextPath}/admin/detail/${i.id}?empno=${i.empno}" style="color: #ababaf;"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a></td>
 											</tr>
 											
 											<script type="text/javascript">
@@ -239,13 +158,14 @@ nav {
 											
 										</c:forEach>
 									</table>
+								</div>
 								<!-- 페이징 처리 -->
 									<div class="paging">
 										
 										<c:choose>
 										<c:when test="${param.page == 1}">
 											<div class="num">
-												<span id="prev" style="color: #14abab;">◀</span>
+												<span id="prev">◀</span>
 											</div>
 										</c:when>
 										<c:otherwise>
@@ -288,7 +208,7 @@ nav {
 										<c:choose>
 											<c:when test="${param.page eq lastNum}">
 												<div class="num">
-													<span id="next" style="color: #14abab;">▶</span>
+													<span id="next">▶</span>
 												</div>
 											</c:when>
 											<c:otherwise>
@@ -302,7 +222,7 @@ nav {
 										</c:choose>
 
 									</div>
-								</div>
+								
 							</div>
 						<!-- 선택 직원 정보 수정 -->
 							<div class="modal_dim" id="modal_dim">

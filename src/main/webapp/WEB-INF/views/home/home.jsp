@@ -51,6 +51,10 @@
 /* height: 85%; */
 /* over-flow:auto; */
 }
+.message-icon{
+    width: 18px;
+    height: 23px;
+}
 </style>
 </head>
 <body>
@@ -96,7 +100,14 @@
 											사원번호 : <span>${employeeInfo.empno}</span>
 										</p>
 										<!--<p class="infoEposition"></p> -->
-										<a href="${pageContext.request.contextPath}/ReceivedMessage?page=1&&name=0&&year=0&&month=0" class="view">안읽은 쪽지 : <span>${countView}</span>통</a>
+										<a href="${pageContext.request.contextPath}/ReceivedMessage?page=1&&name=0&&year=0&&month=0" class="view">안읽은 쪽지 : 
+										<c:if test="${countView <= 0}">
+											<span>없음</span>
+										</c:if>
+										<c:if test="${countView > 0}">
+											<span>${countView}</span>통 <img src="${pageContext.request.contextPath}/imges/message.png" class="message-icon" />
+										</c:if>
+										</a>
 										<div class="buttons">
 											<div id="enter">
 												<p>출근</p>
@@ -243,7 +254,7 @@
 											varStatus="status">
 											<tr>
 												<td>${vo.id}</td>
-												<td>${vo.category}</td>
+												<td>${vo.category}&nbsp;&nbsp;<c:if test="${vo.category == '중요'}"><img src="${pageContext.request.contextPath}/imges/horn.svg"/></c:if></td>
 												<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
 												<td>${vo.owner}</td>
 												<td>${vo.createDate}</td>

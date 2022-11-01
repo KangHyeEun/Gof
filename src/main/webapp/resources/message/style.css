@@ -432,6 +432,7 @@ border: 1px solid #959595;
 	}
 	.sortings select{
 	border: none;
+	text-align: center;
 }
 	.sortings span{
 		font-weight:bold;
@@ -507,6 +508,25 @@ border: 1px solid #959595;
     height: 15em;
     text-align: left;
     word-wrap: break-word;
+	}
+	@media screen and (max-width: 1280px){
+	.holiday-list .thead tr th:nth-child(1), 
+	.holiday-list .thead tr th:nth-child(4), 
+	.holiday-list .thead tr th:nth-child(6), 
+	.holiday-list .tbody tr td:nth-child(1), 
+	.holiday-list .tbody tr td:nth-child(4), 
+	.holiday-list .tbody tr td:nth-child(6) {
+    	display: table-cell;
+		}
+	}
+	@media screen and (max-width: 768px) {
+		.table-head{
+		    flex-direction: column;
+		    align-items: centerjus;
+		    align-items: center;
+		    justify-content: space-evenly;
+		    height: 108px;
+		}
 	}
 	
 	@media screen and (max-width: 668px) {

@@ -10,220 +10,13 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/orgChart/orgChart.css">
-<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/admin/admin1.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/orgChart/orgChart.css">
+
 <title>Insert title here</title>
 <style type="text/css">
-.org {
-	width: 100%;
-	padding-bottom: 2%;
-	margin-bottom: 2%;
-}
 
-.org_inner {
-	border-bottom: 1px solid black;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	padding-bottom: 2%;
-	margin-bottom: 2%;
-}
-
-.org1 {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	overflow-x: auto;
-	white-space: nowrap;
-	font-size: 0
-}
-
-.org1::-webkit-scrollbar {
-    width: 5px;  /* 스크롤바의 너비 */
-}
-
-.org1::-webkit-scrollbar-thumb {
-    height: 10px; /* 스크롤바의 길이 */
-    background: #e6eff8; /* 스크롤바의 색상 */
-    
-    border-radius: 1px;
-}
-
-.org1::-webkit-scrollbar-track {
-    background: #f4f6f8;  /*스크롤바 뒷 배경 색상*/
-}
-
-.org1-1 {
-	border-left: 3px solid #14abab;
-	padding-left: 1%;
-	margin-top: 1%;
-	margin-bottom: 2%;
-}
-
-.org1-main {
-	border: 1px solid black;
-	min-width: 250px;
-	max-width: 250px;
-	height: 20vh;
-	border-radius: 20px;
-	padding: 1%;
-	display: flex;
-	align-items: center;
-	margin-right: 1%;
-}
-
-.org1-img {
-	flex: 1;
-	width: 140px;
-	height: 75%;
-	/* 	border: 1px solid black; */
-	border-radius: 50px;
-	margin-right: 5%;
-	background: url("${pageContext.request.contextPath}/imges/user.png")
-		no-repeat;
-	background-size: cover;
-}
-
-.org1-content {
-	font-size: 0.8px;
-	width: 50%;
-	font-weight: bold;
-}
-
-org1-content > p {
-	margin-bottom: 10%;
-}
-
-.tab_wrap {
-	width: 100%;
-	height: 100%;
-}
-
-.tab_div {
-	width: 100%;
-	height: 90%;
-}
-
-.tab_menu .list {
-	list-style-type: none;
-	display: flex;
-	flex-direction: row;
-	margin-bottom: 0;
-}
-
-.tab_menu .list li .btn {
-	border: 1px solid #e3edf7;
-	background-color: #e3edf7;
-	border-bottom: none;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	padding: 10px 5px;
-	margin-right: 14px;
-	display: flex;
-	flex-direction: column;
-	text-decoration: none;
-	color: black;
-	cursor: pointer;
-	width: 100px;
-	height: 20px;
-	text-align: center;
-}
-
-.tab_menu .list li .con {
-	border: 1px solid black;
-	display: none;
-}
-
-.tab_menu .list li.is_on .btn {
-	background-color: white;
-	border-color: #e3edf7;
-}
-
-.div_list {
-	width: 100%;
-	height: 100%;
-}
-
-.main1 {
-	width: 100%;
-	height: 100%;
-}
-
-.main2 {
-	display: none;
-	width: 100%;
-	height: 100%;
-}
-
-input {
-	border-radius: 0;
-}
-
-.paging {
-	padding-top: 1%;
-}
-
-th {
-	background-color: white;
-	border-bottom: 2px solid black;
-}
-
-.table1Tr2:nth-child(odd) {
-	background-color: #f8f8f9;
-}
-
-.message {
-	border: 1px solid #272454;
-	border-radius: 5px;
-	padding: 2px;
-	background-color: #272454;
-	color: white;
-	cursor: pointer;
-}
-
-.inner-div-bbs {
-	overflow: auto;
-}
-
-.inner-div-bbs::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
-}
-
-.modal_wrap {
-	font-size: 12px;
-	width: 30%;
-	height: 55%;
-}
-
-.mul {
-	width: 100%;
-	height: 100%;
-}
-
-.mdiv2 ul li input {
-	width: 96%;
-	margin-bottom: 10px;
-}
-
-.mbutton {
-	background-color: #272454;
-	border-color: #272454;
-}
-
-.main1p {
-	line-height: 30px;
-}
-
-.hp {
-	font-size: 10px;
-}
-
-.main2div {
-	display: flex;
-	flex-direction: row;
-	margin-top: 10%;
-}
 </style>
 </head>
 <body>
@@ -443,21 +236,23 @@ th {
 															<td>${i.email}</td>
 														</tr>
 
-														<script type="text/javascript">
-												let c = ${list.size()};
-												const count = document.getElementById("count");
-												count.innerText = c;
-											</script>
+												<script type="text/javascript">
+													let c = ${list.size()};
+													const count = document.getElementById("count");
+													count.innerText = c;
+												</script>
 
-													</c:forEach>
-												</table>
-												<!-- 페이지 처리 -->
+												</c:forEach>
+											</table>
+												<!-- --------------------------------------------------------------  -->
+											</div>
+											<!-- 페이지 처리 -->
 												<div class="paging">
 
 													<c:choose>
 														<c:when test="${param.page == 1}">
 															<div class="num">
-																<span id="prev" style="color: #14abab;" class="t">◀</span>
+																<span id="prev" class="t">◀</span>
 															</div>
 														</c:when>
 														<c:otherwise>
@@ -496,7 +291,7 @@ th {
 													<c:choose>
 														<c:when test="${param.page eq lastNum}">
 															<div class="num">
-																<span id="next" style="color: #14abab;" class="t">▶</span>
+																<span id="next" class="t">▶</span>
 															</div>
 														</c:when>
 														<c:otherwise>
@@ -508,8 +303,6 @@ th {
 													</c:choose>
 
 												</div>
-												<!-- --------------------------------------------------------------  -->
-											</div>
 											<!-- -------------------------------------------------------------------------------------------- -->
 										</div>
 									</div>

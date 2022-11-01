@@ -408,6 +408,7 @@ border: 1px solid #959595;
 	
 	#sortingYear{
 		border:none;
+		text-align: center;
 	}
 	.sortingYearSpan{
 		color: black;
@@ -636,12 +637,12 @@ border: 1px solid #959595;
 	    font-size: 14px;
     	white-space: nowrap;	
 	}
-	.thead tr th:nth-child(1),
-	.thead tr th:nth-child(4),
-	.thead tr th:nth-child(6),
-	.tbody tr td:nth-child(1),
-	.tbody tr td:nth-child(4),
-	.tbody tr td:nth-child(6){
+	.holiday-list .thead tr th:nth-child(1),
+	.holiday-list .thead tr th:nth-child(4),
+	.holiday-list .thead tr th:nth-child(6),
+	.holiday-list .tbody tr td:nth-child(1),
+	.holiday-list .tbody tr td:nth-child(4),
+	.holiday-list .tbody tr td:nth-child(6){
 		display: none;
 	}
 	.div1 {

@@ -4,10 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/admin/admin2.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/admin2.css">
 <title>Insert title here</title>
 <style type="text/css">
 	.container {

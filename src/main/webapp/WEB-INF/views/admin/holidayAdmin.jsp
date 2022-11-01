@@ -10,120 +10,24 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/orgChart/orgChart.css">
+<!-- <link rel="stylesheet" -->
+<%-- 	href="${pageContext.request.contextPath}/orgChart/orgChart.css"> --%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/admin/admin1.css">
 <title>Insert title here</title>
 <style type="text/css">
-input {
-	border-radius: 0;
-}
 
-.req {
-	border: 1px solid #2196f3;
-	border-radius: 30px;
-	color: #2196f3;
-	background-color: white;
-}
-
-.req1 {
-	border: 1px solid #16af0f;
-	border-radius: 30px;
-	color: #16af0f;
-	background-color: white;
-}
-
-.req2 {
-	border: 1px solid red;
-	border-radius: 30px;
-	color: red;
-	background-color: white;
-}
-
-.rbtn1 {
-	background-color: white;
-	border: 1px solid #b8bfc4;
-	color: #b8bfc4;
-	border-radius: 5px;
-	width: 50px;
-	cursor: pointer;
-}
-
-.rbtn2 {
-	background-color: #2196f3;
-	border: 1px solid #2196f3;
-	color: white;
-	border-radius: 5px;
-	width: 50px;
-	cursor: pointer;
-}
-
-#rejec {
-	width: 97%
-}
-
-.modal_wrap {
-	width: 30%;
-	height: 25%;
-}
-
-.mdiv1 {
-	margin-bottom: 0;
-}
-
-.detail, #exit2 {
-	cursor: pointer;
-}
-
-.detail-container {
-	height: 80%;
-}
-
-.DTable{
-	width: 100%;
-	height: 100%;
-	border-spacing: 0;
-	border: 1px solid #c1bdbd;
-}
-
-.DTable tbody tr:nth-child(odd) {
-	background-color: #f8f8f9;
-}
-
-.DTable tbody tr td {
-	padding-left: 3%;
-	border-bottom: 1px solid #c1bdbd;
-}
-
-.DTable tr, .DTable tr td, .DTable tr td:first-child {
-	border-bottom: 1px solid #c1bdbd;
-}
-
-.DTable tr td:first-child {
-	border-right: 1px solid #c1bdbd;
-}
-
-span {
-	color: black;
-}
-#pop-approval {
-	color: #14abab;
-}
-.approval-container {
-	margin-left: 2%;
-}
-.category {
-	width: 25%;
-	padding: 0.1%;
-	padding-left: 1%;
-	border: 1px solid #c9eaec;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	cursor: pointer;
-	align-items: center;
-}
+/* .category { */
+/* 	width: 25%; */
+/* 	padding: 0.1%; */
+/* 	padding-left: 1%; */
+/* 	border: 1px solid #c9eaec; */
+/* 	display: flex; */
+/* 	flex-direction: row; */
+/* 	justify-content: space-between; */
+/* 	cursor: pointer; */
+/* 	align-items: center; */
+/* } */
 </style>
 </head>
 <body>
@@ -131,7 +35,7 @@ span {
 	</script>
 	<div class="container-wrap">
 		<div class="header">
-
+			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
 			<div class="header-logout">
 				<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
@@ -148,8 +52,8 @@ span {
 						</div>
 							<form action="${pageContext.request.contextPath}/holidayAdmin">
 							<input name="page" value="1" style="display: none;"/>
-							<div class="div1">
-								<div class="selectD" style="height: 40px;">
+							<div class="div1 holidayAdminCss">
+								<div class="selectD">
 									<select name="hwriteDate" id="hwriteDate" class="category">
 										<option value="">전체 연도</option>
 										<option value="2022">2022</option>
@@ -174,8 +78,8 @@ span {
 					</div>
 
 					<!-- 리스트 --------------------------------------------------------------------------------- -->
-					<div class="table" style="width: 100%;">
-						<div id="EpTable">
+					<div class="table1 tablecss">
+<!-- 						<div id="EpTable"> -->
 							<div class="scroll">
 								<table id="table1" class="table1">
 									<tr>
@@ -270,7 +174,7 @@ span {
 													</c:when>
 												</c:choose></td>
 											<td id="detail${status.count}" class="detail"
-												value1="${i.id}" value2="${i.empno}" style="color: #ababaf;">상세보기</td>
+												value1="${i.id}" value2="${i.empno}" style="color: #ababaf;"><img src="${pageContext.request.contextPath}/imges/magni-icon.png" /></a></td>
 										</tr>
 									</c:forEach>
 								</table>
@@ -330,64 +234,62 @@ span {
 										</div>
 									</div>
 								</div>
-								<!-- 페이지 처리 -->
-								<div class="paging">
+								
+							</div>
+							<!-- 페이지 처리 -->
+							<div class="paging">
+								<c:choose>
+									<c:when test="${param.page == 1}">
+										<div class="num">
+											<span id="prev">◀</span>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="num">
+											<a id="prev" href="${pageContext.request.contextPath}/holidayAdmin?page=${param.page-1}&hwriteDate=${param.hwriteDate}&htype=${param.htype}&edepartment=${param.edepartment}">◀</a>
+										</div>
+									</c:otherwise>
+								</c:choose>
+									<%
+									int Ppage = Integer.parseInt((String) request.getParameter("page"));
+									int begin = (Ppage - 1) / 10 <= 0 ? 1 : (int) Math.ceil((Ppage - 1) / 10) * 10 + 1;
 
+									List<HolidayVO> list = (List<HolidayVO>) request.getAttribute("list");
+
+									int celi = (int) Math.ceil(list.size() / 10);
+									int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin + 9 : celi + 1;
+									%>
+									<c:forEach begin="<%=begin%>" end="<%=endPage%>"
+										varStatus="status" var="var">
+										<c:choose>
+											<c:when test="${param.page eq var}">
+												<div class="num checked">
+													<span>${var}</span>
+												</div>
+											</c:when>
+											<c:otherwise>
+												<div class="num notchecked">
+													<a href="${pageContext.request.contextPath}/holidayAdmin?page=${var}&hwriteDate=${param.hwriteDate}&htype=${param.htype}&edepartment=${param.edepartment}">${var}</a>
+												</div>
+											</c:otherwise>
+										</c:choose>
+										<c:set var="lastNum" value="${status.end}" />
+									</c:forEach>
 									<c:choose>
-										<c:when test="${param.page == 1}">
+										<c:when test="${param.page eq lastNum}">
 											<div class="num">
-												<span id="prev" style="color: #14abab;">◀</span>
+												<span id="next">▶</span>
 											</div>
 										</c:when>
 										<c:otherwise>
 											<div class="num">
-												<a id="prev" href="${pageContext.request.contextPath}/holidayAdmin?page=${param.page-1}&hwriteDate=${param.hwriteDate}&htype=${param.htype}&edepartment=${param.edepartment}">◀</a>
+												<a id="next" href="${pageContext.request.contextPath}/holidayAdmin?page=${param.page+1}&hwriteDate=${param.hwriteDate}&htype=${param.htype}&edepartment=${param.edepartment}">▶</a>
 											</div>
 										</c:otherwise>
 									</c:choose>
-										<%
-										int Ppage = Integer.parseInt((String) request.getParameter("page"));
-										int begin = (Ppage - 1) / 10 <= 0 ? 1 : (int) Math.ceil((Ppage - 1) / 10) * 10 + 1;
-
-										List<HolidayVO> list = (List<HolidayVO>) request.getAttribute("list");
-
-										int celi = (int) Math.ceil(list.size() / 10);
-										int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin + 9 : celi + 1;
-										%>
-										<c:forEach begin="<%=begin%>" end="<%=endPage%>"
-											varStatus="status" var="var">
-											<c:choose>
-												<c:when test="${param.page eq var}">
-													<div class="num checked">
-														<span>${var}</span>
-													</div>
-												</c:when>
-												<c:otherwise>
-													<div class="num notchecked">
-														<a href="${pageContext.request.contextPath}/holidayAdmin?page=${var}&hwriteDate=${param.hwriteDate}&htype=${param.htype}&edepartment=${param.edepartment}">${var}</a>
-													</div>
-												</c:otherwise>
-											</c:choose>
-											<c:set var="lastNum" value="${status.end}" />
-										</c:forEach>
-										<c:choose>
-											<c:when test="${param.page eq lastNum}">
-												<div class="num">
-													<span id="next" style="color: #14abab;">▶</span>
-												</div>
-											</c:when>
-											<c:otherwise>
-												<div class="num">
-													<a id="next" href="${pageContext.request.contextPath}/holidayAdmin?page=${param.page+1}&hwriteDate=${param.hwriteDate}&htype=${param.htype}&edepartment=${param.edepartment}">▶</a>
-												</div>
-											</c:otherwise>
-										</c:choose>
-										
 								</div>
-							</div>
+<!-- 							</div> -->
 						</div>
-					</div>
-
 					<!-- ------------------------------------------------------------------------------ -->
 				</div>
 			</div>

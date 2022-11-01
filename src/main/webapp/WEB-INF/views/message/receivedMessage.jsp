@@ -21,7 +21,7 @@
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
-            <div class="header-logout">로그아웃 버튼</div>
+            <div class="header-logout">	<a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
 		<div class="container">
 			<jsp:include page="../include/menu.jsp"></jsp:include>
@@ -63,7 +63,7 @@
 						<p>🟠 읽지 않음 </p>
 					</div>	
 					<div class="div2">
-						<table class="holiday-list">
+						<table class="holiday-list message-List">
 							<thead class="thead">
 								<tr>
 									<th class="checkbox-table"><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll()"></th>

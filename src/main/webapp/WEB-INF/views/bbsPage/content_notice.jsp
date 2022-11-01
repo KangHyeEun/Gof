@@ -61,7 +61,7 @@
                </div>
            </div>
        </div>
-   </div>
+<!--    </div> -->
 	
 	<script type="text/javascript">
 		//뒤로가기 버튼 이벤트------------------------------
