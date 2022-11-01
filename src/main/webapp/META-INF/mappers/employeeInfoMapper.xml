@@ -31,10 +31,6 @@
 		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
 	</select>
 	
-<!-- 	<update id="updateE"> -->
-<!-- 		update employee_info set  -->
-<!-- 	</update> -->
-	
 	<update id="updateE">
 		update employee_info
 		<set>
@@ -94,4 +90,44 @@
 	<select id="HEdepartment" resultType="EmployeeInfoVO">
 		SELECT edepartment, empno FROM employee_info;
 	</select>
+	
+	
+	<!-- 부서 및 직책 관리 -->
+	
+	<!--  부서 리스트 -->
+	<select id="department" resultType="PositionDepartmentVO">
+		select id, department from department;
+	</select>
+	<!-- 부서 사원수 -->
+	<select id="countDepartment" resultType="PositionDepartmentVO" >
+		SELECT edepartment as department,COUNT(edepartment) AS COUNT FROM employee_info GROUP BY edepartment;
+	</select> 
+	<insert id="insertDepartment">
+		INSERT INTO department(department) VALUES(#{department});
+	</insert>
+	<update id="updateDepartment">
+		UPDATE department SET department = #{department};
+	</update>
+	<delete id="deleteDepartment">
+		DELETE FROM department WHERE department = #{department};
+	</delete>
+	
+	
+	<!-- 직책 리스트 -->
+	<select id="position" resultType="PositionDepartmentVO">
+		select id, position from position;
+	</select>
+	<!-- 부서 사원수 -->
+	<select id="countPosition" resultType="PositionDepartmentVO" >
+		SELECT eposition as department,COUNT(eposition) AS COUNT FROM employee_info GROUP BY eposition;
+	</select> 
+	<insert id="insertPosition">
+		INSERT INTO department(position) VALUES(#{position});
+	</insert>
+	<update id="updatePosition">
+		UPDATE position SET position = #{position};
+	</update>
+	<delete id="deletePosition">
+		DELETE FROM position WHERE position = #{position};
+	</delete>
 </mapper>

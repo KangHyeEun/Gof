@@ -16,6 +16,7 @@ import com.awoo.vo.EmployeeInfoVO;
 import com.awoo.vo.HolidayVO;
 import com.awoo.vo.InfoVO;
 import com.awoo.vo.PersonalInfoVO;
+import com.awoo.vo.PositionDepartmentVO;
 
 @Service
 public class EmployeeInfoService {
@@ -103,4 +104,11 @@ public class EmployeeInfoService {
 	public void HEdepartment(Model model) {
 		 model.addAttribute("depart",dao.HEdepartment());
 	}
+	
+	/* 부서관리 -----------------------------------------------------------------*/
+	/*부서 리스트 */
+	public void position(Model model){
+		model.addAttribute("list",dao.department());
+		model.addAttribute("count",dao.countDepartment());
+	};
 }

@@ -122,7 +122,7 @@
 												<option value="대리">대리</option>
 												<option value="사원">사원</option>
 												<option value="수습">수습</option>
-												<option value="인사">팀장</option>
+												<option value="팀장">팀장</option>
 											</select>
 										</td>
 										<td class="label">재직 상태<span>*</span></td>

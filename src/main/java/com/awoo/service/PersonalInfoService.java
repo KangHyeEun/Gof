@@ -39,11 +39,11 @@ public class PersonalInfoService {
 	
 	public void insertDataP(HttpServletRequest request,PersonalInfoVO vo) {
 			
-			int telNumber = 0;
+			String telNumber = "";
 			String addr = "";
 			String email_id = request.getParameter("email_id");
 			String email_domain = request.getParameter("email_domain");
-			int phoneNumber = Integer.parseInt(request.getParameter("phoneNumber"));		
+			String phoneNumber = request.getParameter("phoneNumber");		
 			int empno = Integer.parseInt(request.getParameter("empno"));		
 			
 			vo.setEmpno(empno);
@@ -70,7 +70,7 @@ public class PersonalInfoService {
 			
 			
 			if(request.getParameter("telNumber") != null && request.getParameter("telNumber") != "") {
-				telNumber = Integer.parseInt(request.getParameter("telNumber"));
+				telNumber = request.getParameter("telNumber");
 			}	
 			vo.setTel_number(telNumber);
 			
@@ -80,12 +80,12 @@ public class PersonalInfoService {
 	
 public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
 		
-		int telNumber = 0;
+		String telNumber = "";
 		String addr = "";
 		String email_id = request.getParameter("email_id");
 		String email_domain = request.getParameter("email_domain");
 		if(request.getParameter("phoneNumber") != null) {
-			int phoneNumber = Integer.parseInt(request.getParameter("phoneNumber"));						
+			String phoneNumber = request.getParameter("phoneNumber");						
 			vo.setPhone_number(phoneNumber);
 		}
 		
@@ -111,7 +111,7 @@ public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
 		
 		
 		if(request.getParameter("telNumber") != null && request.getParameter("telNumber") != "") {
-			telNumber = Integer.parseInt(request.getParameter("telNumber"));
+			telNumber = request.getParameter("telNumber");
 		}	
 		vo.setTel_number(telNumber);
 		

@@ -244,8 +244,8 @@
 													<div id="suggestdiv">
 														<c:forEach var="j" items="${list}" varStatus="status">
 															<div class="info">
-																<span class="name" style="color: black" value="${j.empno}">${j.name}</span>(${j.edepartment})
-																<span id="remove${status.count}">X</span>
+																<span class="name" style="color: black" value1="${j.name}" value2="${j.edepartment}">${j.name}</span>
+																(${j.edepartment})
 															</div>
 														</c:forEach>
 													</div>
@@ -258,7 +258,7 @@
 										<div class="mselect">
 											<div class="sdiv1">
 												<h4>부서</h4>
-												<select name="edepartment" id="mcategory" class="m1">
+												<select name="edepartment" id="mcategory" class="m">
 													<option value="">변경없음</option>
 													<option value="영업">영업</option>
 													<option value="마켓팅">마켓팅</option>
@@ -269,7 +269,7 @@
 											</div>
 											<div class="sdiv2">
 												<h4>직책</h4>
-												<select name="eposition" id="mcategory" class="m2">
+												<select name="eposition" id="mcategory" class="m">
 													<option value="">변경없음</option>
 													<option value="부장">부장</option>
 													<option value="대리">대리</option>
@@ -280,7 +280,7 @@
 											</div>
 											<div class="sdiv3">
 												<h4>고용형태</h4>
-												<select name="ehiredType" id="mcategory">
+												<select name="ehiredType" id="mcategory" class="m">
 													<option value="">고용 형태 선택</option>
 													<option value="정규직">정규직</option>
 													<option value="비정규직">비정규직</option>
@@ -288,7 +288,7 @@
 											</div>
 											<div class="sdiv4">
 												<h4>재직상태</h4>
-												<select name="estatus" id="mcategory">
+												<select name="estatus" id="mcategory" class="m">
 													<option value="">변경없음</option>
 													<option value="재직">재직</option>
 													<option value="퇴직">퇴직</option>
@@ -312,6 +312,21 @@
 	</div>
 
 	<script type="text/javascript">
+	
+	function filter(){
+  	  document.querySelector("#suggestdiv").style.display="block";
+        let value = document.getElementById("userKeyWord").value;
+        let name = document.getElementsByClassName("name");
+        
+        for(let i=0;i<name.length;i++){
+     		if(name[i].innerHTML.indexOf(value) > -1){
+     				name[i].parentNode.style.display = "block";
+	            }else{
+	            	name[i].parentNode.style.display = "none";
+	            }
+     	  }
+     }
+	
 		/*신규 직원 등록*/
 		document.getElementById("newEp").addEventListener("click", function() {
 			location.href = "${pageContext.request.contextPath}/admin/newE";
@@ -404,24 +419,10 @@
 					document.getElementById("endDate").valueAsDate = null;
 				});
 
-		/* 모달창 끄기*/
-		
-		document.getElementById("exit").addEventListener("click", function() {
-			document.getElementById("modal_dim").style.display = "none";	
-				const ul = document.getElementById("ul");
-
-				while(ul.hasChildNodes()){
-					ul.removeChild( ul.firstChild );  
-				}
-				
-				document.getElementById("userKeyWord").value="";
-                	  suggestdiv.style.display = "none";
-				  while(document.getElementById("suggest").firstChild)  {
-					  document.getElementById("suggest").firstChild.remove()
-				  }
-            	
-		});
-		
+		const checkboxes = document.getElementsByName("empno");
+		const ul = document.getElementById("ul");
+		const mspan = document.getElementById("mspan");
+		const li1 = document.getElementsByName("li1");
 		
 		/*모달창 켜기*/
 		document
@@ -443,23 +444,28 @@
 								alert("정보를 수정할 직원을 선택해 주세요.");
 								document.getElementById("modal_dim").style.display = "flex";
 							}
-						});
-		/*모달창 select 색 변경*/
-		document
-				.getElementById("mcategory")
-				.addEventListener(
-						"change",
-						function() {
-							if (document.getElementById("mcategory").style.backgroundColor = '#f8fafb') {
-								document.getElementById("mcategory").style.backgroundColor = "white";
-							}
+
 						});
 		
-		const checkboxes = document.getElementsByName("empno");
-		const ul = document.getElementById("ul");
-		const mspan = document.getElementById("mspan");
-		const li1 = document.getElementsByName("li1");
-		let num = 0;
+	/* 모달창 끄기*/
+			
+			document.getElementById("exit").addEventListener("click", function() {
+				document.getElementById("modal_dim").style.display = "none";	
+				
+					const ul = document.getElementById("ul");
+		
+					while(ul.hasChildNodes()){
+						ul.removeChild( ul.firstChild );  
+					}
+					
+					document.getElementById("userKeyWord").value="";
+	                	  suggestdiv.style.display = "none";
+					  while(document.getElementById("suggest").firstChild)  {
+						  document.getElementById("suggest").firstChild.remove()
+					  }
+					  
+		
+			});
 		
 		/*모달창 div에 li추가*/
 		document.getElementById("modal_open").addEventListener(
@@ -474,98 +480,78 @@
 							const span = document.createElement("span");
 
 							span.innerText = "X"
-							span.setAttribute("id", "remove"+i);
 							span.setAttribute("value", name);
-							span.setAttribute("class", "span1");
-							
-							num += i;
+							span.setAttribute("name", "span1");
 							
 							li.innerText = name + "(" + edepartment + ")";
 							li.setAttribute("name", "li1");
 							li.setAttribute("value", name);
 							li.append(span);
 							
-							ul.append(li);
-							
-						
-						}
-					}
+							ul.append(li); 
 							mspan.innerText = li1.length;
-								
-							/*모달창 span 삭제*/
-							
-							for (var i = 0; i < checkboxes.length; i++) {
-							
-								document.getElementById("remove"+i).addEventListener("click", function(e) {	
-								
-									const del = e.target;  // span ("X")
-									const deleteAll = del.parentNode; // <li><span></span></li>
-									checkboxes[i-1].checked = false;
-									deleteAll.remove();
-									
-									mspan.innerText = li1.length;
-								});
-								
-							}
+						}
+						
+// 						/*모달창 span 삭제*/
+// 						const span1 = document.getElementsByName("span1");		
+// 						span1[i].addEventListener("click", function(e) {	
+// 							const del = e.target;  // span ("X")
+// 				 			const deleteAll = del.parentNode; // <li><span></span></li>				 			
+// 				 			for (var j = 0; j < checkboxes.length; j++) {
+// 								if(del.getAttribute("value") == checkboxes[j].getAttribute("value1")){
+//  				 					checkboxes[j].checked = false;
+//  				 					deleteAll.remove();
+// 								}	
+// 							}
+// 			 				mspan.innerText = li1.length;
+// 			 			});
+					}
+						mspan.innerText = li1.length;		
 				});
+
 		
-				
-		function filter(){
-	    	  document.querySelector("#suggestdiv").style.display="block";
-	          let value = document.getElementById("userKeyWord").value;
-	          let name = document.getElementsByClassName("name");
-	          
-	          for(let i=0;i<name.length;i++){
-	       		if(name[i].innerHTML.indexOf(value) > -1){
-	       				name[i].parentNode.style.display = "block";
-	 	            }else{
-	 	            	name[i].parentNode.style.display = "none";
-	 	            }
-	       	  }
-	       }
-		
-		
-		/*검색 이름 추가*/
+// 		/*검색 이름 추가*/
 		  let info = document.getElementsByClassName("info");
 		  let name = document.getElementsByClassName("name");
 		  
 		  for(let i=0;i<name.length;i++){
-			  info[i].addEventListener("click", function(e) {	
+			  mspan.innerText = "0";
+			  name[i].addEventListener("click", function(e) {	
 		  			const li = document.createElement("li");
 		  			const mspan = document.getElementById("mspan");
-		  			const li1 = document.getElementsByName("li1");
-					li.append(info[i]);
-					li.setAttribute("name", "li1");
-				  	ul.append(li);
+		  			const span = document.createElement("span");
+		  			const name1 = name[i].getAttribute("value1");
+					const edepartment = name[i].getAttribute("value2");
+		  			
+		  			span.innerText = "X";
+					span.setAttribute("value", name1);
+					span.setAttribute("name", "span2");
+					span.setAttribute("id", "span2");
+					
+					li.innerText = name1 + "(" + edepartment + ")";
+					li.setAttribute("name", "li1");					
+				  	li.append(span);
+       	  			ul.append(li);
        	  			mspan.innerText = li1.length;
-       	  			
-       	  		/*추가 하면 체크박스 눌리기*/
-             	  
-//              	  for (var i = 0; i < checkboxes.length; i++) {
-             		  
-//              		  if(checkboxes[i].getAttribute("value") == name[i].getAttribute("value")){
-//              				checkboxes[i].checked = true;		 	  	                   			  
-//              		  }
-//              	  }
-       	  		
-             	/*선택 후 div 정리*/
-           	  document.getElementById("userKeyWord").value="";
-           	  suggestdiv.style.display = "none";
-			  		while(document.getElementById("suggest").firstChild)  {
-				  		document.getElementById("suggest").firstChild.remove()
-			  		}
+		  			
+					/*추가 하면 체크박스 눌리기*/
+				 	for (var j = 0; j < checkboxes.length; j++) {
+						if(span.getAttribute("value") == checkboxes[j].getAttribute("value1")){
+ 				 		checkboxes[j].checked = true;
+						}	
+					}
+				
+       	  		/*선택 후 div 정리*/
+                 	  document.getElementById("userKeyWord").value="";
+                 	  suggestdiv.style.display = "none";
+      			  	while(document.getElementById("suggest").firstChild)  {
+      				  	document.getElementById("suggest").firstChild.remove();
+      			  	}
 
-				});
-			  
-// 			  /*검색 이름 삭제*/			  
-// 			  li.addEventListener("click", function(){
-//      			li.remove();
-//      			mspan.innerText = li1.length;
-//      		});
-			  
-	       	  }
-		  
-		  
+			 	mspan.innerText = li1.length;
+
+			  }); // 클릭이벤트			  
+			} // for문
 
 	</script>
 
