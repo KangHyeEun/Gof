@@ -16,4 +16,5 @@ public interface CalendarDAO {
 	public int insertSchedule(CalendarVO vo);
 	
 	public void deleteSchedule(int id);
+	
 }

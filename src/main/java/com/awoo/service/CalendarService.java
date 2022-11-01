@@ -28,16 +28,25 @@ public class CalendarService {
 	
 //	비동기로 일자별 일정 출력하기 위한 데이터 추출
 	public List<CalendarVO> restDataMethod(Map<String, String> map) {
-		String mapStart = map.get("calEnd").split("-")[2];
-		int temp = Integer.parseInt(mapStart) + 1;
+		String mapStartYear = map.get("calEnd").split("-")[0];
+		String mapStartMonth = map.get("calEnd").split("-")[1];
+		String mapStartDay = map.get("calEnd").split("-")[2];
+		int tempDay = Integer.parseInt(mapStartDay) + 1;
+		int tempYear = Integer.parseInt(mapStartYear);
+		
+		if (mapStartMonth.equals("12") && tempDay == 32) {
+			System.out.println("실행확인");
+			tempYear++;
+			mapStartMonth = "1";
+			tempDay = 1;
+		}
 		
 		String strTemp = "";
-		strTemp += map.get("calEnd").split("-")[0];
-		strTemp += "-" + map.get("calEnd").split("-")[1];
-		strTemp += "-" + temp;
+		strTemp += tempYear;
+		strTemp += "-" + mapStartMonth;
+		strTemp += "-" + tempDay;
 		
 		map.put("calEnd", strTemp);
-		
 		
 		List<CalendarVO> list = dao.selectRestData(map);
 		dateSetMethod(list);
@@ -72,7 +81,8 @@ public class CalendarService {
 		int calEndMonth = Integer.parseInt(calEnd.split("-")[1]);
 		int calEndDay = Integer.parseInt(calEnd.split("-")[2]);
 		
-
+		
+		
 //		날짜범위여부 : 시작일과 종료일이 같으면 0, 아니면 1
 		if ((calStartMonth != calEndMonth) && (calStartDay != calEndDay)) {
 			System.out.println("시작월과 종료일이 다르고 시작일과 종료일이 다르다.");

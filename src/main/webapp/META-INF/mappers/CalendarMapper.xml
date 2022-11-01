@@ -27,6 +27,12 @@
 		order by cal_start
 	</select>
 	
+	<select id="selectRange" resultType="CalendarVO">
+		select cal_range
+		from calendar
+		where cal_id = #{calId}
+	</select>
+	
 	<insert id="insertSchedule">
 		insert into calendar(cal_title, cal_place, cal_content, cal_start,
 							cal_end, cal_range, cal_allday, cal_show,

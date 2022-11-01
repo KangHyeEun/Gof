@@ -274,7 +274,6 @@ const renderCalendar = () => {
 	for (let index = 0; index < daysEle.length; index++) {
 //		daysEle.item(index).addEventListener("click",function(){
 		daysEle.item(index).addEventListener("click",function(){
-			console.log(daysEle.item(index));
 			let dates = daysEle.item(index).classList[0].split("-");
 			let years = dates[0];	// 년
 			let months = dates[1];	// 월
@@ -343,7 +342,7 @@ const renderCalendar = () => {
 
 	let dateRange = {calStart:daysEle.item(0).classList[0],
 					calEnd:daysEle.item(daysEle.length-1).classList[0]};
-	
+
 	fetch(ctx+"/calendar/restData",{
 		method : "POST",
 		headers : { "Content-type" : "application/json"},
@@ -404,7 +403,7 @@ const renderCalendar = () => {
 	}).then(_data => {
 		
 //		 ---------------------------------------------------------------------
-//		 일정 클릭시 상세정보 팝업
+//		 일정 클릭시 일정목록 팝업
 //		 ---------------------------------------------------------------------
 
 		let list = _data;
@@ -483,7 +482,7 @@ const renderCalendar = () => {
 				
 				
 //	 	---------------------------------------------------------------------
-//		일정 팝업에서 제목 혹은 x 키 누를시 이벤트 발생 기능
+//		일정 팝업에서 제목 혹은 x 키 누를시 이벤트 발생 기능 및 상세목록 조회,수정,삭제
 //		---------------------------------------------------------------------
 
 				const scheInfo = document.querySelector(".scheInfo-content > ul");
@@ -509,7 +508,6 @@ const renderCalendar = () => {
 						scheInfo.append(li);
 					}
 					
-					
 				}
 //				팝업 눌러졌는지 체크
 				if (scheList.children.length != 0) {
@@ -518,12 +516,12 @@ const renderCalendar = () => {
 //						일정목록 팝업에서 제목 눌렀을때 이벤트
 //	 	---------------------------------------------------------------------
 						scheList.children[index1].children[0].addEventListener("click", function(){
-//							schedule_xx 에서 xx 값 추출 (id값)
-							let idValue = this.classList[0].split("_")[1];
+//							idValue : schedule_xx 에서 xx 값 추출 (id값)
+							const idValue = this.classList[0].split("_")[1];
 							scheParentToChild[index1].cloneNode(true)
 							
 							for (let index2 = 0; index2 < list.length; index2++) {
-//								일정 상세목록에서 목록하나 클릭했을때
+//								일정 list에서 id값과 클릭한 일정의 id값이 같을때
 								if (list[index2].calId == idValue) {
 									scheInfo.innerHTML = "";
 									
@@ -550,10 +548,11 @@ const renderCalendar = () => {
 											tagCreate("일시", list[index2].calStart + " ~ " + list[index2].calEnd);
 										}
 									}
-									
-//									if (list[index2].calRange != 0 && list[index2].calRange != null && list[index2].calRange != undefined) {
-//										tagCreate("전체일정", list[index2].calRange);
-//									}
+									console.log(list[index2].calRange);
+									if (list[index2].calRange != 0 && list[index2].calRange != null && list[index2].calRange != undefined) {
+										tagCreate("전체일정", list[index2].calRange);
+									}
+//									
 //									if (list[index2].calShow != "" && list[index2].calShow != null && list[index2].calRange != undefined) {
 //										tagCreate("비공개", list[index2].calShow);
 //									}
@@ -567,32 +566,27 @@ const renderCalendar = () => {
 
 
 
+//									일정 상세목록 수정 버튼 눌렀을때
+//	 			---------------------------------------------------------------------
 
-//									*** 세션의 empno 값 가져와서 본인것만 수정할 수 있게 해야함
-//									수정클릭시 이벤트
-//									
-
-//									*** 세션의 empno 값 가져와서 본인것만 지울 수 있게 해야함
-//									삭제클릭시 이벤트
 									
 									console.log(list[index2].empno);
 									console.log(empno);
 									
-									
+//									일정 상세목록 삭제 버튼 눌렀을때
+//	 			---------------------------------------------------------------------
 									document.querySelector(".scheInfo-btn > a:last-child").addEventListener("click", function(e){
-//										e.stopPropagation();
-//										console.log(list[index2].empno);
-//										console.log(typeof(list[index2].empno));
-//										console.log(list[index2].calRange);
-//										console.log(typeof(list[index2].calRange));
+//										list의 사원번호와 접속한 유저의 사원번호 비교
 										if (list[index2].empno == empno) {
 											if (confirm("정말로 삭제하시겠습니까?")) {
 												location.href = ctx+"/calendar/deleteData/"+list[index2].calId;
 											}
+//											삭제 취소 클릭시 돌아감
 											else {
 												location.href = ctx+"/calendar";
 											}
 										}
+//										접속한 유저가 작성한 글이 아닐때
 										else {
 											alert("권한이 없습니다.");
 											location.href = ctx+"/calendar";
@@ -601,27 +595,39 @@ const renderCalendar = () => {
 									
 									
 									
-									
-////									---------------------------------------------------------------------
-////									일정 팝업에서 controller로 가기전 날짜 데이터 추출
-////									---------------------------------------------------------------------
-//
-//									//일정 팝업을 띄운 후 전송버튼을 눌러 날짜 값을 넘겼는지를 판단하는 flag
-//									let calStart = "";
+//									//---------------------------------------------------------------------
+//									//일정 등록
+//									//일정 팝업에서 controller로 가기전 날짜 데이터 비교하여 시작일이 종료일보다 늦지않도록 검사
+//									//---------------------------------------------------------------------
+//									
 //									//button[type="button"] 형태의 button 클릭시 날짜값을 넘겨서 렌더링 함수를 컨트롤
-//									let transferBtn = document.getElementById("btn");
+//									const transferBtn = document.getElementById("btn");
 //									transferBtn.addEventListener("click", function(){
-//										console.log("------------------------------");
-//										let calStart = document.getElementById("calStart");
-//										console.log(calStart.value);
+//										const scheForm = document.querySelector(".schedule form");
 //										
-//										let calYear = calStart.value.split("-")[0];
-//										let calMonth = calStart.value.split("-")[1];
-//										console.log(calYear);
-//										console.log(calMonth);
+//										const calStart = document.getElementById("calStart").value;
+//										const calEnd = document.getElementById("calEnd").value;
 //										
-//									    document.querySelector(".schedule form").setAttribute("action", ctx+"/calendar/insertData");
-//									    documnet.querySelector("#realBtn").click();
+//										const calStartYear = new Date(calStart).getFullYear();
+//										const calStartMonth = new Date(calStart).getMonth();
+//										const calStartDate = new Date(calStart).getDate();
+//										const calEndYear = new Date(calEnd).getFullYear();
+//										const calEndMonth = new Date(calEnd).getMonth();
+//										const calEndDate = new Date(calEnd).getDate();
+//										
+//										if (calStartYear > calEndYear) {
+//										    alert("날짜가 잘못 입력되었습니다.");
+//										}
+//										else if (calStartMonth > calEndMonth) {
+//										    alert("날짜가 잘못 입력되었습니다.");
+//										}
+//										else if (calStartDate > calEndDate) {
+//										    alert("날짜가 잘못 입력되었습니다.");
+//										}
+//										else {
+//										    scheForm.setAttribute("action", ctx+"/calendar/insertData");
+//										    document.querySelector("#realBtn").click();
+//										}
 //									});
 
 
@@ -633,18 +639,39 @@ const renderCalendar = () => {
 							document.querySelector(".schedule-info-wrap").style.display = "none";
 							document.querySelector(".scheInfo-detail-wrap").style.display = "flex";
 						});
+//	 	---------------------------------------------------------------------
+						
 						
 //						일정목록 x 버튼 눌렀을때 이벤트
 //	 	---------------------------------------------------------------------
 						scheList.children[index1].children[1].addEventListener("click", function(_e){
-							const calId = this.previousElementSibling.classList[0].split("_")[1];
-							const checkValue = confirm("정말로 삭제하시겠습니까?");
-//							삭제시
-							if (checkValue) {
-								location.href = ctx+"/calendar/deleteData/"+calId;
+//							idValue : schedule_xx 에서 xx 값 추출 (id값)
+							const idValue = this.previousElementSibling.classList[0].split("_")[1];
+							
+							console.log("일정의 삭제버튼");
+							for (let index2 = 0; index2 < list.length; index2++) {
+//								일정 list 중에서 id를 색인하여 내가 클릭한 일정의 id값(idValue)과 같은지 비교 
+								if (list[index2].calId == idValue) {
+//									내가 클릭한 일정의 작성자와 현재 접속한 유저가 같은지 비교
+									if (list[index2].empno == empno) {
+										if (confirm("정말로 삭제하시겠습니까?")) {
+											location.href = ctx+"/calendar/deleteData/"+list[index2].calId;
+										}
+//										삭제 취소 클릭시 돌아감
+										else {
+											location.href = ctx+"/calendar";
+										}
+									}
+//									해당 글의 작성자가 아닐 경우 권한 없음의 알림창 띄움
+									else {
+										alert("권한이 없습니다.");
+										location.href = ctx+"/calendar";
+									}
+								}
 							}
-//							*** 세션의 empno 값 가져와서 본인것만 지울 수 있게 해야함
 						});
+//	 	---------------------------------------------------------------------
+						
 						
 					}
 				}
@@ -1545,25 +1572,38 @@ document.querySelector(".todayMove").addEventListener("click", () =>{
 // ---------------------------------------------------------------------
 
 //---------------------------------------------------------------------
-//일정 팝업에서 controller로 가기전 날짜 데이터 추출
+//일정 등록
+//일정 팝업에서 controller로 가기전 날짜 데이터 비교하여 시작일이 종료일보다 늦지않도록 검사
 //---------------------------------------------------------------------
 
-//일정 팝업을 띄운 후 전송버튼을 눌러 날짜 값을 넘겼는지를 판단하는 flag
-let calStart = "";
 //button[type="button"] 형태의 button 클릭시 날짜값을 넘겨서 렌더링 함수를 컨트롤
-let transferBtn = document.getElementById("btn");
+const transferBtn = document.getElementById("btn");
 transferBtn.addEventListener("click", function(){
-	console.log("------------------------------");
-	let calStart = document.getElementById("calStart");
-	console.log(calStart.value);
+	const scheForm = document.querySelector(".schedule form");
 	
-	let calYear = calStart.value.split("-")[0];
-	let calMonth = calStart.value.split("-")[1];
-	console.log(calYear);
-	console.log(calMonth);
+	const calStart = document.getElementById("calStart").value;
+	const calEnd = document.getElementById("calEnd").value;
 	
-    document.querySelector(".schedule form").setAttribute("action", ctx+"/calendar/insertData");
-    document.querySelector("#realBtn").click();
+	const calStartYear = new Date(calStart).getFullYear();
+	const calStartMonth = new Date(calStart).getMonth();
+	const calStartDate = new Date(calStart).getDate();
+	const calEndYear = new Date(calEnd).getFullYear();
+	const calEndMonth = new Date(calEnd).getMonth();
+	const calEndDate = new Date(calEnd).getDate();
+	
+	if (calStartYear > calEndYear) {
+	    alert("날짜가 잘못 입력되었습니다.");
+	}
+	else if (calStartMonth > calEndMonth) {
+	    alert("날짜가 잘못 입력되었습니다.");
+	}
+	else if (calStartDate > calEndDate) {
+	    alert("날짜가 잘못 입력되었습니다.");
+	}
+	else {
+	    scheForm.setAttribute("action", ctx+"/calendar/insertData");
+	    document.querySelector("#realBtn").click();
+	}
 });
 
 // ---------------------------------------------------------------------
