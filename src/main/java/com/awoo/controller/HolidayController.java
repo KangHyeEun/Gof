@@ -95,63 +95,52 @@ public class HolidayController {
 	
 	
 	
+	
 /*혜은---------------------------------------------------------------------*/
 	
+	// 전체 리스트 + 상세 검색 (+페이징)
 	@GetMapping("/holidayAdmin")
-	public String holidayAdmin(Model model,@RequestParam("page") String page) {
+	public String holidayAdmin(Model model,@RequestParam("page") String page,@RequestParam Map<String,String> map) {
 		model.addAttribute("page", page);
-		model.addAttribute("url","holidayAdmin");
-		service.selectAdminH(model);
-		Eservice.HEdepartment(model);
-		return "/admin/holidayAdmin";
-	}
-	// 상세 검색
-	@PostMapping("/damin/holidayselect")
-	public String holidayselect(Model model,@RequestParam Map<String,String> map,@RequestParam("page") String page) {
-		model.addAttribute("page", page);
-		model.addAttribute("url","damin/holidayselect");
+		model.addAttribute("map", map);
 		service.selectH(model,map);
 		Eservice.HEdepartment(model);
-		return "/admin/holidayAdmin";
-	}
-	// 상세검색 페이지 이동
-	@GetMapping("/damin/holidayselect")
-	public String holidayselect1(Model model,@RequestParam Map<String,String> map,@RequestParam("page") String page) {
-		model.addAttribute("page", page);
-		model.addAttribute("url","damin/holidayselect");
-		service.selectH(model,map);
-		Eservice.HEdepartment(model);
+		
 		return "/admin/holidayAdmin";
 	}
 		
 	// 승인
-		@GetMapping("holiday/Ok/{id}")
-		public String holidayOk(HolidayVO vo,@PathVariable("id") int id,
-				@RequestParam("empno") int empno,@RequestParam("countDate") double countDate,
-				EmployeeInfoVO evo) {
-			vo.setId(id);
-			vo.setEmpno(empno);
+	@GetMapping("holiday/Ok/{id}")
+	public String holidayOk(HolidayVO vo,@PathVariable("id") int id,
+			@RequestParam("empno") int empno,@RequestParam("countDate") double countDate,@RequestParam("page") String page,Model model) {
+		vo.setId(id);
+		vo.setEmpno(empno);
+		model.addAttribute("page", page);
 
-			double totalH = Eservice.selectHolidayTotal(empno).getTotalHoliday();
-			double usedH = Eservice.selectHolidayTotal(empno).getUsedHoliday();
-			if(totalH >= (usedH+countDate)) {
-				vo.setApproval("승인");
-				Eservice.updateUsedHoliday(vo);				
-				service.updateApproval(vo);	
-			} else if(totalH < (usedH+countDate)) {
-				vo.setApproval("반려");
-				vo.setRejectionReason("잔여 연차 : " + (totalH-usedH));
-				service.updateApproval(vo);	
-			}
-			return "redirect:/holidayAdmin";
+		double totalH = Eservice.selectHolidayTotal(empno).getTotalHoliday();
+		double usedH = Eservice.selectHolidayTotal(empno).getUsedHoliday();
+		if(totalH >= (usedH+countDate)) {
+			vo.setApproval("승인");
+			Eservice.updateUsedHoliday(vo);				
+			service.updateApproval(vo);	
+		} else if(totalH < (usedH+countDate)) {
+			vo.setApproval("반려");
+			vo.setRejectionReason("잔여 연차 : " + (totalH-usedH));
+			service.updateApproval(vo);	
 		}
 		
+		return "redirect:/holidayAdmin";
+	}
+		
 	// 반려
-		@GetMapping("holiday/No/{id}")
-		public String holidayNo(HolidayVO vo,@PathVariable("id") int id) {
+		@GetMapping("/holiday/No/{id}")
+		public String holidayNo(Model model,HolidayVO vo,@PathVariable("id") int id
+				,@RequestParam("page") String page,@RequestParam("rejectionReason") String reject) {
+			model.addAttribute("page", page);
 			vo.setId(id);
 			vo.setApproval("반려");
-			service.updateApproval(vo);	
+			vo.setRejectionReason(reject);
+			service.updateApproval(vo);
 			
 			return "redirect:/holidayAdmin";
 		}

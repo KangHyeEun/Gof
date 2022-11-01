@@ -17,12 +17,15 @@ public interface EmployeeInfoDAO {
 	public void updateE(EmployeeInfoVO vo);
 
 	public List<EmployeeInfoVO> selectEmpno();
-	
+	/*리스트(조직도)*/
 	public List<InfoVO> selectInfo1();
-
+	/*부서(조직도)*/
 	public List<InfoVO> edepartment();
 	
 	public int countInfoE();
+	
+	/*연관검색*/
+	public List<InfoVO> AssociatedSearch(InfoVO vo);
 	
 	/*휴가*/
 	public void updateUsedHoliday(HolidayVO vo);

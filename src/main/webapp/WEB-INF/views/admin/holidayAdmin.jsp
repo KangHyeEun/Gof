@@ -113,9 +113,22 @@ span {
 .approval-container {
 	margin-left: 2%;
 }
+.category {
+	width: 25%;
+	padding: 0.1%;
+	padding-left: 1%;
+	border: 1px solid #c9eaec;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	cursor: pointer;
+	align-items: center;
+}
 </style>
 </head>
 <body>
+<script type="text/javascript">
+	</script>
 	<div class="container-wrap">
 		<div class="header">
 
@@ -133,21 +146,20 @@ span {
 							<h3>휴가 신청 관리</h3>
 							<p>⏏홈>휴가 신청</p>
 						</div>
-						<form
-							action="${pageContext.request.contextPath}/damin/holidayselect?page=1"
-							method="post">
+							<form action="${pageContext.request.contextPath}/holidayAdmin">
+							<input name="page" value="1" style="display: none;"/>
 							<div class="div1">
 								<div class="selectD" style="height: 40px;">
-									<select name="hwriteDate" id="category">
+									<select name="hwriteDate" id="hwriteDate" class="category">
 										<option value="">전체 연도</option>
 										<option value="2022">2022</option>
 										<option value="2021">2021</option>
 										<option value="2017">2017</option>
-									</select> <select name="htype" id="category">
+									</select> <select name="htype" id="htype" class="category">
 										<option value="">휴가 종류</option>
 										<option value="연차">연차</option>
 										<option value="반차">반차</option>
-									</select> <select name="edepartment" id="category">
+									</select> <select name="edepartment" id="edepartment" class="category">
 										<option value="">부서</option>
 										<option value="영업">영업</option>
 										<option value="마켓팅">마켓팅</option>
@@ -155,7 +167,7 @@ span {
 										<option value="인사">인사</option>
 										<option value="회계">회계</option>
 									</select>
-									<button class="btn1">검색하기</button>
+									<button class="btn1" id="btn1">검색하기</button>
 								</div>
 							</div>
 						</form>
@@ -214,29 +226,41 @@ span {
 											<td></td>
 											<td><c:choose>
 													<c:when test="${i.approval eq '요청중'}">
-														<a class="rbtn1" id="modal_open">반려</a>
+														<a class="rbtn1" id="modal_open${status.count}">반려</a>
 														<a class="rbtn2"
-															href="${pageContext.request.contextPath}/holiday/Ok/${i.id}?empno=${i.empno}&countDate=${i.countDate}">승인</a>
+															href="${pageContext.request.contextPath}/holiday/Ok/${i.id}?empno=${i.empno}&countDate=${i.countDate}&page=${param.page}">승인</a>
 														<!-- 모달창 -------------------------------------------------------------------------------- -->
-														<form
-															action="${pageContext.request.contextPath}/holiday/No/${i.id}">
-															<div class="modal_dim" id="modal_dim">
-																<div class="modal_wrap">
-																	<div class="modal">
-																		<div class="mdiv1">
-																			<h4>반려 사유</h4>
-																			<h5 id="exit">X</h5>
-																		</div>
-																		<div>
-																			<input type="text" name="rejectionReason" id="rejec" />
-																		</div>
-																		<div class="bdiv">
-																			<button class="mbutton">등록하기</button>
+															<form action="${pageContext.request.contextPath}/holiday/No/${i.id}" method="get">
+																<input name="page" value="${param.page}" style="display: none;"/>
+																<div class="modal_dim" id="modal_dim">
+																	<div class="modal_wrap">
+																		<div class="modal">
+																			<div class="mdiv1">
+																				<h4>반려 사유</h4>
+																				<h5 id="exit">X</h5>
+																			</div>
+																			<div>
+																				<input type="text" name="rejectionReason" id="rejec" />
+																			</div>
+																			<div class="bdiv">
+																				<button class="mbutton" id="mbutton">등록하기</button>
+																			</div>
 																		</div>
 																	</div>
 																</div>
-															</div>
-														</form>
+															</form>
+															<script type="text/javascript">
+															/* 모달창 */
+																document.getElementById("modal_open"+${status.count}).addEventListener("click",function() {
+														 			document.getElementById("modal_dim").style.display = "flex";														 			
+														 		});
+														
+																document.getElementById("exit").addEventListener("click", function() {
+																	document.getElementById("modal_dim").style.display = "none";
+																});
+															
+															</script>
+															<!-- ----------------------------------------------------------------------------------------- -->
 													</c:when>
 													<c:when test="${i.approval eq '승인'}">
 														${i.approvalDate}
@@ -317,7 +341,7 @@ span {
 										</c:when>
 										<c:otherwise>
 											<div class="num">
-												<a id="prev" href="${pageContext.request.contextPath}/${url}?page=${param.page-1}">◀</a>
+												<a id="prev" href="${pageContext.request.contextPath}/holidayAdmin?page=${param.page-1}&hwriteDate=${param.hwriteDate}&htype=${param.htype}&edepartment=${param.edepartment}">◀</a>
 											</div>
 										</c:otherwise>
 									</c:choose>
@@ -340,24 +364,25 @@ span {
 												</c:when>
 												<c:otherwise>
 													<div class="num notchecked">
-														<a href="${pageContext.request.contextPath}/${url}?page=${var}">${var}</a>
+														<a href="${pageContext.request.contextPath}/holidayAdmin?page=${var}&hwriteDate=${param.hwriteDate}&htype=${param.htype}&edepartment=${param.edepartment}">${var}</a>
 													</div>
 												</c:otherwise>
 											</c:choose>
+											<c:set var="lastNum" value="${status.end}" />
 										</c:forEach>
 										<c:choose>
-											<c:when test="${param.page} == <%=endPage%>">
+											<c:when test="${param.page eq lastNum}">
 												<div class="num">
 													<span id="next" style="color: #14abab;">▶</span>
 												</div>
 											</c:when>
 											<c:otherwise>
 												<div class="num">
-													<a id="next" href="${pageContext.request.contextPath}/${url}?page=${param.page+1}">▶</a>
+													<a id="next" href="${pageContext.request.contextPath}/holidayAdmin?page=${param.page+1}&hwriteDate=${param.hwriteDate}&htype=${param.htype}&edepartment=${param.edepartment}">▶</a>
 												</div>
 											</c:otherwise>
 										</c:choose>
-									
+										
 								</div>
 							</div>
 						</div>
@@ -371,25 +396,13 @@ span {
 
 
 	<script type="text/javascript">
-		
-	
-		/* 모달창 */
-		document.getElementById("exit").addEventListener("click", function() {
-			document.getElementById("modal_dim").style.display = "none";
-		});
 
-		document
-				.getElementById("modal_open")
-				.addEventListener(
-						"click",
-						function() {
-							document.getElementById("modal_dim").style.display = "flex";
-						});
 		let size = ${list.size()};
-			
+		
 		 // 비동기로 상세보기 가져옴
 	 	 for (let k = 1; k <= size; k++) {
-	 		document.getElementById("detail"+k).addEventListener("click",function(){
+	 		 
+	 		 document.getElementById("detail"+k).addEventListener("click",function(){
 				document.getElementById("modal_dim2").style.display = "flex";
 				
 				document.getElementById("exit2").addEventListener("click", function() {
@@ -433,8 +446,11 @@ span {
 				}).catch(error => {
 					console.log("error");
 				});
-			});
+			}); 
+	 		
 	 	 }
+		
 	</script>
+	
 </body>
 </html>

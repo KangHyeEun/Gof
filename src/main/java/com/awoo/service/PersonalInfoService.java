@@ -2,6 +2,7 @@ package com.awoo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,9 +27,14 @@ public class PersonalInfoService {
 		return dao.selectPersonal();
 	}
 
-	public void AllList(Model model){
-//		model.addAttribute("count",dao.countInfo());
-		model.addAttribute("list",dao.selectAllInfo());
+	/*
+	 * public void AllList(Model model){ //
+	 * model.addAttribute("count",dao.countInfo());
+	 * model.addAttribute("list",dao.selectAllInfo()); }
+	 */
+	
+	public void selectDetail(Model model,Map<String, String> map) {
+		model.addAttribute("list",dao.selectDetail(map));
 	}
 	
 	public void insertDataP(HttpServletRequest request,PersonalInfoVO vo) {
@@ -121,7 +127,5 @@ public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
 		model.addAttribute("info",dao.selectInfo(vo));
 	}
 	
-	public void selectDetail(InfoVO vo,Model model) {
-		model.addAttribute("list",dao.selectDetail(vo));
-	}
+	
 }

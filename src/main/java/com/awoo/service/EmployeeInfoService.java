@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import com.awoo.dao.EmployeeInfoDAO;
 import com.awoo.vo.EmployeeInfoVO;
 import com.awoo.vo.HolidayVO;
+import com.awoo.vo.InfoVO;
 import com.awoo.vo.PersonalInfoVO;
 
 @Service
@@ -71,6 +72,15 @@ public class EmployeeInfoService {
 		dao.updateE(vo);
 		service.updateP(request,vop);
 	}
+	
+	/* 연관검색 ------------------------------------------------------------------------*/
+		
+		public List<InfoVO> AssociatedSearch(InfoVO vo,Model model){
+			String name = (String)model.getAttribute("name");
+			vo.setName(name);
+			model.addAttribute("list",dao.AssociatedSearch(vo));
+			return dao.AssociatedSearch(vo);
+		}
 	
 	/*휴가-------------------------------------------------------------------------*/
 	
