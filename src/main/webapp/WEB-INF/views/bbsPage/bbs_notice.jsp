@@ -46,7 +46,9 @@
 						</select>
 						
 						<input type="text" name="keyword" id="keyword" value="${page.keyword}"/>
-						<button id="search"></button>
+						<button id="search">
+							<img src="${pageContext.request.contextPath}/imges/search.svg"/>
+						</button>	
 					</div>				
 				</div>
 				
@@ -67,13 +69,14 @@
 					<tbody>
 						<c:forEach var="vo" items="${list}" varStatus="status">
 							<tr>
-								<td>${list.size() - status.index}</td>
-								<td>${vo.category}</td>
+<%-- 								<td>${list.size() - status.index}</td> --%>
+								<td>${vo.id}</td>
+								<td>${vo.category} <c:if test="${vo.category == '중요'}"><img src="${pageContext.request.contextPath}/imges/horn.svg"/></c:if></td>
 								<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
 								<td>인사담당자</td>
 								<td>${vo.createDate}</td>
 								<td>${vo.viewCounts}</td>
-								<td>첨부 파일</td>
+								<td><span>✉</span> 첨부 파일</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -85,7 +88,7 @@
         <div id="paging">
             <c:choose>
                 <c:when test="${1 == page.startPage}">
-                    <span class="num" style="color: #14abab" >◀◀</span>
+                    <span class="num" >◀◀</span>
                 </c:when>
                 <c:otherwise>
                     <div class="num">
@@ -95,7 +98,7 @@
             </c:choose>
             <c:choose>
                 <c:when test="${1 == page.nowPage}">
-                    <span class="num" style="color: #14abab;">◀</span>
+                    <span class="num">◀</span>
                 </c:when>
                 <c:otherwise>
                     <div class="num">
@@ -118,18 +121,18 @@
             </c:forEach>
             <c:choose>
                 <c:when test="${page.totalPage == page.nowPage}">
-                    <span class="num" style="color: #14abab;">▶</span>
+                    <span class="num">▶</span>
                 </c:when>
                 <c:otherwise>
                     <div class="num">
                         <a
-                        href="${pageContext.request.contextPath}/bbsPage/bbs?page=${page.nowPage + 1}${page.searchTypeKeyword}">▶</a>
+                        href="${pageContext.request.contextPath}/bbsNotice/bbs?page=${page.nowPage + 1}${page.searchTypeKeyword}">▶</a>
                     </div>
                 </c:otherwise>
             </c:choose>
             <c:choose>
                 <c:when test="${page.totalPage eq page.endPage}">
-                    <span class="num" style="color: #14abab">▶▶</span>
+                    <span class="num">▶▶</span>
                 </c:when>
                 <c:otherwise>
                     <div class="num">

@@ -9,69 +9,7 @@
 	href="${pageContext.request.contextPath}/login/style.css">
 <title>Insert title here</title>
 <style type="text/css">
-	.logo{
-	    width: 19em;
-	    margin-bottom: 19px;
-	    margin-left: 11px;
-	}
-	.wrapper{
-	 		background: linear-gradient(90deg, #a8cc66, #1d7fcf);
-            background-size: 400% 400%;
-            animation: AnimationName 5s ease infinite;
-            position:relative
-	}
-	@keyframes AnimationName {
-            0% {
-                background-position: 0% 50%
-            }
-
-            50% {
-                background-position: 100% 51%
-            }
-
-            100% {
-                background-position: 0% 50%
-            }
-        }
 	
-		.login-logo{
-	        width: 73%;
-		    height: 8em;		    
-    		min-width: 270px;
-		}
-		form p {
-		    display: flex;
-		    width: 85%;
-		    font-size: 13px;
-		    height: 0.7em;
-		    color: #686868;
-		}
-		.active{
-			font-size: 28px;
-		}
-		.container{
-		   	display: flex;
-		    justify-content: center;
-		    align-items: center;
-		    flex-direction: column;
-		    width: 25%;
-		    animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-		}
-		
-		@keyframes slide-in-top {
-		  0% {
-		    transform: translateY(-100px);
-		    opacity: 0;
-		  }
-		  100% {
-		    transform: translateY(0);
-		    opacity: 1;
-		  }
-		}
-		
-		.emptydiv{
-			height: 3em;
-		}
 </style>
 </head>
 <body>

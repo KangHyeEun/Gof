@@ -5,202 +5,202 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/bbsstyle.css"/> --%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/bbsstyle.css"/>
 <title>Insert title here</title>
 <style type="text/css">
-body {
-	font-family: 'Nanum Barun Gothic', sans-serif;
-}
+/* body { */
+/* 	font-family: 'Nanum Barun Gothic', sans-serif; */
+/* } */
 
-.inner-div-bbs {
-	display: inline-block;
-}
+/* .inner-div-bbs { */
+/* 	display: inline-block; */
+/* } */
 
-.bbs-header {
-	display: flex;
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-	justify-content: space-between;
-}
+/* .bbs-header { */
+/* 	display: flex; */
+/* 	box-sizing: border-box; */
+/* 	margin: 0; */
+/* 	padding: 0; */
+/* 	justify-content: space-between; */
+/* } */
 
-.title {
-	display: flex;
-	box-sizing: border-box;
-}
+/* .title { */
+/* 	display: flex; */
+/* 	box-sizing: border-box; */
+/* } */
 
-.title h3 {
-	font-family: 'NanumSquare', sans-serif;
-	font-size: 1.8rem;
-	font-weight: 700;
-	line-height: 3.6rem;
-	color: #212529;
-}
+/* .title h3 { */
+/* 	font-family: 'NanumSquare', sans-serif; */
+/* 	font-size: 1.8rem; */
+/* 	font-weight: 700; */
+/* 	line-height: 3.6rem; */
+/* 	color: #212529; */
+/* } */
 
-.wrbtn {
-	box-sizing: border-box;
-	display: flex;
-	align-items: center;
-	height: 5rem;
-}
+/* .wrbtn { */
+/* 	box-sizing: border-box; */
+/* 	display: flex; */
+/* 	align-items: center; */
+/* 	height: 5rem; */
+/* } */
 
-.wrbtn a {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 10px 30px;
-	font-size: 1rem;
-	color: #fff;
-	background-color: #232249;
-	border-radius: 0.4rem;
-	text-decoration: none;
-}
+/* .wrbtn a { */
+/* 	display: flex; */
+/* 	justify-content: center; */
+/* 	align-items: center; */
+/* 	padding: 10px 30px; */
+/* 	font-size: 1rem; */
+/* 	color: #fff; */
+/* 	background-color: #232249; */
+/* 	border-radius: 0.4rem; */
+/* 	text-decoration: none; */
+/* } */
 
-.helpBar {
-	/* border: 1px solid black; */
-	display: flex;
-	justify-content: right;
-	align-items: center;
-	height: 3rem;
-	padding-bottom: 0.8rem;
-}
+/* .helpBar { */
+/* 	/* border: 1px solid black; */ */
+/* 	display: flex; */
+/* 	justify-content: right; */
+/* 	align-items: center; */
+/* 	height: 3rem; */
+/* 	padding-bottom: 0.8rem; */
+/* } */
 
-.search-wrap {
-	border: 1px solid gray;
-	border-radius: 0.4rem;
-	padding: 0.1rem;
-}
+/* .search-wrap { */
+/* 	border: 1px solid gray; */
+/* 	border-radius: 0.4rem; */
+/* 	padding: 0.1rem; */
+/* } */
 
-.helpBar select {
-	width: 6rem;
-	height: 1.5rem;
-	border-style: none;
-}
+/* .helpBar select { */
+/* 	width: 6rem; */
+/* 	height: 1.5rem; */
+/* 	border-style: none; */
+/* } */
 
-.helpBar input {
-	width: 20rem;
-	height: 1.5rem;
-	border-style: none;
-}
+/* .helpBar input { */
+/* 	width: 20rem; */
+/* 	height: 1.5rem; */
+/* 	border-style: none; */
+/* } */
 
-.helpBar select, .helpBar input:focus {
-	outline: none;
-}
+/* .helpBar select, .helpBar input:focus { */
+/* 	outline: none; */
+/* } */
 
-#search {
-	border: none;
-	border-radius: 0.4rem;
-	box-sizing: border-box;
-	padding: 0.5rem 1rem;
-	width: 1.4rem;
-	height: 1.4rem;
-	background-image: url(https://uinnout.com/admin/images/search.svg);
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-color: #fff;
-	cursor: pointer;
-}
+/* #search { */
+/* 	border: none; */
+/* 	border-radius: 0.4rem; */
+/* 	box-sizing: border-box; */
+/* 	padding: 0.5rem 1rem; */
+/* 	width: 1.4rem; */
+/* 	height: 1.4rem; */
+/* 	background-image: url(https://uinnout.com/admin/images/search.svg); */
+/* 	background-repeat: no-repeat; */
+/* 	background-size: contain; */
+/* 	background-color: #fff; */
+/* 	cursor: pointer; */
+/* } */
 
-.main {
-	height: auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	box-sizing: border-box;
-}
+/* .main { */
+/* 	height: auto; */
+/* 	display: flex; */
+/* 	justify-content: center; */
+/* 	align-items: center; */
+/* 	box-sizing: border-box; */
+/* } */
 
-table {
-	border-collapse: collapse;
-	table-layout: fixed;
-	width: -webkit-fill-available;
-}
+/* table { */
+/* 	border-collapse: collapse; */
+/* 	table-layout: fixed; */
+/* 	width: -webkit-fill-available; */
+/* } */
 
-thead tr {
-	border-top: 2px solid #909294;
-	border-bottom: 1px solid #b3c2d1;
-}
+/* thead tr { */
+/* 	border-top: 2px solid #909294; */
+/* 	border-bottom: 1px solid #b3c2d1; */
+/* } */
 
-tbody tr {
-	border-bottom: 1px solid #b3c2d1;
-}
+/* tbody tr { */
+/* 	border-bottom: 1px solid #b3c2d1; */
+/* } */
 
-tbody tr:last-child {
-	border-bottom: 2px solid #909294;
-}
+/* tbody tr:last-child { */
+/* 	border-bottom: 2px solid #909294; */
+/* } */
 
-tbody tr td:nth-child(3) {
-	padding-left: 3rem;
-	text-align: left;
-}
+/* tbody tr td:nth-child(3) { */
+/* 	padding-left: 3rem; */
+/* 	text-align: left; */
+/* } */
 
-table td, table th {
-	padding: 8px;
-	text-align: center;
-	line-height: 1.8rem;
-}
+/* table td, table th { */
+/* 	padding: 8px; */
+/* 	text-align: center; */
+/* 	line-height: 1.8rem; */
+/* } */
 
-table a {
-	text-decoration: none;
-	color: #0459c1;
-	overflow: hidden;
-	font-size: 1rem;
-}
+/* table a { */
+/* 	text-decoration: none; */
+/* 	color: #0459c1; */
+/* 	overflow: hidden; */
+/* 	font-size: 1rem; */
+/* } */
 
-table th {
-	font-family: 'Nanum Barun Gothic', sans-serif;
-	padding-top: 12px;
-	padding-bottom: 12px;
-	background-color: white;
-	color: rgb(0, 0, 0);
-}
+/* table th { */
+/* 	font-family: 'Nanum Barun Gothic', sans-serif; */
+/* 	padding-top: 12px; */
+/* 	padding-bottom: 12px; */
+/* 	background-color: white; */
+/* 	color: rgb(0, 0, 0); */
+/* } */
 
-.bbs-footer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 1.5rem;
-	display: fixed;
-	box-sizing: border-box;
-}
+/* .bbs-footer { */
+/* 	display: flex; */
+/* 	justify-content: center; */
+/* 	align-items: center; */
+/* 	padding: 1.5rem; */
+/* 	display: fixed; */
+/* 	box-sizing: border-box; */
+/* } */
 
-#paging {
-	display: flex;
-}
+/* #paging { */
+/* 	display: flex; */
+/* } */
 
-.num {
-	height: 100%;
-	width: 26px;
-	margin: 0 2px;
-	border: 1px solid #14abab;;
- 	display: flex;
-	justify-content: center;
-	align-items: center;
-	/* 	font-weight: bold; */
-	border-radius: 10px;
-	font-size: 11px;
-	color: black;
-}
+/* .num { */
+/* 	height: 100%; */
+/* 	width: 26px; */
+/* 	margin: 0 2px; */
+/* 	border: 1px solid #14abab;; */
+/*  	display: flex; */
+/* 	justify-content: center; */
+/* 	align-items: center; */
+/* 	/* 	font-weight: bold; */ */
+/* 	border-radius: 10px; */
+/* 	font-size: 11px; */
+/* 	color: black; */
+/* } */
 
-.num a {
-	text-decoration: none;
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+/* .num a { */
+/* 	text-decoration: none; */
+/* 	height: 100%; */
+/* 	width: 100%; */
+/* 	display: flex; */
+/* 	justify-content: center; */
+/* 	align-items: center; */
+/* } */
 
-.checked {
-	background-color: #14abab;
-	color: white;
-	border: 1px solid #14abab;
-}
+/* .checked { */
+/* 	background-color: #14abab; */
+/* 	color: white; */
+/* 	border: 1px solid #14abab; */
+/* } */
 
-.notchecked:hover {
-	background-color: #c9eaec;
-	color: black;
-	border: 1px solid #c9eaec;
-}
+/* .notchecked:hover { */
+/* 	background-color: #c9eaec; */
+/* 	color: black; */
+/* 	border: 1px solid #c9eaec; */
+/* } */
 
 
 </style>
@@ -239,7 +239,9 @@ table th {
 						</select>
 						
 						<input type="text" name="keyword" id="keyword" value="${page.keyword}"/>
-						<button type="submit" id="search"></button>
+						<button type="submit" id="search">
+							<img src="${pageContext.request.contextPath}/imges/search.svg"/>
+						</button>
 					</div>				
 				</div>
 				
@@ -266,7 +268,7 @@ table th {
 								<td>${vo.owner}</td>
 								<td>${vo.createDate}</td>
 								<td>${vo.viewCounts}</td>
-								<td>첨부 파일</td>
+								<td><span>✉</span> 첨부 파일</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -278,7 +280,7 @@ table th {
         <div id="paging">
             <c:choose>
                 <c:when test="${1 == page.startPage}">
-                    <span class="num" style="color: #14abab" >◀◀</span>
+                    <span class="num">◀◀</span>
                 </c:when>
                 <c:otherwise>
                     <div class="num">
@@ -288,7 +290,7 @@ table th {
             </c:choose>
             <c:choose>
                 <c:when test="${1 == page.nowPage}">
-                    <span class="num" style="color: #14abab;">◀</span>
+                    <span class="num">◀</span>
                 </c:when>
                 <c:otherwise>
                     <div class="num">
@@ -311,7 +313,7 @@ table th {
             </c:forEach>
             <c:choose>
                 <c:when test="${page.totalPage == page.nowPage}">
-                    <span class="num" style="color: #14abab;">▶</span>
+                    <span class="num">▶</span>
                 </c:when>
                 <c:otherwise>
                     <div class="num">
@@ -322,7 +324,7 @@ table th {
             </c:choose>
             <c:choose>
                 <c:when test="${page.totalPage eq page.endPage}">
-                    <span class="num" style="color: #14abab">▶▶</span>
+                    <span class="num">▶▶</span>
                 </c:when>
                 <c:otherwise>
                     <div class="num">

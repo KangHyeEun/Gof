@@ -27,7 +27,7 @@ public class BBSService {
 	public void getBBSList(Model model, int page, String searchType, String keyword) {
 		PageVO vo = new PageVO();
 		vo.setNowPage(page);
-		vo.setCntPerPage(8);
+		vo.setCntPerPage(10);
 		vo.setCntPerBlock(10);
 		vo.setSearchType(searchType);
 		vo.setKeyword(keyword);
@@ -104,7 +104,7 @@ public class BBSService {
 	public void getBBSListNotice(Model model, int page, String searchType, String keyword) {
 		PageVO vo = new PageVO();
 		vo.setNowPage(page);
-		vo.setCntPerPage(8);
+		vo.setCntPerPage(10);
 		vo.setCntPerBlock(10);
 		vo.setSearchType(searchType);
 		vo.setKeyword(keyword);

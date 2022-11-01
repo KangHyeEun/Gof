@@ -47,6 +47,10 @@
 	font-weight:bold;
 	color:#299cff;
 }
+.cal-list{
+/* height: 85%; */
+/* over-flow:auto; */
+}
 </style>
 </head>
 <body>
@@ -172,7 +176,7 @@
 										<img src="${pageContext.request.contextPath}/imges/list.png" alt="" />
 										<p id="today-date"></p>
 									</div>
-									<div>
+									<div class="cal-list">
 										<c:if test="${todayCalendar.size() > 0}">
 	<!-- 										<table> -->
 	<!-- 											<thead> -->
