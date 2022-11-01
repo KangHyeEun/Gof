@@ -29,6 +29,7 @@
 	<c:forEach var ="info" items="${info}">
 	<div class="container-wrap">
 		<div class="header">
+			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
 			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
 			<div class="header-logout">   <a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
