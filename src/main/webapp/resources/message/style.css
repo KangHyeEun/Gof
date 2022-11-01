@@ -283,7 +283,7 @@ border: 1px solid #959595;
 	    display: flex;
 	    justify-content: space-between;
 	    align-content: baseline;
-	    font-size: 19px;
+/* 	    font-size: 19px; */
     }
     .bottom-div{
    	width: 100%;
@@ -426,6 +426,10 @@ border: 1px solid #959595;
 	    width: 50px;
 	}
 	
+	.sortings {
+	    display: flex;
+    	align-items: center; 
+	}
 	.sortings select{
 	border: none;
 }
