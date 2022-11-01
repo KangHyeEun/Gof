@@ -10,14 +10,15 @@
 <style type="text/css">
 </style>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/setstyle.css" />
+	href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bbs/setstyle.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bbs/js/jquery-3.6.1.min.js"></script>
 <!-- ckeditor 적용 -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<div class="header">
-		<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+		<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 		<div class="header-logout">
 			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 		</div>
@@ -30,7 +31,10 @@
 				<form:form modelAttribute="BBSVO"
 					action="${pageContext.request.contextPath}/bbsPage/set"
 					method="post" enctype="multipart/form-data">
-
+					<form:hidden path="ownerId" value="${sessionScope.personalInfoVO.empno}"/>
+					<form:hidden path="owner" value="${sessionScope.personalInfoVO.name}"/>
+					<form:hidden path="filelist"/>
+					
 					<div class="set-header">
 						<h2>사내 게시판</h2>
 					</div>
@@ -49,7 +53,9 @@
 							<tbody>
 								<tr>
 									<th>작성자</th>
-									<td>${sessionScope.personalInfoVO.name}</td>
+									<td>
+										${sessionScope.personalInfoVO.name}
+									</td>
 								</tr>
 								<tr>
 									<th>카테고리</th>
@@ -75,19 +81,22 @@
 									</td>
 								</tr>
 								<tr>
-									<th>파일첨부&nbsp;&nbsp;<span><img src="https://uinnout.com/employee/images/clip.svg"></span></th>
-									<td><input type="file" name="mediaFile" id="mediaFile" multiple="multiple" />
-										<button id="btn">Upload</button>
+									<th>파일첨부&nbsp;&nbsp;
+									<span>
+<!-- 									<img src="https://uinnout.com/employee/images/clip.svg"> -->
+									</span>
+									</th>
+									<td>
+										<input type="file" name="upload" id="upload" multiple/>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<div class="set-footer">
-						<button onclick="save">저장하기</button>
-					</div>
 				</form:form>
-
+				<div class="set-footer">
+					<button id="submit">전송</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -102,31 +111,32 @@
 	//이지윅즈 적용
 	CKEDITOR.replace('textarea');
 	
-	
 	//파일 업로드
-		document.getElementById("btn").addEventListener("click", function(e){
-			e.preventDefault();
-			//formData를 통해 데이터를 보낼 양식 설정
-			const formData = new FormData;
-			//mediaFile input=file 태그 엘리먼트 선언
-			const inputFiles = document.getElementById("mediaFile");
-			//inputFiles에서 파일에 대한 정보들을 전부 가져와 변수에 저장
-			let files = inputFiles.files;
-			//어떤 값이 오는지 임시 출력
-			console.log(files);
+	$(function(){
+		$("#submit").click(function(){
+			const formData = new FormData();
+			const $upload = $("#upload");
+			let files = $upload[0].files;
 			
-			//files의 정보를 formData에 담기
-			for (const file of files) {
-				formData.append("uploadFile", file);
+			for (var i = 0; i < files.length; i++) {
+				formData.append("uploadFile", files[i])	
 			}
-			//fetch를 통해 formData 전송
-			fetch("${pageContext.request.contextPath}/bbsPage/fileupload", {
-				method : "POST", //반드시 post
-				body : formData})
-			.then(response => console.log(response))
-			.catch(error => console.log(error));
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/bbsPage/uploadfile",
+				processData : false,
+				contentType : false,
+				data : formData,
+				type : "post",
+				datatype : "json",
+				success: function(result){
+					console.log(JSON.stringify(result));
+					$("#filelist").val(JSON.stringify(result));
+					$("#BBSVO").submit();
+				}
+			});
 		});
-
+	});
 	</script>
 </body>
 </html>

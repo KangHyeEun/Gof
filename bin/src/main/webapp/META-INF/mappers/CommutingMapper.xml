@@ -99,6 +99,15 @@
 		order by id desc
 		limit 0, 5
 	</select>
+	<select id="selectBBSForHome" resultType="BBSVO">
+		select id, owner_id, owner, title, content, date_format(create_date, '%Y-%m-%d') create_date, category, is_delete, view_counts
+		from bbs
+		where
+		is_delete = 0
+		order by id desc
+		limit 0, 5;
+	</select>
+	
 	<select id="selectCountApprovalHoliday" resultType="int">
 		SELECT COUNT(approval) FROM holiday WHERE approval = '요청중' and empno = #{empno};
 	</select>
@@ -110,5 +119,8 @@
 		FROM calendar c, personal_info p
 		WHERE c.empno = p.empno
 		AND #{today} between DATE_FORMAT(cal_start,'%Y-%m-%d') AND DATE_FORMAT(cal_end,'%Y-%m-%d');
+	</select>
+	<select id="getCountView" resultType="int">
+	SELECT COUNT(VIEW) FROM message WHERE mreceiver_id = #{empno} AND VIEW=0;
 	</select>
 </mapper>

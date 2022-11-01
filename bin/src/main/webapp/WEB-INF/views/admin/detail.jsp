@@ -10,6 +10,20 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/admin/admin2.css">
 <title>Insert title here</title>
+<style type="text/css">
+	.btnzip{
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+	}
+	.zip {
+	    display: flex;
+	    justify-content: flex-end;
+	}
+	.zipimg{
+		
+	}
+</style>
 </head>
 <body>
 	<c:forEach var ="info" items="${info}">
@@ -29,8 +43,9 @@
 							<br />
 							<p>⏏홈>관리자>인사관리>직원 상세 정보</p>
 						</div>
-						<form action="${pageContext.request.contextPath}/admin/updateData/${info.empno}"
-							class="form1" method="post" enctype="multipart/form-data">
+						<form action="${pageContext.request.contextPath}/admin/updateData"
+							class="form1" method="get" enctype="multipart/form-data">
+							<input name="page" value="1" style="display: none;" />
 							<div class="personal-wrap">
 								<div class="prodiv">
 									<img id="showimg" 
@@ -150,15 +165,18 @@
 									</tr>
 									<tr>
 										<td id="noB" class="label">주소</td>
-										<td id="noB" colspan='5'>
-											<div>
+										<td colspan='5'>
+										<div style="display: flex; flex-direction: row;" >
+										<input type="text" id="addre" value="${info.address}" style="width: 100%"/>
+											<div style="display: none;" id="addresszip" style="display: flex; flex-direction: row;">
 												<input type="text" name="postcode" id="postcode" placeholder="우편번호">
-												<input type="button" onclick="execDaumPostcode()"
-													value="우편번호 찾기"><br> 
 													<input type="text" name="address" id="address" placeholder="주소"> 
 													<input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소"> 
 													<input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목">
 											</div>
+												<input type="button" onclick="execDaumPostcode()"
+													value="우편번호 찾기"><br> 
+										</div>
 											<div id="wrap"
 												style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
 												<img
@@ -183,6 +201,13 @@
 
             function execDaumPostcode() {
                 // var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+                
+                 var addresszip = document.getElementById('addresszip');
+                 var addre = document.getElementById('addre'); 
+                 
+                 addresszip.style.display = 'flex';
+                 addre.style.display = 'none';
+                
                 new daum.Postcode({
                     oncomplete: function(data) {
                         var addr = ''; 
@@ -245,7 +270,14 @@
         </script>
 	
 							<br>
-							<button type="submit" class="insertbtn">수정하기</button>
+							<div class="btnzip"> 
+								<div class="zip" style="width: 60%">
+									<button type="submit" class="insertbtn">수정하기</button>
+								</div>
+								<div class="zip" style="width: 40%">
+									<a style="font-size: 1.2rem;" href="${pageContext.request.contextPath}/admin?page=1">↩</a>
+								</div>
+							</div>
 						</form>
 	<script>
         

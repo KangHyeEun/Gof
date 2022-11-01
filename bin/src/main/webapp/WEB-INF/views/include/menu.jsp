@@ -44,7 +44,7 @@
                     </ul>
 
                     <ul class="menu">
-                        <li><a href="${pageContext.request.contextPath}/orgChart2?page=1">조직도</a></li>
+                        <li><a href="${pageContext.request.contextPath}//orgChart?page=1">조직도</a></li>
                     </ul>
 
                     <ul onclick="show_sub2()" class="dropmenu2">

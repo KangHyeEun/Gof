@@ -1,15 +1,19 @@
 package com.awoo.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.awoo.dao.BBSCommentDAO;
 import com.awoo.dao.BBSDAO;
 import com.awoo.vo.BBSCommentVO;
 import com.awoo.vo.BBSVO;
+import com.awoo.vo.FileVO;
 import com.awoo.vo.PageVO;
+import com.google.gson.Gson;
 
 @Service
 public class BBSService {
@@ -24,7 +28,7 @@ public class BBSService {
 	}
 
 	//게시판+페이징
-	public void getBBSList(Model model, int page, String searchType, String keyword) {
+	public void selectBBSList(Model model, int page, String searchType, String keyword) {
 		PageVO vo = new PageVO();
 		vo.setNowPage(page);
 		vo.setCntPerPage(10);
@@ -50,33 +54,54 @@ public class BBSService {
 		model.addAttribute("list", bbsDAO.selectBBSList(vo));
 	}
 	
-	//카테고리
-	public void getCateogry(Model model) {
-		model.addAttribute("categories", bbsDAO.selectCategory());
-	}
-	
 	//게시글 상세 보기
-	public void getBBSContent(Model model, String id) {
-		model.addAttribute("bbsVO", bbsDAO.selectBBS(id));
-	}
-	//조회수
-	public void setViewCount(String id) {
-		bbsDAO.updateViewCount(id);
+	public void selectBBS(Model model, String id) {
+		BBSVO vo = new BBSVO();
+		vo.setId(Integer.parseInt(id));
+		model.addAttribute("bbsVO", bbsDAO.selectBBS(vo));
+		
+		FileVO fvo = new FileVO();
+		fvo.setBbsId(vo.getId());
+		System.out.println("select 서비스단"+fvo.getBbsId());
+
+		List<FileVO> filelist = bbsDAO.selectBBSFile(fvo);
+		model.addAttribute("filelist", filelist);
 	}
 	
-	//게시글 보기
-	public boolean setBBS(BBSVO vo2) {
-		return(bbsDAO.insertBBS(vo2) > 0)?true:false;
+	//추가
+	public void insertBBS(BBSVO vo) {
+		Gson gson = new Gson();
+		
+		FileVO[] fileArray = gson.fromJson(vo.getFilelist(), FileVO[].class);
+		List<FileVO> fileList = Arrays.asList(fileArray);
+		
+		bbsDAO.insertBBS(vo);
+		
+		System.out.println("서비스단"+vo.getId());
+		
+		for (FileVO fileVO : fileList) {
+			fileVO.setBbsId(vo.getId());
+			bbsDAO.insertBBSFile(fileVO);
+		}
 	}
 	
 	//수정
-	public boolean putBBS(BBSVO vo2) {
-		return(bbsDAO.updateBBS(vo2) > 0)?true:false;
+	public void updateBBS(BBSVO vo2) {
+		bbsDAO.updateBBS(vo2);
 	}
 	
 	//삭제
-	public boolean deleteBBS(BBSVO vo2) {
-		return (bbsDAO.deleteBBS(vo2)>0)?true:false;
+	public void deleteBBS(BBSVO vo2) {
+		bbsDAO.deleteBBS(vo2);
+	}
+	
+	//카테고리
+	public void selectCategory(Model model) {
+		model.addAttribute("categories", bbsDAO.selectCategory());
+	}
+	//조회수
+	public void updateViewCount(String id) {
+		bbsDAO.updateViewCount(id);
 	}
 	
 	//댓글 불러오기
@@ -97,6 +122,23 @@ public class BBSService {
 	//댓글 삭제
 	public void deleteComment(BBSCommentVO cvo) {
 		comDAO.deleteComment(cvo);
+	}
+
+	//파일 삭제
+	public void deleteBBSFileAll(FileVO fvo) {
+//		FileVO fvo = new FileVO();
+//		fvo.setBnum(bnum);
+		bbsDAO.deleteBBSFile(fvo);
+	}
+	
+	@Transactional
+	public void deleteBBSFile(FileVO[] fvos) {
+//		FileVO fvo = new FileVO();
+//		fvo.setNum(num);
+		for (FileVO fvo : fvos) {
+			bbsDAO.deleteBBSFile(fvo);
+		}
+		System.out.println("삭제 서비스");
 	}
 	
 	//공지사항 게시판----------------------------------------

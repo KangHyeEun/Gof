@@ -6,16 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <!-- 비동기 댓글 -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/bbs/js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bbs/js/jquery-3.6.1.min.js"></script>
 <!-- 스타일 적용 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bbs/contentstyle.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bbs/contentstyle.css" />
 <title>Insert title here</title>
 </head>
 <body>
 
     <div class="header">
-        <img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+        <img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 		<div class="header-logout">
 			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 		</div>
@@ -56,8 +56,9 @@
 
                 <div class="content-footer">
                     <h4>첨부파일&nbsp;&nbsp;&nbsp;<span><img src="https://uinnout.com/employee/images/clip.svg"></span></h4>
-<%--                     <a href="${pageContext.request.contextPath}/bbsPage/download">다운로드&nbsp;&nbsp;<img --%>
-<!--                             src="upload/abc7.txt"></a> -->
+					<c:forEach var="file" items="${filelist}">
+						<a href="${pageContext.request.contextPath}/bbsPage/downloadFile/${file.localname}/${file.servername}">${file.localname}</a><br>
+					</c:forEach>
                 </div>
 
 				<div id="comment-list">

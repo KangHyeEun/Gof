@@ -13,6 +13,8 @@ public class BBSVO {
 	private String createDate;
 	private String isDelete;
 	private int viewCounts;
+	private String filelist;
+	
 	public int getId() {
 		return id;
 	}
@@ -67,8 +69,13 @@ public class BBSVO {
 	public void setViewCounts(int viewCounts) {
 		this.viewCounts = viewCounts;
 	}
+	public String getFilelist() {
+		return filelist;
+	}
 
-	
+	public void setFilelist(String filelist) {
+		this.filelist = filelist;
+	}
 	
 
 	

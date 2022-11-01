@@ -1,3 +1,4 @@
+<%@page import="com.awoo.vo.InfoVO"%>
 <%@page import="com.awoo.vo.PersonalInfoVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -33,7 +34,7 @@ nav {
 	height: 100%;
 	width: 26px;
  	margin: 0 2px; 
-	border: 1px solid #14abab;;
+	border: 1px solid #14abab;
 	display: flex;
 	justify-content:center;
 	align-items:center;
@@ -79,6 +80,23 @@ nav {
 	.table1>tbody:nth-child(2n) {
 	background-color: #f8f8f9;
 }
+
+#suggestdiv{
+		width: 75%;
+		height: auto;
+		border: 1px solid black; 
+		display: none;
+		background: white;
+	}
+.t1 tr td {
+	width: 25%;
+}
+
+#estatus1 {
+	padding: 2%;
+    width: 80%;
+    border-color: #c9eaec;
+} 
 </style>
 </head>
 <body>
@@ -97,8 +115,8 @@ nav {
 							<h3>직원 정보 관리</h3>
 							<p>⏏홈>관리자>인사관리</p>
 						</div>
-						<form action="${pageContext.request.contextPath}/admin/details?page=1"
-							method="post">
+						<form action="${pageContext.request.contextPath}/admin" method="get">
+							<input name="page" value="1" style="display: none;" />
 							<div class="div1">
 								<h4>
 									<img src="${pageContext.request.contextPath}/imges/admin2.png"
@@ -132,14 +150,19 @@ nav {
 									<button class="btn1">검색하기</button>
 								</div>
 								<div id="detailS">
-									<table id="t1">
+									<table id="t1" style="width: 100%">
 										<tr>
-											<td style="width: 13.5%;">재직상태</td>
-											<td><input type="checkbox" name="allCheck1"
-												id="allCheck1" onclick="checkAll1()">전체</td>
-											<td><input type="checkbox" name="estatus1" id="estatus1" value="재직">재직</td>
-											<td><input type="checkbox" name="estatus1" id="estatus1" value="퇴직">퇴직</td>
-											<td><input type="checkbox" name="estatus1" id="estatus1" value="휴직">휴직</td>
+											<td>재직상태</td>
+											<td>
+												<select name="estatus" id="estatus1">
+													<option value="">재직 상태 선택</option>
+													<option value="재직">재직</option>
+													<option value="퇴직">퇴직</option>
+													<option value="휴직">휴직</option>
+												</select>
+											</td>
+											<td>이름</td>
+											<td><input type="text" name="name" id="name" placeholder="이름을 검색해 주세요"/></td>
 										</tr>
 									</table>
 									<table id="t2">
@@ -165,8 +188,9 @@ nav {
 							<img src="${pageContext.request.contextPath}/imges/total.png"
 								class="timg" />총 <span id="count"></span>명
 						</h4>
-						<form action="${pageContext.request.contextPath}/admin/updateD?page=1"
-							method="post" id="form1">
+						<form action="${pageContext.request.contextPath}/admin/updateD"
+							method="get" id="form1">
+							
 							<div id="EpTable">
 								<div class="tbtn1">
 									<button id="modal_open" type="button">선택 직원 정보 수정</button>
@@ -176,7 +200,8 @@ nav {
 
 									<table id="table1" class="table1">
 										<tr>
-											<th><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll()"></th>
+											<th><input type="checkbox" name="allCheck" id="allCheck"
+												onclick="checkAll()"></th>
 											<th>No.</th>
 											<th>이름</th>
 											<th>사원번호</th>
@@ -203,7 +228,7 @@ nav {
 												<td>${i.totalHoliday}</td>
 												<td>${i.estatus}</td>
 												<td><a
-													href="${pageContext.request.contextPath}/admin/detail/${i.id}" style="color: #ababaf;">상세보기</a></td>
+													href="${pageContext.request.contextPath}/admin/detail/${i.id}?empno=${i.empno}" style="color: #ababaf;">상세보기</a></td>
 											</tr>
 											
 											<script type="text/javascript">
@@ -214,7 +239,7 @@ nav {
 											
 										</c:forEach>
 									</table>
-
+								<!-- 페이징 처리 -->
 									<div class="paging">
 										
 										<c:choose>
@@ -225,7 +250,10 @@ nav {
 										</c:when>
 										<c:otherwise>
 											<div class="num">
-												<a id="prev" href="admin?page=${param.page-1}">◀</a>
+												<a id="prev" href="${pageContext.request.contextPath}/admin?page=${param.page-1}
+												&edepartment=${param.edepartment}
+														&eposition=${param.eposition}&ehiredType=${param.ehiredType}
+														&estatus=${param.estatus}&ehiredDate=${param.ehiredDate}&date=${param.date}">◀</a>
 											</div>
 										</c:otherwise>
 									</c:choose>
@@ -233,7 +261,7 @@ nav {
 										int Ppage = Integer.parseInt((String) request.getParameter("page"));
 										int begin = (Ppage - 1) / 10 <= 0 ? 1 : (int) Math.ceil((Ppage - 1) / 10) * 10 + 1;
 
-										List<PersonalInfoVO> list = (List<PersonalInfoVO>) request.getAttribute("list");
+										List<InfoVO> list = (List<InfoVO>) request.getAttribute("list");
 
 										int celi = (int) Math.ceil(list.size() / 10);
 										int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin + 9 : celi + 1;
@@ -248,20 +276,27 @@ nav {
 												</c:when>
 												<c:otherwise>
 													<div class="num notchecked">
-														<a href="admin?page=${var}">${var}</a>
+														<a href="${pageContext.request.contextPath}/admin?page=${var}&edepartment=${param.edepartment}
+														&eposition=${param.eposition}&ehiredType=${param.ehiredType}
+														&estatus=${param.estatus}&ehiredDate=${param.ehiredDate}&date=${param.date}">
+														${var}</a>
 													</div>
 												</c:otherwise>
 											</c:choose>
+											<c:set var="lastNum" value="${status.end}" />
 										</c:forEach>
 										<c:choose>
-											<c:when test="${param.page} == <%=endPage%>">
+											<c:when test="${param.page eq lastNum}">
 												<div class="num">
 													<span id="next" style="color: #14abab;">▶</span>
 												</div>
 											</c:when>
 											<c:otherwise>
 												<div class="num">
-													<a id="next" href="admin?page=${param.page+1}">▶</a>
+													<a id="next" href="${pageContext.request.contextPath}/admin?page=${param.page+1}
+													&edepartment=${param.edepartment}
+														&eposition=${param.eposition}&ehiredType=${param.ehiredType}
+														&estatus=${param.estatus}&ehiredDate=${param.ehiredDate}&date=${param.date}">▶</a>
 												</div>
 											</c:otherwise>
 										</c:choose>
@@ -269,7 +304,7 @@ nav {
 									</div>
 								</div>
 							</div>
-
+						<!-- 선택 직원 정보 수정 -->
 							<div class="modal_dim" id="modal_dim">
 								<div class="modal_wrap">
 									<div class="modal">
@@ -283,8 +318,18 @@ nav {
 											</h4>
 											<div class="mdiv2-1">
 												<h5 style="color: #aaabad;">직원추가</h5>
-												<input type="text" name="" id="" class="minput"
-													placeholder="입력해주세요">
+												<div class="sdiv">
+													<input type="text" name="userKeyWord" id="userKeyWord" class="minput"
+													onkeyup="filter()" autocomplete='off' placeholder="입력해주세요">
+													<div id="suggestdiv">
+														<c:forEach var="j" items="${list}" varStatus="status">
+															<div class="info">
+																<span class="name" style="color: black" value="${j.empno}">${j.name}</span>(${j.edepartment})
+																<span id="remove${status.count}">X</span>
+															</div>
+														</c:forEach>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="mdiv3">
@@ -331,6 +376,7 @@ nav {
 												</select>
 											</div>
 										</div>
+										<input name="page" value="1" style="display: none;" />
 										<div class="bdiv">
 											<button class="mbutton">수정하기</button>
 										</div>
@@ -371,7 +417,7 @@ nav {
 
 		/*상세보기 전체 체크*/
 		function checkAll1() {
-			const checkboxes = document.getElementsByName("estatus1");
+			const checkboxes = document.getElementsByName("estatus");
 			if (document.getElementById("allCheck1").checked == true) {
 				for (var i = 0; i < checkboxes.length; i++)
 					checkboxes[i].checked = true;
@@ -447,6 +493,12 @@ nav {
 				while(ul.hasChildNodes()){
 					ul.removeChild( ul.firstChild );  
 				}
+				
+				document.getElementById("userKeyWord").value="";
+                	  suggestdiv.style.display = "none";
+				  while(document.getElementById("suggest").firstChild)  {
+					  document.getElementById("suggest").firstChild.remove()
+				  }
             	
 		});
 		
@@ -483,15 +535,16 @@ nav {
 							}
 						});
 		
+		const checkboxes = document.getElementsByName("empno");
+		const ul = document.getElementById("ul");
+		const mspan = document.getElementById("mspan");
+		const li1 = document.getElementsByName("li1");
+		let num = 0;
+		
 		/*모달창 div에 li추가*/
 		document.getElementById("modal_open").addEventListener(
 				"click",
 				function() {
-					const checkboxes = document.getElementsByName("empno");
-					const ul = document.getElementById("ul");
-					const mspan = document.getElementById("mspan");
-					const li1 = document.getElementsByName("li1");
-
 					for (var i = 0; i < checkboxes.length; i++) {
 						if (checkboxes[i].checked) {
 							const li = document.createElement("li");
@@ -504,7 +557,9 @@ nav {
 							span.setAttribute("id", "remove"+i);
 							span.setAttribute("value", name);
 							span.setAttribute("class", "span1");
-
+							
+							num += i;
+							
 							li.innerText = name + "(" + edepartment + ")";
 							li.setAttribute("name", "li1");
 							li.setAttribute("value", name);
@@ -515,26 +570,83 @@ nav {
 						
 						}
 					}
-							
 							mspan.innerText = li1.length;
-					
-					/*모달창 span 삭제*/
-					
-					for (var i = 0; i < checkboxes.length; i++) {
-						document.getElementById("remove"+i).addEventListener("click", function(e) {	
-						
-							const del = e.target;  // span ("X")
-							const deleteAll = del.parentNode; // <li><span></span></li>
-							checkboxes[i-1].checked = false;
-							deleteAll.remove();
+								
+							/*모달창 span 삭제*/
 							
-							mspan.innerText = li1.length;
-						});
-						
-					}
+							for (var i = 0; i < checkboxes.length; i++) {
+							
+								document.getElementById("remove"+i).addEventListener("click", function(e) {	
+								
+									const del = e.target;  // span ("X")
+									const deleteAll = del.parentNode; // <li><span></span></li>
+									checkboxes[i-1].checked = false;
+									deleteAll.remove();
+									
+									mspan.innerText = li1.length;
+								});
+								
+							}
 				});
 		
+				
+		function filter(){
+	    	  document.querySelector("#suggestdiv").style.display="block";
+	          let value = document.getElementById("userKeyWord").value;
+	          let name = document.getElementsByClassName("name");
+	          
+	          for(let i=0;i<name.length;i++){
+	       		if(name[i].innerHTML.indexOf(value) > -1){
+	       				name[i].parentNode.style.display = "block";
+	 	            }else{
+	 	            	name[i].parentNode.style.display = "none";
+	 	            }
+	       	  }
+	       }
 		
+		
+		/*검색 이름 추가*/
+		  let info = document.getElementsByClassName("info");
+		  let name = document.getElementsByClassName("name");
+		  
+		  for(let i=0;i<name.length;i++){
+			  info[i].addEventListener("click", function(e) {	
+		  			const li = document.createElement("li");
+		  			const mspan = document.getElementById("mspan");
+		  			const li1 = document.getElementsByName("li1");
+					li.append(info[i]);
+					li.setAttribute("name", "li1");
+				  	ul.append(li);
+       	  			mspan.innerText = li1.length;
+       	  			
+       	  		/*추가 하면 체크박스 눌리기*/
+             	  
+//              	  for (var i = 0; i < checkboxes.length; i++) {
+             		  
+//              		  if(checkboxes[i].getAttribute("value") == name[i].getAttribute("value")){
+//              				checkboxes[i].checked = true;		 	  	                   			  
+//              		  }
+//              	  }
+       	  		
+             	/*선택 후 div 정리*/
+           	  document.getElementById("userKeyWord").value="";
+           	  suggestdiv.style.display = "none";
+			  		while(document.getElementById("suggest").firstChild)  {
+				  		document.getElementById("suggest").firstChild.remove()
+			  		}
+
+				});
+			  
+// 			  /*검색 이름 삭제*/			  
+// 			  li.addEventListener("click", function(){
+//      			li.remove();
+//      			mspan.innerText = li1.length;
+//      		});
+			  
+	       	  }
+		  
+		  
+
 	</script>
 
 </body>

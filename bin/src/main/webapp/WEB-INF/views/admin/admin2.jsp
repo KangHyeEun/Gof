@@ -16,6 +16,18 @@
 	nav {
 		height: auto;
 	}
+	.btnzip{
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+	}
+	.zip {
+	    display: flex;
+	    justify-content: flex-end;
+	}
+	.zipimg{
+		
+	}
 </style>
 </head>
 <body>
@@ -36,8 +48,9 @@
 							<br />
 							<p>⏏홈>관리자>인사관리>직원 개별 등록</p>
 						</div>
-						<form action="${pageContext.request.contextPath}/admin/insertData/${empno}"
-							class="form1" method="post" enctype="multipart/form-data">
+						<form action="${pageContext.request.contextPath}/admin/insertData"
+							class="form1" method="get" enctype="multipart/form-data">
+							<input name="page" value="1" style="display: none;" />
 							<div class="personal-wrap">
 								<div class="prodiv">
 									<img id="showimg"
@@ -251,7 +264,14 @@
         </script>
 
 							<br>
-							<button type="submit" class="insertbtn">등록하기</button>
+							<div class="btnzip"> 
+								<div class="zip" style="width: 60%">
+									<button type="submit" class="insertbtn">등록하기</button>
+								</div>
+								<div class="zip" style="width: 40%">
+									<a style="font-size: 1.2rem;" href="${pageContext.request.contextPath}/admin?page=1">↩</a>
+								</div>
+							</div>
 						</form>
 	<script>
         document.getElementById("birthday").valueAsDate = new Date();

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 </head>
 <body onload="refreshFunc();">
+<!-- <body> -->
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
@@ -49,9 +50,9 @@
                         </div>
 		               	<div class="btnDiv">
 		               		<p id="btnScheAdd" class="btnColor">일정추가</p>
-		               		<p id="btnMonth" class="btnClick">월</p>
-		               		<p id="btnWeek" class="btnColor">주</p>
-		               		<p id="btnDay" class="btnColor">일</p>
+<!-- 		               		<p id="btnMonth" class="btnClick">월</p> -->
+<!-- 		               		<p id="btnWeek" class="btnColor">주</p> -->
+<!-- 		               		<p id="btnDay" class="btnColor">일</p> -->
 		               	</div>
                     </div>
                     <div class="weekdays">
@@ -68,6 +69,7 @@
                     </div>
                 </div>
 			</div>
+			
 			<div class="schedule-wrap">
 				<div class="schedule slideTop">
 					<div>
@@ -92,24 +94,25 @@
 						    </div>
 						    <div>
 							    <label for="calAllday">종일</label>
-							    <input type="checkbox" name="calAllday" id="calAllday" value="1">
+							    <input type="checkbox" name="calAllday" id="calAllday" value="0">
 							    <label for="calShow">비공개</label>
-							    <input type="checkbox" name="calShow" id="calShow" value="1">
+							    <input type="checkbox" name="calShow" id="calShow" value="0">
 							    <label for="calNotice">공지</label>
-							    <input type="checkbox" name="calNotice" id="calNotice" value="1">
+							    <input type="checkbox" name="calNotice" id="calNotice" value="0">
 						    </div>
 						    <div>
 							    <label for="calContent">설명</label><br>
 							    <textarea name="calContent" id="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
 						    </div>
 						    <div class="btn">
-						    	<button id="btn" type="submit">저장</button>
+						    	<button id="btn" class="btnColor" type="button">저장</button>
 						    	<button id="realBtn" class="displayNone" type="submit">버튼</button>
 						    </div>
 						</form>
 					</div>
 				</div>
 			</div>
+			
 			<div class="schedule-info-wrap">
 				<div class="schedule-info slideTop">
 					<div class="schedule-inner">
@@ -123,18 +126,91 @@
 					</div>
 				</div>
 			</div>
+
+		    <div class="scheInfo-detail-wrap">
+		        <div class="scheInfo-detail slideTop">
+	                <div class="scheInfo-title">
+	                    <p>일정 상세정보</p>
+	                    <a>✖️</a>
+	                </div>
+	                <div class="scheInfo-content">
+	                    <ul>
+<!-- 		                    	일정 상세정보 항목들 들어갈 자리 -->
+	                    </ul>
+	                </div>
+	                <div class="scheInfo-btn">
+	                    <a href="${pageContext.request.contextPath}/logout">수정</a>
+	                    <a>삭제</a>
+	                </div>
+		        </div>
+		    </div>
+		    
+		    <div class="scheUpdate-wrap">
+				<div class="scheUpdate slideTop">
+					<div class="scheUpdate-inner">
+						<div class="scheUpdate-title">
+							<p>일정 수정</p>
+							<a>✖️</a>
+						</div>
+						<div class="scheUpdate-content">
+							<form action="${pageContext.request.contextPath}/calendar/updateData" method="post">
+								<div>
+								    <label for="calTitle">제목</label><br>
+								    <input type="text" name="calTitle" id="calTitle">
+							    </div>
+							    <div>
+								    <label for="calPlace">장소</label><br>
+								    <input type="text" name="calPlace" id="calPlace">
+							    </div>
+							    <div>
+								    <label for="calStart">일시</label><br>
+								    <input type="datetime-local" name="calStart" id="calStart">
+								    <label for="calEnd"> ~ </label>
+								    <input type="datetime-local" name="calEnd" id="calEnd">
+							    </div>
+							    <div>
+								    <label for="calAllday">종일</label>
+								    <input type="checkbox" name="calAllday" id="calAllday">
+								    <label for="calShow">비공개</label>
+								    <input type="checkbox" name="calShow" id="calShow">
+								    <label for="calNotice">공지</label>
+								    <input type="checkbox" name="calNotice" id="calNotice">
+							    </div>
+							    <div>
+								    <label for="calContent">설명</label><br>
+								    <textarea name="calContent" id="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
+							    </div>
+							    <div class="btn">
+							    	<button id="Updatebtn" class="btnColor" type="button">수정</button>
+							    	<button id="UpdateRealBtn" class="displayNone" type="submit">버튼</button>
+							    </div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	
-	
-<!-- .js 파일에서 contextPath 사용을 위해 session에 저장 -->
+
 	<script type="text/javascript">
+// 		.js 파일에서 contextPath 사용을 위해 sessionStorag에 저장
+		sessionStorage.removeItem("contextpath");
 		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+// 		.js 파일에서 사원번호, 사원이름 사용을 위해 sessionStorage에 저장
+		sessionStorage.removeItem("empno");
+		sessionStorage.removeItem("ename");
+		sessionStorage.setItem("empno", "${empno}");
+		sessionStorage.setItem("ename", "${ename}");
 	</script>
 	
 <!-- calendar -->
     <script src="${pageContext.request.contextPath}/calendar/cal-script.js"></script>
     
+    <script type="text/javascript">
+    	
+    </script>
     <script type="text/javascript">
 //     	일정 추가 팝업
     	const divA = document.querySelector(".schedule > div > a");
@@ -149,24 +225,42 @@
     	titleA.addEventListener("click", function(){
 			document.querySelector(".schedule-info-wrap").style.display = "none";
 		});
+    	
+//     	일정 상세목록 팝업
+    	const infoTitleA = document.querySelector(".scheInfo-title > a");
+//     	닫기(x표시) 클릭시 none 처리
+    	infoTitleA.addEventListener("click", function(){
+			document.querySelector(".scheInfo-detail-wrap").style.display = "none";
+		});
 		
 		const scheWrapEle = document.querySelector(".schedule-wrap");
 		const scheInfoWrapEle = document.querySelector(".schedule-info-wrap");
+		const InfoDetailWrapEle = document.querySelector(".scheInfo-detail-wrap");
 		
 // 		최종적으로 적용된 CSS를 모두 불러올수있는 메서드
 // 		window.getComputedStyle(element)
 //     	esc 누를시 일정추가, 일정목록 팝업 none 처리
     	document.onkeydown = function(event) {
     		if(event.keyCode == 27) {
-//     			일정추가 팝업 속성
+//     			일정추가 팝업의 최종 속성 (getComputedStyle)
     			const scheWrap = window.getComputedStyle(scheWrapEle);
-//     			일정목록 팝업 속성
+//     			일정목록 팝업의 최종 속성 (getComputedStyle)
     			const scheInfoWrap = window.getComputedStyle(scheInfoWrapEle);
-    			if (scheWrap.display=="flex") {
-        			document.querySelector(".schedule-wrap").style.display = "none";
+//     			일정 상세목록 팝업의 최종 속성 (getComputedStyle)
+    			const InfoDetailWrap = window.getComputedStyle(InfoDetailWrapEle);
+    			
+//     			일정추가 팝업이 보이는 상태일떄
+    			if (scheWrap.display == "flex") {
+    				scheWrapEle.style.display = "none";
     			}
-    			if (scheInfoWrap.display=="block") {
-    				document.querySelector(".schedule-info-wrap").style.display = "none";
+// 				일정 상세목록 팝업만 보이는 상태일때
+				if (scheInfoWrap.display == "none" && InfoDetailWrap.display == "flex") {
+					InfoDetailWrapEle.style.display = "none";
+					scheInfoWrapEle.style.display = "block";
+				}
+//     			일정목록 팝업만 보이는 상태일때
+				else if (InfoDetailWrap.display == "none" && scheInfoWrap.display == "block") {
+					scheInfoWrapEle.style.display = "none";
     			}
     		}
     	}

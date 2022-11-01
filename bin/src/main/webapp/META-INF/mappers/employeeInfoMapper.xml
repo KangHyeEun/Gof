@@ -27,7 +27,7 @@
 	</select>
 	
 	<select id="selectAllEInfo" resultType="InfoVO">
-		select id, NAME, edepartment,eposition,tel_number,name
+		select id, NAME, edepartment,eposition,tel_number,name,employee_info.empno
 		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
 	</select>
 	
@@ -71,6 +71,13 @@
 		personal_info.empno, edepartment,eposition, date_format(ehired_date,'%Y-%m-%d') ehired_date,
 		ehired_type,total_holiday,estatus,check_admin
 		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
+	</select>
+	
+	<!-- 연관검색 (이름,부서) -->
+	<select id="AssociatedSearch" resultType="InfoVO">
+		SELECT NAME,edepartment,e.empno as empno FROM personal_info p,employee_info e
+		WHERE e.empno = p.empno 
+		and NAME like CONCAT('%',#{name},'%');
 	</select>
 	
 	<!-- 휴가 -->

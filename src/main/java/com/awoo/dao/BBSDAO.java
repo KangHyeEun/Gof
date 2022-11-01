@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.awoo.vo.BBSVO;
+import com.awoo.vo.FileVO;
 import com.awoo.vo.PageVO;
 
 @Mapper
@@ -14,19 +15,28 @@ public interface BBSDAO {
 	
 	public List<BBSVO> selectBBSList(PageVO vo);
 	
-	public List<BBSVO> selectCategory();
-	
-	public BBSVO selectBBS(String id);
+	public BBSVO selectBBS(BBSVO vo);
 	
 	public int insertBBS(BBSVO vo);
 	
 	public int updateBBS(BBSVO vo);
 	
 	public int deleteBBS(BBSVO vo);
+
+	public List<BBSVO> selectCategory();
 	
 	public int updateViewCount(String id);
+	
+	//파일
+	public int insertBBSFile(FileVO vo);
+	
+	public List<FileVO> selectBBSFile(FileVO vo);
+	
+	public int deleteBBSFile(FileVO vo);
+	
+	
 
-	//공지사항 게시판
+	//공지사항 게시판-------------------------
 	public int selectBBSCountNotice(PageVO vo);
 	
 	public List<BBSVO> selectBBSListNotice(PageVO vo);

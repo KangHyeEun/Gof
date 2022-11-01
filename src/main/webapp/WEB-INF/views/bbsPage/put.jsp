@@ -8,15 +8,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
+	href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/bbs/setstyle.css" />
+	href="${pageContext.request.contextPath}/resources/bbs/setstyle.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bbs/js/jquery-3.6.1.min.js"></script>
 <!-- ckeditor 적용 -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<div class="header">
-		<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+		<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 		<div class="header-logout">
 			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 		</div>
@@ -26,10 +27,10 @@
 		<div class="container-inner-bbs">
 			<div class="inner-div-bbs">
 
-				<form:form modelAttribute="bbsVO"
-					action="${pageContext.request.contextPath}/bbsPage/put"
-					method="post">
+				<form:form modelAttribute="bbsVO" action="${pageContext.request.contextPath}/bbsPage/put" method="post">
 					<form:hidden path="id" />
+					<form:hidden path="filelist"/>
+					
 					<div class="set-title">
 						<h2>사내 게시판</h2>
 					</div>
@@ -50,12 +51,13 @@
 								</tr>
 								<tr>
 									<th>카테고리</th>
-									<td><form:select path="category">
+									<td>
+										<form:select path="category">
 											<c:forEach var="vo" items="${categories}">
 												<form:option value="${vo.category}">${vo.category}</form:option>
 											</c:forEach>
 										</form:select></td>
-								</tr>
+									</tr>
 								<tr>
 									<th>제목</th>
 									<td>
@@ -70,30 +72,116 @@
 								</tr>
 								<tr>
 									<th>파일첨부<span><img src=""></span></th>
-									<td><input type="file" name="mediaFile" id="mediaFile" multiple="multiple" />
-										<button id="btn">Upload</button>
+									<td>
+										<c:forEach var="file" items="${filelist}">
+										<div class="file-item">
+											<a href="${pageContext.request.contextPath}/bbsPage/downloadFile/${file.localname}/${file.servername}">${file.localname}</a>
+											<button data-id="${file.id}" class="deleteFile">삭제</button>
+										</div>
+										</c:forEach>			
+										<button class="alldelete" data-bbsId="${bbsVO.id}">전체삭제</button><br>
+										<label for="upload">파일 추가 :</label><input type="file" id="upload" name="upload" multiple>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<div class="set-footer">
-						<button>작성하기</button>
-					</div>
 				</form:form>
+					<div class="set-footer">
+						<button type="button" id="modify">수정</button>
+					</div>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
 
 	<script type="text/javascript">
 		//뒤로가기
-		document.getElementById("return").addEventListener("click",function(e){
+		document.getElementById("return").addEventListener("click", function(e){
 			e.preventDefault();
 			location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
 		});
 		
 		//이지윅즈 적용
 		CKEDITOR.replace('textarea');
+		
+		//파일 수정, 삭제
+		$(function(){
+			let flagSingle = false;
+			let flagAll = false;
+			let bbsId = 0;
+			let id = [];
+			
+			$(".deleteFile").click(function(){
+				flagSingle = true;
+				id.push({id : this.dataset.id});
+				$(this).parent().remove();
+				//console.log(num);
+			});
+			
+			$(".alldelete").click(function(){
+				flagAll = true;
+				id = this.dataset.id;
+				$(".file-item").remove();
+			});
+			
+			//파일 수정
+			$("#modify").click(function(){
+				// 파일 삭제
+				if(flagAll){
+					$.ajax({
+						url : "${pageContext.request.contextPath}/bbsPage/deleteFileAll",
+						data : JSON.stringify({id : id}),
+						type : "post",
+						contentType:"application/json; charset=utf-8",
+						datatype : "json",
+						success: function(result){
+							console.log(JSON.stringify(result));
+						}	
+					});	
+				}else if(flagSingle){
+					$.ajax({
+						url : "${pageContext.request.contextPath}/bbsPage/deleteFile",
+						data : JSON.stringify(id),
+						type : "post",
+						contentType:"application/json; charset=utf-8",
+						datatype : "json",
+						success: function(result){
+							console.log(JSON.stringify(result));
+						}
+					});		
+				}
+				
+				const formData = new FormData();
+				const $upload = $("#upload");
+				let files = $upload[0].files;
+				
+				//console.log(files);
+				// 파일 추가
+				if(files.length != 0){
+					for (var i = 0; i < files.length; i++) {
+						formData.append("uploadFile", files[i])	
+					}
+					
+					$.ajax({
+						url : "${pageContext.request.contextPath}/bbsPage/uploadfile",
+						processData : false,
+						contentType : false,
+						data : formData,
+						type : "post",
+						datatype : "json",
+						success: function(result){
+							//console.log(JSON.stringify(result));
+							$("#filelist").val(JSON.stringify(result));
+							console.log(result);
+							//$("#BBSVO").submit();
+							$("#bbsVO").submit();
+						}
+					});
+				}else{
+					$("#bbsVO").submit();
+				}
+			});
+		});
 	</script>
 </body>
 </html>

@@ -1,7 +1,9 @@
+
 	.list{
-     height: 75%;
+/*      height: 75%; */
      width: 100%;
-     font-size: 0.8em;
+     min-height: 75%;
+     font-size: 0.9em;
      display: flex;
      justify-content: center;
      align-items: start;
@@ -10,7 +12,8 @@
     padding: 4px;
     }
    .sorting {
-	    height: 15%;
+/* 	    height: 15%; */
+    	height: 100px;
 	    width: 100%;
 	    display: flex;
 	    align-items: center;
@@ -29,19 +32,20 @@
 	height: auto;
     }
     .table-head{
-    height: 8%;
+/*     height: 8%; */
    	border-bottom: 1px solid black;
     }
     .table-body{
-    height: 92.9%;
+/*     height: 92.9%; */
     }
     .list-table tr{
  	height: 2em;
 /*  	border-bottom:1px solid black; */
     }
     .list-table tr td, .list-table tr th{
-    padding: 0.7em;
+    padding: 0.8em; 
     border:none;
+    white-space: nowrap;
     }
     
 
@@ -53,22 +57,27 @@
    /*근태관리*/
    	.container-inner-bbs{
 	flex-direction : column;
-	padding: 2% 0 0 0;
-    height: auto;
+	padding: 3%;
+	box-sizing: border-box;
+/*     height: auto; */
 	}
 	.inner-div-bbs{
 	    justify-content: space-between;
 	    padding: 1% 3%;
-    	height: 95%;
-	    
+	    /* height: 95%; */
+	    height: auto;
+	    min-height: 100%;
+/* 	    margin-bottom: 35px; */
 	}
 	.container1{
-		width: 90%;
-		height: 12%;
+		width: 100%;
+		height: 160px;
+		min-height:12%;
 		display:flex;
 		flex-direction:row;
 		justify-content: space-between;
 		align-items:center;
+		margin-bottom: 1%;
 /*  		border:1px solid black;  */
 	}
 	.container1 .section1, .container .section2{
@@ -103,10 +112,11 @@
 	}
 	.container2{
 		width: 100%;
-		height: 78%;
+		height: 100%;
+/*     	min-height: 78%; */
 		display:flex;
 		flex-direction:column;
-		justify-content:center;
+		justify-content: start;
 		align-items:center;
 /* 		border:1px solid black; */
 	}
@@ -114,7 +124,7 @@
 	
 	.intro {
     height: 7%;
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -122,7 +132,7 @@
 	}
 	
 	.select{
-	height:4%;
+	height: 30px;
 	width: 100%;
 /* 	border: 1px solid blue; */
 	padding: 5px;
@@ -237,108 +247,118 @@
 	
 	
 	
-	@media screen and (max-width: 1490px) {
-	.list-table tr{
- 	height: 1.5em;
- 	border-bottom:1px solid black;
- 	}
- 	 .list-table tr td, .list-table tr th{
-/*     padding: 0.4%; */
-    }
-    .select {
-    height: 4%;
-    }
-}
-@media screen and (max-height: 863px){
-	.list-table tr td{ 
-  		padding: 7px; 
-     	white-space: nowrap;
- 	} 
-}
+/* 	@media screen and (max-width: 1490px) { */
+/* 	.list-table tr{ */
+/*  	height: 1.5em; */
+/*  	border-bottom:1px solid black; */
+/*  	} */
+/*  	 .list-table tr td, .list-table tr th{ */
+/*     padding: 0.4%; */ 
+/*     } */
+/*     .select { */
+/*     height: 4%; */
+/*     } */
+/* } */
+/* @media screen and (max-height: 863px){ */
+/* 	.list-table tr td{  */
+/*   		padding: 7px;  */
+/*      	white-space: nowrap; */
+/*  	}  */
+/* } */
 
 @media screen and (max-width: 1280px) {
 	.day-rates {
 	    font-size: 1em;
+	     flex-direction: column;
+/* 	    font-size: 0.8em; */
 	}
 }
-@media screen and (max-height: 800px){
-	.list-table tr td{ 
-  		padding: 5px; 
-     	white-space: nowrap;
- 	} 
-}
+/* @media screen and (max-height: 800px){ */
+/* 	.list-table tr td{  */
+/*   		padding: 5px;  */
+/*      	white-space: nowrap; */
+/*  	}  */
+/* } */
 
 @media screen and (max-width: 1024px) {
-	.day-rates {
-	    flex-direction: column;
-	    font-size: 0.8em;
-	}
+	 .container1{
+ 	    flex-direction: column;
+	    height: 250px;
+ 	 }
 	.container .section1 {
-		width: 64%;
+		 width: 100%;
+    	 height: 56%;
 		justify-content: space-evenly;
 	}
 	.container .section2 {
-		width: 35%;
+		width: 100%;
+		height:40%;
+    	flex-direction: row;
 	}
 	.sub-title-container {
 		font-size: 0.8em;
 	}
 	.progress-per {
-    font-size: 8px;
-    }
-}
-@media screen and (max-height: 700px){
-	.list-table tr td{ 
-  		padding: 3px; 
-     	white-space: nowrap;
- 	} 
-}
-
-@media screen and (max-width: 668px) {
-	.container1{
-	flex-direction: column;
-	}
-	
-	.inner-div-bbs {
-     height: 93%;
-	}
-	.container1{
-    height: 25%;
-    }
-	.container2{
-	height: 63%;
-	}
-	
-	.container .section1 {
-    	width: 100%; 
-        height: 46%;
-    }
-    .container .section2 {
-    	width: 100%;
-        height: 46%;
+    	font-size: 8px; 
     }
     .day-rates{
-    flex-direction:row;
+        width: 100%;
+    	flex-direction: row;
     }
-    .list-table{
-    font-size: 11px;
+    .list-table tr td, .list-table tr th {
+    	padding: 1em 0;
     }
-    .select {
-    height: 6%;
-    }
-    .list-table tr {
+}
+@media screen and (max-width: 700px) {
+ 	
+
+}
+
+/* @media screen and (max-width: 668px) { */
+/* 	.container1{ */
+/* 	flex-direction: column; */
+/* 	} */
+	
+/* 	.inner-div-bbs { */
+/*      height: 93%; */
+/* 	} */
+/* 	.container1{ */
+/*     height: 25%; */
+/*     } */
+/* 	.container2{ */
+/* 	height: 63%; */
+/* 	} */
+	
+/* 	.container .section1 { */
+/*     	width: 100%;  */
+/*         height: 46%; */
+/*     } */
+/*     .container .section2 { */
+/*     	width: 100%; */
+/*         height: 46%; */
+/*     } */
+/*     .day-rates{ */
+/*     flex-direction:row; */
+/*     } */
+/*     .list-table{ */
+/*     font-size: 11px; */
+/*     } */
+/*     .select { */
+/*     height: 6%; */
+/*     } */
+/*     .list-table tr { */
 /*     height: 3em; */
-    }
-   	.list-table tr td, .list-table tr th{
-	padding: 0.6em 0em;
-    }
-}
-@media screen and (max-height: 505px){
-	.list-table tr td{ 
-  		padding: 0px;
-     	white-space: nowrap;
- 	} 
-}
+/*     } */
+/*    	.list-table tr td, .list-table tr th{ */
+/* 	padding: 0.6em 0em; */
+/*     } */
+/* } */
+/* @media screen and (max-height: 505px){ */
+/* 	.list-table tr td{  */
+/*   		padding: 0px; */
+/*      	white-space: nowrap; */
+/*  	}  */
+/* } */
 
 
 	
