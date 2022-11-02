@@ -67,34 +67,37 @@ public class AdminController {
 	// 상세보기
 	@GetMapping("/admin/detail/{id}")
 	public String detail(@PathVariable("id") int id,Model model,InfoVO vo,
-			@RequestParam("empno") int empno, HttpServletResponse response) throws IOException {
+			@RequestParam("empno") int empno, HttpServletResponse response,UploadfilesVO uvo) {
 		vo.setId(id);
 		vo.setEmpno(empno);
 		Pservice.selectInfo(vo, model);
 		Eservice.department(model);
 		Eservice.position(model);
+		uvo.setOwnerId(empno);
+		Uservice.selectFile(uvo, model);
 		return "/admin/detail";
 	}
 	
 	// 수정하기
-		@GetMapping("/admin/updateData")
+		@PostMapping("/admin/updateData")
 		public String updateDetail(
 				PersonalInfoVO pvo,EmployeeInfoVO evo,@RequestParam("page") String page,
-				HttpServletRequest request,Model model) {
-//				@RequestParam("proimg") MultipartFile[] files,
-//				UploadfilesVO vo)throws IllegalStateException, IOException {
+				HttpServletRequest request,Model model,
+				@RequestParam("proimg") MultipartFile[] files,
+				UploadfilesVO vo)throws IllegalStateException, IOException {
 			model.addAttribute("page", page);
 			Eservice.updateE(pvo,evo,request);
-			
-//			for (MultipartFile file : files) {
-//				 if(!file.getOriginalFilename().isEmpty()) {
-//						vo.setFileName(file.getOriginalFilename());
-//						vo.setOwnerId(empno);
-//						Uservice.uplaodFile(vo);
-//					} else {
-//						System.out.println("에러가 발생했습니다.");
-//					}
-//			 }	
+			System.out.println(evo.getEmpno());
+			for (MultipartFile file : files) { 
+				if(!file.getOriginalFilename().isEmpty()){ 
+					file.transferTo(Paths.get("C:/sample/"+evo.getEmpno()+file.getOriginalFilename()));
+					vo.setFileName(evo.getEmpno()+file.getOriginalFilename()); 
+					vo.setOwnerId(evo.getEmpno());
+					Uservice.updateFile(vo); 
+					} else { 
+						System.out.println("에러가 발생했습니다."); 
+						} 
+				}	
 			
 			return "redirect:/admin";
 		}
@@ -110,20 +113,26 @@ public class AdminController {
 	}
 	
 	// 새로운 직원 추가
-	@GetMapping("/admin/insertData")
+	@PostMapping("/admin/insertData")
 	public String insertData(
 			PersonalInfoVO pvo,EmployeeInfoVO evo,@RequestParam("page") String page,
-			HttpServletRequest request,Model model) {
-//			,@RequestParam("proimg") MultipartFile[] files,
-//			UploadfilesVO vo)throws IllegalStateException, IOException{
+			HttpServletRequest request,Model model
+			,@RequestParam("proimg") MultipartFile[] files,
+			UploadfilesVO vo)throws IllegalStateException, IOException{
 		model.addAttribute("page", page);
 		Eservice.insertDataE(pvo,evo,request);
 
-		/*
-		 * for (MultipartFile file : files) { if(!file.getOriginalFilename().isEmpty())
-		 * { vo.setFileName(file.getOriginalFilename()); vo.setOwnerId(evo.getEmpno());
-		 * Uservice.uplaodFile(vo); } else { System.out.println("에러가 발생했습니다."); } }
-		 */
+		for (MultipartFile file : files) { 
+			if(!file.getOriginalFilename().isEmpty()){ 
+				file.transferTo(Paths.get("C:/sample/"+evo.getEmpno()+file.getOriginalFilename()));
+				vo.setFileName(evo.getEmpno()+file.getOriginalFilename()); 
+				vo.setOwnerId(evo.getEmpno());
+				Uservice.uplaodFile(vo); 
+				} else { 
+					System.out.println("에러가 발생했습니다."); 
+					} 
+			}
+		 
 		return "redirect:/admin";
 	}
 	
@@ -142,20 +151,6 @@ public class AdminController {
 			
 			return "redirect:/admin";
 		}
-	
-	// 파일 처리
-	@PostMapping("/admin/file")
-	@ResponseBody
-	public void multiFileUploadWithAjax(MultipartFile[] uploadFile,UploadfilesVO vo) 
-			throws IllegalStateException, IOException {
-		for(MultipartFile file : uploadFile) {
-			if(!file.getOriginalFilename().isEmpty()) {
-				file.transferTo(Paths.get("C:/sample/"+file.getOriginalFilename()));
-			}else {
-				System.out.println("에러가 발생했습니다.");
-			}
-		}
-	}
 	
 	// 이름 검색(선택 직원 정보 수정)
 	@ResponseBody   

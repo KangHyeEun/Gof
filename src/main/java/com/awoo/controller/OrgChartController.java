@@ -18,28 +18,33 @@ import com.awoo.service.EmployeeInfoService;
 import com.awoo.service.MessageService;
 import com.awoo.service.OrgChartService;
 import com.awoo.service.PersonalInfoService;
+import com.awoo.service.UploadfilesService;
 import com.awoo.vo.BBSCommentVO;
 import com.awoo.vo.InfoVO;
 import com.awoo.vo.MessageVO;
 import com.awoo.vo.PersonalInfoVO;
+import com.awoo.vo.UploadfilesVO;
 
 @Controller
 public class OrgChartController {
 	
 	private OrgChartService service;
 	private MessageService Mservice;
-	private EmployeeInfoService Eservice;	
+	private EmployeeInfoService Eservice;
+	private UploadfilesService Uservice;
 	
-		public OrgChartController(OrgChartService service, MessageService mservice, EmployeeInfoService eservice) {
+		public OrgChartController(OrgChartService service, MessageService mservice, EmployeeInfoService eservice,
+			UploadfilesService uservice) {
 		super();
 		this.service = service;
 		Mservice = mservice;
 		Eservice = eservice;
+		Uservice = uservice;
 	}
 
 		// 전체 리스트 + 상세검색 (+페이징)
 		@GetMapping("/orgChart")
-		public String OrgChart1(Model model,@RequestParam("page") String page,@RequestParam Map<String,String> map) {
+		public String OrgChart1(Model model,@RequestParam("page") String page,@RequestParam Map<String,String> map,UploadfilesVO uvo) {
 			service.selectAllEInfo(model); /*tab2 페이지*/ 
 			model.addAttribute("page", page);
 			model.addAttribute("map", map);
@@ -47,6 +52,7 @@ public class OrgChartController {
 			service.checkHoliday(model);
 			Eservice.department(model);
 			Eservice.position(model);
+			Uservice.selectFile(uvo, model);
 			return "/orgChart/OrgChart";
 		}
 		

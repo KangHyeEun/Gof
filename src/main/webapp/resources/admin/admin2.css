@@ -13,14 +13,14 @@
 #img {
 	background-color: rgb(228, 223, 223);
 	cursor: pointer;
-	margin-left: 45%;
+	margin-left: 55%;
     background-color: white;
-    padding: 1%;
     padding-left: 4%;
     padding-right: 4%;
     border-radius: 5px;
     border: 1px solid #c0c5c9;
     color: #6c6c6c;
+	font-size: 0.8rem;
 }
 
 .scroll::-webkit-scrollbar {
@@ -41,10 +41,11 @@
 }
 
 #showimg {
-	width: 90%;
-    height: 70%;
+	width: 100%;
+    height: 80%;
     border-radius: 100%;
-    padding-bottom: 5%;
+	border: 1px solid black;
+	box-sizing: content-box;
 }
 
 .personal-wrap {

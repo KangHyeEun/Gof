@@ -16,7 +16,17 @@
 
 <title>Insert title here</title>
 <style type="text/css">
-
+.org1-img {
+	width: 15%;
+	padding-right: 1%;
+}
+#showimg {
+	width: 100%;
+    height: 100%;
+    border-radius: 100%;
+	border: 1px solid black;
+	box-sizing: content-box;
+}
 </style>
 </head>
 <body>
@@ -64,25 +74,41 @@
 												</script>
 													<c:if test="${i.edepartment eq j.edepartment}">
 														<div class="org1-main">
-															<div class="org1-img"></div>
+															<div class="org1-img">
+																<c:choose>
+																	<c:when test="${!empty fileList}">
+																		<c:forEach var="img" items="${fileList}">
+																			<c:if test="${j.empno eq img.ownerId}">
+																				<img id="showimg"
+																					src="${pageContext.request.contextPath}/upload/${img.fileName}">
+																			</c:if>
+																		</c:forEach>
+																	</c:when>
+																	<c:otherwise>
+																		<img id="showimg"
+																			src="${pageContext.request.contextPath}/upload/user.png">
+																	</c:otherwise>
+																</c:choose>
+															</div>
 															<div class="org1-content">
 																<p class="main1p">이름 : ${j.name}(${j.eposition})</p>
 																<p class="main1p">번호 : ${j.phoneNumber}</p>
 																<p style="white-space: pre-line;">이메일 : ${j.email}</p>
 																<div class="main2div">
-																<a class="message" id="modal_open${status.count}">쪽지보내기</a>
-																<c:forEach var="h" items="${checkH}">	
-																	<c:choose>
-																		<c:when test="${(h.countDate > 0) and (h.empno eq j.empno)}">
-																			<p style="color: red;margin-left: 15%;">휴가중🖐</p>
-																		</c:when>
-																		<c:otherwise>
-																			<p style="display: none;">휴가중</p>
-																		</c:otherwise>
-																	</c:choose>																	
-																</c:forEach>
+																	<a class="message" id="modal_open${status.count}">쪽지보내기</a>
+																	<c:forEach var="h" items="${checkH}">
+																		<c:choose>
+																			<c:when
+																				test="${(h.countDate > 0) and (h.empno eq j.empno)}">
+																				<p style="color: red; margin-left: 15%;">휴가중🖐</p>
+																			</c:when>
+																			<c:otherwise>
+																				<p style="display: none;">휴가중</p>
+																			</c:otherwise>
+																		</c:choose>
+																	</c:forEach>
 																</div>
-																
+
 															</div>
 														</div>
 

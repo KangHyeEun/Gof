@@ -3,16 +3,35 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.awoo.dao.UploadfilesDAO">
+
+	<select id="selectFile" resultType="UploadfilesVO">
+		select file_name,owner_id from admin_uploadfiles
+		where 1=1
+		<if test="ownerId != null and ownerId != ''">
+		 	AND owner_id = #{ownerId}
+		 </if>
+	</select>
+	
 	<insert id="uplaodFile">
-		insert into uploadfiles(
-		owner_id,file_name,upload_date
+		insert into admin_uploadfiles(
+		owner_id,file_name
 		)
 		values(
-		#{ownerId},#{fileName},now()
+		#{ownerId},#{fileName}
 		)
 	</insert>
 	
-	<select id="selectFile" resultType="UploadfilesVO">
-		select file_name from uploadfiles where owner_id = #{ownerId}
-	</select>
+	<update id="updateFile">
+		UPDATE admin_uploadfiles 
+		<set>
+			<if test="fileName != null and fileName != ''">
+				file_name = #{fileName},
+			</if>
+			upload_date = now()
+		</set>
+		where 1=1
+		<if test="ownerId != null and ownerId != ''">
+		 	AND owner_id = #{ownerId}
+		 </if>
+	</update>
 </mapper>

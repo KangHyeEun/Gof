@@ -8,21 +8,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.awoo.service.CommutingService;
+import com.awoo.service.UploadfilesService;
 import com.awoo.vo.PersonalInfoVO;
+import com.awoo.vo.UploadfilesVO;
 @Controller
 public class MainController {
 	// 출근 퇴근 값 넣기위한 service 자동주입
 		
 		private CommutingService service;
+		private UploadfilesService Uservice;
 		
-		public MainController(CommutingService service) {
-		super();
-		this.service = service;
-	}
-
-
+		public MainController(CommutingService service, UploadfilesService uservice) {
+			super();
+			this.service = service;
+			Uservice = uservice;
+		}
+		
 		@RequestMapping("MoveToHome")
-		public String MoveToHome(@SessionAttribute("personalInfoVO") PersonalInfoVO vo,
+		public String MoveToHome(@SessionAttribute("personalInfoVO") PersonalInfoVO vo,UploadfilesVO uvo,
 								Model model) {
 			model.addAttribute("ename", vo.getName());
 			model.addAttribute("empno", vo.getEmpno());
@@ -31,6 +34,8 @@ public class MainController {
 			// 홈에 값 가져오는 애들 ---------------------------------------------
 			
 			service.getDateForHome(model);
+			uvo.setOwnerId(vo.getEmpno());
+			Uservice.selectFile(uvo, model);
 			return "home/home";
 		}
 		// 출근 버튼 눌렀을 때

@@ -361,7 +361,16 @@
 					</div>
 
 					<div class="pop2">
-						<img src="https://i.pinimg.com/736x/c6/75/37/c67537a607e37016cd65de01fb4bf437.jpg" alt="">
+						<c:choose>
+							<c:when test="${!empty fileList}">
+								<c:forEach var="img" items="${fileList}">
+									<img src="${pageContext.request.contextPath}/upload/${img.fileName}">
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<img src="${pageContext.request.contextPath}/upload/user.png">
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="pop3">
 						<p class="pop-ename">
