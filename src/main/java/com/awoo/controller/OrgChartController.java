@@ -28,12 +28,15 @@ public class OrgChartController {
 	
 	private OrgChartService service;
 	private MessageService Mservice;
-
-	public OrgChartController(OrgChartService service, MessageService mservice) {
+	private EmployeeInfoService Eservice;	
+	
+		public OrgChartController(OrgChartService service, MessageService mservice, EmployeeInfoService eservice) {
 		super();
 		this.service = service;
 		Mservice = mservice;
+		Eservice = eservice;
 	}
+
 		// 전체 리스트 + 상세검색 (+페이징)
 		@GetMapping("/orgChart")
 		public String OrgChart1(Model model,@RequestParam("page") String page,@RequestParam Map<String,String> map) {
@@ -42,6 +45,8 @@ public class OrgChartController {
 			model.addAttribute("map", map);
 			service.selectOrgDetail(model,map); /*tab1 페이지*/
 			service.checkHoliday(model);
+			Eservice.department(model);
+			Eservice.position(model);
 			return "/orgChart/OrgChart";
 		}
 		

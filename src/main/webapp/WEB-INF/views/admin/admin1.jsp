@@ -41,18 +41,14 @@
 								<div class="selectD">
 									<select name="edepartment" id="category">
 										<option value="">부서 선택</option>
-										<option value="영업">영업</option>
-										<option value="마켓팅">마켓팅</option>
-										<option value="개발">개발</option>
-										<option value="인사">인사</option>
-										<option value="회계">회계</option>
+										<c:forEach var = "d" items="${listD}">
+											<option value="${d.department}">${d.department}</option>
+										</c:forEach>
 									</select> <select name="eposition" id="category">
 										<option value="">직책 선택</option>
-										<option value="부장">부장</option>
-										<option value="대리">대리</option>
-										<option value="사원">사원</option>
-										<option value="수습">수습</option>
-										<option value="팀장">팀장</option>
+										<c:forEach var = "p" items="${listP}">
+											<option value="${p.position}">${p.position}</option>
+										</c:forEach>
 									</select> <select name="ehiredType" id="category">
 										<option value="">고용 형태 선택</option>
 										<option value="정규직">정규직</option>

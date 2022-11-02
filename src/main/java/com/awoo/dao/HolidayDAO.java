@@ -17,8 +17,9 @@ public interface HolidayDAO {
 	public HolidayVO getDetailHoliday(HolidayVO vo);
 	
 	/*혜은*/
-	public List<HolidayVO> selectAdminH();
+//	public List<HolidayVO> selectAdminH();
 	public List<HolidayVO> selectH(Map<String, String> map);
+	public List<HolidayVO> holidayY();
 	public int selectCount();
 	public void updateApproval(HolidayVO vo);
 }

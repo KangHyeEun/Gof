@@ -41,7 +41,7 @@
 								<th colspan="2" style="width: 10%;"></th>
 								<th></th>
 							</tr>
-							<c:forEach var="i" items="${list}" varStatus="status">
+							<c:forEach var="i" items="${listD}" varStatus="status">
 								<tr>
 									<td>${status.count}</td>
 									<td><input type="text" name="department" class="inputText" id="department${i.id}" value="${i.department}"/></td>

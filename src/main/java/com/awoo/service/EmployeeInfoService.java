@@ -109,7 +109,7 @@ public class EmployeeInfoService {
 	/* 부서관리 -----------------------------------------------------------------*/
 	/*부서 리스트 */
 	public void department(Model model){
-		model.addAttribute("list",dao.department());
+		model.addAttribute("listD",dao.department());
 		model.addAttribute("count",dao.countDepartment());
 	};
 	
@@ -128,7 +128,7 @@ public class EmployeeInfoService {
 	/* 직책관리 -----------------------------------------------------------------*/
 	/*직책 리스트 */
 	public void position(Model model){
-		model.addAttribute("list",dao.position());
+		model.addAttribute("listP",dao.position());
 		model.addAttribute("count",dao.countPosition());
 	};
 	

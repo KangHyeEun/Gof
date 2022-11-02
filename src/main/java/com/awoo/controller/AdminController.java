@@ -57,6 +57,8 @@ public class AdminController {
 	public String admin(Model model,@RequestParam("page") String page,@RequestParam Map<String,String> map) {
 		model.addAttribute("page", page);
 		Pservice.selectDetail(model,map);
+		Eservice.department(model);
+		Eservice.position(model);
 		
 		return "/admin/admin1";
 	}
@@ -68,7 +70,9 @@ public class AdminController {
 			@RequestParam("empno") int empno, HttpServletResponse response) throws IOException {
 		vo.setId(id);
 		vo.setEmpno(empno);
-		Pservice.selectInfo(vo, model);	
+		Pservice.selectInfo(vo, model);
+		Eservice.department(model);
+		Eservice.position(model);
 		return "/admin/detail";
 	}
 	
@@ -100,6 +104,8 @@ public class AdminController {
 	@GetMapping("/admin/newE")
 	public String newE(Model model,HttpServletRequest request) {
 		Eservice.selectEmpno(model, request);
+		Eservice.department(model);
+		Eservice.position(model);
 		return "/admin/admin2";
 	}
 	

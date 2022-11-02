@@ -40,7 +40,7 @@
 								<th colspan="2" style="width: 10%;"></th>
 								<th></th>
 							</tr>
-							<c:forEach var="i" items="${list}" varStatus="status">
+							<c:forEach var="i" items="${listP}" varStatus="status">
 								<tr>
 									<td>${status.count}</td>
 									<td><input type="text" class="inputText" name="position" id="position${i.id}" value="${i.position}"/></td>

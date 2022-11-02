@@ -104,11 +104,9 @@
 										<td>
 											<select class="edepartment" id="edepartment" name="edepartment">
 												<option value=" - ">※선택해주세요</option>
-												<option value="영업">영업</option>
-												<option value="마켓팅">마켓팅</option>
-												<option value="개발">개발</option>
-												<option value="인사">인사</option>
-												<option value="회계">회계</option>
+												<c:forEach var = "d" items="${listD}">
+													<option value="${d.department}">${d.department}</option>
+												</c:forEach>
 											</select>
 										</td>
 										<td class="label">직책<span>*</span></td>
@@ -116,11 +114,9 @@
 											<select name="eposition" id="eposition"
 											required>
 												<option value="">※선택해주세요</option>
-												<option value="부장">부장</option>
-												<option value="대리">대리</option>
-												<option value="사원">사원</option>
-												<option value="수습">수습</option>
-												<option value="팀장">팀장</option>
+												<c:forEach var = "p" items="${listP}">
+													<option value="${p.position}">${p.position}</option>
+												</c:forEach>
 											</select>
 										</td>
 										<td class="label">재직 상태<span>*</span></td>

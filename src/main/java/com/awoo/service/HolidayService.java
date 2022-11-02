@@ -95,14 +95,14 @@ public class HolidayService {
 	
 	/*혜은---------------------------------------------*/
 	
-	public void selectAdminH(Model model) {
-		model.addAttribute("list",dao.selectAdminH());
-		model.addAttribute("count",dao.selectCount());
-	}
+	/*
+	 * public void selectAdminH(Model model) {
+	 * model.addAttribute("list",dao.selectAdminH()); }
+	 */
 	
 	public void selectH(Model model,Map<String,String> map) {
 		model.addAttribute("list",dao.selectH(map));
-		model.addAttribute("count",dao.selectCount());
+		model.addAttribute("year",dao.holidayY());
 	}
 	
 	public void updateApproval(HolidayVO vo) {

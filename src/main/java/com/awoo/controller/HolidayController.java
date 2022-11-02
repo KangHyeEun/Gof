@@ -105,6 +105,7 @@ public class HolidayController {
 		model.addAttribute("map", map);
 		service.selectH(model,map);
 		Eservice.HEdepartment(model);
+		Eservice.department(model);
 		
 		return "/admin/holidayAdmin";
 	}

@@ -82,6 +82,10 @@
 		 </where>
 		 order by DATE_FORMAT(hwrite_date, '%y.%m.%d %H:%i:%m') desc;
 	</select>
+	<select id="holidayY" resultType="HolidayVO">
+		SELECT DATE_FORMAT(hwrite_date, '%Y') as hwrite_date
+		FROM holiday GROUP BY DATE_FORMAT(hwrite_date, '%Y');
+	</select>
 </mapper>
 
 

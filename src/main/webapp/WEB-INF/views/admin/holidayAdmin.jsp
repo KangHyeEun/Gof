@@ -56,20 +56,18 @@
 								<div class="selectD">
 									<select name="hwriteDate" id="hwriteDate" class="category">
 										<option value="">전체 연도</option>
-										<option value="2022">2022</option>
-										<option value="2021">2021</option>
-										<option value="2017">2017</option>
+										<c:forEach var = "y" items="${year}">
+											<option value="${y.hwriteDate}">${y.hwriteDate}</option>
+										</c:forEach>
 									</select> <select name="htype" id="htype" class="category">
 										<option value="">휴가 종류</option>
 										<option value="연차">연차</option>
 										<option value="반차">반차</option>
 									</select> <select name="edepartment" id="edepartment" class="category">
 										<option value="">부서</option>
-										<option value="영업">영업</option>
-										<option value="마켓팅">마켓팅</option>
-										<option value="개발">개발</option>
-										<option value="인사">인사</option>
-										<option value="회계">회계</option>
+										<c:forEach var = "d" items="${listD}">
+											<option value="${d.department}">${d.department}</option>
+										</c:forEach>
 									</select>
 									<button class="btn1" id="btn1">검색하기</button>
 								</div>
