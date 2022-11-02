@@ -128,6 +128,18 @@ public class MessageService {
 		return dao.getDetailMessageSend(id);
 	}
 	
+	public void updateEmail(Model model) {
+		int empno = (int)model.getAttribute("empno");
+		String email_password = (String)model.getAttribute("email_password");
+		String email_id = (String)model.getAttribute("email_id");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("empno", empno);
+		map.put("email_password",email_password);
+		map.put("email_id",email_id);
+		
+		dao.updateEmail(map);
+		
+	}
 	
 	
 	

@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/admin/admin2.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/admin2.css">
 <title>Insert title here</title>
 <style type="text/css">
 	.container {
@@ -34,7 +33,7 @@
 
 	<div class="container-wrap">
 		<div class="header">
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 			<div class="header-logout">   <a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
 		<div class="container">
@@ -54,27 +53,27 @@
 							<div class="personal-wrap">
 								<div class="prodiv">
 									<img id="showimg"
-										src="${pageContext.request.contextPath}/imges/user.png">
+										src="${pageContext.request.contextPath}/resources/imges/user.png">
 									<label for="proimg" id="img">사진등록</label><input type="file"
 										name="proimg" id="proimg" accept="image/*" multiple>
 								</div>
 								<div id="personal">
 									<table>
 										<tr>
-											<td class="label">이름<span>*</span></td>
+											<td class="label">이름<span class="redspan">*</span></td>
 											<td><input type="text" name="name" id="name" required></td>
-											<td class="label">성별<span>*</span></td>
+											<td class="label">성별<span class="redspan">*</span></td>
 											<td><input type="radio" name="gender" id="gender"
 												value="M"> 남자 <input type="radio" name="gender"
 												id="gender" value="F"> 여자</td>
 										</tr>
 										<tr>
-											<td class="label">생년월일<span>*</span></td>
+											<td class="label">생년월일<span class="redspan">*</span></td>
 											<td colspan='3'><input type="date" name=birthday
 												id="birthday" required></td>
 										</tr>
 										<tr>
-											<td class="label">이메일<span>*</span></td>
+											<td class="label">이메일<span class="redspan">*</span></td>
 											<td colspan='3'><input type="text" name="email_id"
 												id="email_id" required> @ <input type="text"
 												name="email_domain" id="email_domain" required /> <select
@@ -90,10 +89,10 @@
 											</select></td>
 										</tr>
 										<tr>
-											<td id="noB" class="label">사원번호<span>*</span></td>
+											<td id="noB" class="label">사원번호<span class="redspan">*</span></td>
 											<td id="noB"><input type="text" name="empno" id="empno"
 												required value="${empno}"></td>
-											<td id="noB" class="label">비밀번호<span>*</span></td>
+											<td id="noB" class="label">비밀번호<span class="redspan">*</span></td>
 											<td id="noB"><input type="password" name="password"
 												id="password" value="abc1" readonly></td>
 										</tr>
@@ -108,26 +107,22 @@
 										<td>
 											<select class="edepartment" id="edepartment" name="edepartment">
 												<option value=" - ">※선택해주세요</option>
-												<option value="영업">영업</option>
-												<option value="마켓팅">마켓팅</option>
-												<option value="개발">개발</option>
-												<option value="인사">인사</option>
-												<option value="회계">회계</option>
+												<c:forEach var = "d" items="${listD}">
+													<option value="${d.department}">${d.department}</option>
+												</c:forEach>
 											</select>
 										</td>
-										<td class="label">직책<span>*</span></td>
+										<td class="label">직책<span class="redspan">*</span></td>
 										<td>
 											<select name="eposition" id="eposition"
 											required>
 												<option value="">※선택해주세요</option>
-												<option value="부장">부장</option>
-												<option value="대리">대리</option>
-												<option value="사원">사원</option>
-												<option value="수습">수습</option>
-												<option value="인사">팀장</option>
+												<c:forEach var = "p" items="${listP}">
+													<option value="${p.position}">${p.position}</option>
+												</c:forEach>
 											</select>
 										</td>
-										<td class="label">재직 상태<span>*</span></td>
+										<td class="label">재직 상태<span class="redspan">*</span></td>
 										<td>
 											<select name="estatus" id="estatus"
 											required>
@@ -139,7 +134,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="label">고용 형태<span>*</span></td>
+										<td class="label">고용 형태<span class="redspan">*</span></td>
 										<td>
 											<select name="ehiredType" id="ehiredType"
 											required>
@@ -148,7 +143,7 @@
 												<option value="비정규직">비정규직</option>
 											</select>
 										</td>
-										<td class="label">총 연차 수<span>*</span></td>
+										<td class="label">총 연차 수<span class="redspan">*</span></td>
 										<td><input type="text" name="total_holiday"
 											id="total_holiday" value="0" required></td>
 										<td class="label">관리자 여부</td>
@@ -156,7 +151,7 @@
 											id="check_admin"></td>
 									</tr>
 									<tr>
-										<td class="label">입사일<span>*</span></td>
+										<td class="label">입사일<span class="redspan">*</span></td>
 										<td colspan='5'><input type="date" name="ehiredDate"
 											id="ehiredDate" required></td>
 									</tr>
@@ -164,7 +159,7 @@
 										<td class="label">전화번호</td>
 										<td colspan='1'><input type="number" name="telNumber"
 											id="telNumber" placeholder="번호만 입력해 주세요"></td>
-										<td class="label">핸드폰<span>*</span></td>
+										<td class="label">핸드폰<span class="redspan">*</span></td>
 										<td colspan='3'><input type="number" name="phoneNumber"
 											id="phoneNumber" required placeholder="번호만 입력해 주세요"></td>
 									</tr>

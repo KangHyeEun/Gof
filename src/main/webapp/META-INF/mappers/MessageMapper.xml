@@ -127,6 +127,10 @@
 		AND id= #{id}
 	</update>
 
+	<update id="updateEmail"> 
+		update personal_info set email_password = #{email_password}, email = #{email_id}
+		where empno = #{empno}
+	</update>
 <!-- 	<select id="selectList" resultType="MessageVO"> -->
 <!-- 		select id, mowner, mtitle, -->
 <!-- 		mcontent,date_format(create_date, '%Y-%m-%d %T') create_date, -->

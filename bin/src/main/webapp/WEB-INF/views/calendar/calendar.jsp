@@ -16,8 +16,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/calendar/cal-style.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/calendar/cal-style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 </head>
 <body onload="refreshFunc();">
@@ -25,7 +25,7 @@
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG"/>
             <div class="header-logout">
             	<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </div>
@@ -70,6 +70,7 @@
                 </div>
 			</div>
 			
+<!-- 			 일정등록 팝업 -->
 			<div class="schedule-wrap">
 				<div class="schedule slideTop">
 					<div>
@@ -77,7 +78,7 @@
 						<a>✖️</a>
 					</div>
 					<div>
-						<form action="${pageContext.request.contextPath}/calendar/insertData" method="post">
+						<form action="" method="post">
 							<div>
 							    <label for="calTitle">제목</label><br>
 							    <input type="text" name="calTitle" id="calTitle">
@@ -102,7 +103,7 @@
 						    </div>
 						    <div>
 							    <label for="calContent">설명</label><br>
-							    <textarea name="calContent" id="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
+							    <textarea name="calContent" class="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
 						    </div>
 						    <div class="btn">
 						    	<button id="btn" class="btnColor" type="button">저장</button>
@@ -113,6 +114,7 @@
 				</div>
 			</div>
 			
+<!-- 			일정 클릭시 (등록되어 있는 경우) 일정 목록 팝업 -->
 			<div class="schedule-info-wrap">
 				<div class="schedule-info slideTop">
 					<div class="schedule-inner">
@@ -126,7 +128,8 @@
 					</div>
 				</div>
 			</div>
-
+			
+<!-- 			일정목록에서 항목 클릭시 상세목록 팝업 -->
 		    <div class="scheInfo-detail-wrap">
 		        <div class="scheInfo-detail slideTop">
 	                <div class="scheInfo-title">
@@ -145,50 +148,52 @@
 		        </div>
 		    </div>
 		    
-		    <div class="scheUpdate-wrap">
+			<div class="scheUpdate-wrap">
 				<div class="scheUpdate slideTop">
-					<div class="scheUpdate-inner">
-						<div class="scheUpdate-title">
-							<p>일정 수정</p>
-							<a>✖️</a>
-						</div>
-						<div class="scheUpdate-content">
-							<form action="${pageContext.request.contextPath}/calendar/updateData" method="post">
-								<div>
-								    <label for="calTitle">제목</label><br>
-								    <input type="text" name="calTitle" id="calTitle">
-							    </div>
-							    <div>
-								    <label for="calPlace">장소</label><br>
-								    <input type="text" name="calPlace" id="calPlace">
-							    </div>
-							    <div>
-								    <label for="calStart">일시</label><br>
-								    <input type="datetime-local" name="calStart" id="calStart">
-								    <label for="calEnd"> ~ </label>
-								    <input type="datetime-local" name="calEnd" id="calEnd">
-							    </div>
-							    <div>
-								    <label for="calAllday">종일</label>
-								    <input type="checkbox" name="calAllday" id="calAllday">
-								    <label for="calShow">비공개</label>
-								    <input type="checkbox" name="calShow" id="calShow">
-								    <label for="calNotice">공지</label>
-								    <input type="checkbox" name="calNotice" id="calNotice">
-							    </div>
-							    <div>
-								    <label for="calContent">설명</label><br>
-								    <textarea name="calContent" id="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
-							    </div>
-							    <div class="btn">
-							    	<button id="Updatebtn" class="btnColor" type="button">수정</button>
-							    	<button id="UpdateRealBtn" class="displayNone" type="submit">버튼</button>
-							    </div>
-							</form>
-						</div>
+					<div>
+						<p>일정 수정</p>
+						<a>✖️</a>
+					</div>
+					<div>
+						<form action="" method="post">
+							<div>
+							    <label for="calTitle">제목</label><br>
+							    <input type="text" name="calTitle" id="calTitle">
+						    </div>
+						    <div>
+							    <label for="calPlace">장소</label><br>
+							    <input type="text" name="calPlace" id="calPlace">
+						    </div>
+						    <div>
+							    <label for="calStart">일시</label><br>
+							    <input type="datetime-local" name="calStart" id="calStart">
+							    <label for="calEnd"> ~ </label>
+							    <input type="datetime-local" name="calEnd" id="calEnd">
+						    </div>
+						    <div>
+							    <label for="calAllday">종일</label>
+							    <input type="checkbox" name="calAllday" id="calAllday" value="0">
+							    <label for="calShow">비공개</label>
+							    <input type="checkbox" name="calShow" id="calShow" value="0">
+							    <label for="calNotice">공지</label>
+							    <input type="checkbox" name="calNotice" id="calNotice" value="0">
+						    </div>
+						    <div>
+							    <label for="calContent">설명</label><br>
+							    <textarea name="calContent" class="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
+						    </div>
+						    <div class="btn">
+						    	<button id="Updatebtn" class="btnColor" type="button">수정</button>
+						    	<button id="UpdateRealBtn" class="displayNone" type="submit">버튼</button>
+						    </div>
+						</form>
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
 
 		</div>
 	</div>
@@ -206,7 +211,7 @@
 	</script>
 	
 <!-- calendar -->
-    <script src="${pageContext.request.contextPath}/calendar/cal-script.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/calendar/cal-script.js"></script>
     
     <script type="text/javascript">
     	

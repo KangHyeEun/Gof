@@ -22,6 +22,7 @@
 	}
     #sorting-year, #sorting-month{
     border:none;
+    text-align: center;
     }
     .list-table{
     border-collapse: collapse;

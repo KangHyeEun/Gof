@@ -3,6 +3,8 @@ package com.awoo.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -128,6 +130,49 @@ public class MessageController {
 		return service.getDetailMessageSend(model);
 	}
 	
+	
+	@GetMapping("SendEmail")
+	public String sendEmail(){
+		
+		return "message/sendEmail";
+	}
+	
+	@RequestMapping("loginOK")
+	public String loginOK() {
+		System.out.println("여기는 loginOK cont");
+		return "message/successPage";
+	}
+	
+	@RequestMapping("loginFail")
+	public String loginFail() {
+		System.out.println("여기는 loginFail cont");
+		return "message/failPage";
+	}
+	
+	@PostMapping("updateEmail")
+	public String updateGmail(Model model,
+							HttpServletRequest request,
+							  @SessionAttribute("personalInfoVO") PersonalInfoVO vo) {
+		System.out.println(request.getParameter("email_id"));
+		System.out.println(request.getParameter("email_password"));
+		System.out.println(model.getAttribute("email_id"));
+		System.out.println(model.getAttribute("email_password"));
+		model.addAttribute("empno", vo.getEmpno());
+		model.addAttribute("email_id", request.getParameter("email_id"));
+		model.addAttribute("email_password", request.getParameter("email_password"));
+		service.updateEmail(model);
+		return "redirect:/SendEmail";
+	}
+//	@RequestMapping("preWeb")
+//	public String LoginFail(Htto) {
+//			System.out.println("여기는 로그인 프리웸");
+//		
+//			return "forward:/WebSendMail";
+//	}
+//	@RequestMapping("checkIdController")
+//	public String LoginOK() {
+//		return "message/sendEmail";
+//	}
 	
 	
 	

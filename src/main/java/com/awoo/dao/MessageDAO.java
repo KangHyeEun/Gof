@@ -27,6 +27,8 @@ public interface MessageDAO {
 	public MessageVO getDetailMessageSend(int id);
 	public void viewMessage(Map<String, Object> map);
 	
+	public void updateEmail(Map<String, Object> map);
+	
 //	public List<MessageVO> selectList();
 //	
 //	public MessageVO selectBBS(String id);

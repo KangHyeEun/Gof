@@ -9,100 +9,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/admin/admin1.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/admin1.css">
 <title>Insert title here</title>
 <style type="text/css">
-.container {
-	height: auto;
-}
-
-nav {
-	height: auto;
-}
-
-.scroll {
-	height: 75vh;
-}
-
-.paging {
-	display: flex;
-}
-.num{
-	height: 100%;
-	width: 26px;
- 	margin: 0 2px; 
-	border: 1px solid #14abab;
-	display: flex;
-	justify-content:center;
-	align-items:center;
-/* 	font-weight: bold; */
- 	border-radius:10px; 
-	font-size:11px;
-	color: black;
-	}
-	
-	.num a{
-	text-decoration : none;
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content:center;
-	align-items:center;
-	}
-	.checked{
-	background-color: #14abab;
-	color: white;
-	border: 1px solid #14abab;
-	}
-	
-	.notchecked:hover{
-	background-color: #c9eaec;
-	color: black;
-	border: 1px solid #c9eaec;
-	}
-	
-	.paging {
-		width: 100%;
-	    justify-content: center;
-	    padding-top: 1%;
-	    height: auto;
-	    align-items: center;
-	}
-	#ul {
-		display: flex;
-	}
-	.span1{
-		cursor: pointer;
-	}
-	.table1>tbody:nth-child(2n) {
-	background-color: #f8f8f9;
-}
-
-#suggestdiv{
-		width: 75%;
-		height: auto;
-		border: 1px solid black; 
-		display: none;
-		background: white;
-	}
-.t1 tr td {
-	width: 25%;
-}
-
-#estatus1 {
-	padding: 2%;
-    width: 80%;
-    border-color: #c9eaec;
-} 
 </style>
 </head>
 <body>
 	<div class="container-wrap">
 		<div class="header">
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG" />
+			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG" />
 			<div class="header-logout">   <a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
 		<div class="container">
@@ -111,7 +28,6 @@ nav {
 				<div class="inner-div-bbs">
 					<div class="select">
 						<div class="intro">
-						
 							<h3>직원 정보 관리</h3>
 							<p>⏏홈>관리자>인사관리</p>
 						</div>
@@ -119,24 +35,20 @@ nav {
 							<input name="page" value="1" style="display: none;" />
 							<div class="div1">
 								<h4>
-									<img src="${pageContext.request.contextPath}/imges/admin2.png"
+									<img src="${pageContext.request.contextPath}/resources/imges/admin2.png"
 										class="timg2" />직원 상세 검색
 								</h4>
 								<div class="selectD">
 									<select name="edepartment" id="category">
 										<option value="">부서 선택</option>
-										<option value="영업">영업</option>
-										<option value="마켓팅">마켓팅</option>
-										<option value="개발">개발</option>
-										<option value="인사">인사</option>
-										<option value="회계">회계</option>
+										<c:forEach var = "d" items="${listD}">
+											<option value="${d.department}">${d.department}</option>
+										</c:forEach>
 									</select> <select name="eposition" id="category">
 										<option value="">직책 선택</option>
-										<option value="부장">부장</option>
-										<option value="대리">대리</option>
-										<option value="사원">사원</option>
-										<option value="수습">수습</option>
-										<option value="팀장">팀장</option>
+										<c:forEach var = "p" items="${listP}">
+											<option value="${p.position}">${p.position}</option>
+										</c:forEach>
 									</select> <select name="ehiredType" id="category">
 										<option value="">고용 형태 선택</option>
 										<option value="정규직">정규직</option>
@@ -145,12 +57,12 @@ nav {
 									<div id="category" onclick="test()">
 										<p id="categoryA">상세조건</p>
 										<img id="categoryA"
-											src="${pageContext.request.contextPath}/imges/down.JPG">
+											src="${pageContext.request.contextPath}/resources/imges/down.JPG">
 									</div>
 									<button class="btn1">검색하기</button>
 								</div>
 								<div id="detailS">
-									<table id="t1" style="width: 100%">
+									<table id="t1">
 										<tr>
 											<td>재직상태</td>
 											<td>
@@ -169,14 +81,17 @@ nav {
 										<tr>
 											<td>입사기간</td>
 											<td><input type="date" name="ehiredDate" id="startDate"
-												placeholder="(시작일)"> ~ <input type="date"
+												placeholder="(시작일)">~<input type="date"
 												name="date" id="endDate" placeholder="(종료일)"></td>
-											<td><span id="s1" class="styleA" onclick="change()">최근
-													1개월</span></td>
-											<td><span id="s2" class="styleA" onclick="change()">최근
-													2개월</span></td>
-											<td><span id="s3" class="styleA" onclick="change()">최근
-													3개월</span></td>
+											<td>
+												<span id="s1" class="styleA" onclick="change()">최근 1개월</span>
+<!-- 											</td> -->
+<!-- 											<td> -->
+												<span id="s2" class="styleA" onclick="change()">최근 2개월</span>
+<!-- 											</td> -->
+<!-- 											<td> -->
+												<span id="s3" class="styleA" onclick="change()">최근 3개월</span>
+											</td>
 										</tr>
 									</table>
 								</div>
@@ -185,7 +100,7 @@ nav {
 					</div>
 					<div class="table" style="width: 100%;">
 						<h4>
-							<img src="${pageContext.request.contextPath}/imges/total.png"
+							<img src="${pageContext.request.contextPath}/resources/imges/total.png"
 								class="timg" />총 <span id="count"></span>명
 						</h4>
 						<form action="${pageContext.request.contextPath}/admin/updateD"
@@ -228,7 +143,7 @@ nav {
 												<td>${i.totalHoliday}</td>
 												<td>${i.estatus}</td>
 												<td><a
-													href="${pageContext.request.contextPath}/admin/detail/${i.id}?empno=${i.empno}" style="color: #ababaf;">상세보기</a></td>
+													href="${pageContext.request.contextPath}/admin/detail/${i.id}?empno=${i.empno}" style="color: #ababaf;"><img src="${pageContext.request.contextPath}/resources/imges/magni-icon.png" /></a></td>
 											</tr>
 											
 											<script type="text/javascript">
@@ -239,13 +154,14 @@ nav {
 											
 										</c:forEach>
 									</table>
+								</div>
 								<!-- 페이징 처리 -->
 									<div class="paging">
 										
 										<c:choose>
 										<c:when test="${param.page == 1}">
 											<div class="num">
-												<span id="prev" style="color: #14abab;">◀</span>
+												<span id="prev">◀</span>
 											</div>
 										</c:when>
 										<c:otherwise>
@@ -288,7 +204,7 @@ nav {
 										<c:choose>
 											<c:when test="${param.page eq lastNum}">
 												<div class="num">
-													<span id="next" style="color: #14abab;">▶</span>
+													<span id="next">▶</span>
 												</div>
 											</c:when>
 											<c:otherwise>
@@ -302,7 +218,7 @@ nav {
 										</c:choose>
 
 									</div>
-								</div>
+								
 							</div>
 						<!-- 선택 직원 정보 수정 -->
 							<div class="modal_dim" id="modal_dim">
@@ -324,8 +240,8 @@ nav {
 													<div id="suggestdiv">
 														<c:forEach var="j" items="${list}" varStatus="status">
 															<div class="info">
-																<span class="name" style="color: black" value="${j.empno}">${j.name}</span>(${j.edepartment})
-																<span id="remove${status.count}">X</span>
+																<span class="name" style="color: black" value1="${j.name}" value2="${j.edepartment}">${j.name}</span>
+																(${j.edepartment})
 															</div>
 														</c:forEach>
 													</div>
@@ -338,7 +254,7 @@ nav {
 										<div class="mselect">
 											<div class="sdiv1">
 												<h4>부서</h4>
-												<select name="edepartment" id="mcategory" class="m1">
+												<select name="edepartment" id="mcategory" class="m">
 													<option value="">변경없음</option>
 													<option value="영업">영업</option>
 													<option value="마켓팅">마켓팅</option>
@@ -349,7 +265,7 @@ nav {
 											</div>
 											<div class="sdiv2">
 												<h4>직책</h4>
-												<select name="eposition" id="mcategory" class="m2">
+												<select name="eposition" id="mcategory" class="m">
 													<option value="">변경없음</option>
 													<option value="부장">부장</option>
 													<option value="대리">대리</option>
@@ -360,7 +276,7 @@ nav {
 											</div>
 											<div class="sdiv3">
 												<h4>고용형태</h4>
-												<select name="ehiredType" id="mcategory">
+												<select name="ehiredType" id="mcategory" class="m">
 													<option value="">고용 형태 선택</option>
 													<option value="정규직">정규직</option>
 													<option value="비정규직">비정규직</option>
@@ -368,7 +284,7 @@ nav {
 											</div>
 											<div class="sdiv4">
 												<h4>재직상태</h4>
-												<select name="estatus" id="mcategory">
+												<select name="estatus" id="mcategory" class="m">
 													<option value="">변경없음</option>
 													<option value="재직">재직</option>
 													<option value="퇴직">퇴직</option>
@@ -392,6 +308,21 @@ nav {
 	</div>
 
 	<script type="text/javascript">
+	
+	function filter(){
+  	  document.querySelector("#suggestdiv").style.display="block";
+        let value = document.getElementById("userKeyWord").value;
+        let name = document.getElementsByClassName("name");
+        
+        for(let i=0;i<name.length;i++){
+     		if(name[i].innerHTML.indexOf(value) > -1){
+     				name[i].parentNode.style.display = "block";
+	            }else{
+	            	name[i].parentNode.style.display = "none";
+	            }
+     	  }
+     }
+	
 		/*신규 직원 등록*/
 		document.getElementById("newEp").addEventListener("click", function() {
 			location.href = "${pageContext.request.contextPath}/admin/newE";
@@ -484,24 +415,10 @@ nav {
 					document.getElementById("endDate").valueAsDate = null;
 				});
 
-		/* 모달창 끄기*/
-		
-		document.getElementById("exit").addEventListener("click", function() {
-			document.getElementById("modal_dim").style.display = "none";	
-				const ul = document.getElementById("ul");
-
-				while(ul.hasChildNodes()){
-					ul.removeChild( ul.firstChild );  
-				}
-				
-				document.getElementById("userKeyWord").value="";
-                	  suggestdiv.style.display = "none";
-				  while(document.getElementById("suggest").firstChild)  {
-					  document.getElementById("suggest").firstChild.remove()
-				  }
-            	
-		});
-		
+		const checkboxes = document.getElementsByName("empno");
+		const ul = document.getElementById("ul");
+		const mspan = document.getElementById("mspan");
+		const li1 = document.getElementsByName("li1");
 		
 		/*모달창 켜기*/
 		document
@@ -523,23 +440,28 @@ nav {
 								alert("정보를 수정할 직원을 선택해 주세요.");
 								document.getElementById("modal_dim").style.display = "flex";
 							}
-						});
-		/*모달창 select 색 변경*/
-		document
-				.getElementById("mcategory")
-				.addEventListener(
-						"change",
-						function() {
-							if (document.getElementById("mcategory").style.backgroundColor = '#f8fafb') {
-								document.getElementById("mcategory").style.backgroundColor = "white";
-							}
+
 						});
 		
-		const checkboxes = document.getElementsByName("empno");
-		const ul = document.getElementById("ul");
-		const mspan = document.getElementById("mspan");
-		const li1 = document.getElementsByName("li1");
-		let num = 0;
+	/* 모달창 끄기*/
+			
+			document.getElementById("exit").addEventListener("click", function() {
+				document.getElementById("modal_dim").style.display = "none";	
+				
+					const ul = document.getElementById("ul");
+		
+					while(ul.hasChildNodes()){
+						ul.removeChild( ul.firstChild );  
+					}
+					
+					document.getElementById("userKeyWord").value="";
+	                	  suggestdiv.style.display = "none";
+					  while(document.getElementById("suggest").firstChild)  {
+						  document.getElementById("suggest").firstChild.remove()
+					  }
+					  
+		
+			});
 		
 		/*모달창 div에 li추가*/
 		document.getElementById("modal_open").addEventListener(
@@ -554,98 +476,78 @@ nav {
 							const span = document.createElement("span");
 
 							span.innerText = "X"
-							span.setAttribute("id", "remove"+i);
 							span.setAttribute("value", name);
-							span.setAttribute("class", "span1");
-							
-							num += i;
+							span.setAttribute("name", "span1");
 							
 							li.innerText = name + "(" + edepartment + ")";
 							li.setAttribute("name", "li1");
 							li.setAttribute("value", name);
 							li.append(span);
 							
-							ul.append(li);
-							
-						
-						}
-					}
+							ul.append(li); 
 							mspan.innerText = li1.length;
-								
-							/*모달창 span 삭제*/
-							
-							for (var i = 0; i < checkboxes.length; i++) {
-							
-								document.getElementById("remove"+i).addEventListener("click", function(e) {	
-								
-									const del = e.target;  // span ("X")
-									const deleteAll = del.parentNode; // <li><span></span></li>
-									checkboxes[i-1].checked = false;
-									deleteAll.remove();
-									
-									mspan.innerText = li1.length;
-								});
-								
-							}
+						}
+						
+// 						/*모달창 span 삭제*/
+// 						const span1 = document.getElementsByName("span1");		
+// 						span1[i].addEventListener("click", function(e) {	
+// 							const del = e.target;  // span ("X")
+// 				 			const deleteAll = del.parentNode; // <li><span></span></li>				 			
+// 				 			for (var j = 0; j < checkboxes.length; j++) {
+// 								if(del.getAttribute("value") == checkboxes[j].getAttribute("value1")){
+//  				 					checkboxes[j].checked = false;
+//  				 					deleteAll.remove();
+// 								}	
+// 							}
+// 			 				mspan.innerText = li1.length;
+// 			 			});
+					}
+						mspan.innerText = li1.length;		
 				});
+
 		
-				
-		function filter(){
-	    	  document.querySelector("#suggestdiv").style.display="block";
-	          let value = document.getElementById("userKeyWord").value;
-	          let name = document.getElementsByClassName("name");
-	          
-	          for(let i=0;i<name.length;i++){
-	       		if(name[i].innerHTML.indexOf(value) > -1){
-	       				name[i].parentNode.style.display = "block";
-	 	            }else{
-	 	            	name[i].parentNode.style.display = "none";
-	 	            }
-	       	  }
-	       }
-		
-		
-		/*검색 이름 추가*/
+// 		/*검색 이름 추가*/
 		  let info = document.getElementsByClassName("info");
 		  let name = document.getElementsByClassName("name");
 		  
 		  for(let i=0;i<name.length;i++){
-			  info[i].addEventListener("click", function(e) {	
+			  mspan.innerText = "0";
+			  name[i].addEventListener("click", function(e) {	
 		  			const li = document.createElement("li");
 		  			const mspan = document.getElementById("mspan");
-		  			const li1 = document.getElementsByName("li1");
-					li.append(info[i]);
-					li.setAttribute("name", "li1");
-				  	ul.append(li);
+		  			const span = document.createElement("span");
+		  			const name1 = name[i].getAttribute("value1");
+					const edepartment = name[i].getAttribute("value2");
+		  			
+		  			span.innerText = "X";
+					span.setAttribute("value", name1);
+					span.setAttribute("name", "span2");
+					span.setAttribute("id", "span2");
+					
+					li.innerText = name1 + "(" + edepartment + ")";
+					li.setAttribute("name", "li1");					
+				  	li.append(span);
+       	  			ul.append(li);
        	  			mspan.innerText = li1.length;
-       	  			
-       	  		/*추가 하면 체크박스 눌리기*/
-             	  
-//              	  for (var i = 0; i < checkboxes.length; i++) {
-             		  
-//              		  if(checkboxes[i].getAttribute("value") == name[i].getAttribute("value")){
-//              				checkboxes[i].checked = true;		 	  	                   			  
-//              		  }
-//              	  }
-       	  		
-             	/*선택 후 div 정리*/
-           	  document.getElementById("userKeyWord").value="";
-           	  suggestdiv.style.display = "none";
-			  		while(document.getElementById("suggest").firstChild)  {
-				  		document.getElementById("suggest").firstChild.remove()
-			  		}
+		  			
+					/*추가 하면 체크박스 눌리기*/
+				 	for (var j = 0; j < checkboxes.length; j++) {
+						if(span.getAttribute("value") == checkboxes[j].getAttribute("value1")){
+ 				 		checkboxes[j].checked = true;
+						}	
+					}
+				
+       	  		/*선택 후 div 정리*/
+                 	  document.getElementById("userKeyWord").value="";
+                 	  suggestdiv.style.display = "none";
+      			  	while(document.getElementById("suggest").firstChild)  {
+      				  	document.getElementById("suggest").firstChild.remove();
+      			  	}
 
-				});
-			  
-// 			  /*검색 이름 삭제*/			  
-// 			  li.addEventListener("click", function(){
-//      			li.remove();
-//      			mspan.innerText = li1.length;
-//      		});
-			  
-	       	  }
-		  
-		  
+			 	mspan.innerText = li1.length;
+
+			  }); // 클릭이벤트			  
+			} // for문
 
 	</script>
 

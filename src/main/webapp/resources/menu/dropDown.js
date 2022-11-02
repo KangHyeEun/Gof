@@ -50,7 +50,7 @@ const menuDown2 = document.querySelector(".menu-down2");
 let  subToggle2 = true;
 function show_sub2(){
   if(subToggle2){
-    subBar2.style.height="80px";
+    subBar2.style.height="120px";
     subToggle2 = !subToggle2;
     menuUp2.classList.remove("btn-display");
     menuDown2.classList.add("btn-display");

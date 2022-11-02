@@ -7,8 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/commuting/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/commuting/style.css">
 <title>Insert title here</title>
 
 </head>
@@ -17,7 +17,7 @@
 	<div class="container-wrap">
 		<div class="header">
 			<div class="navbar__toogleBtn" id="mobile-btn">☰</div>
-			<img src="${pageContext.request.contextPath}/imges/logo.PNG"/>
+			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG"/>
             <div class="header-logout">	<a href="${pageContext.request.contextPath}/logout">로그아웃</a> </div>
 		</div>
 		<div class="container">
