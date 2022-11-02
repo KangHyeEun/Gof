@@ -487,26 +487,26 @@ const renderCalendar = () => {
 
 				const scheInfo = document.querySelector(".scheInfo-content > ul");
 				
-				function tagCreate(category, value) {
+				function tagCreate(category, value, scheId) {
 					
-					if (category == "종료일") {
-						let li = document.query
+					
+					let li = document.createElement("li");
+					let span1 = document.createElement("span");
+					let span2 = document.createElement("span");
+					
+					if (category == "제목") {
+						li.classList.add(scheId);
 					}
-					else {
-						let li = document.createElement("li");
-						let span1 = document.createElement("span");
-						let span2 = document.createElement("span");
-							
-						span1.innerHTML = "";
-						span1.innerHTML = category;
-						li.append(span1);
-						
-						span2.innerHTML = "";
-						span2.innerHTML = value;
-						li.append(span2);
-						
-						scheInfo.append(li);
-					}
+					
+					span1.innerHTML = "";
+					span1.innerHTML = category;
+					li.append(span1);
+					
+					span2.innerHTML = "";
+					span2.innerHTML = value;
+					li.append(span2);
+					
+					scheInfo.append(li);
 					
 				}
 //				팝업 눌러졌는지 체크
@@ -526,7 +526,8 @@ const renderCalendar = () => {
 									scheInfo.innerHTML = "";
 									
 									if (list[index2].calTitle != "" && list[index2].calTitle != null && list[index2].calTitle != undefined) {
-										tagCreate("제목", list[index2].calTitle);
+										scheId = "sche_" + idValue;
+										tagCreate("제목", list[index2].calTitle, scheId);
 									} else {
 										tagCreate("제목", "제목 없음");
 									}
@@ -548,9 +549,10 @@ const renderCalendar = () => {
 											tagCreate("일시", list[index2].calStart + " ~ " + list[index2].calEnd);
 										}
 									}
-									console.log(list[index2].calRange);
+//									console.log(list[index2].calRange);
+//									일시가 범위로 되어있다면 calAllday에 저장해둔 전체기간을 출력
 									if (list[index2].calRange != 0 && list[index2].calRange != null && list[index2].calRange != undefined) {
-										tagCreate("전체일정", list[index2].calRange);
+										tagCreate("전체일정", list[index2].calAllday);
 									}
 //									
 //									if (list[index2].calShow != "" && list[index2].calShow != null && list[index2].calRange != undefined) {
@@ -568,10 +570,151 @@ const renderCalendar = () => {
 
 //									일정 상세목록 수정 버튼 눌렀을때
 //	 			---------------------------------------------------------------------
-
+									const scheInfoBtn = document.querySelector(".scheInfo-btn > a:first-child");
+									const scheInfoContent = document.querySelector(".scheInfo-content > ul");
+									let checkId;
+									let checkRange;
 									
-									console.log(list[index2].empno);
-									console.log(empno);
+									scheInfoBtn.addEventListener("click", function(){
+//										일정 상세목록에서 제목에 해당, 여기서 일정의 id값 추출
+										const scheInfoId = scheInfoContent.children[0].classList[0].split("_")[1];
+//										리스트 중의 id와 클릭한 id와 같으면
+										if (list[index2].calId == scheInfoId) {
+//											form 태그의 버튼 클릭시 데이터를 넘기기위해 저장
+											checkId = list[index2].calId;
+											checkRange = list[index2].calRange;
+//											클릭한 id에 해당하는 일정의 작성자가 접속한 유저와 같으면
+											if (list[index2].empno == empno) {
+												console.log("찾았다.");
+												
+//												날짜 정리
+//												---------------------------------------------------------------------
+												const tempStartDate = list[index2].calStart.split(" ")[0];
+												const tempStartTime = list[index2].calStart.split(" ")[1];
+												
+												let tempStartYear = tempStartDate.split("-")[0];
+												let tempStartMonth = tempStartDate.split("-")[1];
+												let tempStartDay = tempStartDate.split("-")[2];
+												let tempStartHour = tempStartTime.split(":")[0];
+												let tempStartMinute = tempStartTime.split(":")[1];
+												
+												let tempEndDate = list[index2].calEnd.split(" ")[0];
+												let tempEndTime = list[index2].calEnd.split(" ")[1];
+												
+												let tempEndYear = tempEndDate.split("-")[0];
+												let tempEndMonth = tempEndDate.split("-")[1];
+												let tempEndDay = tempEndDate.split("-")[2];
+												let tempEndHour = tempEndTime.split(":")[0];
+												let tempEndMinute = tempEndTime.split(":")[1];
+												
+//												한자리일때 값이 안들어가기때문에 앞에 0을 임의로 붙여준다
+//												시작일
+												if (tempStartMonth.length == 1) tempStartMonth = "0" + tempStartMonth;
+												if (tempStartDay.length == 1) tempStartDay = "0" + tempStartDay;
+												if (tempStartHour.length == 1) tempStartHour = "0" + tempStartHour;
+												if (tempStartMinute.length == 1) tempStartMinute = "0" + tempStartMinute;
+//												종료일
+												if (tempEndMonth.length == 1) tempEndMonth = "0" + tempEndMonth;
+												if (tempEndDay.length == 1) tempEndDay = "0" + tempEndDay;
+												if (tempEndHour.length == 1) tempEndHour = "0" + tempEndHour;
+												if (tempEndMinute.length == 1) tempEndMinute = "0" + tempEndMinute;
+												
+												let tempStart = tempStartYear + "-" + tempStartMonth + "-" + tempStartDay + "T" + tempStartHour + ":" + tempStartMinute;
+												let tempEnd = tempEndYear + "-" + tempEndMonth + "-" + tempEndDay + "T" + tempEndHour + ":" + tempEndMinute;
+
+												document.getElementById("calStart1").value = tempStart;
+												document.getElementById("calEnd1").value = tempEnd;						
+
+
+
+//												checkbox 정리
+//												---------------------------------------------------------------------
+												if (list[index2].calAllday != 0) document.getElementById("calAllday1").checked = "on";  
+												if (list[index2].calShow != 0) document.getElementById("calShow1").checked = "on";
+												if (list[index2].calNotice != 0) document.getElementById("calNotice1").checked = "on";
+												
+//												나머지
+//												---------------------------------------------------------------------
+												document.getElementById("calTitle1").value = list[index2].calTitle;
+												document.getElementById("calPlace1").value = list[index2].calPlace;
+												document.getElementById("calContent1").value = list[index2].calContent;
+												
+												document.querySelector(".scheUpdate-wrap").style.display = "flex";
+												document.querySelector(".scheInfo-detail-wrap").style.display = "none";
+												
+	//											list[index2].ename
+											}
+											else {
+												alert("권한이 없습니다.");
+											}
+										}
+									});
+									
+									
+									
+//									일정 수정에서 수정 버튼 눌렀을때
+//	 			---------------------------------------------------------------------
+									//button[type="button"] 형태의 button 클릭시 날짜값을 넘겨서 렌더링 함수를 컨트롤
+									const updateBtn = document.getElementById("updateBtn");
+									updateBtn.addEventListener("click", function(){
+										const scheForm = document.querySelector(".scheUpdate form");
+										
+										const calStart = document.getElementById("calStart1").value;
+										const calEnd = document.getElementById("calEnd1").value;
+
+										let calStartYear;
+										let calStartMonth;
+										let calStartDate;
+										let calEndYear;
+										let calEndMonth;
+										let calEndDate;
+										
+										let calStartHour;
+										let calStartMinute;
+										let calEndHour;
+										let calEndMinute;
+										
+										if (calStart != "" && calEnd != "") {
+											calStartYear = new Date(calStart).getFullYear();
+											calStartMonth = new Date(calStart).getMonth();
+											calStartDate = new Date(calStart).getDate();
+											calEndYear = new Date(calEnd).getFullYear();
+											calEndMonth = new Date(calEnd).getMonth();
+											calEndDate = new Date(calEnd).getDate();
+											
+											calStartHour = calStart.split("T")[1].split(":")[0];
+											calStartMinute = calStart.split("T")[1].split(":")[1]; 
+											calEndHour = calEnd.split("T")[1].split(":")[0];
+											calEndMinute = calEnd.split("T")[1].split(":")[1];
+										}
+										
+										if (calStart == "" || calEnd == "") {
+											alert("날짜를 입력해주세요.");
+										}
+										else if (calStartYear > calEndYear) {
+											alert("날짜가 잘못 입력되었습니다.");
+										}
+										else if (calStartYear == calEndYear && calStartMonth > calEndMonth) {
+											alert("날짜가 잘못 입력되었습니다.");
+										}
+										else if (calStartYear == calEndYear && calStartMonth == calEndMonth && calStartDate > calEndDate) {
+										    alert("날짜가 잘못 입력되었습니다.");
+										}
+										else if (calStartYear == calEndYear && calStartMonth == calEndMonth &&
+												calStartDate == calEndDate && calStartHour > calEndHour) {
+										    alert("시간이 잘못 입력되었습니다.");
+										}
+										else if (calStartYear == calEndYear && calStartMonth == calEndMonth &&
+												calStartDate == calEndDate && calStartHour == calEndHour && calStartMinute > calEndMinute) {
+										    alert("시간이 잘못 입력되었습니다.");
+										}
+										else {
+//											수정에 id값과 range값 넘김
+										    scheForm.setAttribute("action", ctx+"/calendar/updateDate/"+checkId+"/"+checkRange);
+										    document.querySelector("#updateRealBtn").click();
+										}
+									});
+									
 									
 //									일정 상세목록 삭제 버튼 눌렀을때
 //	 			---------------------------------------------------------------------
@@ -595,42 +738,6 @@ const renderCalendar = () => {
 									
 									
 									
-//									//---------------------------------------------------------------------
-//									//일정 등록
-//									//일정 팝업에서 controller로 가기전 날짜 데이터 비교하여 시작일이 종료일보다 늦지않도록 검사
-//									//---------------------------------------------------------------------
-//									
-//									//button[type="button"] 형태의 button 클릭시 날짜값을 넘겨서 렌더링 함수를 컨트롤
-//									const transferBtn = document.getElementById("btn");
-//									transferBtn.addEventListener("click", function(){
-//										const scheForm = document.querySelector(".schedule form");
-//										
-//										const calStart = document.getElementById("calStart").value;
-//										const calEnd = document.getElementById("calEnd").value;
-//										
-//										const calStartYear = new Date(calStart).getFullYear();
-//										const calStartMonth = new Date(calStart).getMonth();
-//										const calStartDate = new Date(calStart).getDate();
-//										const calEndYear = new Date(calEnd).getFullYear();
-//										const calEndMonth = new Date(calEnd).getMonth();
-//										const calEndDate = new Date(calEnd).getDate();
-//										
-//										if (calStartYear > calEndYear) {
-//										    alert("날짜가 잘못 입력되었습니다.");
-//										}
-//										else if (calStartMonth > calEndMonth) {
-//										    alert("날짜가 잘못 입력되었습니다.");
-//										}
-//										else if (calStartDate > calEndDate) {
-//										    alert("날짜가 잘못 입력되었습니다.");
-//										}
-//										else {
-//										    scheForm.setAttribute("action", ctx+"/calendar/insertData");
-//										    document.querySelector("#realBtn").click();
-//										}
-//									});
-
-
 								}
 							}
 //							console.log(list[0]);
@@ -1584,21 +1691,51 @@ transferBtn.addEventListener("click", function(){
 	const calStart = document.getElementById("calStart").value;
 	const calEnd = document.getElementById("calEnd").value;
 	
-	const calStartYear = new Date(calStart).getFullYear();
-	const calStartMonth = new Date(calStart).getMonth();
-	const calStartDate = new Date(calStart).getDate();
-	const calEndYear = new Date(calEnd).getFullYear();
-	const calEndMonth = new Date(calEnd).getMonth();
-	const calEndDate = new Date(calEnd).getDate();
+	let calStartYear;
+	let calStartMonth;
+	let calStartDate;
+	let calEndYear;
+	let calEndMonth;
+	let calEndDate;
 	
-	if (calStartYear > calEndYear) {
+	let calStartHour;
+	let calStartMinute;
+	let calEndHour;
+	let calEndMinute;
+	
+	if (calStart != "" && calEnd != "") {
+		calStartYear = new Date(calStart).getFullYear();
+		calStartMonth = new Date(calStart).getMonth();
+		calStartDate = new Date(calStart).getDate();
+		calEndYear = new Date(calEnd).getFullYear();
+		calEndMonth = new Date(calEnd).getMonth();
+		calEndDate = new Date(calEnd).getDate();
+		
+		calStartHour = calStart.split("T")[1].split(":")[0];
+		calStartMinute = calStart.split("T")[1].split(":")[1]; 
+		calEndHour = calEnd.split("T")[1].split(":")[0];
+		calEndMinute = calEnd.split("T")[1].split(":")[1];
+	}
+	
+	if (calStart == "" || calEnd == "") {
+		alert("날짜를 입력해주세요.");
+	}
+	else if (calStartYear > calEndYear) {
+		alert("날짜가 잘못 입력되었습니다.");
+	}
+	else if (calStartYear == calEndYear && calStartMonth > calEndMonth) {
+		alert("날짜가 잘못 입력되었습니다.");
+	}
+	else if (calStartYear == calEndYear && calStartMonth == calEndMonth && calStartDate > calEndDate) {
 	    alert("날짜가 잘못 입력되었습니다.");
 	}
-	else if (calStartMonth > calEndMonth) {
-	    alert("날짜가 잘못 입력되었습니다.");
+	else if (calStartYear == calEndYear && calStartMonth == calEndMonth &&
+			calStartDate == calEndDate && calStartHour > calEndHour) {
+	    alert("시간이 잘못 입력되었습니다.");
 	}
-	else if (calStartDate > calEndDate) {
-	    alert("날짜가 잘못 입력되었습니다.");
+	else if (calStartYear == calEndYear && calStartMonth == calEndMonth &&
+			calStartDate == calEndDate && calStartHour == calEndHour && calStartMinute > calEndMinute) {
+	    alert("시간이 잘못 입력되었습니다.");
 	}
 	else {
 	    scheForm.setAttribute("action", ctx+"/calendar/insertData");

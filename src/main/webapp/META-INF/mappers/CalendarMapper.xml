@@ -27,13 +27,14 @@
 		order by cal_start
 	</select>
 	
-	<select id="selectRange" resultType="CalendarVO">
+	<select id="selectRange" resultType="int">
 		select cal_range
 		from calendar
 		where cal_id = #{calId}
 	</select>
 	
-	<insert id="insertSchedule">
+	
+	<insert id="insertSchedule" keyProperty="calId">
 		insert into calendar(cal_title, cal_place, cal_content, cal_start,
 							cal_end, cal_range, cal_allday, cal_show,
 							cal_notice, empno, check_admin, approval)
@@ -42,11 +43,24 @@
 							#{calNotice}, #{empno}, #{checkAdmin}, #{approval})
 	</insert>
 	
+	
+	<update id="updateSchedule">
+		update calendar
+		set cal_title = #{calTitle},
+			cal_place = #{calPlace},
+			cal_start = #{calStart},
+			cal_end = #{calEnd},
+			cal_allday = #{calAllday},
+			cal_show = #{calShow},
+			cal_notice = #{calNotice},
+			cal_content = #{calContent}
+		where cal_id = #{calId} or cal_range = #{calId}
+	</update>
+	
+	
 	<delete id="deleteSchedule">
 		delete from calendar
-		where cal_id = #{calId}
-		or cal_range = #{calId}
+		where cal_id = #{calId} or cal_range = #{calId}
 	</delete>
 
-	
 </mapper>

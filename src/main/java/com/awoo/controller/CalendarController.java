@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +40,6 @@ public class CalendarController {
 	@GetMapping("/selectData")
 		public String selectData(@SessionAttribute("personalInfoVO") PersonalInfoVO vo,
 								Model model) {
-		
 //		세션에 저장되어있는 사원번호(로그인한 사원)를 vo로 넘기기위해 private으로 저장
 		empno = vo.getEmpno();
 		ename = vo.getName();
@@ -60,10 +60,19 @@ public class CalendarController {
 	
 //	일정을 DB에 저장
 	@PostMapping("/insertData")
-		public String insertData(CalendarVO vo, Model model) {
+	public String insertData(CalendarVO vo) {
 //		세션에 저장되어있는 사원번호(로그인한 사원)를 vo로 넘김
 		vo.setEmpno(empno);
-		service.insertDataMethod(vo, model);
+		service.insertDataMethod(vo);
+		return "redirect:/calendar/selectData";
+	}
+	
+	@PostMapping("/updateDate/{checkId}/{checkRange}")
+	public String updateDate(CalendarVO vo,
+							@PathVariable("checkId") int id,
+							@PathVariable("checkRange") String range){
+		vo.setEmpno(empno);
+		service.updateDateMethod(vo, id, range);
 		return "redirect:/calendar/selectData";
 	}
 	

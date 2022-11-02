@@ -13,7 +13,11 @@ public interface CalendarDAO {
 	
 	public List<CalendarVO> selectRestData(Map<String, String> map);
 	
+	public int selectRange(int id);
+	
 	public int insertSchedule(CalendarVO vo);
+	
+	public void updateSchedule(CalendarVO vo);
 	
 	public void deleteSchedule(int id);
 	
