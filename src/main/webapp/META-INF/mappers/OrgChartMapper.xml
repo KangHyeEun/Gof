@@ -7,6 +7,7 @@
 	<select id="selectOrgDetail" resultType="InfoVO">
 		SELECT NAME,edepartment,eposition,email, phone_number
 		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
+		 AND (employee_info.estatus = '재직' OR employee_info.estatus = '휴직')
 		 where 1=1
 		 <if test="edepartment != null and edepartment != ''">
 		 	AND edepartment = #{edepartment}

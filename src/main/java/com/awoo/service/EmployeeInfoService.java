@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -107,8 +108,39 @@ public class EmployeeInfoService {
 	
 	/* 부서관리 -----------------------------------------------------------------*/
 	/*부서 리스트 */
-	public void position(Model model){
+	public void department(Model model){
 		model.addAttribute("list",dao.department());
 		model.addAttribute("count",dao.countDepartment());
 	};
+	
+	public void updateDepartment(PositionDepartmentVO vo) {
+		dao.updateDepartment(vo);
+	}
+
+	public void deleteDepartment(PositionDepartmentVO vo) {
+		dao.deleteDepartment(vo);
+	}
+
+	public void insertDepartment(PositionDepartmentVO vo) {
+		dao.insertDepartment(vo);
+	}
+	
+	/* 직책관리 -----------------------------------------------------------------*/
+	/*직책 리스트 */
+	public void position(Model model){
+		model.addAttribute("list",dao.position());
+		model.addAttribute("count",dao.countPosition());
+	};
+	
+	public void updatePosition(PositionDepartmentVO vo) {
+		dao.updatePosition(vo);
+	}
+
+	public void deletePosition(PositionDepartmentVO vo) {
+		dao.deletePosition(vo);
+	}
+
+	public void insertPosition(PositionDepartmentVO vo) {
+		dao.insertPosition(vo);
+	}
 }

@@ -46,8 +46,8 @@
 								<div class="main2" id="main2">
 									<div class="org">
 										<div class="intro">
-											<h2>부서별 안내</h2>
-											<p>⏏홈>조직도</p>
+											<h3>부서별 안내</h3>
+											<p>⏏홈>직원 현황</p>
 										</div>
 										<h3>전체 <span id="count1"></span>명</h3>
 										

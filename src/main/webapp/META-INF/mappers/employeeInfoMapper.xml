@@ -67,6 +67,7 @@
 		personal_info.empno, edepartment,eposition, date_format(ehired_date,'%Y-%m-%d') ehired_date,
 		ehired_type,total_holiday,estatus,check_admin
 		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
+		 AND (employee_info.estatus = '재직' OR employee_info.estatus = '휴직')
 	</select>
 	
 	<!-- 연관검색 (이름,부서) -->
@@ -100,34 +101,42 @@
 	</select>
 	<!-- 부서 사원수 -->
 	<select id="countDepartment" resultType="PositionDepartmentVO" >
-		SELECT edepartment as department,COUNT(edepartment) AS COUNT FROM employee_info GROUP BY edepartment;
+		SELECT d.department as department, COUNT(e.edepartment) as count
+		FROM department AS d LEFT JOIN employee_info AS e 
+		ON d.department = e.edepartment
+		AND (e.estatus = '재직' OR e.estatus = '휴직')
+		GROUP BY d.department;
 	</select> 
 	<insert id="insertDepartment">
 		INSERT INTO department(department) VALUES(#{department});
 	</insert>
 	<update id="updateDepartment">
-		UPDATE department SET department = #{department};
+		UPDATE department SET department = #{department} where id = #{id};
 	</update>
 	<delete id="deleteDepartment">
-		DELETE FROM department WHERE department = #{department};
+		DELETE FROM department WHERE id = #{id}; 
 	</delete>
 	
 	
 	<!-- 직책 리스트 -->
 	<select id="position" resultType="PositionDepartmentVO">
-		select id, position from position;
+		select id, position from positionp;
 	</select>
 	<!-- 부서 사원수 -->
 	<select id="countPosition" resultType="PositionDepartmentVO" >
-		SELECT eposition as department,COUNT(eposition) AS COUNT FROM employee_info GROUP BY eposition;
+		SELECT p.position, COUNT(e.eposition) as count
+		FROM positionp AS p LEFT JOIN employee_info AS e 
+		ON p.position = e.eposition
+		AND (e.estatus = '재직' OR e.estatus = '휴직')
+		GROUP BY p.position;
 	</select> 
 	<insert id="insertPosition">
-		INSERT INTO department(position) VALUES(#{position});
+		INSERT INTO positionp(position) VALUES(#{position});
 	</insert>
 	<update id="updatePosition">
-		UPDATE position SET position = #{position};
+		UPDATE positionp SET position = #{position} where id = #{id};
 	</update>
 	<delete id="deletePosition">
-		DELETE FROM position WHERE position = #{position};
+		DELETE FROM positionp WHERE id = #{id};
 	</delete>
 </mapper>

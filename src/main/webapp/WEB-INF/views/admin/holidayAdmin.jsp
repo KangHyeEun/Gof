@@ -48,7 +48,7 @@
 					<div class="select">
 						<div class="intro">
 							<h3>휴가 신청 관리</h3>
-							<p>⏏홈>휴가 신청</p>
+							<p>⏏홈>관리자>휴가 신청</p>
 						</div>
 							<form action="${pageContext.request.contextPath}/holidayAdmin">
 							<input name="page" value="1" style="display: none;"/>

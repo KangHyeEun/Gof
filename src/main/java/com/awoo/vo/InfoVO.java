@@ -7,8 +7,8 @@ public class InfoVO {
 	private String birthday;
 	private String password;
 	private String email;
-	private int telNumber;
-	private int phoneNumber;
+	private String telNumber;
+	private String phoneNumber;
 	private String address;
 	private int empno;
 	private String ehiredDate;
@@ -69,17 +69,16 @@ public class InfoVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public int getTelNumber() {
+	public String getTelNumber() {
 		return telNumber;
 	}
-	public void setTelNumber(int telNumber) {
+	public void setTelNumber(String telNumber) {
 		this.telNumber = telNumber;
 	}
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	public String getAddress() {

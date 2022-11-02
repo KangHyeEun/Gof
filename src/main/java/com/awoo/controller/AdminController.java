@@ -35,6 +35,7 @@ import com.awoo.service.UploadfilesService;
 import com.awoo.vo.EmployeeInfoVO;
 import com.awoo.vo.InfoVO;
 import com.awoo.vo.PersonalInfoVO;
+import com.awoo.vo.PositionDepartmentVO;
 import com.awoo.vo.UploadfilesVO;
 
 @Controller
@@ -162,11 +163,65 @@ public class AdminController {
 		return Eservice.AssociatedSearch(vo,model);
 	}
 	
+	/*부서관리 ----------------------------------------------------------------------------------------------*/
 	
 	// 부서 관리 페이지 접근
 	@GetMapping("/admin/department")
-	public String department(Model model,HttpServletRequest request) {
-		Eservice.position(model);
+	public String department(Model model) {
+		Eservice.department(model);
 		return "/admin/department";
+	}
+	
+	// 부서 등록
+	@GetMapping("/admin/insertDepartment")
+	public String insertDepartment(PositionDepartmentVO vo) {
+		Eservice.insertDepartment(vo);
+		return "redirect:/admin/department";
+	}
+	
+	// 부서 업데이트
+	@GetMapping("/admin/updateDepartment/{id}")
+	public String updateDepartment(PositionDepartmentVO vo,@PathVariable("id") int id) {
+		vo.setId(id);
+		Eservice.updateDepartment(vo);
+		return "redirect:/admin/department";
+	}
+	
+	// 부서 삭제
+	@GetMapping("/admin/deleteDepartment")
+	public String deleteDepartment(PositionDepartmentVO vo) {
+		Eservice.deleteDepartment(vo);
+		return "redirect:/admin/department";
+	}
+	
+	/*직책관리 ----------------------------------------------------------------------------------------------*/
+	
+	// 직책 관리 페이지 접근
+	@GetMapping("/admin/position")
+	public String position(Model model) {
+		Eservice.position(model);
+		return "/admin/position";
+	}
+
+	// 직책 등록
+	@GetMapping("/admin/insertPosition")
+	public String insertPosition(PositionDepartmentVO vo) {
+		Eservice.insertPosition(vo);
+		return "redirect:/admin/position";
+	}
+
+	// 직책 업데이트
+	@GetMapping("/admin/updatePosition/{id}")
+	public String updatePosition(PositionDepartmentVO vo,@PathVariable("id") int id) {
+		vo.setId(id);
+		Eservice.updatePosition(vo);
+		return "redirect:/admin/position";
+	}
+
+	// 직책 삭제
+	@GetMapping("/admin/deletePosition")
+	public String deletePosition(PositionDepartmentVO vo) {
+		Eservice.deletePosition(vo);
+		return "redirect:/admin/position";
 	}
 }
