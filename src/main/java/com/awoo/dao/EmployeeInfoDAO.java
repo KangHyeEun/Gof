@@ -48,10 +48,9 @@ public interface EmployeeInfoDAO {
 	public void insertPosition(PositionDepartmentVO vo);
 	public void updatePosition(PositionDepartmentVO vo);
 	public void deletePosition(PositionDepartmentVO vo);
+	
+	
+	/*test*/
+	public EmployeeInfoVO selectEmpPro(int empno);
 }
-
-
-
-
-
 

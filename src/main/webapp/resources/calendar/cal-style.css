@@ -283,6 +283,9 @@ input[type="text"] {
 .btnColor:hover{
 	background-color: #319af3;
 }
+.recur {
+	margin-left: 5px;
+}
 
 input[name="calAllday"], label[for="calAllday"], label[for="calAllday1"] {
 	display: none;

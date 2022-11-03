@@ -115,7 +115,7 @@
 		SELECT total_holiday, used_holiday FROM employee_info WHERE empno=#{empno};
 	</select>
 	<select id="getTodayCalendar" resultType="CalendarVO">
-		SELECT cal_id, cal_title, cal_place, cal_start, date_format(cal_end, '%Y-%m-%d %h:%m') AS cal_end, cal_allday, cal_show, cal_notice, cal_content, c.empno as empno, check_admin, approval, p.name as ename 
+		SELECT cal_id, cal_title, cal_place, cal_start, date_format(cal_end, '%Y-%m-%d %h:%m') AS cal_end, cal_allday, cal_show, cal_recur, cal_content, c.empno as empno, check_admin, approval, p.name as ename 
 		FROM calendar c, personal_info p
 		WHERE c.empno = p.empno
 		AND #{today} between DATE_FORMAT(cal_start,'%Y-%m-%d') AND DATE_FORMAT(cal_end,'%Y-%m-%d');

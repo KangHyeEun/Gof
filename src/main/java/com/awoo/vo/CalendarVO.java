@@ -12,8 +12,8 @@ public class CalendarVO {
 	private String calEnd;		// 종료일
 	private int calRange;	// 날짜범위 여부
 	private String calAllday;	// 종일여부
-	private String calShow;		// 공개,비공개
-	private String calNotice;	// 개인,공지
+	private String calShow;		// 공개 (0),비공개 (사원번호)
+	private String calRecur;	// 반복 일정 여부 (매주,매월,매년)
 	private int empno;			// 사원번호(작성자)
 	private int checkAdmin;		// 관리자여부
 	private String approval;	// 승인신청여부
@@ -73,11 +73,11 @@ public class CalendarVO {
 	public void setCalShow(String calShow) {
 		this.calShow = calShow;
 	}
-	public String getCalNotice() {
-		return calNotice;
+	public String getCalRecur() {
+		return calRecur;
 	}
-	public void setCalNotice(String calNotice) {
-		this.calNotice = calNotice;
+	public void setCalRecur(String calRecur) {
+		this.calRecur = calRecur;
 	}
 	public int getEmpno() {
 		return empno;

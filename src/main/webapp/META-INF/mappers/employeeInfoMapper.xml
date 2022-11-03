@@ -139,4 +139,11 @@
 	<delete id="deletePosition">
 		DELETE FROM positionp WHERE id = #{id};
 	</delete>
+	
+		
+	<!-- test -->
+	<select id="selectEmpPro" resultType="EmployeeInfoVO">
+		select * from employee_info
+		where empno = #{empno}
+	</select>
 </mapper>

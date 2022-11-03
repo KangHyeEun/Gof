@@ -340,9 +340,11 @@ const renderCalendar = () => {
 //비동기 통신
 // ---------------------------------------------------------------------
 
-	let dateRange = {calStart:daysEle.item(0).classList[0],
-					calEnd:daysEle.item(daysEle.length-1).classList[0]};
-
+	let dateRange = {
+						calStart:daysEle.item(0).classList[0],
+						calEnd:daysEle.item(daysEle.length-1).classList[0],
+						empno:empno
+					};
 	fetch(ctx+"/calendar/restData",{
 		method : "POST",
 		headers : { "Content-type" : "application/json"},
@@ -365,7 +367,7 @@ const renderCalendar = () => {
 //		    "calEnd": "2022-10-10 13:00",
 //		    "calAllday": "0",
 //		    "calShow": "0",
-//		    "calNotice": "0",
+//		    "calRecur": "0",
 //		    "calContent": "내용 없음",
 //		    "empno": 220401,
 //		    "checkAdmin": 0,
@@ -378,9 +380,9 @@ const renderCalendar = () => {
 				let calDate = list[index1].calStart.split(" ");
 				let calTime = calDate[1];	// 시간
 				calDate = calDate[0];		// 날짜
-				let calHour = calTime.split(":");
-				let calMinute = calHour[1];	// 분
-				calHour = calHour[0];		// 시간
+//				let calHour = calTime.split(":");
+//				let calMinute = calHour[1];	// 분
+//				calHour = calHour[0];		// 시간
 //				console.log("calHour : " + Number(calHour) + " / calMinute : " + calMinute);
 //				div의 클래스에 있는 값과 DB에서 추출한 날짜 값과 같으면 해당 div에 DB값 넣기
 				if (daysEle.item(index).classList[0] == calDate) {
@@ -407,7 +409,7 @@ const renderCalendar = () => {
 //		 ---------------------------------------------------------------------
 
 		let list = _data;
-		let innerSpan;
+//		let innerSpan;
 
 //		console.log(document.querySelectorAll(".days > div > div:first-child > div:not(.days > div > div:first-child > div:first-child)"));
 //		console.log(document.querySelectorAll(".days > div > div:first-child > div:not(.days > div > div:first-child > div:first-child)").length);
@@ -549,22 +551,34 @@ const renderCalendar = () => {
 											tagCreate("일시", list[index2].calStart + " ~ " + list[index2].calEnd);
 										}
 									}
-//									console.log(list[index2].calRange);
+									
 //									일시가 범위로 되어있다면 calAllday에 저장해둔 전체기간을 출력
-									if (list[index2].calRange != 0 && list[index2].calRange != null && list[index2].calRange != undefined) {
-										tagCreate("전체일정", list[index2].calAllday);
+//									(calRange = 0 이면 범위가 아님, 1이면 범위이자 시작일, 그 외에는 시작일의 id값))
+									if (list[index2].calRange != "0" && list[index2].calRange != null && list[index2].calRange != undefined) {
+										
+										if (list[index2].calRange != "1") {
+											tagCreate("전체일정", list[index2].calAllday);
+										}
 									}
-//									
-//									if (list[index2].calShow != "" && list[index2].calShow != null && list[index2].calRange != undefined) {
+									
+									if (list[index2].calRecur != "0" && list[index2].calRecur != null && list[index2].calRecur != undefined) {
+										let tempRecur = "";
+										if (list[index2].calRecur == "weekly") {
+											tempRecur = "매주";
+										}
+										else if (list[index2].calRecur == "monthly") {
+											tempRecur = "매월";
+										}
+										else if (list[index2].calRecur == "yearly") {
+											tempRecur = "매년";
+										}
+										tagCreate("반복", tempRecur);
+									}
+
+//									if (list[index2].calShow != 0 && list[index2].calShow != null && list[index2].calRange != undefined) {
 //										tagCreate("비공개", list[index2].calShow);
 //									}
 									
-//									if (list[index2].calAllday != "" && list[index2].calAllday != null && list[index2].calAllday != undefined) {
-//										tagCreate("종일", list[index2].calAllday);
-//									}
-//									if (list[index2].calNotice != "" && list[index2].calNotice != null && list[index2].calNotice != undefined) {
-//										tagCreate("공지", list[index2].calNotice);
-//									}
 
 
 
@@ -585,7 +599,16 @@ const renderCalendar = () => {
 											checkRange = list[index2].calRange;
 //											클릭한 id에 해당하는 일정의 작성자가 접속한 유저와 같으면
 											if (list[index2].empno == empno) {
-												console.log("찾았다.");
+//												초기화
+//												---------------------------------------------------------------------
+												document.getElementById("calStart1").value = "";
+												document.getElementById("calEnd1").value = "";		
+												document.getElementById("calAllday1").checked = "";  
+												document.getElementById("calShow1").checked = "";
+												document.getElementById("calTitle1").value = "";
+												document.getElementById("calPlace1").value = "";
+												document.getElementById("calContent1").value = "";
+												document.getElementById("recur1").value = "";
 												
 //												날짜 정리
 //												---------------------------------------------------------------------
@@ -631,13 +654,13 @@ const renderCalendar = () => {
 //												---------------------------------------------------------------------
 												if (list[index2].calAllday != 0) document.getElementById("calAllday1").checked = "on";  
 												if (list[index2].calShow != 0) document.getElementById("calShow1").checked = "on";
-												if (list[index2].calNotice != 0) document.getElementById("calNotice1").checked = "on";
 												
 //												나머지
 //												---------------------------------------------------------------------
 												document.getElementById("calTitle1").value = list[index2].calTitle;
 												document.getElementById("calPlace1").value = list[index2].calPlace;
 												document.getElementById("calContent1").value = list[index2].calContent;
+												document.getElementById("recur1").value = list[index2].calRecur;
 												
 												document.querySelector(".scheUpdate-wrap").style.display = "flex";
 												document.querySelector(".scheInfo-detail-wrap").style.display = "none";
@@ -718,7 +741,7 @@ const renderCalendar = () => {
 									
 //									일정 상세목록 삭제 버튼 눌렀을때
 //	 			---------------------------------------------------------------------
-									document.querySelector(".scheInfo-btn > a:last-child").addEventListener("click", function(e){
+									document.querySelector(".scheInfo-btn > a:last-child").addEventListener("click", function(){
 //										list의 사원번호와 접속한 유저의 사원번호 비교
 										if (list[index2].empno == empno) {
 											if (confirm("정말로 삭제하시겠습니까?")) {
@@ -790,15 +813,12 @@ const renderCalendar = () => {
 	}).then(_data => {
 		
 
-		
 //	 	---------------------------------------------------------------------
-//		일정 팝업에서 x 키 누를시 삭제 기능
+//		
 //		---------------------------------------------------------------------
-//		console.log(document.querySelectorAll(".schedule-list > div > span:last-child"));
-//		document.querySelectorAll(".innerScheBtn")[0].addEventListener("click", function(){
-//			console.log(this);
-//		});
-
+		
+		
+		
 		return _data;
 		
 	}).then(_data => {
@@ -1786,7 +1806,7 @@ else {
 //     	f5 누를시 렌더링하기 위한 값 구하기
 
 function refreshFunc() {
-	window.onbeforeunload = function (e) {
+	window.onbeforeunload = function () {
 //		새로고침 전 수정
 		localStorage.setItem("localFullYear", date.getFullYear());	// 새로고침 되기전에 값 저장
     	localStorage.setItem("localMonth", date.getMonth());		// 새로고침 되기전에 값 저장

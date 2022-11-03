@@ -75,4 +75,11 @@
 		</set>
 		where empno = #{empno}
 	</update>
+	
+		
+	<!-- test -->
+	<select id="selectPerPro" resultType="PersonalInfoVO">
+		select * from personal_info
+		where empno = #{empno}
+	</select>
 </mapper>

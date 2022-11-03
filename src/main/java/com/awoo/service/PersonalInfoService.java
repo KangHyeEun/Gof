@@ -1,6 +1,5 @@
 package com.awoo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +46,7 @@ public class PersonalInfoService {
 			int empno = Integer.parseInt(request.getParameter("empno"));		
 			
 			vo.setEmpno(empno);
-			vo.setPhone_number(phoneNumber);
+			vo.setPhoneNumber(phoneNumber);
 			vo.setEmail(email_id+"@"+email_domain);
 			
 			if(request.getParameter("postcode") != null) {
@@ -72,7 +71,7 @@ public class PersonalInfoService {
 			if(request.getParameter("telNumber") != null && request.getParameter("telNumber") != "") {
 				telNumber = request.getParameter("telNumber");
 			}	
-			vo.setTel_number(telNumber);
+			vo.setTelNumber(telNumber);
 			
 			dao.insertDataP(vo);
 		
@@ -86,7 +85,7 @@ public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
 		String email_domain = request.getParameter("email_domain");
 		if(request.getParameter("phoneNumber") != null) {
 			String phoneNumber = request.getParameter("phoneNumber");						
-			vo.setPhone_number(phoneNumber);
+			vo.setPhoneNumber(phoneNumber);
 		}
 		
 		vo.setEmail(email_id+"@"+email_domain);
@@ -113,7 +112,7 @@ public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
 		if(request.getParameter("telNumber") != null && request.getParameter("telNumber") != "") {
 			telNumber = request.getParameter("telNumber");
 		}	
-		vo.setTel_number(telNumber);
+		vo.setTelNumber(telNumber);
 		
 		dao.updateP(vo);
 	}
@@ -137,4 +136,8 @@ public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
 	
 	
 	
+//	test
+	public void selectPerPro(int empno, Model model) {
+		model.addAttribute("pVO", dao.selectPerPro(empno));
+	}
 }

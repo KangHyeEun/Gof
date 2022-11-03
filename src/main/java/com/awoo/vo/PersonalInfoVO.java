@@ -7,8 +7,8 @@ public class PersonalInfoVO {
 	private String birthday;
 	private String password;
 	private String email;
-	private String tel_number;
-	private String phone_number;
+	private String telNumber;
+	private String phoneNumber;
 	private String address;
 	private int empno;
 	
@@ -48,17 +48,17 @@ public class PersonalInfoVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getTel_number() {
-		return tel_number;
+	public String getTelNumber() {
+		return telNumber;
 	}
-	public void setTel_number(String tel_number) {
-		this.tel_number = tel_number;
+	public void setTelNumber(String telNumber) {
+		this.telNumber = telNumber;
 	}
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	public String getAddress() {
 		return address;
@@ -72,5 +72,4 @@ public class PersonalInfoVO {
 	public void setEmpno(int empno) {
 		this.empno = empno;
 	}
-	
 }

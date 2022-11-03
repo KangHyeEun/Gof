@@ -51,11 +51,11 @@ public class EmployeeInfoService {
 		
 		
 		model.addAttribute("empno", em);
-	};	
+	}
 	
 	public List<EmployeeInfoVO> EList(){
 		return dao.selectEmployee();
-	};
+	}
 	
 	public void insertDataE(PersonalInfoVO vop,EmployeeInfoVO vo, HttpServletRequest request) {
 		
@@ -111,7 +111,7 @@ public class EmployeeInfoService {
 	public void department(Model model){
 		model.addAttribute("listD",dao.department());
 		model.addAttribute("count",dao.countDepartment());
-	};
+	}
 	
 	public void updateDepartment(PositionDepartmentVO vo) {
 		dao.updateDepartment(vo);
@@ -130,7 +130,7 @@ public class EmployeeInfoService {
 	public void position(Model model){
 		model.addAttribute("listP",dao.position());
 		model.addAttribute("count",dao.countPosition());
-	};
+	}
 	
 	public void updatePosition(PositionDepartmentVO vo) {
 		dao.updatePosition(vo);
@@ -142,5 +142,12 @@ public class EmployeeInfoService {
 
 	public void insertPosition(PositionDepartmentVO vo) {
 		dao.insertPosition(vo);
+	}
+	
+	
+	
+//	test
+	public void selectPerPro(int empno, Model model) {
+		model.addAttribute("eVO", dao.selectEmpPro(empno));
 	}
 }

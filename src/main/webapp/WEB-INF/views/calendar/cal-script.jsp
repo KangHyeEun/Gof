@@ -356,12 +356,12 @@ const renderCalendar = () => {
 //		    "calEnd": "2022-10-10 13:00",
 //		    "calAllday": "0",
 //		    "calShow": "0",
-//		    "calNotice": "0",
+//		    "calRecur": "0",
 //		    "calContent": "내용 없음",
 //		    "empno": 220401,
 //		    "checkAdmin": 0,
 //		    "approval": 0
-//		}
+// 		}
 		for(let index = 0; index < daysEle.length; index++) {
 			for(let index1 = 0; index1 < list.length; index1++) {
 				let calDate = list[index1].calStart.split(" ");

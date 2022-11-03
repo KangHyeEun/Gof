@@ -21,12 +21,12 @@ import com.awoo.vo.HolidayVO;
 public class HolidayService {
 	
 	private HolidayDAO dao;
-	private EmployeeInfoDAO Edao;
+//	private EmployeeInfoDAO Edao;
 	
 	public HolidayService(HolidayDAO dao, EmployeeInfoDAO edao) {
 		super();
 		this.dao = dao;
-		Edao = edao;
+//		Edao = edao;
 	}
 	
 	public void selectHoliday(Model model){

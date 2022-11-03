@@ -88,18 +88,23 @@
 							    <input type="text" name="calPlace" id="calPlace">
 						    </div>
 						    <div>
-							    <label for="calStart">일시</label><br>
+							    <label for="calStart">일시</label>
+			    				<select class="recur" id="recur" name="calRecur" onchange="chageSelect()">
+									<option value="0">반복</option>
+									<option value="weekly">매주</option>
+									<option value="monthly">매월</option>
+									<option value="yearly">매년</option>
+								</select>
+							    <br>
 							    <input type="datetime-local" name="calStart" id="calStart">
 							    <label for="calEnd"> ~ </label>
 							    <input type="datetime-local" name="calEnd" id="calEnd">
 						    </div>
 						    <div>
-							    <label for="calAllday">종일</label>
+							    <label for="calAllday">전체일정</label>
 							    <input type="checkbox" name="calAllday" id="calAllday" value="0">
 							    <label for="calShow">비공개</label>
-							    <input type="checkbox" name="calShow" id="calShow" value="0">
-							    <label for="calNotice">공지</label>
-							    <input type="checkbox" name="calNotice" id="calNotice" value="0">
+							    <input type="checkbox" name="calShow" id="calShow">
 						    </div>
 						    <div>
 							    <label for="calContent">설명</label><br>
@@ -165,18 +170,23 @@
 							    <input type="text" name="calPlace" id="calPlace1">
 						    </div>
 						    <div>
-							    <label for="calStart1">일시</label><br>
+							    <label for="calStart1">일시</label>
+			    				<select class="recur" id="recur1" name="calRecur">
+									<option value="0">반복</option>
+									<option value="weekly">매주</option>
+									<option value="monthly">매월</option>
+									<option value="yearly">매년</option>
+								</select>
+							    <br>
 							    <input type="datetime-local" name="calStart" id="calStart1">
 							    <label for="calEnd1"> ~ </label>
 							    <input type="datetime-local" name="calEnd" id="calEnd1">
 						    </div>
 						    <div>
-							    <label for="calAllday1">종일</label>
+							    <label for="calAllday1">전체일정</label>
 							    <input type="checkbox" name="calAllday" id="calAllday1" value="0">
 							    <label for="calShow1">비공개</label>
 							    <input type="checkbox" name="calShow" id="calShow1" value="0">
-							    <label for="calNotice1">공지</label>
-							    <input type="checkbox" name="calNotice" id="calNotice1" value="0">
 						    </div>
 						    <div>
 							    <label for="calContent1">설명</label><br>
@@ -193,12 +203,12 @@
 			
 			
 			
+	<a href="${pageContext.request.contextPath}/testing">..</a>
+			
 			
 
 		</div>
 	</div>
-	
-
 	<script type="text/javascript">
 // 		.js 파일에서 contextPath 사용을 위해 sessionStorag에 저장
 		sessionStorage.removeItem("contextpath");
@@ -213,9 +223,6 @@
 <!-- calendar -->
     <script src="${pageContext.request.contextPath}/resources/calendar/cal-script.js"></script>
     
-    <script type="text/javascript">
-    	
-    </script>
     <script type="text/javascript">
 //     	일정 추가 팝업
     	const divA = document.querySelector(".schedule > div > a");
@@ -287,6 +294,16 @@
     	}
     </script>
 
+    <script type="text/javascript">
+//     	일정 등록의 반복 일정 선택시 종료일 입력 방지
+		document.getElementById("recur").addEventListener("change", function(){
+			document.getElementById("calEnd").disabled = "disabled";
+		});
+//     	일정 수정의 반복 일정 선택시 종료일 입력 방지
+		document.getElementById("recur1").addEventListener("change", function(){
+			document.getElementById("calEnd1").disabled = "disabled";
+		});
+    </script>
 
 
 <!-- 위의 .js 에서 EL태그 사용이 불가해서 대신 사용해볼까함 -->
