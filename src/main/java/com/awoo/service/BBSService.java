@@ -4,14 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.awoo.dao.BBSCommentDAO;
 import com.awoo.dao.BBSDAO;
 import com.awoo.vo.BBSCommentVO;
+import com.awoo.vo.BBSFileVO;
 import com.awoo.vo.BBSVO;
-import com.awoo.vo.FileVO;
 import com.awoo.vo.PageVO;
 import com.google.gson.Gson;
 
@@ -60,39 +59,49 @@ public class BBSService {
 		vo.setId(Integer.parseInt(id));
 		model.addAttribute("bbsVO", bbsDAO.selectBBS(vo));
 		
-		FileVO fvo = new FileVO();
+		BBSFileVO fvo = new BBSFileVO();
 		fvo.setBbsId(vo.getId());
-		System.out.println("select 서비스단"+fvo.getBbsId());
 
-		List<FileVO> filelist = bbsDAO.selectBBSFile(fvo);
+		List<BBSFileVO> filelist = bbsDAO.selectBBSFile(fvo);
 		model.addAttribute("filelist", filelist);
 	}
 	
-	//추가
+	//추가(트랜젝션 달기)
 	public void insertBBS(BBSVO vo) {
 		Gson gson = new Gson();
 		
-		FileVO[] fileArray = gson.fromJson(vo.getFilelist(), FileVO[].class);
-		List<FileVO> fileList = Arrays.asList(fileArray);
+		BBSFileVO[] fileArray = gson.fromJson(vo.getFilelist(), BBSFileVO[].class);
+		List<BBSFileVO> fileList = Arrays.asList(fileArray);
 		
 		bbsDAO.insertBBS(vo);
-		
-		System.out.println("서비스단"+vo.getId());
-		
-		for (FileVO fileVO : fileList) {
+				
+		for (BBSFileVO fileVO : fileList) {
 			fileVO.setBbsId(vo.getId());
 			bbsDAO.insertBBSFile(fileVO);
 		}
 	}
 	
-	//수정
-	public void updateBBS(BBSVO vo2) {
-		bbsDAO.updateBBS(vo2);
-	}
-	
 	//삭제
 	public void deleteBBS(BBSVO vo2) {
 		bbsDAO.deleteBBS(vo2);
+	}
+	
+	//수정
+	public void updateBBS(BBSVO vo) {
+		Gson gson = new Gson();
+
+		BBSFileVO[] fileArray = gson.fromJson(vo.getFilelist(), BBSFileVO[].class);
+
+		bbsDAO.updateBBS(vo);
+		
+		if(fileArray != null) {
+			List<BBSFileVO> fileList = Arrays.asList(fileArray);
+		
+			for (BBSFileVO fileVO : fileList) {
+				fileVO.setBbsId(vo.getId());
+				bbsDAO.insertBBSFile(fileVO);
+			}
+		}
 	}
 	
 	//카테고리
@@ -125,20 +134,14 @@ public class BBSService {
 	}
 
 	//파일 삭제
-	public void deleteBBSFileAll(FileVO fvo) {
-//		FileVO fvo = new FileVO();
-//		fvo.setBnum(bnum);
+	public void deleteBBSFileAll(BBSFileVO fvo) {
 		bbsDAO.deleteBBSFile(fvo);
 	}
-	
-	@Transactional
-	public void deleteBBSFile(FileVO[] fvos) {
-//		FileVO fvo = new FileVO();
-//		fvo.setNum(num);
-		for (FileVO fvo : fvos) {
+	//파일 삭제(트랜젝션 달기)
+	public void deleteBBSFile(BBSFileVO[] fvos) {
+		for (BBSFileVO fvo : fvos) {
 			bbsDAO.deleteBBSFile(fvo);
 		}
-		System.out.println("삭제 서비스");
 	}
 	
 	//공지사항 게시판----------------------------------------

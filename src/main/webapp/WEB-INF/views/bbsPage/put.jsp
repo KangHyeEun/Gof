@@ -9,11 +9,44 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/main.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/bbs/setstyle.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bbs/setstyle.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bbs/js/jquery-3.6.1.min.js"></script>
 <!-- ckeditor 적용 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<style type="text/css">
+	.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 0;
+    width: 40%;
+    height: 1rem;
+    overflow: hidden;
+    background-color: #f2f4f5;
+    font-size: 1rem;
+    border-radius: 0.4rem;
+    padding: 10px;
+    margin: 5px;
+	}
+	.file-item button {
+	border : 0;
+	cursor: pointer;
+	}
+	.file-item a {
+	color : #212529;
+	font-size :0.8rem;
+	}
+	.file-item span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+	}
+	.file-item span img{
+    width: 15px;
+	height: 15px;	
+	}
+</style>
 </head>
 <body>
 	<div class="header">
@@ -76,29 +109,39 @@
 										<c:forEach var="file" items="${filelist}">
 										<div class="file-item">
 											<a href="${pageContext.request.contextPath}/bbsPage/downloadFile/${file.localname}/${file.servername}">${file.localname}</a>
-											<button data-id="${file.id}" class="deleteFile">삭제</button>
+											<button data-id="${file.id}" class="deleteFile">
+											 <span><img src="${pageContext.request.contextPath}/resources/imges/cancle.png"/></span>
+											</button>
 										</div>
 										</c:forEach>			
 										<button class="alldelete" data-bbsId="${bbsVO.id}">전체삭제</button><br>
-										<label for="upload">파일 추가 :</label><input type="file" id="upload" name="upload" multiple>
+										<input type="file" id="upload" name="upload" multiple>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-				</form:form>
 					<div class="set-footer">
+						<button id="cancle">취소</button>
 						<button type="button" id="modify">수정</button>
 					</div>
-					</div>
-				</div>
+				</form:form>
 			</div>
-
+		</div>
+	</div>
 	<script type="text/javascript">
 		//뒤로가기
 		document.getElementById("return").addEventListener("click", function(e){
 			e.preventDefault();
 			location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
+		});
+		//취소하기
+		document.getElementById("cancle").addEventListener("click", function(e){
+			e.preventDefault();
+			let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
+			if(yn){
+				location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
+			}
 		});
 		
 		//이지윅즈 적용
@@ -111,17 +154,26 @@
 			let bbsId = 0;
 			let id = [];
 			
-			$(".deleteFile").click(function(){
-				flagSingle = true;
-				id.push({id : this.dataset.id});
-				$(this).parent().remove();
-				//console.log(num);
+			//파일 전체 삭제
+			$(".alldelete").click(function(e){
+				e.preventDefault();
+				let yn = confirm("파일을 전부 삭제하시겠습니까?");
+				if(yn){
+					flagAll = true;
+					bbsId = this.dataset.bbsId;
+					$(".file-item").remove();
+				}
 			});
 			
-			$(".alldelete").click(function(){
-				flagAll = true;
-				id = this.dataset.id;
-				$(".file-item").remove();
+			//파일 하나씩 삭제
+			$(".deleteFile").click(function(e){
+				e.preventDefault();
+				let yn = confirm("파일을 삭제하시겠습니까?");
+				if(yn){
+					flagSingle = true;
+					id.push({id : this.dataset.id});
+					$(this).parent().remove();
+				}
 			});
 			
 			//파일 수정
@@ -130,7 +182,7 @@
 				if(flagAll){
 					$.ajax({
 						url : "${pageContext.request.contextPath}/bbsPage/deleteFileAll",
-						data : JSON.stringify({id : id}),
+						data : JSON.stringify({bbsId : bbsId}),
 						type : "post",
 						contentType:"application/json; charset=utf-8",
 						datatype : "json",

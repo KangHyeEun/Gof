@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.awoo.vo.BBSFileVO;
 import com.awoo.vo.BBSVO;
-import com.awoo.vo.FileVO;
 import com.awoo.vo.PageVO;
 
 @Mapper
@@ -28,11 +28,11 @@ public interface BBSDAO {
 	public int updateViewCount(String id);
 	
 	//파일
-	public int insertBBSFile(FileVO vo);
+	public int insertBBSFile(BBSFileVO vo);
 	
-	public List<FileVO> selectBBSFile(FileVO vo);
+	public List<BBSFileVO> selectBBSFile(BBSFileVO vo);
 	
-	public int deleteBBSFile(FileVO vo);
+	public int deleteBBSFile(BBSFileVO vo);
 	
 	
 

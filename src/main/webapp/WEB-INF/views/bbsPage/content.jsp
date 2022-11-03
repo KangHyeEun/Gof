@@ -56,9 +56,11 @@
 
                 <div class="content-footer">
                     <h4>첨부파일&nbsp;&nbsp;&nbsp;<span><img src="https://uinnout.com/employee/images/clip.svg"></span></h4>
-					<c:forEach var="file" items="${filelist}">
-						<a href="${pageContext.request.contextPath}/bbsPage/downloadFile/${file.localname}/${file.servername}">${file.localname}</a><br>
-					</c:forEach>
+						<div>
+							<c:forEach var="file" items="${filelist}">
+								<a href="${pageContext.request.contextPath}/bbsPage/downloadFile/${file.localname}/${file.servername}">${file.localname}</a><br>
+							</c:forEach>
+						</div>
                 </div>
 
 				<div id="comment-list">

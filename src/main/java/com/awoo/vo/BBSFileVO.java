@@ -2,18 +2,18 @@ package com.awoo.vo;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("FileVO")
-public class FileVO {
+@Alias("BBSFileVO")
+public class BBSFileVO {
 	private int id;
 	private String servername;
 	private String localname;
 	private int bbsId;
 	
-	public FileVO() {
+	public BBSFileVO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FileVO(String servername, String localname) {
+	public BBSFileVO(String servername, String localname) {
 		super();
 		this.servername = servername;
 		this.localname = localname;

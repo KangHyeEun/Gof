@@ -68,17 +68,19 @@
 
 .content-footer {
 	border-top: 2px dashed #e6e8eb;
-	border-bottom: 2px solid #909294;
-	height: auto;
-	display: flex;
+    border-bottom: 2px solid #909294;
+    height: auto;
+    display: flex;
+    height: auto;
+    min-height: 5rem;
+    align-items: center;
+    padding: 15px;
 }
 
 .content-footer a {
-	display: flex;
-	text-decoration: none;
-	justify-content: center;
-	align-items: center;
-	padding-left: 1rem;
+    padding-left: 50px;
+    font-size: 1rem;
+    line-height: 2rem;
 }
 
 .insert {

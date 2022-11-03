@@ -37,8 +37,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.awoo.service.BBSService;
 import com.awoo.vo.BBSCommentVO;
+import com.awoo.vo.BBSFileVO;
 import com.awoo.vo.BBSVO;
-import com.awoo.vo.FileVO;
 import com.awoo.vo.PersonalInfoVO;
 
 @Controller
@@ -106,8 +106,6 @@ public class BBSController {
 		vo2.setOwnerId(Integer.toString(vo.getEmpno()));
 		vo2.setOwner(vo.getName());
 		
-		System.out.println(vo2.getFilelist());
-
 		service.insertBBS(vo2);		
 		return "redirect:/bbsPage/bbs";
 	}
@@ -180,22 +178,19 @@ public class BBSController {
 	
 	//파일 업로드
 	@PostMapping("/uploadfile")
-	public @ResponseBody ResponseEntity<List<FileVO>> uploadFile(MultipartFile[] uploadFile) throws Exception{
-		ArrayList<FileVO> list = new ArrayList<FileVO>();
+	public @ResponseBody ResponseEntity<List<BBSFileVO>> uploadFile(MultipartFile[] uploadFile) throws Exception{
+		ArrayList<BBSFileVO> list = new ArrayList<BBSFileVO>();
 		
 		for (MultipartFile file : uploadFile) {
 			if(!file.getOriginalFilename().isEmpty()) {
 				String name = UUID.randomUUID().toString();
 				file.transferTo(new File("C:\\sample", name));
-				System.out.println(file.getOriginalFilename()+" 저장 완료.");
-				list.add(new FileVO(name, file.getOriginalFilename()));
+				list.add(new BBSFileVO(name, file.getOriginalFilename()));
 			}else {
-				System.out.println("데이터가 존재하지 않습니다.");
+				System.out.println("업로드 파일 데이터가 존재하지 않습니다.");
 			}
 		}
-		System.out.println("모든 데이터가 저장되었습니다.");
-		
-		ResponseEntity<List<FileVO>> response = new ResponseEntity<List<FileVO>>(list,HttpStatus.OK);
+		ResponseEntity<List<BBSFileVO>> response = new ResponseEntity<List<BBSFileVO>>(list,HttpStatus.OK);
 		
 		return response;
 	}
@@ -208,8 +203,7 @@ public class BBSController {
 						@PathVariable String servername,
 						@PathVariable String clientname) {
 		
-		try {
-			String path = "C:/sample/"+servername;
+		try {String path = "C:/sample/"+servername;
 			
 			Path file = Paths.get(path);
 			response.setHeader("Content-Disposition", "attachment;filename="+clientname);
@@ -226,21 +220,17 @@ public class BBSController {
 	
 	//파일 삭제
 	@PostMapping("/deleteFileAll")
-	public @ResponseBody ResponseEntity<String> deleteFileAll(@RequestBody FileVO fvo){
-//		System.out.println(map.toString());
-		System.out.println("삭제 컨트롤러: "+fvo.getBbsId());
+	public @ResponseBody ResponseEntity<String> deleteFileAll(@RequestBody BBSFileVO fvo){
 		service.deleteBBSFileAll(fvo);
-		return new ResponseEntity<String>("deleteFileAll Success",HttpStatus.OK);
+		return new ResponseEntity<String>("deleteFileAll Success", HttpStatus.OK);
 	}
 	
 	@PostMapping("/deleteFile")
-	public @ResponseBody ResponseEntity<String> deleteFile(@RequestBody FileVO[] fvos){
-//		System.out.println(map.toString());
-		for (FileVO fileVO : fvos) {
-			System.out.println("하나 삭제 컨트롤러"+fileVO.getId());
+	public @ResponseBody ResponseEntity<String> deleteFile(@RequestBody BBSFileVO[] fvos){
+		for (BBSFileVO fileVO : fvos) {
 		}
 		service.deleteBBSFile(fvos);
-		return new ResponseEntity<String>("deleteFile Success",HttpStatus.OK);
+		return new ResponseEntity<String>("deleteFile Success", HttpStatus.OK);
 	}
 
 	
