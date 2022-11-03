@@ -1,5 +1,7 @@
 package com.awoo.config;
 
+import java.util.Properties;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.transaction.managed.ManagedTransactionFactory;
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -128,5 +131,22 @@ public class ServletAppContext implements WebMvcConfigurer {
 		
 		reg.addPathPatterns("/login/home");
 	}
+	
+	@Bean
+    public JavaMailSenderImpl javaMailService() {
+          JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+          javaMailSender.setHost("smtp.gmail.com");
+          javaMailSender.setPort(587);
+          javaMailSender.setProtocol("smtp");
+          javaMailSender.setUsername("awoogof@gmail.com");
+          javaMailSender.setPassword("nbqvddvjbuqbddgw");
+          Properties mailProperties = new Properties();
+          mailProperties.put("mail.debug", true);
+          mailProperties.put("mail.smtp.auth", "true");
+          mailProperties.put("mail.smtp.starttls.enable", true);
+          mailProperties.put("mail.smtp.debug", "true");
+          javaMailSender.setJavaMailProperties(mailProperties);
+          return javaMailSender;
+   }
 
 }

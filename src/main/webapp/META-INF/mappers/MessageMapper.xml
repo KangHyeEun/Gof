@@ -78,7 +78,7 @@
 		where mowner_id = #{mownerId} 
 		order by (DATE_FORMAT(msend_date, '%Y')) desc
 	</select>
-		<select id="getRecieveDistinctSender" resultType="String">
+	<select id="getRecieveDistinctSender" resultType="String">
 		SELECT distinct(p.name) 
 		FROM message m, personal_info p
 		WHERE m.mowner_id = p.empno 
