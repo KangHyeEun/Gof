@@ -55,7 +55,7 @@
                             <ul class="sub2">
                                 <li><a href="${pageContext.request.contextPath}/ReceivedMessage?page=1&&name=0&&year=0&&month=0">받은 쪽지함</a></li>
                                 <li><a href="${pageContext.request.contextPath}/SendMessage?page=1&&name=0&&year=0&&month=0">보낸 쪽지함</a></li>
-                                <li><a href="${pageContext.request.contextPath}/SendEmail">보낸 쪽지함</a></li>
+                                <li><a href="${pageContext.request.contextPath}/SendEmail?page=1&&name=0&&year=0&&month=0">메일 보내기</a></li>
                             </ul>
                         </li>
                     </ul>
