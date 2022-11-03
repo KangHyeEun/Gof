@@ -46,15 +46,16 @@
 			<div class="container-inner-bbs">
 				<div class="inner-div-bbs">
 					<!-- 각자 필요한 부분 넣기 -->
+					<c:forEach items="${myInfo}" var="info">
 					<div class="scroll">
 						<div class="intro">
-							<h3>${ename}님의 상세 정보</h3>
+							<h3>${info.name}님의 상세 정보</h3>
 							<p>⏏홈>내 정보>나의 상세정보</p>
 						</div>
 
 						<div class="personal-wrap">
 							<div class="prodiv">
-								<img id="showimg" src="http://localhost:8080/E:/sample/kk.jpg">
+								<img id="showimg" src="${pageContext.request.contextPath}/upload/user.png">
 								<label for="proimg" id="img">사진등록</label><input type="file"
 									name="proimg" id="proimg" accept="image/*" multiple>
 							</div>
@@ -192,7 +193,7 @@
 							</table>
 						</div>
 					</div>
-					
+					</c:forEach>
 				</div>
 			</div>
 		</div>

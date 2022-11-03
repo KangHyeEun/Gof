@@ -24,4 +24,6 @@ public interface PersonalInfoDAO {
 	public List<InfoVO> selectInfo(InfoVO vo);
 
 	public List<InfoVO> selectDetail(Map<String,String> map);
+	
+	public List<InfoVO> selectInfoJY(InfoVO vo); //지영내정보데이터출력
 }
