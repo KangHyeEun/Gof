@@ -168,6 +168,7 @@
 }
     .pop2 {
    	height: 180px;
+   	width: 180px;
     background-color: gray;
     border-radius: 40%;
     overflow: hidden;

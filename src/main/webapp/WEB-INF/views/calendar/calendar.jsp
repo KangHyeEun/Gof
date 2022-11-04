@@ -204,6 +204,7 @@
 			
 			
 	<a href="${pageContext.request.contextPath}/testing">..</a>
+	<a href="${pageContext.request.contextPath}/chat">chating</a>
 			
 			
 
