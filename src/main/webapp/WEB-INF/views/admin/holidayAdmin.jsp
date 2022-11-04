@@ -128,12 +128,13 @@
 											<td></td>
 											<td><c:choose>
 													<c:when test="${i.approval eq '요청중'}">
-														<a class="rbtn1" id="modal_open${status.count}">반려</a>
+														<a class="rbtn1" id="modal_open${status.count}" value1="${i.id}">반려</a>
 														<a class="rbtn2"
 															href="${pageContext.request.contextPath}/holiday/Ok/${i.id}?empno=${i.empno}&countDate=${i.countDate}&page=${param.page}">승인</a>
 														<!-- 모달창 -------------------------------------------------------------------------------- -->
-															<form action="${pageContext.request.contextPath}/holiday/No/${i.id}" method="get">
+															<form action="${pageContext.request.contextPath}/holiday/No" method="post" id="form">
 																<input name="page" value="${param.page}" style="display: none;"/>
+<%-- 																<input type="text" name="id" value="${i.id}" style="display: none;"/> --%>
 																<div class="modal_dim" id="modal_dim">
 																	<div class="modal_wrap">
 																		<div class="modal">
@@ -152,15 +153,19 @@
 																</div>
 															</form>
 															<script type="text/javascript">
-															/* 모달창 */
-																document.getElementById("modal_open"+${status.count}).addEventListener("click",function() {
-														 			document.getElementById("modal_dim").style.display = "flex";														 			
-														 		});
-														
-																document.getElementById("exit").addEventListener("click", function() {
-																	document.getElementById("modal_dim").style.display = "none";
-																});
+															/* 모달창 */																
+																	document.getElementById("modal_open"+${status.count}).addEventListener("click",function() {
+															 			document.getElementById("modal_dim").style.display = "flex";
+															 			const check = document.getElementById("modal_open"+${status.count}).getAttribute("value1");
+// 															 			console.log(check);
+// 															 			document.getElementById("modal_open"+${status.count}).addEventListener("click",function(){
+																            document.getElementById("form").setAttribute("action","${pageContext.request.contextPath}/holiday/No/"+check;
+// 																        });
+															 		});
 															
+																	document.getElementById("exit").addEventListener("click", function() {
+																		document.getElementById("modal_dim").style.display = "none";
+																	});
 															</script>
 															<!-- ----------------------------------------------------------------------------------------- -->
 													</c:when>

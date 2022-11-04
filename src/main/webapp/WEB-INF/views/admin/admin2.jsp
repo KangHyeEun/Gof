@@ -265,7 +265,6 @@
 									<button type="submit" class="insertbtn">등록하기</button>
 								</div>
 								<div class="zip" style="width: 40%">
-									<a href="#" id="temp">임시 저장</a>
 									<a style="font-size: 1.2rem;" href="${pageContext.request.contextPath}/admin?page=1">↩</a>
 								</div>
 							</div>
@@ -286,16 +285,6 @@
                 document.getElementById("showimg").src = fileReader.result;
             }
         });
-        
-        /*임시저장 경로*/
-        document.getElementById("temp").addEventListener("click", function(){
-        	
-        	var obj = new Object();
-        		obj.id = document()
-        	
-        	location.href="${pageContext.request.contextPath}/temp";
-        });
-        
         </script>  
     
 
