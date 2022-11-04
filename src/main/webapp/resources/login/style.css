@@ -38,13 +38,10 @@ h2 {
 }
 
 #formContent {
-/*    	border: 1px solid black;  */
     border-radius: 10px 10px 10px 10px;
     background: #fff;
     width: 100%;
     height: 47vh;
-
-/*     margin-bottom: 11em; */
     max-width: 450px;
     min-width: 350px;
     position: relative;
@@ -130,10 +127,10 @@ input:focus {
            }
        }
 
-	.login-logo{
+.login-logo{
 /* 	        width: 73%; */
     height: 8em;		    
-  		min-width: 270px;
+  	min-width: 270px;
 }
 form p {
     display: flex;
@@ -168,3 +165,21 @@ form p {
 .emptydiv{
 	height: 3em;
 }
+
+/*모달 배경*/
+.modal {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.2);
+	z-index: 999;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.3s ease 0s;
+	animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+/*모달*/
