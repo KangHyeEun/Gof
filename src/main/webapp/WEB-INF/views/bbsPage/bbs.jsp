@@ -42,7 +42,7 @@
 						    <option value="owner" <c:if test="${page.searchType eq 'owner'}">selected</c:if>>작성자</option>
 						</select>
 						
-						<input type="text" name="keyword" id="keyword" value="${page.keyword}"/>
+						<input type="text" name="keyword" id="keyword" value="${page.keyword}" placeholder="입력해주세요"/>
 						<button type="submit" id="search">
 							<img src="${pageContext.request.contextPath}/resources/imges/search.svg"/>
 						</button>
@@ -72,7 +72,7 @@
 								<td>${vo.owner}</td>
 								<td>${vo.createDate}</td>
 								<td>${vo.viewCounts}</td>
-								<td><span>✉</span> 첨부 파일</td>
+								<td><span><img src="${pageContext.request.contextPath}/resources/imges/clip.png" id="cilpimg"/></span>${vo.fileCounts}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

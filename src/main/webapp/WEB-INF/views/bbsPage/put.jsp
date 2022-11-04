@@ -129,111 +129,117 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		//뒤로가기
-		document.getElementById("return").addEventListener("click", function(e){
-			e.preventDefault();
+
+<script type="text/javascript">
+
+	//뒤로가기
+	document.getElementById("return").addEventListener("click",function(e){
+		e.preventDefault();
+		let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
+		if(yn){
 			location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
-		});
-		//취소하기
-		document.getElementById("cancle").addEventListener("click", function(e){
+		}
+	});
+	//취소하기
+	document.getElementById("cancle").addEventListener("click", function(e){
+		e.preventDefault();
+		let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
+		if(yn){
+			location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
+		}
+	});
+	
+	//이지윅즈 적용
+	CKEDITOR.replace('textarea');
+	
+	//파일 수정, 삭제
+	$(function(){
+		let flagSingle = false;
+		let flagAll = false;
+		let bbsId = 0;
+		let id = [];
+		
+		//파일 전체 삭제
+		$(".alldelete").click(function(e){
 			e.preventDefault();
-			let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
+			let yn = confirm("파일을 전부 삭제하시겠습니까?");
 			if(yn){
-				location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
+				flagAll = true;
+				bbsId = this.dataset.bbsId;
+				$(".file-item").remove();
 			}
 		});
 		
-		//이지윅즈 적용
-		CKEDITOR.replace('textarea');
-		
-		//파일 수정, 삭제
-		$(function(){
-			let flagSingle = false;
-			let flagAll = false;
-			let bbsId = 0;
-			let id = [];
-			
-			//파일 전체 삭제
-			$(".alldelete").click(function(e){
-				e.preventDefault();
-				let yn = confirm("파일을 전부 삭제하시겠습니까?");
-				if(yn){
-					flagAll = true;
-					bbsId = this.dataset.bbsId;
-					$(".file-item").remove();
-				}
-			});
-			
-			//파일 하나씩 삭제
-			$(".deleteFile").click(function(e){
-				e.preventDefault();
-				let yn = confirm("파일을 삭제하시겠습니까?");
-				if(yn){
-					flagSingle = true;
-					id.push({id : this.dataset.id});
-					$(this).parent().remove();
-				}
-			});
-			
-			//파일 수정
-			$("#modify").click(function(){
-				// 파일 삭제
-				if(flagAll){
-					$.ajax({
-						url : "${pageContext.request.contextPath}/bbsPage/deleteFileAll",
-						data : JSON.stringify({bbsId : bbsId}),
-						type : "post",
-						contentType:"application/json; charset=utf-8",
-						datatype : "json",
-						success: function(result){
-							console.log(JSON.stringify(result));
-						}	
-					});	
-				}else if(flagSingle){
-					$.ajax({
-						url : "${pageContext.request.contextPath}/bbsPage/deleteFile",
-						data : JSON.stringify(id),
-						type : "post",
-						contentType:"application/json; charset=utf-8",
-						datatype : "json",
-						success: function(result){
-							console.log(JSON.stringify(result));
-						}
-					});		
-				}
-				
-				const formData = new FormData();
-				const $upload = $("#upload");
-				let files = $upload[0].files;
-				
-				//console.log(files);
-				// 파일 추가
-				if(files.length != 0){
-					for (var i = 0; i < files.length; i++) {
-						formData.append("uploadFile", files[i])	
-					}
-					
-					$.ajax({
-						url : "${pageContext.request.contextPath}/bbsPage/uploadfile",
-						processData : false,
-						contentType : false,
-						data : formData,
-						type : "post",
-						datatype : "json",
-						success: function(result){
-							//console.log(JSON.stringify(result));
-							$("#filelist").val(JSON.stringify(result));
-							console.log(result);
-							//$("#BBSVO").submit();
-							$("#bbsVO").submit();
-						}
-					});
-				}else{
-					$("#bbsVO").submit();
-				}
-			});
+		//파일 하나씩 삭제
+		$(".deleteFile").click(function(e){
+			e.preventDefault();
+			let yn = confirm("파일을 삭제하시겠습니까?");
+			if(yn){
+				flagSingle = true;
+				id.push({id : this.dataset.id});
+				$(this).parent().remove();
+			}
 		});
-	</script>
+		
+		//파일 수정
+		$("#modify").click(function(){
+			let yn = confirm("수정하시겠습니까?");
+			// 파일 삭제
+			if(flagAll){
+				$.ajax({
+					url : "${pageContext.request.contextPath}/bbsPage/deleteFileAll",
+					data : JSON.stringify({bbsId : bbsId}),
+					type : "post",
+					contentType:"application/json; charset=utf-8",
+					datatype : "json",
+					success: function(result){
+						console.log(JSON.stringify(result));
+					}	
+				});	
+			}else if(flagSingle){
+				$.ajax({
+					url : "${pageContext.request.contextPath}/bbsPage/deleteFile",
+					data : JSON.stringify(id),
+					type : "post",
+					contentType:"application/json; charset=utf-8",
+					datatype : "json",
+					success: function(result){
+						console.log(JSON.stringify(result));
+					}
+				});		
+			}
+			
+			const formData = new FormData();
+			const $upload = $("#upload");
+			let files = $upload[0].files;
+			
+			//console.log(files);
+			// 파일 추가
+			if(files.length != 0){
+				for (var i = 0; i < files.length; i++) {
+					formData.append("uploadFile", files[i])	
+				}
+				
+				$.ajax({
+					url : "${pageContext.request.contextPath}/bbsPage/uploadfile",
+					processData : false,
+					contentType : false,
+					data : formData,
+					type : "post",
+					datatype : "json",
+					success: function(result){
+						//console.log(JSON.stringify(result));
+						$("#filelist").val(JSON.stringify(result));
+						console.log(result);
+						//$("#BBSVO").submit();
+						$("#bbsVO").submit();
+					}
+				});
+			}else{
+				$("#bbsVO").submit();
+			}
+		});
+	});
+</script>
 </body>
 </html>

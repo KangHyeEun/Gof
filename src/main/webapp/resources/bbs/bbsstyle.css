@@ -159,20 +159,19 @@ tbody tr:last-child {
 	border-bottom: 2px solid #909294;
 }
 
-tbody tr td:nth-child(2) {
-     width: 200px;
-}
+/* tbody tr td:nth-child(2) { */
+/*      width: 200px; */
+/* } */
+
 tbody tr td:nth-child(3) {
-	padding-left: 3rem;
-	text-align: left;
+	display: flex;
+    justify-content: left;
+    align-items: center;
 }
 
 table td, table th {
-/* 	padding: 3px 1px; */
-	text-align: center;
-/* 	line-height: 1.8rem; */
-	
-    line-height: 2.1rem;
+	text-align: center;	
+    line-height: 2.8rem;
 }
 
 table a {
@@ -184,20 +183,14 @@ table a {
 
 table th {
 	font-family: 'Nanum Barun Gothic', sans-serif;
-/* 	padding-top: 12px; */
-/* 	padding-bottom: 12px; */
 	background-color: white;
 	color: rgb(0, 0, 0);
 }
 
 .bbs-footer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-/* 	padding: 1.5rem; */
-	display: fixed;
-	box-sizing: border-box;
-	
+    padding: 2rem;
+    display: fixed;
+    box-sizing: border-box;
     height: 10%;
 	
 }
@@ -293,5 +286,12 @@ table th {
 	background-color: #959595;
 	color: black;
 	border: 1px solid #959595;
+	}
+	
+	#cilpimg {
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+    padding: 0 5px;	
 	}
 

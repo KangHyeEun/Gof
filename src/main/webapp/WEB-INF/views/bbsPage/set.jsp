@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -9,8 +8,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 </style>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bbs/setstyle.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bbs/js/jquery-3.6.1.min.js"></script>
 <!-- ckeditor 적용 -->
@@ -28,13 +26,11 @@
 		<div class="container-inner-bbs">
 			<div class="inner-div-bbs">
 
-				<form:form modelAttribute="BBSVO"
-					action="${pageContext.request.contextPath}/bbsPage/set"
-					method="post" enctype="multipart/form-data">
-					<form:hidden path="ownerId" value="${sessionScope.personalInfoVO.empno}"/>
-					<form:hidden path="owner" value="${sessionScope.personalInfoVO.name}"/>
-					<form:hidden path="filelist"/>
-					
+				<form:form modelAttribute="BBSVO" action="${pageContext.request.contextPath}/bbsPage/set" method="post" enctype="multipart/form-data" name="form">
+					<form:hidden path="ownerId" value="${sessionScope.personalInfoVO.empno}" />
+					<form:hidden path="owner" value="${sessionScope.personalInfoVO.name}" />
+					<form:hidden path="filelist" />
+
 					<div class="set-header">
 						<h2>사내 게시판</h2>
 					</div>
@@ -53,9 +49,7 @@
 							<tbody>
 								<tr>
 									<th>작성자</th>
-									<td>
-										${sessionScope.personalInfoVO.name}
-									</td>
+									<td>${sessionScope.personalInfoVO.name}</td>
 								</tr>
 								<tr>
 									<th>카테고리</th>
@@ -63,8 +57,7 @@
 											<c:forEach var="vo" items="${categories}">
 												<form:option value="${vo.category}" class="category">${vo.category}</form:option>
 											</c:forEach>
-										</form:select>
-									</td>
+										</form:select></td>
 								</tr>
 								<tr>
 									<th>제목</th>
@@ -76,52 +69,70 @@
 								</tr>
 								<tr>
 									<th>내용</th>
-									<td>
-										<form:textarea path="content" id="textarea"/>	
-									</td>
+									<td><form:textarea path="content" id="textarea" /></td>
 								</tr>
 								<tr>
-									<th>파일첨부&nbsp;&nbsp;
-									<span>
-<!-- 									<img src="https://uinnout.com/employee/images/clip.svg"> -->
-									</span>
-									</th>
-									<td>
-										<input type="file" name="upload" id="upload" multiple/>
-									</td>
+									<th>파일첨부&nbsp;&nbsp; <span></span></th>
+									<td><input type="file" name="upload" id="upload" multiple /></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</form:form>
 				<div class="set-footer">
+					<button id="cancle">취소</button>
 					<button id="submit">전송</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 	//뒤로가기
-	document.getElementById("return").addEventListener("click",function(e){
+	document.getElementById("return", "cancle").addEventListener("click",function(e){
 		e.preventDefault();
-		location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
+		let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
+		if(yn){
+			location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
+		}
+	});
+	
+	//취소하기
+	document.getElementById("cancle").addEventListener("click", function(e){
+		e.preventDefault();
+		let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
+		if(yn){
+			location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
+		}
 	});
 	
 	//이지윅즈 적용
-	CKEDITOR.replace('textarea');
+	CKEDITOR.replace("textarea", {
+		height : 400,
+		filebrowserUploadUrl: "${pageContext.request.contextPath}/bbsPage/uploadimage"
+	});
 	
-	//파일 업로드
-	$(function(){
-		$("#submit").click(function(){
-			const formData = new FormData();
-			const $upload = $("#upload");
-			let files = $upload[0].files;
-			
-			for (var i = 0; i < files.length; i++) {
-				formData.append("uploadFile", files[i])	
+	//submit(유효성 검사+파일 보내기)
+	document.getElementById("submit").addEventListener("click", function(e){
+		e.preventDefault();
+		if(form.title.value=="" || form.title.value==0 || CKEDITOR.instances.textarea.getData() ==""){
+			if(form.title.value=="" || form.title.value==0){
+				alert("제목을 입력해주세요.");
+				form.title.focus();
+			}else if(CKEDITOR.instances.textarea.getData() =="" || CKEDITOR.instances.textarea.getData().length ==0){
+				alert("내용을 입력해주세요.");
 			}
-			
+			return false;
+		}else{
+			let yn = confirm("작성한 내용을 저장하시겠습니까?");
+			if(yn){
+				const formData = new FormData();
+				const $upload = $("#upload");
+				let files = $upload[0].files;
+				
+				for (var i = 0; i < files.length; i++) {
+					formData.append("uploadFile", files[i])	
+			}
 			$.ajax({
 				url : "${pageContext.request.contextPath}/bbsPage/uploadfile",
 				processData : false,
@@ -135,8 +146,11 @@
 					$("#BBSVO").submit();
 				}
 			});
-		});
+			}
+			alert("저장되었습니다.");
+		};
 	});
-	</script>
+</script>
+
 </body>
 </html>

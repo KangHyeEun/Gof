@@ -27,7 +27,7 @@
 	</select>
 
 	<select id="selectBBSList" resultType="BBSVO">
-		select id, category, title, owner_id, owner, content, view_counts,
+		select id, category, title, owner_id, owner, content, view_counts, file_counts, 
 		date_format(create_date, '%Y-%m-%d') create_date
 		from bbs
 		where
@@ -59,15 +59,15 @@
 
 	<select id="selectBBS" resultType="BBSVO">
 		select id, category, title,
-		owner_id, owner, content, view_counts,
+		owner_id, owner, content, view_counts, file_counts,
 		date_format(create_date, '%Y-%m-%d') create_date
 		from bbs
 		where is_delete = 0 and id = #{id}
 	</select>
 
 	<insert id="insertBBS" parameterType="BBSVO" useGeneratedKeys="true" keyProperty="id">
-		insert into bbs(category, title, owner_id, owner, content)
-		values(#{category}, #{title}, #{ownerId}, #{owner},	#{content})
+		insert into bbs(category, title, owner_id, owner, content, file_counts)
+		values(#{category}, #{title}, #{ownerId}, #{owner},	#{content}, #{fileCounts})
 	</insert>
 
 	<update id="updateBBS">
@@ -76,6 +76,7 @@
 			<if test="category != null">, category = #{category}</if>
 			<if test="title != null">, title = #{title}</if>
 			<if test="content != null">, content = #{content}</if>
+			<if test="fileCounts != null">, file_counts = #{fileCounts}</if>
 		</set>
 		where id = #{id} and owner_id = #{ownerId}
 	</update>
@@ -88,6 +89,13 @@
 	<update id="updateViewCount">
 		update bbs set view_counts = view_counts + 1
 		where id = #{id}
+	</update>
+	
+	<update id="updateFileCount">
+		update bbs set file_counts = (select count(*) 
+		from bbs as b inner join bbs_uploadfile as f 
+		on b.id = #{id} and f.bbs_id = #{id}) 
+		where id = #{id};
 	</update>
 
 <!-- 파일 업로드 -->
@@ -114,8 +122,13 @@
 				</when>
 			</choose>
 		</where>
-		
 	</delete>
+	
+	<select id="countFiles" resultType="int">
+		select count(*)
+		from bbs as b inner join bbs_uploadfile as f
+		on b.id = #{id} and f.bbs_id = #{id};
+	</select>
 
 
 <!-- 공지사항 게시판 -->

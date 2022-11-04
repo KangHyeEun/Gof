@@ -63,7 +63,7 @@ window.addEventListener("DOMContentLoaded",function(){
     	 // 모달창 띄우기
     	 document.querySelector(".modal").style.display = "flex";
     	 document.querySelector("#empno_id").value = empno;
- 	  	return false;		
+ 	  	return false;
 	 }else{
 		return true;
 	 } 
@@ -76,6 +76,19 @@ window.addEventListener("DOMContentLoaded",function(){
  document.querySelector("#submit").addEventListener("click", function(){
 	 alert("비밀번호가 성공적으로 변경되었습니다.");
  });
+ 
+//  width: 26%;
+//  /* height: calc(100% - 60px); */
+//  position: absolute;
+//  background-color: #4c4c4c94;
+//  /* display: flex; */
+//  /* justify-content: center; */
+//  align-items: center;
+//  /* display: none; */
+//  z-index: 100;
+//  position: absolute;
+//  top: 29%;
+//  left: 37%;
 
 /* //로그인 유효성 검사
 //joinform_check 함수로 유효성 검사

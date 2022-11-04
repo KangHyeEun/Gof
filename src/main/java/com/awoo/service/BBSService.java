@@ -3,6 +3,8 @@ package com.awoo.service;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.io.filefilter.FalseFileFilter;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -51,6 +53,8 @@ public class BBSService {
 		
 		model.addAttribute("page", vo);
 		model.addAttribute("list", bbsDAO.selectBBSList(vo));
+		BBSVO bvo =new BBSVO();
+		bbsDAO.updateFileCount(bvo);
 	}
 	
 	//게시글 상세 보기
@@ -64,6 +68,9 @@ public class BBSService {
 
 		List<BBSFileVO> filelist = bbsDAO.selectBBSFile(fvo);
 		model.addAttribute("filelist", filelist);
+
+		model.addAttribute("countFiles", bbsDAO.countFiles(id));
+
 	}
 	
 	//추가(트랜젝션 달기)
@@ -79,11 +86,13 @@ public class BBSService {
 			fileVO.setBbsId(vo.getId());
 			bbsDAO.insertBBSFile(fileVO);
 		}
+		bbsDAO.updateFileCount(vo);
 	}
 	
 	//삭제
 	public void deleteBBS(BBSVO vo2) {
 		bbsDAO.deleteBBS(vo2);
+		bbsDAO.updateFileCount(vo2);
 	}
 	
 	//수정
@@ -102,12 +111,14 @@ public class BBSService {
 				bbsDAO.insertBBSFile(fileVO);
 			}
 		}
+		bbsDAO.updateFileCount(vo);
 	}
 	
 	//카테고리
 	public void selectCategory(Model model) {
 		model.addAttribute("categories", bbsDAO.selectCategory());
 	}
+	
 	//조회수
 	public void updateViewCount(String id) {
 		bbsDAO.updateViewCount(id);
@@ -136,13 +147,19 @@ public class BBSService {
 	//파일 삭제
 	public void deleteBBSFileAll(BBSFileVO fvo) {
 		bbsDAO.deleteBBSFile(fvo);
+		BBSVO vo =new BBSVO();
+		bbsDAO.updateFileCount(vo);
 	}
+	
 	//파일 삭제(트랜젝션 달기)
 	public void deleteBBSFile(BBSFileVO[] fvos) {
 		for (BBSFileVO fvo : fvos) {
 			bbsDAO.deleteBBSFile(fvo);
 		}
+		BBSVO vo =new BBSVO();
+		bbsDAO.updateFileCount(vo);
 	}
+	
 	
 	//공지사항 게시판----------------------------------------
 	//게시판+페이징

@@ -27,6 +27,9 @@ public interface BBSDAO {
 	
 	public int updateViewCount(String id);
 	
+	public int updateFileCount(BBSVO vo);
+	
+	
 	//파일
 	public int insertBBSFile(BBSFileVO vo);
 	
@@ -34,6 +37,7 @@ public interface BBSDAO {
 	
 	public int deleteBBSFile(BBSFileVO vo);
 	
+	public int countFiles(String id);
 	
 
 	//공지사항 게시판-------------------------

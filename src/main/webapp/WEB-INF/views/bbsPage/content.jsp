@@ -10,6 +10,7 @@
 <!-- 스타일 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bbs/contentstyle.css" />
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -50,38 +51,53 @@
                     </div>
                 </div>
 
-                <div class="content-text">
-                    <p>${bbsVO.content}</p>
+                <div class="content-text" id="textarea">
+                    ${bbsVO.content}
                 </div>
 
                 <div class="content-footer">
-                    <h4>첨부파일&nbsp;&nbsp;&nbsp;<span><img src="https://uinnout.com/employee/images/clip.svg"></span></h4>
+                    <h4>첨부파일<span><img src="https://uinnout.com/employee/images/clip.svg"></span></h4>
+						<div>
+							<h4>${countFiles} 개</h4>
+						</div>
 						<div>
 							<c:forEach var="file" items="${filelist}">
 								<a href="${pageContext.request.contextPath}/bbsPage/downloadFile/${file.localname}/${file.servername}">${file.localname}</a><br>
-							</c:forEach>
+							</c:forEach>							
 						</div>
                 </div>
-
-				<div id="comment-list">
-					<!-- 댓글 달리는 곳 -->
+				
+				<div class="comment-area">
+					<!-- 댓글 적는 곳 -->
+					<div class="comment-img">
+						<c:forEach var="img" items="${fileList}">
+							<c:if test="${personalInfoVO.empno eq img.ownerId}">
+								<img id="showimg" src="${pageContext.request.contextPath}/upload/${img.fileName}">
+							</c:if>
+						</c:forEach>
+					</div>
+					<textarea name="comment" id="comment"></textarea>
+					<button id="set-comment">등록</button>
 				</div>
 				
-				<div>
-					<!-- 댓글 적는 곳 -->
-					<textarea name="comment" id="comment" cols="150" rows="5"></textarea>
-					<button id="set-comment">댓글 달기</button>
+				<div id="comment-list">
+					<!-- 댓글 달리는 곳 -->
 				</div>
            </div>
        </div>
    </div>
 	
 	<script type="text/javascript">
+	
+// 	 	window.addEventListener("DOMContentLoaded",function(){
+// 			document.getElementById("keyword").value = "${keyword}";
+// 		});
+
 		//뒤로가기 버튼 이벤트------------------------------
 		document.getElementById("return").addEventListener("click", function() {
 			location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
 		});
-
+		
 		//댓글 불러오기-----------------------------------------------
 		$(function(){
 			$.ajax({
@@ -100,7 +116,7 @@
 						const commentList = document.querySelector("#comment-list");
 						
 						const div = document.createElement("div");
-						const owner = document.createElement("h4");
+						const owner = document.createElement("p");
 						owner.innerText = item.owner;
 						const comment = document.createElement("p");
 						comment.innerText = item.comment;
@@ -351,7 +367,7 @@
 						}
 					});
 				}else{
-					alert("댓글을 달아주세요");
+					alert("댓글을 입력해주세요");
 				}
 			});
 		});			

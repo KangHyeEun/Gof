@@ -14,6 +14,7 @@ public class BBSVO {
 	private String isDelete;
 	private int viewCounts;
 	private String filelist;
+	private int fileCounts;
 	
 	public int getId() {
 		return id;
@@ -72,11 +73,14 @@ public class BBSVO {
 	public String getFilelist() {
 		return filelist;
 	}
-
 	public void setFilelist(String filelist) {
 		this.filelist = filelist;
 	}
-	
-
+	public int getFileCounts() {
+		return fileCounts;
+	}
+	public void setFileCounts(int fileCounts) {
+		this.fileCounts = fileCounts;
+	}
 	
 }
