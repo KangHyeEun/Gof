@@ -11,7 +11,38 @@
 
 <title>Insert title here</title>
 <style>
-
+	.container1{
+	    flex-direction: column;
+	}
+	.img-container img{
+	    width: 100px;
+  		height: 100px;
+	}
+	.img-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+	}
+	.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: #dfdfdf;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+	}
+	.send-message{
+	height: 45px;
+    /* font-weight: bold; */
+    letter-spacing: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #484848;
+	}
 </style>
 </head>
 <body>
@@ -28,16 +59,16 @@
 				<div class="inner-div-bbs">
 					<h3 class="sub-title">보내기 성공</h3> 
 						<div class="wrap">
-					      <div class="container">
+					      <div class="container1">
 					        <div class="heading">
-					          <span class="big-message">THANK YOU!</span>
+					          <span class="big-message"></span>
 					        </div>
+					         <p class="content send-message">이메일이 성공적으로 전송되었습니다.</p>
 					        <div class="img-container">
-					          <img src="img/thankyou.png" alt="thankyou-image">
+					          <img src="${pageContext.request.contextPath}/resources/imges/mailsuccess.png"/>
 					        </div>
 					        <div class="content-div">
-					            <p class="content">Your submission has been received. We will reply soon!</p>
-					            <p class="content"><a href="#">Back to previous page</a></p>
+					            <p class="content button"><a href="${pageContext.request.contextPath}/SendEmail?page=1&&name=0&&year=0&&month=0">뒤로가기</a></p>
 					        </div>
 					      </div>
 					    </div>

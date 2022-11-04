@@ -417,23 +417,31 @@ border: 1px solid #959595;
 /* 	th:nth-child(4), td:nth-child(4){ */
 /* 		width:150px; */
 /* 	} */
+	.holiday-list tr th, .holiday-list tr td{
+	text-overflow: ellipsis;
+    overflow: hidden;
+	}
 	.holiday-list tr th:nth-child(5), .holiday-list tr td:nth-child(5){
-	width: 170px;
+	width: 220px;
 	white-space: nowrap;
 	}
 	.holiday-list tr th:nth-child(6), .holiday-list tr td:nth-child(6){
-     display: block;
-    /* width: 100%; */
-    width: 22em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    height: 1em;
-    text-align: left;
-    word-wrap: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+		width: 300px;
+		display: inline-block;
+/*     width: 100%; */
+/*     width: 22em; */
+/*     overflow: hidden; */
+/*     text-overflow: ellipsis; */
+/*     white-space: normal; */
+    	height: 1em;
+/*     text-align: left; */
+/*     word-wrap: break-word; */
+/*     display: -webkit-box; */
+/*     -webkit-line-clamp: 1; */
+/*     -webkit-box-orient: vertical; */
+
+/* 	text-overflow: ellipsis; */
+/*     overflow: hidden; */
 	}
 	.sub-sub-title{
 	    display: flex;

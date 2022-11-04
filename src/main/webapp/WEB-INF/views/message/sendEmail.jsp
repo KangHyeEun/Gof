@@ -63,11 +63,6 @@
 }
 
 
-/* 	#input1:checked ~ #morning-off, */
-/* #input2:checked ~ #afternoon-off{ */
-/* 	background-color: #272454; */
-/* 	color: white; */
-/* } */
 	.mail-select-container{
 	display: flex;
     flex-direction: row-reverse;
@@ -126,6 +121,33 @@
 	.cke_contents{
 	height:230px;
 	}
+	.hidespan{
+	color:red;
+	}
+	
+	
+	.detail-container table td:nth-child(1) {
+    width: 20px;
+    }
+	.holiday-list tr th, .holiday-list tr td {
+	text-overflow: ellipsis;
+    overflow: hidden;	
+	}    
+    .holiday-list tr th:nth-child(1), .holiday-list tr td:nth-child(1) {
+    width: 30px;
+	}
+	.holiday-list tr th:nth-child(3), .holiday-list tr td:nth-child(3) {
+     width: 265px;
+	}
+	.holiday-list tr th:nth-child(4), .holiday-list tr td:nth-child(4) {
+    width: 120px;
+	}
+	.holiday-list tr th:nth-child(5), .holiday-list tr td:nth-child(5) {
+    width: 150px;
+	}
+	.holiday-list tr th:nth-child(6), .holiday-list tr td:nth-child(6) {
+    width: 300px;
+	}
 </style>
 </head>
 <body>
@@ -144,7 +166,6 @@
 					<div class="table-head">
 						
 						<button type="button" id="writeMessage">메일 작성</button>
-<!-- 						<button type="button" id="deleteMessage">삭제</button> -->
 						
 						<div class="sortings">
 							<select name="sorting-year" id="sorting-name" onchange="OnChange();">
@@ -183,6 +204,7 @@
 									<th>본문</th>
 									<th>첨부 파일 개수</th>
 									<th>공개여부</th>
+									<th>상세보기</th>
 								</tr>
 							</thead>
 							<tbody class="tbody" id="htable-body">
@@ -195,7 +217,7 @@
 										<td>${ml.title}</td>
 										<td>${ml.content }</td>
 										<td>${ml.countFiles}</td>
-										<td>${ml.showHide == 1? "공개" : "비공개"}</td>
+										<td>${ml.showHide == 1? "<span>공개</span>" : "<span class='hidespan'>비공개</span>"}</td>
 										<td><a class="${ml.id}" id="atag${status1.count}"><img src="${pageContext.request.contextPath}/resources/imges/magni-icon.png" /></a></td>
 									</tr>
 								</c:forEach>
@@ -226,40 +248,6 @@
 							</c:forEach>
 						<div class="num"><a id="next">▶</a></div>
 					</div>
-					
-				
-				
-				
-<!-- 					<h3 class="sub-title">사내 메일 보내기</h3> -->
-<!-- 						<p>AWOOGOF@GMAIL.COM</p> -->
-						
-<!-- 						<table> -->
-<!-- 							<tr> -->
-<!-- 								<th>id</th> -->
-<!-- 								<th>보낸사람</th> -->
-<!-- 								<th>보낸 이메일</th> -->
-<!-- 								<th>보낸 날짜</th> -->
-<!-- 								<th>제목</th> -->
-<!-- 								<th>본문</th> -->
-<!-- 								<th>첨부 파일 개수</th> -->
-<!-- 								<th>공개여부</th> -->
-<!-- 							</tr> -->
-<%-- 							<c:forEach items="${mailDataList}" var="ml"> --%>
-<!-- 								<tr> -->
-<%-- 									<td>${ml.id}</td> --%>
-<%-- 									<td>${ml.name}</td> --%>
-<%-- 									<td>${ml.sendTo}</td> --%>
-<%-- 									<td>${ml.sendDate}</td> --%>
-<%-- 									<td>${ml.title}</td> --%>
-<%-- 									<td>${ml.content }</td> --%>
-<%-- 									<td>${ml.countFiles}</td> --%>
-<%-- 									<td>${ml.showHide}</td> --%>
-<!-- 								</tr> -->
-<%-- 							</c:forEach> --%>
-<!-- 						</table> -->
-<!-- 					<button type="button" id="btn1"> 비밀번호 수정 </button> -->
-					
-			
 				</div>
 			</div>
 		
@@ -298,10 +286,11 @@
 										<label for="file">File</label>
 										   <input type="file" name="attachment" multiple class="mail-input" id="file">
 										<label for="content" >Content</label>
-												<textarea name="content" class="ckeditor" required id="content"></textarea>
+												<textarea name="content" class="ckeditor" required="required" id="content"></textarea>
 									 	<div class="pop5">
 									 		<button type="button" value="Submit" id="empty-send">전송</button>
 											<button type="submit" value="Submit" id="real-send" style="display:none">전송</button>
+<!-- 											<button type="submit" value="Submit" id="real-send">전송</button> -->
 										</div>
 									</form>
 								</div>
@@ -316,8 +305,57 @@
 		                <button class="btn gray_btn modal_close" id="btn_cancle">취소</button>
 		            </div>
 		        </section>
-		        
-		        
+			</div>
+		    <!-- 상세보기 -->
+			<div id="detailpop">
+				<div class="pop-container">
+					<div class="pop1">
+						<div class="pop-titleContainer">
+							<span class="pop-title">메일 상세보기</span>
+							<span id="pop-approval"></span>
+						</div>
+						<div>
+							<a href="">✖️</a>
+						</div>
+					</div>
+					<div class="detail-container">
+						<div class="approval-container">
+						<div></div>
+						<table border="1">
+							<tr>
+								<td>보낸사람</td>
+								<td><span id="pop-name"></span></td>
+							</tr>
+							<tr>
+								<td>보낸이메일</td>
+								<td><span id="pop-sendto"></span></td>
+							</tr>
+							<tr>
+								<td>제목</td>
+								<td><span id="pop-title"></span></td>
+							</tr>
+							<tr>
+								<td>내용</td>
+								<td><span id="pop-content"></span></td>
+							</tr>
+							<tr>
+								<td>첨부파일 개수</td>
+								<td><span id="pop-countFiles"></span></td>
+							</tr>
+						</table>
+						
+						<div class="sub-info-container">
+							<div class="approvalDate">결재일: <span id="pop-sendDate"></span></div>
+							<div id="reject" class="reject">공개여부: <span id="pop-showHide"></span></div>
+						</div>
+						<button type="button" id="btn-check">확인</button>
+<!-- 							<div class="message-owner">보낸사람: <span id="pop-mownerId">-</span></div> -->
+<!-- <!-- 							<div class="message-receiver">받는사람: <span id="pop-mreceiverId">-</span></div> --> 
+<!-- 							<div class="message-content">내용: <span id="pop-mcontent">-</span></div> -->
+<!-- 							<div class="message-date">보낸일자: <span id="pop-msendDate">-</span></div> -->
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -394,14 +432,15 @@
 		    
 		    document.getElementById("empty-send").addEventListener("click",function(){
 		    	let emails = document.getElementsByClassName("email");
-		    	let title = document.getElementsByClassName("title").value;
-		    	let file = document.getElementsByClassName("file").value;
-		    	let content = document.getElementsByClassName("content").value;
-		    	console.log(content == null);
-		    	console.log(content == "");
+		    	let title = document.getElementById("title").value;
+		    	let file = document.getElementById("file").value;
+		    	let content = document.getElementById("content").value;
+		    	console.log(content != "");
+		    	console.log(title != "");
 		    	for (var i = 0; i < emails.length; i++) {
-		    		if(emails[i].value != null && title != null && content != null){
-		    			document.getElementById("confirm-block").style.display = "block";		
+		    		console.log(emails[i].value)
+		    		if(emails[i].value != "" && title != ""){
+		    			document.getElementById("confirm-block").style.display = "block";
 		    		}
 		    		else{
 		    			document.getElementById("real-send").click();
@@ -411,12 +450,51 @@
 		    	
 		   	});
 		    document.getElementById("btn_ok").addEventListener("click",function(){
-		    	 document.getElementById("real-send").click();
+		    	document.getElementById("real-send").click();
+// 		    	alert("메일이 성공적으로 전송되었습니다");
 		   	});
 		    document.getElementById("btn_cancle").addEventListener("click",function(){
 		    	document.getElementById("confirm-block").style.display = "none";
 		   	});
+		    document.getElementById("btn-check").addEventListener("click",function(){
+				location.href="";
+			});
 		    
+		 // 비동기로 상세보기 가져옴
+			 for (let k = 1; k <= size; k++) {
+				document.getElementById("atag"+k).addEventListener("click",function(){
+					document.getElementById("detailpop").style.display = "flex";
+				
+					let classname = document.getElementById("atag"+k).className;
+					let simple_data = {id:classname};
+					
+					fetch("${pageContext.request.contextPath}/mail/detail",{
+						method : "POST", // PUT, PATCH, DELETE
+						headers : {"Content-Type" : "application/json"},
+						body : JSON.stringify(simple_data)
+					}).then(response => response.json())
+				
+					.then(data => {
+						
+						document.getElementById("pop-name").innerHTML=data.name;
+						
+						
+						document.getElementById("pop-sendto").innerHTML=data.sendTo;
+						document.getElementById("pop-countFiles").innerHTML=data.countFiles;
+						document.getElementById("pop-title").innerHTML=data.title;
+						document.getElementById("pop-content").innerHTML=data.content;
+						document.getElementById("pop-sendDate").innerHTML=data.sendDate;
+						
+						if(data.showHide == 1){
+							document.getElementById("pop-showHide").innerHTML= "<span>공개</span>";
+						}else{
+							document.getElementById("pop-showHide").innerHTML= "<span class='hidespan'>비공개</span>";
+						}
+					}).catch(error => {
+						console.log("error");
+					});
+				});
+			 }		
 	</script>
 </body>
 </html>

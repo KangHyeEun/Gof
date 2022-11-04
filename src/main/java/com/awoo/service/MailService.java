@@ -63,7 +63,7 @@ public class MailService {
 			
 	
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("empno", (int)model.getAttribute("empno"));
+			map.put("empno", empno);
 			map.put("name", sortingName);
 			map.put("year", sortingYear);
 			map.put("month", sortingMonth);
@@ -82,13 +82,8 @@ public class MailService {
 	
 	public void sendEmail(List<MailVO> mailList) {
 		
-//		String toAddress, String fromAddress,
-//		String subject, String msgBody, MultipartFile[] attachment
-		
-	    
-//		String[] sendToArr = mvo.getSendTo();
 	    MimeMessagePreparator[] preparators = new MimeMessagePreparator[mailList.size()];
-//
+
 	    int i = 0;
 	    for(final MailVO mvo : mailList) {
 	    	preparators[i++] =  new MimeMessagePreparator() {
@@ -104,7 +99,7 @@ public class MailService {
 	             		MultipartFile multipartFile = mvo.getAttachment()[i];            		
 	             		if(multipartFile.getOriginalFilename() != "") {
 	             			filecnt += 1;
-//	             			// 파일 깨지지 말라고 encodeText 넣어줌
+	             			// 파일 깨지지 말라고 encodeText 넣어줌
 	             			String title = multipartFile.getOriginalFilename();
 	             			helper.addAttachment(MimeUtility.encodeText(title,"EUC-KR","B"), multipartFile);
 	             		}
@@ -114,111 +109,17 @@ public class MailService {
 	    		};
 	    		dao.insertMail(mvo);
 	    	}
+	    //메일 보내는 곳!
 	    	mailSender.send(preparators);
 	    }
 	    
-//	        preparators[i++] =  new MimeMessagePreparator() {
-	       
-
-	    
- 
-//	    MimeMessagePreparator[] preparators = new MimeMessagePreparator[mails.size()];
-//
-//	    int i = 0;
-//	    for(final MailVO vo: mails) {
-//	        preparators[i++] =  new MimeMessagePreparator() {
-//	            @Override
-//	            public void prepare(MimeMessage mimeMessage) throws Exception {
-//	                final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-//	                helper.setFrom(vo.getFrom());
-//	                helper.setTo(vo.getTo());
-//	                helper.setSubject(vo.getSubject());
-//	                helper.setText(vo.getContents(), true);
-//	            }
-//	        };
-//	    }
-//
-//	    mailSender.send(preparators);
 	
-//	
-//	public void saveEmail(List<MailVO> mailvo) {
-//		
-//		for (MailVO mail : mailvo) {
-//				
-//				dao.insertMail(mail);
-//			}
-//		}
+	
+	public MailVO getDetailMail(Model model) {
+		
+		int id = (int)model.getAttribute("id");	
+		return dao.getDetailMail(id);
 	}
-
-
 	
+}
 
-
-
-
-
-
-
-
-
-
-//package com.awoo.service;
-//
-//import java.io.File;
-//
-//import javax.mail.internet.MimeMessage;
-//import javax.mail.internet.MimeUtility;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.core.io.FileSystemResource;
-//import org.springframework.mail.MailSender;
-//import org.springframework.mail.SimpleMailMessage;
-//import org.springframework.mail.javamail.JavaMailSenderImpl;
-//import org.springframework.mail.javamail.MimeMessageHelper;
-//import org.springframework.mail.javamail.MimeMessagePreparator;
-//import org.springframework.stereotype.Service;
-//import org.springframework.ui.Model;
-//import org.springframework.web.multipart.MultipartFile;
-//
-//
-//@Service
-//public class MailService {
-//
-//	@Autowired
-//	private JavaMailSenderImpl mailSender;
-//	
-//	public void sendEmail(String toAddress, String fromAddress,
-//					String subject, String msgBody, MultipartFile[] attachment) {
-//		
-//		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
-//	        @Override
-//	        public void prepare(MimeMessage mimeMessage) throws Exception {
-//	            final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-//	            helper.setFrom(fromAddress);
-//	            helper.setTo(toAddress);
-//	            helper.setSubject(subject);
-//	            helper.setText(msgBody, true);
-//            	for (int i = 0; i < attachment.length; i++) {
-//            		MultipartFile multipartFile = attachment[i];            		
-//            		if(multipartFile.getOriginalFilename() != "") {
-//            			// 파일 깨지지 말라고 encodeText 넣어줌
-//            			String title = multipartFile.getOriginalFilename();
-//            			helper.addAttachment(MimeUtility.encodeText(title,"EUC-KR","B"), multipartFile);
-//            		}
-//	            }
-//	        }
-//	    };
-//
-//	    mailSender.send(preparator);
-//	}
-//	
-//	public void saveEmail(String email, 
-//						  String title, 
-//						  String content,
-//						  MultipartFile[] attachment,
-//						  Model model) {
-//		int empno = (int)model.getAttribute("empno");
-//		map.
-//		model.addAttribute("");
-//	}
-//}

@@ -135,11 +135,21 @@ public class ServletAppContext implements WebMvcConfigurer {
 	@Bean
     public JavaMailSenderImpl javaMailService() {
           JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-          javaMailSender.setHost("smtp.gmail.com");
+          // 구글
+//          javaMailSender.setHost("smtp.gmail.com");
+//          javaMailSender.setPort(587);
+//          javaMailSender.setProtocol("smtp");
+//          javaMailSender.setUsername("awoogof@gmail.com");
+//          javaMailSender.setPassword("nbqvddvjbuqbddgw");
+          
+          //네이버
+          javaMailSender.setHost("smtp.naver.com");
           javaMailSender.setPort(587);
           javaMailSender.setProtocol("smtp");
-          javaMailSender.setUsername("awoogof@gmail.com");
-          javaMailSender.setPassword("nbqvddvjbuqbddgw");
+          javaMailSender.setUsername("yegabin14@naver.com");
+          javaMailSender.setPassword("Yegabin14");
+          
+          
           Properties mailProperties = new Properties();
           mailProperties.put("mail.debug", true);
           mailProperties.put("mail.smtp.auth", "true");

@@ -17,6 +17,8 @@ public interface MailDAO {
 	public List<String> getMailDistinctYear(Map<String, Object> map);
 	public List<String> getMailDistinctSender(Map<String, Object> map);
 	public void insertMail(MailVO vo);
+	
+	public MailVO getDetailMail(int id);
 
 	
 }

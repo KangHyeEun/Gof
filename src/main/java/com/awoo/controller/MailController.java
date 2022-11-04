@@ -3,13 +3,17 @@ package com.awoo.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.awoo.dao.MailDAO;
 import com.awoo.service.MailService;
 import com.awoo.vo.MailVO;
+import com.awoo.vo.MessageVO;
 import com.awoo.vo.PersonalInfoVO;
 
 @Controller
@@ -57,15 +62,15 @@ public class MailController {
 							  @SessionAttribute("personalInfoVO") PersonalInfoVO vo,
 							  Model model
 								) throws Exception {
-//		ModelAndView mv = new ModelAndView();
-//		
-		String addr = "awoogof@gmail.com";
-		System.out.println("--------------------------");
-		System.out.println(email);
-		System.out.println(title);
-		System.out.println(content);
-		System.out.println(showHide);
-		System.out.println(email);
+
+
+		//google
+//		String addr = "awoogof@gmail.com";
+		
+		//naver
+		String addr = "yegabin14@naver.com";
+		
+		
 		List<MailVO> mailList = new ArrayList<MailVO>(); 
 		for (String one : email) {
 			MailVO mvo = new MailVO();
@@ -87,5 +92,16 @@ public class MailController {
 		return "message/successPage";
 	}
 	
-	
+	@ResponseBody   
+	@PostMapping("/mail/detail")
+	public MailVO MessageDetailReceive(@RequestBody Map<String, String> map,
+										@SessionAttribute("personalInfoVO") PersonalInfoVO vo,
+										Model model) {
+		model.addAttribute("empno", vo.getEmpno());
+		
+		int id = Integer.parseInt((String)map.get("id"));
+		model.addAttribute("id", id);
+		
+		return mailService.getDetailMail(model);
+	}
 }

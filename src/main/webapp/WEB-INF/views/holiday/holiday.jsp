@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/holiday/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/message/style.css">
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/message/style.css"> --%>
 <title>Insert title here</title>
 </head>
 <body>

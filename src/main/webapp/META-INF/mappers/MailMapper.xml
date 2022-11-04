@@ -5,7 +5,7 @@
 
 <mapper namespace="com.awoo.dao.MailDAO">
 	<select id="getmailList" resultType="MailVO">
-		SELECT m.id, m.empno, e.name AS name, m.send_to, m.send_date, m.title, m.content, m.count_files, m.show_hide
+		SELECT m.id, m.empno, e.name AS name, m.send_to, DATE_FORMAT(m.send_date, '%Y-%m-%d %H:%i') as send_date, m.title, m.content, m.count_files, m.show_hide
 		from mail m, personal_info e
 		<where>
 			m.empno= e.empno AND (show_hide = 1 OR m.empno = #{empno})
@@ -47,6 +47,12 @@
 		from mail m, personal_info e
 		where m.empno= e.empno AND (show_hide = 1 OR m.empno = #{empno})
 	</select>
+	<select id="getDetailMail" resultType="MailVO">
+		SELECT m.id, m.empno, e.name AS name, m.send_to, m.send_date, m.title, m.content, m.count_files, m.show_hide
+		from mail m, personal_info e
+		where m.empno= e.empno AND m.id = #{id};
+	</select>
+	
 <!-- 	<select id="getRecieveDistinctSender" resultType="String"> -->
 <!-- 		SELECT distinct(p.name)  -->
 <!-- 		FROM message m, personal_info p -->
