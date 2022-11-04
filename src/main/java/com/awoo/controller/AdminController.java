@@ -9,6 +9,7 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -70,11 +71,11 @@ public class AdminController {
 			@RequestParam("empno") int empno, HttpServletResponse response,UploadfilesVO uvo) {
 		vo.setId(id);
 		vo.setEmpno(empno);
-		Pservice.selectInfo(vo, model);
-		Eservice.department(model);
-		Eservice.position(model);
+		Pservice.selectInfo(vo, model); // 인사 정보
+		Eservice.department(model); // 부서
+		Eservice.position(model); // 직책
 		uvo.setOwnerId(empno);
-		Uservice.selectFile(uvo, model);
+		Uservice.selectFile(uvo, model); // 파일업로드
 		return "/admin/detail";
 	}
 	
@@ -87,7 +88,6 @@ public class AdminController {
 				UploadfilesVO vo)throws IllegalStateException, IOException {
 			model.addAttribute("page", page);
 			Eservice.updateE(pvo,evo,request);
-			System.out.println(evo.getEmpno());
 			for (MultipartFile file : files) { 
 				if(!file.getOriginalFilename().isEmpty()){ 
 					file.transferTo(Paths.get("C:/sample/"+evo.getEmpno()+file.getOriginalFilename()));
@@ -152,18 +152,6 @@ public class AdminController {
 			return "redirect:/admin";
 		}
 	
-	// 이름 검색(선택 직원 정보 수정)
-	@ResponseBody   
-	@PostMapping("/AssociatedSearch")
-	public List<InfoVO> AssociatedSearch(@RequestBody Map<String, String> map,Model model,InfoVO vo) {
-
-		String name = (String)map.get("name");
-
-		model.addAttribute("name", name);
-
-		return Eservice.AssociatedSearch(vo,model);
-	}
-	
 	/*부서관리 ----------------------------------------------------------------------------------------------*/
 	
 	// 부서 관리 페이지 접근
@@ -191,6 +179,7 @@ public class AdminController {
 	// 부서 삭제
 	@GetMapping("/admin/deleteDepartment")
 	public String deleteDepartment(PositionDepartmentVO vo) {
+		vo.setDepartment("-");
 		Eservice.deleteDepartment(vo);
 		return "redirect:/admin/department";
 	}
@@ -222,6 +211,7 @@ public class AdminController {
 	// 직책 삭제
 	@GetMapping("/admin/deletePosition")
 	public String deletePosition(PositionDepartmentVO vo) {
+		vo.setPosition("-");
 		Eservice.deletePosition(vo);
 		return "redirect:/admin/position";
 	}

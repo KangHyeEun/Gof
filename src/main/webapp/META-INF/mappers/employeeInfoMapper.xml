@@ -113,6 +113,10 @@
 	<update id="updateDepartment">
 		UPDATE department SET department = #{department} where id = #{id};
 	</update>
+	<update id="updateDepartment2">
+		update employee_info set edepartment = #{department}
+		where edepartment = (SELECT department from department WHERE id = #{id});
+	</update>
 	<delete id="deleteDepartment">
 		DELETE FROM department WHERE id = #{id}; 
 	</delete>
@@ -135,6 +139,10 @@
 	</insert>
 	<update id="updatePosition">
 		UPDATE positionp SET position = #{position} where id = #{id};
+	</update>
+	<update id="updatePosition2">
+		update employee_info set eposition = #{position}
+		where eposition = (SELECT position from positionp WHERE id = #{id});
 	</update>
 	<delete id="deletePosition">
 		DELETE FROM positionp WHERE id = #{id};

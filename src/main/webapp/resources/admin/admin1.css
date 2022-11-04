@@ -329,8 +329,8 @@ h4 {
 }
 
 .modal_wrap {
-	width: 40%;
-	height: 70%;
+	min-width: 500px;
+	min-height:520px;
 	background: white;
 	z-index: 100;
 	border-radius: 10px;
@@ -388,23 +388,37 @@ h4 {
 }
 
 .mdiv2-1 {
-	width: 100%;
+	width:300px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	flex: 1;
+	margin-top: 3%;
+    margin-right: 2%;
+}
+
+.mdiv2-1>h5 {
+	color: #aaabad;
+    width: 58px;	
+}
+
+#userKeyWord{
+	padding: 3%;
+    border: 1px solid #aaabad;
+    border-radius: 5px;
 }
 
 .minput {
-	width: 75%;
+	width: 187px;
 	height: 50%;
 }
 
 .mdiv3 {
 	width: 100%;
-	height: 15%;
+	min-height: 70px;
+	height:auto;
 	border: 1px solid #aaabad;
-	margin-bottom: 5%;
+	margin-bottom: 1%;
 }
 
 .mselect {
@@ -417,8 +431,8 @@ h4 {
 }
 
 #mcategory {
-	width: 98%;
-	height: 50%;
+	width: 95%;
+    height: 35%;
 	background-color: #f8fafb;
 	border-radius: 0.4rem;
 	margin-left: 5px;
@@ -445,10 +459,6 @@ h4 {
 
 nav {
 	height: auto;
-}
-
-.scroll {
-/* 	height: 75vh; */
 }
 
 .paging {
@@ -582,10 +592,7 @@ nav {
 	.DTable tr td:first-child {
 		border-right: 1px solid #c1bdbd;
 	}
-	
-	span {
-	/* 	color: black; */
-	}
+
 	#pop-approval {
 		color: #14abab;
 	}
@@ -593,6 +600,31 @@ nav {
 		margin-left: 2%;
 	}
 	
+	
+	#suggestdiv{
+			width: 198px;
+			height: auto;
+			border: 1px solid black; 
+			display: none;
+			background: white;
+			position: absolute;
+			border: 1px solid rgb(170, 171, 173);
+    		margin-top: 1px;
+		}
+		
+		#ul {
+			display: flex;
+    		flex-direction: row;
+    		flex-wrap: wrap;
+		}
+		
+		#ul>li {
+			margin-left: 1%;
+		}
+		
+		#ul>li>span {
+			color: #14ABAB;
+		}
 	
 	@media screen and (max-width: 1400px) {
 		#EpTable .scroll .table1 th:nth-child(2),

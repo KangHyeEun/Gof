@@ -114,10 +114,12 @@ public class EmployeeInfoService {
 	}
 	
 	public void updateDepartment(PositionDepartmentVO vo) {
+		dao.updateDepartment2(vo);
 		dao.updateDepartment(vo);
 	}
 
 	public void deleteDepartment(PositionDepartmentVO vo) {
+		dao.updateDepartment2(vo);
 		dao.deleteDepartment(vo);
 	}
 
@@ -133,10 +135,12 @@ public class EmployeeInfoService {
 	}
 	
 	public void updatePosition(PositionDepartmentVO vo) {
+		dao.updatePosition2(vo);
 		dao.updatePosition(vo);
 	}
 
 	public void deletePosition(PositionDepartmentVO vo) {
+		dao.updatePosition2(vo);
 		dao.deletePosition(vo);
 	}
 

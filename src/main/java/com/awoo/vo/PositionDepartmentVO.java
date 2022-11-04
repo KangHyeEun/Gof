@@ -6,7 +6,7 @@ public class PositionDepartmentVO {
 	private String position;
 	private String department;
 	private int count;
-	
+
 	public int getCount() {
 		return count;
 	}

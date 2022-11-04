@@ -62,7 +62,7 @@
 									</c:otherwise>
 								</c:choose>
 									<label for="proimg" id="img">사진수정</label><input type="file"
-										name="proimg" id="proimg" accept="image/*" multiple>
+										name="proimg" id="proimg" accept="image/*">
 								</div>
 								<div id="personal">
 									<table>

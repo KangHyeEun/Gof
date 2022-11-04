@@ -40,6 +40,7 @@ public interface EmployeeInfoDAO {
 	public List<PositionDepartmentVO> countDepartment();
 	public void insertDepartment(PositionDepartmentVO vo);
 	public void updateDepartment(PositionDepartmentVO vo);
+	public void updateDepartment2(PositionDepartmentVO vo);
 	public void deleteDepartment(PositionDepartmentVO vo);
 	
 	/*직책 관리*/
@@ -47,6 +48,7 @@ public interface EmployeeInfoDAO {
 	public List<PositionDepartmentVO> countPosition();
 	public void insertPosition(PositionDepartmentVO vo);
 	public void updatePosition(PositionDepartmentVO vo);
+	public void updatePosition2(PositionDepartmentVO vo);
 	public void deletePosition(PositionDepartmentVO vo);
 	
 	

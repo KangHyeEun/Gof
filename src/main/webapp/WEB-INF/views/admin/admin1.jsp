@@ -12,8 +12,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/admin1.css">
 <title>Insert title here</title>
-<style type="text/css">
-</style>
 </head>
 <body>
 	<div class="container-wrap">
@@ -240,7 +238,8 @@
 													<div id="suggestdiv">
 														<c:forEach var="j" items="${list}" varStatus="status">
 															<div class="info">
-																<span class="name" style="color: black" value1="${j.name}" value2="${j.edepartment}">${j.name}</span>
+																<span class="name" id="name${status.count}" style="color: black" 
+																value1="${j.name}" value2="${j.edepartment}" value3="${j.empno}">${j.name}</span>
 																(${j.edepartment})
 															</div>
 														</c:forEach>
@@ -277,7 +276,7 @@
 											<div class="sdiv3">
 												<h4>고용형태</h4>
 												<select name="ehiredType" id="mcategory" class="m">
-													<option value="">고용 형태 선택</option>
+													<option value="">변경없음</option>
 													<option value="정규직">정규직</option>
 													<option value="비정규직">비정규직</option>
 												</select>
@@ -346,19 +345,6 @@
 			con.style.display = (con.style.display != 'none') ? "none" : "flex";
 		}
 
-		/*상세보기 전체 체크*/
-		function checkAll1() {
-			const checkboxes = document.getElementsByName("estatus");
-			if (document.getElementById("allCheck1").checked == true) {
-				for (var i = 0; i < checkboxes.length; i++)
-					checkboxes[i].checked = true;
-			}
-			if (document.getElementById("allCheck1").checked == false) {
-				for (var i = 0; i < checkboxes.length; i++)
-					checkboxes[i].checked = false;
-			}
-		}
-
 		/*버튼 변화 (1개월,2개월,3개월)*/
 		var s = [ "s1", "s2", "s3" ];
 
@@ -420,6 +406,7 @@
 		const mspan = document.getElementById("mspan");
 		const li1 = document.getElementsByName("li1");
 		
+		/*------------------------------------------------------------------------------------------------*/
 		/*모달창 켜기*/
 		document
 				.getElementById("modal_open")
@@ -438,16 +425,23 @@
 								document.getElementById("modal_dim").style.display = "flex";
 							} else {
 								alert("정보를 수정할 직원을 선택해 주세요.");
-								document.getElementById("modal_dim").style.display = "flex";
 							}
 
 						});
-		
+		/*------------------------------------------------------------------------------------------------*/
 	/* 모달창 끄기*/
 			
 			document.getElementById("exit").addEventListener("click", function() {
 				document.getElementById("modal_dim").style.display = "none";	
-				
+					
+					const checkboxes = document.getElementsByName("empno");
+					
+					for (var i = 0; i < checkboxes.length; i++){							
+					if (checkboxes[i].checked == true) {
+							checkboxes[i].checked = false;
+						}
+					}
+
 					const ul = document.getElementById("ul");
 		
 					while(ul.hasChildNodes()){
@@ -459,14 +453,18 @@
 					  while(document.getElementById("suggest").firstChild)  {
 						  document.getElementById("suggest").firstChild.remove()
 					  }
-					  
 		
 			});
-		
+			/*------------------------------------------------------------------------------------------------*/
 		/*모달창 div에 li추가*/
+		let num = 0;
+
 		document.getElementById("modal_open").addEventListener(
 				"click",
 				function() {
+					const ul = document.getElementById("ul");
+					const checkboxes = document.getElementsByName("empno");
+					const mspan = document.getElementById("mspan");
 					for (var i = 0; i < checkboxes.length; i++) {
 						if (checkboxes[i].checked) {
 							const li = document.createElement("li");
@@ -475,7 +473,7 @@
 									.getAttribute("value2");
 							const span = document.createElement("span");
 
-							span.innerText = "X"
+							span.innerText = "X";
 							span.setAttribute("value", name);
 							span.setAttribute("name", "span1");
 							
@@ -485,70 +483,122 @@
 							li.append(span);
 							
 							ul.append(li); 
-							mspan.innerText = li1.length;
-						}
-						
-// 						/*모달창 span 삭제*/
-// 						const span1 = document.getElementsByName("span1");		
-// 						span1[i].addEventListener("click", function(e) {	
-// 							const del = e.target;  // span ("X")
-// 				 			const deleteAll = del.parentNode; // <li><span></span></li>				 			
-// 				 			for (var j = 0; j < checkboxes.length; j++) {
-// 								if(del.getAttribute("value") == checkboxes[j].getAttribute("value1")){
-//  				 					checkboxes[j].checked = false;
-//  				 					deleteAll.remove();
-// 								}	
-// 							}
-// 			 				mspan.innerText = li1.length;
-// 			 			});
+						}						
 					}
-						mspan.innerText = li1.length;		
-				});
 
+					/*------------------------------------------------------------------------------------------------*/
+					/*모달창 span 삭제*/
+					const span1 = document.getElementsByName("span1");
+					for (var i = 0; i < span1.length; i++) {
+					span1[i].addEventListener("click", function(e) {
+						const checkboxes = document.getElementsByName("empno");
+						const del = e.target;  // span ("X")
+			 			const deleteAll = del.parentNode; // <li><span></span></li>				 			
+			 			for (var j = 0; j < checkboxes.length; j++) {
+							if(del.getAttribute("value") == checkboxes[j].getAttribute("value1")){
+				 					checkboxes[j].checked = false;
+				 					deleteAll.remove();
+							}	
+						}
+			 				const li1 = document.getElementsByName("li1");
+							num = li1.length;
+							mspan.innerText = num;
+						});
+					}
+					/*------------------------------------------------------------------------------------------------*/
+					const li1 = document.getElementsByName("li1");
+					num = li1.length;
+					mspan.innerText = num;					
+				});
 		
-// 		/*검색 이름 추가*/
-		  let info = document.getElementsByClassName("info");
-		  let name = document.getElementsByClassName("name");
-		  
-		  for(let i=0;i<name.length;i++){
-			  mspan.innerText = "0";
-			  name[i].addEventListener("click", function(e) {	
-		  			const li = document.createElement("li");
-		  			const mspan = document.getElementById("mspan");
-		  			const span = document.createElement("span");
-		  			const name1 = name[i].getAttribute("value1");
-					const edepartment = name[i].getAttribute("value2");
-		  			
-		  			span.innerText = "X";
-					span.setAttribute("value", name1);
-					span.setAttribute("name", "span2");
-					span.setAttribute("id", "span2");
+		/*------------------------------------------------------------------------------------------------*/
+		/*검색 이름 추가*/
+			let name = document.getElementsByClassName("name");
+			
+			for (var i = 1; i < name.length; i++) {
+				document.getElementById("name"+i).addEventListener("click",function(e){
+					const ul = document.getElementById("ul");
+					const li = document.createElement("li");
+					const name1 = e.target.getAttribute("value1");
+					const department1 = e.target.getAttribute("value2");
+					const empno1 = e.target.getAttribute("value3");
+					li.innerText = name1 + "(" + department1 + ")";
+					li.setAttribute("name", "li1");
+					li.setAttribute("value", name1);
 					
-					li.innerText = name1 + "(" + edepartment + ")";
-					li.setAttribute("name", "li1");					
-				  	li.append(span);
-       	  			ul.append(li);
-       	  			mspan.innerText = li1.length;
-		  			
-					/*추가 하면 체크박스 눌리기*/
-				 	for (var j = 0; j < checkboxes.length; j++) {
-						if(span.getAttribute("value") == checkboxes[j].getAttribute("value1")){
- 				 		checkboxes[j].checked = true;
+// 					const form1 = document.getElementById("form1");
+
+					const input = document.createElement("input");
+				    input.setAttribute("type","checkbox");
+				    input.setAttribute("name","empno");
+				    input.setAttribute("value",empno1);
+				    input.style.display='none';
+					input.checked=true;
+					
+					const span = document.createElement("span");
+					span.innerText = "X";
+					span.setAttribute("value", name1);
+					span.setAttribute("name", "span1");
+					span.setAttribute("value1", empno1);
+					li.append(span);
+					li.append(input);
+					ul.append(li);
+					
+					const checkboxes = document.getElementsByName("empno");
+					for (var j = 0; j < checkboxes.length; j++) {
+					if(span.getAttribute("value") == checkboxes[j].getAttribute("value1")){
+		 					checkboxes[j].checked = true;
+					}
+					
+				}
+					
+				/*------------------------------------------------------------------------------------------------*/
+				/*모달창 span 삭제*/
+					const span1 = document.getElementsByName("span1");
+				for (var i = 0; i < span1.length; i++) {
+				span1[i].addEventListener("click", function(e) {
+					const checkboxes = document.getElementsByName("empno");
+					const del = e.target;  // span ("X")
+		 			const deleteAll = del.parentNode; // <li><span></span></li>				 			
+		 			for (var j = 0; j < checkboxes.length; j++) {
+						if(del.getAttribute("value") == checkboxes[j].getAttribute("value1")){
+			 					checkboxes[j].checked = false;
 						}	
 					}
+
+				 	deleteAll.remove();
+		 			const li1 = document.getElementsByName("li1");
+					num = li1.length;
+					mspan.innerText = num;
+					});
+				}
+// 				console.log(arr);
+				/*------------------------------------------------------------------------------------------------*/
 				
-       	  		/*선택 후 div 정리*/
-                 	  document.getElementById("userKeyWord").value="";
-                 	  suggestdiv.style.display = "none";
-      			  	while(document.getElementById("suggest").firstChild)  {
-      				  	document.getElementById("suggest").firstChild.remove();
-      			  	}
-
-			 	mspan.innerText = li1.length;
-
-			  }); // 클릭이벤트			  
-			} // for문
-
+				const li1 = document.getElementsByName("li1");
+				num = li1.length;
+				mspan.innerText = num;
+				
+					/*선택 후 div 정리*/
+              	 document.getElementById("userKeyWord").value="";
+              	 suggestdiv.style.display = "none";
+              	 
+              	 var checkNum = 0;
+              	for (var k = 0; k < num; k++) {
+					if(li1[k].innerText == li.innerText){
+						checkNum ++;
+				}
+		 
+				}
+              	if(checkNum != 1){
+              		li.remove();
+              		const li1 = document.getElementsByName("li1");
+    				num = li1.length;
+    				mspan.innerText = num;
+              	}
+              	
+				});
+			}
 	</script>
 
 </body>

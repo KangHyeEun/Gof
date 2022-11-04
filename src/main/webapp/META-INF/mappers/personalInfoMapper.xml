@@ -63,11 +63,14 @@
 			<if test="password != null and password != ''">
 			password = #{password},  
 			</if>
-			<if test="tel_number != null and tel_number != ''">
-			tel_number = #{tel_number},  
+			<if test="telNumber != null and telNumber != ''">
+			tel_number = #{telNumber},  
 			</if>
-			<if test="phone_number != null and phone_number != ''">
-			phone_number = #{phone_number},  
+			<if test="email != null and email != ''">
+			tel_number = #{email},  
+			</if>
+			<if test="phoneNumber != null and phoneNumber != ''">
+			phone_number = #{phoneNumber},  
 			</if>
 			<if test="address != null and address != ''">
 			address = #{address},  

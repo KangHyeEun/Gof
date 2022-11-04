@@ -83,7 +83,7 @@
 									/*update*/
 									document.getElementById("update"+${i.id}).addEventListener("click", function(){
 										let value = document.getElementById("position"+${i.id}).value;
-										let isUpdate = confirm(" 부서를 "+value+"로 바꾸시겠습니까?");
+										let isUpdate = confirm(" 직책을 "+value+"로 바꾸시겠습니까?");
 										if(isUpdate){
 											alert("성공적으로 바뀌었습니다.");				
 											location.href = "${pageContext.request.contextPath}/admin/updatePosition/"+${i.id}+"?position="+value;
@@ -91,9 +91,9 @@
 									});
 									/*delete*/
 									document.getElementById("del"+${i.id}).addEventListener("click", function(){
-										let isDelete = confirm("해당 부서를 지우시겠습니까?");
+										let isDelete = confirm("해당 직책을 지우시겠습니까?");
 										if(isDelete){
-											alert("해당 부서가 성공적으로 지워졌습니다.");				
+											alert("해당 직책이 성공적으로 지워졌습니다.");				
 											location.href = "${pageContext.request.contextPath}/admin/deletePosition?id="+${i.id};
 										}
 									});
