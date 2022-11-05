@@ -215,4 +215,13 @@ public class AdminController {
 		Eservice.deletePosition(vo);
 		return "redirect:/admin/position";
 	}
+	
+	
+	/*가빈 카카오톡 보내기*/
+
+	@GetMapping("admin/kakaoSend")
+	public String kakaoSend() {
+		return "admin/kakaoSend";
+	}
+	
 }

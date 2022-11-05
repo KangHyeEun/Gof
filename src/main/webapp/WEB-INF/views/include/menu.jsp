@@ -74,6 +74,7 @@
                                 <li><a href="${pageContext.request.contextPath}/holidayAdmin?page=1">휴가 관리</a></li>
                                 <li><a href="${pageContext.request.contextPath}/admin/department">부서 관리</a></li>
                                 <li><a href="${pageContext.request.contextPath}/admin/position">직책 관리</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin/kakaoSend">카카오톡 공지</a></li>
                             </ul>
                         </li>
                     </ul>
