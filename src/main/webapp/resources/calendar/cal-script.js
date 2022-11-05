@@ -95,7 +95,10 @@ const renderCalendar = () => {
     let nextClass;
     let holidayStyle;
 
-//style="color: blue;"
+//style="color:red;"
+//style="color:#ff2424;"
+//style="color:blue;"
+//style="color:#008aff;"
 
 // 이전 달 마지막 주 일자 (회색)
     for (let x = firstDayindex; x > 0; x--) {
@@ -113,10 +116,10 @@ const renderCalendar = () => {
 		
 //		일요일이면
 		if(holidayStyle == 0) {
-			days += `<div class="${prevClass} prev-date" style="color:red"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"><span></span></div></div>`;
+			days += `<div class="${prevClass} prev-date" style="color:#ff2424;"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //		토요일이면
 		} else if(holidayStyle == 6) {
-			days += `<div class="${prevClass} prev-date" style="color:blue"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"><span></span></div></div>`;
+			days += `<div class="${prevClass} prev-date" style="color:#008aff;"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //		평일이면
 		} else {
 			days += `<div class="${prevClass} prev-date"><div><div><span>${prevLastDay - x + 1}</span></div></div><div class="overCnt"><span></span></div></div>`;
@@ -137,10 +140,10 @@ const renderCalendar = () => {
 		
 //			일요일이면
 			if(holidayStyle == 0) {
-				days += `<div class="${currentClass} today" style="color:red"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
+				days += `<div class="${currentClass} today" style="color:#ff2424;"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //			토요일이면
 			} else if(holidayStyle == 6) {
-				days += `<div class="${currentClass} today" style="color:blue"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
+				days += `<div class="${currentClass} today" style="color:#008aff;"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //			평일이면
 			} else {
 				days += `<div class="${currentClass} today"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
@@ -153,10 +156,10 @@ const renderCalendar = () => {
 		
 //			일요일이면
 			if(holidayStyle == 0) {
-            	days += `<div class="${currentClass}" style="color:red"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
+            	days += `<div class="${currentClass}" style="color:#ff2424;"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //			토요일이면
 			} else if(holidayStyle == 6) {
-            	days += `<div class="${currentClass}" style="color:blue"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
+            	days += `<div class="${currentClass}" style="color:#008aff;"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //			평일이면
 			} else {
             	days += `<div class="${currentClass}"><div><div><span>${i}</span></div></div><div class="overCnt"><span></span></div></div>`;
@@ -179,10 +182,10 @@ const renderCalendar = () => {
 		
 //		일요일이면
 		if(holidayStyle == 0) {
-        	days += `<div class="${nextClass} next-date" style="color:red"><div><div><span>${j}</span></div></div><div class="overCnt"><span></span></div></div>`;
+        	days += `<div class="${nextClass} next-date" style="color:#ff2424;"><div><div><span>${j}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //		토요일이면
 		} else if(holidayStyle == 6) {
-        	days += `<div class="${nextClass} next-date" style="color:blue"><div><div><span>${j}</span></div></div><div class="overCnt"><span></span></div></div>`;
+        	days += `<div class="${nextClass} next-date" style="color:#008aff;"><div><div><span>${j}</span></div></div><div class="overCnt"><span></span></div></div>`;
 //		평일이면
 		} else {
         	days += `<div class="${nextClass} next-date"><div><div><span>${j}</span></div></div><div class="overCnt"><span></span></div></div>`;
@@ -233,7 +236,8 @@ const renderCalendar = () => {
 	    daysEle.item(index).addEventListener("mousedown", function(_e) {
 //			target : 클릭한 영역의 class
 			targetdaysEle = _e.target.className;
-		    this.style.backgroundColor = "#746bf5";
+//		    this.style.backgroundColor = "#746bf5";
+		    this.style.backgroundColor = "#afdeff";
 	    });
 //		마우스떼기
 		document.addEventListener("mouseup", function(){
@@ -453,16 +457,16 @@ const renderCalendar = () => {
 //				클릭한 곳의 상위 요소로 가서 하위요소의 개수를 구한다 => 클릭한 곳의 일정 개수를 구하기 위함
 //				innerDiv[index].parentElement.children.length (일자 div도 포함되어있어서 1부터 시작)
 				let scheParentToChild = innerDiv[index].parentElement.children;
-				let delBtn = "";
-				delBtn = "×"
+//				let delBtn = "";
+//				delBtn = "×"
 //				일자에 있는 일정들 팝업에 복사
 				for (let index1 = 1; index1 < scheParentToChild.length; index1++) {
-					const innerSpan = document.createElement("span");
-					innerSpan.classList.add("innerScheBtn");
-					innerSpan.innerHTML = delBtn;
+//					const innerSpan = document.createElement("span");
+//					innerSpan.classList.add("innerScheBtn");
+//					innerSpan.innerHTML = delBtn;
 //					element 복제, 하위 요소도 복제하기 위해 true 값 설정
 					childEle = scheParentToChild[index1].cloneNode(true);
-					childEle.append(innerSpan);
+//					childEle.append(innerSpan);
 					childEle.children[0].classList.add("innerSchedule");
 					scheList.append(childEle);
 				}
@@ -649,11 +653,19 @@ const renderCalendar = () => {
 												document.getElementById("calEnd1").value = tempEnd;						
 
 
-
 //												checkbox 정리
 //												---------------------------------------------------------------------
-												if (list[index2].calAllday != 0) document.getElementById("calAllday1").checked = "on";  
-												if (list[index2].calShow != 0) document.getElementById("calShow1").checked = "on";
+//												if (list[index2].calAllday != 0) document.getElementById("calAllday1").checked = "on";
+												if (list[index2].calShow != 0){
+													document.getElementById("calShow1").checked = true;
+												} 
+												
+//												반복일정 값 유무에 의해 종료일 입력방지
+//												---------------------------------------------------------------------
+//												DB에 저장된 값이 0이 아니고 현재 화면에 선택되어져있는 반복일정 값이 "반복"이 아닐때
+												if (list[index2].calRecur != 0 && document.getElementById("recur1").value != "0") {
+													document.getElementById("calEnd1").disabled = "disabled";
+												}
 												
 //												나머지
 //												---------------------------------------------------------------------
@@ -661,6 +673,7 @@ const renderCalendar = () => {
 												document.getElementById("calPlace1").value = list[index2].calPlace;
 												document.getElementById("calContent1").value = list[index2].calContent;
 												document.getElementById("recur1").value = list[index2].calRecur;
+												
 												
 												document.querySelector(".scheUpdate-wrap").style.display = "flex";
 												document.querySelector(".scheInfo-detail-wrap").style.display = "none";
@@ -773,33 +786,34 @@ const renderCalendar = () => {
 						
 						
 //						일정목록 x 버튼 눌렀을때 이벤트
+//						없앴음...
 //	 	---------------------------------------------------------------------
-						scheList.children[index1].children[1].addEventListener("click", function(_e){
-//							idValue : schedule_xx 에서 xx 값 추출 (id값)
-							const idValue = this.previousElementSibling.classList[0].split("_")[1];
-							
-							console.log("일정의 삭제버튼");
-							for (let index2 = 0; index2 < list.length; index2++) {
-//								일정 list 중에서 id를 색인하여 내가 클릭한 일정의 id값(idValue)과 같은지 비교 
-								if (list[index2].calId == idValue) {
-//									내가 클릭한 일정의 작성자와 현재 접속한 유저가 같은지 비교
-									if (list[index2].empno == empno) {
-										if (confirm("정말로 삭제하시겠습니까?")) {
-											location.href = ctx+"/calendar/deleteData/"+list[index2].calId;
-										}
-//										삭제 취소 클릭시 돌아감
-										else {
-											location.href = ctx+"/calendar";
-										}
-									}
-//									해당 글의 작성자가 아닐 경우 권한 없음의 알림창 띄움
-									else {
-										alert("권한이 없습니다.");
-										location.href = ctx+"/calendar";
-									}
-								}
-							}
-						});
+//						scheList.children[index1].children[1].addEventListener("click", function(_e){
+////							idValue : schedule_xx 에서 xx 값 추출 (id값)
+//							const idValue = this.previousElementSibling.classList[0].split("_")[1];
+//							
+//							console.log("일정의 삭제버튼");
+//							for (let index2 = 0; index2 < list.length; index2++) {
+////								일정 list 중에서 id를 색인하여 내가 클릭한 일정의 id값(idValue)과 같은지 비교 
+//								if (list[index2].calId == idValue) {
+////									내가 클릭한 일정의 작성자와 현재 접속한 유저가 같은지 비교
+//									if (list[index2].empno == empno) {
+//										if (confirm("정말로 삭제하시겠습니까?")) {
+//											location.href = ctx+"/calendar/deleteData/"+list[index2].calId;
+//										}
+////										삭제 취소 클릭시 돌아감
+//										else {
+//											location.href = ctx+"/calendar";
+//										}
+//									}
+////									해당 글의 작성자가 아닐 경우 권한 없음의 알림창 띄움
+//									else {
+//										alert("권한이 없습니다.");
+//										location.href = ctx+"/calendar";
+//									}
+//								}
+//							}
+//						});
 //	 	---------------------------------------------------------------------
 						
 						
@@ -1606,7 +1620,6 @@ const prev = document.querySelector(".prev");
 prev.addEventListener("click", () => {
 	date.setDate(1);
     date.setMonth(date.getMonth() - 1);
-    console.log("이전달 : " + date.getMonth());
     renderCalendar();
 });
 
@@ -1631,7 +1644,6 @@ const next = document.querySelector(".next");
 next.addEventListener("click", () => {
 	date.setDate(1);
     date.setMonth(date.getMonth() + 1);
-    console.log("다음달 : " + date.getMonth());
     
 //    현재 년도로부터 30년 후 까지만 사용 가능
 	if((date.getFullYear()) >= (new Date().getFullYear()+30)){

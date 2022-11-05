@@ -50,9 +50,6 @@
                         </div>
 		               	<div class="btnDiv">
 		               		<p id="btnScheAdd" class="btnColor">일정추가</p>
-<!-- 		               		<p id="btnMonth" class="btnClick">월</p> -->
-<!-- 		               		<p id="btnWeek" class="btnColor">주</p> -->
-<!-- 		               		<p id="btnDay" class="btnColor">일</p> -->
 		               	</div>
                     </div>
                     <div class="weekdays">
@@ -81,34 +78,34 @@
 						<form action="" method="post">
 							<div>
 							    <label for="calTitle">제목</label><br>
-							    <input type="text" name="calTitle" id="calTitle">
+							    <input type="text" name="calTitle" id="calTitle" class="preventEnter" required>
 						    </div>
 						    <div>
 							    <label for="calPlace">장소</label><br>
-							    <input type="text" name="calPlace" id="calPlace">
+							    <input type="text" name="calPlace" id="calPlace" class="preventEnter">
 						    </div>
 						    <div>
 							    <label for="calStart">일시</label>
-			    				<select class="recur" id="recur" name="calRecur" onchange="chageSelect()">
+			    				<select class="recur" id="recur" name="calRecur">
 									<option value="0">반복</option>
 									<option value="weekly">매주</option>
 									<option value="monthly">매월</option>
 									<option value="yearly">매년</option>
 								</select>
 							    <br>
-							    <input type="datetime-local" name="calStart" id="calStart">
+							    <input type="datetime-local" name="calStart" id="calStart" class="preventEnter">
 							    <label for="calEnd"> ~ </label>
-							    <input type="datetime-local" name="calEnd" id="calEnd">
+							    <input type="datetime-local" name="calEnd" id="calEnd" class="preventEnter">
 						    </div>
 						    <div>
 							    <label for="calAllday">전체일정</label>
 							    <input type="checkbox" name="calAllday" id="calAllday" value="0">
 							    <label for="calShow">비공개</label>
-							    <input type="checkbox" name="calShow" id="calShow">
+							    <input type="checkbox" name="calShow" id="calShow" class="preventEnter">
 						    </div>
 						    <div>
 							    <label for="calContent">설명</label><br>
-							    <textarea name="calContent" class="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
+							    <textarea name="calContent" class="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요." required></textarea>
 						    </div>
 						    <div class="btn">
 						    	<button id="btn" class="btnColor" type="button">저장</button>
@@ -163,11 +160,11 @@
 						<form action="" method="post">
 							<div>
 							    <label for="calTitle1">제목</label><br>
-							    <input type="text" name="calTitle" id="calTitle1">
+							    <input type="text" name="calTitle" id="calTitle1" class="preventEnter" required>
 						    </div>
 						    <div>
 							    <label for="calPlace1">장소</label><br>
-							    <input type="text" name="calPlace" id="calPlace1">
+							    <input type="text" name="calPlace" id="calPlace1" class="preventEnter">
 						    </div>
 						    <div>
 							    <label for="calStart1">일시</label>
@@ -178,19 +175,19 @@
 									<option value="yearly">매년</option>
 								</select>
 							    <br>
-							    <input type="datetime-local" name="calStart" id="calStart1">
+							    <input type="datetime-local" name="calStart" id="calStart1" class="preventEnter">
 							    <label for="calEnd1"> ~ </label>
-							    <input type="datetime-local" name="calEnd" id="calEnd1">
+							    <input type="datetime-local" name="calEnd" id="calEnd1" class="preventEnter">
 						    </div>
 						    <div>
 							    <label for="calAllday1">전체일정</label>
 							    <input type="checkbox" name="calAllday" id="calAllday1" value="0">
 							    <label for="calShow1">비공개</label>
-							    <input type="checkbox" name="calShow" id="calShow1" value="0">
+							    <input type="checkbox" name="calShow" id="calShow1" value="0" class="preventEnter">
 						    </div>
 						    <div>
 							    <label for="calContent1">설명</label><br>
-							    <textarea name="calContent" class="calContent" id="calContent1" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
+							    <textarea name="calContent" class="calContent" id="calContent1" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요." required></textarea>
 						    </div>
 						    <div class="btn">
 						    	<button id="updateBtn" class="btnColor" type="button">수정</button>
@@ -298,17 +295,46 @@
     <script type="text/javascript">
 //     	일정 등록의 반복 일정 선택시 종료일 입력 방지
 		document.getElementById("recur").addEventListener("change", function(){
-			document.getElementById("calEnd").disabled = "disabled";
+			if (this.value != 0) {
+				document.getElementById("calEnd").disabled = "disabled";
+			}
+			else {
+				document.getElementById("calEnd").disabled = "";
+			}
 		});
 //     	일정 수정의 반복 일정 선택시 종료일 입력 방지
 		document.getElementById("recur1").addEventListener("change", function(){
-			document.getElementById("calEnd1").disabled = "disabled";
+			if (this.value != 0) {
+				document.getElementById("calEnd1").disabled = "disabled";
+			}
+			else {
+				document.getElementById("calEnd1").disabled = "";
+			}
 		});
+// 		종료일 입력방지 상태일때 시작일 수정시 종료일 고정되는 문제 발생
+// 		반복일정 선택 이후 시작일 수정시 종료일도 변경
+		document.getElementById("calStart1").addEventListener("change", function(){
+			document.getElementById("calEnd1").value = this.value;
+		});
+		
+// 		input 태그에서 enter 방지
+		const preventEnter = document.querySelectorAll(".preventEnter");
+		
+		for (let index = 0; index < preventEnter.length; index++) {
+			preventEnter[index].addEventListener("keydown", function(event) {
+				if (event.keyCode === 13) {
+					event.preventDefault();
+				}
+			}, true);
+		}
+		for (let index = 0; index < preventEnter.length; index++) {
+			preventEnter[index].addEventListener("keydown", function(event) {
+				if (event.keyCode === 13) {
+					event.preventDefault();
+				}
+			}, true);
+		}
     </script>
-
-
-<!-- 위의 .js 에서 EL태그 사용이 불가해서 대신 사용해볼까함 -->
-<%--     <jsp:include page="./cal-script.jsp"></jsp:include> --%>
     
 </body>
 </html>

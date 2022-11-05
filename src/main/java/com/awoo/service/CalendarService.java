@@ -58,9 +58,17 @@ public class CalendarService {
 	}
 //	일정 수정
 	public void updateDateMethod(CalendarVO vo, int id, String range) {
+
+		System.out.println("확인 111 ");
+		System.out.println(vo.getCalRecur());
+		System.out.println(vo.getCalStart());
+		System.out.println(vo.getCalEnd());
+		System.out.println(vo.getCalShow());
+		System.out.println("---------------");
+		
 //		종료일 없으면 시작일을 종료일에 대입
 		if (vo.getCalEnd() == null || vo.getCalEnd() == "") {
-			vo.setCalStart(vo.getCalEnd());
+			vo.setCalEnd(vo.getCalStart());
 		}
 //		제목
 		if(vo.getCalTitle() == null || vo.getCalTitle() == "") vo.setCalTitle("제목 없음");
@@ -68,7 +76,7 @@ public class CalendarService {
 		if(vo.getCalContent() == null || vo.getCalContent() == "") vo.setCalContent("내용 없음");
 //		범위일때 전체일정 넣는곳
 //		일시가 범위로 되어있다면 calAllday에 전체일정을 저장
-//		(calRange = 0 이면 범위가 아님, 1이면 범위이자 시작일, 그 외에는 시작일의 id값))
+//		(calRange = 0 이면 범위가 아니고, 1이면 범위이자 시작일, 그 외에는 시작일의 id값))
 		if(vo.getCalRange() != 0 || vo.getCalRange() != 1) {
 			String calStart = vo.getCalStart().split("T")[0];
 			String calEnd = vo.getCalEnd().split("T")[0];
@@ -79,12 +87,25 @@ public class CalendarService {
 			
 			vo.setCalAllday(temp);
 		}
-		if(vo.getCalShow() == null || vo.getCalShow() == "") vo.setCalShow("0");
+		System.out.println("vo.getCalShow() 111");
+		System.out.println(vo.getCalShow());
+		if(vo.getCalShow() == null || vo.getCalShow() == "" || vo.getCalShow() == "0") vo.setCalShow("0");
 		else vo.setCalShow(Integer.toString(vo.getEmpno()));
+		System.out.println("vo.getCalShow() 222");
+		System.out.println(vo.getCalShow());
 		
 		vo.setCalId(id);
 //		일정이 하루에서 범위로 바뀌거나 범위가 바뀌는 경우에는 모두 삭제 후 다시 저장하는 방식
 		deleteDataMethod(vo);
+		
+
+		System.out.println("확인 222 ");
+		System.out.println(vo.getCalRecur());
+		System.out.println(vo.getCalStart());
+		System.out.println(vo.getCalEnd());
+		System.out.println(vo.getCalShow());
+		System.out.println("---------------");
+		
 //		삭제 후 재삽입
 		insertDataMethod(vo);
 		
@@ -107,18 +128,31 @@ public class CalendarService {
 	
 //	일정 생성
 	public void insertDataMethod(CalendarVO vo) {
-//		종료일 없으면 시작일을 종료일에 대입
+
+		System.out.println("확인 333 ");
+		System.out.println(vo.getCalRecur());
+		System.out.println(vo.getCalStart());
+		System.out.println(vo.getCalEnd());
+		System.out.println(vo.getCalShow());
+		System.out.println("---------------");
+		
+//		반복일정 여부가 0이 아닌데 종료일 없으면 시작일을 종료일에 대입
 		if (vo.getCalRecur() != "0") {
 			String[] tempChange = vo.getCalStart().split("-");
 			String tempDate = "";
-			if (vo.getCalEnd() == null || vo.getCalEnd() == "") {
-//				반복일정 선택시 종료일을 +5년으로 잡는다
-				tempDate = "" + (Integer.parseInt(tempChange[0]) + 5)
-						+ "-" + tempChange[1] + "-" + tempChange[2];
-				
-				vo.setCalEnd(tempDate);
-			}
+//			반복일정 선택시 종료일을 +5년으로 잡는다
+			tempDate = "" + (Integer.parseInt(tempChange[0]) + 5)
+					+ "-" + tempChange[1] + "-" + tempChange[2];
+			
+			vo.setCalEnd(tempDate);
 		}
+
+		System.out.println("확인 444 ");
+		System.out.println(vo.getCalRecur());
+		System.out.println(vo.getCalStart());
+		System.out.println(vo.getCalEnd());
+		System.out.println(vo.getCalShow());
+		System.out.println("---------------");
 		
 		String calStart = vo.getCalStart().split("T")[0];
 		String calEnd = vo.getCalEnd().split("T")[0];
@@ -140,7 +174,7 @@ public class CalendarService {
 		}
 		if(vo.getCalAllday() == null || vo.getCalAllday() == "") vo.setCalAllday("0");
 //		비공개
-		if(vo.getCalShow() == null || vo.getCalShow() == "") vo.setCalShow("0");
+		if(vo.getCalShow() == null || vo.getCalShow() == "" || vo.getCalShow() == "0") vo.setCalShow("0");
 		else vo.setCalShow(Integer.toString(vo.getEmpno()));
 
 		int calStartYear = Integer.parseInt(calStart.split("-")[0]);
@@ -176,9 +210,16 @@ public class CalendarService {
 //		일정이 범위일때 시작일 기준으로 넣었던 일정의 id 값을 가지고 나머지 일정에 있는 cal_range 에 등륵한다.
 		int cal_range = vo.getCalId();
 		
+
+		System.out.println("확인 555 ");
+		System.out.println(vo.getCalRecur());
+		System.out.println(vo.getCalStart());
+		System.out.println(vo.getCalEnd());
+		System.out.println(vo.getCalShow());
+		System.out.println("---------------");
 		
-//		위에서 날짜범위 확인후 1을 받았을 경우, 일시가 범위일때
-		if (vo.getCalRange() == 1) {
+//		일시가 범위이거나 반복일때
+		if (vo.getCalRange() != 0 || vo.getCalRecur() != "0") {
 //			일정이 범위일때 시작일을 제외한 나머지 일정을 넣기위한 함수
 			insertRangeDateMethod(vo, calStartYear, calStartMonth, calStartDay, calStartTime,
 								cal_range, calEndYear, calEndMonth, calEndDay, calEndTime);
@@ -207,25 +248,19 @@ public class CalendarService {
 		String startDate = dateFormat.format(cal.getTime());
 		
 		int i = 0;
+
+		System.out.println("확인 666 ");
+		System.out.println(vo.getCalRecur());
+		System.out.println(vo.getCalStart());
+		System.out.println(vo.getCalEnd());
+		System.out.println(vo.getCalShow());
+		System.out.println("---------------");
 		
 		while(!startDate.equals(endDate)){ //다르다면 실행, 동일 하다면 빠져나감
 			if(i==0) { //최초 실행 출력, 화면단이랑은 상관없는 로직
 				System.out.println(dateFormat.format(cal.getTime()));
 			}
-
-			System.out.println("vo.getCalRecur() 333 ");
-			System.out.println(vo.getCalRecur());
-			System.out.println(vo.getCalStart());
-			System.out.println(vo.getCalEnd());
-			System.out.println(calStartYear);
-			System.out.println(calStartYear+30);
-			System.out.println(calEndYear);
-			System.out.println(vo.getCalRecur().equals("weekly"));
-			System.out.println();
-			System.out.println("---------------");
-			
 			if (vo.getCalRecur().equals("weekly") && calEndYear > Integer.parseInt(startDate.split("-")[0])) {
-				System.out.println("실행확인 111");
 				cal.add(Calendar.DATE, 7); //7일 더해줌
 			}
 			else if (vo.getCalRecur().equals("monthly")) {
@@ -235,7 +270,6 @@ public class CalendarService {
 				cal.add(Calendar.YEAR, 1); //1달 더해줌
 			}
 			else {
-				System.out.println("실행확인 222");
 				cal.add(Calendar.DATE, 1); //1일 더해줌
 			}
 //			cal.add(Calendar.MONTH, 1); //1달 더해줌
