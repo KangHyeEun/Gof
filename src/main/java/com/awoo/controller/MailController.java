@@ -65,10 +65,10 @@ public class MailController {
 
 
 		//google
-//		String addr = "awoogof@gmail.com";
+		String addr = "awoogof@gmail.com";
 		
 		//naver
-		String addr = "yegabin14@naver.com";
+//		String addr = "yegabin14@naver.com";
 		
 		
 		List<MailVO> mailList = new ArrayList<MailVO>(); 

@@ -48,7 +48,7 @@
                     </ul>
 
                     <ul onclick="show_sub2()" class="dropmenu2">
-                        <li>쪽지</li>
+                        <li>메신저</li>
                         <li class="drop_down_pointer"><span class="menu-up2 btn-display">▲</span><span
                                 class="menu-down2">▼</span></li>
                         <li>

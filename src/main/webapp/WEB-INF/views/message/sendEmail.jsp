@@ -345,7 +345,7 @@
 						</table>
 						
 						<div class="sub-info-container">
-							<div class="approvalDate">결재일: <span id="pop-sendDate"></span></div>
+							<div class="approvalDate">보낸 날짜: <span id="pop-sendDate"></span></div>
 							<div id="reject" class="reject">공개여부: <span id="pop-showHide"></span></div>
 						</div>
 						<button type="button" id="btn-check">확인</button>
