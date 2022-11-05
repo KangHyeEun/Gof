@@ -16,7 +16,8 @@
     width: 92%;
 	height: 81vh;
     background-color: #ffffff;
-    box-shadow: 0 .5rem 3rem rgba(0,0,0,0.4);
+/*     box-shadow: 0 .5rem 3rem rgba(0,0,0,0.4); */
+    box-shadow: 0px 3px 1rem rgb(0 0 0 / 40%);;
 }
 .calendar div, .calendar i, .calendar p, .calendar span {
 	user-select: none;
@@ -24,8 +25,11 @@
 .month {
     width: 100%;
     height: 12%;
-    background-color: #272454;
-    color: #ffffff;
+/*     background-color: #272454; */
+
+    background-color: #ffffff;
+    color:black;
+/*     color: #ffffff; */
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -41,6 +45,7 @@
     font-size: 16px;
 }
 .date > h1 {
+	color: black;
 	font-size: 26px;
 }
 .btnMove, .btnDiv{
@@ -54,7 +59,9 @@
 .fas {
 	flex:0.2;
 	border: 1px solid white;
-    font-size: 30px;
+/*     font-size: 30px; */
+    font-size: 20px;
+    padding: 5px;
 }
 .btnMove > i:first-child {
 	border-top-left-radius: 5px;
@@ -68,9 +75,14 @@
 .date {
 	flex: 3;
 }
+.todayMove{
+	color: #626262;
+    font-size: 0.9em;	
+}
+
 .todayMove:hover {
     cursor: pointer;
-    color: #746bf5;
+    color: #008aff;
 }
 
 .btnDiv {
@@ -79,27 +91,42 @@
 	align-items: center;
 }
 .btnDiv > p {
-	border: 1px solid white;
-	width: 30px;
-	height: 30px;
-	cursor: pointer;
+/* 	border: 1px solid white; */
+    border: 1px solid #dbdbdb;
+    cursor: pointer;
+    letter-spacing: 1px; 
 }
-.btnDiv > p:first-child {
-	width: 70px;
+ .btnDiv > p:first-child { 
+	width: 85px;
+    /* width: 137px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 33px;
+    font-size: 0.9em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.btnDiv > p:first-child > img{
+	width: 30px;
 }
 .btnColor {
-	box-shadow: inset 1px 1px 5px white;
+/* 	box-shadow: inset 1px 1px 5px white; */
+	box-shadow: 0px 1px 1px #bfbfbf;
+    background: #f5f5f5;
+    border: 1px solid #e7e7e7;
 }
 .btnClick {
 	box-shadow: inset 2px 2px 5px black;
 }
 .btnDiv > p:first-child {
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
+/* 	border-top-left-radius: 5px; */
+/* 	border-bottom-left-radius: 5px; */
+	border-radius: 5px;
 }
 .btnDiv > p:last-child {
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
+/* 	border-top-right-radius: 5px; */
+/* 	border-bottom-right-radius: 5px; */
 }
 
 .prev, .next, .todayMove, .prevs, .nexts {
@@ -119,7 +146,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    font-size: 0.9em;
+    border: 1px solid #dfdfdf;
+/*     text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5); */
 }
 .days {
     width: 100%;
@@ -133,9 +163,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
-    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+    border-right: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+/*     text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5); */
     transition: background-color 0.2s;
 }
 /* 사용자 에이전트 스타일시트를 막기 위함 */
@@ -164,11 +194,20 @@
 	text-overflow: ellipsis;	/* ... 만들기 */
 	white-space: nowrap;		/* 아래줄로 내려가는 것을 막기위해 */
 	word-break: break-all;
+	
+	font-size: 0.8em;
+}
+.days > div > div:first-child > div > span:not(.days > div > div:first-child > div:first-child > span):hover {
+	background-color: #359ff9;
+    color: white;
+    border-radius: 7px;
 }
 .days > div:hover:not(.today) {
-	background-color: #a7a4bf;
-    border-color: black;
+/* 	background-color: #a7a4bf; */
+	background-color: #eeeeee87;
+/*     border-color: #7e7e7e; */
     cursor: pointer;
+    box-shadow: 1px 1px 2px #9b9b9b;
 }
 .prev-date,
 .next-date{
@@ -176,7 +215,8 @@
 }
 .today {
 	cursor: pointer;
-    background-color: #272454;
+/*     background-color: #272454; */
+    background-color: #eeeeee;
     color: #ffffff;
 }
 .days div:nth-child(7),.days div:nth-child(14),.days div:nth-child(21),
@@ -247,8 +287,21 @@
 	margin-top: 10px;
 }
 input[type="text"] {
-	width: 78%;
+    border-radius: 3px;
+    border: 1px solid #a3a3a3;
+    width: 100%;
+    height: 22px;
+	
 }
+#calStart, #calEnd {
+    width: 47.4%;
+    text-align: center;
+    height: 23px;
+    border: 1px solid #a3a3a3;
+    margin-top: 5px;
+    border-radius: 3px;
+}
+
 .schedule > div > form > div {
 	padding: 5px 0;
 }
@@ -260,6 +313,10 @@ input[type="text"] {
 	resize: none;
 	padding: 10px;
 }
+.calContent{
+	border:1px solid #a3a3a3;
+	border-radius: 3px;
+}
 .schedule > div > form > div:last-child {
     display: flex;
     justify-content: center;
@@ -268,7 +325,7 @@ input[type="text"] {
 .schedule > div > form > div > button:first-child {
     width: 100%;
     height: 40px;
-    background-color: #272454;
+    background-color: #359ff9;
     color: white;
     border: none;
     border-radius: 10px;
@@ -281,10 +338,15 @@ input[type="text"] {
 	cursor: pointer;
 }
 .btnColor:hover{
-	background-color: #319af3;
+	background-color: #818181;
+    color: white;
+    border: 1px solid #7a7a7a;
 }
 .recur {
 	margin-left: 5px;
+    border: 0px;
+    width: 70px;
+    text-align: center;
 }
 
 input[name="calAllday"], label[for="calAllday"], label[for="calAllday1"] {
@@ -339,16 +401,27 @@ input[name="calAllday"], label[for="calAllday"], label[for="calAllday1"] {
 	overflow: hidden;
 	white-space: nowrap;
 	cursor: pointer;
+	width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.schedule-list > div > span{
+	text-align:center;
 }
 .schedule-list > div > span:hover {
-	display: inline-block;
-	border-bottom: 1px solid black;
+    background-color: #359ff9;
+    color: white;
+    border-radius: 7px;
 }
 
 .schedule-list > div > span:last-child {
 	margin-left: 5px;
 }
-
+.innerSchedule{
+	width: 85%;
+	font-size:0.9em;
+}
 
 /* ============================================ */
 /* .schedule-detail */
@@ -418,7 +491,7 @@ input[name="calAllday"], label[for="calAllday"], label[for="calAllday1"] {
 .scheInfo-btn > a {
 	width: 48%;
     height: 40px;
-    background-color: #272454;
+    background-color: #359ff9;
     color: white;
     border: none;
     border-radius: 10px;
@@ -430,7 +503,9 @@ input[name="calAllday"], label[for="calAllday"], label[for="calAllday1"] {
 	margin-top: 20px;
 	cursor: pointer;
 }
-
+.scheInfo-btn > a:hover{
+	background-color:#296fab;
+}
 /* ============================================ */
 /* .scheUpdate */
 /* ============================================ */
