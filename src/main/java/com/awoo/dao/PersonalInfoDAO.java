@@ -25,8 +25,6 @@ public interface PersonalInfoDAO {
 
 	public List<InfoVO> selectDetail(Map<String,String> map);
 	
-	public List<InfoVO> selectInfoJY(InfoVO vo); //지영내정보데이터출력
-	
 
 	/*test*/
 	public PersonalInfoVO selectPerPro(int empno);

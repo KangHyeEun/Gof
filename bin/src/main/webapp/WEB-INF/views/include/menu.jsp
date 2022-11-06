@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/menu/default.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/menu/default.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&display=swap" rel="stylesheet">
     
     <style>
@@ -16,7 +16,7 @@
                     </ul>
 
                     <ul class="menu">
-                        <li><a href="#">내 정보</a></li>
+                        <li><a href="${pageContext.request.contextPath}/Profile?empno=${personalInfoVO.empno}">내 정보</a></li>
                     </ul>
 
                     <ul onclick="show_sub()" class="dropmenu">
@@ -44,7 +44,7 @@
                     </ul>
 
                     <ul class="menu">
-                        <li><a href="${pageContext.request.contextPath}//orgChart?page=1">조직도</a></li>
+                        <li><a href="${pageContext.request.contextPath}//orgChart?page=1">직원 현황</a></li>
                     </ul>
 
                     <ul onclick="show_sub2()" class="dropmenu2">
@@ -55,6 +55,7 @@
                             <ul class="sub2">
                                 <li><a href="${pageContext.request.contextPath}/ReceivedMessage?page=1&&name=0&&year=0&&month=0">받은 쪽지함</a></li>
                                 <li><a href="${pageContext.request.contextPath}/SendMessage?page=1&&name=0&&year=0&&month=0">보낸 쪽지함</a></li>
+                                <li><a href="${pageContext.request.contextPath}/SendEmail">보낸 쪽지함</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -71,6 +72,8 @@
                             <ul class="sub3">
                                 <li><a href="${pageContext.request.contextPath}/admin?page=1">인사 관리</a></li>
                                 <li><a href="${pageContext.request.contextPath}/holidayAdmin?page=1">휴가 관리</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin/department">부서 관리</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin/position">직책 관리</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -80,6 +83,6 @@
                 </div>
             </nav>
     
-    <script src="${pageContext.request.contextPath}/menu/dropDown.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/menu/dropDown.js"></script>
 
 

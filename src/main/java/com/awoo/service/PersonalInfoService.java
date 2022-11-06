@@ -126,15 +126,7 @@ public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
 		model.addAttribute("info",dao.selectInfo(vo));
 	}
 	
-	
-	//지영내정보데이터출력
-	public void mySelectInfo(InfoVO vo, Model model) {
-		List<InfoVO> fvo = dao.selectInfoJY(vo);
-		System.out.println(fvo);		
-		model.addAttribute("myInfo", fvo);
-	}
-	
-	
+		
 	
 //	test
 	public void selectPerPro(int empno, Model model) {

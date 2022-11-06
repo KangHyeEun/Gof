@@ -142,7 +142,7 @@
 	                    </ul>
 	                </div>
 	                <div class="scheInfo-btn">
-	                    <a href="${pageContext.request.contextPath}/logout">수정</a>
+	                    <a>수정</a>
 	                    <a>삭제</a>
 	                </div>
 		        </div>
@@ -157,34 +157,34 @@
 					<div>
 						<form action="" method="post">
 							<div>
-							    <label for="calTitle">제목</label><br>
-							    <input type="text" name="calTitle" id="calTitle">
+							    <label for="calTitle1">제목</label><br>
+							    <input type="text" name="calTitle" id="calTitle1">
 						    </div>
 						    <div>
-							    <label for="calPlace">장소</label><br>
-							    <input type="text" name="calPlace" id="calPlace">
+							    <label for="calPlace1">장소</label><br>
+							    <input type="text" name="calPlace" id="calPlace1">
 						    </div>
 						    <div>
-							    <label for="calStart">일시</label><br>
-							    <input type="datetime-local" name="calStart" id="calStart">
-							    <label for="calEnd"> ~ </label>
-							    <input type="datetime-local" name="calEnd" id="calEnd">
+							    <label for="calStart1">일시</label><br>
+							    <input type="datetime-local" name="calStart" id="calStart1">
+							    <label for="calEnd1"> ~ </label>
+							    <input type="datetime-local" name="calEnd" id="calEnd1">
 						    </div>
 						    <div>
-							    <label for="calAllday">종일</label>
-							    <input type="checkbox" name="calAllday" id="calAllday" value="0">
-							    <label for="calShow">비공개</label>
-							    <input type="checkbox" name="calShow" id="calShow" value="0">
-							    <label for="calNotice">공지</label>
-							    <input type="checkbox" name="calNotice" id="calNotice" value="0">
+							    <label for="calAllday1">종일</label>
+							    <input type="checkbox" name="calAllday" id="calAllday1" value="0">
+							    <label for="calShow1">비공개</label>
+							    <input type="checkbox" name="calShow" id="calShow1" value="0">
+							    <label for="calNotice1">공지</label>
+							    <input type="checkbox" name="calNotice" id="calNotice1" value="0">
 						    </div>
 						    <div>
-							    <label for="calContent">설명</label><br>
-							    <textarea name="calContent" class="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
+							    <label for="calContent1">설명</label><br>
+							    <textarea name="calContent" class="calContent" id="calContent1" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요."></textarea>
 						    </div>
 						    <div class="btn">
-						    	<button id="Updatebtn" class="btnColor" type="button">수정</button>
-						    	<button id="UpdateRealBtn" class="displayNone" type="submit">버튼</button>
+						    	<button id="updateBtn" class="btnColor" type="button">수정</button>
+						    	<button id="updateRealBtn" class="displayNone" type="submit">버튼</button>
 						    </div>
 						</form>
 					</div>
@@ -238,9 +238,17 @@
 			document.querySelector(".scheInfo-detail-wrap").style.display = "none";
 		});
 		
+//     	일정 수정 팝업
+    	const updateA = document.querySelector(".scheUpdate a");
+//     	닫기(x표시) 클릭시 none 처리
+    	updateA.addEventListener("click", function(){
+			document.querySelector(".scheUpdate-wrap").style.display = "none";
+		});
+		
 		const scheWrapEle = document.querySelector(".schedule-wrap");
 		const scheInfoWrapEle = document.querySelector(".schedule-info-wrap");
 		const InfoDetailWrapEle = document.querySelector(".scheInfo-detail-wrap");
+		const scheUpdateWrapEle = document.querySelector(".scheUpdate-wrap");
 		
 // 		최종적으로 적용된 CSS를 모두 불러올수있는 메서드
 // 		window.getComputedStyle(element)
@@ -253,13 +261,21 @@
     			const scheInfoWrap = window.getComputedStyle(scheInfoWrapEle);
 //     			일정 상세목록 팝업의 최종 속성 (getComputedStyle)
     			const InfoDetailWrap = window.getComputedStyle(InfoDetailWrapEle);
+//     			일정 수정
+    			const scheUpdateWrap = window.getComputedStyle(scheUpdateWrapEle);
     			
 //     			일정추가 팝업이 보이는 상태일떄
     			if (scheWrap.display == "flex") {
     				scheWrapEle.style.display = "none";
     			}
+    			
+//     			일정 수정만 보이는 상태일때
+    			if (scheUpdateWrap.display == "flex" && InfoDetailWrap.display == "none") {
+    				scheUpdateWrapEle.style.display = "none";
+					InfoDetailWrapEle.style.display = "flex";
+    			}
 // 				일정 상세목록 팝업만 보이는 상태일때
-				if (scheInfoWrap.display == "none" && InfoDetailWrap.display == "flex") {
+				else if (scheInfoWrap.display == "none" && InfoDetailWrap.display == "flex") {
 					InfoDetailWrapEle.style.display = "none";
 					scheInfoWrapEle.style.display = "block";
 				}

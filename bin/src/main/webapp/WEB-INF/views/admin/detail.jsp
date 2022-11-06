@@ -45,13 +45,23 @@
 							<p>⏏홈>관리자>인사관리>직원 상세 정보</p>
 						</div>
 						<form action="${pageContext.request.contextPath}/admin/updateData"
-							class="form1" method="get" enctype="multipart/form-data">
+							class="form1" method="post" enctype="multipart/form-data">
 							<input name="page" value="1" style="display: none;" />
 							<div class="personal-wrap">
 								<div class="prodiv">
-									<img id="showimg" 
-										src="http://localhost:8080/E:/sample/kk.jpg">
-									<label for="proimg" id="img">사진등록</label><input type="file"
+								<c:choose>
+									<c:when test="${!empty fileList}">
+										<c:forEach var="img" items="${fileList}">
+											<img id="showimg" 
+												src="${pageContext.request.contextPath}/upload/${img.fileName}">
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<img id="showimg"
+										src="${pageContext.request.contextPath}/upload/user.png">
+									</c:otherwise>
+								</c:choose>
+									<label for="proimg" id="img">사진수정</label><input type="file"
 										name="proimg" id="proimg" accept="image/*" multiple>
 								</div>
 								<div id="personal">
@@ -288,27 +298,6 @@
             fileReader.onload = function(){
                 document.getElementById("showimg").src = fileReader.result;
             }
-            
-         	// formData 를 통해 데이터를 보낼 양식 설정
-        	const formData = new FormData();
-        	// MediaFile input = file 태트 엘리먼트를 선언       	
-        	const inputFiles = document.getElementById("proimg");
-        	// inputFiles에서 파일에 대한 정보들을 전부 가져와 변수에 저장
-        	let files = inputFiles.files;
-        	// 어쩐 값이 오는지 임시 출력
-    		console.log(files);
-        	
-    		// files의 정보를 formData에 담기
-    		for (const file of files) {
-    			formData.append("uploadFile", file);
-    		}
-    		
-     		//fetch를 통해 formData 전송
-    		fetch("${pageContext.request.contextPath}/admin/file",{
-    			method : "POST",
-    			body : formData})
-    		.then(reponse => console.log(response))
-    		.catch(error => console.log(error));
         });
 		
 		/*라디오버튼 선택-------------------------------------------------------------------------------------------------------------------*/

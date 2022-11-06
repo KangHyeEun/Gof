@@ -91,25 +91,25 @@
 	</update>
 
 <!-- 파일 업로드 -->
-	<insert id="insertBBSFile" parameterType="FileVO">
+	<insert id="insertBBSFile" parameterType="BBSFileVO">
 		insert into bbs_uploadfile(bbs_id, servername, localname)
 		values(#{bbsId}, #{servername}, #{localname})
 	</insert>
 	
-	<select id="selectBBSFile" parameterType="FileVO" resultType="FileVO">
+	<select id="selectBBSFile" parameterType="BBSFileVO" resultType="BBSFileVO">
 		select id, bbs_id, localname, servername
 		from bbs_uploadfile
 		where bbs_id = #{bbsId}
 	</select>
 	
-	<delete id="deleteBBSFile" parameterType="FileVO">
+	<delete id="deleteBBSFile" parameterType="BBSFileVO">
 		delete from bbs_uploadfile
 		<where>
 			<choose>
 				<when test="id != 0">
 					and id = #{id}
 				</when>
-				<when test="bbs_id != 0">
+				<when test="bbsId != 0">
 					and bbs_id = #{bbsId}
 				</when>
 			</choose>

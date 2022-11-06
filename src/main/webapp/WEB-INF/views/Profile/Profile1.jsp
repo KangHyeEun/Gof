@@ -52,128 +52,138 @@
 								<h3>${info.name}님의 상세정보</h3>
 								<p>⏏홈>내 정보>나의 상세정보</p>
 							</div>
-
-							<div class="personal-wrap">
-								<div class="prodiv">
+							<form action="${pageContext.request.contextPath}/Profile/updateData"
+								class="form1" method="post" enctype="multipart/form-data">
+								<input name="page" value="1" style="display: none;" />
+								<div class="personal-wrap">
+									<div class="prodiv">
 									<c:choose>
 										<c:when test="${!empty fileList}">
 											<c:forEach var="img" items="${fileList}">
-												<img id="showimg"
+												<img id="showimg" 
 													src="${pageContext.request.contextPath}/upload/${img.fileName}">
 											</c:forEach>
 										</c:when>
 										<c:otherwise>
 											<img id="showimg"
-												src="${pageContext.request.contextPath}/upload/user.png">
+											src="${pageContext.request.contextPath}/upload/user.png">
 										</c:otherwise>
 									</c:choose>
-									<label for="proimg" id="img">사진등록</label><input type="file"
-										name="proimg" id="proimg" accept="image/*" multiple>
+										<label for="proimg" id="img">사진수정</label><input type="file"
+											name="proimg" id="proimg" accept="image/*">
+									</div>
+									<div id="personal">
+										<table>
+											<tr>
+												<td class="label">이름<span></span></td>
+												<td>${info.name}</td>
+	
+												<td class="label">성별<span></span></td>
+												<td>${info.gender}</td>
+											</tr>
+	
+											<tr>
+												<td class="label">생년월일<span></span></td>
+												<td colspan='3'>${info.birthday}</td>
+											</tr>
+											<tr>
+												<td class="label">이메일<span></span></td>
+												<td colspan='3'><input type="text" name="email_id"
+													id="email_id" value="${info.emailf}" required> @ <input
+													type="text" name="email_domain" id="email_domain"
+													value="${info.emails}" required /> <select class="select"
+													id="email_select" required>
+														<option value=" ">직접입력</option>
+														<option value="naver.com">naver.com</option>
+														<option value="gmail.com">gmail.com</option>
+														<option value="hanmail.net">hanmail.net</option>
+														<option value="hotmail.com">hotmail.com</option>
+														<option value="korea.com">korea.com</option>
+														<option value="nate.com">nate.com</option>
+														<option value="yahoo.com">yahoo.com</option>
+												</select></td>
+											</tr>
+											<tr>
+												<td id="noB" class="label">사원번호<span></span></td>
+												<td id="noB">${info.empno}</td>
+												<td id="noB" class="label">비밀번호<span></span></td>
+												<td id="noB"><input type="password" name="password"
+													id="password" value="${info.password}"></td>
+											</tr>
+										</table>
+									</div>
 								</div>
-								<div id="personal">
+								<div id="employee" style="width: 100%;">
 									<table>
 										<tr>
-											<td class="label">이름<span></span></td>
-											<td>${info.name}</td>
-
-											<td class="label">성별<span></span></td>
-											<td>${info.gender}</td>
-										</tr>
-
-										<tr>
-											<td class="label">생년월일<span></span></td>
-											<td colspan='3'>${info.birthday}</td>
+											<td class="label">부서</td>
+											<td>${info.edepartment}</td>
+											<td class="label">직책<span></span></td>
+											<td>${info.eposition}</td>
+	
 										</tr>
 										<tr>
-											<td class="label">이메일<span></span></td>
-											<td colspan='3'><input type="text" name="email_id"
-												id="email_id" value="${email_id}" required> @ <input
-												type="text" name="email_domain" id="email_domain"
-												value="${email_domain}" required /> <select class="select"
-												id="email_select" required>
-													<option value=" ">직접입력</option>
-													<option value="naver.com">naver.com</option>
-													<option value="gmail.com">gmail.com</option>
-													<option value="hanmail.net">hanmail.net</option>
-													<option value="hotmail.com">hotmail.com</option>
-													<option value="korea.com">korea.com</option>
-													<option value="nate.com">nate.com</option>
-													<option value="yahoo.com">yahoo.com</option>
-											</select></td>
+											<td class="label">고용 형태<span></span></td>
+											<td>${info.ehiredType}</td>
+											<td class="label">총 연차 수<span></span></td>
+											<td>${info.totalHoliday}</td>
+											<!--<td class="label">관리자 여부</td>
+											<td><input type="checkbox" name="check_admin"
+												id="check_admin"></td>-->
 										</tr>
 										<tr>
-											<td id="noB" class="label">사원번호<span></span></td>
-											<td id="noB">${info.empno}</td>
-											<td id="noB" class="label">비밀번호<span></span></td>
-											<td id="noB"><input type="password" name="password"
-												id="password" value="${info.password}" readonly></td>
+											<td class="label">입사일<span></span></td>
+											<td>${info.ehiredDate}</td>
+											<td class="label">재직 상태<span></span></td>
+											<td>${info.estatus}</td>
+										<tr>
+											<td class="label">전화번호</td>
+											<td colspan='1'><input type="number" name="telNumber"
+												id="telNumber" placeholder="번호만 입력해 주세요"
+												value="${info.telNumber}"></td>
+											<td class="label">핸드폰<span></span></td>
+											<td colspan='3'><input type="number" name="phoneNumber"
+												id="phoneNumber" required placeholder="번호만 입력해 주세요"
+												value="${info.phoneNumber}"></td>
+										</tr>
+										<tr>
+											<td id="noB" class="label">주소</td>
+											<td colspan='5'>
+												<div style="display: flex; flex-direction: row;">
+													<input type="text" id="addre" value="${info.address}"
+														style="width: 100%" />
+													<div style="display: none;" id="addresszip"
+														style="display: flex; flex-direction: row;">
+														<input type="text" name="postcode" id="postcode"
+															placeholder="우편번호"> <input type="text"
+															name="address" id="address" placeholder="주소"> <input
+															type="text" name="detailAddress" id="detailAddress"
+															placeholder="상세주소"> <input type="text"
+															name="extraAddress" id="extraAddress" placeholder="참고항목">
+													</div>
+													<input type="button" onclick="execDaumPostcode()"
+														value="우편번호 찾기"><br>
+												</div>
+												<div id="wrap"
+													style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
+													<img
+														src="//t1.daumcdn.net/postcode/resource/images/close.png"
+														id="btnFoldWrap"
+														style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
+														onclick="foldDaumPostcode()" alt="접기 버튼">
+												</div>
+											</td>
 										</tr>
 									</table>
 								</div>
-							</div>
-							<div id="employee" style="width: 100%;">
-								<table>
-									<tr>
-										<td class="label">부서</td>
-										<td>${info.edepartment}</td>
-										<td class="label">직책<span></span></td>
-										<td>${info.eposition}</td>
-
-									</tr>
-									<tr>
-										<td class="label">고용 형태<span></span></td>
-										<td>${info.ehiredType}</td>
-										<td class="label">총 연차 수<span></span></td>
-										<td>${info.totalHoliday}</td>
-										<!--<td class="label">관리자 여부</td>
-										<td><input type="checkbox" name="check_admin"
-											id="check_admin"></td>-->
-									</tr>
-									<tr>
-										<td class="label">입사일<span></span></td>
-										<td>${info.ehiredDate}</td>
-										<td class="label">재직 상태<span></span></td>
-										<td>${info.estatus}</td>
-									<tr>
-										<td class="label">전화번호</td>
-										<td colspan='1'><input type="number" name="telNumber"
-											id="telNumber" placeholder="번호만 입력해 주세요"
-											value="${info.telNumber}"></td>
-										<td class="label">핸드폰<span></span></td>
-										<td colspan='3'><input type="number" name="phoneNumber"
-											id="phoneNumber" required placeholder="번호만 입력해 주세요"
-											value="${info.phoneNumber}"></td>
-									</tr>
-									<tr>
-										<td id="noB" class="label">주소</td>
-										<td colspan='5'>
-											<div style="display: flex; flex-direction: row;">
-												<input type="text" id="addre" value="${info.address}"
-													style="width: 100%" />
-												<div style="display: none;" id="addresszip"
-													style="display: flex; flex-direction: row;">
-													<input type="text" name="postcode" id="postcode"
-														placeholder="우편번호"> <input type="text"
-														name="address" id="address" placeholder="주소"> <input
-														type="text" name="detailAddress" id="detailAddress"
-														placeholder="상세주소"> <input type="text"
-														name="extraAddress" id="extraAddress" placeholder="참고항목">
-												</div>
-												<input type="button" onclick="execDaumPostcode()"
-													value="우편번호 찾기"><br>
-											</div>
-											<div id="wrap"
-												style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
-												<img
-													src="//t1.daumcdn.net/postcode/resource/images/close.png"
-													id="btnFoldWrap"
-													style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
-													onclick="foldDaumPostcode()" alt="접기 버튼">
-											</div>
-										</td>
-									</tr>
-								</table>
-							</div>
+								<br>
+								<div class="btnzip">
+									<div class="zip" style="width: 60%">
+										<button type="submit" class="insertbtn">내정보 수정하기</button>
+									</div>
+								</div>
+							</form>
+							
 							<!-- 주소 찾기  ------------------------------------------------------------------------------------------------------>
 							<script
 								src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -252,16 +262,7 @@
                     email.readonly  = false;   
                 }
             });
-        </script>
 
-							<br>
-							<div class="btnzip">
-								<div class="zip" style="width: 60%">
-									<button type="submit" class="insertbtn">수정하기</button>
-								</div>
-							</div>
-
-							<script>
         
         /*프로필 사진 변경-----------------------------------------------------------------------------------------------------------------*/
         const InputFile = document.getElementById("proimg");

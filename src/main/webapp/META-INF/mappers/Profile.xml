@@ -2,20 +2,52 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.awoo.dao.PersonalInfoDAO">
+<mapper namespace="com.awoo.dao.profileDAO">
 
-	<select id="selectInfoJY" resultType="InfoVO">
-		select id, NAME,gender,birthday,password,email,tel_number,phone_number,address, 
-		personal_info.empno, edepartment,eposition, date_format(ehired_date,'%Y-%m-%d') ehired_date,
-		ehired_type,total_holiday,estatus,check_admin
-		 from personal_info JOIN employee_info ON personal_info.empno = employee_info.empno
-		 <where>
-		 	<if test="empno != 0">
-				 personal_info.empno = #{empno} 	
-		 	</if>
-		 </where> 
+	<select id="selectInfoJY" resultType="profileVO">
+		SELECT id 
+			 , name
+			 , gender
+			 , birthday
+			 , password
+			 , SUBSTRING_INDEX(email, '@', 1)	AS emailf
+			 , SUBSTRING_INDEX(email, '@', -1)	AS emails
+			 , tel_number
+			 , phone_number
+			 , address
+			 , personal_info.empno 
+			 , edepartment
+			 , eposition
+			 , date_format(ehired_date,'%Y-%m-%d') ehired_date
+			 , ehired_type
+			 , total_holiday
+			 , estatus
+			 , check_admin
+		  FROM personal_info 
+		  JOIN employee_info ON personal_info.empno = employee_info.empno
+		<where>
+			<if test="empno != 0">
+				personal_info.empno = #{empno} 	
+			</if>
+		</where> 
 	</select>
+	
+<!-- 	<update id="updateE">
+		UPDATE personal_info
+		<set>
+		       password 	= #{password}
+			 , email	 	= #{email}
+			 , tel_number 	= #{telNumber}
+			 , phone_number = #{phoneNumber}
+			 , address 	 	= #{address}
+		</set>
+	   <where>
+	   	   <if test="empno != 0">
+		   	   personal_info.empno = #{empno}
+		   </if>
+	   </where> 
+	</update>  -->
+	
 
-
-
+	
 </mapper>
