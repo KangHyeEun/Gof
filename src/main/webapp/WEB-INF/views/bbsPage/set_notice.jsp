@@ -11,6 +11,7 @@
 	href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/bbs/setstyle.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bbs/js/jquery-3.6.1.min.js"></script>
 <!-- ckeditor 적용 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>	
 </head>
@@ -26,12 +27,13 @@
 		<div class="container-inner-bbs">
 			<div class="inner-div-bbs">
 
-				<form:form modelAttribute="BBSVO"
-					action="${pageContext.request.contextPath}/bbsNotice/set"
-					method="post" enctype="multipart/form-data">
+				<form:form modelAttribute="BBSVO" action="${pageContext.request.contextPath}/bbsNotice/set" method="post" enctype="multipart/form-data" name="form">
+					<form:hidden path="ownerId" value="${sessionScope.personalInfoVO.empno}" />
+					<form:hidden path="owner" value="${sessionScope.personalInfoVO.name}" />
+					<form:hidden path="filelist" />
 
 					<div class="set-header">
-						<h2>사내 게시판</h2>
+						<h2>공지사항</h2>
 					</div>
 
 					<div class="set-subtitle">
@@ -56,8 +58,7 @@
 											<c:forEach var="vo" items="${categories}">
 												<form:option value="${vo.category}" class="category">${vo.category}</form:option>
 											</c:forEach>
-										</form:select>
-									</td>
+										</form:select></td>
 								</tr>
 								<tr>
 									<th>제목</th>
@@ -69,62 +70,87 @@
 								</tr>
 								<tr>
 									<th>내용</th>
-									<td>
-										<form:textarea path="content" id="textarea"/>
-									</td>
+									<td><form:textarea path="content" id="textarea" /></td>
 								</tr>
 								<tr>
-									<th>파일첨부&nbsp;&nbsp;<span><img src="https://uinnout.com/employee/images/clip.svg"></span></th>
-									<td><input type="file" name="mediaFile" id="mediaFile" multiple="multiple" />
-										<button id="btn">Upload</button>
-									</td>
+									<th>파일첨부&nbsp;&nbsp; <span></span></th>
+									<td><input type="file" name="upload" id="upload" multiple /></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<div class="set-footer">
-						<button>저장하기</button>
-					</div>
 				</form:form>
-
+				<div class="set-footer">
+					<button id="cancle">취소</button>
+					<button id="submit">전송</button>
+				</div>
 			</div>
 		</div>
 	</div>
-
+	
 	<script type="text/javascript">
 	//뒤로가기
-		document.getElementById("return").addEventListener("click",function(e){
-			e.preventDefault();
+	document.getElementById("return", "cancle").addEventListener("click",function(e){
+		e.preventDefault();
+		let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
+		if(yn){
 			location.href = "${pageContext.request.contextPath}/bbsNotice/bbs";
-		});
+		}
+	});
+	
+	//취소하기
+	document.getElementById("cancle").addEventListener("click", function(e){
+		e.preventDefault();
+		let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
+		if(yn){
+			location.href = "${pageContext.request.contextPath}/bbsNotice/bbs";
+		}
+	});
 	
 	//이지윅즈 적용
-	CKEDITOR.replace('textarea');
+	CKEDITOR.replace("textarea", {
+		height : 400,
+		filebrowserUploadUrl: "${pageContext.request.contextPath}/bbsNotice/uploadimage"
+	});
 	
-	//파일 업로드
-		document.getElementById("btn").addEventListener("click", function(e){
-			e.preventDefault();
-			//formData를 통해 데이터를 보낼 양식 설정
-			const formData = new FormData;
-			//mediaFile input=file 태그 엘리먼트 선언
-			const inputFiles = document.getElementById("mediaFile");
-			//inputFiles에서 파일에 대한 정보들을 전부 가져와 변수에 저장
-			let files = inputFiles.files;
-			//어떤 값이 오는지 임시 출력
-			console.log(files);
-			
-			//files의 정보를 formData에 담기
-			for (const file of files) {
-				formData.append("uploadFile", file);
+	//submit(유효성 검사+파일 보내기)
+	document.getElementById("submit").addEventListener("click", function(e){
+		e.preventDefault();
+		if(form.title.value=="" || form.title.value==0 || CKEDITOR.instances.textarea.getData() ==""){
+			if(form.title.value=="" || form.title.value==0){
+				alert("제목을 입력해주세요.");
+				form.title.focus();
+			}else if(CKEDITOR.instances.textarea.getData() =="" || CKEDITOR.instances.textarea.getData().length ==0){
+				alert("내용을 입력해주세요.");
 			}
-			//fetch를 통해 formData 전송
-			fetch("${pageContext.request.contextPath}/bbsNotice/fileupload", {
-				method : "POST", //반드시 post
-				body : formData})
-			.then(response => console.log(response))
-			.catch(error => console.log(error));
-		});
-
+			return false;
+		}else{
+			let yn = confirm("작성한 내용을 저장하시겠습니까?");
+			if(yn){
+				const formData = new FormData();
+				const $upload = $("#upload");
+				let files = $upload[0].files;
+				
+				for (var i = 0; i < files.length; i++) {
+					formData.append("uploadFile", files[i])	
+			}
+			$.ajax({
+				url : "${pageContext.request.contextPath}/bbsNotice/uploadfile",
+				processData : false,
+				contentType : false,
+				data : formData,
+				type : "post",
+				datatype : "json",
+				success: function(result){
+					console.log(JSON.stringify(result));
+					$("#filelist").val(JSON.stringify(result));
+					$("#BBSVO").submit();
+				}
+			});
+			}
+			alert("저장되었습니다.");
+		};
+	});
 	</script>
 </body>
 </html>

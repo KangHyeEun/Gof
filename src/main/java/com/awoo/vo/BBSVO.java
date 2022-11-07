@@ -82,5 +82,12 @@ public class BBSVO {
 	public void setFileCounts(int fileCounts) {
 		this.fileCounts = fileCounts;
 	}
+	@Override
+	public String toString() {
+		return "BBSVO [id=" + id + ", category=" + category + ", title=" + title + ", ownerId=" + ownerId + ", owner="
+				+ owner + ", content=" + content + ", createDate=" + createDate + ", isDelete=" + isDelete
+				+ ", viewCounts=" + viewCounts + ", filelist=" + filelist + ", fileCounts=" + fileCounts + "]";
+	}
+	
 	
 }

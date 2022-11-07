@@ -23,7 +23,7 @@
         <div class="container-inner-bbs">
             <div class="inner-div-bbs">
                 <div class="content-title">
-                    <h3>사내 게시판</h3>
+                    <h3>공지사항</h3>
                 </div>
 
                 <div class="content-nav">
@@ -53,9 +53,15 @@
                 </div>
 
                 <div class="content-footer">
-                    <h4>첨부파일&nbsp;&nbsp;&nbsp;<span><img src="https://uinnout.com/employee/images/clip.svg"></span></h4>
-                    <a href="${pageContext.request.contextPath}/bbsNotice/download">다운로드&nbsp;&nbsp;<img
-                            src="upload/abc7.txt"></a>
+                    <h4>첨부파일<span><img src="https://uinnout.com/employee/images/clip.svg"></span></h4>
+						<div>
+							<h4>${countFiles} 개</h4>
+						</div>
+						<div>
+							<c:forEach var="file" items="${filelist}">
+								<a href="${pageContext.request.contextPath}/bbsNotice/downloadFile/${file.localname}/${file.servername}">${file.localname}</a><br>
+							</c:forEach>							
+						</div>
                 </div>
               
                </div>

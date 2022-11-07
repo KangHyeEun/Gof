@@ -123,7 +123,7 @@
 					</div>
 					<div class="set-footer">
 						<button id="cancle">취소</button>
-						<button type="button" id="modify">수정</button>
+						<button type="button" id="modify">수정하기</button>
 					</div>
 				</form:form>
 			</div>

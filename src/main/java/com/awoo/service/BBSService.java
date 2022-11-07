@@ -187,6 +187,66 @@ public class BBSService {
 		
 		model.addAttribute("page", vo);
 		model.addAttribute("list", bbsDAO.selectBBSListNotice(vo));
+		
+		BBSVO bvo = new BBSVO();
+		bbsDAO.updateFileCountNotice(bvo);
+	}
+
+	
+	//게시글 상세 보기
+	public void selectBBSNotice(Model model, String id) {
+		BBSVO vo = new BBSVO();
+		vo.setId(Integer.parseInt(id));
+		model.addAttribute("bbsVO", bbsDAO.selectBBSNotice(vo));
+		
+		BBSFileVO fvo = new BBSFileVO();
+		fvo.setBbsId(vo.getId());
+
+		List<BBSFileVO> filelist = bbsDAO.selectBBSFileNotice(fvo);
+		model.addAttribute("filelist", filelist);
+		
+		model.addAttribute("countFiles", bbsDAO.countFilesNotice(id));
+	}
+	
+	//추가
+	public void insertBBSNotice(BBSVO vo2) {
+		Gson gson = new Gson();
+		
+		BBSFileVO[] fileArray = gson.fromJson(vo2.getFilelist(), BBSFileVO[].class);
+		List<BBSFileVO> fileList = Arrays.asList(fileArray);
+		
+		bbsDAO.insertBBSNotice(vo2);
+		
+		for (BBSFileVO fileVO : fileList) {
+			fileVO.setBbsId(vo2.getId());
+			bbsDAO.insertBBSFileNotice(fileVO);
+		}
+		bbsDAO.updateFileCountNotice(vo2);
+	}
+	
+	//삭제
+	public void deleteBBSNotice(BBSVO vo2) {
+		bbsDAO.deleteBBSNotice(vo2);
+		bbsDAO.updateFileCountNotice(vo2);
+	}
+	
+	//수정
+	public void updateBBSNotice(BBSVO vo2) {
+		Gson gson = new Gson();
+
+		BBSFileVO[] fileArray = gson.fromJson(vo2.getFilelist(), BBSFileVO[].class);
+
+		bbsDAO.updateBBSNotice(vo2);
+		
+		if(fileArray != null) {
+			List<BBSFileVO> fileList = Arrays.asList(fileArray);
+		
+			for (BBSFileVO fileVO : fileList) {
+				fileVO.setBbsId(vo2.getId());
+				bbsDAO.insertBBSFileNotice(fileVO);
+			}
+		}
+		bbsDAO.updateFileCountNotice(vo2);
 	}
 	
 	//카테고리
@@ -194,28 +254,25 @@ public class BBSService {
 		model.addAttribute("categories", bbsDAO.selectCategoryNotice());
 	}
 	
-	//게시글 상세 보기
-	public void getBBSContentNotice(Model model, String id) {
-		model.addAttribute("bbsVO", bbsDAO.selectBBSNotice(id));
-	}
 	//조회수
 	public void setViewCountNotice(String id) {
 		bbsDAO.updateViewCountNotice(id);
 	}
 	
-	//게시글 보기
-	public boolean setBBSNotice(BBSVO vo2) {
-		return(bbsDAO.insertBBSNotice(vo2) > 0)?true:false;
+	//파일 삭제
+	public void deleteBBSFileAllNotice(BBSFileVO fvo) {
+		bbsDAO.deleteBBSFileNotice(fvo);
+		BBSVO vo =new BBSVO();
+		bbsDAO.updateFileCountNotice(vo);
 	}
 	
-	//수정
-	public boolean putBBSNotice(BBSVO vo2) {
-		return(bbsDAO.updateBBSNotice(vo2) > 0)?true:false;
-	}
-	
-	//삭제
-	public boolean deleteBBSNotice(BBSVO vo2) {
-		return (bbsDAO.deleteBBSNotice(vo2)>0)?true:false;
+	//파일 삭제(트랜젝션 달기)
+	public void deleteBBSFileNotice(BBSFileVO[] fvos) {
+		for (BBSFileVO fvo : fvos) {
+			bbsDAO.deleteBBSFileNotice(fvo);
+		}
+		BBSVO vo =new BBSVO();
+		bbsDAO.updateFileCountNotice(vo);
 	}
 	
 }

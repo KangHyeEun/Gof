@@ -107,15 +107,31 @@
 				success : function(data){
 					console.log(data);
 					for(const item of data){
-// 						$("#comment-list").append("<div><h4>"+item.owner+"</h4><p>"+item.comment
-// 								+"</p></div><button class='comment-delete'>삭제</button>");
-						
 						//owner_id를 가져옴
-						let sownerid = ${personalInfoVO.empno};
+						let ownerid = ${personalInfoVO.empno};
 						
 						const commentList = document.querySelector("#comment-list");
 						
-						const div = document.createElement("div");
+						const div1 = document.createElement("div");
+						div1.setAttribute("class", "comment-wrap");
+						
+						const div2 = document.createElement("div");
+						div2.setAttribute("class", "comment-upper");
+						
+						const div3 = document.createElement("div");
+						div3.setAttribute("class", "comment-upper-left");
+						
+						const div4 = document.createElement("div");
+						div4.setAttribute("class", "comment-upper-right");
+
+						const div5 = document.createElement("div");
+						div5.setAttribute("class", "comment-context");
+						
+						//이미지를 넣어볼까?
+// 						const img = document.createElement("img");
+// 						img.setAttribute("id", "showimg");
+// 						img.setAttribute("src", "${pageContext.request.contextPath}/upload/${img.fileName}");
+						
 						const owner = document.createElement("p");
 						owner.innerText = item.owner;
 						const comment = document.createElement("p");
@@ -125,18 +141,15 @@
 						
 						// 해당 유저가 쓴 댓글일 경우
 						//empno == ownerid
-						if(item.ownerId == sownerid){
+						if(item.ownerId == ownerid){
 							// 삭제 버튼
 							const delete_button = document.createElement("button");
 							delete_button.innerText = "삭제";
 						
 							delete_button.addEventListener("click", function(){
-								//alert("삭제되었습니다");
 								let yn = confirm("삭제하시겠습니까?");
-								//console.log(yn);
 								if(yn){
 									let comment_data = {id : item.id};
-									
 									$.ajax({
 										url:"${pageContext.request.contextPath}/bbsPage/comment/delete",
 										type:"DELETE",
@@ -144,13 +157,12 @@
 										contentType : "application/json; charset=utf-8",
 										dataType : "html",
 										success:function(data){
-											div.remove();
+											div1.remove();
 										}
 									});
 								}
 							});
-							
-							div.append(delete_button);
+							div4.append(delete_button);
 							
 							// 수정 버튼
 							const modify_button = document.createElement("button");
@@ -159,10 +171,12 @@
 							modify_button.addEventListener("click", function(){
 								const edit_div = document.createElement("div");
 								const edit_textarea = document.createElement("textarea");
-								edit_textarea.cols = "200";
-								edit_textarea.rows = "5";
+								edit_textarea.setAttribute("id", "edit_textarea");
+
+								edit_textarea.value = comment.innerText;
 								
-								edit_textarea.value = p.innerText;
+								const button_div = document.createElement("div");
+								button_div.setAttribute("id", "button_div");
 								
 								const edit_modify = document.createElement("button");
 								edit_modify.innerText = "수정완료";
@@ -170,15 +184,17 @@
 								edit_cancel.innerText = "취소";
 								
 								edit_div.append(edit_textarea);
-								edit_div.append(edit_modify);
-								edit_div.append(edit_cancel);
+								edit_div.append(button_div);
 								
-								div.after(edit_div);
-								div.style.display = "none";
+								button_div.append(edit_modify);
+								button_div.append(edit_cancel);
+								
+								div5.after(edit_div);
+								div5.style.display = "none";
 								
 								// 취소 버튼 클릭 시 이벤트
 								edit_cancel.addEventListener("click", function(){
-									div.style.display = "block";
+									div5.style.display = "block";
 									edit_div.remove();
 								});
 								
@@ -198,24 +214,30 @@
 											dataType : "json",
 											success:function(data){
 												console.log(data);
-												p.innerText = data.comment;
-												div.style.display = "block";
+												comment.innerText = data.comment;
+												div5.style.display = "block";
 												edit_div.remove();
 											}
 										});
+										location.reload();	
 									}
 								});
 							});
-							
-							div.append(modify_button);
+							div4.append(modify_button);
 						}
+						commentList.append(div1);
+						div1.append(div2);
+						div2.append(div3);
+						div2.append(div4);
+ 						
+// 						div3.append(img);
 						
-						div.prepend(comment);
-						div.prepend(createDate);
-						div.prepend(owner);
+						div3.prepend(owner);
+						div4.prepend(createDate);
 						
+						div1.append(div5);
+						div5.append(comment);
 						
-						commentList.append(div);
 					}
 				}
 			});
@@ -272,10 +294,10 @@
 							const commentList = document.querySelector("#comment-list");
 							
 							const div = document.createElement("div");
-							const h4 = document.createElement("h4");
-							h4.innerText = data.owner;
-							const p = document.createElement("p");
-							p.innerText = data.comment;
+							const owner1 = document.createElement("p");
+							owner1.innerText = data.owner;
+							const comment = document.createElement("p");
+							comment.innerText = data.comment;
 							
 							// 삭제 버튼
 							const delete_button = document.createElement("button");
@@ -313,7 +335,7 @@
 								edit_textarea.cols = "200";
 								edit_textarea.rows = "5";
 								
-								edit_textarea.value = p.innerText;
+								edit_textarea.value = comment.innerText;
 								
 								const edit_modify = document.createElement("button");
 								edit_modify.innerText = "수정완료";
@@ -349,7 +371,7 @@
 											dataType : "json",
 											success:function(data){
 // 												console.log(data);
-												p.innerText = data.comment;
+												comment.innerText = data.comment;
 												div.style.display = "block";
 												edit_div.remove();
 											}
@@ -360,10 +382,12 @@
 							
 							div.append(modify_button);
 														
-							div.prepend(p);
-							div.prepend(h4);
+							div.prepend(comment);
+							div.prepend(owner1);
 														
 							commentList.append(div);
+							
+							location.reload();
 						}
 					});
 				}else{

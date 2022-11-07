@@ -8,6 +8,7 @@ public class BBSFileVO {
 	private String servername;
 	private String localname;
 	private int bbsId;
+	private String bbsSeperateString;
 	
 	public BBSFileVO() {
 		// TODO Auto-generated constructor stub
@@ -17,12 +18,6 @@ public class BBSFileVO {
 		super();
 		this.servername = servername;
 		this.localname = localname;
-	}
-
-	@Override
-	public String toString() {
-		return "FileVO [id=" + id + ", servername=" + servername + ", localname=" + localname + ", bbsId=" + bbsId
-				+ "]";
 	}
 
 	public int getId() {
@@ -57,7 +52,14 @@ public class BBSFileVO {
 		this.bbsId = bbsId;
 	}
 	
-	
+	public String getBbsSeperateString() {
+		return bbsSeperateString;
+	}
+
+	public void setBbsSeperateString(String bbsSeperateString) {
+		this.bbsSeperateString = bbsSeperateString;
+	}
+
 	
 	
 }

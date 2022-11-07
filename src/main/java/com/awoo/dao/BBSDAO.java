@@ -15,6 +15,8 @@ public interface BBSDAO {
 	
 	public List<BBSVO> selectBBSList(PageVO vo);
 	
+	public List<BBSVO> selectCategory();
+	
 	public BBSVO selectBBS(BBSVO vo);
 	
 	public int insertBBS(BBSVO vo);
@@ -22,23 +24,20 @@ public interface BBSDAO {
 	public int updateBBS(BBSVO vo);
 	
 	public int deleteBBS(BBSVO vo);
-
-	public List<BBSVO> selectCategory();
 	
 	public int updateViewCount(String id);
 	
 	public int updateFileCount(BBSVO vo);
 	
+	public int countFiles(String id);
 	
-	//파일
+	//파일---------------------------------
 	public int insertBBSFile(BBSFileVO vo);
 	
 	public List<BBSFileVO> selectBBSFile(BBSFileVO vo);
 	
 	public int deleteBBSFile(BBSFileVO vo);
-	
-	public int countFiles(String id);
-	
+
 
 	//공지사항 게시판-------------------------
 	public int selectBBSCountNotice(PageVO vo);
@@ -47,7 +46,7 @@ public interface BBSDAO {
 	
 	public List<BBSVO> selectCategoryNotice();
 	
-	public BBSVO selectBBSNotice(String id);
+	public BBSVO selectBBSNotice(BBSVO vo);
 	
 	public int insertBBSNotice(BBSVO vo);
 	
@@ -57,4 +56,15 @@ public interface BBSDAO {
 	
 	public int updateViewCountNotice(String id);
 	
+	public int updateFileCountNotice(BBSVO vo);
+	
+	public int countFilesNotice(String id);
+	
+	//파일---------------------------------
+	public int insertBBSFileNotice(BBSFileVO vo);
+	
+	public List<BBSFileVO> selectBBSFileNotice(BBSFileVO vo);
+	
+	public int deleteBBSFileNotice(BBSFileVO vo);
+			
 }

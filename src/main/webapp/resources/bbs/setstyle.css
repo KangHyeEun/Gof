@@ -10,6 +10,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding-top: 1rem;
 	padding-bottom: 1rem;
 }
 
@@ -64,17 +65,31 @@ table tr:nth-child(4) {
 	padding-top: 2rem;
 }
 
-.set-footer button {
+#cancle {
+	font-family: 'Nanum Barun Gothic', sans-serif;
+	font-weight: 400;
+	color: #3fb4d0;
+	border-radius: 0.4rem;
+	border: 1px solid #3fb4d0;
+	text-align: center;
+	background: #fff;
+	height: 2.5rem;
+	width: 4rem;
+	cursor: pointer;
+}
+
+#modify {
 	font-family: 'Nanum Barun Gothic', sans-serif;
 	font-weight: 400;
 	color: #fff;
 	border-radius: 0.4rem;
 	border: 0;
 	text-align: center;
-	background: #232249;
-	height: 3rem;
-	width: 8rem;
+	background: #14ABAB;
+	height: 2.5rem;
+	width: 6rem;
 	cursor: pointer;
+	margin-left: 15px;
 }
 
 #category {

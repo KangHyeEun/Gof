@@ -70,14 +70,17 @@
 					<tbody>
 						<c:forEach var="vo" items="${list}" varStatus="status">
 							<tr>
-<%-- 								<td>${list.size() - status.index}</td> --%>
 								<td>${vo.id}</td>
 								<td>${vo.category} <c:if test="${vo.category == '중요'}"><img src="${pageContext.request.contextPath}/resources/imges/horn.svg"/></c:if></td>
 								<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
 								<td>인사담당자</td>
 								<td>${vo.createDate}</td>
 								<td>${vo.viewCounts}</td>
-								<td><span>✉</span> 첨부 파일</td>
+								<td>
+								<c:if test="${vo.fileCounts != 0}">
+									<span><img src="${pageContext.request.contextPath}/resources/imges/clip.png" id="cilpimg"/></span>${vo.fileCounts}
+								</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -150,10 +153,6 @@
 </div>
 		
 <script type="text/javascript">
-
-// 	window.addEventListener("DOMContentLoaded",function(){
-// 		document.getElementById("keyword").value = "${keyword}";
-// 	});
 // //검색
 	document.getElementById("search").addEventListener("click", function(){
 		let searchType = document.getElementById("searchType").value;
@@ -164,13 +163,6 @@
 
 		location.href = "${pageContext.request.contextPath}/bbsNotice/bbs?searchType="+searchType+"&keyword="+keyword;
 	});	
-	
-// 	function clickPage(i){
-// 		let searchType = document.getElementById("searchType").value;
-// 		let keyword = document.getElementById("keyword").value;
-		
-// 		location.href = "${pageContext.request.contextPath}/bbsNotice/bbs?page="+i+"&searchType="+searchType+"&keyword="+keyword;
-// 	}
 </script>
 
 </body>

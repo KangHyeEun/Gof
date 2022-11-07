@@ -72,7 +72,11 @@
 								<td>${vo.owner}</td>
 								<td>${vo.createDate}</td>
 								<td>${vo.viewCounts}</td>
-								<td><span><img src="${pageContext.request.contextPath}/resources/imges/clip.png" id="cilpimg"/></span>${vo.fileCounts}</td>
+								<td>
+								<c:if test="${vo.fileCounts != 0}">
+									<span><img src="${pageContext.request.contextPath}/resources/imges/clip.png" id="cilpimg"/></span>${vo.fileCounts}
+								</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
