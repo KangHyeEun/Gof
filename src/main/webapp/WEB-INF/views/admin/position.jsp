@@ -11,6 +11,12 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/admin/department.css">	
 <title>Insert title here</title>
+<style type="text/css">
+	.modal_wrap{
+		max-height: 260px;
+		min-height: 260px;
+	}
+</style>
 </head>
 <body>
 

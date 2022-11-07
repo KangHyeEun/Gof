@@ -12,6 +12,25 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/admin1.css">
 <title>Insert title here</title>
+<style type="text/css">
+	.sp{
+		font-size: 0.8rem;
+    	color: #a3a2a2;
+	}
+	.s1 .s2 .s3 {
+		width: 99px; 
+	}
+	.t2-tr {
+		display: flex;
+	}
+	.t2-td1 {
+		flex:1;
+	}
+	.t2-td2 {
+		flex:1;
+		width: 350px;
+	}
+</style>
 </head>
 <body>
 	<div class="container-wrap">
@@ -76,12 +95,12 @@
 										</tr>
 									</table>
 									<table id="t2">
-										<tr>
+										<tr class="t2-tr">
 											<td>입사기간</td>
-											<td><input type="date" name="ehiredDate" id="startDate"
+											<td class="t2-td1"><input type="date" name="ehiredDate" id="startDate"
 												placeholder="(시작일)">~<input type="date"
 												name="date" id="endDate" placeholder="(종료일)"></td>
-											<td>
+											<td class="t2-td2">
 												<span id="s1" class="styleA" onclick="change()">최근 1개월</span>
 <!-- 											</td> -->
 <!-- 											<td> -->
@@ -99,7 +118,7 @@
 					<div class="table" style="width: 100%;">
 						<h4>
 							<img src="${pageContext.request.contextPath}/resources/imges/total.png"
-								class="timg" />총 <span id="count"></span>명
+								class="timg" />총 <span id="count"></span>명 <span class="sp">(퇴사자 포함)</span>
 						</h4>
 						<form action="${pageContext.request.contextPath}/admin/updateD"
 							method="get" id="form1">
@@ -234,7 +253,7 @@
 												<h5 style="color: #aaabad;">직원추가</h5>
 												<div class="sdiv">
 													<input type="text" name="userKeyWord" id="userKeyWord" class="minput"
-													onkeyup="filter()" autocomplete='off' placeholder="입력해주세요">
+													onkeyup="filter()" autocomplete='off' placeholder="입력해주세요" onsubmit="return false;">
 													<div id="suggestdiv">
 														<c:forEach var="j" items="${list}" varStatus="status">
 															<div class="info">

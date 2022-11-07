@@ -141,9 +141,7 @@ public class HolidayController {
 			vo.setId(id);
 			vo.setApproval("반려");
 			vo.setRejectionReason(reject);
-//			service.updateApproval(vo);
-			
-			System.out.println(id);
+			service.updateApproval(vo);
 			
 			return "redirect:/holidayAdmin";
 		}

@@ -67,7 +67,7 @@
 			tel_number = #{telNumber},  
 			</if>
 			<if test="email != null and email != ''">
-			tel_number = #{email},  
+			email = #{email},  
 			</if>
 			<if test="phoneNumber != null and phoneNumber != ''">
 			phone_number = #{phoneNumber},  

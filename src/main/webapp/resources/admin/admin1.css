@@ -372,6 +372,7 @@ h4 {
 
 .mdiv1>h5 {
 	margin: 5px;
+	cursor: pointer;
 }
 
 .mdiv2 {

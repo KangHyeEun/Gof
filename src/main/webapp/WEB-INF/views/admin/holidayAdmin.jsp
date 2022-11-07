@@ -10,24 +10,22 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/main.css">
-<!-- <link rel="stylesheet" -->
-<%-- 	href="${pageContext.request.contextPath}/orgChart/orgChart.css"> --%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/admin/admin1.css">
 <title>Insert title here</title>
 <style type="text/css">
 
-/* .category { */
-/* 	width: 25%; */
-/* 	padding: 0.1%; */
-/* 	padding-left: 1%; */
-/* 	border: 1px solid #c9eaec; */
-/* 	display: flex; */
-/* 	flex-direction: row; */
-/* 	justify-content: space-between; */
-/* 	cursor: pointer; */
-/* 	align-items: center; */
-/* } */
+	.modal_wrap{
+		max-height: 200px;
+		min-height: 200px;
+	}
+	
+	#rejec{
+		margin-top: 15px;
+	    border: 10p;
+	    padding: 5px;
+	    border: 1px solid #afb7bc;
+	}
 </style>
 </head>
 <body>
@@ -132,18 +130,17 @@
 														<a class="rbtn2"
 															href="${pageContext.request.contextPath}/holiday/Ok/${i.id}?empno=${i.empno}&countDate=${i.countDate}&page=${param.page}">승인</a>
 														<!-- 모달창 -------------------------------------------------------------------------------- -->
-															<form action="${pageContext.request.contextPath}/holiday/No" method="post" id="form">
+															<form action="${pageContext.request.contextPath}/holiday/No/${i.id}" method="get" id="form">
 																<input name="page" value="${param.page}" style="display: none;"/>
-<%-- 																<input type="text" name="id" value="${i.id}" style="display: none;"/> --%>
-																<div class="modal_dim" id="modal_dim">
+																<div class="modal_dim" id="modal_dim${status.count}">
 																	<div class="modal_wrap">
 																		<div class="modal">
 																			<div class="mdiv1">
 																				<h4>반려 사유</h4>
-																				<h5 id="exit">X</h5>
+																				<h5 id="exit${status.count}">X</h5>
 																			</div>
 																			<div>
-																				<input type="text" name="rejectionReason" id="rejec" />
+																				<input type="text" name="rejectionReason" id="rejec" placeholder="반려사유를 입력해주세요."/>
 																			</div>
 																			<div class="bdiv">
 																				<button class="mbutton" id="mbutton">등록하기</button>
@@ -153,18 +150,13 @@
 																</div>
 															</form>
 															<script type="text/javascript">
-															/* 모달창 */																
+															/* 반려모달창 */																
 																	document.getElementById("modal_open"+${status.count}).addEventListener("click",function() {
-															 			document.getElementById("modal_dim").style.display = "flex";
-															 			const check = document.getElementById("modal_open"+${status.count}).getAttribute("value1");
-// 															 			console.log(check);
-// 															 			document.getElementById("modal_open"+${status.count}).addEventListener("click",function(){
-																            document.getElementById("form").setAttribute("action","${pageContext.request.contextPath}/holiday/No/"+check;
-// 																        });
+															 			document.getElementById("modal_dim"+${status.count}).style.display = "flex";
 															 		});
 															
-																	document.getElementById("exit").addEventListener("click", function() {
-																		document.getElementById("modal_dim").style.display = "none";
+																	document.getElementById("exit"+${status.count}).addEventListener("click", function() {
+																		document.getElementById("modal_dim"+${status.count}).style.display = "none";
 																	});
 															</script>
 															<!-- ----------------------------------------------------------------------------------------- -->
