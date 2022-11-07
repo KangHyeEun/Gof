@@ -11,6 +11,10 @@ public class PersonalInfoVO {
 	private String phoneNumber;
 	private String address;
 	private int empno;
+	private int mail_auth;
+	private int mail_key;
+	
+	
 	
 	public int getId() {
 		return id;
@@ -71,5 +75,18 @@ public class PersonalInfoVO {
 	}
 	public void setEmpno(int empno) {
 		this.empno = empno;
+	}
+	
+	public int getMail_auth() {
+		return mail_auth;
+	}
+	public void setMail_auth(int mail_auth) {
+		this.mail_auth = mail_auth;
+	}
+	public int getMail_key() {
+		return mail_key;
+	}
+	public void setMail_key(int mail_key) {
+		this.mail_key = mail_key;
 	}
 }

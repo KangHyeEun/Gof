@@ -26,6 +26,12 @@ public class LoginController {
 	//로그인(세션 저장)
 	@PostMapping("/login")
 	public String login(PersonalInfoVO vo, HttpSession session, HttpServletRequest request) {
+		System.out.println(vo.getEmpno());
+		System.out.println(vo.getPassword());
+		
+		
+		
+		
 		return service.isUser(vo, session, request);
 	}	
 	

@@ -34,7 +34,8 @@
 		
 	</div>
 
-	<div class="modal">
+<!-- 	<div class="modal" style="display:block;"> -->
+	<div class="modal" style="display:block;">
 		<div id="formContent">
 			<div class="modal-header">
 				<div>
@@ -56,6 +57,7 @@
 
 <!-- 신규 사원 비밀번호 변경 유도 -->
 <script type="text/javascript">
+// let Listsize = ${verificationData.size()};
 window.addEventListener("DOMContentLoaded",function(){
 	document.querySelector(".modal").style.display = "none";
 });
@@ -63,27 +65,29 @@ window.addEventListener("DOMContentLoaded",function(){
 document.getElementById("checkPW").addEventListener("click", function(e){
     let empno = document.querySelector('#empno').value;
     let pw = document.querySelector('#pw').value;
-    if(pw == 'abc1') {
-    	e.preventDefault();
-		alert("초기 비밀번호를 변경해주세요.");
-   		// 모달창 띄우기
-    	document.querySelector(".modal").style.display = "flex";
-    	document.querySelector("#empno_id").value = empno;
- 	  	return false;
-	}else if(empno == "" || empno == 0){
-		e.preventDefault();
-		alert("아이디를 입력하세요.");
-		loginForm.empno.focus();
-		return false;
-	}else if(pw == "" || pw == 0){
-		e.preventDefault();
-		loginForm.pw.focus();
-		alert("비밀번호를 입력하세요");
-		return false;
-	}else{
-		alert("환영합니다.");
-		$("#checkPW").submit();
-	}
+  
+    
+//     if(pw == 'abc1') {
+//     	e.preventDefault();
+// 		alert("초기 비밀번호를 변경해주세요.");
+//    		// 모달창 띄우기
+//     	document.querySelector(".modal").style.display = "flex";
+//     	document.querySelector("#empno_id").value = empno;
+//  	  	return false;
+// 	}else if(empno == "" || empno == 0){
+// 		e.preventDefault();
+// 		alert("아이디를 입력하세요.");
+// 		loginForm.empno.focus();
+// 		return false;
+// 	}else if(pw == "" || pw == 0){
+// 		e.preventDefault();
+// 		loginForm.pw.focus();
+// 		alert("비밀번호를 입력하세요");
+// 		return false;
+// 	}else{
+// 		alert("환영합니다.");
+// 		$("#checkPW").submit();
+// 	}
  });
  
  document.querySelector(".close-button").addEventListener("click", function(){

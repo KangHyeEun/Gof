@@ -12,5 +12,10 @@
 		update personal_info set password = #{newPW}
 		where password = #{nowPW} and empno = #{empno_id}
 	</update>
+	
+	<!-- 모든 정보 가져와서 검사 -->
+	<select id="getVerification" resultType="PersonalInfoVO">
+		select id, name, gender, birthday, email, tel_number, phone_number, address, empno, mail_auth, mail_key from personal_info
+	</select>
 </mapper>
 
