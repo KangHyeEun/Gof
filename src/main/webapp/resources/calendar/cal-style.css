@@ -272,7 +272,7 @@ input[type="text"] {
     height: 22px;
 	
 }
-#calStart, #calEnd {
+#calStart, #calEnd, #calStart1, #calEnd1 {
     width: 47.4%;
     text-align: center;
     height: 23px;

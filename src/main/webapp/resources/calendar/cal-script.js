@@ -396,7 +396,19 @@ const renderCalendar = () => {
 					span.classList.add("schedule_"+list[index1].calId);
 					
 					innerSpan = "";
-					innerSpan += calTime + " " + list[index1].calTitle;
+					
+					if (empno == list[index1].empno) {
+						if (list[index1].calShow == 0) {
+							innerSpan += "🟢 " + calTime + " " + list[index1].calTitle;
+						}
+						else {
+							innerSpan += "🟠 " + calTime + " " + list[index1].calTitle;
+						}
+					}
+					else {
+						innerSpan += "🟡 " + calTime + " " + list[index1].calTitle;
+					}
+					
 					span.innerHTML += innerSpan;
 					div.append(span);
 					scheduleDiv.append(div);

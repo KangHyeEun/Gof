@@ -28,6 +28,8 @@
 			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG"/>
             <div class="header-logout">
             	<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+	<a href="${pageContext.request.contextPath}/testing">..</a>
+	<a href="${pageContext.request.contextPath}/chat">chating</a>
             </div>
 		</div>
 		<div class="container">
@@ -197,14 +199,6 @@
 					</div>
 				</div>
 			</div>
-			
-			
-			
-	<a href="${pageContext.request.contextPath}/testing">..</a>
-	<a href="${pageContext.request.contextPath}/chat">chating</a>
-			
-			
-
 		</div>
 	</div>
 	<script type="text/javascript">

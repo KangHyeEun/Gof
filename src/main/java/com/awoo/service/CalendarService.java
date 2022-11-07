@@ -128,16 +128,18 @@ public class CalendarService {
 	
 //	일정 생성
 	public void insertDataMethod(CalendarVO vo) {
-
+		
 		System.out.println("확인 333 ");
 		System.out.println(vo.getCalRecur());
 		System.out.println(vo.getCalStart());
 		System.out.println(vo.getCalEnd());
 		System.out.println(vo.getCalShow());
 		System.out.println("---------------");
+		System.out.println(vo.getCalRecur().getClass().getName());
+		System.out.println("---------------");
 		
 //		반복일정 여부가 0이 아닌데 종료일 없으면 시작일을 종료일에 대입
-		if (vo.getCalRecur() != "0") {
+		if (!vo.getCalRecur().equals("0")) {
 			String[] tempChange = vo.getCalStart().split("-");
 			String tempDate = "";
 //			반복일정 선택시 종료일을 +5년으로 잡는다
@@ -197,7 +199,7 @@ public class CalendarService {
 			vo.setCalRange(1);
 		}
 		
-		if (vo.getCalRecur() == "0") {
+		if (vo.getCalRecur().equals("0")) {
 //			일정이 하루이든 범위이든 시작일 기준으로 하나 등록
 			dao.insertSchedule(vo);
 		}
@@ -219,7 +221,7 @@ public class CalendarService {
 		System.out.println("---------------");
 		
 //		일시가 범위이거나 반복일때
-		if (vo.getCalRange() != 0 || vo.getCalRecur() != "0") {
+		if (vo.getCalRange() != 0 || !vo.getCalRecur().equals("0")) {
 //			일정이 범위일때 시작일을 제외한 나머지 일정을 넣기위한 함수
 			insertRangeDateMethod(vo, calStartYear, calStartMonth, calStartDay, calStartTime,
 								cal_range, calEndYear, calEndMonth, calEndDay, calEndTime);
