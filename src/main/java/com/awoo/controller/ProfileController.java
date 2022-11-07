@@ -8,15 +8,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.awoo.service.EmployeeInfoService;
 import com.awoo.service.PersonalInfoService;
 import com.awoo.service.UploadfilesService;
 import com.awoo.service.profileService;
-
+import com.awoo.vo.PersonalInfoVO;
 import com.awoo.vo.UploadfilesVO;
 import com.awoo.vo.profileVO;
 
@@ -24,52 +25,35 @@ import com.awoo.vo.profileVO;
 @Controller
 public class ProfileController {
 
-	private profileService service;
-	private PersonalInfoService Pservice;
-	private EmployeeInfoService Eservice;
+	private profileService pservice;
 	private UploadfilesService Uservice;
 	
-	public ProfileController(PersonalInfoService pservice, EmployeeInfoService eservice, UploadfilesService uservice, profileService service) {
+	
+	public ProfileController(profileService pservice, UploadfilesService uservice) {
 		super();
-		this.service = service;
-		Pservice = pservice;
-		Eservice = eservice;
+		this.pservice = pservice;
 		Uservice = uservice;
 	}
 	
-//	// 조회
-//	@GetMapping("/Profile")
-//	public String Profile(profileVO vo, Model model) {
-//		service.mySelectInfo(vo, model);	
-//		return "/Profile/Profile1";
-//	}
 	
-//	// 수정
-//	@RequestMapping("/Profile/updateData")
-//	public String updateProfile(profileVO vo, Model model) {
-//		service.updateProfile(vo, model);
-//		return "redirect:/Profile/Profile1";
-//	}
-//	
-//	
-	// 조회
+	// 조회 
 	@GetMapping("/Profile")
-	public String Profile(profileVO vo, Model model,HttpServletResponse response,UploadfilesVO uvo,@RequestParam("empno") int empno) {
-		service.mySelectInfo(vo, model);
-		uvo.setOwnerId(empno);
+	public String profile(Model model, Model model1, UploadfilesVO uvo, @SessionAttribute("personalInfoVO")PersonalInfoVO pvo ) {
+		// 내정보 가져오기
+		pservice.selectJY(pvo.getEmpno(),model1);
+		//사진가져오기
+		uvo.setOwnerId(pvo.getEmpno());
 		Uservice.selectFile(uvo, model);
-		return "/Profile/Profile1";
+		return "Profile/Profile1";
 	}
 	
-// 수정 데이터 오는지 찍어본거
-//	@PostMapping("/Profile/updateData")
-//	   public ResponseEntity<String> Profile(profileVO profileVO){
-//	      System.out.println("profileVO : " + profileVO);
-//	      return null;
-//	   }
-//	
-//	
-	
+	@PostMapping("/Profile/updateData")
+	public String update(@SessionAttribute("personalInfoVO")PersonalInfoVO pvo, profileVO vo) {
+		vo.setEmpno(pvo.getEmpno());
+		
+		pservice.updateJY(vo);
+		return "redirect:/Profile";
+	}
 
 }
 	

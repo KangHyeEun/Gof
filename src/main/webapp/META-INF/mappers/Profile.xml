@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.awoo.dao.profileDAO">
 
-	<select id="selectInfoJY" resultType="profileVO">
+	<select id="select" resultType="profileVO">
 		SELECT id 
 			 , name
 			 , gender
@@ -24,29 +24,26 @@
 			 , estatus
 			 , check_admin
 		  FROM personal_info 
-		  JOIN employee_info ON personal_info.empno = employee_info.empno
-		<where>
-			<if test="empno != 0">
-				personal_info.empno = #{empno} 	
-			</if>
-		</where> 
+		  JOIN employee_info ON personal_info.empno = employee_info.empno 
+		  where  employee_info.empno =  #{emp}
+			
+	 
 	</select>
 	
-<!-- 	<update id="updateE">
-		UPDATE personal_info
-		<set>
-		       password 	= #{password}
-			 , email	 	= #{email}
-			 , tel_number 	= #{telNumber}
-			 , phone_number = #{phoneNumber}
-			 , address 	 	= #{address}
-		</set>
-	   <where>
-	   	   <if test="empno != 0">
-		   	   personal_info.empno = #{empno}
-		   </if>
-	   </where> 
-	</update>  -->
+	<update id="updateE">
+		
+		  
+	 UPDATE personal_info 
+		SET 
+		PASSWORD =#{password} , 
+		email	 	= CONCAT(#{emailf},'@',#{emails}),
+		tel_number= #{telNumber} ,
+		phone_number =#{phoneNumber} ,
+		address = #{address}
+		where empno =  #{empno}
+			 
+		 
+	</update>  
 	
 
 	

@@ -46,10 +46,10 @@
 			<div class="container-inner-bbs">
 				<div class="inner-div-bbs">
 					<!-- 각자 필요한 부분 넣기 -->
-					<c:forEach items="${myInfo}" var="info">
+					
 						<div class="scroll">
 							<div class="intro">
-								<h3>${info.name}님의 상세정보</h3>
+								<h3>${jy.name}님의 상세정보</h3>
 								<p>⏏홈>내 정보>나의 상세정보</p>
 							</div>
 							<form action="${pageContext.request.contextPath}/Profile/updateData"
@@ -76,23 +76,22 @@
 										<table>
 											<tr>
 												<td class="label">이름<span></span></td>
-												<td>${info.name}</td>
+												<td>${jy.name}</td>
 	
 												<td class="label">성별<span></span></td>
-												<td>${info.gender}</td>
+												<td>${jy.gender}</td>
 											</tr>
 	
 											<tr>
 												<td class="label">생년월일<span></span></td>
-												<td colspan='3'>${info.birthday}</td>
+												<td colspan='3'>${jy.birthday}</td>
 											</tr>
 											<tr>
 												<td class="label">이메일<span></span></td>
-												<td colspan='3'><input type="text" name="email_id"
-													id="email_id" value="${info.emailf}" required> @ <input
-													type="text" name="email_domain" id="email_domain"
-													value="${info.emails}" required /> <select class="select"
-													id="email_select" required>
+												<td colspan='3'>
+													<input type="text" name="emailf" id="emailf" value="${jy.emailf}" required> @ 
+													<input type="text" name="emails" id="emails" value="${jy.emails}" required /> 
+													<select class="select" id="email_select" required>
 														<option value=" ">직접입력</option>
 														<option value="naver.com">naver.com</option>
 														<option value="gmail.com">gmail.com</option>
@@ -101,14 +100,16 @@
 														<option value="korea.com">korea.com</option>
 														<option value="nate.com">nate.com</option>
 														<option value="yahoo.com">yahoo.com</option>
-												</select></td>
+													</select>
+												</td>
 											</tr>
 											<tr>
 												<td id="noB" class="label">사원번호<span></span></td>
-												<td id="noB">${info.empno}</td>
+												<td id="noB">${jy.empno}</td>
 												<td id="noB" class="label">비밀번호<span></span></td>
-												<td id="noB"><input type="password" name="password"
-													id="password" value="${info.password}"></td>
+												<td id="noB">
+													<input type="password" name="password" id="password" value="${jy.password}">
+												</td>
 											</tr>
 										</table>
 									</div>
@@ -117,55 +118,50 @@
 									<table>
 										<tr>
 											<td class="label">부서</td>
-											<td>${info.edepartment}</td>
+											<td>${jy.edepartment}</td>
 											<td class="label">직책<span></span></td>
-											<td>${info.eposition}</td>
+											<td>${jy.eposition}</td>
 	
 										</tr>
 										<tr>
 											<td class="label">고용 형태<span></span></td>
-											<td>${info.ehiredType}</td>
+											<td>${jy.ehiredType}</td>
 											<td class="label">총 연차 수<span></span></td>
-											<td>${info.totalHoliday}</td>
+											<td>${jy.totalHoliday}</td>
 											<!--<td class="label">관리자 여부</td>
 											<td><input type="checkbox" name="check_admin"
 												id="check_admin"></td>-->
 										</tr>
 										<tr>
 											<td class="label">입사일<span></span></td>
-											<td>${info.ehiredDate}</td>
+											<td>${jy.ehiredDate}</td>
 											<td class="label">재직 상태<span></span></td>
-											<td>${info.estatus}</td>
+											<td>${jy.estatus}</td>
 										<tr>
 											<td class="label">전화번호</td>
-											<td colspan='1'><input type="number" name="telNumber"
-												id="telNumber" placeholder="번호만 입력해 주세요"
-												value="${info.telNumber}"></td>
-											<td class="label">핸드폰<span></span></td>
-											<td colspan='3'><input type="number" name="phoneNumber"
-												id="phoneNumber" required placeholder="번호만 입력해 주세요"
-												value="${info.phoneNumber}"></td>
+											<td colspan='1'>
+												<input type="number" name="telNumber" id="telNumber" placeholder="번호만 입력해 주세요" value="${jy.telNumber}">
+											</td>
+											<td class="label"><span>핸드폰</span>
+											</td>
+											<td colspan='3'>
+												<input type="number" name="phoneNumber" id="phoneNumber" required placeholder="번호만 입력해 주세요" value="${jy.phoneNumber}">
+											</td>
 										</tr>
 										<tr>
 											<td id="noB" class="label">주소</td>
 											<td colspan='5'>
 												<div style="display: flex; flex-direction: row;">
-													<input type="text" id="addre" value="${info.address}"
-														style="width: 100%" />
-													<div style="display: none;" id="addresszip"
-														style="display: flex; flex-direction: row;">
-														<input type="text" name="postcode" id="postcode"
-															placeholder="우편번호"> <input type="text"
-															name="address" id="address" placeholder="주소"> <input
-															type="text" name="detailAddress" id="detailAddress"
-															placeholder="상세주소"> <input type="text"
-															name="extraAddress" id="extraAddress" placeholder="참고항목">
-													</div>
-													<input type="button" onclick="execDaumPostcode()"
-														value="우편번호 찾기"><br>
+													<input type="text" name="address" id="address" value="${jy.address}" style="width: 100%" />
+<!-- 													<div id="addresszip" style="display: flex; flex-direction: row;"> -->
+<!-- 														<input type="text" name="address" id="address" placeholder="우편번호">  -->
+<!-- 														<input type="text" name="address" id="address" placeholder="주소">  -->
+<!-- 														<input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소">  -->
+<!-- 														<input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목"> -->
+<!-- 													</div> -->
+<!-- 													<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br> -->
 												</div>
-												<div id="wrap"
-													style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
+												<div id="wrap" style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
 													<img
 														src="//t1.daumcdn.net/postcode/resource/images/close.png"
 														id="btnFoldWrap"
@@ -179,88 +175,29 @@
 								<br>
 								<div class="btnzip">
 									<div class="zip" style="width: 60%">
-										<button type="submit" class="insertbtn">내정보 수정하기</button>
+										<button type="submit" class="insertbtn" id="btn1">내정보 수정하기</button>
 									</div>
 								</div>
 							</form>
 							
-							<!-- 주소 찾기  ------------------------------------------------------------------------------------------------------>
-							<script
-								src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-							<script>
-            var element_wrap = document.getElementById('wrap');
-
-            function foldDaumPostcode() {
-                element_wrap.style.display = 'none';
-            }
-
-            function execDaumPostcode() {
-                // var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
-                
-                 var addresszip = document.getElementById('addresszip');
-                 var addre = document.getElementById('addre'); 
-                 
-                 addresszip.style.display = 'flex';
-                 addre.style.display = 'none';
-                
-                new daum.Postcode({
-                    oncomplete: function(data) {
-                        var addr = ''; 
-                        var extraAddr = ''; 
-
-                        if (data.userSelectedType === 'R') { 
-                            addr = data.roadAddress;
-                        } else { 
-                            addr = data.jibunAddress;
-                        }
-
-                        if(data.userSelectedType === 'R'){
-                            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                                extraAddr += data.bname;
-                            }
-                            if(data.buildingName !== '' && data.apartment === 'Y'){
-                                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                            }
-                            if(extraAddr !== ''){
-                                extraAddr = ' (' + extraAddr + ')';
-                            }
-                            document.getElementById("extraAddress").value = extraAddr;
-                        
-                        } else {
-                            document.getElementById("extraAddress").value = '';
-                        }
-
-                        document.getElementById('postcode').value = data.zonecode;
-                        document.getElementById("address").value = addr;
-                        document.getElementById("detailAddress").focus();
-
-                        element_wrap.style.display = 'none';
-
-                        document.body.scrollTop = currentScroll;
-                    },
-
-                    onresize : function(size) {
-                        element_wrap.style.height = size.height+'px';
-                    },
-                    width : '100%',
-                    height : '100%'
-                }).embed(element_wrap);
-
-                element_wrap.style.display = 'block';
-            }
-        </script>
-							<!-- 이메일 박스 -------------------------------------------------------------------------------------------------------->
-							<script>
+			
+						</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+				<!-- 주소 찾기  ------------------------------------------------------------------------------------------------------>
+		
+          
+        
+		<!-- 이메일 박스 -------------------------------------------------------------------------------------------------------->
+		<script>
             document.getElementById("email_select").addEventListener("change",function(){
-                const email_select = document.getElementById("email_select").value;
-                const email = document.getElementById("email_domain");
-                if(email_select != " "){
-                    email.readonly  = true;   
-                    email.value = email_select; 
-                }else {
-                    email.value = null; 
-                    email.readonly  = false;   
-                }
+                const email1 = document.getElementById("email_select").value;
+                console.log(email1);
+                
+                document.getElementById("emails").value = email1;
             });
 
         
@@ -277,14 +214,11 @@
         });
 		
 
-   
+        document.getElementById("btn1").addEventListener("click",function(){
+        	alert("정상적으로 수정되었습니다.");
+        })
+        
+    
     </script>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-	</div>
-
 </body>
 </html>

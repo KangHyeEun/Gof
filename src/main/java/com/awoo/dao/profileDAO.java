@@ -10,11 +10,10 @@ import com.awoo.vo.profileVO;
 @Mapper
 public interface profileDAO {
 	
+	public profileVO select(int emp);
 	// 조회
-	public List<profileVO> selectInfoJY(profileVO vo);
+	
+	public void updateE(profileVO vo);
 }
-	
-	// 수정
-//	public void updateProfile(profileVO vo);
-	
+
 

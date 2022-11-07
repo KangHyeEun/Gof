@@ -15,25 +15,20 @@ import com.awoo.vo.profileVO;
 @Service
 public class profileService {
 	
-	private profileDAO dao;
-	private PersonalInfoService service;
+	private profileDAO pdao;
 
-	public profileService(profileDAO dao,PersonalInfoService service) {
+	public profileService(profileDAO pdao) {
 		super();
-		this.dao = dao;
-		this.service = service;
+		this.pdao = pdao;
 	}
 
-	public void mySelectInfo(profileVO vo, Model model) {
-		List<profileVO> fvo = dao.selectInfoJY(vo);
-		model.addAttribute("myInfo", fvo);
+	public void selectJY(int empno, Model model) {
+		model.addAttribute("jy", pdao.select(empno));
 	}
-	
-//	public void updateProfile(profileVO vo, Model model) {
-//		dao.updateProfile(vo);
-//	}
-	
 
+	public void updateJY(profileVO vo) {
+		pdao.updateE(vo);
+	}
 	
 
 }
