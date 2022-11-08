@@ -131,30 +131,10 @@ width: 25px;
 }
 .pop-container{
  padding-bottom: 3px;
+ height: 700px;
 }
-#detailpop .pop-container{
-	 background-image: url("${pageContext.request.contextPath}/resources/imges/kakao.png");
- 	 background-size : cover; 
-	 height: 816px;
-	 padding:0;
-	 justify-content: flex-start;
-}
-.button-kakao{
-    width: 300px;
-    z-index: 10;
-    height: 100%;
-    background-size: contain;
-    background-repeat: no-repeat;
-	background-image: url("${pageContext.request.contextPath}/resources/imges/kakao-button.png");
-}
-.no-button-kakao{
-	width: 300px;
-    z-index: 10;
-    height: 100%;
-    background-size: contain;
-    background-repeat: no-repeat;
-	background-image: url("${pageContext.request.contextPath}/resources/imges/kakao-mb.png");
-}
+
+
 #detailpop .pop1{
 border:none;
 }

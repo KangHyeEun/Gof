@@ -115,7 +115,7 @@
     }
 	.holiday-list tr th, .holiday-list tr td {
 	text-overflow: ellipsis;
-    overflow: hidden;	
+    overflow: hidden;
 	}    
     .holiday-list tr th:nth-child(1), .holiday-list tr td:nth-child(1) {
     width: 30px;
@@ -132,3 +132,18 @@
 	.holiday-list tr th:nth-child(6), .holiday-list tr td:nth-child(6) {
     width: 300px;
 	}
+	.div2{
+	    overflow: auto;
+	}
+	
+	@media screen and (max-width: 1280px) {
+		.div2 .holiday-list tr th:nth-child(6), .div2 .holiday-list tr td:nth-child(6) {
+		display:none;
+		}
+	}
+	@media screen and (max-width: 1000px) {
+		.pop-container {
+	    width: 90%;
+	    height: 850px;
+	}
+}

@@ -374,7 +374,7 @@ border: 1px solid #959595;
 	}
 	.detail-container table, .detail-container table td {
     font-weight: normal;
-    white-space: break-spaces;
+    white-space: nowrap;
     overflow: auto;
     }
 	.detail-container table td:nth-child(1) {

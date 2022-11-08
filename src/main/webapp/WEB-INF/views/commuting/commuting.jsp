@@ -25,10 +25,9 @@
 			<div class="container-inner-bbs">
 			<div class="intro">
 				<h3>근무 기록</h3>
-				<p>⏏홈&gt;근태 관리&gt;근무 기록</p>
+				<p></p>
 			</div>
 				
-					
 					<div class="container1">
 						<section class="section1">
 							<div class="sub-title-container">

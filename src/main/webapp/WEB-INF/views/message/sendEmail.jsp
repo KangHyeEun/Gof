@@ -155,7 +155,7 @@
 										<label for="file">File</label>
 										   <input type="file" name="attachment" multiple class="mail-input" id="file">
 										<label for="content" >Content</label>
-												<textarea name="content" class="ckeditor" required="required" id="content"></textarea>
+											<textarea name="content" class="ckeditor" required="required" id="content"></textarea>
 									 	<div class="pop5">
 									 		<button type="button" value="Submit" id="empty-send">전송</button>
 											<button type="submit" value="Submit" id="real-send" style="display:none">전송</button>

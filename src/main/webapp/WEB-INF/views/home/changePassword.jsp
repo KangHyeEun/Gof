@@ -58,8 +58,9 @@
 					</div>
 				</div>
 				<form action="${pageContext.request.contextPath}/EmailAuth" method="post" id="modal-form" name="modal-form">
-					<label for="text">받는 이메일 :</label><input type="email" name="userMail" id="userMail" value="${userInfo.email}"><br />
+					<label for="text">받는 이메일 :</label><input type="email" name="userMail" id="userMail" value="${userInfo.email}" readonly><br />
 					<button id="mail-auth">인증번호 받기</button>
+					<p style="font-size:2px">※본인 이메일이 아닐 경우 관리자에 연락부탁드립니다</p>
 				</form>
 			</div>
 		</div>

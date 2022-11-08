@@ -14,6 +14,29 @@
 <script id="javascript-sdk" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <title>Insert title here</title>
 <style>
+#detailpop .pop-container{
+	 background-image: url("${pageContext.request.contextPath}/resources/imges/kakao.png");
+ 	 background-size : cover; 
+	 height: 816px;
+	 padding:0;
+	 justify-content: flex-start;
+}
+.button-kakao{
+    width: 300px;
+    z-index: 10;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+	background-image: url("${pageContext.request.contextPath}/resources/imges/kakao-button.png");
+}
+.no-button-kakao{
+	width: 300px;
+    z-index: 10;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+	background-image: url("${pageContext.request.contextPath}/resources/imges/kakao-mb.png");
+}
 
 </style>
 </head>
