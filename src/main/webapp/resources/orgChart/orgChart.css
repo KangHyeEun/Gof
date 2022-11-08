@@ -87,7 +87,8 @@ input {
 	flex-direction: row;
 	overflow-x: auto;
 	white-space: nowrap;
-	font-size: 0
+	font-size: 0;
+	padding: 1%;
 }
 
 .org1::-webkit-scrollbar {
@@ -113,7 +114,7 @@ input {
 }
 
 .org1-main {
-	border: 1px solid black;
+	border: 1px solid #dfe7ee;
 	min-width: 250px;
 	max-width: 250px;
 	height: 20vh;
@@ -232,10 +233,6 @@ th {
 	background-color: #272454;
 	color: white;
 	cursor: pointer;
-}
-
-.inner-div-bbs {
-/* 	overflow: auto; */
 }
 
 .inner-div-bbs::-webkit-scrollbar {

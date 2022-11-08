@@ -87,7 +87,6 @@ public class AdminController {
 				@RequestParam("proimg") MultipartFile[] files,
 				UploadfilesVO vo)throws IllegalStateException, IOException {
 			model.addAttribute("page", page);
-			System.out.println(evo.getTotalHoliday());
 			Eservice.updateE(pvo,evo,request);
 			for (MultipartFile file : files) { 
 				if(!file.getOriginalFilename().isEmpty()){ 
@@ -96,7 +95,7 @@ public class AdminController {
 					vo.setOwnerId(evo.getEmpno());
 					Uservice.updateFile(vo); 
 					} else { 
-						System.out.println("에러가 발생했습니다."); 
+						System.out.println("사진을 변경하지 않았습니다."); 
 						} 
 				}	
 			
@@ -130,7 +129,7 @@ public class AdminController {
 				vo.setOwnerId(evo.getEmpno());
 				Uservice.uplaodFile(vo); 
 				} else { 
-					System.out.println("에러가 발생했습니다."); 
+					System.out.println("사진을 등록하지 않았습니다."); 
 					} 
 			}
 		 

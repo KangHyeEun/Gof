@@ -24,15 +24,32 @@
 }
 
 .scroll {
+    flex-direction: column;
 	box-sizing: border-box;
     width: 100%;
+    overflow-x: auto;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 5px;  /* 스크롤바의 너비 */
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    height: 10px; /* 스크롤바의 길이 */
+    background: #e6eff8; /* 스크롤바의 색상 */
+    
+    border-radius: 1px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: #f4f6f8;  /*스크롤바 뒷 배경 색상*/
 }
 
 #showimg {
 	width: 100%;
 	height: 80%;
 	border-radius: 100%;
-	border: 1px solid black;
+	border: 1px solid #dfe7ee;
 	box-sizing: content-box;
 }
 
@@ -124,9 +141,10 @@ nav {
 	    align-items: center;
 	    margin-bottom: 25px;
 	    margin-top: 25px;
+	    margin-left: 20%;
 	}
 	.prodiv {
-		width: 20%;
+		width: 150px;
     	height: 190px;
 	}
 	#personal {
@@ -155,12 +173,13 @@ nav {
 	select {
 		padding: 0;
 	}
-}
-
-@media screen and (max-width:815px) {
-	
+	.btnzip {
+		margin-bottom: 10%;
+	}
 }
 
 @media screen and (max-width:500px) {
-	
+	.btnzip {
+		margin-bottom: 20%;
+	}
 }

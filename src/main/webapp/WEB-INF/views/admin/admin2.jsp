@@ -82,10 +82,10 @@
 							</div>
 
 							<div id="employee" style="width: 100%;">
-								<table>
+								<table class="etable">
 									<tr>
 										<td class="label">부서</td>
-										<td>
+										<td class="selecte">
 											<select class="edepartment" id="edepartment" name="edepartment">
 												<option value="-">※선택해주세요</option>
 												<c:forEach var = "d" items="${listD}">
@@ -94,7 +94,7 @@
 											</select>
 										</td>
 										<td class="label">직책<span class="redspan">*</span></td>
-										<td>
+										<td class="selecte">
 											<select name="eposition" id="eposition"
 											required>
 												<option value="-">※선택해주세요</option>
@@ -104,7 +104,7 @@
 											</select>
 										</td>
 										<td class="label">재직 상태<span class="redspan">*</span></td>
-										<td>
+										<td class="selecte">
 											<select name="estatus" id="estatus"
 											required>
 												<option value="-">※선택해주세요</option>
@@ -116,7 +116,7 @@
 									</tr>
 									<tr>
 										<td class="label">고용 형태<span class="redspan">*</span></td>
-										<td>
+										<td class="selecte">
 											<select name="ehiredType" id="ehiredType"
 											required>
 												<option value="">※선택해주세요</option>
