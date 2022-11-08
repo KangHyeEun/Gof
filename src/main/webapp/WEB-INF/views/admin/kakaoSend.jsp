@@ -103,6 +103,9 @@
     width: 65%;
     flex-direction: column;
 }
+.pop-titleContainer > p{
+width:100%;
+}
 .pop2{
     height: 88%;
     display: flex;

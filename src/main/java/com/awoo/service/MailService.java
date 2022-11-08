@@ -27,11 +27,8 @@ import com.awoo.vo.MailVO;
 @Service
 public class MailService {
 
-	@Autowired
 	private JavaMailSenderImpl mailSender;
-	private MailDAO dao;
-	
-	
+	private MailDAO dao;	
 	
 	public MailService(JavaMailSenderImpl mailSender, MailDAO dao) {
 		super();
@@ -120,6 +117,37 @@ public class MailService {
 		int id = (int)model.getAttribute("id");	
 		return dao.getDetailMail(id);
 	}
+	
+	
+	// 로그인 인증 메일 보내는 곳
+	public void sendAuthMail(Map<String, Object> map) { 
+		 
+	    MimeMessagePreparator[] preparators = new MimeMessagePreparator[1];
+    	preparators[0] =  new MimeMessagePreparator() {
+    		 @Override 
+ 	        public void prepare(MimeMessage mimeMessage) throws Exception {
+ 	            final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+ 	            helper.setFrom("awoogof@gmail.com");
+ 	            helper.setTo((String)map.get("mail"));
+ 	            helper.setSubject("[AWOO]인증번호입니다.");
+ 	            helper.setText(
+ 	            		"<p><span style=\"font-size:18px\"><u><strong>[AWOO 인증 메세지]</strong></u></span></p>\r\n"
+ 	            		+ "\r\n"
+ 	            		+ "<p>이메일 인증은 사원인증 <u><strong>최초 1회</strong></u> 진행됩니다</p>\r\n"
+ 	            		+ "\r\n"
+ 	            		+ "<p>아래의 번호를 입력하여 주시기 바랍니다.</p>\r\n"
+ 	            		+ "\r\n"
+ 	            		+ "<p><span style=\"color:#2980b9; font-size:15px\"><strong>"+map.get("random").toString()+"</strong></span></p>\r\n"
+ 	            		+ "\r\n"
+ 	            		+ "<p>&nbsp;</p>\r\n"
+ 	            		+ ""
+ 	            		, true);
+ 	            }
+			};
+		//메일 보내는 곳!
+			mailSender.send(preparators);
+		}
+	    
 	
 }
 
