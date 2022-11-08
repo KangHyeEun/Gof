@@ -27,7 +27,7 @@
 					<div class="select">
 						<div class="intro">
 							<h3>직원 정보 관리</h3>
-							<p>⏏홈>관리자>인사관리</p>
+							<p></p>
 						</div>
 						<form action="${pageContext.request.contextPath}/admin" method="get">
 							<input name="page" value="1" style="display: none;" />
@@ -235,7 +235,7 @@
 											<div class="mdiv2-1">
 												<h5 style="color: #aaabad;">직원추가</h5>
 												<div class="sdiv">
-													<input type="text" name="userKeyWord" id="userKeyWord" class="minput"
+													<input type="text" name="userKeyWord" id="userKeyWord" class="minput" onclick="filter()"
 													onkeyup="filter()" autocomplete='off' placeholder="입력해주세요" onsubmit="return false;">
 													<div id="suggestdiv">
 														<c:forEach var="j" items="${list}" varStatus="status">

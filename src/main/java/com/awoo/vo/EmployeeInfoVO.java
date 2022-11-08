@@ -10,7 +10,7 @@ public class EmployeeInfoVO {
 	 private double totalHoliday;
 	 private double usedHoliday;
 	 private int checkAdmin;
-
+	 
 	public double getUsedHoliday() {
 		return usedHoliday;
 	}

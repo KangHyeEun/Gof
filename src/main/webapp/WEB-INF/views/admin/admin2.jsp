@@ -26,7 +26,7 @@
 						<div class="intro">
 							<h3>신규 직원 등록</h3>
 							<br />
-							<p>⏏홈>관리자>인사관리>직원 개별 등록</p>
+							<p></p>
 						</div>
 						<form action="${pageContext.request.contextPath}/admin/insertData"
 							class="form1" method="post" enctype="multipart/form-data">
@@ -45,7 +45,7 @@
 											<td><input type="text" name="name" id="name" required></td>
 											<td class="label">성별<span class="redspan">*</span></td>
 											<td><input type="radio" name="gender" id="gender"
-												value="M"> 남자 <input type="radio" name="gender"
+												value="M" checked> 남자 <input type="radio" name="gender"
 												id="gender" value="F"> 여자</td>
 										</tr>
 										<tr>
@@ -93,10 +93,9 @@
 												</c:forEach>
 											</select>
 										</td>
-										<td class="label">직책<span class="redspan">*</span></td>
+										<td class="label">직책</td>
 										<td class="selecte">
-											<select name="eposition" id="eposition"
-											required>
+											<select name="eposition" id="eposition">
 												<option value="-">※선택해주세요</option>
 												<c:forEach var = "p" items="${listP}">
 													<option value="${p.position}">${p.position}</option>
@@ -107,7 +106,7 @@
 										<td class="selecte">
 											<select name="estatus" id="estatus"
 											required>
-												<option value="-">※선택해주세요</option>
+												<option>※선택해주세요</option>
 												<option value="재직">재직</option>
 												<option value="휴직">휴직</option>
 												<option value="퇴직">퇴직</option>
@@ -117,9 +116,8 @@
 									<tr>
 										<td class="label">고용 형태<span class="redspan">*</span></td>
 										<td class="selecte">
-											<select name="ehiredType" id="ehiredType"
-											required>
-												<option value="">※선택해주세요</option>
+											<select name="ehiredType" id="ehiredType" required>
+												<option>※선택해주세요</option>
 												<option value="정규직">정규직</option>
 												<option value="비정규직">비정규직</option>
 											</select>
@@ -139,10 +137,10 @@
 									<tr>
 										<td class="label">전화번호</td>
 										<td colspan='1'><input type="number" name="telNumber"
-											id="telNumber" placeholder="번호만 입력해 주세요"></td>
+											id="telNumber" placeholder="번호만 입력해 주세요"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></td>
 										<td class="label">핸드폰<span class="redspan">*</span></td>
 										<td colspan='3'><input type="number" name="phoneNumber"
-											id="phoneNumber" required placeholder="번호만 입력해 주세요"></td>
+											id="phoneNumber" required placeholder="번호만 입력해 주세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></td>
 									</tr>
 									<tr>
 										<td id="noB" class="label">주소</td>

@@ -57,7 +57,7 @@
 									<div class="org">
 										<div class="intro">
 											<h3>부서별 안내</h3>
-											<p>⏏홈>직원 현황</p>
+											<p></p>
 										</div>
 										<h3>전체 <span id="count1"></span>명</h3>
 										

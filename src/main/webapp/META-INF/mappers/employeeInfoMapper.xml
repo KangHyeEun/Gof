@@ -147,7 +147,6 @@
 	<delete id="deletePosition">
 		DELETE FROM positionp WHERE id = #{id};
 	</delete>
-	
 		
 	<!-- test -->
 	<select id="selectEmpPro" resultType="EmployeeInfoVO">

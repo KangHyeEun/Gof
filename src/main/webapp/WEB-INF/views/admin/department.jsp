@@ -33,7 +33,7 @@
 				<div class="inner-div-bbs">
 					<div class="intro">
 						<h2>부서 관리</h2>
-						<p>⏏홈>관리자>부서 관리</p>
+						<p></p>
 					</div>
 					<div class="tbtn1">
 						<button type="button" id="insertBtn">부서 등록</button>

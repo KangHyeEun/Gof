@@ -32,5 +32,9 @@
 		select count(mail_auth) from personal_info where empno = #{empno} and mail_auth = #{mailAuth}
 	</select>
 	
+	<!-- 관리자 확인 -->
+	<select id="checkAdmin" resultType="String">
+		select if (check_admin = 1, '관리자','일반') AS result FROM employee_info WHERE empno = #{empno};
+	</select>
 </mapper>
 

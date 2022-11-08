@@ -32,7 +32,7 @@
 				<div class="inner-div-bbs">
 					<div class="intro">
 						<h2>직책 관리</h2>
-						<p>⏏홈>관리자>직책 관리</p>
+						<p></p>
 					</div>
 					<div class="tbtn1">
 						<button type="button" id="insertBtn">직책 등록</button>

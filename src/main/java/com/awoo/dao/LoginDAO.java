@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.awoo.vo.EmployeeInfoVO;
 import com.awoo.vo.PersonalInfoVO;
 
 @Mapper
@@ -16,4 +17,7 @@ public interface LoginDAO {
 	public PersonalInfoVO getUserInfo(int empno);
 	public void setMailAuth(Map<String, Object> map);
 	public int getMailAuth(Map<String, Object> map);
+	
+	//관리자 확인
+	public String checkAdmin(PersonalInfoVO vo);
 }

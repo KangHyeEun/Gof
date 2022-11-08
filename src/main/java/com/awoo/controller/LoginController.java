@@ -31,7 +31,7 @@ public class LoginController {
 		this.service = service;
 		this.mservice = mservice;
 	}
-
+	
 	//로그인(세션 저장)
 	@PostMapping("/login")
 	public String login(PersonalInfoVO vo, HttpSession session, HttpServletRequest request) {

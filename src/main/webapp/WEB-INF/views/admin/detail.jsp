@@ -42,7 +42,7 @@
 						<div class="intro">
 							<h3>${info.name}님의 직원 정보</h3>
 							<br />
-							<p>⏏홈>관리자>인사관리>직원 상세 정보</p>
+							<p></p>
 						</div>
 						<form action="${pageContext.request.contextPath}/admin/updateData"
 							class="form1" method="post" enctype="multipart/form-data">

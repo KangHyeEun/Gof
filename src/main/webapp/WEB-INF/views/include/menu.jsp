@@ -3,11 +3,6 @@
     
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/menu/default.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&display=swap" rel="stylesheet">
-    
-    <style>
-
-	
-	</style>
 
             <nav class="nav">
                 <div class="menuwrap">
@@ -63,8 +58,8 @@
                     <ul class="menu">
                         <li><a href="${pageContext.request.contextPath }/calendar">캘린더</a></li>
                     </ul>
-
-                    <ul onclick="show_sub3()" class="dropmenu3">
+					
+                    <ul onclick="show_sub3()" class="dropmenu3" style="display: none;">
                         <li>관리자</li>
                         <li class="drop_down_pointer"><span class="menu-up3 btn-display">▲</span><span
                                 class="menu-down3">▼</span></li>
@@ -83,7 +78,12 @@
                     </ul> -->
                 </div>
             </nav>
-    
+    <script type="text/javascript">
+    	var checkAdmin = '<%=(String)session.getAttribute("checkAdmin")%>';
+    	if(checkAdmin == '관리자'){
+    		document.querySelector(".dropmenu3").style.display='block';
+    	}
+	</script>
     <script src="${pageContext.request.contextPath}/resources/menu/dropDown.js"></script>
 
 

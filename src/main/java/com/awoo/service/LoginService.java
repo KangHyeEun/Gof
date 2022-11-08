@@ -33,6 +33,9 @@ public class LoginService {
 			//세션에 담기
 			session.setAttribute("personalInfoVO", loginDao.selectUser(vo));
 			
+			// 혜은 : 관리자 확인
+			session.setAttribute("checkAdmin", loginDao.checkAdmin(vo));
+			
 			//가빈 추가 비밀번호가 abc1일경우 비밀번호 변경 페이지로 이동
 			if(loginDao.selectUser(vo).getPassword().equals("abc1")){
 				path ="redirect:/login/changePassword";				
