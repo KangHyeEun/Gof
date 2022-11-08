@@ -174,7 +174,7 @@
 									</c:forEach>
 								</table>
 								<!-- 상세보기 모달 -->
-								<div class="modal_dim" id="modal_dim2">
+								<div class="modal_dim" id="modal_dim_detail">
 									<div class="modal_wrap"
 										style="width: 30%;min-height: 60%;">
 										<div class="modal">
@@ -184,7 +184,7 @@
 													<span id="pop-approval"></span>
 												</div>
 												<div>
-													<h5 id="exit2">X</h5>
+													<h5 id="detailExit">X</h5>
 												</div>
 											</div>
 											<div class="detail-container">
@@ -300,10 +300,10 @@
 	 	 for (let k = 1; k <= size; k++) {
 	 		 
 	 		 document.getElementById("detail"+k).addEventListener("click",function(){
-				document.getElementById("modal_dim2").style.display = "flex";
+				document.getElementById("modal_dim_detail").style.display = "flex";
 				
-				document.getElementById("exit2").addEventListener("click", function() {
-					document.getElementById("modal_dim2").style.display = "none";
+				document.getElementById("detailExit").addEventListener("click", function() {
+					document.getElementById("modal_dim_detail").style.display = "none";
 				});
 				
 				let id1 = document.getElementById("detail"+k).getAttribute("value1");
