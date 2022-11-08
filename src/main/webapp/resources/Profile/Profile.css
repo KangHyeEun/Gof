@@ -96,12 +96,16 @@ input, select {
 }
 
 .insertbtn {
-	background-color: #14abab;
-	border: 1px solid #14abab;
+	background-color: #272454;
+	border: 1px solid #272454;
 	color: white;
 	width: 150px;
     height: 40px;
     border-radius: 5px;
+}
+.insertbtn:hover {
+	background-color:#2b2fd2;
+	border: 1px solid #2b2fd2;
 }
 
 .form1 {

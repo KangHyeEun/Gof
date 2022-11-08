@@ -76,15 +76,15 @@
 										<table>
 											<tr>
 												<td class="label">이름<span></span></td>
-												<td>${jy.name}</td>
+												<td style="background-color:rgba(123,137,148,.2);">${jy.name}</td>
 	
 												<td class="label">성별<span></span></td>
-												<td>${jy.gender}</td>
+												<td style="background-color:rgba(123,137,148,.2);">${jy.gender}</td>
 											</tr>
 	
 											<tr>
 												<td class="label">생년월일<span></span></td>
-												<td colspan='3'>${jy.birthday}</td>
+												<td colspan='3' style="background-color:rgba(123,137,148,.2);">${jy.birthday}</td>
 											</tr>
 											<tr>
 												<td class="label">이메일<span></span></td>
@@ -105,7 +105,7 @@
 											</tr>
 											<tr>
 												<td id="noB" class="label">사원번호<span></span></td>
-												<td id="noB">${jy.empno}</td>
+												<td id="noB" style="background-color:rgba(123,137,148,.2);">${jy.empno}</td>
 												<td id="noB" class="label">비밀번호<span></span></td>
 												<td id="noB">
 													<input type="password" name="password" id="password" value="${jy.password}">
@@ -118,25 +118,25 @@
 									<table>
 										<tr>
 											<td class="label">부서</td>
-											<td>${jy.edepartment}</td>
+											<td style="background-color:rgba(123,137,148,.2);">${jy.edepartment}</td>
 											<td class="label">직책<span></span></td>
-											<td>${jy.eposition}</td>
+											<td style="background-color:rgba(123,137,148,.2);">${jy.eposition}</td>
 	
 										</tr>
 										<tr>
 											<td class="label">고용 형태<span></span></td>
-											<td>${jy.ehiredType}</td>
+											<td style="background-color:rgba(123,137,148,.2);">${jy.ehiredType}</td>
 											<td class="label">총 연차 수<span></span></td>
-											<td>${jy.totalHoliday}</td>
+											<td style="background-color:rgba(123,137,148,.2);">${jy.totalHoliday}</td>
 											<!--<td class="label">관리자 여부</td>
 											<td><input type="checkbox" name="check_admin"
 												id="check_admin"></td>-->
 										</tr>
 										<tr>
 											<td class="label">입사일<span></span></td>
-											<td>${jy.ehiredDate}</td>
+											<td style="background-color:rgba(123,137,148,.2);">${jy.ehiredDate}</td>
 											<td class="label">재직 상태<span></span></td>
-											<td>${jy.estatus}</td>
+											<td style="background-color:rgba(123,137,148,.2);">${jy.estatus}</td>
 										<tr>
 											<td class="label">전화번호</td>
 											<td colspan='1'>
