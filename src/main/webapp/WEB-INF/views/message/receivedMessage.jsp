@@ -143,7 +143,7 @@
 							</div>	
 							<div class="pop2">
 								<p class="p"><span class="important">*</span>보낼사람 (사원번호)</p>
-								<input type="text" id="mreceiverId" name="mreceiverId" onkeyup="filter()" required autocomplete='off'/>
+								<input type="text" id="mreceiverId" name="mreceiverId" onkeyup="filter()" required autocomplete='off' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
 								<!-- 이름검색 -->
 								<div class="person-info-container">
 									 <c:forEach items="${employees}" var="em">
@@ -303,18 +303,21 @@
 					alert("삭제할 쪽지가 없습니다.");
 				} else {
 					var chk = confirm("정말 삭제하시겠습니까?");	
-					fetch("${pageContext.request.contextPath}/sendMessage/deleteMessage",{
-						method : "POST", // PUT, PATCH, DELETE
-						headers : {"Content-Type" : "application/json"},
-						body : JSON.stringify(valueArr)
-					}).then(response => response.json())
-				
-					.then(data => {
-						
-						alert("삭제가 완료되었습니다.");
-					}).catch(error => {
-						console.log("error");
-				});
+					if(chk){
+						fetch("${pageContext.request.contextPath}/sendMessage/deleteMessage",{
+							method : "POST", // PUT, PATCH, DELETE
+							headers : {"Content-Type" : "application/json"},
+							body : JSON.stringify(valueArr)
+						}).then(response => response.json())
+					
+						.then(data => {
+							
+							alert("삭제가 완료되었습니다.");
+						}).catch(error => {
+							console.log("error");
+						});	
+					}
+					
 			}		
 			location.reload();
 		});		

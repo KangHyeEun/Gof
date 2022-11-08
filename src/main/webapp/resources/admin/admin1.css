@@ -508,6 +508,7 @@ nav {
  	border-radius:3px; 
 	font-size:11px;
 	color: black;
+	cursor: pointer;
 	}
 	
 	.num a{

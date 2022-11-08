@@ -338,6 +338,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     }
     #enter:hover {
 /*     background: linear-gradient(#226fb1, #053d6c); */
@@ -358,6 +359,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     }
     #leave:hover {
 /*     background: linear-gradient(#70707c, #0e0e10); */

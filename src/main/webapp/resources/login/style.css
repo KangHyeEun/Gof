@@ -70,6 +70,7 @@ button {
     font-weight: bold;
     border: none;
     width: 84%;
+    cursor: pointer;
 }
 form{
 	width: 100%;

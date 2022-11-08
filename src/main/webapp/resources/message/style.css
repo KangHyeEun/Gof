@@ -303,6 +303,7 @@ border: 1px solid #959595;
     justify-content: center;
     align-items: center;
     border-radius: 0.4rem;
+    cursor: pointer;
     }
     .bottom-div button:hover{
    	    background: linear-gradient(1deg, #000000, #272454);
@@ -319,6 +320,7 @@ border: 1px solid #959595;
     justify-content: center;
     align-items: center;
     border-radius: 0.4rem;
+    cursor: pointer;
     }
     #writeMessage:hover{
     background: linear-gradient(1deg, #000000, #272454);
@@ -397,6 +399,7 @@ border: 1px solid #959595;
     justify-content: center;
     align-items: center;
     border-radius: 0.4rem;
+    cursor: pointer;
 	}
 	.sub-title{
 	width: auto;
@@ -433,6 +436,7 @@ border: 1px solid #959595;
 	.sortings select{
 	border: none;
 	text-align: center;
+	cursor: pointer;
 }
 	.sortings span{
 		font-weight:bold;

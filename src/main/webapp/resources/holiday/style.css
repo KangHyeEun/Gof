@@ -65,6 +65,7 @@
 #sortingYear{
 /* 	width:50%; */
     width: 100px;
+    cursor: pointer;
 }
 .holiday-list{
     width: 100%;
@@ -94,6 +95,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 0.4rem;
+    cursor: pointer;
 }
 #apply-holiday:hover {
 	background: linear-gradient(1deg, #000000, #272454);
@@ -196,6 +198,7 @@
 	width:50%;
 	height: 60%;
 	padding: 0 2%;
+	cursor: pointer;
 }
 .pop2-1{
 	width:100%;
@@ -255,7 +258,7 @@
     height: 100%;
     font-weight: bold;
     border-radius: 4px;
-
+	cursor: pointer;
 }
 #morning-off,#afternoon-off{
 	border: 1px solid black;
@@ -265,6 +268,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 /* #morning-off{ */
 /* 	background-color:#272454; */
@@ -309,6 +313,7 @@
 .date-div input{
     width: 45%;
     height: 100%;
+    cursor: pointer;
 }
 	
 .p{
@@ -318,7 +323,7 @@
 	color: #ff6a53;
 }
 input[type=radio]{ 
- 	display: none; 
+ 	display: none;
  } 
 #input1:checked ~ #morning-off,
 #input2:checked ~ #afternoon-off{
@@ -345,6 +350,7 @@ input[type=radio]{
  	border-radius:3px; 
 	font-size:11px;
 	color: black;	
+	cursor: pointer;
 }
 .num a{
 text-decoration : none;
@@ -616,7 +622,7 @@ border: 1px solid #959595;
 /*      	color: #9f9f9f; */
     box-sizing: border-box;
     padding: 6px 0;
-
+	cursor: pointer;
 	}
 	.holiday-list td a:hover{
  		transition: 0.3s; 

@@ -8,41 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/message/successPageStyle.css">
 
 <title>Insert title here</title>
 <style>
-	.container1{
-	    flex-direction: column;
-	}
-	.img-container img{
-	    width: 100px;
-  		height: 100px;
-	}
-	.img-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150px;
-	}
-	.button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    background-color: #dfdfdf;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-	}
-	.send-message{
-	height: 45px;
-    /* font-weight: bold; */
-    letter-spacing: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #484848;
-	}
+
 </style>
 </head>
 <body>
@@ -72,12 +42,10 @@
 					        </div>
 					      </div>
 					    </div>
-					
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	
 	<script>
 	
 	</script>
