@@ -12,6 +12,9 @@ public class BBSCommentVO {
 	private String createDate;
 	private int orderId;
 	private int isDelete;
+	private String eposition;
+	private String edepartment;
+	
 	public int getId() {
 		return id;
 	}
@@ -60,7 +63,17 @@ public class BBSCommentVO {
 	public void setIsDelete(int isDelete) {
 		this.isDelete = isDelete;
 	}
-	
-
+	public String getEposition() {
+		return eposition;
+	}
+	public void setEposition(String eposition) {
+		this.eposition = eposition;
+	}
+	public String getEdepartment() {
+		return edepartment;
+	}
+	public void setEdepartment(String edepartment) {
+		this.edepartment = edepartment;
+	}
 	
 }

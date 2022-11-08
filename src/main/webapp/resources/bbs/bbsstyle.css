@@ -266,7 +266,7 @@ table th {
 	font-size:11px;
 	color: black;
 	cursor: pointer;
-	
+	 
 	}
 	.num a{
 	text-decoration : none;
@@ -275,6 +275,7 @@ table th {
 	display: flex;
 	justify-content:center;
 	align-items:center;
+	
 	}
 	.checked{
 	background-color: #272454;

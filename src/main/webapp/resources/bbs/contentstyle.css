@@ -114,51 +114,83 @@
     box-sizing: border-box;
     padding: 20px 5px;
 }
-.comment-img {
-    border-radius: 50px;
-    margin-right: 2%;
-/*     border: 1px solid #909294; */
-    width: 50px;
-    height: 40px;
+.comment-area textarea {
+    width: -webkit-fill-available;
+    border: none;
+    border-bottom: 1px solid gray;
+    resize: none;
+	box-shadow: 2px 1px 2px #c9c9c9;
+}
+.comment-area textarea:focus {
+    outline: none;
+}
+.comment-area button {
+	width: 70px;
+    height: 38px;
+    border-radius: 0.4rem;
+    color: #fff;
+    border: none;
+    background: #4f78bf;
     box-sizing: border-box;
 }
-#showimg {
-	width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    box-sizing: content-box;
-}
-.comment-area textarea {
-	width: -webkit-fill-available;
-    border-radius: 5px;
-}
-#comment-list {
-/*     background-color: #f1f5fa; */
-/*     border-radius: 10px; */
-/*     margin: 10px 0; */
-/*     padding: 20px; */
-}
+/* .comment-img { */
+/*     border-radius: 50px; */
+/*     margin-right: 2%; */
+/*     width: 50px; */
+/*     height: 40px; */
+/*     box-sizing: border-box; */
+/* } */
+/* #showimg { */
+/* 	width: 100%; */
+/*     height: 100%; */
+/*     border-radius: 100%; */
+/*     box-sizing: content-box; */
+/* } */
 .comment-wrap {
 	margin-bottom: 1rem;
-/*     border-radius: 10px; */
-/*     border: 1px solid #909294; */
-/* 	padding: 0.5rem; */
+    background-color: #f0f5fa;
+    padding: 10px;
 }
 .comment-upper{
 	display: flex;
     justify-content: space-between;
-    align-items: center;
 }
+.comment-upper-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .comment-upper-right {
-	display: flex;
+    display: flex;
+    align-items: baseline;
+}
+.comment-upper-left-round {
+	width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    box-sizing: border-box;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #41abab;
+    color: #fff;
+}
+.comment-upper-left p:nth-child(2) {
+	padding-right : 5px;
 }
 .comment-upper-right button {
-	margin-left: 20px;
+	margin-left: 15px;
     color: blue;
     border: none;
     font-size: 1rem;
     background-color: transparent;
     cursor: pointer;
+}
+.comment-context {
+    border-bottom: 1px solid gray;
+    padding: 0.5rem 2.5rem;
 }
 #edit_textarea {
 	width: -webkit-fill-available;

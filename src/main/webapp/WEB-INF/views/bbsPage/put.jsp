@@ -150,7 +150,9 @@
 	});
 	
 	//이지윅즈 적용
-	CKEDITOR.replace('textarea');
+	CKEDITOR.replace('textarea', {
+		filebrowserUploadUrl: 'bbsPage/uploadimage'
+	});
 	
 	//파일 수정, 삭제
 	$(function(){
