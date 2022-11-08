@@ -151,10 +151,10 @@
 											</select>
 										</td>
 										<td class="label">총 연차 수<span>*</span></td>
-										<td><input type="text" name="total_holiday"
+										<td><input type="text" name="totalHoliday"
 											id="total_holiday" value="${info.totalHoliday}" required></td>
 										<td class="label">관리자 여부</td>
-										<td><input type="checkbox" name="check_admin"
+										<td><input type="checkbox" name="checkAdmin"
 											id="check_admin"></td>
 									</tr>
 									<tr>

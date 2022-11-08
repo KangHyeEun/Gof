@@ -8,26 +8,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/admin2.css">
 <title>Insert title here</title>
-<style type="text/css">
-	.container {
-		height: auto;
-	}
-	nav {
-		height: auto;
-	}
-	.btnzip{
-		display: flex;
-		flex-direction: row;
-		width: 100%;
-	}
-	.zip {
-	    display: flex;
-	    justify-content: flex-end;
-	}
-	.zipimg{
-		
-	}
-</style>
 </head>
 <body>
 
@@ -107,7 +87,7 @@
 										<td class="label">부서</td>
 										<td>
 											<select class="edepartment" id="edepartment" name="edepartment">
-												<option value=" - ">※선택해주세요</option>
+												<option value="-">※선택해주세요</option>
 												<c:forEach var = "d" items="${listD}">
 													<option value="${d.department}">${d.department}</option>
 												</c:forEach>
@@ -117,7 +97,7 @@
 										<td>
 											<select name="eposition" id="eposition"
 											required>
-												<option value="">※선택해주세요</option>
+												<option value="-">※선택해주세요</option>
 												<c:forEach var = "p" items="${listP}">
 													<option value="${p.position}">${p.position}</option>
 												</c:forEach>
@@ -127,7 +107,7 @@
 										<td>
 											<select name="estatus" id="estatus"
 											required>
-												<option value="">※선택해주세요</option>
+												<option value="-">※선택해주세요</option>
 												<option value="재직">재직</option>
 												<option value="휴직">휴직</option>
 												<option value="퇴직">퇴직</option>

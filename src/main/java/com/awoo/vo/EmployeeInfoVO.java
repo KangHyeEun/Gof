@@ -7,7 +7,7 @@ public class EmployeeInfoVO {
 	 private String ehiredType;
 	 private String estatus;
 	 private String edepartment;
-	 private int totalHoliday;
+	 private double totalHoliday;
 	 private double usedHoliday;
 	 private int checkAdmin;
 
@@ -53,10 +53,10 @@ public class EmployeeInfoVO {
 	public void setEdepartment(String edepartment) {
 		this.edepartment = edepartment;
 	}
-	public int getTotalHoliday() {
+	public double getTotalHoliday() {
 		return totalHoliday;
 	}
-	public void setTotalHoliday(int totalHoliday) {
+	public void setTotalHoliday(double totalHoliday) {
 		this.totalHoliday = totalHoliday;
 	}
 	public int getCheckAdmin() {

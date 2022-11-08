@@ -12,25 +12,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/admin1.css">
 <title>Insert title here</title>
-<style type="text/css">
-	.sp{
-		font-size: 0.8rem;
-    	color: #a3a2a2;
-	}
-	.s1 .s2 .s3 {
-		width: 99px; 
-	}
-	.t2-tr {
-		display: flex;
-	}
-	.t2-td1 {
-		flex:1;
-	}
-	.t2-td2 {
-		flex:1;
-		width: 350px;
-	}
-</style>
 </head>
 <body>
 	<div class="container-wrap">
@@ -80,7 +61,7 @@
 								</div>
 								<div id="detailS">
 									<table id="t1">
-										<tr>
+										<tr class="t1-tr">
 											<td>재직상태</td>
 											<td>
 												<select name="estatus" id="estatus1">
@@ -90,24 +71,26 @@
 													<option value="휴직">휴직</option>
 												</select>
 											</td>
-											<td>이름</td>
-											<td><input type="text" name="name" id="name" placeholder="이름을 검색해 주세요"/></td>
+											<td class="nametd">
+												<span>이름</span>
+												<input type="text" name="name" id="name" placeholder="이름을 검색해 주세요"/>
+											</td>
 										</tr>
 									</table>
 									<table id="t2">
 										<tr class="t2-tr">
 											<td>입사기간</td>
-											<td class="t2-td1"><input type="date" name="ehiredDate" id="startDate"
-												placeholder="(시작일)">~<input type="date"
-												name="date" id="endDate" placeholder="(종료일)"></td>
-											<td class="t2-td2">
-												<span id="s1" class="styleA" onclick="change()">최근 1개월</span>
-<!-- 											</td> -->
-<!-- 											<td> -->
-												<span id="s2" class="styleA" onclick="change()">최근 2개월</span>
-<!-- 											</td> -->
-<!-- 											<td> -->
-												<span id="s3" class="styleA" onclick="change()">최근 3개월</span>
+											<td class="t2-td1">
+											<div class="minput">
+												<input type="date" name="ehiredDate" id="startDate"
+													placeholder="(시작일)">&nbsp;&nbsp;~&nbsp;&nbsp;<input type="date"
+													name="date" id="endDate" placeholder="(종료일)">
+											</div>
+												<div class="m3">
+													<span id="s1" class="styleA" onclick="change()">최근 1개월</span>
+													<span id="s2" class="styleA" onclick="change()">최근 2개월</span>
+													<span id="s3" class="styleA" onclick="change()">최근 3개월</span>
+												</div>
 											</td>
 										</tr>
 									</table>

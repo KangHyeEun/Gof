@@ -87,6 +87,7 @@ public class AdminController {
 				@RequestParam("proimg") MultipartFile[] files,
 				UploadfilesVO vo)throws IllegalStateException, IOException {
 			model.addAttribute("page", page);
+			System.out.println(evo.getTotalHoliday());
 			Eservice.updateE(pvo,evo,request);
 			for (MultipartFile file : files) { 
 				if(!file.getOriginalFilename().isEmpty()){ 

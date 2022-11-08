@@ -49,7 +49,7 @@
 		date_format(approval_date,'%y.%m.%d') AS approval_date, rejection_reason
 		FROM holiday h, employee_info e
 		where h.empno = e.empno
-		order by DATE_FORMAT(hwrite_date, '%y.%m.%d %H:%i:%m') desc;
+		order by id desc;
 	</select>
 	<select id="selectCount" resultType="int">
 		SELECT COUNT(*) FROM holiday;

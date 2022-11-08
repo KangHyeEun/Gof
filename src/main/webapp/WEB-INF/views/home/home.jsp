@@ -326,36 +326,9 @@
 
 					<div class="outersection right-outersection">
 						<div class="inner-outer-section right-inner-outer">
-							<p class="bbs-subtitle">사내 게시판</p>
+							<p class="bbs-subtitle">생활·경제 뉴스</p>
 							<div class="bbs-container">
-								<table class="bbs-table">
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>분류</th>
-											<th>제목</th>
-											<th>작성자</th>
-											<th>작성일</th>
-											<th>조회수</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="vo" items="${BBSListForHome}"
-											varStatus="status">
-											<tr>
-												<td>${vo.id}</td>
-												<td>${vo.category}</td>
-												<td><a href="${pageContext.request.contextPath}/bbsPage/bbs/${vo.id}">${vo.title}</a></td>
-												<td>${vo.owner}</td>
-												<td>${vo.createDate}</td>
-												<td>${vo.viewCounts}</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-								<div class="hidden-link-to-bbs">
-									<a href="${pageContext.request.contextPath}/bbsPage/bbs">사내 공지사항으로 이동</a>
-								</div>
+								<table class="bbs-table" id="newsTable"></table>
 							</div>
 						</div>
 					</div>
@@ -771,7 +744,32 @@
 		}
 
 
-    
+    	//-------------------------뉴스 api-------------------------------------
+    	window.onload = function(){
+
+		fetch("${pageContext.request.contextPath}/news")
+		.then(response => response.json())
+		.then(data => {
+			const newsTable = document.getElementById("newsTable");
+
+	        let size = data.items.length;
+	        
+	        for (let i = 0; i < size; i++) {
+	            const tr = document.createElement("tr");
+	            const td = document.createElement("td");
+
+	            const a = document.createElement("a");
+	            a.innerHTML=data.items[i].title;
+	            a.setAttribute("href",data.items[i].originallink);
+	            a.setAttribute("target","_blank");
+	            td.append(a);
+	            tr.append(td);
+	            newsTable.append(tr);
+	        }
+		}).catch(error => {
+			console.log("error");
+		});
+    }
     </script>
 
 
