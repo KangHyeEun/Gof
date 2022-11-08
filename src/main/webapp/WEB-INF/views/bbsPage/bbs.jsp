@@ -25,6 +25,7 @@
 	    <!-- 헤더 -->
 	    <div class="bbs-header">
 	        <div class="title">
+	            <span><img src="${pageContext.request.contextPath}/resources/imges/pen.png"/></span>
 	            <h3>사내 게시판</h3>
 	        </div>
 	        <div class="wrbtn">
@@ -54,13 +55,13 @@
 				<table>
 					<thead>
 						<tr>
-							<th>번호</th>
-							<th>분류</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>조회수</th>
-							<th>첨부 파일</th>
+							<th style="width: 7%">No.</th>
+							<th style="width: 13%">분류</th>
+							<th style="width: 45%">제목</th>
+							<th style="width: 8%">작성자</th>
+							<th style="width: 13%">작성일</th>
+							<th style="width: 8%">조회수</th>
+							<th style="width: 8%">첨부 파일</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -163,6 +164,16 @@
 
 		location.href = "${pageContext.request.contextPath}/bbsPage/bbs?searchType="+searchType+"&keyword="+keyword;
 	});	
+	
+	//검색(enter 이벤트)
+	document.getElementById("keyword").addEventListener('keyup',function(e){
+	    if (e.keyCode === 13) {
+			let searchType = document.getElementById("searchType").value;
+			let keyword = document.getElementById("keyword").value;
+			
+			location.href = "${pageContext.request.contextPath}/bbsPage/bbs?searchType="+searchType+"&keyword="+keyword;
+	  }  
+	});
 	
 // 	function clickPage(i){
 // 		let searchType = document.getElementById("searchType").value;

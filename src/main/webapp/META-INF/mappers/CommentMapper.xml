@@ -5,9 +5,10 @@
 <mapper namespace="com.awoo.dao.BBSCommentDAO">
 	
 	<select id="selectCommentList" resultType="BBSCommentVO">
-		select id, bbs_id, owner_id, owner, comment, 
-		date_format(create_date, '%Y-%m-%d %T') createDate
-		from bbs_comment 
+		select b.id, b.bbs_id, b.owner_id, b.owner, b.comment, 
+		date_format(b.create_date, '%Y-%m-%d %T') create_date, e.eposition, e.edepartment 
+		from bbs_comment as b inner join employee_info as e
+		on b.owner_id = e.empno 
 		where is_delete = 0 and bbs_id = #{bbsId}
 	</select>
 	

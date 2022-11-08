@@ -8,6 +8,14 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bbs/bbsstyle.css"/>
 <title>Insert title here</title>
 <style type="text/css">
+#import-category {
+	font-family: 'Nanum Barun Gothic', sans-serif;
+/*     font-size: 1.2rem; */
+    font-weight: 700;
+/*     line-height: 1.8rem; */
+    color: #272454;
+    background: #f8f8f9;
+}
 </style>
 </head>
 <body>
@@ -27,7 +35,7 @@
 	    <!-- 헤더 -->
 	    <div class="bbs-header">
 	        <div class="title">
-	            <h3>공지사항</h3>
+	           <span><img src="${pageContext.request.contextPath}/resources/imges/notice.png"/></span><h3>공지사항</h3>
 	        </div>
 	        <div class="wrbtn">
                 <c:if test="${personalInfoVO.empno == 220102}">
@@ -43,10 +51,9 @@
 						    <option value="title" <c:if test="${page.searchType eq 'title'}">selected</c:if>>제목</option>
 					        <option value="content" <c:if test="${page.searchType eq 'content'}">selected</c:if>>내용</option>
 						    <option value="title_content" <c:if test="${page.searchType eq 'title_content'}">selected</c:if>>제목+내용</option>
-						    <option value="owner" <c:if test="${page.searchType eq 'owner'}">selected</c:if>>작성자</option>
 						</select>
 						
-						<input type="text" name="keyword" id="keyword" value="${page.keyword}"/>
+						<input type="text" name="keyword" id="keyword" value="${page.keyword}" placeholder="입력해주세요"/>
 						<button id="search">
 							<img src="${pageContext.request.contextPath}/resources/imges/search.svg"/>
 						</button>	
@@ -58,20 +65,22 @@
 				<table>
 					<thead>
 						<tr>
-							<th>번호</th>
-							<th>분류</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>조회수</th>
-							<th>첨부 파일</th>
+							<th style="width: 7%">No.</th>
+							<th style="width: 13%">분류</th>
+							<th style="width: 45%">제목</th>
+							<th style="width: 8%">작성자</th>
+							<th style="width: 13%">작성일</th>
+							<th style="width: 8%">조회수</th>
+							<th style="width: 8%">첨부 파일</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="vo" items="${list}" varStatus="status">
-							<tr>
+						<c:choose>
+						<c:when test="${vo.category == '중요'}">
+							<tr id="import-category">
 								<td>${vo.id}</td>
-								<td>${vo.category} <c:if test="${vo.category == '중요'}"><img src="${pageContext.request.contextPath}/resources/imges/horn.svg"/></c:if></td>
+								<td>${vo.category} <img src="${pageContext.request.contextPath}/resources/imges/horn.svg"/></td>
 								<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
 								<td>인사담당자</td>
 								<td>${vo.createDate}</td>
@@ -82,6 +91,23 @@
 								</c:if>
 								</td>
 							</tr>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td>${vo.id}</td>
+								<td>${vo.category}</td>
+								<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
+								<td>인사담당자</td>
+								<td>${vo.createDate}</td>
+								<td>${vo.viewCounts}</td>
+								<td>
+								<c:if test="${vo.fileCounts != 0}">
+									<span><img src="${pageContext.request.contextPath}/resources/imges/clip.png" id="cilpimg"/></span>${vo.fileCounts}
+								</c:if>
+								</td>
+							</tr>
+						</c:otherwise>
+						</c:choose>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -153,16 +179,24 @@
 </div>
 		
 <script type="text/javascript">
-// //검색
+//검색(click 이벤트)
 	document.getElementById("search").addEventListener("click", function(){
 		let searchType = document.getElementById("searchType").value;
 		let keyword = document.getElementById("keyword").value;
 		
-		console.log(searchType);
-		console.log(keyword);
-
 		location.href = "${pageContext.request.contextPath}/bbsNotice/bbs?searchType="+searchType+"&keyword="+keyword;
 	});	
+//검색(enter 이벤트)
+	document.getElementById("keyword").addEventListener('keyup',function(e){
+	    if (e.keyCode === 13) {
+			let searchType = document.getElementById("searchType").value;
+			let keyword = document.getElementById("keyword").value;
+			
+			location.href = "${pageContext.request.contextPath}/bbsNotice/bbs?searchType="+searchType+"&keyword="+keyword;
+	  }  
+	});
+	
+	
 </script>
 
 </body>

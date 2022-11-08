@@ -69,13 +69,13 @@
 				
 				<div class="comment-area">
 					<!-- 댓글 적는 곳 -->
-					<div class="comment-img">
-						<c:forEach var="img" items="${fileList}">
-							<c:if test="${personalInfoVO.empno eq img.ownerId}">
-								<img id="showimg" src="${pageContext.request.contextPath}/upload/${img.fileName}">
-							</c:if>
-						</c:forEach>
-					</div>
+<!-- 					<div class="comment-img"> -->
+<%-- 						<c:forEach var="img" items="${fileList}"> --%>
+<%-- 							<c:if test="${personalInfoVO.empno eq img.ownerId}"> --%>
+<%-- 								<img id="showimg" src="${pageContext.request.contextPath}/upload/${img.fileName}"> --%>
+<%-- 							</c:if> --%>
+<%-- 						</c:forEach> --%>
+<!-- 					</div> -->
 					<textarea name="comment" id="comment"></textarea>
 					<button id="set-comment">등록</button>
 				</div>
@@ -120,6 +120,9 @@
 						
 						const div3 = document.createElement("div");
 						div3.setAttribute("class", "comment-upper-left");
+
+						const span = document.createElement("span");
+						span.setAttribute("class", "comment-upper-left-round");
 						
 						const div4 = document.createElement("div");
 						div4.setAttribute("class", "comment-upper-right");
@@ -127,13 +130,12 @@
 						const div5 = document.createElement("div");
 						div5.setAttribute("class", "comment-context");
 						
-						//이미지를 넣어볼까?
-// 						const img = document.createElement("img");
-// 						img.setAttribute("id", "showimg");
-// 						img.setAttribute("src", "${pageContext.request.contextPath}/upload/${img.fileName}");
-						
 						const owner = document.createElement("p");
 						owner.innerText = item.owner;
+						const eposition = document.createElement("p");
+						eposition.innerText = item.eposition;
+						const edepartment = document.createElement("p");
+						edepartment.innerText = item.edepartment;
 						const comment = document.createElement("p");
 						comment.innerText = item.comment;
 						const createDate = document.createElement("p");
@@ -200,7 +202,7 @@
 								
 								// 수정완료 버튼 클릭 시 이벤트
 								edit_modify.addEventListener("click", function(){
-									//alert("수정완료 버튼 클릭");
+// 									alert("수정완료 버튼 클릭");
 									if(confirm("수정하시겠습니까")){
 										let comment = edit_textarea.value;
 										
@@ -219,7 +221,7 @@
 												edit_div.remove();
 											}
 										});
-										location.reload();	
+// 										location.reload();	
 									}
 								});
 							});
@@ -229,10 +231,14 @@
 						div1.append(div2);
 						div2.append(div3);
 						div2.append(div4);
- 						
-// 						div3.append(img);
+ 							
+						div3.append(span);
+						div3.append(owner);
+						div3.append(eposition);
+// 						div3.append('(');
+						span.append(edepartment);
+// 						div3.append(')');
 						
-						div3.prepend(owner);
 						div4.prepend(createDate);
 						
 						div1.append(div5);
@@ -387,7 +393,7 @@
 														
 							commentList.append(div);
 							
-							location.reload();
+// 							location.reload();
 						}
 					});
 				}else{

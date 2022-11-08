@@ -104,7 +104,7 @@
 		where id = #{id};
 	</update>
 	
-		<!-- 파일 업로드 -->
+	<!-- 파일 업로드 -->
 	<insert id="insertBBSFile" parameterType="BBSFileVO">
 		insert into bbs_uploadfile(bbs_id, servername, localname, bbs_seperate)
 		values(#{bbsId}, #{servername}, #{localname}, 'B')
@@ -172,7 +172,7 @@
 				concat('%', #{keyword}, '%')
 			</when>
 		</choose>
-		order by category desc
+		order by category desc, id desc 
 		limit #{startRow}, #{cntPerPage}
 	</select>
 	

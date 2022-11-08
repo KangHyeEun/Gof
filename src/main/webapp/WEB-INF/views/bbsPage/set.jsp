@@ -53,11 +53,13 @@
 								</tr>
 								<tr>
 									<th>카테고리</th>
-									<td><form:select path="category">
+									<td>
+										<form:select path="category">
 											<c:forEach var="vo" items="${categories}">
 												<form:option value="${vo.category}" class="category">${vo.category}</form:option>
 											</c:forEach>
-										</form:select></td>
+										</form:select>
+									</td>
 								</tr>
 								<tr>
 									<th>제목</th>
