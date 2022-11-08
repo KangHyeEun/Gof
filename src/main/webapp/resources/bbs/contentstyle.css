@@ -146,7 +146,7 @@
 /*     border-radius: 100%; */
 /*     box-sizing: content-box; */
 /* } */
-.comment-wrap {
+#comment-wrap {
 	margin-bottom: 1rem;
     background-color: #f0f5fa;
     padding: 10px;
@@ -174,7 +174,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #41abab;
     color: #fff;
 }
 .comment-upper-left p:nth-child(2) {
@@ -188,7 +187,7 @@
     background-color: transparent;
     cursor: pointer;
 }
-.comment-context {
+#comment-context {
     border-bottom: 1px solid gray;
     padding: 0.5rem 2.5rem;
 }

@@ -113,7 +113,7 @@
 						const commentList = document.querySelector("#comment-list");
 						
 						const div1 = document.createElement("div");
-						div1.setAttribute("class", "comment-wrap");
+						div1.setAttribute("id", "comment-wrap");
 						
 						const div2 = document.createElement("div");
 						div2.setAttribute("class", "comment-upper");
@@ -123,17 +123,31 @@
 
 						const span = document.createElement("span");
 						span.setAttribute("class", "comment-upper-left-round");
+// 						span.style.backgroundColor = "gray";
 						
 						const div4 = document.createElement("div");
 						div4.setAttribute("class", "comment-upper-right");
 
 						const div5 = document.createElement("div");
-						div5.setAttribute("class", "comment-context");
+						div5.setAttribute("id", "comment-context");
 						
 						const owner = document.createElement("p");
 						owner.innerText = item.owner;
 						const eposition = document.createElement("p");
 						eposition.innerText = item.eposition;
+						
+						if(item.edepartment == "영업"){
+							span.style.backgroundColor = "#41abab";
+						}else if(item.edepartment == "인사"){
+							span.style.backgroundColor = "purple";
+						}else if(item.edepartment == "회계"){
+							span.style.backgroundColor = "#272454";
+						}else if(item.edepartment == "마케팅"){
+							span.style.backgroundColor = "orange";
+						}else {
+							span.style.backgroundColor = "green";
+						}
+						
 						const edepartment = document.createElement("p");
 						edepartment.innerText = item.edepartment;
 						const comment = document.createElement("p");
@@ -221,7 +235,8 @@
 												edit_div.remove();
 											}
 										});
-// 										location.reload();	
+										//리로드
+										location.reload();
 									}
 								});
 							});
@@ -235,9 +250,7 @@
 						div3.append(span);
 						div3.append(owner);
 						div3.append(eposition);
-// 						div3.append('(');
 						span.append(edepartment);
-// 						div3.append(')');
 						
 						div4.prepend(createDate);
 						
@@ -264,19 +277,19 @@
 				let comment = $("#comment").val();
 				
 				if(comment.length > 0){
-					//현재 시간
-					let today = new Date();
+// 					//현재 시간
+// 					let today = new Date();
 					
-					let year = today.getFullYear();
-					let month = ('0' + (today.getMonth() + 1)).slice(-2);
-					let day = ('0' + today.getDate()).slice(-2);
+// 					let year = today.getFullYear();
+// 					let month = ('0' + (today.getMonth() + 1)).slice(-2);
+// 					let day = ('0' + today.getDate()).slice(-2);
 					
-					let hours = ('0' + today.getHours()).slice(-2); 
-					let minutes = ('0' + today.getMinutes()).slice(-2);
-					let seconds = ('0' + today.getSeconds()).slice(-2); 
+// 					let hours = ('0' + today.getHours()).slice(-2); 
+// 					let minutes = ('0' + today.getMinutes()).slice(-2);
+// 					let seconds = ('0' + today.getSeconds()).slice(-2); 
 
-					let dateTimeString = year+'-'+month+'-'+day+hours+':'+minutes+':'+seconds;
-					let createDate = dateTimeString;
+// 					let dateTimeString = year+'-'+month+'-'+day+hours+':'+minutes+':'+seconds;
+// 					let createDate = dateTimeString;
 					
 // 					console.log(dateTimeString); //현재 시간 찍힘
 					
@@ -285,7 +298,6 @@
 							bbsId :"${bbsVO.id}",
 							ownerId:"${personalInfoVO.empno}",
 							owner:"${personalInfoVO.name}",
-							createDate
 							};
 					
 					$.ajax({
@@ -295,105 +307,107 @@
 						contentType : "application/json; charset=utf-8",
 						dataType : "json",
 						success:function(data){
-							let owner = data.owner;
+							location.reload();
+
+// 							let owner = data.owner;
 							
-							const commentList = document.querySelector("#comment-list");
+// 							const commentList = document.querySelector("#comment-list");
 							
-							const div = document.createElement("div");
-							const owner1 = document.createElement("p");
-							owner1.innerText = data.owner;
-							const comment = document.createElement("p");
-							comment.innerText = data.comment;
+// 							const div = document.createElement("div");
+// 							const owner1 = document.createElement("p");
+// 							owner1.innerText = data.owner;
+// 							const comment = document.createElement("p");
+// 							comment.innerText = data.comment;
 							
-							// 삭제 버튼
-							const delete_button = document.createElement("button");
-							delete_button.innerText = "삭제";
+// 							// 삭제 버튼
+// 							const delete_button = document.createElement("button");
+// 							delete_button.innerText = "삭제";
 							
-							delete_button.addEventListener("click", function(){
-								//alert("삭제되었습니다");
-								let yn = confirm("삭제하시겠습니까?");
-								//console.log(yn);
-								if(yn){
-									let comment_data = {id : data.id};
+// 							delete_button.addEventListener("click", function(){
+// 								//alert("삭제되었습니다");
+// 								let yn = confirm("삭제하시겠습니까?");
+// 								//console.log(yn);
+// 								if(yn){
+// 									let comment_data = {id : data.id};
 										
-									$.ajax({
-										url:"${pageContext.request.contextPath}/bbsPage/comment/delete",
-										type:"DELETE",
-										data:JSON.stringify(comment_data),
-										contentType : "application/json; charset=utf-8",
-										dataType : "html",
-										success:function(data){
-											div.remove();
-										}
-									});
-								}
-							});
+// 									$.ajax({
+// 										url:"${pageContext.request.contextPath}/bbsPage/comment/delete",
+// 										type:"DELETE",
+// 										data:JSON.stringify(comment_data),
+// 										contentType : "application/json; charset=utf-8",
+// 										dataType : "html",
+// 										success:function(data){
+// 											div.remove();
+// 										}
+// 									});
+// 								}
+// 							});
 								
-							div.append(delete_button);
+// 							div.append(delete_button);
 							
-							// 수정 버튼
-							const modify_button = document.createElement("button");
-							modify_button.innerText = "수정";
+// 							// 수정 버튼
+// 							const modify_button = document.createElement("button");
+// 							modify_button.innerText = "수정";
 							
-							modify_button.addEventListener("click", function(){
-								const edit_div = document.createElement("div");
-								const edit_textarea = document.createElement("textarea");
-								edit_textarea.cols = "200";
-								edit_textarea.rows = "5";
+// 							modify_button.addEventListener("click", function(){
+// 								const edit_div = document.createElement("div");
+// 								const edit_textarea = document.createElement("textarea");
+// 								edit_textarea.cols = "200";
+// 								edit_textarea.rows = "5";
 								
-								edit_textarea.value = comment.innerText;
+// 								edit_textarea.value = comment.innerText;
 								
-								const edit_modify = document.createElement("button");
-								edit_modify.innerText = "수정완료";
-								const edit_cancel = document.createElement("button");
-								edit_cancel.innerText = "취소";
+// 								const edit_modify = document.createElement("button");
+// 								edit_modify.innerText = "수정완료";
+// 								const edit_cancel = document.createElement("button");
+// 								edit_cancel.innerText = "취소";
 								
-								edit_div.append(edit_textarea);
-								edit_div.append(edit_modify);
-								edit_div.append(edit_cancel);
+// 								edit_div.append(edit_textarea);
+// 								edit_div.append(edit_modify);
+// 								edit_div.append(edit_cancel);
 								
-								div.after(edit_div);
-								div.style.display = "none";
+// 								div.after(edit_div);
+// 								div.style.display = "none";
 								
-								// 취소 버튼 클릭 시 이벤트
-								edit_cancel.addEventListener("click", function(){
-									div.style.display = "block";
-									edit_div.remove();
-								});
+// 								// 취소 버튼 클릭 시 이벤트
+// 								edit_cancel.addEventListener("click", function(){
+// 									div.style.display = "block";
+// 									edit_div.remove();
+// 								});
 								
-								// 수정완료 버튼 클릭 시 이벤트
-								edit_modify.addEventListener("click", function(){
-									//alert("수정완료 버튼 클릭");
-									if(confirm("수정하시겠습니까")){
-										let comment = edit_textarea.value;
+// 								// 수정완료 버튼 클릭 시 이벤트
+// 								edit_modify.addEventListener("click", function(){
+// 									//alert("수정완료 버튼 클릭");
+// 									if(confirm("수정하시겠습니까")){
+// 										let comment = edit_textarea.value;
 										
-										const modify_data = {comment, id:data.id};
+// 										const modify_data = {comment, id:data.id};
 										
-										$.ajax({
-											url:"${pageContext.request.contextPath}/bbsPage/comment/update",
-											type:"PATCH",
-											data:JSON.stringify(modify_data),
-											contentType : "application/json; charset=utf-8",
-											dataType : "json",
-											success:function(data){
-// 												console.log(data);
-												comment.innerText = data.comment;
-												div.style.display = "block";
-												edit_div.remove();
-											}
-										});
-									}
-								});
-							});
+// 										$.ajax({
+// 											url:"${pageContext.request.contextPath}/bbsPage/comment/update",
+// 											type:"PATCH",
+// 											data:JSON.stringify(modify_data),
+// 											contentType : "application/json; charset=utf-8",
+// 											dataType : "json",
+// 											success:function(data){
+// // 												console.log(data);
+// 												comment.innerText = data.comment;
+// 												div.style.display = "block";
+// 												edit_div.remove();
+// 											}
+// 										});
+// 									}
+// 								});
+// 							});
 							
-							div.append(modify_button);
+// 							div.append(modify_button);
 														
-							div.prepend(comment);
-							div.prepend(owner1);
+// 							div.prepend(comment);
+// 							div.prepend(owner1);
 														
-							commentList.append(div);
+// 							commentList.append(div);
 							
-// 							location.reload();
+// // 							location.reload();
 						}
 					});
 				}else{
