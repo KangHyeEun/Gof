@@ -20,6 +20,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/calendar/cal-style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 </head>
+<style>
+.chat {
+	position: fixed;
+	right: 2%;
+	bottom: 3%;
+}
+</style>
 <body onload="refreshFunc();">
 <!-- <body> -->
 	<div class="container-wrap">
@@ -200,6 +207,12 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="chat">
+			<div><span>🟢</span></div>
+<%-- 			<jsp:include page="../include/menu.jsp"></jsp:include> --%>
+		</div>
+		
 	</div>
 	<script type="text/javascript">
 // 		.js 파일에서 contextPath 사용을 위해 sessionStorag에 저장

@@ -147,6 +147,9 @@ nav{
 	.container-inner-bbs {
 	 	width: 100%;
 	}
+	.container-inner {
+	 	width: 100%;
+	}
    .toggle-none{
        display: none;
    }
