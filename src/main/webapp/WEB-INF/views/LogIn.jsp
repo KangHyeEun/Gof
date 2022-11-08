@@ -23,7 +23,7 @@
 				<!-- Login Form -->
 				<form:form modelAttribute="personalInfoVO" action="${pageContext.request.contextPath}/login" method="post" name="loginForm">
 					<p>아이디</p>
-					<form:input path="empno" placeholder="아이디를 입력하세요" id="empno" value="220204"/>
+					<form:input path="empno" placeholder="아이디를 입력하세요" id="empno" value="220204" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
 					<p>패스워드</p>
 					<form:password path="password" placeholder="패스워드를 입력하세요" id="pw" value="abc6"/>
 					<button id="checkPW">Log in</button>
@@ -35,24 +35,24 @@
 	</div>
 
 <!-- 	<div class="modal" style="display:block;"> -->
-	<div class="modal" style="display:block;">
-		<div id="formContent">
-			<div class="modal-header">
-				<div>
-					<h3 class="active">비밀번호 변경</h3>
-				</div>
-				<div>
-					<h5 class="close-button">X</h5>
-				</div>
-			</div>
-			<form action="${pageContext.request.contextPath}/resetPassword" method="post" id="modal-form" name="modal-form">
-				<label for="text">아이디:</label><input type="text" name="empno_id" id="empno_id"><br />
-				<label for="text">현재 비밀번호:</label><input type="text" name="nowPW" id="nowPW"><br />
-				<label for="text">새 비밀번호:</label><input type="password" name="newPW" id="newPW" placeholder="영문자+숫자+특수문자 조합 8~25자리"><br />
-				<button id="submit">비밀번호 바꾸기</button>
-			</form>
-		</div>
-	</div>
+<!-- 	<div class="modal" style="display:block;"> -->
+<!-- 		<div id="formContent"> -->
+<!-- 			<div class="modal-header"> -->
+<!-- 				<div> -->
+<!-- 					<h3 class="active">비밀번호 변경</h3> -->
+<!-- 				</div> -->
+<!-- 				<div> -->
+<!-- 					<h5 class="close-button">X</h5> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<%-- 			<form action="${pageContext.request.contextPath}/resetPassword" method="post" id="modal-form" name="modal-form"> --%>
+<!-- 				<label for="text">아이디:</label><input type="text" name="empno_id" id="empno_id"><br /> -->
+<!-- 				<label for="text">현재 비밀번호:</label><input type="text" name="nowPW" id="nowPW"><br /> -->
+<!-- 				<label for="text">새 비밀번호:</label><input type="password" name="newPW" id="newPW" placeholder="영문자+숫자+특수문자 조합 8~25자리"><br /> -->
+<!-- 				<button id="submit">비밀번호 바꾸기</button> -->
+<%-- 			</form> --%>
+<!-- 		</div> -->
+<!-- 	</div> -->
 </body>
 
 <!-- 신규 사원 비밀번호 변경 유도 -->
@@ -61,6 +61,7 @@
 window.addEventListener("DOMContentLoaded",function(){
 	document.querySelector(".modal").style.display = "none";
 });
+
  
 document.getElementById("checkPW").addEventListener("click", function(e){
     let empno = document.querySelector('#empno').value;

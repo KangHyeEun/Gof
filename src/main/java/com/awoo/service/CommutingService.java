@@ -69,8 +69,7 @@ public class CommutingService {
 		String begin = cal.get(Calendar.YEAR) + "" + (cal.get(Calendar.MONTH) + 1)
 				+ cal.getMinimum(Calendar.DAY_OF_MONTH);
 		String end = cal.get(Calendar.YEAR) + "" + (cal.get(Calendar.MONTH) + 1)
-				+ cal.getMaximum(Calendar.DAY_OF_MONTH);
-		
+				+ cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		int getDays;
 		try {
 			// 시작일 마지막일을 아래에 있는 getDays메서드로 전송해서 평일 계산해옴
@@ -222,12 +221,9 @@ public class CommutingService {
 
 		Date format1 = new SimpleDateFormat(dateType).parse(begin);
 		Date format2 = new SimpleDateFormat(dateType).parse(end);
-
 		long diffSec = (format1.getTime() - format2.getTime()) / 1000; // 초 차이
 		long diffDays = diffSec / (24 * 60 * 60); // 일자수 차이
-
 		long DaysOfMonth = (diffDays * -1) + 1; // 이번달 총
-		
 		Date CountDate = bDate;		// 시작 값 : 20221001 이달의 첫날
 		int cnt = 0;
 		for (int i = 0; i < DaysOfMonth; i++) {

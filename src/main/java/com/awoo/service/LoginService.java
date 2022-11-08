@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.awoo.dao.LoginDAO;
 import com.awoo.vo.PersonalInfoVO;
@@ -28,10 +29,16 @@ public class LoginService {
 			session.invalidate();
 			//초기화한 후애 다시 세션 불러와야 함
 			session = request.getSession();
+			
 			//세션에 담기
 			session.setAttribute("personalInfoVO", loginDao.selectUser(vo));
-			path ="redirect:/login/home";
-//			path ="redirect:/MoveToHome";
+			
+			//가빈 추가 비밀번호가 abc1일경우 비밀번호 변경 페이지로 이동
+			if(loginDao.selectUser(vo).getPassword().equals("abc1")){
+				path ="redirect:/login/changePassword";				
+			}else {
+				path = "redirect:/login/home";
+			}
 		}else {
 			//세션을 초기화하고 로그인 창으로 돌려보냄
 			session.invalidate();
@@ -41,7 +48,25 @@ public class LoginService {
 	}
 	
 	//신입사원 초기 비밀번호 변경
-	public void resetPassword(Map<String, String> map) {
+	public void resetPassword(Map<String, Object> map) {
 		loginDao.updatePassword(map);	
+	}
+	
+	// 이메일 인증을 위한 데이터 가져오기
+	public void getUserInfo(int empno, Model model) {
+		model.addAttribute("userInfo", loginDao.getUserInfo(empno));
+	}
+	
+	public void setMailAuth(Map<String, Object> map) {
+		loginDao.setMailAuth(map);
+	}
+	public String getMailAuth(Map<String, Object> map) {
+		String path = "";
+		if(loginDao.getMailAuth(map) == 1) {
+			path = "redirect:/login/afterAuthPage";
+		}else {
+			path ="redirect:/login/changePassword";			
+		}
+		return path;
 	}
 }

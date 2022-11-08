@@ -18,12 +18,14 @@
 	width: 90px;
 	object-fit: cover;
 }
-.header > .header-logout{
+.header > .header-logout, .header > .header-logout a:visited, .header > .header-logout a:link{
 	color:white;
+}
+.header > .header-logout a:hover{
+	color: #c1c1c1;
 }
 .container{
     width:100%;
-/*     min-height:100vh; */
     display: flex;
 }
 .container-inner{
