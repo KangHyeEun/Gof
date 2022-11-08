@@ -76,7 +76,7 @@
 												<div class= "mcontents">
 													<p>[<span class="requirement">*</span>]항목은 필수 입력 정보입니다.</p>
 													<h4><span class="requirement">*</span>부서명</h4>
-													<input type="text" name="department" id="department" />
+													<input type="text" name="department" id="department" required />
 												</div>
 												<div class="bdiv">
 													<button class="mbutton" id="mbutton">등록하기</button>

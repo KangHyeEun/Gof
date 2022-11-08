@@ -140,7 +140,7 @@
 																				<h5 id="exit${status.count}">X</h5>
 																			</div>
 																			<div>
-																				<input type="text" name="rejectionReason" id="rejec" placeholder="반려사유를 입력해주세요."/>
+																				<input type="text" name="rejectionReason" id="rejec" placeholder="반려사유를 입력해주세요." required/>
 																			</div>
 																			<div class="bdiv">
 																				<button class="mbutton" id="mbutton">등록하기</button>
