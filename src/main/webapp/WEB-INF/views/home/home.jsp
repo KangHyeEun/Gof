@@ -83,22 +83,18 @@
 								</div>
 								<div class="div2-1-1">
 									<div class="div2-1-1-1">
-										<c:choose>
-											<c:when test="${!empty fileList}">
-												<c:forEach var="img" items="${fileList}">
-													<img src="${pageContext.request.contextPath}/upload/${img.fileName}">
-												</c:forEach>
-											</c:when>
-											<c:otherwise>
-												<img src="${pageContext.request.contextPath}/upload/user.png">
-											</c:otherwise>
-										</c:choose>
+										<c:forEach var="img" items="${fileList}">
+												<c:if test="${not empty img.fileName}">
+													<img id="showimg"
+														src="${pageContext.request.contextPath}/upload/${img.fileName}">
+												</c:if>
+										</c:forEach>
 									</div>
 									<div class="div2-1-1-2">
 										<p class="infoEcheckAdmin">
 											<img
 												src="${pageContext.request.contextPath}/resources/imges/badge_staff.png" />
-											${employeeInfo.checkAdmin == 1? "관리자" : "일반 직원"}
+											${employeeInfo.checkAdmin eq 1? "관리자" : "일반 직원"}
 										</p>
 										<p class="infoEname">${ename}
 											<span>${employeeInfo.eposition}</span>님
@@ -341,16 +337,12 @@
 					</div>
 
 					<div class="pop2">
-						<c:choose>
-							<c:when test="${!empty fileList}">
-								<c:forEach var="img" items="${fileList}">
-									<img src="${pageContext.request.contextPath}/upload/${img.fileName}">
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<img src="${pageContext.request.contextPath}/upload/user.png">
-							</c:otherwise>
-						</c:choose>
+						<c:forEach var="img" items="${fileList}">
+							<c:if test="${not empty img.fileName}">
+								<img id="showimg"
+									src="${pageContext.request.contextPath}/upload/${img.fileName}">
+							</c:if>
+						</c:forEach>
 					</div>
 					<div class="pop3">
 						<p class="pop-ename">
@@ -383,16 +375,12 @@
 						<a href="">✖️</a>
 					</div>
 					<div class="pop2">
-						<c:choose>
-							<c:when test="${!empty fileList}">
-								<c:forEach var="img" items="${fileList}">
-									<img src="${pageContext.request.contextPath}/upload/${img.fileName}">
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<img src="${pageContext.request.contextPath}/upload/user.png">
-							</c:otherwise>
-						</c:choose>
+						<c:forEach var="img" items="${fileList}">
+							<c:if test="${not empty img.fileName}">
+								<img id="showimg"
+									src="${pageContext.request.contextPath}/upload/${img.fileName}">
+							</c:if>
+						</c:forEach>
 					</div>
 					<div class="pop3">
 						<p class="pop-ename">

@@ -78,16 +78,12 @@
 																<c:choose>
 																	<c:when test="${!empty fileList}">
 																		<c:forEach var="img" items="${fileList}">
-																			<c:if test="${j.empno eq img.ownerId}">
+																			<c:if test="${j.empno eq img.ownerId and not empty img.fileName}">
 																				<img id="showimg"
 																					src="${pageContext.request.contextPath}/upload/${img.fileName}">
 																			</c:if>
 																		</c:forEach>
 																	</c:when>
-																	<c:otherwise>
-																		<img id="showimg"
-																			src="${pageContext.request.contextPath}/upload/user.png">
-																	</c:otherwise>
 																</c:choose>
 															</div>
 															<div class="org1-content">

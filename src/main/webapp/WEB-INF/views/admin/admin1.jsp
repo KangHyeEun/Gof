@@ -73,7 +73,7 @@
 											</td>
 											<td class="nametd">
 												<span>이름</span>
-												<input type="text" name="name" id="name" placeholder="이름을 검색해 주세요"/>
+												<input type="text" name="name" id="name" placeholder="이름을 검색해 주세요" style="ime-mode:active;"/>
 											</td>
 										</tr>
 									</table>
@@ -322,8 +322,9 @@
 	            	name[i].parentNode.style.display = "none";
 	            }
      	  }
-     }
-	
+        
+     }	
+		
 		/*신규 직원 등록*/
 		document.getElementById("newEp").addEventListener("click", function() {
 			location.href = "${pageContext.request.contextPath}/admin/newE";

@@ -58,7 +58,7 @@
 											<td colspan='3'><input type="text" name="email_id"
 												id="email_id" required> @ <input type="text"
 												name="email_domain" id="email_domain" required /> <select
-												class="select" id="email_select" required>
+												class="select" id="email_select">
 													<option value=" ">직접입력</option>
 													<option value="naver.com">naver.com</option>
 													<option value="gmail.com">gmail.com</option>
@@ -106,7 +106,7 @@
 										<td class="selecte">
 											<select name="estatus" id="estatus"
 											required>
-												<option>※선택해주세요</option>
+												<option value="">※선택해주세요</option>
 												<option value="재직">재직</option>
 												<option value="휴직">휴직</option>
 												<option value="퇴직">퇴직</option>
@@ -117,7 +117,7 @@
 										<td class="label">고용 형태<span class="redspan">*</span></td>
 										<td class="selecte">
 											<select name="ehiredType" id="ehiredType" required>
-												<option>※선택해주세요</option>
+												<option value="">※선택해주세요</option>
 												<option value="정규직">정규직</option>
 												<option value="비정규직">비정규직</option>
 											</select>
@@ -126,8 +126,10 @@
 										<td><input type="text" name="total_holiday"
 											id="total_holiday" value="0" required></td>
 										<td class="label">관리자 여부</td>
-										<td><input type="checkbox" name="check_admin"
-											id="check_admin"></td>
+										<td>
+											<input type="checkbox" name="checkAdmin" id="check_admin" value="1">
+											<input type="checkbox" name="checkAdmin" id="check_admin2" value="2" style="display: none;" checked>
+										</td>
 									</tr>
 									<tr>
 										<td class="label">입사일<span class="redspan">*</span></td>
@@ -136,10 +138,10 @@
 									</tr>
 									<tr>
 										<td class="label">전화번호</td>
-										<td colspan='1'><input type="number" name="telNumber"
+										<td colspan='1'><input type="number" name="telNumber" pattern=" /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/"
 											id="telNumber" placeholder="번호만 입력해 주세요"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></td>
 										<td class="label">핸드폰<span class="redspan">*</span></td>
-										<td colspan='3'><input type="number" name="phoneNumber"
+										<td colspan='3'><input type="number" name="phoneNumber" pattern=" /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/"
 											id="phoneNumber" required placeholder="번호만 입력해 주세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></td>
 									</tr>
 									<tr>
@@ -262,6 +264,14 @@
             fileReader.onload = function(){
                 document.getElementById("showimg").src = fileReader.result;
             }
+        });
+        
+        document.getElementById('check_admin').addEventListener("click",function(){
+        	if(document.getElementById('check_admin').checked){
+        		document.getElementById('check_admin2').checked = false;
+        	}else{
+        		document.getElementById('check_admin2').checked = true;
+        	}
         });
         </script>  
     

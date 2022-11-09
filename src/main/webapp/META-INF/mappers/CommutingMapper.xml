@@ -83,7 +83,7 @@
 	</select>
 	
 	<select id="getEmpInfo" resultType="EmployeeInfoVO">
-		select empno, eposition, edepartment, total_holiday, used_holiday
+		select empno, eposition, edepartment, total_holiday, used_holiday, check_admin
 		from employee_info where empno=#{empno}
 	</select>
 	

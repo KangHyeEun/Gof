@@ -49,19 +49,13 @@
 							<input name="page" value="1" style="display: none;" />
 							<div class="personal-wrap">
 								<div class="prodiv">
-								<c:choose>
-									<c:when test="${!empty fileList}">
 										<c:forEach var="img" items="${fileList}">
-											<img id="showimg" 
-												src="${pageContext.request.contextPath}/upload/${img.fileName}">
+												<c:if test="${not empty img.fileName}">
+													<img id="showimg"
+														src="${pageContext.request.contextPath}/upload/${img.fileName}">
+												</c:if>
 										</c:forEach>
-									</c:when>
-									<c:otherwise>
-										<img id="showimg"
-										src="${pageContext.request.contextPath}/upload/user.png">
-									</c:otherwise>
-								</c:choose>
-									<label for="proimg" id="img">사진수정</label><input type="file"
+										<label for="proimg" id="img">사진수정</label><input type="file"
 										name="proimg" id="proimg" accept="image/*">
 								</div>
 								<div id="personal">
@@ -84,7 +78,7 @@
 											<td colspan='3'><input type="text" name="email_id"
 												id="email_id" value="${email_id}" required> @ <input type="text"
 												name="email_domain" id="email_domain" value="${email_domain}" required /> <select
-												class="select" id="email_select" required>
+												class="select" id="email_select">
 													<option value=" ">직접입력</option>
 													<option value="naver.com">naver.com</option>
 													<option value="gmail.com">gmail.com</option>
@@ -113,17 +107,16 @@
 										<td class="label">부서</td>
 										<td>
 											<select class="edepartment" id="edepartment" name="edepartment">
-												<option value=" - ">※선택해주세요</option>
+												<option value="-">※선택해주세요</option>
 												<c:forEach var = "d" items="${listD}">
 													<option value="${d.department}">${d.department}</option>
 												</c:forEach>
 											</select>
 										</td>
-										<td class="label">직책<span>*</span></td>
+										<td class="label">직책</td>
 										<td>
-											<select name="eposition" id="eposition"
-											required>
-												<option value="">※선택해주세요</option>
+											<select name="eposition" id="eposition">
+												<option value="-">※선택해주세요</option>
 												<c:forEach var = "p" items="${listP}">
 													<option value="${p.position}">${p.position}</option>
 												</c:forEach>
@@ -151,11 +144,13 @@
 											</select>
 										</td>
 										<td class="label">총 연차 수<span>*</span></td>
-										<td><input type="text" name="totalHoliday"
+										<td><input type="text" name="totalH"
 											id="total_holiday" value="${info.totalHoliday}" required></td>
 										<td class="label">관리자 여부</td>
-										<td><input type="checkbox" name="checkAdmin"
-											id="check_admin"></td>
+										<td>
+											<input type="checkbox" name="checkAdmin" id="check_admin" value="1">
+											<input type="checkbox" name="checkAdmin" id="check_admin2" value="2" style="display: none;">
+										</td>
 									</tr>
 									<tr>
 										<td class="label">입사일<span>*</span></td>
@@ -165,10 +160,10 @@
 									<tr>
 										<td class="label">전화번호</td>
 										<td colspan='1'><input type="number" name="telNumber"
-											id="telNumber" placeholder="번호만 입력해 주세요" value="${info.telNumber}"></td>
+											id="telNumber" placeholder="번호만 입력해 주세요" value="${info.telNumber}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></td>
 										<td class="label">핸드폰<span>*</span></td>
 										<td colspan='3'><input type="number" name="phoneNumber"
-											id="phoneNumber" required placeholder="번호만 입력해 주세요" value="${info.phoneNumber}"></td>
+											id="phoneNumber" required placeholder="번호만 입력해 주세요" value="${info.phoneNumber}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></td>
 									</tr>
 									<tr>
 										<td id="noB" class="label">주소</td>
@@ -274,6 +269,7 @@
                     email.readonly  = false;   
                 }
             });
+            
         </script>
 	
 							<br>
@@ -348,7 +344,20 @@
 		if(${info.checkAdmin eq "1"}){
        		check.checked = true;
        	}
+		
+		document.getElementById('check_admin').addEventListener("click",function(){
+        	if(document.getElementById('check_admin').checked){
+        		document.getElementById('check_admin2').checked = false;
+        	}else{
+        		document.getElementById('check_admin2').checked = true;
+        	}
+        });
 
+		/*총 연차 수 value*/
+		document.getElementById('total_holiday').addEventListener("change",function(){
+        	let v = document.getElementById('total_holiday').value;
+        	document.getElementById('total_holiday').setAttribute("value",v);
+        });
     </script>
 
 <!-- -------------------------------------------------------------------------------- -->

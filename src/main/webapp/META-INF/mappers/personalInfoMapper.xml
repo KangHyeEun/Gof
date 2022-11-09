@@ -10,8 +10,8 @@
 		)
 		values (
 		#{empno},#{name},#{gender},#{birthday},#{password},#{email},
-		#{tel_number},
-		#{phone_number},#{address}
+		#{telNumber},
+		#{phoneNumber},#{address}
 		) 
 	</insert>
 	<select id="selectInfo" resultType="InfoVO">

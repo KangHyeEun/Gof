@@ -83,20 +83,22 @@ public class AdminController {
 		@PostMapping("/admin/updateData")
 		public String updateDetail(
 				PersonalInfoVO pvo,EmployeeInfoVO evo,@RequestParam("page") String page,
-				HttpServletRequest request,Model model,
+				HttpServletRequest request,Model model,@RequestParam("totalH") int totalH,
 				@RequestParam("proimg") MultipartFile[] files,
 				UploadfilesVO vo)throws IllegalStateException, IOException {
 			model.addAttribute("page", page);
+			evo.setTotalHoliday(totalH);
 			Eservice.updateE(pvo,evo,request);
 			for (MultipartFile file : files) { 
 				if(!file.getOriginalFilename().isEmpty()){ 
-					file.transferTo(Paths.get("C:/sample/"+evo.getEmpno()+file.getOriginalFilename()));
-					vo.setFileName(evo.getEmpno()+file.getOriginalFilename()); 
+					String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+					file.transferTo(Paths.get("C:/sample/"+evo.getEmpno()+"."+ext));
+					vo.setFileName(String.valueOf(evo.getEmpno())+"."+ext); 
 					vo.setOwnerId(evo.getEmpno());
 					Uservice.updateFile(vo); 
 					} else { 
 						System.out.println("사진을 변경하지 않았습니다."); 
-						} 
+					} 
 				}	
 			
 			return "redirect:/admin";
@@ -124,11 +126,15 @@ public class AdminController {
 
 		for (MultipartFile file : files) { 
 			if(!file.getOriginalFilename().isEmpty()){ 
-				file.transferTo(Paths.get("C:/sample/"+evo.getEmpno()+file.getOriginalFilename()));
-				vo.setFileName(evo.getEmpno()+file.getOriginalFilename()); 
+				String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+				file.transferTo(Paths.get("C:/sample/"+evo.getEmpno()+"."+ext));
+				vo.setFileName(String.valueOf(evo.getEmpno())+"."+ext); 
 				vo.setOwnerId(evo.getEmpno());
 				Uservice.uplaodFile(vo); 
 				} else { 
+					vo.setFileName("user.png"); 
+					vo.setOwnerId(evo.getEmpno());
+					Uservice.uplaodFile(vo); 
 					System.out.println("사진을 등록하지 않았습니다."); 
 					} 
 			}

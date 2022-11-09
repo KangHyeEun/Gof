@@ -49,14 +49,25 @@
 			<if test="ehiredType != null and ehiredType != ''">
 			ehired_type = #{ehiredType},  
 			</if>
-			<if test="totalHoliday != null and totalHoliday != ''">
-			total_holiday = #{totalHoliday},  
-			</if>
+<!-- 			<if test="totalHoliday != null and totalHoliday != ''"> -->
+<!-- 				total_holiday = #{totalHoliday},  -->
+<!-- 			</if> -->
+<!-- 			<if test="totalHoliday == 0"> -->
+<!-- 				total_holiday = 0,  -->
+<!-- 			</if>  -->
+			<choose>
+				<when test="totalHoliday == 0">
+					total_holiday = 0,
+				</when>
+				<when test="totalHoliday != null and totalHoliday != '' and totalHoliday != 0">
+					total_holiday = #{totalHoliday},
+				</when>
+			</choose>
 			<if test="estatus != null and estatus != ''">
 			estatus = #{estatus},  
 			</if>
 			<if test="checkAdmin != null and checkAdmin != ''">
-			check_admin = #{checkAdmin},  
+			check_admin = #{checkAdmin}, 
 			</if>
 		</set>
 		where empno = #{empno}
