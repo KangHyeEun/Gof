@@ -79,8 +79,6 @@ public class CalendarController {
 //	팝입 일정에서 x 표시 눌렀을때 삭제
 	@GetMapping("/deleteData/{calId}")
 	public String deleteData(CalendarVO vo) {
-		System.out.println("확인 111");
-		System.out.println(vo.getCalId());
 		service.deleteDataMethod(vo);
 		return "redirect:/calendar/selectData";
 	}

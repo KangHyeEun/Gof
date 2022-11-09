@@ -59,13 +59,6 @@ public class CalendarService {
 //	일정 수정
 	public void updateDateMethod(CalendarVO vo, int id, String range) {
 
-		System.out.println("확인 111 ");
-		System.out.println(vo.getCalRecur());
-		System.out.println(vo.getCalStart());
-		System.out.println(vo.getCalEnd());
-		System.out.println(vo.getCalShow());
-		System.out.println("---------------");
-		
 //		종료일 없으면 시작일을 종료일에 대입
 		if (vo.getCalEnd() == null || vo.getCalEnd() == "") {
 			vo.setCalEnd(vo.getCalStart());
@@ -87,24 +80,12 @@ public class CalendarService {
 			
 			vo.setCalAllday(temp);
 		}
-		System.out.println("vo.getCalShow() 111");
-		System.out.println(vo.getCalShow());
 		if(vo.getCalShow() == null || vo.getCalShow() == "" || vo.getCalShow() == "0") vo.setCalShow("0");
 		else vo.setCalShow(Integer.toString(vo.getEmpno()));
-		System.out.println("vo.getCalShow() 222");
-		System.out.println(vo.getCalShow());
 		
 		vo.setCalId(id);
 //		일정이 하루에서 범위로 바뀌거나 범위가 바뀌는 경우에는 모두 삭제 후 다시 저장하는 방식
 		deleteDataMethod(vo);
-		
-
-		System.out.println("확인 222 ");
-		System.out.println(vo.getCalRecur());
-		System.out.println(vo.getCalStart());
-		System.out.println(vo.getCalEnd());
-		System.out.println(vo.getCalShow());
-		System.out.println("---------------");
 		
 //		삭제 후 재삽입
 		insertDataMethod(vo);
@@ -129,15 +110,6 @@ public class CalendarService {
 //	일정 생성
 	public void insertDataMethod(CalendarVO vo) {
 		
-		System.out.println("확인 333 ");
-		System.out.println(vo.getCalRecur());
-		System.out.println(vo.getCalStart());
-		System.out.println(vo.getCalEnd());
-		System.out.println(vo.getCalShow());
-		System.out.println("---------------");
-		System.out.println(vo.getCalRecur().getClass().getName());
-		System.out.println("---------------");
-		
 //		반복일정 여부가 0이 아닌데 종료일 없으면 시작일을 종료일에 대입
 		if (!vo.getCalRecur().equals("0")) {
 			String[] tempChange = vo.getCalStart().split("-");
@@ -147,14 +119,9 @@ public class CalendarService {
 					+ "-" + tempChange[1] + "-" + tempChange[2];
 			
 			vo.setCalEnd(tempDate);
+			System.out.println("tempDate : " + tempDate);
+			System.out.println("vo.getCalEnd() : " + vo.getCalEnd());
 		}
-
-		System.out.println("확인 444 ");
-		System.out.println(vo.getCalRecur());
-		System.out.println(vo.getCalStart());
-		System.out.println(vo.getCalEnd());
-		System.out.println(vo.getCalShow());
-		System.out.println("---------------");
 		
 		String calStart = vo.getCalStart().split("T")[0];
 		String calEnd = vo.getCalEnd().split("T")[0];
@@ -212,14 +179,6 @@ public class CalendarService {
 //		일정이 범위일때 시작일 기준으로 넣었던 일정의 id 값을 가지고 나머지 일정에 있는 cal_range 에 등륵한다.
 		int cal_range = vo.getCalId();
 		
-
-		System.out.println("확인 555 ");
-		System.out.println(vo.getCalRecur());
-		System.out.println(vo.getCalStart());
-		System.out.println(vo.getCalEnd());
-		System.out.println(vo.getCalShow());
-		System.out.println("---------------");
-		
 //		일시가 범위이거나 반복일때
 		if (vo.getCalRange() != 0 || !vo.getCalRecur().equals("0")) {
 //			일정이 범위일때 시작일을 제외한 나머지 일정을 넣기위한 함수
@@ -245,18 +204,12 @@ public class CalendarService {
 		
 		cal.set( calEndYear, (calEndMonth-1), calEndDay ); //종료 날짜 셋팅
 		String endDate = dateFormat.format(cal.getTime());
-		
+		System.out.println("endDate : " + endDate);
 		cal.set ( calStartYear, (calStartMonth-1), calStartDay ); //시작 날짜 셋팅
 		String startDate = dateFormat.format(cal.getTime());
+		System.out.println("startDate : " + startDate);
 		
 		int i = 0;
-
-		System.out.println("확인 666 ");
-		System.out.println(vo.getCalRecur());
-		System.out.println(vo.getCalStart());
-		System.out.println(vo.getCalEnd());
-		System.out.println(vo.getCalShow());
-		System.out.println("---------------");
 		
 		while(!startDate.equals(endDate)){ //다르다면 실행, 동일 하다면 빠져나감
 			if(i==0) { //최초 실행 출력, 화면단이랑은 상관없는 로직
@@ -278,7 +231,7 @@ public class CalendarService {
 //			cal.add(Calendar.DATE, 1); //1일 더해줌
 			
 			startDate = dateFormat.format(cal.getTime()); //비교를 위한 값 셋팅
-			
+			System.out.println(startDate);
 			startTime = "" + startDate + " " + calStartTime;
 			endTime = "" + startDate + " " + calEndTime;
 			

@@ -42,6 +42,7 @@
 		<div class="container">
 			<jsp:include page="../include/menu.jsp"></jsp:include>
 			<div class="container-inner">
+				<div class="description">🟢 : 내가 등록한 일정 🟡 : 다른 사람이 등록한 일정 🟠 : 비공개 일정</div>
 			    <!-- right-content -->
                 <div class="calendar">
                     <div class="month">
@@ -86,7 +87,7 @@
 					<div>
 						<form action="" method="post">
 							<div>
-							    <label for="calTitle">제목</label><br>
+							    <label for="calTitle">제목 <span class="asterisk">*</span></label><br>
 							    <input type="text" name="calTitle" id="calTitle" class="preventEnter" required>
 						    </div>
 						    <div>
@@ -94,7 +95,7 @@
 							    <input type="text" name="calPlace" id="calPlace" class="preventEnter">
 						    </div>
 						    <div>
-							    <label for="calStart">일시</label>
+							    <label for="calStart">일시 <span class="asterisk">*</span></label>
 			    				<select class="recur" id="recur" name="calRecur">
 									<option value="0">반복</option>
 									<option value="weekly">매주</option>
@@ -113,7 +114,7 @@
 							    <input type="checkbox" name="calShow" id="calShow" class="preventEnter">
 						    </div>
 						    <div>
-							    <label for="calContent">설명</label><br>
+							    <label for="calContent">설명 <span class="asterisk">*</span></label><br>
 							    <textarea name="calContent" class="calContent" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요." required></textarea>
 						    </div>
 						    <div class="btn">
@@ -168,7 +169,7 @@
 					<div>
 						<form action="" method="post">
 							<div>
-							    <label for="calTitle1">제목</label><br>
+							    <label for="calTitle1">제목 <span class="asterisk">*</span></label><br>
 							    <input type="text" name="calTitle" id="calTitle1" class="preventEnter" required>
 						    </div>
 						    <div>
@@ -176,7 +177,7 @@
 							    <input type="text" name="calPlace" id="calPlace1" class="preventEnter">
 						    </div>
 						    <div>
-							    <label for="calStart1">일시</label>
+							    <label for="calStart1">일시 <span class="asterisk">*</span></label>
 			    				<select class="recur" id="recur1" name="calRecur">
 									<option value="0">반복</option>
 									<option value="weekly">매주</option>
@@ -195,7 +196,7 @@
 							    <input type="checkbox" name="calShow" id="calShow1" value="0" class="preventEnter">
 						    </div>
 						    <div>
-							    <label for="calContent1">설명</label><br>
+							    <label for="calContent1">설명 <span class="asterisk">*</span></label><br>
 							    <textarea name="calContent" class="calContent" id="calContent1" cols="70" rows="5" placeholder="일정에 필요한 설명을 남기세요." required></textarea>
 						    </div>
 						    <div class="btn">
