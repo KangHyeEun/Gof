@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.awoo.service.BBSService;
+import com.awoo.service.BBSNoticeService;
 import com.awoo.vo.BBSFileVO;
 import com.awoo.vo.BBSVO;
 import com.awoo.vo.PersonalInfoVO;
@@ -39,9 +39,9 @@ import com.awoo.vo.PersonalInfoVO;
 @RequestMapping("bbsNotice")
 public class BBSNoticeController {
 
-	private BBSService service;
-
-	public BBSNoticeController(BBSService service) {
+	private BBSNoticeService service;
+	
+	public BBSNoticeController(BBSNoticeService service) {
 		super();
 		this.service = service;
 	}

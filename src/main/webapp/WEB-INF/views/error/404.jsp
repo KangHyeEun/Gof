@@ -13,12 +13,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+	}
+	#errorBtn{
+    color: #fff;
+    padding: 15px 80px;
+    text-align: center;
+    font-size: 13px;
+    box-shadow: 2px 3px 3px 0 rgb(187 187 187);
+    border-radius: 5px 5px 5px 5px;
+    transition: all 0.3s ease-in-out;
+    background-color: #5fbae9;
+    border: #fff;
+    cursor: pointer;
+	}
+	#other_error_img {
+		width: 560px;
+		height: 470px;
 	}
 </style>
+<script>
+    const backFunc = function (){
+        history.back();
+    }
+</script>
 </head>
 <body>
 	<div class="error-wrapper">
 		<img src="${pageContext.request.contextPath}/resources/imges/404error.jpg">
+        <button onclick="backFunc()" id="errorBtn">뒤로 가기</button>
 	</div>
 </body>
 </html>
