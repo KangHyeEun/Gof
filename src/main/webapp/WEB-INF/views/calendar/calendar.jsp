@@ -20,13 +20,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/calendar/cal-style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 </head>
-<style>
-.chat {
-	position: fixed;
-	right: 2%;
-	bottom: 3%;
-}
-</style>
 <body onload="refreshFunc();">
 <!-- <body> -->
 	<div class="container-wrap">
@@ -35,8 +28,8 @@
 			<img src="${pageContext.request.contextPath}/resources/imges/logo.PNG"/>
             <div class="header-logout">
             	<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
-	<a href="${pageContext.request.contextPath}/testing">..</a>
-	<a href="${pageContext.request.contextPath}/chat">chating</a>
+<%-- 	<a href="${pageContext.request.contextPath}/testing">..</a> --%>
+<%-- 	<a href="${pageContext.request.contextPath}/chat">chating</a> --%>
             </div>
 		</div>
 		<div class="container">
@@ -210,9 +203,18 @@
 		</div>
 		
 		<div class="chat">
-			<div><span>🟢</span></div>
-<%-- 			<jsp:include page="../include/menu.jsp"></jsp:include> --%>
+			<div class="includeChat">
+				<jsp:include page="../chat/chat.jsp"></jsp:include>
+<%-- 				<jsp:include page="../include/chatTest.jsp"></jsp:include> --%>
+			</div>
+			<div class="btnFirstImg">
+				<img src="${pageContext.request.contextPath}/resources/imges/chat-icon.png"/>
+			</div>
+			<div class="btnSecondImg">
+				<img src="${pageContext.request.contextPath}/resources/imges/chat-down-icon.png"/>
+			</div>
 		</div>
+		<script src="${pageContext.request.contextPath}/resources/chat/chat-script.js"></script>
 		
 	</div>
 	<script type="text/javascript">

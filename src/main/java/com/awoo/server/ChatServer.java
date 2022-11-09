@@ -33,7 +33,7 @@ public class ChatServer {
 	@OnMessage
 	public void handleMessage(String message, Session userSession) throws IOException {
 		// 메시지 내용을 콘솔에 출력한다.
-		System.out.println(message);
+//		System.out.println(message);
 		// 초기 유저 명
 		String name = "anonymous";
 		// 메시지로 유저 명을 추출한다.
@@ -66,12 +66,15 @@ public class ChatServer {
 //		client가 메시지를 보냈을때
 		else if (no.equals("2")) {
 //			replaceFirst(기존문자, 바뀔문자) 변경되며, replace와는 다르게 처음으로 만난 문자만 변경된다.
+//			System.out.println(tempName);
 			final String username2 = tempName.split("#")[1];
+			final String userEmano = tempName.split("#")[2];
+//			System.out.println("2번의 msg : " + msg);
 //			session관리 리스트에서 Session을 취득한다.
 			for (Session session : sessionUsers) {
 				try {
 					if (session != userSession) {
-						session.getBasicRemote().sendText("2#" + username2 + "#" + msg);
+						session.getBasicRemote().sendText("2#" + username2 + "#" + userEmano + "#" + msg);
 					}
 				} catch (IOException e2) {
 					e2.printStackTrace();
@@ -80,7 +83,7 @@ public class ChatServer {
 		}
 //		client가 퇴장했을때
 		else if (no.equals("3")) {
-			System.out.println("3일때");
+//			System.out.println("3일때");
 //			replaceFirst(기존문자, 바뀔문자) 변경되며, replace와는 다르게 처음으로 만난 문자만 변경된다.
 			final String username3 = tempName.split("#")[1];
 //			session관리 리스트에서 Session을 취득한다.

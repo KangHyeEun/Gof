@@ -117,6 +117,7 @@ public class CalendarService {
 //			반복일정 선택시 종료일을 +5년으로 잡는다
 			tempDate = "" + (Integer.parseInt(tempChange[0]) + 5)
 					+ "-" + tempChange[1] + "-" + tempChange[2];
+//					+ "-" + "01" + "-" + "01";
 			
 			vo.setCalEnd(tempDate);
 			System.out.println("tempDate : " + tempDate);
@@ -210,13 +211,19 @@ public class CalendarService {
 		System.out.println("startDate : " + startDate);
 		
 		int i = 0;
+		int countWeek = 0;
 		
 		while(!startDate.equals(endDate)){ //다르다면 실행, 동일 하다면 빠져나감
 			if(i==0) { //최초 실행 출력, 화면단이랑은 상관없는 로직
 				System.out.println(dateFormat.format(cal.getTime()));
 			}
-			if (vo.getCalRecur().equals("weekly") && calEndYear > Integer.parseInt(startDate.split("-")[0])) {
+			if (vo.getCalRecur().equals("weekly") && calEndYear >= Integer.parseInt(startDate.split("-")[0])) {
 				cal.add(Calendar.DATE, 7); //7일 더해줌
+				countWeek++;
+//				5년을 7일씩 나눈 값이 260.xxx 으로 261 이상이되면 반복문 탈출
+				if (countWeek >= 261) {
+					break;
+				}
 			}
 			else if (vo.getCalRecur().equals("monthly")) {
 				cal.add(Calendar.MONTH, 1); //1달 더해줌

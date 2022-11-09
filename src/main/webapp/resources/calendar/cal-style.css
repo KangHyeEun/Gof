@@ -12,9 +12,8 @@
     align-items: center;
 }
 .description {
-	width: 100%;
+	width: 90%;
 	height: 4%;
-	padding-left: 15%;
 	font-size: 15px;
 }
 .calendar {
@@ -707,7 +706,8 @@ input[name="calAllday"], label[for="calAllday"], label[for="calAllday1"] {
 @media ( max-width: 500px ) {	/* default */
 	
 }
-/* //test Commit//test Commit */
+
+
 @media (max-height: 880px) {
 	.days > div > div > div:not(.days > div > div > div:nth-child(1),
 							.days > div > div > div:nth-child(2),

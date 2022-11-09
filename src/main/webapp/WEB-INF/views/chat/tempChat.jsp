@@ -1,34 +1,85 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-    
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/chat/chat-style.css">
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Web Socket Example</title>
+</head>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+/* textarea { */
+/* 	resize: none; */
+/* 	width: 500px; */
+/* 	height: 100px; */
+/* } */
+#messageTextArea {
+	width: 400px;
+	height: 300px;
+	border: 1px solid black;
+	overflow: auto;
+}
+#conn, #disconn {
+	display: none;
+}
+#user {
+	display: none;
+}
 
+.leftDiv {
+	margin: 0 0 10px 10px;
+}
+.rightDiv {
+	text-align:right;
+	margin: 0 0 10px 10px;
+}
+.leftText, .rightText {
+	padding: 5px;
+	display: inline-block;
+	max-width: 250px;
+	word-break: break-all;
+	background-color: #eee;
+	border-radius: 5px;
+	font-size: 15px;
+}
+.centerText {
+	display: inline-block;
+	background-color: #eee;
+	border-radius: 5px;
+	font-size: 14px;
+}
+
+</style>
+<body>
 	<div id="messageTextArea">
 	
 	</div>
 	
-	<div class="formWrap">
-		<form>
-			<!-- 유저 명을 입력하는 텍스트 박스(기본 값은 anonymous(익명)) -->
-			<input id="user" type="text" value="" readonly>
-			<!-- 송신 메시지를 작성하는 텍스트 박스 -->
-			<input id="textMessage" type="text">
-			<!-- 메세지를 송신하는 버튼 -->
-	<!-- 		<input onclick="sendMessage()" value="Send" type="button" id="send"> -->
-			<input onclick="sendMessage()" value="➤" type="button" id="send">
-			<!-- WebSocket 접속 종료하는 버튼 -->
-			<input onclick="disconnect()" value="Disconnect" type="button" id="disconn">
+	<br />
 	
-			<input onclick="connect()" value="connect" type="button" id="conn">
-		</form>
-	</div>
+	<form>
+		<!-- 유저 명을 입력하는 텍스트 박스(기본 값은 anonymous(익명)) -->
+		<input id="user" type="text" value="" readonly>
+		<!-- 송신 메시지를 작성하는 텍스트 박스 -->
+		<input id="textMessage" type="text">
+		<!-- 메세지를 송신하는 버튼 -->
+		<input onclick="sendMessage()" value="Send" type="button" id="send">
+		<!-- WebSocket 접속 종료하는 버튼 -->
+		<input onclick="disconnect()" value="Disconnect" type="button" id="disconn">
+
+		<input onclick="connect()" value="connect" type="button" id="conn">
+
+	</form>
+	<br />
 	
 	<script type="text/javascript">
 // 		접속한 유저 이름 자동 기입
-		var chatUser = document.getElementById("user");
-		chatUser.value = sessionStorage.getItem("ename");
-		var chatEmpno = sessionStorage.getItem("empno");
+		var user = document.getElementById("user");
+		user.value = sessionStorage.getItem("ename");
+		var empno = sessionStorage.getItem("empno");
 	</script>
 	
 	<script type="text/javascript">
@@ -86,11 +137,11 @@
 				let temp = "";
 				
 				for (var i = 0; i < list.length; i++) {
-//	 				접속한 유저와 chatEmpno가 같을때
-					if (list[i].empno == chatEmpno) {
+//	 				접속한 유저와 empno가 같을때
+					if (list[i].empno == empno) {
 //		 				콘솔 텍스트에 메시지를 출력한다.
 						temp += '<div class="rightDiv">';
-//			 			temp += '<p>' + chatUser.value + '</p>';
+//			 			temp += '<p>' + user.value + '</p>';
 						temp += '<span style="font-size:11px;color:#777;">' + list[i].chTime + '</span>';
 						temp += '<span class="rightText">' + list[i].chContent + '</span>';
 						temp += '</div>';
@@ -105,24 +156,26 @@
 				}
 				
 				messageTextArea.innerHTML += temp;
+//	 			채팅 화면 최하단 이동
+				messageTextArea.scrollTop = messageTextArea.scrollHeight;
 				
 			}).catch(error => {
 				console.log("error");
 			});
 			
-			setTimeout(function () {
-				// 콘솔 텍스트에 메시지를 출력한다
-				openPrint(chatUser.value, " 님이 입장했습니다.");
-//	 			채팅 화면 최하단 이동
-				messageTextArea.scrollTop = messageTextArea.scrollHeight;
-				// WebSocket 서버에 메시지를 전송(형식 「{{유저명}}메시지」)  
-				webSocket.send("{{" + "1#"+chatUser.value+"#" + "}}");
-			}, 200);
+			// 콘솔 텍스트에 메시지를 출력한다
+			openPrint(user.value, " 님이 입장했습니다.");
+			
+// 			채팅 화면 최하단 이동
+			messageTextArea.scrollTop = messageTextArea.scrollHeight;
+			
+			// WebSocket 서버에 메시지를 전송(형식 「{{유저명}}메시지」)  
+			webSocket.send("{{" + "1#"+user.value+"#" + "}}");
 		}
 		// 종료 발생 때 사용할 callback 함수
 		var close = function() {
 			// 콘솔 텍스트에 메시지를 출력한다
-			closePrint(chatUser.value, " 님이 퇴장했습니다.");
+			closePrint(user.value, " 님이 퇴장했습니다.");
 			
 // 			채팅 화면 최하단 이동
 			messageTextArea.scrollTop = messageTextArea.scrollHeight;
@@ -132,7 +185,6 @@
 // 				// 재접속
 // 				webSocket = connectWebSocket(
 // 						"ws://localhost:8080/Awoo/chatServer", message, open,
-// 						"ws://192.168.12.37:8080/Awoo/chatServer", message, open,
 // 						close, error);
 // 			});
 
@@ -177,7 +229,7 @@
 			// 콘솔 텍스트에 메시지를 출력한다.
 			let temp = "";
 			temp += '<div class="rightDiv">';
-// 			temp += '<p>' + chatUser.value + '</p>';
+// 			temp += '<p>' + user.value + '</p>';
 			temp += ' <span style="font-size:11px;color:#777;">' + new Date().toLocaleTimeString() + '</span>';
 			temp += '<span class="rightText">' + message.value + '</span>';
 			temp += '</div>';
@@ -187,8 +239,8 @@
 			messageTextArea.scrollTop = messageTextArea.scrollHeight;
 			
 			// WebSocket 서버에 메시지를 전송(형식 「{{유저명}}메시지」)  
-// 			webSocket.send("{{" + "2#"+chatUser.value+"#" + "}}" + message.value);
-			webSocket.send("{{" + "2#"+chatUser.value+"#"+chatEmpno+"#" + "}}" + message.value);
+// 			webSocket.send("{{" + "2#"+user.value+"#" + "}}" + message.value);
+			webSocket.send("{{" + "2#"+user.value+"#"+empno+"#" + "}}" + message.value);
 			// 송신 메시지를 작성한 텍스트 박스를 초기화한다.  
 			message.value = "";
 		}
@@ -262,7 +314,7 @@
 		
 		// Disconnect 버튼을 누르면 호출되는 함수  
 		function disconnect() {
-			webSocket.send("{{" + "3#"+chatUser.value+"#" + "}}");
+			webSocket.send("{{" + "3#"+user.value+"#" + "}}");
 			
 			// WebSocket 접속 해제
 			webSocket.close();
@@ -286,3 +338,7 @@
 			}
 		});
 	</script>
+	
+	
+</body>
+</html>
