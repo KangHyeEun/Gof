@@ -28,6 +28,10 @@ body {
 	display: flex;
 	box-sizing: border-box;
 }
+.title span img {
+	width : 45px;
+	height: 45px;
+}
 
 .title h3 {
 	font-family: 'NanumSquare', sans-serif;

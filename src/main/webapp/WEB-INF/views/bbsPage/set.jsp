@@ -71,7 +71,7 @@
 								</tr>
 								<tr>
 									<th>내용</th>
-									<td><form:textarea path="content" id="textarea" /></td>
+									<td><form:textarea path="content" id="textarea" class="ckeditor"/></td>
 								</tr>
 								<tr>
 									<th>파일첨부&nbsp;&nbsp; <span></span></th>
@@ -109,9 +109,8 @@
 	});
 	
 	//이지윅즈 적용
-	CKEDITOR.replace("textarea", {
-		height : 400,
-		filebrowserUploadUrl: "${pageContext.request.contextPath}/bbsPage/uploadimage"
+	CKEDITOR.replace('textarea', {
+		height : 600
 	});
 	
 	//submit(유효성 검사+파일 보내기)

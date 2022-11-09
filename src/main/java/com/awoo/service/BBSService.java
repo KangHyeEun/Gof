@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.awoo.dao.BBSCommentDAO;
@@ -73,7 +74,8 @@ public class BBSService {
 
 	}
 	
-	//추가(트랜젝션 달기)
+	//추가
+	@Transactional
 	public void insertBBS(BBSVO vo) {
 		Gson gson = new Gson();
 		
@@ -144,14 +146,15 @@ public class BBSService {
 		comDAO.deleteComment(cvo);
 	}
 
-	//파일 삭제
+	//파일 삭제(전체 삭제)
 	public void deleteBBSFileAll(BBSFileVO fvo) {
 		bbsDAO.deleteBBSFile(fvo);
 		BBSVO vo =new BBSVO();
 		bbsDAO.updateFileCount(vo);
 	}
 	
-	//파일 삭제(트랜젝션 달기)
+	//파일 삭제(개별 삭제)
+	@Transactional
 	public void deleteBBSFile(BBSFileVO[] fvos) {
 		for (BBSFileVO fvo : fvos) {
 			bbsDAO.deleteBBSFile(fvo);
@@ -209,6 +212,7 @@ public class BBSService {
 	}
 	
 	//추가
+	@Transactional
 	public void insertBBSNotice(BBSVO vo2) {
 		Gson gson = new Gson();
 		
@@ -259,14 +263,15 @@ public class BBSService {
 		bbsDAO.updateViewCountNotice(id);
 	}
 	
-	//파일 삭제
+	//파일 삭제(전체 삭제)
 	public void deleteBBSFileAllNotice(BBSFileVO fvo) {
 		bbsDAO.deleteBBSFileNotice(fvo);
 		BBSVO vo =new BBSVO();
 		bbsDAO.updateFileCountNotice(vo);
 	}
 	
-	//파일 삭제(트랜젝션 달기)
+	//파일 삭제(개별 삭제)
+	@Transactional
 	public void deleteBBSFileNotice(BBSFileVO[] fvos) {
 		for (BBSFileVO fvo : fvos) {
 			bbsDAO.deleteBBSFileNotice(fvo);
