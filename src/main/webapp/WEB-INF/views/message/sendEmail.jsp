@@ -8,11 +8,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/holiday/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/message/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/message/sendEmailStyle.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 
 <title>Insert title here</title>
 <style>

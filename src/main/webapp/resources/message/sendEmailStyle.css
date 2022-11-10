@@ -136,6 +136,10 @@
 	    overflow: auto;
 	}
 	
+	.cke_reset_all tr td {
+    max-width: none;
+	}
+	
 	@media screen and (max-width: 1280px) {
 		.div2 .holiday-list tr th:nth-child(6), .div2 .holiday-list tr td:nth-child(6) {
 		display:none;
