@@ -257,22 +257,18 @@
 												<h4>부서</h4>
 												<select name="edepartment" id="mcategory" class="m">
 													<option value="">변경없음</option>
-													<option value="영업">영업</option>
-													<option value="마켓팅">마켓팅</option>
-													<option value="개발">개발</option>
-													<option value="인사">인사</option>
-													<option value="회계">회계</option>
+													<c:forEach var="d" items="${listD}">
+														<option value="${d.department}">${d.department}</option>
+													</c:forEach>
 												</select>
 											</div>
 											<div class="sdiv2">
 												<h4>직책</h4>
 												<select name="eposition" id="mcategory" class="m">
 													<option value="">변경없음</option>
-													<option value="부장">부장</option>
-													<option value="대리">대리</option>
-													<option value="사원">사원</option>
-													<option value="수습">수습</option>
-													<option value="팀장">팀장</option>
+													<c:forEach var="p" items="${listP}">
+														<option value="${p.position}">${p.position}</option>
+													</c:forEach>
 												</select>
 											</div>
 											<div class="sdiv3">
@@ -528,8 +524,6 @@
 					li.innerText = name1 + "(" + department1 + ")";
 					li.setAttribute("name", "li1");
 					li.setAttribute("value", name1);
-					
-// 					const form1 = document.getElementById("form1");
 
 					const input = document.createElement("input");
 				    input.setAttribute("type","checkbox");

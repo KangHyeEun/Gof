@@ -57,14 +57,13 @@ public class AdminController {
 	@GetMapping("/admin")
 	public String admin(Model model,@RequestParam("page") String page,@RequestParam Map<String,String> map) {
 		model.addAttribute("page", page);
-		Pservice.selectDetail(model,map);
-		Eservice.department(model);
-		Eservice.position(model);
+		Pservice.selectDetail(model,map); //전체 리스트 + 상세검색
+		Eservice.department(model); // 부서 리스트
+		Eservice.position(model); // 직책 리스트
 		
 		return "/admin/admin1";
 	}
-	
-	
+
 	// 상세보기
 	@GetMapping("/admin/detail/{id}")
 	public String detail(@PathVariable("id") int id,Model model,InfoVO vo,
@@ -75,7 +74,7 @@ public class AdminController {
 		Eservice.department(model); // 부서
 		Eservice.position(model); // 직책
 		uvo.setOwnerId(empno);
-		Uservice.selectFile(uvo, model); // 파일업로드
+		Uservice.selectFile(uvo, model); // 사원 사진 정보
 		return "/admin/detail";
 	}
 	
@@ -88,14 +87,14 @@ public class AdminController {
 				UploadfilesVO vo)throws IllegalStateException, IOException {
 			model.addAttribute("page", page);
 			evo.setTotalHoliday(totalH);
-			Eservice.updateE(pvo,evo,request);
+			Eservice.updateE(pvo,evo,request); // 인사정보 수정
 			for (MultipartFile file : files) { 
 				if(!file.getOriginalFilename().isEmpty()){ 
 					String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 					file.transferTo(Paths.get("C:/sample/"+evo.getEmpno()+"."+ext));
 					vo.setFileName(String.valueOf(evo.getEmpno())+"."+ext); 
 					vo.setOwnerId(evo.getEmpno());
-					Uservice.updateFile(vo); 
+					Uservice.updateFile(vo); // 사원사진 등록
 					} else { 
 						System.out.println("사진을 변경하지 않았습니다."); 
 					} 
@@ -108,9 +107,9 @@ public class AdminController {
 	// 새로운 직원 추가 페이지 이동
 	@GetMapping("/admin/newE")
 	public String newE(Model model,HttpServletRequest request) {
-		Eservice.selectEmpno(model, request);
-		Eservice.department(model);
-		Eservice.position(model);
+		Eservice.selectEmpno(model, request); // 사원번호 지정(설정)
+		Eservice.department(model); // 부서 리스트
+		Eservice.position(model); // 직책 리스트
 		return "/admin/admin2";
 	}
 	
@@ -122,7 +121,7 @@ public class AdminController {
 			,@RequestParam("proimg") MultipartFile[] files,
 			UploadfilesVO vo)throws IllegalStateException, IOException{
 		model.addAttribute("page", page);
-		Eservice.insertDataE(pvo,evo,request);
+		Eservice.insertDataE(pvo,evo,request); // 신규직원 등록
 
 		for (MultipartFile file : files) { 
 			if(!file.getOriginalFilename().isEmpty()){ 
@@ -130,19 +129,18 @@ public class AdminController {
 				file.transferTo(Paths.get("C:/sample/"+evo.getEmpno()+"."+ext));
 				vo.setFileName(String.valueOf(evo.getEmpno())+"."+ext); 
 				vo.setOwnerId(evo.getEmpno());
-				Uservice.uplaodFile(vo); 
+				Uservice.uplaodFile(vo); // 사원 사진 등록
 				} else { 
 					vo.setFileName("user.png"); 
 					vo.setOwnerId(evo.getEmpno());
-					Uservice.uplaodFile(vo); 
+					Uservice.uplaodFile(vo); // 사원 사진 db 등록
 					System.out.println("사진을 등록하지 않았습니다."); 
 					} 
 			}
 		 
 		return "redirect:/admin";
 	}
-	
-	
+
 	// 선택 직원 정보 수정
 		@GetMapping("/admin/updateD")
 		public String updateD(@RequestParam("empno") int[] empno,PersonalInfoVO pvo,EmployeeInfoVO evo, 
@@ -152,7 +150,7 @@ public class AdminController {
 			for (int i : empno) {
 				pvo.setEmpno(i);
 				evo.setEmpno(i);
-				Eservice.updateE(pvo,evo,request);
+				Eservice.updateE(pvo,evo,request); // 인사정보 수정
 			}
 			
 			return "redirect:/admin";

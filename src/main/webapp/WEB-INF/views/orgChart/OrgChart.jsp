@@ -109,9 +109,6 @@
 														</div>
 
 														<!-- 모달창 -->
-<!-- 														<form -->
-<%-- 															action="${pageContext.request.contextPath}/MessageInsert" --%>
-<!-- 															method="post"> -->
 															<input name="page" value="${param.page}"
 																style="display: none;" />
 															<div class="modal_dim" id="modal_dim${status.count}">
@@ -175,7 +172,6 @@
 																	</div>
 																</div>
 															</div>
-<!-- 														</form> -->
 													</c:if>
 													<script type="text/javascript">
 						/* 모달창 */
@@ -337,6 +333,7 @@
 	</div>
 
 	<script>
+		/*탭메뉴*/
         const tabList = document.querySelectorAll('.tab_menu .list li');
         const main1 = document.getElementById("main1");
         const main2 = document.getElementById("main2");

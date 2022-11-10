@@ -102,11 +102,10 @@ public class HolidayController {
 	@GetMapping("/holidayAdmin")
 	public String holidayAdmin(Model model,@RequestParam("page") String page,@RequestParam Map<String,String> map) {
 		model.addAttribute("page", page);
-		model.addAttribute("map", map);
-		service.selectH(model,map);
-		Eservice.HEdepartment(model);
-		Eservice.department(model);
-		
+		service.selectH(model,map); // 전체 리스트 + 상세 검색
+		Eservice.HEdepartment(model); // empno : 부서 식별
+ 		Eservice.department(model); // 부서 리스트
+		 
 		return "/admin/holidayAdmin";
 	}
 		
@@ -118,16 +117,16 @@ public class HolidayController {
 		vo.setEmpno(empno);
 		model.addAttribute("page", page);
 
-		double totalH = Eservice.selectHolidayTotal(empno).getTotalHoliday();
-		double usedH = Eservice.selectHolidayTotal(empno).getUsedHoliday();
+		double totalH = Eservice.selectHolidayTotal(empno).getTotalHoliday(); // 연차 사용 계산을 위한 리스트에서 추출
+		double usedH = Eservice.selectHolidayTotal(empno).getUsedHoliday(); // 연차 사용 계산을 위한 리스트에서 추출
 		if(totalH >= (usedH+countDate)) {
 			vo.setApproval("승인");
-			Eservice.updateUsedHoliday(vo);				
-			service.updateApproval(vo);	
+			Eservice.updateUsedHoliday(vo);	// 사용한 휴가 계산		
+			service.updateApproval(vo);	// 휴가 승인, 반려
 		} else if(totalH < (usedH+countDate)) {
 			vo.setApproval("반려");
 			vo.setRejectionReason("잔여 연차 : " + (totalH-usedH));
-			service.updateApproval(vo);	
+			service.updateApproval(vo);	// 휴가 승인, 반려
 		}
 		
 		return "redirect:/holidayAdmin";
@@ -141,7 +140,7 @@ public class HolidayController {
 			vo.setId(id);
 			vo.setApproval("반려");
 			vo.setRejectionReason(reject);
-			service.updateApproval(vo);
+			service.updateApproval(vo); // 휴가 승인, 반려
 			
 			return "redirect:/holidayAdmin";
 		}

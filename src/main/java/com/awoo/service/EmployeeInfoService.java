@@ -30,7 +30,7 @@ public class EmployeeInfoService {
 		this.dao = dao;
 		this.service = service;
 	}	
-	
+	// 사원번호 지정(설정)
 	public void selectEmpno(Model model,HttpServletRequest request){
 		int j = 1;
 		
@@ -52,27 +52,21 @@ public class EmployeeInfoService {
 		
 		model.addAttribute("empno", em);
 	}
-	
-	public List<EmployeeInfoVO> EList(){
-		return dao.selectEmployee();
-	}
-	
+
+	// 신규 직원 등록
 	public void insertDataE(PersonalInfoVO vop,EmployeeInfoVO vo, HttpServletRequest request) {
 		
 		int empno = Integer.parseInt(request.getParameter("empno"));		
 		vo.setEmpno(empno);
 		
 		dao.insertDataE(vo);
-		service.insertDataP(request,vop);
+		service.insertDataP(request,vop); // 인사정보 : 신규직원 등록 (personalInfo)
 	}
-	
-	public void insertDataEH(EmployeeInfoVO vo) {
-		dao.insertDataE(vo);
-	}
-	
+
+	// 인사정보 수정
 	public void updateE(PersonalInfoVO vop,EmployeeInfoVO vo, HttpServletRequest request) {
 		dao.updateE(vo);
-		service.updateP(request,vop);
+		service.updateP(request,vop); // 인사정보 (personalInfo 수정)
 	}
 	
 	/* 연관검색 ------------------------------------------------------------------------*/
@@ -85,11 +79,11 @@ public class EmployeeInfoService {
 		}
 	
 	/*휴가-------------------------------------------------------------------------*/
-	
+	/*사용한 휴가 계산*/
 	public void updateUsedHoliday(HolidayVO vo) {
 		dao.updateUsedHoliday(vo);
 	}
-	
+	/*연차 사용 계산을 위한 리스트*/
 	public EmployeeInfoVO selectHolidayTotal(int empno){
 		
 		EmployeeInfoVO list = new EmployeeInfoVO();
@@ -102,54 +96,53 @@ public class EmployeeInfoService {
 		return list;
 	}
 	
+	/*empno : 부서 식별*/
 	public void HEdepartment(Model model) {
 		 model.addAttribute("depart",dao.HEdepartment());
 	}
 	
 	/* 부서관리 -----------------------------------------------------------------*/
-	/*부서 리스트 */
+	// 부서 리스트
 	public void department(Model model){
-		model.addAttribute("listD",dao.department());
-		model.addAttribute("count",dao.countDepartment());
+		model.addAttribute("listD",dao.department()); // 부서 리스트
+		model.addAttribute("count",dao.countDepartment()); // 부서 사원수
 	}
-	
+	// 부서 수정
 	public void updateDepartment(PositionDepartmentVO vo) {
-		dao.updateDepartment2(vo);
-		dao.updateDepartment(vo);
+		dao.updateDepartment2(vo); //부서 수정 및 삭제 후 해당 직원 재배치
+		dao.updateDepartment(vo); // 부서 수정
 	}
-
+	// 부서 삭제
 	public void deleteDepartment(PositionDepartmentVO vo) {
-		dao.updateDepartment2(vo);
-		dao.deleteDepartment(vo);
+		dao.updateDepartment2(vo); // 부서 수정 및 삭제 후 해당 직원 재배치
+		dao.deleteDepartment(vo); // 부서 삭제
 	}
-
+    // 부서 추가
 	public void insertDepartment(PositionDepartmentVO vo) {
 		dao.insertDepartment(vo);
 	}
 	
 	/* 직책관리 -----------------------------------------------------------------*/
-	/*직책 리스트 */
+	// 직책 리스트 
 	public void position(Model model){
-		model.addAttribute("listP",dao.position());
-		model.addAttribute("count",dao.countPosition());
+		model.addAttribute("listP",dao.position()); // 직책 리스트
+		model.addAttribute("count",dao.countPosition()); // 직책 사원수
 	}
-	
+	// 직책 수정
 	public void updatePosition(PositionDepartmentVO vo) {
-		dao.updatePosition2(vo);
-		dao.updatePosition(vo);
+		dao.updatePosition2(vo); // 직책 수정 및 삭제 후 해당 직원 재배치
+		dao.updatePosition(vo); // 직책 수정
 	}
-
+	// 직책 삭제
 	public void deletePosition(PositionDepartmentVO vo) {
-		dao.updatePosition2(vo);
-		dao.deletePosition(vo);
+		dao.updatePosition2(vo); // 직책 수정 및 삭제 후 해당 직원 재배치
+		dao.deletePosition(vo); // 직책 삭제
 	}
-
+	// 직책 추가
 	public void insertPosition(PositionDepartmentVO vo) {
 		dao.insertPosition(vo);
 	}
-	
-	
-	
+
 //	test
 	public void selectPerPro(int empno, Model model) {
 		model.addAttribute("eVO", dao.selectEmpPro(empno));

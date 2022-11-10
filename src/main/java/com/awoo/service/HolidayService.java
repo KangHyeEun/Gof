@@ -94,17 +94,13 @@ public class HolidayService {
 	}
 	
 	/*혜은---------------------------------------------*/
-	
-	/*
-	 * public void selectAdminH(Model model) {
-	 * model.addAttribute("list",dao.selectAdminH()); }
-	 */
-	
+
+	// 전체 리스트 + 상세 검색
 	public void selectH(Model model,Map<String,String> map) {
-		model.addAttribute("list",dao.selectH(map));
-		model.addAttribute("year",dao.holidayY());
+		model.addAttribute("list",dao.selectH(map)); // 전체 리스트 + 상세 검색
+		model.addAttribute("year",dao.holidayY()); // 휴가 신청 연도 리스트
 	}
-	
+	// 휴가 승인,반려
 	public void updateApproval(HolidayVO vo) {
 		dao.updateApproval(vo);
 	}

@@ -1,6 +1,5 @@
 package com.awoo.service;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -8,8 +7,6 @@ import org.springframework.ui.Model;
 
 import com.awoo.dao.EmployeeInfoDAO;
 import com.awoo.dao.OrgChartDAO;
-import com.awoo.vo.HolidayVO;
-import com.awoo.vo.InfoVO;
 
 @Service
 public class OrgChartService {
@@ -22,21 +19,13 @@ public class OrgChartService {
 		this.dao = dao;
 		this.odao = odao;
 	}
-	/*tab2*/
-	public void selectAllEInfo(Model model) {
-		model.addAttribute("edepartment",dao.edepartment());
-		model.addAttribute("list1",dao.selectInfo1());
-//		model.addAttribute("holiday",odao.holidayOrg());
-	}
 	
-	/*tab1*/
+	/*tab1 페이지(직원 현황) + tab2 페이지(부서별 안내)*/
 	public void selectOrgDetail(Model model,Map<String, String> map) {
-		model.addAttribute("list",odao.selectOrgDetail(map));
-	}
-	
-//	public List<HolidayVO> holidayOrg(){
-//		return odao.holidayOrg();
-//	}
+		model.addAttribute("edepartment",dao.edepartment()); // 부서(직원 현황)
+		model.addAttribute("list1",dao.selectInfo1()); // tab2
+		model.addAttribute("list",odao.selectOrgDetail(map)); // tab1
+ 	}
 	
 	/*휴가 체크*/
 	public void checkHoliday(Model model){

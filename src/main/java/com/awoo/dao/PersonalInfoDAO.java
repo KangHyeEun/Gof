@@ -11,22 +11,17 @@ import com.awoo.vo.PersonalInfoVO;
 @Mapper
 public interface PersonalInfoDAO {
 	
-	public List<PersonalInfoVO> selectPersonal();
-
-	public List<PersonalInfoVO> selectAllInfo();
-	
-	public int countInfo();
-	
+	// 인사정보 : 신규직원 등록
 	public void insertDataP(PersonalInfoVO vo);
-	
+	// 인사정보 : 수정하기
 	public void updateP(PersonalInfoVO vo);
-	
+	// 인사정보 : 상세보기
 	public List<InfoVO> selectInfo(InfoVO vo);
-
+	// 전체 리스트 + 상세검색
 	public List<InfoVO> selectDetail(Map<String,String> map);
 	
 
-	/*test*/
-	public PersonalInfoVO selectPerPro(int empno);
+//	/*test*/
+//	public PersonalInfoVO selectPerPro(int empno);
 }
 

@@ -17,9 +17,7 @@ public interface HolidayDAO {
 	public HolidayVO getDetailHoliday(HolidayVO vo);
 	
 	/*혜은*/
-//	public List<HolidayVO> selectAdminH();
-	public List<HolidayVO> selectH(Map<String, String> map);
-	public List<HolidayVO> holidayY();
-	public int selectCount();
-	public void updateApproval(HolidayVO vo);
+	public List<HolidayVO> selectH(Map<String, String> map); // 전체 리스트 + 상세 검색
+	public List<HolidayVO> holidayY(); // 휴가 신청 연도(select - option)
+	public void updateApproval(HolidayVO vo); // 휴가 승인, 반려
 }

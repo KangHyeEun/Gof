@@ -1,6 +1,5 @@
 package com.awoo.service;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,21 +20,11 @@ public class PersonalInfoService {
 		super();
 		this.dao = dao;
 	}
-	
-	public List<PersonalInfoVO> PList(){
-		return dao.selectPersonal();
-	}
-
-	/*
-	 * public void AllList(Model model){ //
-	 * model.addAttribute("count",dao.countInfo());
-	 * model.addAttribute("list",dao.selectAllInfo()); }
-	 */
-	
+	// 전체 리스트 + 상세검색
 	public void selectDetail(Model model,Map<String, String> map) {
 		model.addAttribute("list",dao.selectDetail(map));
 	}
-	
+	// 인사정보 : 신규직원 등록
 	public void insertDataP(HttpServletRequest request,PersonalInfoVO vo) {
 			
 			String telNumber = "";
@@ -76,8 +65,8 @@ public class PersonalInfoService {
 			dao.insertDataP(vo);
 		
 	}
-	
-public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
+	// 인사정보 : 수정하기
+	public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
 		
 		String telNumber = "";
 		String addr = "";
@@ -116,7 +105,7 @@ public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
 		
 		dao.updateP(vo);
 	}
-	
+	// 인사정보 : 상세보기
 	public void selectInfo(InfoVO vo,Model model) {
 		String[] email = dao.selectInfo(vo).get(0).getEmail().split("@");
 		for (int i = 0; i < email.length; i++) {
@@ -129,7 +118,7 @@ public void updateP(HttpServletRequest request,PersonalInfoVO vo) {
 		
 	
 //	test
-	public void selectPerPro(int empno, Model model) {
-		model.addAttribute("pVO", dao.selectPerPro(empno));
-	}
+//	public void selectPerPro(int empno, Model model) {
+//		model.addAttribute("pVO", dao.selectPerPro(empno));
+//	}
 }

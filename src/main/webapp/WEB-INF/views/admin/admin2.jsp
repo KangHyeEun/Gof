@@ -178,7 +178,6 @@
             }
 
             function execDaumPostcode() {
-                // var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
                 new daum.Postcode({
                     oncomplete: function(data) {
                         var addr = ''; 
