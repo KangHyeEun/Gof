@@ -204,7 +204,10 @@
 		
 		<div class="chat">
 			<div class="includeChat">
-				<jsp:include page="../chat/chat.jsp"></jsp:include>
+				<jsp:include page="../chat/chat.jsp">
+					<jsp:param value="${empno}" name="empno" />
+					<jsp:param value="${ename}" name="ename" />
+				</jsp:include>
 <%-- 				<jsp:include page="../include/chatTest.jsp"></jsp:include> --%>
 			</div>
 			<div class="btnFirstImg">

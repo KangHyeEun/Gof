@@ -134,6 +134,7 @@
     box-shadow: 1px 1px 10px #9b9b9b;
 	background: radial-gradient(circle at top left, hsl(340, 80%, 55%), hsl(270, 80%, 55%));
 	color: #ffffff;
+	text-align: left;
 }
 .centerText {
 	display: inline-block;

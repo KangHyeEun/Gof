@@ -25,13 +25,25 @@
 	</div>
 	
 	<script type="text/javascript">
+		<%
+			request.setCharacterEncoding("UTF-8");
+			String empno = request.getParameter("empno");
+			String ename = request.getParameter("ename");
+			System.out.println("empno : " + empno);
+			System.out.println("ename : " + ename);
+		%>
 // 		접속한 유저 이름 자동 기입
 		var chatUser = document.getElementById("user");
-		chatUser.value = sessionStorage.getItem("ename");
-		var chatEmpno = sessionStorage.getItem("empno");
-	</script>
-	
-	<script type="text/javascript">
+// 		chatUser.value = sessionStorage.getItem("ename");
+// 		var chatEmpno = sessionStorage.getItem("empno");
+		chatUser.value = '<%=ename%>';
+		var chatEmpno = <%=empno%>;
+		
+// 		sessionStorage.removeItem("empno");
+// 		sessionStorage.removeItem("ename");
+// 		sessionStorage.setItem("empno", "${empno}");
+// 		sessionStorage.setItem("ename", "${ename}");
+		
 		// 콘솔 텍스트 에리어 오브젝트
 		const messageTextArea = document.getElementById("messageTextArea");
 		
@@ -166,25 +178,49 @@
 			}
 		};
 		// 웹 소켓 생성
-		var webSocket = connectWebSocket("ws://localhost:8080/Awoo/chatServer",
-// 		var webSocket = connectWebSocket("ws://192.168.12.37:8080/Awoo/chatServer",
+// 		var webSocket = connectWebSocket("ws://localhost:8080/Awoo/chatServer",
+		var webSocket = connectWebSocket("ws://192.168.12.37:8080/Awoo/chatServer",
 				message, open, close, error);
 
 		// Send 버튼을 누르면 호출되는 함수  
 		function sendMessage() {
+			const tempDate = new Date().toLocaleDateString();	// 현재 날짜
+			const tempTime = new Date().toLocaleTimeString();	// 현재 시간
 			// 송신 메시지를 작성하는 텍스트 박스 오브젝트를 취득  
 			var message = document.getElementById("textMessage");
 			// 콘솔 텍스트에 메시지를 출력한다.
 			let temp = "";
 			temp += '<div class="rightDiv">';
 // 			temp += '<p>' + chatUser.value + '</p>';
-			temp += ' <span style="font-size:11px;color:#777;">' + new Date().toLocaleTimeString() + '</span>';
+			temp += ' <span style="font-size:11px;color:#777;">' + tempTime + '</span>';
 			temp += '<span class="rightText">' + message.value + '</span>';
 			temp += '</div>';
 			
 			messageTextArea.innerHTML += temp;
 // 			채팅 화면 최하단 이동
 			messageTextArea.scrollTop = messageTextArea.scrollHeight;
+
+// 			여기는 보내는 메시지 공간으로 msgPrint인 받는 메시지 메서드에서
+// 			DB로 넣게되면 접속자 만큼 DB에 저장되기 때문에
+// 			메시지 발송시 DB에 바로 저장하는 방식으로 여기서 처리한다.
+
+			let msgData = {
+					ename : chatUser.value,
+					empno : chatEmpno,
+					chContent : message.value,
+					chDate : tempDate,
+					chTime : tempTime
+			}
+			fetch("${pageContext.request.contextPath}/insertChat",{
+				method : "POST", // PUT, PATCH, DELETE
+				headers : {"Content-Type" : "application/json"},
+				body : JSON.stringify(msgData)
+			}).then(response => response.json())
+			.then(data => {
+// 				console.log("성공");
+			}).catch(error => {
+				console.log("error");
+			});
 			
 			// WebSocket 서버에 메시지를 전송(형식 「{{유저명}}메시지」)  
 // 			webSocket.send("{{" + "2#"+chatUser.value+"#" + "}}" + message.value);
@@ -210,8 +246,8 @@
 		}
 		// 메세지 전송 및 아이디
 		function msgPrint(user, empno, txt) {
-			const tempDate = new Date().toLocaleDateString();
-			const tempTime = new Date().toLocaleTimeString();
+			const tempDate = new Date().toLocaleDateString();	// 현재 날짜
+			const tempTime = new Date().toLocaleTimeString();	// 현재 시간
 			let temp = "";
 			temp += '<div class="leftDiv">';
 			temp += '<p>' + user + '</p>';
@@ -223,23 +259,27 @@
 // 			채팅 화면 최하단 이동
 			messageTextArea.scrollTop = messageTextArea.scrollHeight;
 			
-			let msgData = {
-					ename : user,
-					empno : empno,
-					chContent : txt,
-					chDate : tempDate,
-					chTime : tempTime
-			}
-			fetch("${pageContext.request.contextPath}/insertChat",{
-				method : "POST", // PUT, PATCH, DELETE
-				headers : {"Content-Type" : "application/json"},
-				body : JSON.stringify(msgData)
-			}).then(response => response.json())
-			.then(data => {
-// 				console.log("성공");
-			}).catch(error => {
-				console.log("error");
-			});
+			
+// 			여기는 받는 메시지 공간으로 여기서 DB로 넣게되면 접속자 만큼 DB에 저장되기 때문에
+// 			메시지 발송시 DB에 바로 저장하는 방식으로 sendMessage() 에서 처리한다.
+
+// 			let msgData = {
+// 					ename : user,
+// 					empno : empno,
+// 					chContent : txt,
+// 					chDate : tempDate,
+// 					chTime : tempTime
+// 			}
+// 			fetch("${pageContext.request.contextPath}/insertChat",{
+// 				method : "POST", // PUT, PATCH, DELETE
+// 				headers : {"Content-Type" : "application/json"},
+// 				body : JSON.stringify(msgData)
+// 			}).then(response => response.json())
+// 			.then(data => {
+// // 				console.log("성공");
+// 			}).catch(error => {
+// 				console.log("error");
+// 			});
 			
 		}
 // 		client 접속 종료
@@ -274,8 +314,8 @@
 			setTimeout(function() {
 				// 재접속
 				webSocket = connectWebSocket(
-						"ws://localhost:8080/Awoo/chatServer", message, open,
-// 						"ws://192.168.12.37:8080/Awoo/chatServer", message, open,
+// 						"ws://localhost:8080/Awoo/chatServer", message, open,
+						"ws://192.168.12.37:8080/Awoo/chatServer", message, open,
 						close, error);
 			});
 		}
