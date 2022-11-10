@@ -178,8 +178,8 @@
 			}
 		};
 		// 웹 소켓 생성
-// 		var webSocket = connectWebSocket("ws://localhost:8080/Awoo/chatServer",
-		var webSocket = connectWebSocket("ws://192.168.12.37:8080/Awoo/chatServer",
+		var webSocket = connectWebSocket("ws://localhost:8080/Awoo/chatServer",
+// 		var webSocket = connectWebSocket("ws://192.168.12.37:8080/Awoo/chatServer",
 				message, open, close, error);
 
 		// Send 버튼을 누르면 호출되는 함수  
@@ -314,8 +314,8 @@
 			setTimeout(function() {
 				// 재접속
 				webSocket = connectWebSocket(
-// 						"ws://localhost:8080/Awoo/chatServer", message, open,
-						"ws://192.168.12.37:8080/Awoo/chatServer", message, open,
+						"ws://localhost:8080/Awoo/chatServer", message, open,
+// 						"ws://192.168.12.37:8080/Awoo/chatServer", message, open,
 						close, error);
 			});
 		}
