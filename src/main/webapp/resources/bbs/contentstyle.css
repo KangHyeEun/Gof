@@ -49,6 +49,8 @@
 
 .head-inner {
 	display: flex;
+	justify-content: center;
+	align-content: center;
 }
 
 .head-inner div p {
@@ -213,3 +215,51 @@
     background-color: transparent;
     cursor: pointer;
 }
+
+	@media screen and (max-width:1215px){
+
+	}
+	
+	@media screen and (max-width:815px){
+		.content-head span {
+			font-size: 1rem;
+		}
+		.content-head h3 {
+			font-size: 0.9rem;
+			font-weight: 500;
+		}
+		.head-inner {
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		}
+		.head-inner div p {
+		    font-size: 0.9rem;
+		}
+		.second-inner {
+			width: max-content;
+		}
+	
+	}
+
+	@media screen and (max-width:500px){
+		.content-head span {
+			font-size: 1rem;
+		}
+		.content-head h3 {
+			font-size: 0.9rem;
+			font-weight: 500;
+		}
+		.head-inner {
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		}
+		.head-inner div p {
+		    font-size: 0.9rem;
+		}
+		.second-inner {
+			width: max-content;
+		}
+	}
+		

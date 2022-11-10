@@ -40,7 +40,7 @@
                     <h3><span>[${bbsVO.category}]</span> &nbsp; ${bbsVO.title}</h3>
                     <div class="head-inner">
                         <div class="first-inner">
-                            <p>작성자 인사 담당자(${bbsVO.owner})</p>
+                            <p>작성자 ${bbsVO.owner}</p>
                         </div>
                         <div>
                             <p>작성일 ${bbsVO.createDate}</p>

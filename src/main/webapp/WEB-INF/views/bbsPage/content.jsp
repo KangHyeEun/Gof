@@ -45,7 +45,7 @@
                         <div class="first-inner">
                             <p>작성자 ${bbsVO.owner}</p>
                         </div>
-                        <div>
+                        <div class="second-inner">
                             <p>작성일 ${bbsVO.createDate}</p>
                         </div>
                     </div>

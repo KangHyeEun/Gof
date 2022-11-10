@@ -65,13 +65,13 @@
 				<table>
 					<thead>
 						<tr>
-							<th style="width: 7%">No.</th>
-							<th style="width: 13%">분류</th>
-							<th style="width: 45%">제목</th>
-							<th style="width: 8%">작성자</th>
-							<th style="width: 13%">작성일</th>
-							<th style="width: 8%">조회수</th>
-							<th style="width: 8%">첨부 파일</th>
+							<th id="small-th">No.</th>
+							<th id="small-th">분류</th>
+							<th id="title-th">제목</th>
+							<th id="middle-th">작성자</th>
+							<th id="middle-th">작성일</th>
+							<th id="middle-th">조회수</th>
+							<th id="middle-th">첨부 파일</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -80,14 +80,21 @@
 						<c:when test="${vo.category == '중요'}">
 							<tr id="import-category">
 								<td>${vo.id}</td>
-								<td>${vo.category} <img src="${pageContext.request.contextPath}/resources/imges/horn.svg"/></td>
+								<td>
+								<span id="nonehorn">
+								${vo.category}
+								</span> 
+								<img src="${pageContext.request.contextPath}/resources/imges/horn.svg"/></td>
 								<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
-								<td>인사담당자</td>
+								<td>인사팀</td>
 								<td>${vo.createDate}</td>
 								<td>${vo.viewCounts}</td>
 								<td>
 								<c:if test="${vo.fileCounts != 0}">
-									<span><img src="${pageContext.request.contextPath}/resources/imges/clip.png" id="cilpimg"/></span>${vo.fileCounts}
+									<span><img src="${pageContext.request.contextPath}/resources/imges/clip.png" id="cilpimg"/></span>
+									<span id="filecount-span">
+										${vo.fileCounts}
+									</span>
 								</c:if>
 								</td>
 							</tr>
@@ -97,12 +104,15 @@
 								<td>${vo.id}</td>
 								<td>${vo.category}</td>
 								<td><a href="${pageContext.request.contextPath}/bbsNotice/bbs/${vo.id}">${vo.title}</a></td>
-								<td>인사담당자</td>
+								<td>인사팀</td>
 								<td>${vo.createDate}</td>
 								<td>${vo.viewCounts}</td>
 								<td>
 								<c:if test="${vo.fileCounts != 0}">
-									<span><img src="${pageContext.request.contextPath}/resources/imges/clip.png" id="cilpimg"/></span>${vo.fileCounts}
+									<span><img src="${pageContext.request.contextPath}/resources/imges/clip.png" id="cilpimg"/></span>
+									<span id="filecount-span">
+										${vo.fileCounts}
+									</span>
 								</c:if>
 								</td>
 							</tr>
