@@ -217,7 +217,7 @@
 											<c:forEach items="${todayCalendar}" var="cal">
 												<p class="cal-list">
 													<span>⦁ </span>
-													<span><b>${cal.calEnd.split(" ")[1]} </b></span> 
+													<span><b>${cal.calStart.split(" ")[1].split(":")[0]}:${cal.calStart.split(" ")[1].split(":")[1]} </b></span>
 													<span>${cal.calTitle} </span>
 													<span>- ${cal.ename} </span>
 													<span>~ ${cal.calEnd.split(" ")[0]} </span> 
@@ -405,7 +405,26 @@
 				</div>
 			</div>
 		</div>
+		
+<!-- 		좌측 하단 채팅 -->
+		<div class="chat">
+			<div class="includeChat">
+				<jsp:include page="../chat/chat.jsp">
+					<jsp:param value="${empno}" name="empno" />
+					<jsp:param value="${ename}" name="ename" />
+				</jsp:include>
+			</div>
+			<div class="btnFirstImg">
+				<img src="${pageContext.request.contextPath}/resources/imges/chat-icon.png"/>
+			</div>
+			<div class="btnSecondImg">
+				<img src="${pageContext.request.contextPath}/resources/imges/chat-down-icon.png"/>
+			</div>
+		</div>
+		<script src="${pageContext.request.contextPath}/resources/chat/chat-script.js"></script>
+		
 	</div>
+	
 	<script type="text/javascript">
 	    document.addEventListener("DOMContentLoaded", function(){
 	    		

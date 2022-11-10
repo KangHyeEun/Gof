@@ -52,6 +52,7 @@ public class ChatServer {
 		if (no.equals("1")) {
 //			replaceFirst(기존문자, 바뀔문자) 변경되며, replace와는 다르게 처음으로 만난 문자만 변경된다.
 			final String username1 = tempName.split("#")[1];
+			
 //			session관리 리스트에서 Session을 취득한다.
 			for (Session session : sessionUsers) {
 				try {
@@ -66,10 +67,9 @@ public class ChatServer {
 //		client가 메시지를 보냈을때
 		else if (no.equals("2")) {
 //			replaceFirst(기존문자, 바뀔문자) 변경되며, replace와는 다르게 처음으로 만난 문자만 변경된다.
-//			System.out.println(tempName);
 			final String username2 = tempName.split("#")[1];
 			final String userEmano = tempName.split("#")[2];
-//			System.out.println("2번의 msg : " + msg);
+			
 //			session관리 리스트에서 Session을 취득한다.
 			for (Session session : sessionUsers) {
 				try {
@@ -83,9 +83,9 @@ public class ChatServer {
 		}
 //		client가 퇴장했을때
 		else if (no.equals("3")) {
-//			System.out.println("3일때");
 //			replaceFirst(기존문자, 바뀔문자) 변경되며, replace와는 다르게 처음으로 만난 문자만 변경된다.
 			final String username3 = tempName.split("#")[1];
+			
 //			session관리 리스트에서 Session을 취득한다.
 			for (Session session : sessionUsers) {
 				try {
@@ -97,7 +97,6 @@ public class ChatServer {
 					e2.printStackTrace();
 				}
 			}
-//			sessionUsers.remove(userSession);
 			
 		}
 		

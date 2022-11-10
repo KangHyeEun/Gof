@@ -37,10 +37,18 @@ public class CalendarService {
 		String mapStartDay = map.get("calEnd").split("-")[2];
 		int tempDay = Integer.parseInt(mapStartDay) + 1;
 		int tempYear = Integer.parseInt(mapStartYear);
+		int tempMonth = 0;
 		
+//		12월인데 해당 달의 마지막 일자 표시가 31이고 토요일일때 (1월의 일자 표시가 안될때)
 		if (mapStartMonth.equals("12") && tempDay == 32) {
 			tempYear++;
 			mapStartMonth = "1";
+			tempDay = 1;
+		}
+//		12월은 아니지만 달의 마지막 일자 표시가 31이고 토요일일때 (다음달의 일자 표시가 안될때)
+		else if (tempDay == 32) {
+			tempMonth = Integer.parseInt(mapStartMonth);
+			mapStartMonth = Integer.toString(tempMonth + 1);
 			tempDay = 1;
 		}
 		
@@ -120,8 +128,6 @@ public class CalendarService {
 //					+ "-" + "01" + "-" + "01";
 			
 			vo.setCalEnd(tempDate);
-			System.out.println("tempDate : " + tempDate);
-			System.out.println("vo.getCalEnd() : " + vo.getCalEnd());
 		}
 		
 		String calStart = vo.getCalStart().split("T")[0];
@@ -205,10 +211,9 @@ public class CalendarService {
 		
 		cal.set( calEndYear, (calEndMonth-1), calEndDay ); //종료 날짜 셋팅
 		String endDate = dateFormat.format(cal.getTime());
-		System.out.println("endDate : " + endDate);
+		
 		cal.set ( calStartYear, (calStartMonth-1), calStartDay ); //시작 날짜 셋팅
 		String startDate = dateFormat.format(cal.getTime());
-		System.out.println("startDate : " + startDate);
 		
 		int i = 0;
 		int countWeek = 0;
@@ -222,6 +227,7 @@ public class CalendarService {
 				countWeek++;
 //				5년을 7일씩 나눈 값이 260.xxx 으로 261 이상이되면 반복문 탈출
 				if (countWeek >= 261) {
+//				if (countWeek >= 522) {
 					break;
 				}
 			}
@@ -234,11 +240,12 @@ public class CalendarService {
 			else {
 				cal.add(Calendar.DATE, 1); //1일 더해줌
 			}
+			
 //			cal.add(Calendar.MONTH, 1); //1달 더해줌
 //			cal.add(Calendar.DATE, 1); //1일 더해줌
 			
 			startDate = dateFormat.format(cal.getTime()); //비교를 위한 값 셋팅
-			System.out.println(startDate);
+			
 			startTime = "" + startDate + " " + calStartTime;
 			endTime = "" + startDate + " " + calEndTime;
 			
@@ -276,11 +283,13 @@ public class CalendarService {
 			calStart = innerList.get(i).getCalStart();
 			calEnd = innerList.get(i).getCalEnd();
 			
+//			ex) 2022-11-01 11:30
 			calStartDate = calStart.split(" ")[0];
 			calStartTime = calStart.split(" ")[1];
 			calEndDate = calEnd.split(" ")[0];
 			calEndTime = calEnd.split(" ")[1];
 			
+//			ex) 2022-11-01
 			calStartYear = calStartDate.split("-")[0];
 			calStartMonth = calStartDate.split("-")[1];
 			calStartDay = calStartDate.split("-")[2];
@@ -302,6 +311,14 @@ public class CalendarService {
 			
 			innerList.get(i).setCalStart(calStart);
 			innerList.get(i).setCalEnd(calEnd);
+			
+//			String aaa = "2024-8";
+//			System.out.println("여기--------------------------");
+//			if (calEnd.contains(aaa)) {
+//				System.out.println("calStart : " + calStart);
+//				System.out.println("calEnd : " + calEnd);
+//				System.out.println("i: " + i);
+//			}
 		}
 	}
 	

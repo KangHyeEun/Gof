@@ -208,7 +208,6 @@
 					<jsp:param value="${empno}" name="empno" />
 					<jsp:param value="${ename}" name="ename" />
 				</jsp:include>
-<%-- 				<jsp:include page="../include/chatTest.jsp"></jsp:include> --%>
 			</div>
 			<div class="btnFirstImg">
 				<img src="${pageContext.request.contextPath}/resources/imges/chat-icon.png"/>

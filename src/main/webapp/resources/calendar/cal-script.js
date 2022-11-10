@@ -362,20 +362,22 @@ const renderCalendar = () => {
 
 		let list = _data;
 		let innerSpan;
-//		console.log(list[0]);
+//		console.log(list[1]);
 //		{
-//		    "calId": 1,
-//		    "calTitle": "제목 없음",
-//		    "calPlace": "회의실A",
-//		    "calStart": "2022-10-9 05:00",
-//		    "calEnd": "2022-10-10 13:00",
-//		    "calAllday": "0",
-//		    "calShow": "0",
-//		    "calRecur": "0",
-//		    "calContent": "내용 없음",
-//		    "empno": 220401,
-//		    "checkAdmin": 0,
-//		    "approval": 0
+//			calId: 14650
+//			calTitle: "월간 보고"
+//			calPlace: "회의실 B"
+//			calContent: "월간 보고"
+//			calStart: "2022-11-1 23:23"
+//			calEnd: "2022-11-1 23:23"
+//			calRange: 1
+//			calAllday: "2022-11-01 23:23 ~ 2027-11-01 23:23"
+//			calShow: "0"
+//			calRecur: "monthly"
+//			empno: 220204
+//			checkAdmin: 0
+//			approval: null
+//			ename: "김석호"
 //		}
 		
 //		달력에 직접적으로 보이는 부분
@@ -384,11 +386,14 @@ const renderCalendar = () => {
 				let calDate = list[index1].calStart.split(" ");
 				let calTime = calDate[1];	// 시간
 				calDate = calDate[0];		// 날짜
+//				console.log(calDate);
+				
 //				let calHour = calTime.split(":");
 //				let calMinute = calHour[1];	// 분
 //				calHour = calHour[0];		// 시간
 //				console.log("calHour : " + Number(calHour) + " / calMinute : " + calMinute);
 //				div의 클래스에 있는 값과 DB에서 추출한 날짜 값과 같으면 해당 div에 DB값 넣기
+
 				if (daysEle.item(index).classList[0] == calDate) {
 					let scheduleDiv = document.getElementsByClassName(calDate)[0].children[0];
 					let div = document.createElement("div");
