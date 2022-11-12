@@ -94,8 +94,8 @@ public class PersonalInfoService {
 					addr += (" " + extraAddress);
 				}
 			}
+			vo.setAddress(addr);
 		}
-		vo.setAddress(addr);
 		
 		
 		if(request.getParameter("telNumber") != null && request.getParameter("telNumber") != "") {
