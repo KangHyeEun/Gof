@@ -120,7 +120,7 @@
 											List<CommutingVO> list = (List<CommutingVO>)request.getAttribute("CommutingList");
 											
 											int celi = (int)Math.ceil(list.size()/10);
-											int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin+9 : celi+1;
+											int endPage = list.size() == 0 ? 1 : celi - begin > 10 ? begin+9 : list.size()%10 == 0 ? celi : celi+1;
 											%>
 											<c:forEach begin="<%=begin%>" end="<%=endPage%>" varStatus="status" var="var">
 									
@@ -174,7 +174,7 @@
 				
 				//근무시간미달 표시
 				let hourtext = child[i].children[4].innerHTML;
-				if(hourtext.split("시간")[0] < 8){
+				if(hourtext.split("시간")[0] < 9){
 					child[i].children[4].innerHTML = hourtext+"<span class=point>❗<span>";	
 				}
 				

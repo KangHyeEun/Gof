@@ -58,7 +58,6 @@ public class MessageService {
 		
 		
 		vo.setMreceiverId((int)model.getAttribute("empno"));
-		vo.setOwnerName("김석호");;
 		
 		model.addAttribute("employees", dao.getDistinctEmployees());
 		model.addAttribute("rdistinctYear", dao.getRecieveDistinctYear(vo));

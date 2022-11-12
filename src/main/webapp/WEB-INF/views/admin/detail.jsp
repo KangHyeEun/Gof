@@ -169,7 +169,7 @@
 										<td id="noB" class="label">주소</td>
 										<td colspan='5'>
 										<div style="display: flex; flex-direction: row;" >
-										<input type="text" id="addre" value="${info.address}" style="width: 100%"/>
+										<input type="text" id="addre" name="addre" value="${info.address}" style="width: 100%"/>
 											<div style="display: none;" id="addresszip" style="display: flex; flex-direction: row;">
 												<input type="text" name="postcode" id="postcode" placeholder="우편번호">
 													<input type="text" name="address" id="address" placeholder="주소"> 
@@ -195,6 +195,12 @@
 							<script
 								src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 							<script>
+			document.getElementById('address').value="${info.address}";
+			
+			document.getElementById('addre').addEventListener("change",function(){
+				document.getElementById('address').value=document.getElementById('addre').value;            
+            });
+			
             var element_wrap = document.getElementById('wrap');
 
             function foldDaumPostcode() {
@@ -207,6 +213,7 @@
                  var addresszip = document.getElementById('addresszip');
                  var addre = document.getElementById('addre'); 
                  
+                 document.getElementById('address').value="";
                  addresszip.style.display = 'flex';
                  addre.style.display = 'none';
                 

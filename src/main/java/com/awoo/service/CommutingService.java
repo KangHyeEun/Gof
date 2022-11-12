@@ -37,20 +37,14 @@ public class CommutingService {
 		int empno = (int)model.getAttribute("empno");
 		// 초과 근무 시간
 		LocalDate date = LocalDate.now();
-		LocalTime time = LocalTime.now();
 		// 오늘 날짜 시간 구하기
 		//-----------------------------------------------------------------------------//
-		DateTimeFormatter timeformatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 		DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-		String formatedNow = time.format(timeformatter); // 현제 시간 구하기
-		String now = date + " " + formatedNow;
 		String today = date.format(dateformatter);
 
 		String dates = date.format(dateformatter);
 		String[] splitedForMonth = dates.split("-");
-//		String onlyYear = splitedForMonth[0];
-		String onlyMonth = splitedForMonth[1];
 		String YearAndMonth = splitedForMonth[0]+"-"+splitedForMonth[1];
 		
 		// 오늘 날짜의 시작일과 마지막일 구하기
@@ -144,11 +138,9 @@ public class CommutingService {
 		LocalTime time = LocalTime.now();
 
 		DateTimeFormatter timeformatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-		DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 		String formatedNow = time.format(timeformatter);
 		String now = date + " " + formatedNow;
-		String today = date.format(dateformatter);
 
 		CommutingVO vo = new CommutingVO();
 		vo.setStartTime(now);
@@ -201,10 +193,7 @@ public class CommutingService {
 		return null;
 	}
 
-	// 이 달의 첫날과 마지막날
-//	public void getWeekday() throws Exception {
-//		
-//	}
+
 
 	// 이달의 평일 개수 구하기
 	public int getDays(String begin, String end, String dateType) throws Exception {

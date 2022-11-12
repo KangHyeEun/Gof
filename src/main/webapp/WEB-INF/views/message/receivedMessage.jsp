@@ -198,7 +198,7 @@
 							</tr>
 							<tr>
 								<td>확인여부</td>
-								<td><span id="pop-halfDay"></span><span id="pop-htype">나중에 추가할 예정</span></td>
+								<td><span id="pop-halfDay"></span></td>
 							</tr>
 							<tr>
 								<td>보낸일자</td>
@@ -383,6 +383,12 @@
 				
 				document.getElementById("pop-mownerId").innerHTML=data.ownerName;
 				document.getElementById("pop-mcontent").innerHTML=data.mcontent;
+				
+				if(data.view == 1){
+					document.getElementById("pop-halfDay").innerHTML= "읽음";	
+				}else{
+					document.getElementById("pop-halfDay").innerHTML= "읽지 않음";
+				}
 				document.getElementById("pop-msendDate").innerHTML=data.msendDate;
 				
 			
