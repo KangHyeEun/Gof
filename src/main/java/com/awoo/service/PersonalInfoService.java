@@ -116,9 +116,9 @@ public class PersonalInfoService {
 	}
 	
 		
-	
-//	test
-//	public void selectPerPro(int empno, Model model) {
-//		model.addAttribute("pVO", dao.selectPerPro(empno));
-//	}
+
+	// 내 정보
+	public void selectPerPro(int empno, Model model) {
+		model.addAttribute("pVO", dao.selectPerPro(empno));
+	}
 }
