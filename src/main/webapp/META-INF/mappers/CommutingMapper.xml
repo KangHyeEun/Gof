@@ -79,7 +79,8 @@
 	</select>
 	<select id="countNomalWorkday" resultType="int">
 		SELECT count(work_time)
-	  	FROM commuting WHERE empno = ${empno} and cast(SUBSTRING_INDEX(work_time, '시간', 1) AS UNSIGNED) >= 9;
+	  	FROM commuting WHERE empno = ${empno} and cast(SUBSTRING_INDEX(work_time, '시간', 1) AS UNSIGNED) >= 9 
+	  	and DATE_FORMAT(workday,'%Y-%m')=#{workday};
 	</select>
 	
 	<select id="getEmpInfo" resultType="EmployeeInfoVO">

@@ -174,7 +174,7 @@
 				
 				//근무시간미달 표시
 				let hourtext = child[i].children[4].innerHTML;
-				if(hourtext.split("시간")[0] < 8){
+				if(hourtext.split("시간")[0] < 9){
 					child[i].children[4].innerHTML = hourtext+"<span class=point>❗<span>";	
 				}
 				

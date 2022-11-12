@@ -95,13 +95,13 @@
 	
 	
 	<select id="getDetailMessageReceive" resultType="MessageVO">
-		SELECT m.id as id, mowner_id, p.name as ownerName, mcontent, date_format(msend_date, '%Y-%m-%d') as msend_date, mreceiver_id 
+		SELECT m.id as id, mowner_id, p.name as ownerName, mcontent, date_format(msend_date, '%Y-%m-%d') as msend_date, mreceiver_id, view 
 		FROM message m INNER join personal_info p
 		WHERE m.mowner_id = p.empno
 		and m.id = #{id}
 	</select>
 	<select id="getDetailMessageSend" resultType="MessageVO">
-		SELECT m.id as id, mowner_id, mcontent, date_format(msend_date, '%Y-%m-%d') as msend_date, mreceiver_id, p.name as receiverName
+		SELECT m.id as id, mowner_id, mcontent, date_format(msend_date, '%Y-%m-%d') as msend_date, mreceiver_id, p.name as receiverName, view
 		FROM message m INNER join personal_info p
 		WHERE m.mreceiver_id = p.empno
 		and m.id = #{id}
