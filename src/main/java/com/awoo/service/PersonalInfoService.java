@@ -121,4 +121,8 @@ public class PersonalInfoService {
 	public void selectPerPro(int empno, Model model) {
 		model.addAttribute("pVO", dao.selectPerPro(empno));
 	}
+	// 내 정보 비밀번호 확인
+	public int passCheckMethod(Map<String, String> map) {
+		return dao.passCheck(map);
+	}
 }

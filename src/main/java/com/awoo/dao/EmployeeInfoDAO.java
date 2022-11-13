@@ -48,7 +48,7 @@ public interface EmployeeInfoDAO {
 	public void deletePosition(PositionDepartmentVO vo); // 직책 삭제
 	
 	
-	/*test*/
+	/*내 정보*/
 	public EmployeeInfoVO selectEmpPro(int empno);
 }
 

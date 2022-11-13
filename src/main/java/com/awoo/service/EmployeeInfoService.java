@@ -143,7 +143,8 @@ public class EmployeeInfoService {
 		dao.insertPosition(vo);
 	}
 
-//	test
+	
+	/* 내 정보 -----------------------------------------------------------------*/
 	public void selectPerPro(int empno, Model model) {
 		model.addAttribute("eVO", dao.selectEmpPro(empno));
 	}

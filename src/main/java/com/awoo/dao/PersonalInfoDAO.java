@@ -21,7 +21,9 @@ public interface PersonalInfoDAO {
 	public List<InfoVO> selectDetail(Map<String,String> map);
 	
 
-//	/*test*/
-//	public PersonalInfoVO selectPerPro(int empno);
+	// 내 정보
+	public PersonalInfoVO selectPerPro(int empno);	
+	// 내 정보
+	public int passCheck(Map<String,String> map);
 }
 

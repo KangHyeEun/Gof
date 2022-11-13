@@ -11,7 +11,7 @@
                     </ul>
 
                     <ul class="menu">
-                        <li><a href="${pageContext.request.contextPath}/Profile">내 정보</a></li>
+                        <li><a href="${pageContext.request.contextPath}/profile">내 정보</a></li>
                     </ul>
 
                     <ul onclick="show_sub()" class="dropmenu">

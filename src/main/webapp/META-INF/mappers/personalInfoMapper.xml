@@ -81,9 +81,20 @@
 	</update>
 	
 		
-	<!-- test -->
-<!-- 	<select id="selectPerPro" resultType="PersonalInfoVO"> -->
-<!-- 		select * from personal_info -->
-<!-- 		where empno = #{empno} -->
-<!-- 	</select> -->
+	<!-- 내 정보 : 수정하기 -->
+	<select id="selectPerPro" resultType="PersonalInfoVO">
+		select * from personal_info
+		where empno = #{empno}
+	</select>
+	<!-- 내 정보 : 비밀번호 확인 -->
+	<select id="passCheck" resultType="int">
+		select count(*) from personal_info
+		where 1=1
+		<if test="empno != null and empno != ''">
+			and empno = #{empno}
+		</if>
+		<if test="password != null and password != ''">
+			and password = #{password}
+		</if>
+	</select>
 </mapper>

@@ -29,8 +29,6 @@
 			request.setCharacterEncoding("UTF-8");
 			String empno = request.getParameter("empno");
 			String ename = request.getParameter("ename");
-			System.out.println("empno : " + empno);
-			System.out.println("ename : " + ename);
 		%>
 // 		접속한 유저 이름 자동 기입
 		var chatUser = document.getElementById("user");
