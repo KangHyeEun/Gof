@@ -289,13 +289,14 @@
 							        </div>
 							      </section> -->
 								<section class="weather-part">
+									<p><b>오늘의 날씨</b></p>
 									<div class="temp">
 										<img src="" alt="Weather Icon"> <span class="numb">_</span>
 										<span class="deg">°</span>C
 									</div>
 									<div class="weather">_ _</div>
 									<div class="location">
-										<i class='bx bx-map'></i> <span>_, _</span>
+<!-- 										<i class='bx bx-map'></i> <span>_, _</span> -->
 									</div>
 									<div class="bottom-details">
 										<div class="column feels">
