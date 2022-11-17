@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 
 import com.awoo.dao.BBSCommentDAO;
 import com.awoo.dao.BBSDAO;
+import com.awoo.dao.EmployeeInfoDAO;
 import com.awoo.vo.BBSCommentVO;
 import com.awoo.vo.BBSFileVO;
 import com.awoo.vo.BBSVO;
 import com.awoo.vo.PageVO;
+import com.awoo.vo.PersonalInfoVO;
 import com.google.gson.Gson;
 
 @Service
@@ -20,11 +22,13 @@ public class BBSService {
 	
 	private BBSDAO bbsDAO;
 	private BBSCommentDAO comDAO;
+	private EmployeeInfoDAO infoDAO;
 	
-	public BBSService(BBSDAO bbsDAO, BBSCommentDAO comDAO) {
+	public BBSService(BBSDAO bbsDAO, BBSCommentDAO comDAO, EmployeeInfoDAO infoDAO) {
 		super();
 		this.bbsDAO = bbsDAO;
 		this.comDAO = comDAO;
+		this.infoDAO = infoDAO;
 	}
 
 	//게시판+페이징
@@ -56,8 +60,9 @@ public class BBSService {
 		bbsDAO.updateFileCount(bvo);
 	}
 	
+
 	//게시글 상세 보기
-	public void selectBBS(Model model, String id) {
+	public void selectBBS(Model model, String id, PersonalInfoVO pvo) {
 		BBSVO vo = new BBSVO();
 		vo.setId(Integer.parseInt(id));
 		model.addAttribute("bbsVO", bbsDAO.selectBBS(vo));
@@ -69,6 +74,9 @@ public class BBSService {
 		model.addAttribute("filelist", filelist);
 
 		model.addAttribute("countFiles", bbsDAO.countFiles(id));
+		
+		System.out.println(pvo.getEmpno());
+		model.addAttribute("eVO", infoDAO.selectEmpPro(pvo.getEmpno()));
 
 	}
 	
@@ -126,6 +134,7 @@ public class BBSService {
 	
 	//댓글 불러오기
 	public List<BBSCommentVO> getCommentList(BBSCommentVO cvo) {
+		System.out.println(cvo.toString());
 		return comDAO.selectCommentList(cvo);
 	}
 	
@@ -145,6 +154,7 @@ public class BBSService {
 	}
 
 	//파일 삭제(전체 삭제)
+//	@Transactional
 	public void deleteBBSFileAll(BBSFileVO fvo) {
 		bbsDAO.deleteBBSFile(fvo);
 		BBSVO vo =new BBSVO();

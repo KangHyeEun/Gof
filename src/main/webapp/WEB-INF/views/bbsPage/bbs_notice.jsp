@@ -8,14 +8,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bbs/bbsstyle.css"/>
 <title>Insert title here</title>
 <style type="text/css">
-#import-category {
-	font-family: 'Nanum Barun Gothic', sans-serif;
-/*     font-size: 1.2rem; */
-    font-weight: 700;
-/*     line-height: 1.8rem; */
-    color: #272454;
-    background: #f8f8f9;
-}
 </style>
 </head>
 <body>

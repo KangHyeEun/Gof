@@ -29,14 +29,11 @@ public class LoginService {
 			session.invalidate();
 			//초기화한 후애 다시 세션 불러와야 함
 			session = request.getSession();
-			
 			//세션에 담기
 			session.setAttribute("personalInfoVO", loginDao.selectUser(vo));
-			
-			// 혜은 : 관리자 확인
+			//관리자 확인
 			session.setAttribute("checkAdmin", loginDao.checkAdmin(vo));
-			
-			//가빈 추가 비밀번호가 abc1일경우 비밀번호 변경 페이지로 이동
+			//초기 비밀번호(abc1)일경우 비밀번호 변경 페이지로 이동
 			if(loginDao.selectUser(vo).getPassword().equals("abc1")){
 				path ="redirect:/login/changePassword";				
 			}else {
@@ -50,7 +47,7 @@ public class LoginService {
 		return path;
 	}
 	
-	//신입사원 초기 비밀번호 변경
+	//초기 비밀번호 변경
 	public void resetPassword(Map<String, Object> map) {
 		loginDao.updatePassword(map);	
 	}

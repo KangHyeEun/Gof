@@ -46,7 +46,6 @@
 <body>
 	<div class="wrapper fadeInDown" >
 		<div class="container" style="display:flex">
-<!-- 		<div class="container"> -->
 		<img src="${pageContext.request.contextPath}/resources/imges/logo-white.png" class="login-logo"/>
 			<div id="formContent">
 				<div class="modal-header">
@@ -60,7 +59,6 @@
 					<div>
 						<h5 class="close-button"></h5>
 					</div>
-					
 				</div>
 				<form action="${pageContext.request.contextPath}/resetPassword" method="post" id="modal-form" name="modal-form">
 					<label for="text">현재 비밀번호:</label><input type="text" name="nowPW" id="nowPW" value="${userInfo.password}" readonly><br />

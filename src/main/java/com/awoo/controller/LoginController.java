@@ -38,7 +38,7 @@ public class LoginController {
 		return service.isUser(vo, session, request);
 	}	
 	
-	//메인페이지 이동  데이터 불러오는 것 때문에 MoveToHome으로 변경했습니다!!!
+	//메인페이지 이동
 	@GetMapping("/login/home")
 	public String postLogin() {
 		return "redirect:/MoveToHome";
@@ -63,7 +63,7 @@ public class LoginController {
 		return "redirect:/";	
 	}
 	
-	//신입사원 초기 비밀번호 변경
+	//초기 비밀번호 변경
 	@PostMapping("/resetPassword")
 	public String resetPW(@RequestParam Map<String, Object> map, @SessionAttribute("personalInfoVO") PersonalInfoVO vo) {
 		map.put("empno", vo.getEmpno());

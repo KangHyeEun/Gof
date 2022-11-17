@@ -23,7 +23,38 @@ public class PageVO {
 	private String searchType;
 	// 키워드
 	private String keyword;
-	
+
+	public int getNowPage() {return nowPage;}
+	public void setNowPage(int nowPage) {this.nowPage = nowPage;}
+	public int getStartPage() {return startPage;}
+	public void setStartPage() {this.startPage = ((this.nowPage - 1)/this.cntPerBlock)*this.cntPerBlock+1;}
+	public int getEndPage() {return endPage;}
+	public void setEndPage() {
+		this.endPage = ((this.nowPage - 1)/this.cntPerBlock)*this.cntPerBlock+this.cntPerBlock;
+		this.endPage = (this.totalPage < this.endPage)?this.totalPage:this.endPage;}
+	public int getTotalPage() {return totalPage;}
+	public void setTotalPage() {
+		this.totalPage = (this.totalRow%this.cntPerPage==0)?(this.totalRow/this.cntPerPage):(this.totalRow/this.cntPerPage+1);}
+	public int getTotalRow() {return totalRow;}
+	public void setTotalRow(int totalRow) {	this.totalRow = totalRow;}
+	public int getStartRow() {return startRow;}
+	public void setStartRow() {	this.startRow = ((this.nowPage-1)*this.cntPerPage+1)-1;}
+	public int getEndRow() {return endRow;}
+	public void setEndRow() {
+		int init = (this.nowPage-1)*this.cntPerPage+this.cntPerPage;
+		this.endRow = (init > this.totalRow)?this.totalRow:init;}
+	public int getCntPerPage() {return cntPerPage;}
+	public void setCntPerPage(int cntPerPage) {this.cntPerPage = cntPerPage;}
+	public int getCntPerBlock() {return cntPerBlock;}
+	public void setCntPerBlock(int cntPerBlock) {this.cntPerBlock = cntPerBlock;}
+
+	public void process() {
+		this.setTotalPage();
+		this.setStartPage();
+		this.setEndPage();
+		this.setStartRow();
+		this.setEndRow();
+	}
 
 	public String getSearchType() {
 		return searchType;
@@ -40,109 +71,18 @@ public class PageVO {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
-	public int getNowPage() {
-		return nowPage;
-	}
-
-	public void setNowPage(int nowPage) {
-		this.nowPage = nowPage;
-	}
-
-	public int getStartPage() {
-		return startPage;
-	}
-
-	public void setStartPage() {
-		this.startPage = ((this.nowPage - 1)/this.cntPerBlock)*this.cntPerBlock+1;
-	}
-
-	public int getEndPage() {
-		return endPage;
-	}
-
-	public void setEndPage() {
-		this.endPage = ((this.nowPage - 1)/this.cntPerBlock)*this.cntPerBlock+this.cntPerBlock;
-		this.endPage = (this.totalPage < this.endPage)?this.totalPage:this.endPage;
-	}
-
-	public int getTotalPage() {
-		return totalPage;
-	}
-
-	public void setTotalPage() {
-		this.totalPage = (this.totalRow%this.cntPerPage==0)?
-				(this.totalRow/this.cntPerPage):(this.totalRow/this.cntPerPage+1);
-	}
-
-	public int getTotalRow() {
-		return totalRow;
-	}
-
-	public void setTotalRow(int totalRow) {
-		this.totalRow = totalRow;
-	}
-
-	public int getStartRow() {
-		return startRow;
-	}
-
-	public void setStartRow() {
-		this.startRow = ((this.nowPage-1)*this.cntPerPage+1)-1;
-	}
-
-	public int getEndRow() {
-		return endRow;
-	}
-
-	public void setEndRow() {
-		int init = (this.nowPage-1)*this.cntPerPage+this.cntPerPage;
-		this.endRow = (init > this.totalRow)?this.totalRow:init;
-	}
-
-	public int getCntPerPage() {
-		return cntPerPage;
-	}
-
-	public void setCntPerPage(int cntPerPage) {
-		this.cntPerPage = cntPerPage;
-	}
-
-	public int getCntPerBlock() {
-		return cntPerBlock;
-	}
-
-	public void setCntPerBlock(int cntPerBlock) {
-		this.cntPerBlock = cntPerBlock;
-	}
-	
-	public void process() {
-		this.setTotalPage();
-		this.setStartPage();
-		this.setEndPage();
-		this.setStartRow();
-		this.setEndRow();
-	}
-
-	@Override
-	public String toString() {
-		return "PageVO [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage="
-				+ totalPage + ", totalRow=" + totalRow + ", startRow=" + startRow + ", endRow=" + endRow
-				+ ", cntPerPage=" + cntPerPage + ", cntPerBlock=" + cntPerBlock + ", searchType=" + searchType
-				+ ", keyword=" + keyword + "]";
-	}
 	
 	public String getSearchTypeKeyword() {
-		
+
 		if(searchType.equals("") || keyword.equals("")) {
 			return "";	
 		} else {
 			return "&searchType=" + searchType + "&keyword=" + keyword;	
 		}
 	}
-	
-	
-	
+
+
+
 }
 
 

@@ -14,8 +14,6 @@ public class PersonalInfoVO {
 	private int mail_auth;
 	private int mail_key;
 	
-	
-	
 	public int getId() {
 		return id;
 	}

@@ -132,7 +132,6 @@ thead tr {
 /* 	white-space: nowrap; */
 /* 	overflow: hidden; */
 /* } */
-
 tbody tr {
 	border-bottom: 1px solid #b3c2d1;
 }
@@ -160,8 +159,9 @@ table td, th {
 #middle-th {
 	width: 11%;
 }
+
 #title-th {
-	width : 40%;
+	width: 40%;
 }
 
 table a {
@@ -241,27 +241,32 @@ table th {
 	padding: 0 5px;
 }
 
+#import-category {
+	font-family: 'Nanum Barun Gothic', sans-serif;
+	font-weight: 700;
+	color: #272454;
+	background: #f8f8f9;
+}
 
-@media screen and (max-width:1215px) {
-	/*글자 안넘어가도록 설정*/
+@media screen and (max-width:1215px) { /*글자 안넘어가도록 설정*/
 }
 
 @media screen and (max-width:1400px) {
 	/*글자 안넘어가도록 설정*/
 	#small-th {
-		width : 5%;
+		width: 5%;
 	}
 	#middle-th {
-		width : 7%;
+		width: 7%;
 	}
 }
 
 @media screen and (max-width:1085px) {
 	/*글자 안넘어가도록 설정*/
-	thead th:nth-child(5) , tbody td:nth-child(5) {
+	thead th:nth-child(5), tbody td:nth-child(5) {
 		display: none;
 	}
-	thead th:nth-child(6) , tbody td:nth-child(6) {
+	thead th:nth-child(6), tbody td:nth-child(6) {
 		display: none;
 	}
 	#filecount-span {
@@ -269,16 +274,14 @@ table th {
 	}
 }
 
-
-
 @media screen and (max-width:815px) {
-	thead th:nth-child(5) , tbody td:nth-child(5) {
+	thead th:nth-child(5), tbody td:nth-child(5) {
 		display: none;
 	}
-	thead th:nth-child(6) , tbody td:nth-child(6) {
+	thead th:nth-child(6), tbody td:nth-child(6) {
 		display: none;
 	}
-	thead th:nth-child(7) , tbody td:nth-child(7) {
+	thead th:nth-child(7), tbody td:nth-child(7) {
 		display: none;
 	}
 	#nonehorn {
@@ -288,7 +291,7 @@ table th {
 
 @media screen and (max-width:610px) {
 	#small-th {
-		width : 6%;
+		width: 6%;
 	}
 	#nonehorn {
 		display: none;
@@ -311,23 +314,23 @@ table th {
 	#filecount-div {
 		display: none;
 	}
-	thead th:nth-child(5) , tbody td:nth-child(5) {
+	thead th:nth-child(5), tbody td:nth-child(5) {
 		display: none;
 	}
-	thead th:nth-child(6) , tbody td:nth-child(6) {
+	thead th:nth-child(6), tbody td:nth-child(6) {
 		display: none;
 	}
-	thead th:nth-child(7) , tbody td:nth-child(7) {
+	thead th:nth-child(7), tbody td:nth-child(7) {
 		display: none;
 	}
 	#small-th {
-		width : 4%;
+		width: 4%;
 	}
 	#middle-th {
-		width : 5%;
+		width: 5%;
 	}
 	#title-th {
-		width : 25%;
+		width: 25%;
 	}
 	table a {
 		padding-left: 10px;

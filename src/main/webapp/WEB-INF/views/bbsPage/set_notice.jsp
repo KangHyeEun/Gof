@@ -11,7 +11,7 @@
 	href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/bbs/setstyle.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bbs/js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 <!-- ckeditor 적용 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>	
 </head>
@@ -73,7 +73,7 @@
 									<td><form:textarea path="content" id="textarea" /></td>
 								</tr>
 								<tr>
-									<th>파일첨부&nbsp;&nbsp; <span></span></th>
+									<th>파일첨부</th>
 									<td><input type="file" name="upload" id="upload" multiple /></td>
 								</tr>
 							</tbody>

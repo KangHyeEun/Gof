@@ -67,25 +67,23 @@
                </div>
            </div>
        </div>
-<!--    </div> -->
 	
-	<script type="text/javascript">
-		//뒤로가기 버튼 이벤트------------------------------
-		document.getElementById("return").addEventListener("click", function() {
-			location.href = "${pageContext.request.contextPath}/bbsNotice/bbs";
-		});
-		//수정하기 버튼 이벤트-------------------------------
-		document.getElementById("modify").addEventListener("click", function() {
-			location.href = "${pageContext.request.contextPath}/bbsNotice/put/${bbsVO.id}";
-		});
-		//삭제하기 버튼 이벤트-------------------------------
-		document.getElementById("delete").addEventListener("click", function() {
-			if(confirm('정말로 삭제하시겠습니까?')){
-			location.href = "${pageContext.request.contextPath}/bbsNotice/delete/${bbsVO.id}";
-			}
-		});
-		
-	</script>
+<script type="text/javascript">
+	//뒤로가기 버튼 이벤트------------------------------
+	document.getElementById("return").addEventListener("click", function() {
+		location.href = "${pageContext.request.contextPath}/bbsNotice/bbs";
+	});
+	//수정하기 버튼 이벤트-------------------------------
+	document.getElementById("modify").addEventListener("click", function() {
+		location.href = "${pageContext.request.contextPath}/bbsNotice/put/${bbsVO.id}";
+	});
+	//삭제하기 버튼 이벤트-------------------------------
+	document.getElementById("delete").addEventListener("click", function() {
+		if(confirm('정말로 삭제하시겠습니까?')){
+		location.href = "${pageContext.request.contextPath}/bbsNotice/delete/${bbsVO.id}";
+		}
+	});
+</script>
 
 </body>
 </html>

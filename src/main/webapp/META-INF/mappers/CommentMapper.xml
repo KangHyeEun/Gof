@@ -12,7 +12,8 @@
 		where is_delete = 0 and bbs_id = #{bbsId}
 	</select>
 	
-	<insert id="insertComment" >
+	
+	<insert id="insertComment" parameterType="BBSCommentVO" useGeneratedKeys="true" keyProperty="id">
 		insert into bbs_comment (bbs_id, owner_id, owner, comment)
 		values (#{bbsId}, #{ownerId}, #{owner}, #{comment});
 	</insert>

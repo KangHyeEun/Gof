@@ -30,8 +30,7 @@
 		select id, category, title, owner_id, owner, content, view_counts, file_counts, 
 		date_format(create_date, '%Y-%m-%d') create_date
 		from bbs
-		where
-		is_delete = 0
+		where is_delete = 0
 		<choose>
 			<when test="searchType.equals('title') and keyword != ''">
 				and title like concat('%', #{keyword}, '%')

@@ -12,7 +12,7 @@ import com.awoo.vo.PersonalInfoVO;
 public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String LogIn(PersonalInfoVO vo, Model model) {		
+	public String LogIn(PersonalInfoVO vo, Model model) {
 		return "LogIn";
 	}
 

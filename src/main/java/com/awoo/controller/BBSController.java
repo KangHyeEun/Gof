@@ -90,16 +90,12 @@ public class BBSController {
         } else {
             String value = viewCookie.getValue(); // 쿠키 값 받아옴.
         }
-		service.selectBBS(model, id);
-
-		//댓글 사원 얼굴
-		UploadfilesVO fvo = new UploadfilesVO();
-		fileService.selectFile(fvo, model);
+		service.selectBBS(model, id, vo);
 		
 		return "bbsPage/content";
 	}
 	
-	//글쓰기 선택(select)
+	//글쓰기
 	@GetMapping("/wrbtn")
 	public String getBBSCreate(@ModelAttribute("BBSVO") BBSVO vo2, Model model) {
 		service.selectCategory(model);
@@ -128,8 +124,8 @@ public class BBSController {
 
 	//수정하기 선택(select)
 	@GetMapping("/put/{id}")
-	public String modifyBBS(@PathVariable("id")String id, Model model) {
-		service.selectBBS(model, id);
+	public String modifyBBS(@PathVariable("id")String id, Model model, @SessionAttribute("personalInfoVO") PersonalInfoVO vo) {
+		service.selectBBS(model, id, vo);
 		service.selectCategory(model);
 		return "bbsPage/put";
 	}
@@ -168,6 +164,7 @@ public class BBSController {
 	@ResponseBody
 	public ResponseEntity<String> dropComment(@RequestBody BBSCommentVO vo){
 		service.deleteComment(vo);
+		System.out.println(vo.toString());
 		String str = "삭제되었습니다";
 		ResponseEntity<String> entity = new ResponseEntity<String>(str , HttpStatus.OK);
 		return entity;
@@ -203,7 +200,6 @@ public class BBSController {
 	
 	//파일 다운로드
 	@GetMapping("/downloadFile/{clientname}/{servername}")
-	@ResponseBody
 	public void downloadFile(
 						HttpServletResponse response,
 						@PathVariable String servername,

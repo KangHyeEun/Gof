@@ -10,43 +10,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bbs/setstyle.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bbs/js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 <!-- ckeditor 적용 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
-<style type="text/css">
-	.file-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 0;
-    width: 40%;
-    height: 1rem;
-    overflow: hidden;
-    background-color: #f2f4f5;
-    font-size: 1rem;
-    border-radius: 0.4rem;
-    padding: 10px;
-    margin: 5px;
-	}
-	.file-item button {
-	border : 0;
-	cursor: pointer;
-	}
-	.file-item a {
-	color : #212529;
-	font-size :0.8rem;
-	}
-	.file-item span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-	}
-	.file-item span img{
-    width: 15px;
-	height: 15px;	
-	}
-</style>
 </head>
 <body>
 	<div class="header">
@@ -133,7 +99,7 @@
 <script type="text/javascript">
 
 	//뒤로가기
-	document.getElementById("return").addEventListener("click",function(e){
+	document.getElementById("return", "cancle").addEventListener("click",function(e){
 		e.preventDefault();
 		let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
 		if(yn){
@@ -141,15 +107,14 @@
 		}
 	});
 	//취소하기
-	document.getElementById("cancle").addEventListener("click", function(e){
-		e.preventDefault();
-		let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
-		if(yn){
-			location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
-		}
-	});
+// 	document.getElementById("cancle").addEventListener("click", function(e){
+// 		e.preventDefault();
+// 		let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
+// 		if(yn){
+// 			location.href = "${pageContext.request.contextPath}/bbsPage/bbs";
+// 		}
+// 	});
 	
-	//이지윅즈 적용
 	//이지윅즈 적용
 	CKEDITOR.replace('textarea', {
 		height : 600
