@@ -75,7 +75,6 @@ public class BBSService {
 
 		model.addAttribute("countFiles", bbsDAO.countFiles(id));
 		
-		System.out.println(pvo.getEmpno());
 		model.addAttribute("eVO", infoDAO.selectEmpPro(pvo.getEmpno()));
 
 	}
@@ -134,7 +133,6 @@ public class BBSService {
 	
 	//댓글 불러오기
 	public List<BBSCommentVO> getCommentList(BBSCommentVO cvo) {
-		System.out.println(cvo.toString());
 		return comDAO.selectCommentList(cvo);
 	}
 	

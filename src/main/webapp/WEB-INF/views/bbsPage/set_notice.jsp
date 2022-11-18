@@ -90,7 +90,15 @@
 	
 	<script type="text/javascript">
 	//뒤로가기
-	document.getElementById("return", "cancle").addEventListener("click",function(e){
+	document.getElementById("return").addEventListener("click",function(e){
+		e.preventDefault();
+		let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
+		if(yn){
+			location.href = "${pageContext.request.contextPath}/bbsNotice/bbs";
+		}
+	});
+	//취소
+	document.getElementById("cancle").addEventListener("click",function(e){
 		e.preventDefault();
 		let yn = confirm("작성한 내용들은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
 		if(yn){

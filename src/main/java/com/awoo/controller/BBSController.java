@@ -45,12 +45,10 @@ import com.awoo.vo.UploadfilesVO;
 public class BBSController {
 	
 	private BBSService service;
-	private UploadfilesService fileService;
 
-	public BBSController(BBSService service, UploadfilesService fileService) {
+	public BBSController(BBSService service) {
 		super();
 		this.service = service;
-		this.fileService = fileService;
 	}
 
 	//게시판 목록
@@ -164,7 +162,6 @@ public class BBSController {
 	@ResponseBody
 	public ResponseEntity<String> dropComment(@RequestBody BBSCommentVO vo){
 		service.deleteComment(vo);
-		System.out.println(vo.toString());
 		String str = "삭제되었습니다";
 		ResponseEntity<String> entity = new ResponseEntity<String>(str , HttpStatus.OK);
 		return entity;
