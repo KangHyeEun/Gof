@@ -93,9 +93,6 @@ public class MainController {
 	         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 	         String responseBody = get(apiURL,requestHeaders);
 
-	         
-//	         System.out.println(responseBody);
-
 	    	return responseBody;
 	    }
 	    

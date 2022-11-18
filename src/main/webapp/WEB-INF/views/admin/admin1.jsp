@@ -569,7 +569,7 @@
 					mspan.innerText = num;
 					});
 				}
-// 				console.log(arr);
+
 				/*------------------------------------------------------------------------------------------------*/
 				
 				const li1 = document.getElementsByName("li1");

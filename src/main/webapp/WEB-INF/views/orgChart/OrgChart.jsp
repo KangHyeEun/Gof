@@ -57,7 +57,6 @@
 									<div class="org">
 										<div class="intro">
 											<h3>부서별 안내</h3>
-											<p></p>
 										</div>
 										<h3>전체 <span id="count1"></span>명</h3>
 										
@@ -127,7 +126,7 @@
 																					value="${j.name}" /></li>
 																				<li><label for="mcontent">내용: </label><br /> <textarea
 																				 name="mcontent" placeholder="내용을 입력하세요." id="mcontent${status.count}" style="width: 98%;
-																					    height: 170px;">
+																					    height: 250px;">
 																				</textarea></li>
 																			</ul>
 																		</div>
@@ -196,7 +195,6 @@
 									<div class="select">
 										<div class="intro">
 											<h3>직원 현황</h3>
-											<p>⏏홈>조직도</p>
 										</div>
 										<form action="${pageContext.request.contextPath}/orgChart"
 											method="get" class="t">
