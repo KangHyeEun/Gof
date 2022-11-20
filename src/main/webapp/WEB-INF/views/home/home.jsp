@@ -707,7 +707,7 @@
 		        weatherPart.style.visibility = "visible";
 		        weatherPart.querySelector(".temp .numb").innerText = Math.floor(temp);
 		        weatherPart.querySelector(".weather").innerText = description;
-		        weatherPart.querySelector(".location span").innerText = city+" , "+country;
+// 		        weatherPart.querySelector(".location span").innerText = city+" , "+country;
 		        weatherPart.querySelector(".temp .numb-2").innerText = Math.floor(feels_like);
 		        weatherPart.querySelector(".humidity span").innerText = humidity+"%";
 		        infoTxt.classList.remove("pending", "error");
@@ -745,8 +745,7 @@
 		});
     }
     </script>
-
-
+    
 
 </body>
 </html>

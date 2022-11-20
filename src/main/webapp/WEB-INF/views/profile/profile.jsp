@@ -343,7 +343,7 @@
 									<button type="button" class="insertbtn">수정하기</button>
 									<button type="submit" class="realbtn" style="display: none">수정하기</button>
 								</div>
-								<div class="zip" style="width: 40%">
+								<div class="zip" style="width: 40%; display: none;">
 									<a style="font-size: 1.2rem;" href="${pageContext.request.contextPath}/admin?page=1">↩</a>
 								</div>
 							</div>
