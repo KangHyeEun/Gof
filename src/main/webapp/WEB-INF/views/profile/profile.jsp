@@ -29,8 +29,12 @@
 	#total_holiday, #telNumber {
  		width: 80%; 
 	}
+	.personal-wrap {
+		height: 27.5vh;
+	}
 	.label {
 		user-select: none;
+		padding: 11px;
 	}
 	.blockInput {
 		user-select: none;

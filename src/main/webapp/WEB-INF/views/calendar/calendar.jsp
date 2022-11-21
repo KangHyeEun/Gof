@@ -200,7 +200,7 @@
 			</div>
 		</div>
 		
-		<div class="chat">
+		<div class="chat" style="display:none;">
 			<div class="includeChat">
 				<jsp:include page="../chat/chat.jsp">
 					<jsp:param value="${empno}" name="empno" />
